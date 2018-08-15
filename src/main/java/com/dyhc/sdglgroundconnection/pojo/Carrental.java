@@ -17,7 +17,7 @@ public class Carrental {
     private int carRentalId; // 公司编号
     @Column(name = "carRentalName")
     private String carRentalName; // 名称
-    private Integer phone; // 联系电话
+    private String phone; // 联系电话
     private String contacts; // 联系人
     @Column(name = "companyAddress")
     private String companyAddress; // 公司地址
@@ -59,11 +59,11 @@ public class Carrental {
 
     @Basic
     @Column(name = "phone")
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

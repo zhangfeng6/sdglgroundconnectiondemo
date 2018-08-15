@@ -24,12 +24,12 @@ public class Staff {
     private String password; // 密码
     @Column(name = "cardId")
     private String cardId; // 身份证号
-    private Integer qqnumber; // QQ号码
+    private String qqnumber; // QQ号码
     @Column(name = "headPortraitPath")
     private String headPortraitPath; // 头像地址
     @Column(name = "currentAddress")
     private String currentAddress; // 现住址
-    private Integer phone; // 联系电话
+    private String phone; // 联系电话
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
     @Column(name = "createBy")
@@ -118,11 +118,11 @@ public class Staff {
 
     @Basic
     @Column(name = "qqnumber")
-    public Integer getQqnumber() {
+    public String getQqnumber() {
         return qqnumber;
     }
 
-    public void setQqnumber(Integer qqnumber) {
+    public void setQqnumber(String qqnumber) {
         this.qqnumber = qqnumber;
     }
 
@@ -148,11 +148,11 @@ public class Staff {
 
     @Basic
     @Column(name = "phone")
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

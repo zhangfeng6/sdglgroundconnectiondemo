@@ -24,7 +24,7 @@ public class Scenicspot {
     private Integer costprice; // 成本价
     private Integer offer; // 报价
     @Column(name = "typeCode")
-    private Integer typeCode; // 景点等级编号
+    private String typeCode; // 景点等级编号
     @Column(name = "typeId")
     private Integer typeId; // 编码（【景点等级】外键，与字典表关联）
     @Column(name = "picturePath")
@@ -109,11 +109,11 @@ public class Scenicspot {
 
     @Basic
     @Column(name = "typeCode")
-    public Integer getTypeCode() {
+    public String getTypeCode() {
         return typeCode;
     }
 
-    public void setTypeCode(Integer typeCode) {
+    public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
 
