@@ -11,4 +11,5 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DispatchMapper extends CommonMapper<Dispatch>{
+
 }
