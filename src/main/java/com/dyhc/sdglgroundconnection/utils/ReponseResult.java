@@ -51,6 +51,7 @@ public class ReponseResult<T> {
      * @return
      */
     public static <T> ReponseResult<T> ok(String message) {
+
         ReponseResult<T> reponseResult = new ReponseResult<>();
         reponseResult.setCode(ReponseCode.CODE_SUCCESS);
         reponseResult.setCount(0L);
