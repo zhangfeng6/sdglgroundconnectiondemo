@@ -1,9 +1,6 @@
 package com.dyhc.sdglgroundconnection.utils;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * 自定义操作日志注解接口类
@@ -24,6 +21,7 @@ PACKAGE：包声明
 PARAMETER：参数声明
 TYPE：类、接口（包括注解类型）或enum声明*/
 @Target(ElementType.METHOD)
+@Documented
 public @interface LogNotes {
     //操作类型
     String operationType();
