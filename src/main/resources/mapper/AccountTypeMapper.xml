@@ -2,5 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.AccountTypeMapper">
+    <!--删除账户类型-->
+     <delete id="removeAccountType">
+          delete  from  accounttype where  accountTypeId=#{accountTypeId}
+     </delete>
+    
+    <!--新增用户类型-->
+    <insert id="saveAccountType">
+     INSERT INTO accounttype  VALUES (null,bank=#{bank},accountNum=#{accountNum},accountName=#{accountName},status=#{status},whetherDel=#{whetherDel},createBy=#{createBy},updateBy={updateBy},upDate={upDate},createDate={createDate},null,null,null)
+    </insert>
+    <!--查询账户类型信息-->
+    <select id="" resultType="">
 
+    </select>
 </mapper>
