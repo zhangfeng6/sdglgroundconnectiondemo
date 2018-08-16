@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Operationlog;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,10 @@ import org.springframework.stereotype.Component;
  * 操作日志业务接口
  **/
 public interface OperationlogService {
+    /**
+     * 添加操作日志数据     张枫
+     * @param operationlog   日志对象
+     * @return          受影响行数
+     */
+    int saveOperationlog(Operationlog operationlog)throws Exception;
 }

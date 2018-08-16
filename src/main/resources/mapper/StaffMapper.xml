@@ -2,5 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.StaffMapper">
-
+    <select id="login" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        select * from staff where theUserName=#{theUserName} and password=#{password}
+    </select>
 </mapper>

@@ -17,8 +17,22 @@ public class MealType {
     private int typeId; // 类型编号
     @Column(name = "restaurantId")
     private Integer restaurantId; // 餐馆编号（外键，与餐馆表关联）
-    @Column(name = "typeName")
-    private String typeName; // 类型名称
+    @Column(name = "typeCode")
+    private String typeCode; // 类型编码
+
+    @Column(name = "valueId")
+    private Integer valueId; // 类型编码
+
+    @Basic
+    @Column(name = "valueId")
+    public Integer getValueId() {
+        return valueId;
+    }
+
+    public void setValueId(Integer valueId) {
+        this.valueId = valueId;
+    }
+
     private Double costprice; // 成本价
     private Double offer; // 报价
     @Column(name = "whetherDel")
@@ -59,12 +73,12 @@ public class MealType {
 
     @Basic
     @Column(name = "typeName")
-    public String getTypeName() {
-        return typeName;
+    public String getTypeCode() {
+        return typeCode;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
     }
 
     @Basic
@@ -174,7 +188,8 @@ public class MealType {
         MealType mealtype = (MealType) o;
         return typeId == mealtype.typeId &&
                 Objects.equals(restaurantId, mealtype.restaurantId) &&
-                Objects.equals(typeName, mealtype.typeName) &&
+                Objects.equals(typeCode, mealtype.typeCode) &&
+                Objects.equals(valueId, mealtype.valueId) &&
                 Objects.equals(costprice, mealtype.costprice) &&
                 Objects.equals(offer, mealtype.offer) &&
                 Objects.equals(whetherDel, mealtype.whetherDel) &&
@@ -190,6 +205,6 @@ public class MealType {
     @Override
     public int hashCode() {
 
-        return Objects.hash(typeId, restaurantId, typeName, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
+        return Objects.hash(typeId, restaurantId, typeCode, valueId, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
     }
 }

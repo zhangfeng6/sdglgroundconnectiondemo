@@ -12,6 +12,15 @@ import java.util.Objects;
  **/
 @Table(name = "operationlog")
 public class Operationlog {
+
+    public Operationlog(String operationType, String  operationContent, Integer createBy, Date createDate){
+        this.operationType=operationType;
+        this.operationContent=operationContent;
+        this.createBy=createBy;
+        this.createDate=createDate;
+        this.status=0;
+    }
+    public Operationlog(){}
     @Id
     @Column(name = "operationLogId")
     private int operationLogId; // 主键Id
@@ -28,12 +37,13 @@ public class Operationlog {
     private Integer createBy; // 创建人 （外键，与人员表关联）
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
-    @JsonFormat(pattern = "yyyy-MM-dd")
+
     @Column(name = "upDate")
     private Date upDate; // 修改日期
-    @JsonFormat(pattern = "yyyy-MM-dd")
+
     @Column(name = "createDate")
     private Date createDate; // 创建时间
+
     private String value1;
     private String value2;
     private String value3;

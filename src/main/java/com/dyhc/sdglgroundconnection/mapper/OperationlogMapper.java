@@ -11,4 +11,10 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface OperationlogMapper extends CommonMapper<Operationlog>{
+    /**
+     * 添加操作日志数据     张枫
+     * @param operationlog   日志对象
+     * @return          受影响行数
+     */
+    int saveOperationlog(Operationlog operationlog)throws Exception;
 }
