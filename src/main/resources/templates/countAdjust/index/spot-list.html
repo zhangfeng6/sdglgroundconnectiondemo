@@ -1,185 +1,279 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax & LayUI分页插件</title>
+	<link rel="stylesheet" href="/css/layui.css" media="all">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
-	</head>
-
-	<body>
-		<div class="page-content-wrap">
-					<form class="layui-form" action="">
-						<div class="layui-form-item">
-							<div class="layui-inline tool-btn">
-								<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="spot-add.html"><i class="layui-icon">&#xe654;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html"><i class="layui-icon">&#xe640;</i></button>
-							</div>
-							<div class="layui-inline">
-								<input type="text" name="title" required lay-verify="required" placeholder="请输入景点名称" autocomplete="off" class="layui-input">
-							</div>
-							<div class="layui-inline">
-								<input type="text" name="title" required lay-verify="required" placeholder="请输入景点地址" autocomplete="off" class="layui-input">
-							</div>
-							<div class="layui-inline">
-								<select name="states" lay-filter="status">
-									<option value="">请选择景点等级</option>
-									<option value="010">AAA</option>
-									<option value="021">AAAA</option>
-									<option value="010">AAAAA</option>
-								</select>
-							</div>
-							<div class="layui-inline">
-								<select name="states" lay-filter="status">
-									<option value="">请选择一个状态</option>
-									<option value="010">禁用</option>
-									<option value="021">正常</option>
-								</select>
-							</div>
-							<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
-						</div>
-					</form>
-					<div class="layui-form" id="table-list">
-						<table class="layui-table" lay-skin="line">
-							<colgroup>
-								<col width="50">
-								<col class="hidden-xs" width="100">
-								<col class="hidden-xs" width="100">
-								<col class="hidden-xs" width="100">
-								<col class="hidden-xs" width="120">
-								<col width="150">
-								<col width="130">
-								<col width="130">
-								<col width="80">
-								<col width="130">
-							</colgroup>
-							<thead>
-								<tr>
-									<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-									<th class="">景点编号</th>
-									<th class="">名称</th>
-									<th class="">所属景点名称</th>
-									<th class="">地址</th>
-									<th class="">景点等级</th>
-									<th class="">备注</th>
-									<th class="">报价</th>
-									<th>状态</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr id='node-1' class="parent collapsed">
-									<td><input type="checkbox" name="" lay-skin="primary" data-id="1">
-									<a class="layui-btn layui-btn-mini layui-btn-normal showSubBtn" data-id='1'>+</a></td>
-									<td class="">2012</td>
-									<td class="">万狮京华</td>
-									<td class="">五星级</td>
-									<td class="">平阳路大马村</td>
-									<td class="">提供早餐</td>
-									<td class="">12873283</td>
-									<td class="">200</td>
-									<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status">禁用 </button></td>
-									<td>
-										<div class="layui-inline">
-											<button class="layui-btn layui-btn-mini layui-btn-normal  add-btn" data-id="1" data-url="spotshopping-add.html"><i class="layui-icon">&#xe654;</i></button>
-											<button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn" data-id="1" data-url="spot-add.html"><i class="layui-icon">&#xe642;</i></button>
-											<button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="1" data-url="spot-add.html"><i class="layui-icon">&#xe640;</i></button>
-										</div>
-									</td>
-								</tr>
-								<tr id="node-2" class="child-node-1 parent collapsed" style="display:none ;background-color: #D6E9C6;" parentid="1">
-									<td class=""></td>
-									<td class=""></td>
-									<td class="">购物地名称</td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class="">操作</td>
-								</tr>
-								<tr id='node-2' class="child-node-1 parent collapsed" style="display:none ;" parentid="1">
-									<td class=""></td>
-									<td class=""></td>
-									<td class="">大床房</td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td>
-										<div class="layui-inline">
-											<button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe642;</i></button>
-											<button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe640;</i></button>
-										</div>
-									</td>
-								</tr>
-								<tr id='node-2' class="child-node-1 parent collapsed" style="display:none ;" parentid="1">
-									<td class=""></td>
-									<td class=""></td>
-									<td class="">大床房</td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td class=""></td>
-									<td>
-										<div class="layui-inline">
-											<button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe642;</i></button>
-											<button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe640;</i></button>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+</head>
+<body>
+<div class="page-content-wrap">
+	<form class="layui-form" action="">
+		<div class="layui-form-item">
+			<div class="layui-inline tool-btn">
+				<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="spot-add.html"><i class="layui-icon">&#xe654;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html" type="button"><i class="layui-icon">&#xe640;</i></button>
+			</div>
+			<div class="layui-inline">
+				<input type="text" name="scenicSpotName"  placeholder="请输入景点名称" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-inline">
+				<input type="text" name="scenicSpotAddress" placeholder="请输入景点地址" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-inline">
+				<select name="typeId" lay-filter="status">
+					<option value="0">请选择景点等级</option>
+					<option value="1">AAAAA</option>
+					<option value="2">AAAAA</option>
+					<option value="3">AAA</option>
+					<option value="4">AA</option>
+					<option value="5">A</option>
+				</select>
+			</div>
+			<div class="layui-inline">
+				<select name="whetherDel" lay-filter="status">
+					<option value="0">请选择一个状态</option>
+					<option value="3">正常</option>
+					<option value="4">禁用</option>
+				</select>
+			</div>
+			<button class="layui-btn layui-btn-normal" onclick="loadData()" type="button">搜索</button>
 		</div>
-		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-			layui.use(['jquery'], function() {
-				var $=layui.jquery;
-				//修改状态
-				$('#table-list').on('click', '.table-list-status', function() {
-					var That = $(this);
-					var status = That.attr('data-status');
-					var id = That.parent().attr('data-id');
-					if(status == 1) {
-						That.removeClass('layui-btn-normal').addClass('layui-btn-warm').html('隐藏').attr('data-status', 2);
-					} else if(status == 2) {
-						That.removeClass('layui-btn-warm').addClass('layui-btn-normal').html('显示').attr('data-status', 1);
+	</form>
+	<div class="layui-form" id="table-list">
+		<table class="layui-table" lay-skin="line">
 
-					}
-				})
-				//栏目展示隐藏
-				$('.showSubBtn').on('click', function() {
-					var _this = $(this);
-					var id = _this.attr('data-id');
-					var parent = _this.parents('.parent');
-					var child = $('.child-node-' + id);
-					var childAll = $('tr[parentid=' + id + ']');
-					if(parent.hasClass('collapsed')) {
-						_this.html('-');
-						parent.addClass('expanded').removeClass('collapsed');
-						child.css('display', '');
-					} else {
-						_this.html('+');
-						parent.addClass('collapsed').removeClass('expanded');
-						child.css('display', 'none');
-						childAll.addClass('collapsed').removeClass('expanded').css('display', 'none');
-						childAll.find('.showSubBtn').html('+');
-					}
+			<thead>
+			<tr>
+				<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+				<th class="">景点编号</th>
+				<th class="">名称</th>
+				<th class="">所属景点名称</th>
+				<th class="">地址</th>
+				<th class="">景点等级</th>
+				<th class="">备注</th>
+				<th class="">报价</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			</tbody>
 
-				})
-			});
-		</script>
-	</body>
+		</table>
+		<div id="laypage" style="text-align: center"></div>
+	</div>
+</div>
 
+</body>
 </html>
+<script src="/layui.js"></script>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+
+
+    var limitcount = 2; // 每页总记录数
+    var curnum = 1;  // 当前页码
+
+    loadData();
+    function loadData() {
+        var content = "";
+        var scenicSpotName=$("input[name='scenicSpotName']").val();
+        var scenicSpotAddress=$("input[name='scenicSpotAddress']").val();
+        var typeId=$("select[name='typeId']").val();
+        var whetherDel=$("select[name='whetherDel']").val();
+        $.ajax({
+            url: "http://localhost:8888/Scenicspot/listScenicspots",
+            data: {"typeId":1,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"whetherDel":3,"pageNo":curnum,"pageSize":2},
+            dataType: "json",
+            type: "get",
+            async: false,
+            success: function (result) {
+                $.each(result.data,function (i,e) {
+                    content+="<tr id='node-"+e.scenicSpotId+"' class='parent collapsed'>" +
+                        "<td><input type='checkbox' name='' lay-skin='primary' data-id='1'>" +
+                        "<a class='layui-btn layui-btn-mini layuis-btn-normal showSubBtn' data-id='"+e.scenicSpotId+"'>+</a></td>" +
+                        "<td class=''>"+e.scenicSpotId+"</td>" +
+                        "<td class=''>"+e.scenicSpotName+"</td>";
+                    if (e.parentId==0){
+                        content+="<td class=''>无</td>";
+                    }else {
+                        content+="<td class='parentName'>无</td>";
+                        getScenicspotByParentId(e.parentId);
+                    }
+                    content+="<td class=''>"+e.scenicSpotAddress+"</td>" +
+                        "<td class=''>";
+                    if (e.typeId==1) {
+                        content+="五星级";
+                    }
+                    if (e.typeId==2) {
+                        content+="四星级";
+                    }
+                    if (e.typeId==3) {
+                        content+="三星级";
+                    }
+                    if (e.typeId==4) {
+                        content+="二星级";
+                    }
+                    if (e.typeId==5) {
+                        content+="一星级";
+                    }
+                    content+="<td class=''>"+e.remarks+"</td>"+
+                        " <td class=''>"+e.offer+"</td>" +
+                        "<td><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status'>";
+                    if (e.whetherDel==3) {
+                        content+="正常";
+                    }
+                    if (e.whetherDel==4) {
+                        content+="禁用";
+                    }
+                    content+="</button></td>" +
+                        "<td>" +
+                        "<div class='layui-inline'>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='1' data-url='spotshopping-add.html'><i class='layui-icon'>&#xe654;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "</div>" +
+                        "</td>" +
+                        "</tr>"+
+                    	"<tr id='node-"+e.scenicSpotId+"' class='child-node-"+e.scenicSpotId+" parent collapsed' style='display:none ;background-color: #D6E9C6;' parentid='1'>" +
+                        "<td class=''></td>" +
+                        "<td class=''></td>" +
+                        "<td class=''>购物地名称</td>" +
+                        "<td class=''></td>" +
+                        "<td class=''></td>" +
+                        "<td class=''></td>" +
+                        "<td class=''></td>" +
+                        "<td class=''></td>" +
+                        "<td class=''></td>" +
+                        "<td class=''>操作</td>" +
+                        "</tr>";
+                    if (e.shoppings.length==0){
+                        content+= "<tr id='node-"+e.scenicSpotId+"' class='child-node-"+e.scenicSpotId+" parent collapsed' style='display:none ;' parentid='1'>" +
+                            "<td class='' colspan='9' style='text-align: center'>无</td>" +
+                            "<td>" +
+                            "<div class='layui-inline'>" +
+                            "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                            "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                            "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                            "</div>" +
+                            "</td>" +
+                            "</tr>" ;
+
+					}else {
+                        $.each(e.shoppings,function (i,e1) {
+                            content+= "<tr id='node-"+e.scenicSpotId+"' class='child-node-"+e.scenicSpotId+" parent collapsed' style='display:none ;' parentid='1'>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''>"+e1.shoppingSite+"</td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td>" +
+                                "<div class='layui-inline'>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                                "</div>" +
+                                "</td>" +
+                                "</tr>" ;
+                        });
+					}
+
+                })
+                $('tbody').html(content);
+
+                // 分页插件
+                layui.use('table', function () {
+                    var laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'laypage'
+                        , count: result.count
+                        , curr: curnum
+                        , limit: 2
+                        , layout: ['prev', 'page', 'next', 'skip', 'count']
+                        , jump: function (obj, first) {
+                            if (!first) {
+                                //obj包含了当前分页的所有参数，比如：
+                                curnum = obj.curr; // 当前页码
+                                limitcount = obj.limit; // 每页记录数
+                                // 查询新数据
+                                loadData();
+                            }
+                        }
+                    })
+                })
+            },
+            error: function (res) {
+                alert(res);
+            }
+        })
+    }
+    
+
+
+    /**
+     * 根据父景点id查询景点名称
+     * @param scenicSpotId
+     */
+    function getScenicspotByParentId(parentId) {
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8888/Scenicspot/getScenicspotByParentId",
+            data: {"parentId":parentId},
+            dataType: "json",
+            success:function (result1) {
+                var lala=result1.data[0].scenicSpotName;
+                $(".parentName").text(result1.data[0].scenicSpotName);
+            }
+        })
+    }
+
+
+
+
+
+
+
+    layui.use(['jquery'], function() {
+        var $ = layui.jquery;
+        //修改状态
+        $('#table-list').on('click', '.table-list-status', function () {
+            var That = $(this);
+            var status = That.attr('data-status');
+            var id = That.parent().attr('data-id');
+            if (status == 1) {
+                That.removeClass('layui-btn-normal').addClass('layui-btn-warm').html('隐藏').attr('data-status', 2);
+            } else if (status == 2) {
+                That.removeClass('layui-btn-warm').addClass('layui-btn-normal').html('显示').attr('data-status', 1);
+
+            }
+        })
+        //栏目展示隐藏
+        $(document).on('click', '.showSubBtn', function () {
+            var _this = $(this);
+            var id = _this.attr('data-id');
+            var parent = _this.parents('.parent');
+            var child = $('.child-node-' + id);
+            var childAll = $('tr[parentid=' + id + ']');
+            if (parent.hasClass('collapsed')) {
+                _this.html('-');
+                parent.addClass('expanded').removeClass('collapsed');
+                child.css('display', '');
+            } else {
+                _this.html('+');
+                parent.addClass('collapsed').removeClass('expanded');
+                child.css('display', 'none');
+                childAll.addClass('collapsed').removeClass('expanded').css('display', 'none');
+                childAll.find('.showSubBtn').html('+');
+            }
+
+        })
+    })
+
+
+
+</script>

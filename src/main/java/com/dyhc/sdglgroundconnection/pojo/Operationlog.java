@@ -1,8 +1,15 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.dyhc.sdglgroundconnection.utils.CustomDateSerializer;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,6 +28,7 @@ public class Operationlog {
         this.status=0;
     }
     public Operationlog(){}
+
     @Id
     @Column(name = "operationLogId")
     private int operationLogId; // 主键Id
@@ -38,8 +46,22 @@ public class Operationlog {
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
 
+    @Transient()
+    private Staff staff;
+
+    @Basic
+    @Column(name = "staff")
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
     @Column(name = "upDate")
     private Date upDate; // 修改日期
+
 
     @Column(name = "createDate")
     private Date createDate; // 创建时间
@@ -140,6 +162,7 @@ public class Operationlog {
 
     @Basic
     @Column(name = "createDate")
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getCreateDate() {
         return createDate;
     }

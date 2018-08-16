@@ -3,7 +3,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.OperationlogMapper">
 
+    <!--新增日志信息-->
     <insert id="saveOperationlog">
       INSERT INTO `operationlog` VALUE(NULL,#{operationType},#{operationContent},#{roleId},#{operationDate},#{status},#{createBy},#{updateBy},#{upDate},#{createDate},#{value1},#{value2},#{value3})
     </insert>
+
+    <!--根据参数查询符合条件的数据-->
+    <select id="listOperationLog" resultMap="getloganduser">
+          SELECT o.*,s.* FROM `operationlog` o,`staff` s WHERE o.`createBy`=s.`roleId`
+        <if test="createDate != null and createDate != ''">
+            AND o.`createDate`=#{createDate}
+        </if>
+        <if test="theUserName != null and theUserName != ''">
+            AND s.`theUserName` LIKE CONCAT('%',#{theUserName},'%')
+        </if>
+        AND o.`status` !=1
+    </select>
+
+    <resultMap id="getloganduser" type="com.dyhc.sdglgroundconnection.pojo.Operationlog">
+        <id column="operationLogId" property="operationLogId"/>
+        <association property="staff" javaType="com.dyhc.sdglgroundconnection.pojo.Staff">
+            <id column="staffId" property="staffId"/>
+        </association>
+    </resultMap>
 </mapper>

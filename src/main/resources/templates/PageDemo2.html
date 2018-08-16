@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ajax & LayUI分页插件</title>
     <link rel="stylesheet" href="/css/layui.css" media="all">
+
 </head>
 <body>
 <div id="pTable" style="width:888px;margin:0 auto">
@@ -32,9 +33,7 @@
 
     var limitcount = 2; // 每页总记录数
     var curnum = 1;  // 当前页码
-
     loadData();
-
     function loadData() {
         var str = "";
         $.ajax({
@@ -48,7 +47,6 @@
                         "<td>" + result.starHotel + "</td><td>" + result.hotelAddress + "</td><td>" + result.breakfast + "</td><td>" + result.contacts + "</td><td>" + result.phone + "</td><td>" + result.updateDate + "</td></tr>";
                 })
                 $('tbody').html(str);
-
                 // 分页插件
                 layui.use('table', function () {
                     var laypage = layui.laypage;
@@ -61,7 +59,7 @@
                         , jump: function (obj, first) {
                             if (!first) {
                                 //obj包含了当前分页的所有参数，比如：
-                                curnum = obj.curr; // 当前页面
+                                curnum = obj.curr; // 当前页码
                                 limitcount = obj.limit; // 每页记录数
                                 // 查询新数据
                                 loadData();

@@ -1,9 +1,9 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,7 +32,7 @@ public class Scenicspot {
     private String describe; // 描述
     private String remarks; // 备注
     @Column(name = "whetherDel")
-    private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
+    private Integer whetherDel; // 是否删除（，1代表未删除,2代表已删除,3代表正常，4代表禁用）
     @Column(name = "createBy")
     private Integer createBy; // 创建人 （外键，与人员表关联）
     @Column(name = "scenicSpotId")
@@ -46,6 +46,28 @@ public class Scenicspot {
     private String value1;
     private String value2;
     private String value3;
+
+    @Transient
+    private Dictionaries dictionarie;       //字典表
+
+    public List<Shopping> getShoppings() {
+        return shoppings;
+    }
+
+    public void setShoppings(List<Shopping> shoppings) {
+        this.shoppings = shoppings;
+    }
+
+    @Transient
+    private List<Shopping> shoppings;       //购物表
+
+    public Dictionaries getDictionarie() {
+        return dictionarie;
+    }
+
+    public void setDictionarie(Dictionaries dictionarie) {
+        this.dictionarie = dictionarie;
+    }
 
     @Id
     @Column(name = "scenicSpotId")
