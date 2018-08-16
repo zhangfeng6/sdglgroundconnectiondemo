@@ -3,4 +3,45 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.ScenicspotMapper">
 
+    <select id="listScenicspots" resultMap="getScenicspotLevel">
+        SELECT * FROM scenicspot
+        <where>
+            <if test="scenicSpotName!=null or scenicSpotName!=''">
+                scenicSpotName like CONCAT('%',#{scenicSpotName},'%')
+            </if>
+            <if test="scenicSpotAddress!=null or scenicSpotAddress!=''">
+                and scenicSpotAddress like CONCAT('%',#{scenicSpotAddress},'%')
+            </if>
+            <if test="typeId!=0">
+                and  typeId=#{typeId}
+            </if>
+            <if test="whetherDel!=0">
+               and whetherDel=#{whetherDel}
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="getScenicspotByParentId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        select * from scenicspot where parentId=#{parentId}
+    </select>
+
+    <resultMap id="getScenicspotLevel" type="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        <id column="scenicSpotId" property="scenicSpotId"/>
+        <result column="parentId" property="parentId"/>
+        <result column="scenicSpotName" property="scenicSpotName"/>
+        <result column="scenicSpotAddress" property="scenicSpotAddress"/>
+        <result column="typeId" property="typeId"/>
+        <result column="remarks" property="remarks"/>
+        <result column="offer" property="offer"/>
+        <result column="whetherDel" property="whetherDel"/>
+        <association property="dictionarie" javaType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+            <id column="dictionariesId" property="dictionariesId"/>
+            <result column="valueId" property="valueId"/>
+            <result column="typeCode" property="typeCode"/>
+            <result column="valueContent1" property="valueContent1"/>
+            <result column="valueContent1" property="valueContent1"/>
+        </association>
+    </resultMap>
 </mapper>
