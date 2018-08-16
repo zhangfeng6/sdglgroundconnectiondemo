@@ -19,15 +19,16 @@
 							<div class="layui-inline tool-btn">
 							</div>
 							<div class="layui-inline">
-								<input type="text" name="title"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
+								<input type="text" name="title"  placeholder="请输入操作人账户" autocomplete="off" class="layui-input">
 							</div>
+
 							<div class="layui-inline">
-								开始时间
-								<input type="date" />
+								<span>请输入操作时间</span>
 							</div>
+
 							<div class="layui-inline">
-								结束时间
-								<input type="date" />
+
+								<input type="date" autocomplete="off" class="layui-input">
 							</div>
 							<button class="layui-btn layui-btn-normal">搜索</button>
 						</div>
@@ -46,14 +47,11 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th style="width: 30px;">操作类型</th>
-									<th style="width: 45px;">操作内容</th>
-									<th style="width: 30px;">操作人</th>
-									<th style="width: 45px;">操作时间</th>
-									<th style="width: 80px;">创建人</th>
-									<th style="width: 100px;">修改人</th>
-									<th style="width: 80px;">修改日期</th>
-									<th style="width: 100px;">创建时间</th>
+									<th style="width: 30px;">序号</th>
+									<th style="width: 45px;">操作类型</th>
+									<th style="width: 30px;">操作内容</th>
+									<th style="width: 45px;">操作人</th>
+									<th style="width: 80px;">操作时间</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -63,39 +61,55 @@
 									<td style="font-size:small">wangtaoadmin</td>
 									<td style="font-size:small">142227199505240013</td>
 									<td style="font-size:small">1945210797</td>
-									<td style="font-size:small">山西太原小店区平阳路华康大厦7层</td>
-									<td style="font-size:small">13008300524</td>
-									<td style="font-size:small">13008300524</td>
+
 								</tr>
-								<tr id='node-1' class="parent collapsed">
+								<tr id='node-2' class="parent collapsed">
 									<td style="font-size:small">吴勇飞</td>
 									<td style="font-size:small">计调</td>
 									<td style="font-size:small">wuyongfeiadmin</td>
 									<td style="font-size:small">145642199640213210</td>
 									<td style="font-size:small">1523612352</td>
-									<td style="font-size:small">山西太原小店区平阳路华康大厦7层</td>
-									<td style="font-size:small">13854625312</td>
-									<td style="font-size:small">13008300524</td>
+
 								</tr>
 							</tbody>
 						</table>
-						<div class="page-wrap">
-							<ul class="pagination">
-								<li class="disabled"><span>«</span></li>
-								<li class="active"><span>1</span></li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">»</a>
-								</li>
-							</ul>
-						</div>
+						<ul id="demo20"></ul>
 					</div>
 				</div>
 		</div>
 		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/jquery-3.3.1.min.js"></script>
+	<!--	<script src="/js/paging.js"></script>-->
+		<script type="text/javascript">
+            layui.use(['laypage', 'layer'], function(){
+                var laypage = layui.laypage
+                    ,layer = layui.layer;
+                //测试数据
+                var data = [
+                    "<tr><td>1</td><td>途牛组团社</td><td>10</td><td>忻州</td><td>2017-02-02</td><td>2017-02-03</td><td>100</td><td>玩具</td><td><div class='layui-inline'><button class='layui-btn layui-btn-small layui-btn-normal add-btn' data-url='article-add.html'><i class='layui-icon'>&#xe654;</i></button><button class='layui-btn layui-btn-small layui-btn-normal go-btn' data-url='article-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='1' data-url='article-detail.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>","<tr><td>2</td><td>途牛组团社</td><td>10</td><td>忻州</td><td>2017-02-02</td><td>2017-02-03</td><td>100</td><td>玩具01</td><td><div class='layui-inline'><button class='layui-btn layui-btn-small layui-btn-normal add-btn' data-url='article-add.html'><i class='layui-icon'>&#xe654;</i></button><button class='layui-btn layui-btn-small layui-btn-normal go-btn' data-url='article-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='1' data-url='article-detail.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>"
+                ];
+                //调用分页
+                laypage.render({
+                    elem: 'demo20'
+                    ,count: data.length
+                    ,limit: 1
+                    ,jump: function(obj){
+                        //模拟渲染
+                        document.getElementById('biuuu_city_list').innerHTML = function(){
+                            var arr = []
+                                ,thisData = data.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
+                            layui.each(thisData, function(index, item){
+                                arr.push('<li>'+ item +'</li>');
+                            });
+                            return arr.join('');
+                        }();
+                    }
+                });
+
+            });
+		</script>
+
 	</body>
 
 </html>
