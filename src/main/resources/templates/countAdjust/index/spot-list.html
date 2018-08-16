@@ -12,16 +12,16 @@
 		<div class="layui-form-item">
 			<div class="layui-inline tool-btn">
 				<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="spot-add.html"><i class="layui-icon">&#xe654;</i></button>
-				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html"><i class="layui-icon">&#xe640;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html" type="button"><i class="layui-icon">&#xe640;</i></button>
 			</div>
 			<div class="layui-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder="请输入景点名称" autocomplete="off" class="layui-input">
+				<input type="text" name="scenicSpotName"  placeholder="请输入景点名称" autocomplete="off" class="layui-input">
 			</div>
 			<div class="layui-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder="请输入景点地址" autocomplete="off" class="layui-input">
+				<input type="text" name="scenicSpotAddress" placeholder="请输入景点地址" autocomplete="off" class="layui-input">
 			</div>
 			<div class="layui-inline">
-				<select name="states" lay-filter="status">
+				<select name="typeId" lay-filter="status">
 					<option value="0">请选择景点等级</option>
 					<option value="1">AAAAA</option>
 					<option value="2">AAAAA</option>
@@ -31,13 +31,13 @@
 				</select>
 			</div>
 			<div class="layui-inline">
-				<select name="states" lay-filter="status">
+				<select name="whetherDel" lay-filter="status">
 					<option value="0">请选择一个状态</option>
 					<option value="3">正常</option>
 					<option value="4">禁用</option>
 				</select>
 			</div>
-			<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+			<button class="layui-btn layui-btn-normal" onclick="loadData()" type="button">搜索</button>
 		</div>
 	</form>
 	<div class="layui-form" id="table-list">
@@ -58,71 +58,6 @@
 			</tr>
 			</thead>
 			<tbody>
-				<!--<tr id='node-4' class="parent collapsed">
-					<td><input type="checkbox" name="" lay-skin="primary" data-id="1">
-						<a class="layui-btn layui-btn-mini layui-btn-normal showSubBtn" data-id='1'>+</a></td>
-					<td class="">2012</td>
-					<td class="">万狮京华</td>
-					<td class="">五星级</td>
-					<td class="">平阳路大马村</td>
-					<td class="">提供早餐</td>
-					<td class="">12873283</td>
-					<td class="">200</td>
-					<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status">禁用 </button></td>
-					<td>
-						<div class="layui-inline">
-							<button class="layui-btn layui-btn-mini layui-btn-normal  add-btn" data-id="1" data-url="spotshopping-add.html"><i class="layui-icon">&#xe654;</i></button>
-							<button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn" data-id="1" data-url="spot-add.html"><i class="layui-icon">&#xe642;</i></button>
-							<button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="1" data-url="spot-add.html"><i class="layui-icon">&#xe640;</i></button>
-						</div>
-					</td>
-				</tr>
-				<tr id="node-3" class="child-node-1 parent collapsed" style="display:none ;background-color: #D6E9C6;" parentid="1">
-					<td class=""></td>
-					<td class=""></td>
-					<td class="">购物地名称</td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class="">操作</td>
-				</tr>
-				<tr id='node-1' class="child-node-1 parent collapsed" style="display:none ;" parentid="1">
-					<td class=""></td>
-					<td class=""></td>
-					<td class="">大床房</td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td>
-						<div class="layui-inline">
-							<button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe642;</i></button>
-							<button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe640;</i></button>
-						</div>
-					</td>
-				</tr>
-				<tr id='node-2' class="child-node-1 parent collapsed" style="display:none ;" parentid="1">
-					<td class=""></td>
-					<td class=""></td>
-					<td class="">大床房</td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td class=""></td>
-					<td>
-						<div class="layui-inline">
-							<button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe642;</i></button>
-							<button class="layui-btn layui-btn-mini layui-btn-danger del-btn" data-id="2" data-url="hotelroom-add.html"><i class="layui-icon">&#xe640;</i></button>
-						</div>
-					</td>
-				</tr>-->
 			</tbody>
 
 		</table>
@@ -143,16 +78,21 @@
     loadData();
     function loadData() {
         var content = "";
+        var scenicSpotName=$("input[name='scenicSpotName']").val();
+        var scenicSpotAddress=$("input[name='scenicSpotAddress']").val();
+        var typeId=$("select[name='typeId']").val();
+        var whetherDel=$("select[name='whetherDel']").val();
         $.ajax({
             url: "http://localhost:8888/Scenicspot/listScenicspots",
-            data: {"typeId":1,"scenicSpotName":"五","scenicSpotAddress":"五","whetherDel":3,"pageNo":curnum},
+            data: {"typeId":1,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"whetherDel":3,"pageNo":curnum,"pageSize":2},
             dataType: "json",
             type: "get",
+            async: false,
             success: function (result) {
                 $.each(result.data,function (i,e) {
-                    content+="<tr id='node-1' class='parent collapsed'>" +
+                    content+="<tr id='node-"+e.scenicSpotId+"' class='parent collapsed'>" +
                         "<td><input type='checkbox' name='' lay-skin='primary' data-id='1'>" +
-                        "<a class='layui-btn layui-btn-mini layuis-btn-normal showSubBtn' data-id='1' onclick='shopAddress(e.scenicSpotId)'>+</a></td>" +
+                        "<a class='layui-btn layui-btn-mini layuis-btn-normal showSubBtn' data-id='"+e.scenicSpotId+"'>+</a></td>" +
                         "<td class=''>"+e.scenicSpotId+"</td>" +
                         "<td class=''>"+e.scenicSpotName+"</td>";
                     if (e.parentId==0){
@@ -195,8 +135,8 @@
                         "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
                         "</div>" +
                         "</td>" +
-                        "</tr>";
-                    content+="<tr id='node-3' class='child-node-1 parent collapsed' style='display:none ;background-color: #D6E9C6;' parentid='1'>" +
+                        "</tr>"+
+                    	"<tr id='node-"+e.scenicSpotId+"' class='child-node-"+e.scenicSpotId+" parent collapsed' style='display:none ;background-color: #D6E9C6;' parentid='1'>" +
                         "<td class=''></td>" +
                         "<td class=''></td>" +
                         "<td class=''>购物地名称</td>" +
@@ -207,27 +147,44 @@
                         "<td class=''></td>" +
                         "<td class=''></td>" +
                         "<td class=''>操作</td>" +
-                        "</tr>" +
-                        "<tr id='node-1' class='child-node-1 parent collapsed' style='display:none ;' parentid='1'>" +
-                        "<td class=''></td>" +
-                        "<td class=''></td>" +
-                        "<td class=''>大床房</td>" +
-                        "<td class=''></td>" +
-                        "<td class=''></td>" +
-                        "<td class=''></td>" +
-                        "<td class=''></td>" +
-                        "<td class=''></td>" +
-                        "<td class=''></td>" +
-                        "<td>" +
-                        "<div class='layui-inline'>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
-                        "</div>" +
-                        "</td>" +
-                        "</tr>" ;
+                        "</tr>";
+                    if (e.shoppings.length==0){
+                        content+= "<tr id='node-"+e.scenicSpotId+"' class='child-node-"+e.scenicSpotId+" parent collapsed' style='display:none ;' parentid='1'>" +
+                            "<td class='' colspan='9' style='text-align: center'>无</td>" +
+                            "<td>" +
+                            "<div class='layui-inline'>" +
+                            "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                            "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                            "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                            "</div>" +
+                            "</td>" +
+                            "</tr>" ;
+
+					}else {
+                        $.each(e.shoppings,function (i,e1) {
+                            content+= "<tr id='node-"+e.scenicSpotId+"' class='child-node-"+e.scenicSpotId+" parent collapsed' style='display:none ;' parentid='1'>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''>"+e1.shoppingSite+"</td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td class=''></td>" +
+                                "<td>" +
+                                "<div class='layui-inline'>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                                "</div>" +
+                                "</td>" +
+                                "</tr>" ;
+                        });
+					}
+
                 })
-                 $('tbody').html(content);
+                $('tbody').html(content);
 
                 // 分页插件
                 layui.use('table', function () {
@@ -255,6 +212,8 @@
             }
         })
     }
+    
+
 
     /**
      * 根据父景点id查询景点名称
@@ -273,22 +232,7 @@
         })
     }
 
-    /**
-	 * 根据景点id查询附近的购物地点
-     * @param scenicSpotId
-     */
-    function shopAddress(scenicSpotId){
-        $.ajax({
-            type: "post",
-            url: "http://localhost:8888/Scenicspot/getScenicspotByParentId",
-            data: {"parentId":parentId},
-            dataType: "json",
-            success:function (result1) {
-                var lala=result1.data[0].scenicSpotName;
-                $(".parentName").text(result1.data[0].scenicSpotName);
-            }
-        })
-	}
+
 
 
 

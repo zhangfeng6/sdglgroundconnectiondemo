@@ -38,9 +38,9 @@ public class ScenicspotController {
      * @return
      */
     @RequestMapping("/listScenicspots")
-    public ReponseResult listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer whetherDel, Integer pageNo) {
+    public ReponseResult listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer whetherDel, Integer pageNo,Integer pageSize) {
         try {
-            PageInfo<Scenicspot> scenicspotPageInfo = scenicspotService.listScenicspots(typeId, scenicSpotName, scenicSpotAddress, whetherDel, pageNo, 2);
+            PageInfo<Scenicspot> scenicspotPageInfo = scenicspotService.listScenicspots(typeId, scenicSpotName, scenicSpotAddress, whetherDel, pageNo, pageSize);
             ReponseResult<List> data = ReponseResult.ok(scenicspotPageInfo.getList(), scenicspotPageInfo.getTotal(), "分页获取景点成功！");
             logger.info(" method:showHotel  分页获取景点成功！");
             return data;

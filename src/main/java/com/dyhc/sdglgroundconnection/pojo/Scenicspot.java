@@ -1,9 +1,9 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -49,6 +49,17 @@ public class Scenicspot {
 
     @Transient
     private Dictionaries dictionarie;       //字典表
+
+    public List<Shopping> getShoppings() {
+        return shoppings;
+    }
+
+    public void setShoppings(List<Shopping> shoppings) {
+        this.shoppings = shoppings;
+    }
+
+    @Transient
+    private List<Shopping> shoppings;       //购物表
 
     public Dictionaries getDictionarie() {
         return dictionarie;

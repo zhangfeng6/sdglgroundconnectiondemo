@@ -29,5 +29,5 @@ public interface ScenicspotService {
      * @param parentId
      * @return
      */
-    PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId);
+    PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId)throws Exception;
 }

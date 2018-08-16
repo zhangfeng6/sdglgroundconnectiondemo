@@ -1,7 +1,9 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ScenicspotMapper;
+import com.dyhc.sdglgroundconnection.mapper.ShoppingMapper;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
+import com.dyhc.sdglgroundconnection.pojo.Shopping;
 import com.dyhc.sdglgroundconnection.service.ScenicspotService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -20,17 +22,23 @@ public class ScenicspotServiceImpl implements ScenicspotService {
 
     @Autowired
     private ScenicspotMapper scenicspotMapper;
+    @Autowired
+    private ShoppingMapper shoppingMapper;
 
     @Override
     public PageInfo<Scenicspot> listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer whetherDel, Integer pageNo, Integer pageSize) throws Exception {
         PageHelper.startPage(pageNo, pageSize, true);
         List<Scenicspot> list1=scenicspotMapper.listScenicspots(typeId,scenicSpotName,scenicSpotAddress,whetherDel);
+        for (Scenicspot s:list1) {
+            List<Shopping> list2=shoppingMapper.listShoppingByScenicSpotId(s.getScenicSpotId());
+            s.setShoppings(list2);
+        }
         PageInfo<Scenicspot> pageInfo = new PageInfo<>(list1);
         return pageInfo;
     }
 
     @Override
-    public PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId) {
+    public PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId) throws Exception{
         List<Scenicspot> list1=scenicspotMapper.getScenicspotByParentId(parentId);
         PageInfo<Scenicspot> pageInfo=new PageInfo<Scenicspot>(scenicspotMapper.getScenicspotByParentId(parentId));
         return pageInfo;
