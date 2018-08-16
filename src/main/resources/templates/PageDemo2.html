@@ -32,9 +32,7 @@
 
     var limitcount = 2; // 每页总记录数
     var curnum = 1;  // 当前页码
-
     loadData();
-
     function loadData() {
         var str = "";
         $.ajax({
@@ -48,7 +46,6 @@
                         "<td>" + result.starHotel + "</td><td>" + result.hotelAddress + "</td><td>" + result.breakfast + "</td><td>" + result.contacts + "</td><td>" + result.phone + "</td><td>" + result.updateDate + "</td></tr>";
                 })
                 $('tbody').html(str);
-
                 // 分页插件
                 layui.use('table', function () {
                     var laypage = layui.laypage;

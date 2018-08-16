@@ -54,6 +54,7 @@ public class LogBeforeAdvice{
         Operationlog operationlog = new Operationlog();
         operationlog.setOperationType(logNotes.operationType());
         operationlog.setOperationContent(logNotes.content());
+        operationlog.setStatus(0);
         operationlog.setCreateBy(user.getRoleId());
         operationlog.setCreateDate(new Date());
         // 执行添加日志
