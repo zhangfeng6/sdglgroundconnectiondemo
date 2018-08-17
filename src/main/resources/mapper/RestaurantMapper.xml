@@ -2,5 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.RestaurantMapper">
+    <select id="selectByEx" resultType="com.dyhc.sdglgroundconnection.pojo.Restaurant">
+        select * from restaurant where whetherDel != 1
+        <if test="restaurantName!=null and restaurantName!=''">
+            and restaurantName like concat("%",#{restaurantName},"%")
+        </if>
+        <if test="restaurantAddress!=null and restaurantAddress!=''">
+            and restaurantAddress like concat("%",#{restaurantAddress},"%")
+        </if>
+        <if test="whetherDel!=null and whetherDel!=''">
+            and whetherDel = #{whetherDel}
+        </if>
 
+    </select>
+
+    <update id="delRestaurantById">
+        update restaurant set whetherDel=1 where restaurantId=#{restaurantId}
+    </update>
+
+    <update id="updateRestaurantById">
+        update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone} where restaurantId=#{restaurantId}
+    </update>
 </mapper>
