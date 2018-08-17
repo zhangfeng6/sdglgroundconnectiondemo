@@ -5,4 +5,5 @@
     <select id="login" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
         select * from staff where theUserName=#{theUserName} and password=#{password}
     </select>
+
 </mapper>
