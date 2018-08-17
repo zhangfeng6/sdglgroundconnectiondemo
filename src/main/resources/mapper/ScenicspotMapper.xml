@@ -6,10 +6,10 @@
     <select id="listScenicspots" resultMap="getScenicspotLevel">
         SELECT * FROM  `scenicspot` s
         <where>
-            <if test="scenicSpotName!=null or scenicSpotName!=''">
+            <if test="scenicSpotName!=null and scenicSpotName!=''">
                 scenicSpotName like CONCAT('%',#{scenicSpotName},'%')
             </if>
-            <if test="scenicSpotAddress!=null or scenicSpotAddress!=''">
+            <if test="scenicSpotAddress!=null and scenicSpotAddress!=''">
                 and scenicSpotAddress like CONCAT('%',#{scenicSpotAddress},'%')
             </if>
             <if test="typeId!=0">
@@ -18,6 +18,8 @@
             <if test="whetherDel!=0">
                and whetherDel=#{whetherDel}
             </if>
+            and whetherDel!=1
+            and whetherDel!=2
         </where>
         ORDER BY `createDate` DESC
     </select>
