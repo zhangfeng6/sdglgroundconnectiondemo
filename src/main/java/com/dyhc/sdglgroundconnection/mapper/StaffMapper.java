@@ -22,4 +22,5 @@ public interface StaffMapper extends CommonMapper<Staff>{
      * @throws Exception
      */
     Staff login(@Param("theUserName") String theUserName,@Param("password") String password) throws Exception;
+
 }

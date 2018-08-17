@@ -1,5 +1,4 @@
 package com.dyhc.sdglgroundconnection.web;
-
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.service.HotelService;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -11,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 酒店 控制层

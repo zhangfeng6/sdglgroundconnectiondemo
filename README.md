@@ -66,7 +66,7 @@ log.html		  导游带团日志单
 new_file.html		  团结算账单
 ptd.html		  导游接团任务工作单(派团单)
 CarRenting1.html CarRenting2.html 旅游团队运输合同
-BookingNotice.html        山西世达国旅订房通知单
-TravelPlan.html		  地接行程计划单
+BookingNotice.html        
+TravelPlan.html		  地接行程计山西世达国旅订房通知单划单
 Mission.html		  派团单
 Confirmation.html	  确认书

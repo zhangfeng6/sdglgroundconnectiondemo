@@ -4,7 +4,7 @@
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.ScenicspotMapper">
 
     <select id="listScenicspots" resultMap="getScenicspotLevel">
-        SELECT * FROM scenicspot
+        SELECT * FROM  `scenicspot` s
         <where>
             <if test="scenicSpotName!=null or scenicSpotName!=''">
                 scenicSpotName like CONCAT('%',#{scenicSpotName},'%')
@@ -24,7 +24,7 @@
 
 
     <select id="getScenicspotByParentId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        select * from scenicspot where parentId=#{parentId}
+        select * from scenicspot  where parentId=#{parentId}
     </select>
 
     <resultMap id="getScenicspotLevel" type="com.dyhc.sdglgroundconnection.pojo.Scenicspot">

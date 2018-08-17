@@ -27,5 +27,5 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @param parentId
      * @return
      */
-    List<Scenicspot> getScenicspotByParentId(@Param("parentId") Integer parentId);
+    List<Scenicspot> getScenicspotByParentId(@Param("parentId") Integer parentId)throws Exception;
 }

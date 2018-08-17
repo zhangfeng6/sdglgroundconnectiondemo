@@ -1,5 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Shopping;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +10,6 @@ import org.springframework.stereotype.Component;
  * 购物业务接口
  **/
 public interface ShoppingService {
+
+
 }
