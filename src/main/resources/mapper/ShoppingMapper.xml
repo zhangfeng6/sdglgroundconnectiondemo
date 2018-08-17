@@ -3,6 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.ShoppingMapper">
     <select id="listShoppingByScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Shopping">
-        select * from shopping where scenicSpotId=#{scenicSpotId} ORDER BY `creationDate` DESC
+        select * from shopping where scenicSpotId=#{scenicSpotId} and whetherDel=3 ORDER BY `creationDate` DESC
     </select>
+    
+    <update id="deleteShoppingById">
+        UPDATE `shopping` SET whetherDel=1 WHERE shoppingId=#{shoppingId}
+    </update>
+
+    <update id="deleteShoppingsByscenicSpotId">
+        UPDATE `shopping` SET whetherDel=1 WHERE scenicSpotId=#{scenicSpotId}
+    </update>
 </mapper>

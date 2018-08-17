@@ -37,6 +37,24 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public int deleteShoppingById(Integer shoppingId) throws Exception {
-        return shoppingMapper.deleteByPrimaryKey(shoppingId);
+        try {
+            shoppingMapper.deleteShoppingById(shoppingId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    @Override
+    public Integer deleteShoppingsByscenicSpotId(Integer scenicSpotId) throws Exception {
+        try {
+            shoppingMapper.deleteShoppingsByscenicSpotId(scenicSpotId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

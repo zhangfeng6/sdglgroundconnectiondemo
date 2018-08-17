@@ -44,4 +44,12 @@ public interface ShoppingService {
      * @throws Exception
      */
     int deleteShoppingById(Integer shoppingId)throws Exception;
+
+
+    /**
+     * 根据景点id删除购物地点
+     * @param scenicSpotId
+     * @throws Exception
+     */
+    Integer deleteShoppingsByscenicSpotId(Integer scenicSpotId)throws Exception;
 }

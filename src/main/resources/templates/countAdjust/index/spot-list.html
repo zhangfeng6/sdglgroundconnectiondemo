@@ -131,8 +131,8 @@
                         "<td>" +
                         "<div class='layui-inline'>" +
                         "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='1' data-url='spotshopping-add.html' type='button' id='insertShopping' value='"+e.scenicSpotId+"'><i class='layui-icon'>&#xe654;</i></button>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon' type='button' value='"+e.scenicSpotId+"' id='updateInfo'>&#xe642;</i></button>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='1' data-url='spot-add.html' type='button' value='"+e.scenicSpotId+"' id='updateInfo'><i class='layui-icon'>&#xe642;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='spot-add.html' type='button' onclick='delScenicspotById("+e.scenicSpotId+")'><i class='layui-icon'>&#xe640;</i></button>" +
                         "</div>" +
                         "</td>" +
                         "</tr>"+
@@ -237,14 +237,14 @@
         });
     });
     $(document).on('click','#insertInfo',function(){
-        var id = $(this).val();
+
         layer.open({
             type: 2,
             title: '景点添加',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'spot-add.html?id='+id
+            content:'spot-add.html?id=0'
         });
     });
 
@@ -294,7 +294,24 @@
         })
 	}
 
-
+    /**
+     * 根据景点id删除该景点信息和附近的购物地点
+     */
+    function delScenicspotById(scenicSpotId) {
+        var tishi=window.confirm("删除景点会把附近的购物地点删除?确认删除吗");
+        if(tishi==true){
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/Scenicspot/deleteScenicspotById",
+                data: {"scenicSpotId":scenicSpotId},
+                dataType: "json",
+                success:function (result1) {
+                    alert(result1.msg);
+                    parent.location.reload();
+                }
+            })
+		}
+    }
 
 
 

@@ -22,4 +22,18 @@ public interface ShoppingMapper extends CommonMapper<Shopping>{
     List<Shopping> listShoppingByScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
 
 
+    /**
+     * 根据购物id删除该购物地点
+     * @param shoppingId
+     * @throws Exception
+     */
+    void deleteShoppingById(@Param("shoppingId") Integer shoppingId)throws Exception;
+
+
+    /**
+     * 根据景点id删除购物地点
+     * @param scenicSpotId
+     * @throws Exception
+     */
+    void deleteShoppingsByscenicSpotId(@Param("scenicSpotId") Integer scenicSpotId)throws Exception;
 }

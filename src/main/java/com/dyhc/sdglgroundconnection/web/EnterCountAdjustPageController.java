@@ -1,6 +1,8 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.Shopping;
+import com.dyhc.sdglgroundconnection.service.ScenicspotService;
 import com.dyhc.sdglgroundconnection.service.ShoppingService;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -24,6 +26,8 @@ public class EnterCountAdjustPageController {
 
     @Autowired
     private ShoppingService shoppingService;
+    @Autowired
+    private ScenicspotService scenicspotService;
     
     /**
      * 进入计调首页
@@ -246,8 +250,20 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/spot-add.html")
-    public String  spotadd() {
+    public String  spotadd(HttpServletRequest request) {
+        try {
+
+            String id=request.getParameter("id");
+            Integer spotId=Integer.parseInt(id);
+            request.setAttribute("jdId",spotId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return "countAdjust/index/spot-add";
+
+
+
     }
     /**
      * 进入rbac-user-list页
