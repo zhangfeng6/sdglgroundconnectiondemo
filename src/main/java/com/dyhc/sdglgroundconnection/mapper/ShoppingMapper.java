@@ -14,5 +14,12 @@ import java.util.List;
 @Mapper
 @Component
 public interface ShoppingMapper extends CommonMapper<Shopping>{
+    /**
+     * 根据景点id查询购物地点
+     * @param scenicSpotId
+     * @return
+     */
     List<Shopping> listShoppingByScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
+
+
 }

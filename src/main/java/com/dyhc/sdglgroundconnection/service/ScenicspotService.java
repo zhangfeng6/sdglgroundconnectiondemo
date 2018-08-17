@@ -30,4 +30,6 @@ public interface ScenicspotService {
      * @return
      */
     PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId)throws Exception;
+
+
 }

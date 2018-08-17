@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>ajax & LayUI分页插件</title>
@@ -11,7 +11,7 @@
 	<form class="layui-form" action="">
 		<div class="layui-form-item">
 			<div class="layui-inline tool-btn">
-				<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="spot-add.html"><i class="layui-icon">&#xe654;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="spot-add.html" type="button" id="insertInfo"><i class="layui-icon">&#xe654;</i></button>
 				<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html" type="button"><i class="layui-icon">&#xe640;</i></button>
 			</div>
 			<div class="layui-inline">
@@ -130,8 +130,8 @@
                     content+="</button></td>" +
                         "<td>" +
                         "<div class='layui-inline'>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='1' data-url='spotshopping-add.html'><i class='layui-icon'>&#xe654;</i></button>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='1' data-url='spotshopping-add.html' type='button' id='insertShopping' value='"+e.scenicSpotId+"'><i class='layui-icon'>&#xe654;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon' type='button' value='"+e.scenicSpotId+"' id='updateInfo'>&#xe642;</i></button>" +
                         "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='spot-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
                         "</div>" +
                         "</td>" +
@@ -154,7 +154,6 @@
                             "<td>" +
                             "<div class='layui-inline'>" +
                             "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
-                            "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
                             "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
                             "</div>" +
                             "</td>" +
@@ -174,9 +173,8 @@
                                 "<td class=''></td>" +
                                 "<td>" +
                                 "<div class='layui-inline'>" +
-                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
-                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe642;</i></button>" +
-                                "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='2' data-url='hotelroom-add.html' id='updateShopping' type='button' value='"+e1.shoppingId+"'><i class='layui-icon'>&#xe642;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='2' data-url='hotelroom-add.html'><i class='layui-icon' type='button'  onclick='deleteShoppingById("+e1.shoppingId+")'>&#xe640;</i></button>" +
                                 "</div>" +
                                 "</td>" +
                                 "</tr>" ;
@@ -212,7 +210,55 @@
             }
         })
     }
-    
+
+    $(document).on('click','#insertShopping',function(){
+        var scenicSpotId = $(this).val();
+        layer.open({
+            type: 2,
+            title: '点击购物添加',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '700px'],
+            content:'spotshopping-add.html?scenicSpotId='+scenicSpotId
+        });/* parent.layer.closeAll();*/
+    });
+
+
+
+    $(document).on('click','#updateInfo',function(){
+        var id = $(this).val();
+        layer.open({
+            type: 2,
+            title: '景点修改',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '700px'],
+            content:'spot-add.html?id='+id
+        });
+    });
+    $(document).on('click','#insertInfo',function(){
+        var id = $(this).val();
+        layer.open({
+            type: 2,
+            title: '景点添加',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '700px'],
+            content:'spot-add.html?id='+id
+        });
+    });
+
+    $(document).on('click','#updateShopping',function(){
+        var shoppingId = $(this).val();
+        layer.open({
+            type: 2,
+            title: '购物修改',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '700px'],
+            content:'spotshopping-update.html?shoppingId='+shoppingId
+        });
+    });
 
 
     /**
@@ -232,7 +278,21 @@
         })
     }
 
-
+    /**
+	 * 根据购物id删除该购物信息
+     */
+	function deleteShoppingById(shoppingId){
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8888/shopping/deleteShoppingById",
+            data: {"shoppingId":shoppingId},
+            dataType: "json",
+            success:function (result1) {
+                alert(result1.msg);
+                parent.location.reload();
+            }
+        })
+	}
 
 
 

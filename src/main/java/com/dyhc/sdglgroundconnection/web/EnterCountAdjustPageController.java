@@ -1,9 +1,15 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Shopping;
+import com.dyhc.sdglgroundconnection.service.ShoppingService;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -15,6 +21,9 @@ public class EnterCountAdjustPageController {
 
     // 日志对象
     private Logger logger = LoggerFactory.getLogger(EnterGeneralControlPageController.class);
+
+    @Autowired
+    private ShoppingService shoppingService;
     
     /**
      * 进入计调首页
@@ -253,7 +262,31 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/spotshopping-add.html")
-    public String  spotshoppingadd() {
+    public String  spotshoppingadd(HttpServletRequest request) {
+        String scenicSpotId=  request.getParameter("scenicSpotId");
+        String shoppingId=  request.getParameter("shoppingId");
+        request.setAttribute("scenicSpotId",scenicSpotId);
+        request.setAttribute("shoppingId",shoppingId);
+        request.setAttribute("shoppingSite","请输入购物地点名称");
+        return "countAdjust/index/spotshopping-add";
+    }
+    /**
+     * 进入rbac-user-list页
+     * @return
+     */
+   @RequestMapping("/spotshopping-update.html")
+    public String  spotshoppingupdate(HttpServletRequest request) {
+        try {
+            String id= request.getParameter("shoppingId");
+            String shoppingSite= request.getParameter("shoppingSite");
+            Integer shoppingId=Integer.parseInt(id);
+            Shopping shopping= shoppingService.getShoppingById(shoppingId);
+             request.setAttribute("shoppingId",shoppingId);
+            request.setAttribute("hopping",shopping);
+            request.setAttribute("shoppingSite",shopping.getShoppingSite());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "countAdjust/index/spotshopping-add";
     }
 

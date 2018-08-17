@@ -17,4 +17,26 @@ public class ShoppingServiceImpl implements ShoppingService {
     @Autowired
     private ShoppingMapper shoppingMapper;
 
+
+    @Override
+    public Integer insertShopping(Shopping shopping) throws  Exception{
+        Integer re=shoppingMapper.insert(shopping);
+        return re;
+    }
+
+    @Override
+    public Integer updateShopping(Shopping shopping,String shoppingSite) throws Exception {
+        Integer re=shoppingMapper.updateByPrimaryKeySelective(shopping);
+        return re;
+    }
+
+    @Override
+    public Shopping getShoppingById(Integer shoppingId) throws Exception {
+        return shoppingMapper.selectByPrimaryKey(shoppingId);
+    }
+
+    @Override
+    public int deleteShoppingById(Integer shoppingId) throws Exception {
+        return shoppingMapper.deleteByPrimaryKey(shoppingId);
+    }
 }
