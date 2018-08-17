@@ -2,11 +2,16 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.AccountTypeMapper;
 import com.dyhc.sdglgroundconnection.pojo.AccountType;
+import com.dyhc.sdglgroundconnection.pojo.Staff;
 import com.dyhc.sdglgroundconnection.service.AccountTypeService;
+import com.dyhc.sdglgroundconnection.service.StaffService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -17,7 +22,6 @@ public class AccountTypeServiceImpl implements AccountTypeService {
 
     @Autowired
     private AccountTypeMapper accountTypeMapper;
-
     /**
      *账户类型分页模糊查询
      * @param pageNo 当前页码
@@ -25,19 +29,18 @@ public class AccountTypeServiceImpl implements AccountTypeService {
      * @return
      */
     @Override
-    public PageInfo<AccountType> listAccountType(Integer pageNo, Integer PageSize) {
-        PageHelper.startPage(pageNo,PageSize);
-        PageInfo<AccountType>pageInfo=new PageInfo<>(accountTypeMapper.selectAll());
+    public PageInfo<AccountType> listAccountType(Integer pageNo, Integer PageSize,String accountNum) throws Exception {
+        PageHelper.startPage(pageNo,PageSize,true);
+        PageInfo<AccountType>pageInfo=new PageInfo<>(accountTypeMapper.listAccountType(pageNo,PageSize,accountNum));
         return pageInfo;
     }
-
     /**
      * 删除账户类型
-     * @param accountTypeId账户类型ID
+     * @param
      * @return
      */
     @Override
-    public Integer removeAccountType(Integer accountTypeId) {
+    public Integer removeAccountType(Integer accountTypeId) throws Exception {
         Integer remove=0;
         try {
             remove=accountTypeMapper.removeAccountType(accountTypeId);
@@ -45,5 +48,56 @@ public class AccountTypeServiceImpl implements AccountTypeService {
             e.printStackTrace();
         }
         return remove;
+    }
+
+    /**
+     * 新增账户类型
+     * @param accountType
+     * @return
+     */
+    @Override
+    public Integer saveAccountType(AccountType accountType)throws Exception {
+        Integer saveAccountType=0;
+        try {
+            accountType.setWhetherDel(0);
+            accountType.setCreateDate(new Date());
+            saveAccountType=accountTypeMapper.insert(accountType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveAccountType;
+    }
+
+    /**
+     * 修改账户类型
+     * @param accountType
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Integer updateAccountType(AccountType accountType)throws Exception {
+        Integer updateAccountType=0;
+        try {
+            updateAccountType=accountTypeMapper.updateAccountType(accountType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return updateAccountType;
+    }
+
+    /**
+     * 显示账目修改信息赋值
+     * @param accountTypeId
+     * @return
+     */
+    @Override
+    public AccountType updateShowAll(Integer accountTypeId) {
+        AccountType accountType=null;
+        try {
+            accountType=accountTypeMapper.selectByPrimaryKey(accountTypeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return accountType;
     }
 }

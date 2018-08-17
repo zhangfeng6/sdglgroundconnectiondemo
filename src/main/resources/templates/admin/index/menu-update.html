@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="renderer" content="webkit">
@@ -10,7 +10,8 @@
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
 	</head>
 	<body>
-		<div class="wrap-container">
+	<input type="hidden" name="staffId" id="accountTypeId" th:value="${accountTypeId}">
+	<div class="wrap-container">
 			<form class="layui-form" style="width: 90%;padding-top: 20px;">
 					<div class="layui-form-item">
 						<label class="layui-form-label">开户行：</label>
@@ -30,13 +31,13 @@
 						<input type="text" name="accountName" required lay-verify="required" placeholder="请输入账户名" autocomplete="off" class="layui-input">
 					</div>
 				</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">状态：</label>
-						<div class="layui-input-block">
-							<input type="radio" name="status" value="1" title="个人" checked>
-							<input type="radio" name="status" value="2" title="企业">
-						</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">单选框</label>
+					<div class="layui-input-block">
+						<input type="radio" name="status" value="1" title="个人">
+						<input type="radio" name="status" value="2" title="企业">
 					</div>
+				</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">创建人：</label>
 						<div class="layui-input-block" >
@@ -59,7 +60,7 @@
 					</div>
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="save()">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="updateA()">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -70,22 +71,43 @@
 		<script src="/layui.js"></script>
 		<script src="/js/jquery-1.8.2.min.js"></script>
 		<script>
+   //修改赋值
+   function updataShow(){
+       var accountTypeId=$("input[id='accountTypeId']").val();
+       $.ajax({
+           url: "/AccountType/updateShowAllAccountType",
+           data: {accountTypeId:accountTypeId},
+           dataType: "json",
+           type: "get",
+           success: function (data) {
+               $("input[name='bank']").val(data.data.bank);
+               $("input[name='accountNum']").val(data.data.accountNum);
+               $("input[name='accountName']").val(data.data.accountName);
+               $("input[name='status'] :checked").val(data.data.status);
+              /* $("input[name='createBy'] option:checked").val(data.data.createBy);
+               $("input[name='upDate']  option:checked").val(data.data.upDate);*/
 
-            //新增账户信息
-            function save() {
+           },
+           error: function () {
+               alert("错误！");
+           }
+       })
+   }
+            //修改账户信息
+            function updateA() {
                 var accountType =$("form[class='layui-form']").serialize();
                 $.ajax({
-                    url: "/AccountType/saveAccountType",
+                    url: "/AccountType/updateAccountType",
                     data: accountType,
                     dataType: "json",
                     type: "get",
                     success: function (data) {
                         var index=parent.layer.getFrameIndex(window.name);
                         if (data!=null){
-                            alert("新增保存成功！");
+                            alert("修改保存成功！");
                             parent.layer.close(index);
                         }else {
-                            alert("新增失败");
+                            alert("修改失败");
                         }
                     },
                     error: function () {
@@ -95,6 +117,7 @@
             }
 
          $(function () {
+             updataShow();
              $.ajax({
                  url: "/Staff/showAllstaff",
                  data: {},

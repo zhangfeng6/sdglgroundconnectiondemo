@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.Staff;
 import com.dyhc.sdglgroundconnection.service.StaffService;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +15,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 人员 控制层
  **/
+@RequestMapping("/Staff")
 @RestController
 public class StaffController  {
 
@@ -27,6 +30,25 @@ public class StaffController  {
 
     @Autowired
     private StaffService staffService;
+
+    /**
+     * 查询人员全部信息
+     * @return
+     */
+    @LogNotes(operationType="用户信息",content="查询账户")
+    @RequestMapping("/showAllstaff")
+    public ReponseResult showAllstaff(){
+        try {
+            ReponseResult<List<Staff>> data =ReponseResult.ok(staffService.idAccountType(),"查询成功");
+            logger.info("method:showAccountType 人员查询成功");
+            return  data;
+        } catch (Exception e) {
+            logger.info("method:showAccountType 人员查询失败");
+            e.printStackTrace();
+            ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
+            return error;
+        }
+    }
 
 
     /**
