@@ -335,5 +335,22 @@ public class EnterCountAdjustPageController {
         return "countAdjust/index/Quotation-detail";
     }
 
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/line-template.html")
+    public String  linetemplate() {
+        return "countAdjust/index/line-template";
+    }
+
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/savetemplate.html")
+    public String  savetemplate() {
+        return "countAdjust/index/savetemplate";
+    }
 
 }

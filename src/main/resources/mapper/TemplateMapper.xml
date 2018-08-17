@@ -3,4 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.TemplateMapper">
 
+    <!--根据条件查询模板信息-->
+    <select id="listtemplate" resultMap="lianbiao">
+        SELECT t.`templateId`,t.`templateName`,t.`templateContent`,t.`creationDate`,s.`theUserName` FROM `template` t,`staff` s WHERE t.`creater`=s.`roleId` AND t.`whetherDel` != 1
+        <if test="tempName != null and tempName != '' ">
+            AND t.`templateName` LIKE CONCAT('%',#{tempName},'%')
+        </if>
+        <if test="username != null and username != '' ">
+            AND s.`theUserName` LIKE CONCAT('%',#{username},'%')
+        </if>
+    </select>
+    <!--查询模板信息的resultMap-->
+    <resultMap id="lianbiao" type="com.dyhc.sdglgroundconnection.pojo.Template">
+        <id column="templateId" property="templateId"/>
+        <association property="staff" javaType="com.dyhc.sdglgroundconnection.pojo.Staff">
+            <id column="staffId" property="staffId"/>
+        </association>
+    </resultMap>
 </mapper>
