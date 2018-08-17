@@ -30,4 +30,32 @@ public interface ScenicspotService {
      * @return
      */
     PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId)throws Exception;
+
+
+    /**
+     * 添加景点信息
+     * @param scenicspot
+     * @return
+     */
+    Integer insertScenicspot(Scenicspot scenicspot)throws Exception;
+
+
+    /**
+     * 根据景点id查询该景点信息
+     * @param scenicSpotId
+     * @return
+     */
+    Scenicspot getScenicspotById(Integer scenicSpotId);
+
+    /**
+     * 修改景点信息
+     * @param scenicspot
+     */
+    Integer updateScenicspot(Scenicspot scenicspot)throws Exception;
+
+    /**
+     * 根据景点id删除该景点
+     * @param scenicSpotId
+     */
+    Integer deleteScenicspotById(Integer scenicSpotId);
 }
