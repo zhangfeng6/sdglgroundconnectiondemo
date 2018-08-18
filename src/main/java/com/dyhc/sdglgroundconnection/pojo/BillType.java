@@ -32,6 +32,20 @@ public class BillType {
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private  Staff staff;
+
+    /**
+     * 获取人员信息
+     * @return
+     */
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
 
     @Id
     @Column(name = "billTypeId")

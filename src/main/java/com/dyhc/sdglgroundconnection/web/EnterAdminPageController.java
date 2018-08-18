@@ -195,6 +195,25 @@ public class EnterAdminPageController {
     }
 
     /**
+     * 进入menu-guide-add.html页面
+     * @return
+     */
+    @RequestMapping("/menu-guide-add.html")
+    public String   menuGuideAdd() {
+        return "admin/index/menu-guide-add";
+    }
+
+    /**
+     * 进入menu-guide-add.html页面
+     * @return
+     */
+    @RequestMapping("/menu-guide-update.html")
+    public  String  menuGuideupdate(Integer guideId,HttpServletRequest request) {
+        request.setAttribute("guideId",guideId);
+        System.out.println(request.getAttribute("guideId"));
+        return "admin/index/menu-guide-update";
+    }
+    /**
      * 进入menu-add1页面
      * @return
      */

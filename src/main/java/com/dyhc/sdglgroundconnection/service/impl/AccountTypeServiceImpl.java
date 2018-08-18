@@ -61,6 +61,9 @@ public class AccountTypeServiceImpl implements AccountTypeService {
         try {
             accountType.setWhetherDel(0);
             accountType.setCreateDate(new Date());
+            accountType.setUpDate(new Date());
+            accountType.setCreateBy(1);
+            accountType.setUpdateBy(2);
             saveAccountType=accountTypeMapper.insert(accountType);
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,6 +79,9 @@ public class AccountTypeServiceImpl implements AccountTypeService {
      */
     @Override
     public Integer updateAccountType(AccountType accountType)throws Exception {
+        accountType.setUpDate(new Date());
+        accountType.setCreateBy(1);
+        accountType.setUpdateBy(2);
         Integer updateAccountType=0;
         try {
             updateAccountType=accountTypeMapper.updateAccountType(accountType);

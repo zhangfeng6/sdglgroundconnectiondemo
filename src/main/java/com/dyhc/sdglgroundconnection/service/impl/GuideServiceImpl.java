@@ -1,9 +1,16 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.GuideMapper;
+import com.dyhc.sdglgroundconnection.pojo.AccountType;
+import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.service.GuideService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Date;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -14,4 +21,92 @@ public class GuideServiceImpl implements GuideService {
 
     @Autowired
     private GuideMapper guideMapper;
+    /**
+     * 分页查询导游信息
+     * @param pageNo
+     * @param PageSize
+     * @param guideName
+     * @return
+     */
+    @Override
+    public PageInfo<Guide> listGuide(@RequestParam("pageNo") Integer pageNo, @RequestParam("PageSize")Integer PageSize, @RequestParam("guideName")String guideName) {
+        PageHelper.startPage(pageNo,PageSize,true);
+        PageInfo<Guide> pageInfo=new PageInfo<>(guideMapper.listGuide(pageNo,PageSize,guideName));
+        return pageInfo;
+    }
+
+    /**
+     * 删除都有信息
+     * @param guideId
+     * @return
+     */
+    @Override
+    public Integer removeGuide(Integer guideId) throws  Exception {
+        Integer Ak =0;
+        try {
+            Ak=guideMapper.deleteByPrimaryKey(guideId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Ak;
+    }
+
+    /**
+     * 新增导游信息
+     * @param guide
+     * @return
+     */
+    @Override
+    public Integer saveGuide(Guide guide)throws Exception {
+        guide.setCreationDate(new Date());
+        guide.setModifiedData(new Date());
+        guide.setModifier(1);
+        guide.setCreater(2);
+        guide.setWhetherDel(0);
+        guide.setState(3);
+        Integer Ak =0;
+        try {
+            Ak=guideMapper.insert(guide);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Ak;
+    }
+
+    /**
+     * 修改导游信息(贾晓亮)
+     * @param guide
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Integer updateGuide(Guide guide) throws  Exception {
+        guide.setCreationDate(new Date());
+        guide.setModifiedData(new Date());
+        guide.setModifier(1);
+        guide.setCreater(2);
+        guide.setWhetherDel(0);
+        guide.setState(3);
+        Integer Ak =0;
+        try {
+            Ak=guideMapper.updateByPrimaryKey(guide);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Ak;
+    }
+
+    /**
+     *导游修改赋值
+     * @return
+     */
+    public  Guide assignmentGuide(Integer assignment){
+        Guide guide = null;
+        try {
+            guide = guideMapper.selectByPrimaryKey(assignment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  guide;
+    }
 }
