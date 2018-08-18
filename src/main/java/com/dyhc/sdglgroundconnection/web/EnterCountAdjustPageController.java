@@ -1,9 +1,17 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
+import com.dyhc.sdglgroundconnection.pojo.Shopping;
+import com.dyhc.sdglgroundconnection.service.ScenicspotService;
+import com.dyhc.sdglgroundconnection.service.ShoppingService;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -15,6 +23,11 @@ public class EnterCountAdjustPageController {
 
     // 日志对象
     private Logger logger = LoggerFactory.getLogger(EnterGeneralControlPageController.class);
+
+    @Autowired
+    private ShoppingService shoppingService;
+    @Autowired
+    private ScenicspotService scenicspotService;
     
     /**
      * 进入计调首页
@@ -237,8 +250,20 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/spot-add.html")
-    public String  spotadd() {
+    public String  spotadd(HttpServletRequest request) {
+        try {
+
+            String id=request.getParameter("id");
+            Integer spotId=Integer.parseInt(id);
+            request.setAttribute("jdId",spotId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return "countAdjust/index/spot-add";
+
+
+
     }
     /**
      * 进入rbac-user-list页
@@ -253,7 +278,21 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/spotshopping-add.html")
-    public String  spotshoppingadd() {
+    public String  spotshoppingadd(HttpServletRequest request) {
+        String scenicSpotId= request.getParameter("scenicSpotId");
+        request.setAttribute("scenicSpotId",scenicSpotId);
+        request.setAttribute("shoppingId",0);
+        return "countAdjust/index/spotshopping-add";
+    }
+    /**
+     * 进入rbac-user-list页
+     * @return
+     */
+   @RequestMapping("/spotshopping-update.html")
+    public String  spotshoppingupdate(HttpServletRequest request) {
+        String shoppingId= request.getParameter("shoppingId");
+        request.setAttribute("shoppingId",shoppingId);
+       request.setAttribute("scenicSpotId","");
         return "countAdjust/index/spotshopping-add";
     }
 
@@ -335,5 +374,22 @@ public class EnterCountAdjustPageController {
         return "countAdjust/index/Quotation-detail";
     }
 
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/line-template.html")
+    public String  linetemplate() {
+        return "countAdjust/index/line-template";
+    }
+
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/savetemplate.html")
+    public String  savetemplate() {
+        return "countAdjust/index/savetemplate";
+    }
 
 }

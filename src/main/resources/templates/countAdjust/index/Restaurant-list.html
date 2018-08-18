@@ -9,6 +9,8 @@
 		<title>网站后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+
+
 	</head>
 
 	<body>
@@ -16,37 +18,22 @@
 					<form class="layui-form" action="">
 						<div class="layui-form-item">
 							<div class="layui-inline tool-btn">
-								<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" data-url="Restaurant-add.html"><i class="layui-icon">&#xe654;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="article-add.html"><i class="layui-icon">&#xe640;</i></button>
+								<button class='layui-btn layui-btn-small layui-btn-normal add-btn' id='insert' type='button'><i class='layui-icon'>&#xe654;</i></button>
 							</div>
 							<div class="layui-inline">
-								<input type="text" name="title" required lay-verify="required" placeholder="请输入饭店名称" autocomplete="off" class="layui-input">
+								<input type="text" id="jiuN" name="title" placeholder="请输入饭店名称" autocomplete="off" class="layui-input">
 							</div>
 							<div class="layui-inline">
-								<input type="text" name="title" required lay-verify="required" placeholder="请输入饭店地址" autocomplete="off" class="layui-input">
-							</div>
-							价格区间：
-							<div class="layui-inline">
-								<input size="3" type="text" name="title" required lay-verify="required" placeholder="最低价" autocomplete="off" class="layui-input">
+								<input type="text" id="jiuA" name="title1" placeholder="请输入饭店地址" autocomplete="off" class="layui-input">
 							</div>
 							<div class="layui-inline">
-								<input size="3" type="text" name="title" required lay-verify="required" placeholder="最高价" autocomplete="off" class="layui-input">
-							</div>
-							<div class="layui-inline">
-								<select name="states" lay-filter="status">
+								<select name="states" id="jiuS" lay-filter="status">
 									<option value="">请选择一个状态</option>
-									<option value="010">禁用</option>
-									<option value="021">正常</option>
+									<option value="2">禁用</option>
+									<option value="0">正常</option>
 								</select>
 							</div>
-							<div class="layui-inline">
-								<select name="states" lay-filter="status">
-									<option value="">请选择饮食类型</option>
-									<option value="010">面食</option>
-									<option value="021">盖饭</option>
-								</select>
-							</div>
-							<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+							<input type="button" class="layui-btn layui-btn-normal" lay-submit="search" value="搜索" onclick="loadData()">
 						</div>
 					</form>
 					<div class="layui-form" id="table-list">
@@ -65,7 +52,7 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+									<th></th>
 									<th class="">餐馆编号</th>
 									<th class="">名称</th>
 									<th class="">地址</th>
@@ -74,16 +61,15 @@
 									<th>操作</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tb">
 								<tr id='node-1' class="parent collapsed">
-									<td><input type="checkbox" name="" lay-skin="primary" data-id="1">
-									<a class="layui-btn layui-btn-mini layui-btn-normal showSubBtn" data-id='1'>+</a></td>
+									<td><input type="checkbox" name="" lay-skin="primary" data-id="1"><a class="layui-btn layui-btn-mini layui-btn-normal showSubBtn" data-id='1'>+</a></td>
 									<td class="">2012</td>
 									<td class="">万狮京华</td>
 									<td class="">平阳路大马村</td>
 									
 									<td class="">12873283</td>
-									<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status">禁用 </button></td>
+									<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status" onclick="loadData()">禁用 </button></td>
 									<td>
 										<div class="layui-inline">
 											<button class="layui-btn layui-btn-mini layui-btn-normal  add-btn" data-id="1" data-url="Restaurantroom-add.html"><i class="layui-icon">&#xe654;</i></button>
@@ -134,15 +120,18 @@
 
 							</tbody>
 						</table>
+						<div id="laypage" style="text-align: center"></div>
 					</div>
 		</div>
-		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/layui.js"></script>
+		<script src="/js/jquery-1.8.2.min.js"></script>
+		<!--<script src="/js/layui.all.js"></script>-->
 		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			layui.use(['jquery'], function() {
 				var $=layui.jquery;
 				//修改状态
-				$('#table-list').on('click', '.table-list-status', function() {
+                $('#table-list').on('click', '.table-list-status', function() {
 					var That = $(this);
 					var status = That.attr('data-status');
 					var id = That.parent().attr('data-id');
@@ -154,7 +143,7 @@
 					}
 				})
 				//栏目展示隐藏
-				$('.showSubBtn').on('click', function() {
+                $('.showSubBtn').on('click', function() {
 					var _this = $(this);
 					var id = _this.attr('data-id');
 					var parent = _this.parents('.parent');
@@ -174,6 +163,115 @@
 
 				})
 			});
+
+
+
+
+            var limitcount = 2; // 每页总记录数
+            var curnum = 1;  // 当前页码
+
+			$(function(){
+                loadData();
+
+
+                $(document).on("click","#insert",function () {
+                    layer.open({
+                        type: 2,
+                        title: '新增饭店',
+                        maxmin: true,
+                        shadeClose: true, //点击遮罩关闭层
+                        area : ['800px' , '520px'],
+                        content: 'Restaurant-add.html'
+                    });
+                })
+
+                $(document).on("click","#update",function () {
+                    var id=$(this).val();
+                    layer.open({
+                        type: 2,
+                        title: '修改饭店',
+                        maxmin: true,
+                        shadeClose: true, //点击遮罩关闭层
+                        area : ['800px' , '520px'],
+                        content: 'Restaurant-add.html?restaurantId='+id
+                    });
+                })
+			})
+
+
+
+
+            function loadData() {
+                var restaurantName=$("#jiuN").val();
+            	var restaurantAddress=$("#jiuA").val();
+            	var whetherDel=$("#jiuS option:selected").val();
+                var str = "";
+                $.ajax({
+                    url: "/Restaurant/showAllRestaurants",
+                    data: {page:curnum,limit:limitcount,restaurantName:restaurantName,restaurantAddress:restaurantAddress,whetherDel:whetherDel},
+                    dataType: "json",
+                    type: "get",
+                    success: function (e) {
+                        $(e.data).each(function (i, result) {
+                            var del = "正常";
+                            if (result.whetherDel==2) {
+                                del = "禁用";
+							}
+                            str += "<tr><td><input type=\"checkbox\" name=\"\" lay-skin=\"primary\" data-id=\"1\"><a class=\"layui-btn layui-btn-mini layui-btn-normal showSubBtn\" data-id='1'>+</a></td><td>" + (i+1) + "</td><td>" + result.restaurantName + "</td>" +
+                                "<td>" + result.restaurantAddress + "</td><td>" + result.phone + "</td><td><button class=\"layui-btn layui-btn-mini layui-btn-normal table-list-status\">" + del + "</button></td><td><div class='layui-inline'><button id='update' type='button' value='" + result.restaurantId + "' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='1' data-url='article-detail.html'><i class='layui-icon' onclick='delRestaurantById(" + result.restaurantId + ")'>&#xe640;</i></button></div></td></td></tr>";
+                        })
+                        $('tbody').html(str);
+
+                        // 分页插件
+                        layui.use('table', function () {
+                            var laypage = layui.laypage;
+                            laypage.render({
+                                elem: 'laypage'
+                                , count: e.count
+                                , curr: curnum
+                                , limit: 2
+                                , layout: ['prev', 'page', 'next', 'skip', 'count']
+                                , jump: function (obj, first) {
+                                    if (!first) {
+                                        //obj包含了当前分页的所有参数，比如：
+                                        curnum = obj.curr; // 当前页面
+                                        limitcount = obj.limit; // 每页记录数
+                                        // 查询新数据
+                                        loadData();
+                                    }
+                                }
+                            })
+                        })
+                    },
+                    error: function (res) {
+                        alert(res);
+                    }
+                })
+            }
+
+
+            function delRestaurantById(id){
+			    if(confirm("是否删除？")){
+                    $.ajax({
+                        url: "/Restaurant/delRestaurantById",
+                        data: {restaurantId:id},
+                        dataType: "json",
+                        type: "get",
+                        success: function (e) {
+                            alert(e.msg);
+                            loadData();
+                        }
+                    })
+				}
+			}
+
+			function like(){
+                var iWidth=550; //弹出窗口的宽度;
+                var iHeight=500;
+                var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+                var iLeft = (window.screen.availWidth-10-iWidth)/2;
+                window.showModalDialog("Restaurant-add.html","newwindow","height=500, width=550, top="+iTop+",left="+iLeft+", toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
+			}
 		</script>
 	</body>
 

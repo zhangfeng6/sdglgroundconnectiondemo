@@ -29,6 +29,7 @@ public class Scenicspot {
     private Integer typeId; // 编码（【景点等级】外键，与字典表关联）
     @Column(name = "picturePath")
     private String picturePath; // 景区图片地址
+    @Column(name = "`describe`")
     private String describe; // 描述
     private String remarks; // 备注
     @Column(name = "whetherDel")

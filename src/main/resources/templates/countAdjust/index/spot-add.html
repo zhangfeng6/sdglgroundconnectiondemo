@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="renderer" content="webkit">
@@ -8,6 +8,7 @@
 		<title>网站后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css"/>
+
 	</head>
 	<body>
 	<form class="layui-form column-content-detail">
@@ -18,61 +19,57 @@
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
 								<div class="layui-form-item">
+									<input type="hidden" th:value="${jdId}" name="scenicSpotId"/>
 									<label class="layui-form-label">景点名称：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+										<input type="text" name="scenicSpotName"  placeholder="请输入名称" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">父景点：</label>
 									<div class="layui-inline">
-										<select name="states" lay-filter="status">
-											<option value="09">无</option>
-											<option value="010">AAA</option>
-											<option value="021">AAAA</option>
-											<option value="010">AAAAA</option>
+										<select name="parentId" lay-filter="status">
+
 										</select>
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">等级：</label>
 									<div class="layui-inline">
-										<select name="states" lay-filter="status">
-											<option value="">请选择景点等级</option>
-											<option value="010">AAA</option>
-											<option value="021">AAAA</option>
-											<option value="010">AAAAA</option>
+										<select name="typeId" lay-filter="status">
+											<option>wu</option>
 										</select>
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">地点：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
+										<input type="text" name="scenicSpotAddress"  placeholder="请输入地址" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">图片地址：</label>
 									<div class="layui-input-block">
-										<i class="layui-icon ">&#xe67c;</i>上传图片
+										<input type="file" id="imageFile" name="multipartFile"/>
+										<!--<i class="layui-icon ">&#xe67c;</i>上传图片-->
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">成本价：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入成本价" autocomplete="off" class="layui-input">
+										<input type="text" name="costprice"  placeholder="请输入成本价" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">报价：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入报价" autocomplete="off" class="layui-input">
+										<input type="text" name="offer"  placeholder="请输入报价" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">备注：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入备注" autocomplete="off" class="layui-input">
+										<input type="text" name="remarks"  placeholder="请输入备注" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 							</div>
@@ -80,13 +77,14 @@
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="insertScenicspotInfo()" type="button">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
 				</form>
 	<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/jquery-1.8.2.min.js"></script>
 	<script>
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
 				var form = layui.form(),
@@ -135,6 +133,204 @@
 					}
 				});
 			});
+
+        bd6DropBox();
+        bdScenicspotLevel();
+        getScenicspotById();
+
+        /**
+		 * 获取所有父景点
+         */
+        function bd6DropBox() {
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/Scenicspot/listScenicspot",
+                data:{},
+                dataType: "json",
+                success:function (result1) {
+                    var content="<option value='0'>无</option>";
+                    $.each(result1.data,function (i,e) {
+						content+="<option value='"+e.scenicSpotId+"'>"+e.scenicSpotName+"</option>";
+                    })
+					$("select[name='parentId']").html(content);
+                }
+            })
+        }
+
+        /**
+         * 获取所有景点等级
+         */
+        function bdScenicspotLevel() {
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/Dictionaries/listDictionaries",
+                data:{},
+                dataType: "json",
+                success:function (result1) {
+                    var content="<option value='0'>无</option>";
+                    $.each(result1.data,function (i,e) {
+                        content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                    })
+                    $("select[name='typeId']").html(content);
+                }
+            })
+        }
+
+        /**
+		 * 添加景点信息
+         */
+        function insertScenicspotInfo() {
+            var scenicSpotName=$("input[name='scenicSpotName']").val();
+            var typeId=$("select[name='typeId']").val();
+            var scenicSpotAddress=$("input[name='scenicSpotAddress']").val();
+            var tp=$("#imageFile").val();
+            var costprice=$("input[name='costprice']").val();
+            var offer=$("input[name='offer']").val();
+            var remarks=$("input[name='remarks']").val();
+
+            if (scenicSpotName==""){
+                alert("请输入景点名称")
+				return;
+			}else if (typeId=="0"){
+                alert("请选择景点等级")
+                return;
+            }else if (scenicSpotAddress==""){
+                alert("请输入景点的地址")
+                return;
+            }else if (tp==""){
+                alert("请选择景点图片")
+                return;
+            }else if (costprice==""){
+                alert("请输入景点的成本价")
+                return;
+            }else if (offer==""){
+                alert("请输入景点的报价")
+                return;
+            }else if (remarks==""){
+                alert("请输入景点的备注")
+                return;
+            }else {
+                var DataDeal = {
+                    //将从form中通过$('#refer').serialize()获取的值转成json
+                    formToJson: function (data) {
+                        data=data.replace(/&/g,"\",\"");
+                        data=data.replace(/=/g,"\":\"");
+                        data="{\""+data+"\"}";
+                        return data;
+                    }
+                };
+                var scenicspot=$("form").serialize();
+                scenicspot= decodeURIComponent(scenicspot,true);//防止中文乱码
+                var jsondata=DataDeal.formToJson(scenicspot);//转化为json
+                var savePath = "D://北大青鸟/万达国旅地接社系统/images"; // 图片保存路径
+                var fileObj = document.getElementById("imageFile").files[0];  // 获取图片对象
+                // formData对象，用来序列化二进制数据
+                var formData = new FormData();
+                formData.append("multipartFile", fileObj);
+                formData.append("savePath", savePath);
+                formData.append("scenicspot",jsondata);
+                var scenicSpotId=$("input[name='scenicSpotId']").val();
+                if (scenicSpotId==0){
+                    // 发送请求到服务器
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/Scenicspot/insertScenicspotInfo",
+                        data:formData,
+                        dataType: "json",
+                        cache: false, // 上传文件不需要缓存
+                        processData: false, // 对参数进行序列化处理
+                        contentType: false,
+                        success:function (result1) {
+                            alert(result1.msg);
+                            parent.location.reload();
+                        }
+                    })
+                }else {
+                    // 发送请求到服务器
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/Scenicspot/updateScenicspotInfo",
+                        data: formData,
+                        dataType: "json",
+                        cache: false, // 上传文件不需要缓存
+                        processData: false, // 对参数进行序列化处理
+                        contentType: false,
+                        success: function (result1) {
+                            alert(result1.msg);
+                            parent.location.reload();
+                        }
+                    })
+                }
+			}
+
+
+
+
+        }
+
+
+        /**
+		 * 根据景点id查询该景点信息
+         */
+        function getScenicspotById() {
+			var scenicSpotId=$("input[name='scenicSpotId']").val();
+			if (scenicSpotId!=0) {
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8888/Scenicspot/getScenicspotById",
+                    data:{"scenicSpotId":scenicSpotId},
+                    dataType: "json",
+                    success:function (result1) {
+                        $("input[name='scenicSpotName']").val(result1.data.scenicSpotName);
+                        $("input[name='costprice']").val(result1.data.costprice);
+                        $("input[name='offer']").val(result1.data.offer);
+                        $("input[name='remarks']").val(result1.data.remarks);
+                        $("input[name='scenicSpotAddress']").val(result1.data.scenicSpotAddress);
+                        $("input[name='scenicSpotId']").val(result1.data.scenicSpotId);
+                        var content="";
+                        var typeId=result1.data.typeId;
+                        if (typeId==1){
+                            content="<option value='1' selected ='selected'>AAAAA </option>" +
+                                "<option value='2'>AAAA</option>" +
+                                "<option value='3'>AAA </option>" +
+                                "<option value='4'>AA </option>" +
+								"<option value='5'>A </option>";
+						}
+                        if (typeId==2){
+                            content="<option value='1'>AAAAA </option>" +
+                                "<option value='2' selected ='selected'>AAAA</option>" +
+                                "<option value='3'>AAA </option>" +
+                                "<option value='4'>AA </option>" +
+                                "<option value='5'>A </option>";
+                        }
+                        if (typeId==3){
+                            content="<option value='1'>AAAAA </option>" +
+                                "<option value='2'>AAAA</option>" +
+                                "<option value='3' selected ='selected'>AAA </option>" +
+                                "<option value='4'>AA </option>" +
+                                "<option value='5'>A </option>";
+                        }
+                        if (typeId==4){
+                            content="<option value='1'>AAAAA </option>" +
+                                "<option value='2'>AAAA</option>" +
+                                "<option value='3'>AAA </option>" +
+                                "<option value='4' selected ='selected'>AA </option>" +
+                                "<option value='5'>A </option>";
+                        }
+                        if (typeId==5){
+                            content="<option value='1'>AAAAA </option>" +
+                                "<option value='2'>AAAA</option>" +
+                                "<option value='3'>AAA </option>" +
+                                "<option value='4'>AA </option>" +
+                                "<option value='5'  selected ='selected'>A </option>";
+                        }
+                        $("select[name='typeId']").html(content);
+                    }
+                })
+			}
+        }
+
+
 	</script>
 	</body>
 </html>

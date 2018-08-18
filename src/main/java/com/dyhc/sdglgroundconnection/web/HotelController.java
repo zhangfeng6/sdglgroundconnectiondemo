@@ -15,6 +15,7 @@ import java.util.List;
  * this class by created wuyongfei on 2018/6/5 13:50
  * 酒店 控制层
  **/
+@RequestMapping("/Hotel")
 @RestController
 public class HotelController {
 
@@ -30,6 +31,25 @@ public class HotelController {
             PageInfo<Hotel> pageInfo = hotelService.listHotels(pageNo,pageSize);
             ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取酒店成功！");
             logger.info(" method:showHotel  分页获取酒店成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showHotel  获取酒店数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 根据id获取指定的酒店信息    张枫
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getHotelById")
+    public ReponseResult getHotelById(@RequestParam("id") Integer id) {
+        try {
+            ReponseResult<Hotel> data = ReponseResult.ok(hotelService.getHotelById(id),"获取指定的酒店信息");
+            logger.info(" method:showHotel  获取酒店信息成功！");
             return data;
         } catch (Exception e) {
             logger.error(" method:showHotel  获取酒店数据失败，系统出现异常！");

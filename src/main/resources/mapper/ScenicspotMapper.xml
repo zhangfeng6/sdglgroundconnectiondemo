@@ -6,10 +6,10 @@
     <select id="listScenicspots" resultMap="getScenicspotLevel">
         SELECT * FROM  `scenicspot` s
         <where>
-            <if test="scenicSpotName!=null or scenicSpotName!=''">
+            <if test="scenicSpotName!=null and scenicSpotName!=''">
                 scenicSpotName like CONCAT('%',#{scenicSpotName},'%')
             </if>
-            <if test="scenicSpotAddress!=null or scenicSpotAddress!=''">
+            <if test="scenicSpotAddress!=null and scenicSpotAddress!=''">
                 and scenicSpotAddress like CONCAT('%',#{scenicSpotAddress},'%')
             </if>
             <if test="typeId!=0">
@@ -18,14 +18,28 @@
             <if test="whetherDel!=0">
                and whetherDel=#{whetherDel}
             </if>
+            and whetherDel!=1
+            and whetherDel!=2
         </where>
-
+        ORDER BY `createDate` DESC
     </select>
 
 
     <select id="getScenicspotByParentId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        select * from scenicspot  where parentId=#{parentId}
+        select * from scenicspot  where parentId=#{parentId} and whetherDel=3
     </select>
+    
+    <update id="updateScenicspot">
+        UPDATE scenicspot
+        SET scenicSpotName=#{scenicSpotName},parentId=#{parentId},scenicSpotAddress=#{scenicSpotAddress},costprice=#{costprice},offer=#{offer},typeId=#{typeId},picturePath=#{picturePath},remarks=#{remarks},updateBy=#{updateBy},updateDate=#{updateDate}
+        WHERE scenicSpotId=#{scenicSpotId}
+    </update>
+
+
+    <update id="deleteScenicspotById">
+        UPDATE scenicspot SET whetherDel=1 WHERE scenicSpotId=#{scenicSpotId}
+    </update>
+
 
     <resultMap id="getScenicspotLevel" type="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
         <id column="scenicSpotId" property="scenicSpotId"/>

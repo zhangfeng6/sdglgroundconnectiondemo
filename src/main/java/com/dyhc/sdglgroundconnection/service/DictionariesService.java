@@ -1,5 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +10,10 @@ import org.springframework.stereotype.Component;
  * 字典业务接口
  **/
 public interface DictionariesService {
+
+    /**
+     * 获取所有的景点等级
+     * @return
+     */
+    PageInfo<Dictionaries> listDictionaries();
 }

@@ -17,4 +17,44 @@ public class ShoppingServiceImpl implements ShoppingService {
     @Autowired
     private ShoppingMapper shoppingMapper;
 
+
+    @Override
+    public Integer insertShopping(Shopping shopping) throws  Exception{
+        Integer re=shoppingMapper.insert(shopping);
+        return re;
+    }
+
+    @Override
+    public Integer updateShopping(Shopping shopping,String shoppingSite) throws Exception {
+        Integer re=shoppingMapper.updateByPrimaryKeySelective(shopping);
+        return re;
+    }
+
+    @Override
+    public Shopping getShoppingById(Integer shoppingId) throws Exception {
+        return shoppingMapper.selectByPrimaryKey(shoppingId);
+    }
+
+    @Override
+    public int deleteShoppingById(Integer shoppingId) throws Exception {
+        try {
+            shoppingMapper.deleteShoppingById(shoppingId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    @Override
+    public Integer deleteShoppingsByscenicSpotId(Integer scenicSpotId) throws Exception {
+        try {
+            shoppingMapper.deleteShoppingsByscenicSpotId(scenicSpotId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

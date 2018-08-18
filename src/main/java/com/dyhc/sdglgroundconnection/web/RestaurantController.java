@@ -1,16 +1,26 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Restaurant;
 import com.dyhc.sdglgroundconnection.service.RestaurantService;
+import com.dyhc.sdglgroundconnection.utils.FileUploadUtil;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 餐馆 控制层
  **/
+@RequestMapping("/Restaurant")
 @RestController
 public class RestaurantController {
 
@@ -19,4 +29,82 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+
+
+    @RequestMapping("/showAllRestaurants")
+    public ReponseResult showRestaurant(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize,String restaurantName,String restaurantAddress,Integer whetherDel) {
+        try {
+            PageInfo<Restaurant> pageInfo = restaurantService.listRestaurants(pageNo,pageSize,restaurantName,restaurantAddress,whetherDel);
+            ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取饭店成功！");
+            logger.info(" method:showHotel  分页获取饭店成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  获取饭店数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    @RequestMapping("/delRestaurantById")
+    @LogNotes(operationType="饭店",content="删除")
+    public ReponseResult delRestaurantById(Integer restaurantId) {
+        try {
+            Integer i = restaurantService.delRestaurantById(restaurantId);
+            ReponseResult<Object> data = ReponseResult.ok("删除成功！");
+            logger.info(" method:delRestaurantById  删除饭店成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  删除饭店失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("删除失败！");
+            return err;
+        }
+    }
+
+
+    @RequestMapping("/insertRestaurant")
+    @LogNotes(operationType="饭店",content="新增")
+    public ReponseResult insertRestaurant(@RequestParam("multipartFile") MultipartFile multipartFile,
+                                          @RequestParam("savePath") String savePath,Restaurant restauran) {
+        Integer i = 0;
+        String uploadResult = FileUploadUtil.uploadImage(multipartFile, savePath, ".jpg");
+        restauran.setPicturePath(savePath+uploadResult);
+        try {
+            if (restauran.getRestaurantId()!=0){
+                i = restaurantService.updateRestaurantById(restauran);
+            }else{
+                restauran.setWhetherDel(0);
+                i = restaurantService.insertRestaurant(restauran);
+            }
+
+            ReponseResult<Object> data = ReponseResult.ok("保存成功！");
+            logger.info(" method:delRestaurantById  保存饭店成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  保存饭店失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("保存失败！");
+            return err;
+        }
+    }
+
+
+    @RequestMapping("/selectRestaurantById")
+    public ReponseResult selectRestaurantById(Integer restaurantId) {
+        try {
+            Restaurant restaurant = restaurantService.selectRestaurantById(restaurantId);
+            ReponseResult<Object> data = ReponseResult.ok(restaurant,"查询成功！");
+            logger.info(" method:delRestaurantById  查询饭店成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  查询饭店失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+
 }

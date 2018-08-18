@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -28,4 +29,21 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @return
      */
     List<Scenicspot> getScenicspotByParentId(@Param("parentId") Integer parentId)throws Exception;
+
+    /**
+     * 修改景点信息
+     * @param scenicspot
+     */
+    void updateScenicspot(Scenicspot scenicspot)throws  Exception;
+
+
+    /**
+     * 根据景点id删除该景点
+     * @param scenicSpotId
+     */
+    void deleteScenicspotById(@Param("scenicSpotId") Integer scenicSpotId);
+
+    
+
+
 }

@@ -43,4 +43,50 @@ public class ScenicspotServiceImpl implements ScenicspotService {
         PageInfo<Scenicspot> pageInfo=new PageInfo<Scenicspot>(scenicspotMapper.getScenicspotByParentId(parentId));
         return pageInfo;
     }
+
+    @Override
+    public Integer insertScenicspot(Scenicspot scenicspot)throws Exception {
+
+        return scenicspotMapper.insertSelective(scenicspot);
+    }
+
+    @Override
+    public Scenicspot getScenicspotById(Integer scenicSpotId) {
+        return scenicspotMapper.selectByPrimaryKey(scenicSpotId);
+    }
+
+    @Override
+    public Integer updateScenicspot(Scenicspot scenicspot) throws Exception {
+        try {
+            scenicspotMapper.updateScenicspot(scenicspot);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    @Override
+    public Integer deleteScenicspotById(Integer scenicSpotId) {
+        try {
+            scenicspotMapper.deleteScenicspotById(scenicSpotId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * 查询所有景点信息
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Scenicspot> listScenicspotAll() throws Exception {
+        return scenicspotMapper.selectAll();
+    }
+
+
 }

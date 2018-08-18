@@ -17,6 +17,8 @@ public class VehicleType {
     private int typeId; // 类型编号
     @Column(name = "carRentalId")
     private Integer carRentalId; // 公司编号（外键，与租赁公司表关联）
+
+
     private Integer passengervolume; // 载客量
     private Integer costprice; // 成本价
     private Integer offer; // 报价
@@ -35,10 +37,13 @@ public class VehicleType {
     private String value1; // 预备
     private String value2; // 预备
     private String value3; // 预备
+
     @Column(name = "typeCode")
     private String typeCode;
-    @Column(name = "createBy")
+
+    @Column(name = "valueId")
     private Integer valueId;
+
     @Basic
     @Column(name = "typeCode")
     public String getTypeCode() {
@@ -48,6 +53,7 @@ public class VehicleType {
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
+
     @Basic
     @Column(name = "valueId")
     public Integer getValueId() {
@@ -77,6 +83,8 @@ public class VehicleType {
     public void setCarRentalId(Integer carRentalId) {
         this.carRentalId = carRentalId;
     }
+
+
 
     @Basic
     @Column(name = "passengervolume")
