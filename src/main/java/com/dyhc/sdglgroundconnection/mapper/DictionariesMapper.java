@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,4 +21,11 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * @return
      */
     List<Dictionaries> listDictionaries();
+
+    /**
+     * 按id查詢
+     * @param valueId
+     * @return
+     */
+    Dictionaries selectById(@Param("valueId")int valueId);
 }

@@ -51,6 +51,16 @@ public class MealType {
     private String value2;
     private String value3;
 
+    public String getValueContent1() {
+        return valueContent1;
+    }
+
+    public void setValueContent1(String valueContent1) {
+        this.valueContent1 = valueContent1;
+    }
+
+    private String valueContent1;
+
     @Id
     @Column(name = "typeId")
     public int getTypeId() {

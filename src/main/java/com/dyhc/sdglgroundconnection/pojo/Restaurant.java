@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,10 +20,22 @@ public class Restaurant {
     private String restaurantName; // 名称
     @Column(name = "restaurantAddress")
     private String restaurantAddress; // 地点
-    @Column(name = "typeCode")
+
+
+    public List<MealType> getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(List<MealType> mealType) {
+        this.mealType = mealType;
+    }
+
+    @Transient
+    private List<MealType> mealType;
+/*    @Column(name = "typeCode")
     private Integer typeCode; // 餐厅类型编号（【餐厅类型编号】外键，与字典表关联
     @Column(name = "valueId")
-    private Integer valueId; // 编码（【餐厅类型名称】外键，与字典表关联）
+    private Integer valueId; // 编码（【餐厅类型名称】外键，与字典表关联）*/
     @Column(name = "picturePath")
     private String picturePath; // 餐馆图片地址
     private String phone; // 联系电话
@@ -72,7 +85,7 @@ public class Restaurant {
         this.restaurantAddress = restaurantAddress;
     }
 
-    @Basic
+/*    @Basic
     @Column(name = "typeCode")
     public Integer getTypeCode() {
         return typeCode;
@@ -90,7 +103,7 @@ public class Restaurant {
 
     public void setValueId(Integer valueId) {
         this.valueId = valueId;
-    }
+    }*/
 
     @Basic
     @Column(name = "picturePath")
@@ -200,8 +213,8 @@ public class Restaurant {
         return restaurantId == that.restaurantId &&
                 Objects.equals(restaurantName, that.restaurantName) &&
                 Objects.equals(restaurantAddress, that.restaurantAddress) &&
-                Objects.equals(typeCode, that.typeCode) &&
-                Objects.equals(valueId, that.valueId) &&
+                /*Objects.equals(typeCode, that.typeCode) &&
+                Objects.equals(valueId, that.valueId) &&*/
                 Objects.equals(picturePath, that.picturePath) &&
                 Objects.equals(phone, that.phone) &&
                 Objects.equals(whetherDel, that.whetherDel) &&
@@ -217,6 +230,6 @@ public class Restaurant {
     @Override
     public int hashCode() {
 
-        return Objects.hash(restaurantId, restaurantName, restaurantAddress, typeCode, valueId, picturePath, phone, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
+        return Objects.hash(restaurantId, restaurantName, restaurantAddress, picturePath, phone, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
     }
 }
