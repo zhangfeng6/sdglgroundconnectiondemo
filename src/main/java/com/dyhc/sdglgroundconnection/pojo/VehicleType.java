@@ -17,8 +17,8 @@ public class VehicleType {
     private int typeId; // 类型编号
     @Column(name = "carRentalId")
     private Integer carRentalId; // 公司编号（外键，与租赁公司表关联）
-    @Column(name = "typeName")
-    private String typeName; // 类型名称
+
+
     private Integer passengervolume; // 载客量
     private Integer costprice; // 成本价
     private Integer offer; // 报价
@@ -37,6 +37,32 @@ public class VehicleType {
     private String value1; // 预备
     private String value2; // 预备
     private String value3; // 预备
+
+    @Column(name = "typeCode")
+    private String typeCode;
+
+    @Column(name = "valueId")
+    private Integer valueId;
+
+    @Basic
+    @Column(name = "typeCode")
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
+    @Basic
+    @Column(name = "valueId")
+    public Integer getValueId() {
+        return valueId;
+    }
+
+    public void setValueId(Integer valueId) {
+        this.valueId = valueId;
+    }
 
     @Id
     @Column(name = "typeId")
@@ -58,15 +84,7 @@ public class VehicleType {
         this.carRentalId = carRentalId;
     }
 
-    @Basic
-    @Column(name = "typeName")
-    public String getTypeName() {
-        return typeName;
-    }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
 
     @Basic
     @Column(name = "passengervolume")
@@ -185,7 +203,6 @@ public class VehicleType {
         VehicleType that = (VehicleType) o;
         return typeId == that.typeId &&
                 Objects.equals(carRentalId, that.carRentalId) &&
-                Objects.equals(typeName, that.typeName) &&
                 Objects.equals(passengervolume, that.passengervolume) &&
                 Objects.equals(costprice, that.costprice) &&
                 Objects.equals(offer, that.offer) &&
@@ -202,6 +219,6 @@ public class VehicleType {
     @Override
     public int hashCode() {
 
-        return Objects.hash(typeId, carRentalId, typeName, passengervolume, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
+        return Objects.hash(typeId, carRentalId, passengervolume, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
     }
 }

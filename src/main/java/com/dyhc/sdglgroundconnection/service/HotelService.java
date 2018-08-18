@@ -21,4 +21,12 @@ public interface HotelService {
      * @throws Exception
      */
     List<Hotel> listHotelNoPage() throws Exception;
+
+    /**
+     * 根据id获取指定的酒店信息 张枫
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    Hotel getHotelById(Integer id) throws Exception;
 }

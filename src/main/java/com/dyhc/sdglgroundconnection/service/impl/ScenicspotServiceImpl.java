@@ -78,5 +78,15 @@ public class ScenicspotServiceImpl implements ScenicspotService {
         }
     }
 
+    /**
+     * 查询所有景点信息
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Scenicspot> listScenicspotAll() throws Exception {
+        return scenicspotMapper.selectAll();
+    }
+
 
 }

@@ -20,13 +20,8 @@
             <tr>
                 <td><label class="layui-form-label">酒店</label></td>
                 <td>
-                    <select name="city" lay-verify="required">
-                        <option value=""></option>
-                        <option value="0">哈红祖</option>
-                        <option value="1">无敌组</option>
-                        <option value="2">哈皮组</option>
-                        <option value="3">66组</option>
-                        <option value="4">纪检组</option>
+                    <select name="jiudian" lay-verify="required" lay-filter="abc" >
+
                     </select>
                 </td>
                 <td><label class="layui-form-label">成本价</label></td>
@@ -36,16 +31,12 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="image" style="width: 150px;height: 120px;margin: 8px;" src="/images/face/jiudian.jpg"/>
-                    <div style="margin-left: 8px;">
-                        <input type="image"src="/images/face/xingyou.png" style="width: 20px;height: 20px;margin: 3px;"/>
-                        <input type="image"src="/images/face/xingyou.png"style="width: 20px;height: 20px;margin: 3px;"/>
-                        <input type="image"src="/images/face/xingyou.png"style="width: 20px;height: 20px;margin: 3px;"/>
-                        <input type="image"src="/images/face/xingwu.png"style="width: 20px;height: 20px;margin: 3px;"/>
-                        <input type="image"src="/images/face/xingwu.png"style="width: 20px;height: 20px;margin: 3px;"/>
+                    <input type="image" style="width: 150px;height: 120px;margin: 8px;" id="tupian" src="/images/face/jiudian.jpg"/>
+                    <div style="margin-left: 8px;" id="xingji">
+
                     </div>
                 </td>
-                <td style="margin:8px;" colspan="4">
+                <td style="margin:8px;" colspan="4" >
                     <span style="font-size: 16px;font-weight:bold">中华酒店</span>
                     <p>中华酒店起源于吊亮酒店，必须成功样式要好看今天必须做完，中华酒店起源于吊<br/>亮酒店，必须成功样式要好看今天必须做完，吊亮酒店，必须成功样式要好看今天必须做完</p>
                 </td>
@@ -59,13 +50,8 @@
             <tr id="scenic">
                 <td><label class="layui-form-label">景点</label></td>
                 <td>
-                    <select name="city" lay-verify="required">
-                        <option value=""></option>
-                        <option value="0">哈红祖</option>
-                        <option value="1">无敌组</option>
-                        <option value="2">哈皮组</option>
-                        <option value="3">66组</option>
-                        <option value="4">纪检组</option>
+                    <select  name="jingdian" lay-verify="required" >
+
                     </select>
                 </td>
                 <td><label class="layui-form-label">成本价:</label></td>
@@ -91,13 +77,20 @@
 <script type="text/javascript" src="/js/baojiadan.js"></script>
 <script type="text/javascript">
     $(function() {
+        LodingResouce();
     });
+
     layui.use(['form', 'layedit', 'laydate','element'], function() {
-        var form = layui.form,
-            layer = layui.layer,
-            layedit = layui.layedit,
-            element=layui.element,
-            laydate = layui.laydate;
+         var form = layui.form;
+         layer = layui.layer;
+         layedit = layui.layedit;
+         element=layui.element;
+         laydate = layui.laydate;
+
+        form.on('select(abc)',function (data) {
+            alert(data.value);
+        });
+
         //日期
         laydate.render({
             elem: '#date'
@@ -112,6 +105,88 @@
         form.render('select', 'test1');
         form.render('select');
     });
+
+    
+    /**
+     * 加载下拉框资源
+     * @constructor
+     */
+    function LodingResouce(){
+        $.ajax({
+            url: "/Template/getResource",
+            dataType: "json",
+            type: "get",
+            success:function (result) {
+                var jiudian="<option value='0'>--请选择--</option>";
+                var jingdian="<option value='0'>--请选择--</option>";
+                $(result.data["hotel"]).each(function (i,e) {
+                    jiudian+="<option value='"+e.hotelId+"'>"+e.hotelName+"</option>";
+                });
+                $(result.data["scenicspot"]).each(function (i,e) {
+                    jingdian+="<option value='"+e.scenicSpotId+"'>"+e.scenicSpotName+"</option>";
+                });
+                $("select[name=jingdian]").html(jingdian);
+                $("select[name=jiudian]").html(jiudian);
+            },
+            error:function (err) {
+                alert(err);
+            }
+
+        });
+    }
+    function insertJingdian(onClickjd) {
+        var content=$("select[name=jingdian]").html();
+        $(onClickjd).parent().parent().next().after("<tr id='scenic'>"+
+            "<td><label class='layui-form-label'>景点</label></td>"+
+            "<td>"+
+            "<select name='jingdian' lay-verify='required'>"+content+"</select>"+
+            "</td>"+
+            "<td><label class='layui-form-label'>成本价:</label></td>"+
+            "<td><input type='text' class='layui-input'></td>"+
+            "<td><label class='layui-form-label'>报价:</label></td>"+
+            "<td><input type='text' class='layui-input'></td>"+
+            "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>"+
+            "</tr>");
+        layui.use(['form', 'layedit', 'laydate','element'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                element=layui.element,
+                laydate = layui.laydate,
+                a;
+            form.render(); //更新全部
+            form.render('select'); //刷新select选择框渲染
+        });
+    }
+
+    /**
+     * 根据Id查找指定的酒店信息
+     * @param id
+     */
+    function getHotelByid(id) {
+        $.ajax({
+            url: "/Hotel/getHotelById",
+            data:{id:id},
+            dataType: "json",
+            type: "get",
+            success:function (result) {
+                var xingji="";
+                for(var i=0;i<5;i++){
+                    if(i<result.data.starHotel){
+                        xingji+=" <input type='image' src='/images/face/xingyou.png' style='width: 20px;height: 20px;margin: 3px;'/>";
+                    }else{
+                        xingji+="<input type='image'src='/images/face/xingwu.png'style='width: 20px;height: 20px;margin: 3px;'/>";
+                    }
+                }
+                $("#xingji").html(xingji);
+                $("#tupian").attr("src","");
+            },
+            error:function (err) {
+                alert(err);
+            }
+
+        });
+    }
 </script>
 </body>
 </html>

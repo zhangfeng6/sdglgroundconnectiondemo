@@ -35,4 +35,15 @@ public class HotelServiceImpl implements HotelService {
     public List<Hotel> listHotelNoPage() throws Exception {
         return hotelMapper.selectAll();
     }
+
+    /**
+     * 根据id获取指定的酒店信息
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Hotel getHotelById(Integer id) throws Exception {
+        return hotelMapper.selectByPrimaryKey(id);
+    }
 }

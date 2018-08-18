@@ -58,4 +58,11 @@ public interface ScenicspotService {
      * @param scenicSpotId
      */
     Integer deleteScenicspotById(Integer scenicSpotId);
+
+    /**
+     * 查看所有景点信息   张枫
+     * @return
+     * @throws Exception
+     */
+    List<Scenicspot> listScenicspotAll() throws Exception;
 }
