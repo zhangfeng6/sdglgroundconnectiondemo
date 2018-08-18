@@ -23,7 +23,7 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">购物地名称：</label>
 									<div class="layui-input-block">
-										<input type="text" id="shoppingSite" required lay-verify="required" placeholder="请输入购物地点名称" autocomplete="off" class="layui-input" th:value="${shoppingSite}">
+										<input type="text" id="shoppingSite" placeholder="请输入购物地点名称" autocomplete="off" class="layui-input" th:value="${shoppingSite}">
 									</div>
 								</div>
 							</div>
@@ -89,13 +89,38 @@
 				});
 			});
 
+        getShoppingById();
+
         /**
-		 * 添加景点附近的购物地点
+         *根据购物id查询该购物地点的信息
+         */
+		function getShoppingById() {
+            var shoppingId=$("#shoppingId").val();
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/shopping/getShoppingById",
+                data: {"shoppingId":shoppingId},
+                dataType: "json",
+                success:function (result1) {
+                    $("#shoppingSite").val(result1.data.shoppingSite);
+                    $("#shoppingId").val(result1.data.shoppingId);
+                    $("#scenicSpotId").val(result1.data.scenicSpotId);
+                }
+            })
+        }
+
+        /**
+		 * 编辑景点附近的购物地点
          */
 		function insertShopping() {
 		    var scenicSpotId=$("#scenicSpotId").val();
             var shoppingSite=$("#shoppingSite").val();
             var shoppingId=$("#shoppingId").val();
+            if (shoppingSite==""){
+				alert("请输入购物地点名称");
+				return;
+			}
+			//添加购物地点
             if (shoppingId==0) {
                 $.ajax({
                     type: "post",
@@ -108,6 +133,7 @@
                     }
                 })
 			}else {
+                //删除购物地点
                 $.ajax({
                     type: "post",
                     url: "http://localhost:8888/shopping/updateShopping",

@@ -24,7 +24,7 @@
 				<select name="typeId" lay-filter="status">
 					<option value="0">请选择景点等级</option>
 					<option value="1">AAAAA</option>
-					<option value="2">AAAAA</option>
+					<option value="2">AAAA</option>
 					<option value="3">AAA</option>
 					<option value="4">AA</option>
 					<option value="5">A</option>
@@ -37,7 +37,7 @@
 					<option value="4">禁用</option>
 				</select>
 			</div>
-			<button class="layui-btn layui-btn-normal" onclick="loadData()" type="button">搜索</button>
+			<button class="layui-btn layui-btn-normal" onclick="loadData(1)" type="button">搜索</button>
 		</div>
 	</form>
 	<div class="layui-form" id="table-list">
@@ -76,7 +76,10 @@
     var curnum = 1;  // 当前页码
 
     loadData();
-    function loadData() {
+    function loadData(aa) {
+        if(aa==1){
+            curnum=1;
+		}
         var content = "";
         var scenicSpotName=$("input[name='scenicSpotName']").val();
         var scenicSpotAddress=$("input[name='scenicSpotAddress']").val();
@@ -84,7 +87,7 @@
         var whetherDel=$("select[name='whetherDel']").val();
         $.ajax({
             url: "http://localhost:8888/Scenicspot/listScenicspots",
-            data: {"typeId":1,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"whetherDel":3,"pageNo":curnum,"pageSize":2},
+            data: {"typeId":typeId,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"whetherDel":whetherDel,"pageNo":curnum,"pageSize":2},
             dataType: "json",
             type: "get",
             async: false,
@@ -121,6 +124,12 @@
                     content+="<td class=''>"+e.remarks+"</td>"+
                         " <td class=''>"+e.offer+"</td>" +
                         "<td><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status'>";
+                    if (e.whetherDel==1) {
+                        content+="已删除";
+                    }
+                    if (e.whetherDel==2) {
+                        content+="未删除";
+                    }
                     if (e.whetherDel==3) {
                         content+="正常";
                     }
@@ -282,16 +291,22 @@
 	 * 根据购物id删除该购物信息
      */
 	function deleteShoppingById(shoppingId){
-        $.ajax({
-            type: "post",
-            url: "http://localhost:8888/shopping/deleteShoppingById",
-            data: {"shoppingId":shoppingId},
-            dataType: "json",
-            success:function (result1) {
-                alert(result1.msg);
-                parent.location.reload();
-            }
-        })
+        var tishi=window.confirm("确认要删除购物地点吗?");
+        if (tishi==true) {
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/shopping/deleteShoppingById",
+                data: {"shoppingId":shoppingId},
+                dataType: "json",
+                success:function (result1) {
+                    alert(result1.msg);
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    loadData(1);
+                }
+            })
+		}
+
 	}
 
     /**
@@ -307,7 +322,9 @@
                 dataType: "json",
                 success:function (result1) {
                     alert(result1.msg);
-                    parent.location.reload();
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    loadData(1);
                 }
             })
 		}

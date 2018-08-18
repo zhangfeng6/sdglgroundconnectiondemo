@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -84,6 +85,23 @@ public class ShoppingController  {
             return  data;
         }catch (Exception e){
             ReponseResult<Integer> data=ReponseResult.err("删除购物地点失败");
+            e.printStackTrace();
+            return  data;
+        }
+    }
+
+    /**
+     *根据购物id查询该购物地点的信息
+     * @param shoppingId
+     * @return
+     */
+    @RequestMapping("getShoppingById")
+    public ReponseResult getShoppingById(@RequestParam("shoppingId")Integer shoppingId){
+        try {
+            ReponseResult data=ReponseResult.ok(shoppingService.getShoppingById(shoppingId),"查询购物信息成功");
+            return data;
+        }catch (Exception e){
+            ReponseResult data=ReponseResult.err("查询购物信息失败");
             e.printStackTrace();
             return  data;
         }

@@ -279,11 +279,9 @@ public class EnterCountAdjustPageController {
      */
     @RequestMapping("/spotshopping-add.html")
     public String  spotshoppingadd(HttpServletRequest request) {
-        String scenicSpotId=  request.getParameter("scenicSpotId");
-        String shoppingId=  request.getParameter("shoppingId");
+        String scenicSpotId= request.getParameter("scenicSpotId");
         request.setAttribute("scenicSpotId",scenicSpotId);
-        request.setAttribute("shoppingId",shoppingId);
-        request.setAttribute("shoppingSite","请输入购物地点名称");
+        request.setAttribute("shoppingId",0);
         return "countAdjust/index/spotshopping-add";
     }
     /**
@@ -292,17 +290,9 @@ public class EnterCountAdjustPageController {
      */
    @RequestMapping("/spotshopping-update.html")
     public String  spotshoppingupdate(HttpServletRequest request) {
-        try {
-            String id= request.getParameter("shoppingId");
-            String shoppingSite= request.getParameter("shoppingSite");
-            Integer shoppingId=Integer.parseInt(id);
-            Shopping shopping= shoppingService.getShoppingById(shoppingId);
-             request.setAttribute("shoppingId",shoppingId);
-            request.setAttribute("hopping",shopping);
-            request.setAttribute("shoppingSite",shopping.getShoppingSite());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        String shoppingId= request.getParameter("shoppingId");
+        request.setAttribute("shoppingId",shoppingId);
+       request.setAttribute("scenicSpotId","");
         return "countAdjust/index/spotshopping-add";
     }
 
