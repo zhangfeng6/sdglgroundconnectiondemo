@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
 	</head>
 	<body>
-		<div class="wrap-container">
+		<div class="wrap-container" >
 			<form class="layui-form" style="width: 90%;padding-top: 20px;">
 					<div class="layui-form-item">
 						<label class="layui-form-label">公司名称：</label>
@@ -48,13 +48,13 @@
 
 		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-			//Demo
-//			layui.use(['form'], function() {
-//				var form = layui.form();
+
+			layui.use(['form'], function() {
+			var form = layui.form();
 				form.render();
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
-					layer.msg(JSON.stringify(data.field));
+					/*layer.msg(JSON.stringify(data.field));*/
 					return false;
 				});
 			});

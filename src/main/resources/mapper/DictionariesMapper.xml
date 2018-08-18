@@ -6,4 +6,9 @@
         SELECT * FROM `dictionaries`
         WHERE typeCode='ATTRACTIONS'
     </select>
+
+    <select id="getDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM `dictionaries`
+        WHERE typeCode='THEROOM' and valueId=#{valueId}
+    </select>
 </mapper>

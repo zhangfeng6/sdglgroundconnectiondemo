@@ -15,5 +15,5 @@ public interface DictionariesService {
      * 获取所有的景点等级
      * @return
      */
-    PageInfo<Dictionaries> listDictionaries();
+    PageInfo<Dictionaries> listDictionaries()throws Exception;
 }

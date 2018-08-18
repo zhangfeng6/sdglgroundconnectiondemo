@@ -18,7 +18,8 @@ public class DictionariesServiceImpl implements DictionariesService {
     private DictionariesMapper dictionariesMapper;
 
     @Override
-    public PageInfo<Dictionaries> listDictionaries() {
+    public PageInfo<Dictionaries> listDictionaries()throws Exception {
+
         return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries());
     }
 }

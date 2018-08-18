@@ -37,6 +37,18 @@ public class VehicleType {
     private String value1; // 预备
     private String value2; // 预备
     private String value3; // 预备
+    @Transient
+    private Dictionaries dictionaries;      //字典表
+    public Dictionaries getDictionaries() {
+        return dictionaries;
+    }
+
+    public void setDictionaries(Dictionaries dictionaries) {
+        this.dictionaries = dictionaries;
+    }
+
+
+
 
     @Column(name = "typeCode")
     private String typeCode;
