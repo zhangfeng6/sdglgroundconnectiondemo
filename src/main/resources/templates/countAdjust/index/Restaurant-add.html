@@ -113,19 +113,30 @@
             selectById();
 		})
 
+
 		function insertRestaurant(){
-            var restaurantName=$("[name='restaurantName']").val();
-            var restaurantAddress=$("[name='restaurantAddress']").val();
-            var phone=$("[name='phone']").val();
+            var DataDeal = {
+                //将从form中通过$('#refer').serialize()获取的值转成json
+                formToJson: function (data) {
+                    data=data.replace(/&/g,"\",\"");
+                    data=data.replace(/=/g,"\":\"");
+                    data="{\""+data+"\"}";
+                    return data;
+                }
+            };
+            var restaurant = $("form").serialize();
+            restaurant= decodeURIComponent(restaurant,true);//防止中文乱码
+            var jsondata=DataDeal.formToJson(restaurant)
             var savePath = "D://"; // 图片保存路径
             var fileObj = document.getElementById("file").files[0]; // 获取文件对象
             // formData对象，用来序列化二进制数据
             var formData = new FormData();
             formData.append("multipartFile", fileObj);
             formData.append("savePath", savePath);
+            formData.append("restaurant",jsondata)
 		    $.ajax({
                 url: "/Restaurant/insertRestaurant",
-                data:formData,restaurantName:restaurantName,restaurantAddress:restaurantAddress,phone:phone,
+                data:formData,
                 dataType: "json",
                 type: "post",
                 cache: false, // 上传文件不需要缓存
@@ -141,7 +152,10 @@
 		function selectById(){
             var thisURL = document.URL;
             var  getval =thisURL.split('?')[1];
-            var id= getval.split("=")[1];
+            var id=0;
+            if (getval!=undefined){
+                var id= getval.split("=")[1];
+			}
             $.ajax({
                 url: "/Restaurant/selectRestaurantById",
                 data:{restaurantId:id},

@@ -11,31 +11,49 @@
 	</head>
 	<body>
 		<div class="wrap-container">
-			<form class="layui-form" style="width: 90%;padding-top: 20px;">
+			<form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxlshuai">
 					<div class="layui-form-item">
-						<label class="layui-form-label">开户行：</label>
+						<label class="layui-form-label">证件号：</label>
 						<div class="layui-input-block">
-							<input type="text" name="bank" required lay-verify="required" placeholder="请输入用开户行" autocomplete="off" class="layui-input">
+							<input type="text" name="certificate" required lay-verify="required" placeholder="请输入用证件号" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 				<div class="layui-form-item">
-					<label class="layui-form-label">卡号：</label>
+					<label class="layui-form-label">导游姓名：</label>
 					<div class="layui-input-block">
-						<input type="text" name="accountNum" required lay-verify="required" placeholder="请输入卡号" autocomplete="off" class="layui-input">
+						<input type="text" name="guideName" required lay-verify="required" placeholder="请输入导游姓名" autocomplete="off" class="layui-input">
 					</div>
 				</div>
 				<div class="layui-form-item">
-					<label class="layui-form-label">账户名：</label>
+					<label class="layui-form-label">用户名：</label>
 					<div class="layui-input-block">
-						<input type="text" name="accountName" required lay-verify="required" placeholder="请输入账户名" autocomplete="off" class="layui-input">
+						<input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">密码：</label>
+					<div class="layui-input-block">
+						<input type="text" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">联系电话：</label>
+					<div class="layui-input-block">
+						<input type="text" name="telephone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">年龄：</label>
+					<div class="layui-input-block">
+						<input type="text" name="age" required lay-verify="required" placeholder="请输入年龄" autocomplete="off" class="layui-input">
 					</div>
 				</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">类型：</label>
+						<label class="layui-form-label">性别：</label>
 						<div class="layui-input-block">
-							<select name="status" lay-verify="">
-								<option value="1">个人</option>
-								<option value="2">企业</option>
+							<select name="sex" lay-verify="" id="leixing">
+								<option value="0">女</option>
+								<option value="1">男</option>
 							</select>
 						</div>
 					</div>
@@ -55,27 +73,33 @@
 
             //新增账户信息
             function save() {
-                var  bank= $("input[name='bank']").val().trim();
-                var accountNum=  $("input[name='accountNum']").val().trim();
-                var accountName=$("input[name='accountName']").val().trim();
-                var leixing=$("#leixing").find("option:selected").val().trim();
-                if (bank=="" || bank==null ||bank==undefined){
-                    alert("不能为空");
+                var certificate=$("input[name='certificate']").val().trim();
+                var guideName=$("input[name='guideName']").val().trim();
+                var username=$("input[name='username']").val().trim();
+                var password=$("input[name='password']").val().trim();
+                var telephone=$("input[name='telephone']").val().trim();
+                var age=$("input[name='age']").val().trim();
+                var sex=$("#leixing").find("option:selected").val().trim();
+                if (certificate=="" || certificate==null ||certificate==undefined){
                     return;
-                } else if (accountNum=="" || accountNum==null||accountNum==undefined){
-                    alert("不能为空");
+                } else if (guideName=="" || guideName==null||guideName==undefined){
                     return;
-                } else if (""==accountName || null==accountName||accountName==undefined){
-                    alert("不能为空");
+                } else if (""==username || null==username||username==undefined){
+
                     return;
-                } else if (""==leixing || null==leixing || leixing==undefined){
-                    alert("不能为空");
+                } else if (""==password || null==password || password==undefined){
+                    return;
+                }else if (""==telephone || null==telephone || telephone==undefined){
+                    return;
+                }else if (""==age || null==age || age==undefined){
+                    return;
+                }else if (""==sex || null==sex || sex==undefined){
                     return;
                 }else{
-                var accountType =$("form[class='layui-form']").serialize();
+                var guide=$("#jxlshuai").serialize();
                 $.ajax({
-                    url: "/AccountType/saveAccountType",
-                    data: accountType,
+                    url: "/Guide/guideSave",
+                    data: guide,
                     dataType: "json",
                     type: "get",
                     success: function (data) {

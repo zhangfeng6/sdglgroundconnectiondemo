@@ -2,18 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.RestaurantMapper">
-    <select id="selectByEx" resultType="com.dyhc.sdglgroundconnection.pojo.Restaurant">
-        select * from restaurant where whetherDel != 1
+
+    <resultMap id="lianbiao" type="com.dyhc.sdglgroundconnection.pojo.Restaurant">
+        <id column="restaurantId" property="restaurantId"/>
+        <collection property="mealType" ofType="com.dyhc.sdglgroundconnection.pojo.MealType">
+            <id column="typeId" property="typeId"/>
+        </collection>
+    </resultMap>
+
+
+
+    <select id="selectByEx" resultMap="lianbiao">
+        select * from restaurant where whetherDel!=1
         <if test="restaurantName!=null and restaurantName!=''">
-            and restaurantName like concat("%",#{restaurantName},"%")
+            and r.restaurantName like concat("%",#{restaurantName},"%")
         </if>
         <if test="restaurantAddress!=null and restaurantAddress!=''">
-            and restaurantAddress like concat("%",#{restaurantAddress},"%")
+            and r.restaurantAddress like concat("%",#{restaurantAddress},"%")
         </if>
-        <if test="whetherDel!=null and whetherDel!=''">
-            and whetherDel = #{whetherDel}
+        <if test="whetherDel!=null">
+            and r.whetherDel = #{whetherDel}
         </if>
-
     </select>
 
     <update id="delRestaurantById">
@@ -21,6 +30,6 @@
     </update>
 
     <update id="updateRestaurantById">
-        update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone} where restaurantId=#{restaurantId}
+        update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone},picturePath=#{picturePath} where restaurantId=#{restaurantId}
     </update>
 </mapper>
