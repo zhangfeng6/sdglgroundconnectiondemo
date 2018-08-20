@@ -188,4 +188,6 @@ public class EnterGeneralControlPageController {
     public String  welcome() {
         return "General-control/index/welcome";
     }
+
+
 }

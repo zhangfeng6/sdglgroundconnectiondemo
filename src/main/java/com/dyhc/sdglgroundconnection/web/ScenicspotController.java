@@ -191,6 +191,7 @@ public class ScenicspotController {
                 logger.error(" method:testUploadImage 上传图片失败，请稍后再试！");
                 return ReponseResult.err("上传图片失败，请稍后再试！");
             }
+
             return data;
         }catch (Exception e){
             e.printStackTrace();

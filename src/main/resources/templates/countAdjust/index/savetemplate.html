@@ -8,66 +8,64 @@
 </head>
 <body>
 <div id="content">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane">
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td><label class="layui-form-label">线路</label></td>
                 <td>
-                    <input type="text" class="layui-input">
+                    <input type="text" class="layui-input" placeholder="请输入模板线路名称！" name="templateName" >
                 </td>
             </tr>
 
             <tr>
                 <td><label class="layui-form-label">酒店</label></td>
                 <td>
-                    <select name="jiudian" lay-verify="required" lay-filter="abc" >
+                    <select name="hotelId" lay-verify="required" lay-filter="hotel" >
 
                     </select>
                 </td>
                 <td><label class="layui-form-label">成本价</label></td>
-                <td><input type="text" class="layui-input"></td>
+                <td><input type="text" class="layui-input" name="costprice"></td>
                 <td><label class="layui-form-label">报价</label></td>
-                <td><input type="text" class="layui-input"></td>
+                <td><input type="text" class="layui-input" name="offer"></td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <input type="image" style="width: 150px;height: 120px;margin: 8px;" id="tupian" src="/images/face/jiudian.jpg"/>
-                    <div style="margin-left: 8px;" id="xingji">
+                <td colspan="2" id="tupian">
 
-                    </div>
                 </td>
-                <td style="margin:8px;" colspan="4" >
-                    <span style="font-size: 16px;font-weight:bold">中华酒店</span>
-                    <p>中华酒店起源于吊亮酒店，必须成功样式要好看今天必须做完，中华酒店起源于吊<br/>亮酒店，必须成功样式要好看今天必须做完，吊亮酒店，必须成功样式要好看今天必须做完</p>
+                <td style="margin:8px;" colspan="4"  id="jieshao">
                 </td>
             </tr>
 
             <!--点击新增景点-->
             <tr id="onClickjd">
                 <td colspan="2"><button class="layui-btn" type="button" style="font-size: 12px" onclick="insertJingdian(this)">添加景点+</button></td>
+
             </tr>
             <!--点击新增结束-->
-            <tr id="scenic">
+            <tr  name="scenic">
                 <td><label class="layui-form-label">景点</label></td>
                 <td>
-                    <select  name="jingdian" lay-verify="required" >
+                    <select  name="scenicSpotId1" lay-verify="required" lay-filter="jingd1" >
 
                     </select>
                 </td>
                 <td><label class="layui-form-label">成本价:</label></td>
-                <td><input type="text" class="layui-input"></td>
+                <td><input type="text" class="layui-input" name="costprice1"></td>
                 <td><label class="layui-form-label">报价:</label></td>
-                <td><input type="text" class="layui-input"></td>
+                <td><input type="text" class="layui-input" name="offer1" ></td>
+
             </tr>
             <tr>
                 <td><label class="layui-form-label">行程</label></td>
-                <td colspan="5"> <textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+                <td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="templateContent"></textarea></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
-                <td><button class="layui-btn layui-btn-radius">保存</button></td>
-                <td><button class="layui-btn layui-btn-radius">取消</button></td>
+                <td style="padding-top: 8px"><button type="button" class="layui-btn layui-btn-radius" onclick="saveTemplate()">保存</button></td>
+                <td style="padding-top: 8px"><button class="layui-btn layui-btn-radius">取消</button></td>
             </tr>
         </table>
     </form>
@@ -78,6 +76,9 @@
 <script type="text/javascript">
     $(function() {
         LodingResouce();
+        $("input[name=templateName]").blur(function () {
+            judgeName();
+        });
     });
 
     layui.use(['form', 'layedit', 'laydate','element'], function() {
@@ -87,8 +88,25 @@
          element=layui.element;
          laydate = layui.laydate;
 
-        form.on('select(abc)',function (data) {
-            alert(data.value);
+        form.on('select(hotel)',function (data) {
+                getHotelByid(data.value);
+        });
+
+
+        form.on('select(jingd1)',function(data){
+            getScenicByid(data.value,1);
+        });
+        form.on('select(jingd2)',function(data){
+            getScenicByid(data.value,2);
+        });
+        form.on('select(jingd3)',function(data){
+            getScenicByid(data.value,3);
+        });
+        form.on('select(jingd4)',function(data){
+            getScenicByid(data.value,4);
+        });
+        form.on('select(jingd5)',function(data){
+            getScenicByid(data.value,5);
         });
 
         //日期
@@ -125,8 +143,8 @@
                 $(result.data["scenicspot"]).each(function (i,e) {
                     jingdian+="<option value='"+e.scenicSpotId+"'>"+e.scenicSpotName+"</option>";
                 });
-                $("select[name=jingdian]").html(jingdian);
-                $("select[name=jiudian]").html(jiudian);
+                $("select[name=scenicSpotId1]").html(jingdian);
+                $("select[name=hotelId]").html(jiudian);
             },
             error:function (err) {
                 alert(err);
@@ -134,17 +152,42 @@
 
         });
     }
+    //判断用户输入的模板名称是否存在  存在则情况文本框提示用户重新输入
+    function judgeName() {
+         var name=$("input[name=templateName]").val();
+         $.ajax({
+             url:"/Template/judgeTemplateName",
+             data:{templateName:name},
+             type:"get",
+             dataType:"json",
+             success:function (result) {
+                 if(result.data==false){
+                     $("input[name=templateName]").val("");
+                     alert("该线路名称已存在,请重新输入！");
+                 }
+             },
+             error:function (err) {
+                 alert(err);
+             }
+         });
+    }
     function insertJingdian(onClickjd) {
-        var content=$("select[name=jingdian]").html();
-        $(onClickjd).parent().parent().next().after("<tr id='scenic'>"+
+        var A=$("tr[name=scenic]");
+        if(A.length==5){
+            alert("最多可选择五个景点！");
+            return;
+        }
+        var index=parseInt(A.length)+1;
+        var content=$("select[name=scenicSpotId1]").html();
+        $(onClickjd).parent().parent().next().after("<tr name='scenic'>"+
             "<td><label class='layui-form-label'>景点</label></td>"+
             "<td>"+
-            "<select name='jingdian' lay-verify='required'>"+content+"</select>"+
+            "<select name='scenicSpotId"+index+"' lay-verify='required' lay-filter='jingd"+index+"'>"+content+"</select>"+
             "</td>"+
             "<td><label class='layui-form-label'>成本价:</label></td>"+
-            "<td><input type='text' class='layui-input'></td>"+
+            "<td><input type='text' class='layui-input' name='costprice"+index+"'></td>"+
             "<td><label class='layui-form-label'>报价:</label></td>"+
-            "<td><input type='text' class='layui-input'></td>"+
+            "<td><input type='text' class='layui-input' name='offer"+index+"'></td>"+
             "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>"+
             "</tr>");
         layui.use(['form', 'layedit', 'laydate','element'], function() {
@@ -160,10 +203,67 @@
     }
 
     /**
+     * 点击保存按钮 响应方法 新增模板信息
+     */
+    function  saveTemplate() {
+        var info=$("form").serialize();
+        $.ajax({
+            url:"/Template/saveTemplate",
+            data:info,
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                if(result.data>0){
+                    parent.location.reload();
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    alert("添加成功！");
+                }else{
+                    alert("...");
+                }
+            },error:function (err) {
+                alert(err);
+            }
+        });
+    }
+    
+    /**
+     * 根据景点id获取该
+     * */
+    function  getScenicByid(id,index) {
+        if(id==0){
+            $("input[name=costprice"+index+"]").val("");
+            $("input[name=offer"+index+"]").val("");
+            return;
+        }
+        $.ajax({
+            url: "/Scenicspot/getScenicspotById",
+            data:{scenicSpotId:id},
+            dataType: "json",
+            type: "get",
+            success:function (result) {
+                $("input[name=costprice"+index+"]").val(result.data.costprice);
+                $("input[name=offer"+index+"]").val(result.data.offer);
+            },
+            error:function (err) {
+                alert(err);
+            }
+
+        });
+    }
+    
+    /**
      * 根据Id查找指定的酒店信息
      * @param id
      */
     function getHotelByid(id) {
+        if(id==0){
+            $("#tupian").html("");
+            $("#jieshao").html("");
+            $("input[name=costprice]").val("");
+            $("input[name=offer]").val("");
+            return;
+        }
         $.ajax({
             url: "/Hotel/getHotelById",
             data:{id:id},
@@ -171,6 +271,8 @@
             type: "get",
             success:function (result) {
                 var xingji="";
+                var jieshao="<span style='font-size: 16px;font-weight:bold'>"+result.data.hotelName+"</span>" +
+                    "<p>"+result.data.hotelDescribe+"<p>";
                 for(var i=0;i<5;i++){
                     if(i<result.data.starHotel){
                         xingji+=" <input type='image' src='/images/face/xingyou.png' style='width: 20px;height: 20px;margin: 3px;'/>";
@@ -178,8 +280,12 @@
                         xingji+="<input type='image'src='/images/face/xingwu.png'style='width: 20px;height: 20px;margin: 3px;'/>";
                     }
                 }
-                $("#xingji").html(xingji);
-                $("#tupian").attr("src","");
+                var content="<input type='image' style='width: 150px;height: 120px;margin: 8px;'  src='"+result.data.picturePath+"'/>\n" +
+                    "<div style='margin-left: 8px;'>"+xingji+"</div>";
+                $("#tupian").html(content);
+                $("#jieshao").html(jieshao);
+                $("input[name=costprice]").val(result.data.costprice);
+                $("input[name=offer]").val(result.data.offer);
             },
             error:function (err) {
                 alert(err);

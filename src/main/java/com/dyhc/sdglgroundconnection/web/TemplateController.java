@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.parameterentity.TemplateParameter;
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.Template;
@@ -80,8 +81,8 @@ public class TemplateController {
             Map<String,Object> map=new HashMap<String,Object>();
             map.put("hotel",hotelList);
             map.put("scenicspot",scenicspotList);
-            ReponseResult<Map> data=ReponseResult.ok(map,"获取添加模板资源成功");
-            logger.info("method:getResource  获取添加模板资源成功！");
+            ReponseResult<Map> data=ReponseResult.ok(map,"获取模板资源成功");
+            logger.info("method:getResource  获取模板资源成功！");
             return data;
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,5 +91,41 @@ public class TemplateController {
             return err;
         }
 
+    }
+
+    /**
+     * 判断模板名称是否可用
+     * @param templateName  模板名称
+     * @return
+     */
+    @RequestMapping("/judgeTemplateName")
+    public ReponseResult judgeTemplateName(@RequestParam("templateName")String templateName){
+        try {
+            Boolean flag=true;
+            Template template=templateService.gettemplateByName(templateName);
+            if(template==null){ flag=true; }else{flag=false;}
+            ReponseResult<Boolean> data=ReponseResult.ok(flag,"获取数据成功！");
+            logger.info("method:judgeTemplateName 调用判断模板名称！");
+            return  data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:judgeTemplateName 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    @RequestMapping("/saveTemplate")
+    public ReponseResult  saveTemplate(TemplateParameter templateParameter){
+        try {
+            ReponseResult<Integer> data=ReponseResult.ok(templateService.savetemplate(templateParameter),"添加数据成功！");
+            logger.info("method:saveTemplate 添加模板数据！");
+            return  data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:saveTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
     }
 }

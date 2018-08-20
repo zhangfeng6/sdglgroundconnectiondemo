@@ -23,4 +23,12 @@ public interface TemplateMapper  extends CommonMapper<Template>{
      * @throws Exception
      */
     List<Template> listtemplate(@Param("tempName")String tempName,@Param("username")String username)throws Exception;
+
+    /**
+     * 根据模板名称返回模板对象  判读是否存在    张枫
+     * @param templateName
+     * @return
+     * @throws Exception
+     */
+    Template gettemplateByName(@Param("templateName")String templateName) throws Exception;
 }

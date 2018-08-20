@@ -20,4 +20,9 @@
             <id column="staffId" property="staffId"/>
         </association>
     </resultMap>
+
+    <!--根据模板名称进行查询-->
+    <select id="gettemplateByName" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
+        SELECT `templateId` FROM `template` WHERE templateName=#{templateName}
+    </select>
 </mapper>

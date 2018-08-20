@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.parameterentity.TemplateParameter;
 import com.dyhc.sdglgroundconnection.pojo.Template;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,18 @@ public interface TemplateService {
      * @throws Exception
      */
     PageInfo<Template> listtemplate(String tempName, String userName, Integer pageNo, Integer pageSize)throws Exception;
+    /**
+     * 根据模板名称返回模板对象  判读是否存在    张枫
+     * @param templateName
+     * @return
+     * @throws Exception
+     */
+    Template gettemplateByName(String templateName) throws Exception;
+
+    /**
+     * 新增模板信息       张枫
+     * @param template
+     * @return
+     */
+    int savetemplate(TemplateParameter template)throws Exception;
 }

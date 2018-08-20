@@ -32,7 +32,7 @@ public class Offerline {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建时间
-    private String value1;
+    private int howmanydays;
     private String value2;
     private String value3;
 
@@ -137,13 +137,13 @@ public class Offerline {
     }
 
     @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    @Column(name = "howmanydays")
+    public int getHowmanydays() {
+        return howmanydays;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setHowmanydays(int howmanydays) {
+        this.howmanydays = howmanydays;
     }
 
     @Basic
@@ -181,7 +181,7 @@ public class Offerline {
                 Objects.equals(modifier, offerline.modifier) &&
                 Objects.equals(modifiedData, offerline.modifiedData) &&
                 Objects.equals(creationDate, offerline.creationDate) &&
-                Objects.equals(value1, offerline.value1) &&
+                Objects.equals(howmanydays, offerline.howmanydays) &&
                 Objects.equals(value2, offerline.value2) &&
                 Objects.equals(value3, offerline.value3);
     }
@@ -189,6 +189,6 @@ public class Offerline {
     @Override
     public int hashCode() {
 
-        return Objects.hash(offerLineRecordId, offerId, lineArriveName, travelContent, date, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(offerLineRecordId, offerId, lineArriveName, travelContent, date, whetherDel, creater, modifier, modifiedData, creationDate, howmanydays, value2, value3);
     }
 }
