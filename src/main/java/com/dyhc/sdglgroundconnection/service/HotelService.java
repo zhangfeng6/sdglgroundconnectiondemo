@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
+import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -29,4 +30,21 @@ public interface HotelService {
      * @throws Exception
      */
     Hotel getHotelById(Integer id) throws Exception;
+
+
+    /**
+     *查询酒店表:小亮
+     * @return
+     * @throws Exception
+     */
+    PageInfo<Hotel> hotelShowAll(Integer pageNo,Integer pageSize,String hotelName,Integer costpriceOne,Integer costpriceTwo)throws  Exception;
+
+    /**
+     * 根据酒店表的编号查询下面的房间:小亮
+     * @param hotelId
+     * @return
+     */
+    List<RoomType> roomTypeList(Integer hotelId) throws  Exception;
+
+
 }

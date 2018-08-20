@@ -213,6 +213,9 @@ public class EnterAdminPageController {
         System.out.println(request.getAttribute("guideId"));
         return "admin/index/menu-guide-update";
     }
+
+
+
     /**
      * 进入menu-add1页面
      * @return

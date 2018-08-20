@@ -38,6 +38,33 @@ public class EnterCountAdjustPageController {
         return "countAdjust/index/count-Adjust-Index";
     }
     /**
+     * 进入类型管理单据类型管理页面
+     * @return
+     */
+    @RequestMapping("/BillType-manage.html")
+    public String  BillTypemanage() {
+        return "countAdjust/index/BillType-manage";
+    }
+    /**
+     * 进入类型管理单据类型管理页面新增
+     * @return
+     */
+    @RequestMapping("/BillType-Save.html")
+    public String  BillTySave() {
+        System.out.println("进入新增页面");
+        return "countAdjust/index/BillType-Save";
+    }
+    /**
+     * 进入类型管理单据类型管理页面修改
+     * @return
+     */
+    @RequestMapping("/BillType-Update.html")
+    public String  BillTypeUpdate(Integer billTypeId,HttpServletRequest request) {
+        request.setAttribute("billTypeId",billTypeId);
+        return "countAdjust/index/BillType-Update";
+    }
+
+    /**
      * 进入管理信息
      * @return
      */

@@ -1,9 +1,11 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -40,13 +42,28 @@ public class Hotel {
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @Column(name = "updateDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private String value1;
     private String value2;
     private String value3;
+    /**
+     *存放酒店房间信息
+     */
+    @Transient
+    private List<RoomType> roomTypesList;
+
+    public List<RoomType> getRoomTypesList() {
+        return roomTypesList;
+    }
+
+    public void setRoomTypesList(List<RoomType> roomTypesList) {
+        this.roomTypesList = roomTypesList;
+    }
 
     @Id
     @Column(name = "hotelId")

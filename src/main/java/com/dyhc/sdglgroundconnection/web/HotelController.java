@@ -25,6 +25,55 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
+    /**
+     * 酒店分页显示
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/hotelShowAll")
+    public ReponseResult hotelShowAll(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam("hotelName") String hotelName,@RequestParam("costpriceOne")Integer costpriceOne,@RequestParam("costpriceTwo") Integer costpriceTwo) {
+        try {
+            PageInfo<Hotel> pageInfo = hotelService.hotelShowAll(pageNo,pageSize,hotelName,costpriceOne,costpriceTwo);
+            ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取酒店成功！");
+            System.out.println(data);
+            logger.info(" method:showHotel  分页获取酒店成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showHotel  获取酒店数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @RequestMapping("/showAllHotels")
     public ReponseResult showHotel(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize) {
         try {
@@ -39,6 +88,12 @@ public class HotelController {
             return err;
         }
     }
+
+
+
+
+
+
 
     /**
      * 根据id获取指定的酒店信息    张枫
