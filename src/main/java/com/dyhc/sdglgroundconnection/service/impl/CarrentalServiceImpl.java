@@ -50,4 +50,36 @@ public class CarrentalServiceImpl implements CarrentalService {
         }
         return new PageInfo<>(list1);
     }
+
+    @Override
+    public Integer insertCarRental(Carrental carrental)throws Exception {
+        try {
+            carrentalMapper.insertCarRental(carrental);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public Carrental getCarRentalById(Integer carRentalId) throws Exception {
+        return carrentalMapper.selectByPrimaryKey(carRentalId);
+    }
+
+    @Override
+    public Integer updateCarRental(Carrental carrental) throws Exception {
+        return carrentalMapper.updateByPrimaryKeySelective(carrental);
+    }
+
+    @Override
+    public Integer deleteCarRentalBycarRentalId(Integer carRentalId) throws Exception {
+        try {
+            carrentalMapper.deleteCarRentalBycarRentalId(carRentalId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

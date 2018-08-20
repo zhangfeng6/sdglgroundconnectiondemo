@@ -70,26 +70,25 @@
 
 
     $(document).on('click','#innerCarRental',function(){
-        //var id = $(this).val();
         layer.open({
             type: 2,
             title: '点击添加车辆公司按钮',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'carRental_add.html'
+            content:'carRental_add.html?carRentalId=0'
         });
     });
 
     $(document).on('click','#updateCarRental',function(){
-        //var id = $(this).val();
+        var carRentalId = $(this).val();
         layer.open({
             type: 2,
             title: '点击修改车辆公司按钮',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'carRental_add.html'
+            content:'carRental_add.html?carRentalId='+carRentalId
         });
     });
 
@@ -124,6 +123,11 @@
     var curnum = 1;  // 当前页码
 
     listCarRentals();
+
+    /**
+	 * 查询车队信息并分页
+     * @param aa
+     */
     function listCarRentals(aa) {
         if (aa==1){
             curnum=1;
@@ -153,8 +157,8 @@
                         "<td style='width: 200px;'>"+e.companyAddress+"</td>" +
                         "<td>" +
                         "<div class='layui-inline'>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='"+e.carRentalId+"' data-url='carRental_add.html' type='button' id='updateCarRental'><i class='layui-icon'>&#xe642;</i></button>" +
-                        " <button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='"+e.carRentalId+"' data-url='carRental_add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='"+e.carRentalId+"' data-url='carRental_add.html' type='button' id='updateCarRental' value='"+e.carRentalId+"'><i class='layui-icon'>&#xe642;</i></button>" +
+                        " <button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='"+e.carRentalId+"' data-url='carRental_add.html' type='button' onclick='deleteCarRentals("+e.carRentalId+")'><i class='layui-icon'>&#xe640;</i></button>" +
                         "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='"+e.carRentalId+"' data-url='vehicleType_add.html' type='button' id='insertVehicleType'><i class='layui-icon'>&#xe654;</i></button>" +
                         "</div>" +
                         "</td>" +
@@ -219,6 +223,26 @@
             }
         })
     }
+
+    function deleteCarRentals(carRentalId){
+        var tishi=window.confirm("确认要删除车队公司及公司的车辆类型吗?");
+        if (tishi==true){
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/CarRental/deleteCarRentals",
+                data: {"carRentalId":carRentalId},
+                dataType: "json",
+                success:function (result1) {
+                    alert(result1.msg);
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    listCarRentals(1);
+                }
+            })
+		}
+
+	}
+
 
     layui.use(['jquery'], function() {
         var $=layui.jquery;

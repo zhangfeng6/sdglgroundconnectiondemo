@@ -22,4 +22,17 @@ public interface CarrentalMapper extends CommonMapper<Carrental>{
      */
     List<Carrental> listCarRentals(@Param("carRentalName") String carRentalName)throws Exception;
 
+
+    /**
+     * 根据条件添加公司
+     */
+    void insertCarRental(Carrental carrental)throws Exception;
+
+
+    /**
+     * 根据公司id删除公司
+     * @param carRentalId
+     */
+    void deleteCarRentalBycarRentalId(@Param("carRentalId") Integer carRentalId)throws Exception;
+
 }

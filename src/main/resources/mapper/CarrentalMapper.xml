@@ -10,6 +10,15 @@
             </if>
             and `whetherdel`=3
         </where>
+        order by createDate desc
     </select>
 
+
+    <insert id="insertCarRental">
+        INSERT INTO `carrental`(carRentalName,phone,contacts,companyAddress,whetherDel,createBy,createDate) VALUE(#{carRentalName},#{phone},#{contacts},#{companyAddress},#{whetherDel},#{createBy},#{createDate})
+    </insert>
+
+    <delete id="deleteCarRentalBycarRentalId">
+        DELETE FROM `carrental` WHERE carRentalId=#{carRentalId}
+    </delete>
 </mapper>

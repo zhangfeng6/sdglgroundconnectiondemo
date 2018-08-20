@@ -21,4 +21,29 @@ public interface CarrentalService {
      */
     PageInfo<Carrental> listCarRentals(String carRentalName,Integer costprice1,Integer costprice2,Integer passengervolume,Integer pageNo,Integer pageSize)throws Exception;
 
+    /**
+     * 根据条件添加公司
+     */
+    Integer insertCarRental(Carrental carrental)throws Exception;
+
+
+    /**
+     * 根据公司id查询公司信息
+     * @param carRentalId
+     * @return
+     */
+    Carrental getCarRentalById(Integer carRentalId)throws Exception;
+
+
+    /**
+     * 根据条件修改公司信息
+     */
+    Integer updateCarRental(Carrental carrental)throws Exception;
+
+    /**
+     * 根据公司id删除公司
+     * @param carRentalId
+     */
+    Integer deleteCarRentalBycarRentalId(Integer carRentalId)throws Exception;
+
 }

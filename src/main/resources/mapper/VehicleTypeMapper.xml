@@ -17,4 +17,8 @@
             and whetherDel=3
         </where>
     </select>
+
+    <delete id="deleteVehicleTypesBycarRentalId">
+        DELETE FROM `vehicletype` WHERE carRentalId=#{carRentalId}
+    </delete>
 </mapper>

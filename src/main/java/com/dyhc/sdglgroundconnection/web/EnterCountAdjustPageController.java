@@ -82,7 +82,9 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/carRental_add.html")
-    public String  carRentaladd() {
+    public String  carRentaladd(HttpServletRequest request) {
+        String carRentalId= request.getParameter("carRentalId");
+        request.setAttribute("carRentalId",carRentalId);
         return "countAdjust/index/carRental_add";
     }
     /**

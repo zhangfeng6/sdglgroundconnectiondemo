@@ -14,4 +14,15 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 
     @Autowired
     private VehicleTypeMapper vehicleTypeMapper;
+
+    @Override
+    public Integer deleteVehicleTypesBycarRentalId(Integer carRentalId) throws Exception {
+        try {
+            vehicleTypeMapper.deleteVehicleTypesBycarRentalId(carRentalId);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

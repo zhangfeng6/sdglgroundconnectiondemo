@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="renderer" content="webkit">
@@ -8,38 +8,40 @@
 		<title>新增汽车租赁公司</title>
 		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+
 	</head>
 	<body>
 		<div class="wrap-container" >
 			<form class="layui-form" style="width: 90%;padding-top: 20px;">
 					<div class="layui-form-item">
+						<input type="hidden" name="carRentalId" th:value="${carRentalId}"/>
 						<label class="layui-form-label">公司名称：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title1" required lay-verify="required" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+							<input type="text" name="carRentalName" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">联系人：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title2" required lay-verify="required" placeholder="请输入联系人" autocomplete="off" class="layui-input">
+							<input type="text" name="contacts"  placeholder="请输入联系人" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">联系电话：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title2" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+							<input type="text" name="phone"  placeholder="请输入联系电话" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">公司地址：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title2" required lay-verify="required" placeholder="请输入公司地址" autocomplete="off" class="layui-input">
+							<input type="text" name="companyAddress"  placeholder="请输入公司地址" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+							<button class="layui-btn layui-btn-normal"  lay-filter="formDemo" type="button" onclick="editCarrental()">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -47,7 +49,85 @@
 		</div>
 
 		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/jquery-3.3.1.min.js"></script>
+
 		<script>
+
+            getCarrentalById();
+
+			/**
+			 * 根据公司id查询公司信息
+			 */
+			function getCarrentalById() {
+                var carRentalId=$("input[name='carRentalId']").val();
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8888/CarRental/getCarRentalById",
+                    data: {"carRentalId":carRentalId},
+                    dataType: "json",
+                    success:function (result1) {
+                        $("input[name='carRentalName']").val(result1.data.carRentalName);
+                        $("input[name='phone']").val(result1.data.phone);
+                        $("input[name='contacts']").val(result1.data.contacts);
+                        $("input[name='companyAddress']").val(result1.data.companyAddress);
+                    }
+                })
+            }
+
+
+            /**
+			 * 编辑车辆公司信息
+             */
+			function editCarrental(){
+                var carRentalName=$("input[name='carRentalName']").val();
+                var phone=$("input[name='phone']").val();
+                var contacts=$("input[name='contacts']").val();
+                var companyAddress=$("input[name='companyAddress']").val();
+
+                if($("input[name='carRentalName']").val()==""){
+                    alert("请输入公司的名称");
+                    return;
+				}else  if($("input[name='phone']").val()==""){
+                    alert("请输入联系人");
+                    return;
+                }else  if($("input[name='contacts']")==""){
+                    alert("请输入联系电话");
+                    return;
+                }else  if($("input[name='companyAddress']").val()==""){
+                    alert("请输入公司的地址");
+                    return;
+                }
+                var carrental=$("form").serialize();
+                var carRentalId=$("input[name='carRentalId']").val();
+				//判断是添加还是修改操作
+			    if (carRentalId=="0"){
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/CarRental/insertCarRental",
+                        data: carrental,
+                        dataType: "json",
+                        success:function (result1) {
+                            alert(result1.msg);
+                            parent.location.reload();
+                        }
+                    })
+				}else {
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/CarRental/updateCarRental",
+                        data: carrental,
+                        dataType: "json",
+                        success:function (result1) {
+                            alert(result1.msg);
+                            parent.location.reload();
+                        }
+                    })
+				}
+
+
+
+			}
+
 
 			layui.use(['form'], function() {
 			var form = layui.form();

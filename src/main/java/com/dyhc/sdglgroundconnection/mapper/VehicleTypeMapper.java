@@ -24,4 +24,10 @@ public interface VehicleTypeMapper extends CommonMapper<VehicleType> {
      */
     List<VehicleType> listVehicleTypes(@Param("costprice1") Integer costprice1,@Param("costprice2")  Integer costprice2, @Param("passengervolume") Integer passengervolume);
 
+
+    /**
+     * 根据公司id删除公司下的车辆类型
+     * @param carRentalId
+     */
+    void deleteVehicleTypesBycarRentalId(@Param("carRentalId") Integer carRentalId)throws Exception;
 }
