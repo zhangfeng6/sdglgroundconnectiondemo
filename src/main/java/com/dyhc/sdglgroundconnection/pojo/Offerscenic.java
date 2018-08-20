@@ -32,7 +32,7 @@ public class Offerscenic {
     @Column(name = "creationDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Timestamp creationDate; // 创建时间
-    private String value1;
+    private Integer howmanydays;
     private String value2;
     private String value3;
 
@@ -137,13 +137,13 @@ public class Offerscenic {
     }
 
     @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    @Column(name = "howmanydays")
+    public int getHowmanydays() {
+        return howmanydays;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setHowmanydays(int howmanydays) {
+        this.howmanydays = howmanydays;
     }
 
     @Basic
@@ -181,7 +181,7 @@ public class Offerscenic {
                 Objects.equals(modifier, that.modifier) &&
                 Objects.equals(modifiedData, that.modifiedData) &&
                 Objects.equals(creationDate, that.creationDate) &&
-                Objects.equals(value1, that.value1) &&
+                Objects.equals(howmanydays, that.howmanydays) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -189,6 +189,6 @@ public class Offerscenic {
     @Override
     public int hashCode() {
 
-        return Objects.hash(offerScenicId, scenicSpotId, offerId, costPrice, offer, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(offerScenicId, scenicSpotId, offerId, costPrice, offer, whetherDel, creater, modifier, modifiedData, creationDate, howmanydays, value2, value3);
     }
 }
