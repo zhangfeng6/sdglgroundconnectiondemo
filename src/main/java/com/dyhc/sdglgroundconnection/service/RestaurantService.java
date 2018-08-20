@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  * 餐馆业务接口
  **/
 public interface RestaurantService {
+
     PageInfo<Restaurant> listRestaurants(Integer pageNo, Integer PageSize,String restaurantName, String restaurantAddress,Integer whetherDel) throws Exception;
 
     /**

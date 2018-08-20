@@ -8,15 +8,20 @@
 		<title>网站后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+		<style type="text/css">
+			#layui-input{
+				width: 200px;
+			}
+		</style>
 	</head>
 	<body>
-	<input type="hidden" name="staffId" id="accountTypeId" th:value="${accountTypeId}">
 	<div class="wrap-container">
 			<form class="layui-form" style="width: 90%;padding-top: 20px;">
-					<div class="layui-form-item">
+				<input type="hidden" name="accountTypeId" id="accountTypeId" class="layui-input" th:value="${accountTypeId}">
+				<div class="layui-form-item">
 						<label class="layui-form-label">开户行：</label>
-						<div class="layui-input-block">
-							<input type="text" name="bank" required lay-verify="required" placeholder="请输入用开户行" autocomplete="off" class="layui-input">
+						<div class="layui-input-block" >
+							<input type="text" name="bank" required lay-verify="required" placeholder="请输入用开户行" autocomplete="off" class="layui-input" >
 						</div>
 					</div>
 				<div class="layui-form-item">
@@ -32,32 +37,14 @@
 					</div>
 				</div>
 				<div class="layui-form-item">
-					<label class="layui-form-label">单选框</label>
-					<div class="layui-input-block">
-						<input type="radio" name="status" value="1" title="个人">
-						<input type="radio" name="status" value="2" title="企业">
-					</div>
-				</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">创建人：</label>
-						<div class="layui-input-block" >
-							<select name="createBy" lay-filter="status" id="selectStaff">
-							</select>
-						</div>
-					</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">创建人：</label>
-					<div class="layui-input-block" >
-						<select name="updateBy" lay-filter="status" id="selectStaff2">
+					<label class="layui-form-label">类型：</label>
+					<div class="layui-input-block" id="leixing">
+						<select name="status" lay-verify="">
+							<option value="1">个人</option>
+							<option value="2">企业</option>
 						</select>
 					</div>
 				</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">修改日期：</label>
-						<div class="layui-input-block">
-							<input type="text" name="upDate" id="vvv" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-						</div>
-					</div>
 					<div class="layui-form-item">
 						<div class="layui-input-block">
 							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="updateA()">立即提交</button>
@@ -83,10 +70,7 @@
                $("input[name='bank']").val(data.data.bank);
                $("input[name='accountNum']").val(data.data.accountNum);
                $("input[name='accountName']").val(data.data.accountName);
-               $("input[name='status'] :checked").val(data.data.status);
-              /* $("input[name='createBy'] option:checked").val(data.data.createBy);
-               $("input[name='upDate']  option:checked").val(data.data.upDate);*/
-
+               $("#leixing").find("option:eq('"+(data.data.status-1)+"')").attr("selected",true);
            },
            error: function () {
                alert("错误！");
@@ -95,25 +79,45 @@
    }
             //修改账户信息
             function updateA() {
-                var accountType =$("form[class='layui-form']").serialize();
-                $.ajax({
-                    url: "/AccountType/updateAccountType",
-                    data: accountType,
-                    dataType: "json",
-                    type: "get",
-                    success: function (data) {
-                        var index=parent.layer.getFrameIndex(window.name);
-                        if (data!=null){
-                            alert("修改保存成功！");
-                            parent.layer.close(index);
-                        }else {
-                            alert("修改失败");
-                        }
-                    },
-                    error: function () {
-                        alert("错误！");
-                    }
-                })
+              var  bank= $("input[name='bank']").val().trim();
+              var accountNum=  $("input[name='accountNum']").val().trim();
+              var accountName=$("input[name='accountName']").val().trim();
+              var leixing=$("#leixing").find("option:selected").val().trim();
+             /* alert(bank);alert(accountNum);alert(accountName);alert(leixing);*/
+              if (bank=="" || bank==null ||bank==undefined){
+					alert("不能为空");
+					return;
+			  } else if (accountNum=="" || accountNum==null||accountNum==undefined){
+                  alert("不能为空");
+                  return;
+			  } else if (""==accountName || null==accountName||accountName==undefined){
+                  alert("不能为空");
+                  return;
+			  } else if (""==leixing || null==leixing || leixing==undefined){
+                  alert("不能为空");
+                  return;
+			  }else{
+                  var accountType =$("form[class='layui-form']").serialize();
+                  $.ajax({
+                      url: "/AccountType/updateAccountType",
+                      data: accountType,
+                      dataType: "json",
+                      type: "get",
+                      success: function (data) {
+                          parent.location.reload();
+                          var index=parent.layer.getFrameIndex(window.name);
+                          if (data!=null){
+                              alert("修改保存成功！");
+                              parent.layer.close(index);
+                          }else {
+                              alert("修改失败");
+                          }
+                      },
+                      error: function () {
+                          alert("错误！");
+                      }
+                  })
+			   }
             }
 
          $(function () {
@@ -152,7 +156,6 @@
 				form.render();
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
-					layer.msg(JSON.stringify(data.field));
 					return false;
 				});
 			});
