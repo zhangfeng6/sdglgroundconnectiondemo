@@ -17,8 +17,6 @@ public class VehicleType {
     private int typeId; // 类型编号
     @Column(name = "carRentalId")
     private Integer carRentalId; // 公司编号（外键，与租赁公司表关联）
-
-
     private Integer passengervolume; // 载客量
     private Integer costprice; // 成本价
     private Integer offer; // 报价
