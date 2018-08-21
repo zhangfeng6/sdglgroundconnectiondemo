@@ -20,12 +20,11 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * 查询所有的景点等级
      * @return
      */
-    List<Dictionaries> listDictionaries();
+    List<Dictionaries> listDictionaries()throws Exception;
 
     /**
-     * 按id查詢
-     * @param valueId
+     * 根据类型id查询车辆类型
      * @return
      */
-    Dictionaries selectById(@Param("valueId")int valueId);
+    Dictionaries getDictionaries(@Param("valueId") Integer valueId)throws Exception;
 }

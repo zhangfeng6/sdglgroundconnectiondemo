@@ -7,8 +7,8 @@
         WHERE typeCode='ATTRACTIONS'
     </select>
 
-    <select id="selectById" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+    <select id="getDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
-        WHERE typeCode='DIET' and valueId=#{valueId}
+        WHERE typeCode='THEROOM' and valueId=#{valueId}
     </select>
 </mapper>

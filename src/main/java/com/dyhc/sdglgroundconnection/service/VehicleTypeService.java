@@ -9,4 +9,10 @@ import org.springframework.stereotype.Service;
  * 车辆类型业务接口
  **/
 public interface VehicleTypeService {
+
+    /**
+     * 根据公司id删除公司下的车辆类型
+     * @param carRentalId
+     */
+    Integer deleteVehicleTypesBycarRentalId(Integer carRentalId)throws Exception;
 }
