@@ -44,7 +44,23 @@ public class DictionariesController {
             e.printStackTrace();
             return  data;
         }
+    }
 
 
+    /**
+     * 获取所有的景点等级
+     * @return
+     */
+    @RequestMapping("listDictionaries1")
+    public ReponseResult listDictionaries1(){
+        try {
+            PageInfo<Dictionaries> pageInfo=dictionariesService.listDictionaries1();
+            ReponseResult<List> data=ReponseResult.ok(pageInfo.getList(),"获取所有的车辆类型成功");
+            return  data;
+        }catch (Exception e){
+            ReponseResult<List> data=ReponseResult.err("获取所有的车辆类型失败");
+            e.printStackTrace();
+            return  data;
+        }
     }
 }

@@ -17,16 +17,7 @@
 			<div class="layui-inline">
 				<input type="text" name="carRentalName" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
 			</div>
-			<div class="layui-inline">
-				<input type="text" name="costprice1" placeholder="请输入最低价格" autocomplete="off" class="layui-input">
-			</div>
-			<div class="layui-inline">-</div>
-			<div class="layui-inline">
-				<input type="text" name="costprice2" placeholder="请输入最高价格" autocomplete="off" class="layui-input">
-			</div>
-			<div class="layui-inline">
-				<input type="text" name="passengervolume" placeholder="请输入载客量" autocomplete="off" class="layui-input">
-			</div>
+
 			<button class="layui-btn layui-btn-normal" lay-submit="search" type="button" onclick="listCarRentals(1)">搜索</button>
 		</div>
 	</form>
@@ -94,29 +85,30 @@
 
 
     $(document).on('click','#insertVehicleType',function(){
-        //var id = $(this).val();
+        var carRentalId = $(this).val();
         layer.open({
             type: 2,
             title: '点击添加车辆公司的车辆类型按钮',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'vehicleType_add.html'
+            content:'vehicleType_add.html?typeId=0&carRentalId='+carRentalId
         });
     });
 
 
     $(document).on('click','#updateVehicleType',function(){
-        //var id = $(this).val();
+        var typeId = $(this).val();
         layer.open({
             type: 2,
             title: '点击修改车辆公司的车辆类型按钮',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'vehicleType_add.html'
+            content:'vehicleType_add.html?carRentalId=0&typeId='+typeId
         });
     });
+
 
 
     var limitcount = 2; // 每页总记录数
@@ -134,12 +126,9 @@
         }
         var content = "";
         var carRentalName=$("input[name='carRentalName']").val();
-        var costprice1=$("input[name='costprice1']").val();
-        var costprice2=$("input[name='costprice2']").val();
-        var passengervolume=$("input[name='passengervolume']").val();
         $.ajax({
             url: "http://localhost:8888/CarRental/listCarRentals",
-            data: {"carRentalName":carRentalName,"costprice1":costprice1,"costprice2":costprice2,"passengervolume":passengervolume,"pageNo":curnum,"pageSize":limitcount},
+            data: {"carRentalName":carRentalName,"pageNo":curnum,"pageSize":limitcount},
             dataType: "json",
             type: "get",
             async: false,
@@ -147,7 +136,7 @@
                 $.each(result.data,function (i,e) {
                     content+="<tr id='node-"+e.carRentalId+"' class='parent collapsed'>" +
                         "<td></td>" +
-                        "<td style='width: 80px;'>"+e.carRentalId+"</td>" +
+                        "<td style='width: 80px;'>"+(i+1)+"</td>" +
                         " <td style='width: 120px;'>"+e.carRentalName+
                         "<a class='layui-btn layui-btn-mini layui-btn-normal showSubBtn' data-id='"+e.carRentalId+"'" +
                         "'>+</a>" +
@@ -159,7 +148,7 @@
                         "<div class='layui-inline'>" +
                         "<button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='"+e.carRentalId+"' data-url='carRental_add.html' type='button' id='updateCarRental' value='"+e.carRentalId+"'><i class='layui-icon'>&#xe642;</i></button>" +
                         " <button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='"+e.carRentalId+"' data-url='carRental_add.html' type='button' onclick='deleteCarRentals("+e.carRentalId+")'><i class='layui-icon'>&#xe640;</i></button>" +
-                        "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='"+e.carRentalId+"' data-url='vehicleType_add.html' type='button' id='insertVehicleType'><i class='layui-icon'>&#xe654;</i></button>" +
+                        "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='"+e.carRentalId+"' data-url='vehicleType_add.html' type='button' id='insertVehicleType' value='"+e.carRentalId+"'><i class='layui-icon'>&#xe654;</i></button>" +
                         "</div>" +
                         "</td>" +
                         "</tr>" +
@@ -172,7 +161,7 @@
                         "<th>报价</th>" +
                         "<th>操作</th>" +
                         "</tr>";
-                    if (e.vehicleTypes==null){
+                    if (e.vehicleTypes==null || e.vehicleTypes==''){
                         content+= "<tr id='type-"+e.carRentalId+"' class='child-node-"+e.carRentalId+" parent collapsed' style='display: none;' parentid='"+e.carRentalId+"'>" +
                             "<td colspan='7' style='text-align: center'>无任何车辆类型</td>" +
                             "<tr>";
@@ -187,8 +176,8 @@
                                 "<td class='hidden-xs'>"+e1.offer+"</td>" +
                                 "<td>" +
                                 "<div class='layui-inline'>" +
-                                " <button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='"+e.carRentalId+"' data-url='vehicleType_add.html' id='updateVehicleType' type='button'><i class='layui-icon'>&#xe642;</i></button>" +
-                                "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn'   data-id='"+e.carRentalId+"' data-url='vehicleType_add.html'><i class='layui-icon'>&#xe640;</i></button>" +
+                                " <button class='layui-btn layui-btn-mini layui-btn-normal  edit-btn' data-id='"+e.carRentalId+"' data-url='vehicleType_add.html' id='updateVehicleType' type='button' value='"+e1.typeId+"'><i class='layui-icon'>&#xe642;</i></button>" +
+                                "<button class='layui-btn layui-btn-mini layui-btn-danger del-btn'   data-id='"+e.carRentalId+"' data-url='vehicleType_add.html' type='button' onclick='deleteVehicleTypeById("+e1.typeId+")'><i class='layui-icon'>&#xe640;</i></button>" +
                                 "</div>" +
                                 "</td>" +
                                 "</tr>";
@@ -224,6 +213,11 @@
         })
     }
 
+
+    /**
+	 * 删除车队公司及下面的车辆类型
+     * @param carRentalId
+     */
     function deleteCarRentals(carRentalId){
         var tishi=window.confirm("确认要删除车队公司及公司的车辆类型吗?");
         if (tishi==true){
@@ -243,6 +237,46 @@
 
 	}
 
+
+    /**
+	 * 根据车辆id删除车辆
+     */
+	function deleteVehicleTypeById(typeId){
+        var tishi=window.confirm("确认要删除该车辆类型吗?");
+        if (tishi==true){
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8888/Vehicletype/deleteVehicleTypeById",
+                data: {"typeId":typeId},
+                dataType: "json",
+                success:function (result1) {
+                    alert(result1.msg);
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    listCarRentals(1);
+                }
+            })
+        }
+	}
+
+    /**
+     * 查询车辆类型
+     */
+    function listDictionaries(){
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8888/Dictionaries/listDictionaries1",
+            data:{},
+            dataType: "json",
+            success:function (result1) {
+                var content="<option value='0'>请选择一个车辆类型</option>";
+                $.each(result1.data,function (i,e) {
+                    content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                })
+                $("select").html(content);
+            }
+        })
+    }
 
     layui.use(['jquery'], function() {
         var $=layui.jquery;

@@ -52,7 +52,7 @@
 		<script src="/js/jquery-3.3.1.min.js"></script>
 
 		<script>
-
+			var carName="";
             getCarrentalById();
 
 			/**
@@ -66,10 +66,14 @@
                     data: {"carRentalId":carRentalId},
                     dataType: "json",
                     success:function (result1) {
-                        $("input[name='carRentalName']").val(result1.data.carRentalName);
-                        $("input[name='phone']").val(result1.data.phone);
-                        $("input[name='contacts']").val(result1.data.contacts);
-                        $("input[name='companyAddress']").val(result1.data.companyAddress);
+                        if (result1.data!=null) {
+                            carName=result1.data.carRentalName;
+                            $("input[name='carRentalName']").val(result1.data.carRentalName);
+                            $("input[name='phone']").val(result1.data.phone);
+                            $("input[name='contacts']").val(result1.data.contacts);
+                            $("input[name='companyAddress']").val(result1.data.companyAddress);
+						}
+
                     }
                 })
             }
@@ -107,8 +111,12 @@
                         data: carrental,
                         dataType: "json",
                         success:function (result1) {
-                            alert(result1.msg);
-                            parent.location.reload();
+                            if(result1.data==1){
+                                alert(result1.msg);
+                                parent.location.reload();
+                            }else {
+                                alert(result1.msg);
+                            }
                         }
                     })
 				}else {
@@ -118,16 +126,39 @@
                         data: carrental,
                         dataType: "json",
                         success:function (result1) {
-                            alert(result1.msg);
-                            parent.location.reload();
+                            if(result1.data==1 || result1.data==0){
+                                alert(result1.msg);
+                                parent.location.reload();
+                            }else {
+                                alert(result1.msg);
+                            }
+
                         }
                     })
 				}
-
-
-
 			}
 
+            $("input[name='carRentalName']").blur(function () {
+                var lala=$(this).val();
+				if (carName==lala) {
+				    return;
+				}else {
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/CarRental/getCarrentalByName",
+                        data: {"carRentalName":lala},
+                        dataType: "json",
+                        success:function (result1) {
+                            if(result1.data.length!=0){
+                                alert("该公司已存在，无法编辑");
+                                return;
+							}
+
+
+                        }
+                    })
+				}
+            })
 
 			layui.use(['form'], function() {
 			var form = layui.form();

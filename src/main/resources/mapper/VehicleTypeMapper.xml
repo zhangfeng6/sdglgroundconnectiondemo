@@ -3,22 +3,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.VehicleTypeMapper">
     <select id="listVehicleTypes" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
-        select * from vehicleType
-        <where>
-            <if test="costprice1!=null">
-                costprice>=#{costprice1}
-            </if>
-            <if test="costprice2!=null">
-                and costprice&lt;=#{costprice2}
-            </if>
-            <if test="passengervolume!=null">
-                and passengervolume=#{passengervolume}
-            </if>
-            and whetherDel=3
-        </where>
+        select  * from VehicleType
+
+        where  whetherDel=3
+
+        order by createDate desc
     </select>
 
-    <delete id="deleteVehicleTypesBycarRentalId">
-        DELETE FROM `vehicletype` WHERE carRentalId=#{carRentalId}
-    </delete>
+
+    <update id="deleteVehicleTypesBycarRentalId">
+        update vehicletype set whetherDel=1 WHERE carRentalId=#{carRentalId}
+    </update>
+
+    <insert id="insertVehicleType">
+        INSERT INTO `vehicletype`(valueId,passengervolume,costprice,offer,typeCode,carRentalId,whetherDel,createBy,createDate)
+        VALUE(#{valueId},#{passengervolume},#{costprice},#{offer},'THEROOM',#{carRentalId},#{whetherDel},#{createBy},#{createDate})
+    </insert>
+    
+    <update id="updateVehicleType">
+        UPDATE vehicletype SET valueId=#{valueId},passengervolume=#{passengervolume},costprice=#{costprice},offer=#{offer},updateBy=#{updateBy},updateDate=#{updateDate} WHERE typeId=#{typeId}
+    </update>
+    
+    <update id="deleteVehicleTypeById">
+        update vehicletype set whetherDel=1 where typeId=#{typeId}
+    </update>
+    
+    <select id="listVehicleTypeByValueId" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
+        select * from vehicleType
+        where carRentalId=#{carRentalId} and valueId=#{valueId} and whetherDel=3
+    </select>
+
 </mapper>

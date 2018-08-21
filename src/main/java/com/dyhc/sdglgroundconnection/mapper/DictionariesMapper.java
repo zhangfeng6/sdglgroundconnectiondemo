@@ -27,4 +27,11 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * @return
      */
     Dictionaries getDictionaries(@Param("valueId") Integer valueId)throws Exception;
+
+
+    /**
+     * 查询所有的车辆类型
+     * @return
+     */
+    List<Dictionaries> listDictionaries1()throws Exception;
 }

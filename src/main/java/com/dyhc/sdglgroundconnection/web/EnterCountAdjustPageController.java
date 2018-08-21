@@ -357,7 +357,11 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/vehicleType_add.html")
-    public String  vehicleType_add() {
+    public String  vehicleType_add(HttpServletRequest request) {
+        String carRentalId= request.getParameter("carRentalId");
+        String typeId= request.getParameter("typeId");
+        request.setAttribute("typeId",typeId);
+        request.setAttribute("carRentalId",carRentalId);
         return "countAdjust/index/vehicleType_add";
     }
     /**
