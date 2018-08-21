@@ -173,4 +173,18 @@ public class TemplateController {
             return err;
         }
     }
+
+    @RequestMapping("/listtemplateall")
+    public ReponseResult listtemplateall(){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(templateService.listtemplateall(),"成功获取所有线路信息！");
+            logger.info("method:removeTemplate 成功获取所有线路信息！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:removeTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

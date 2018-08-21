@@ -17,12 +17,12 @@
                     <input type="text" class="layui-input" placeholder="请输入模板名称！" name="templateName" >
                 </td>
             </tr>
-            <!--点击新增景点-->
+            <!--点击新增线路-->
             <tr id="onClickjd">
                 <td colspan="2"><button class="layui-btn" id="newjd" type="button" style="font-size: 12px" onclick="insertJingdian()">添加线路</button></td>
 
             </tr>
-            <!--点击新增结束-->
+            <!--点击新增线路-->
             <tr  name="template">
                 <td><label class="layui-form-label">线路</label></td>
                 <td>
@@ -85,12 +85,18 @@
     //执行修改操作时给文本框赋值
     function updatefuzhi(mid){
         $.ajax({
-            url:"/Template/gettemplateById",
-            data:{mid:mid},
+            url:"/Tourismtemplate/listtandlById",
+            data:{tid:mid},
             dataType:"json",
             type:"get",
             success:function (result) {
-
+                $("input[name=templateName]").val(result.data['info'].tourismtemplateName);
+                $(result.data["list"]).each(function (i,e) {
+                    if(i>0){
+                        insertJingdian();
+                    }
+                    $("select[name=temline"+(i+1)+"]").val(e.templateId);
+                });
             },
             error:function (err) {
                 alert("系统异常！");
@@ -104,11 +110,15 @@
      */
     function LodingResouce(){
         $.ajax({
-            url: "/Template/getResource",
+            url: "/Template/listtemplateall",
             dataType: "json",
             type: "get",
             success:function (result) {
-
+                var content="<option value='0'>--请选择--</option>";
+                $(result.data).each(function (i,e) {
+                   content+="<option value='"+e.templateId+"'>"+e.templateName+"</option>";
+                });
+                $("select[name=temline1]").html(content);
             },
             error:function (err) {
                 alert(err);
@@ -123,8 +133,8 @@
             return;
         }
         $.ajax({
-            url:"/Template/judgeTemplateName",
-            data:{templateName:name},
+            url:"/Tourismtemplate/jumptempName",
+            data:{temName:name},
             type:"get",
             dataType:"json",
             success:function (result) {
@@ -138,43 +148,21 @@
             }
         });
     }
-    function insertJingdian() {
-        var A=$("tr[name=template]");
-        if(A.length==7){
-            alert("最多可选择七天行程！");
-            return;
-        }
-        var index=parseInt(A.length)+1;
-        var content=$("select[name=temline1]").html();
-        $("#caozuo").prev().after("<tr  name='template'>\n" +
-            "<td><label class='layui-form-label'>线路</label></td>\n" +
-            "<td>\n" +
-            "<select  name='temline"+index+"' lay-verify='required' >\n" +
-            "</select>\n" +
-            "</td>\n" +
-            "<td><span style='font-weight: bold;padding-left: 15px;margin-right: 15px;' name='howmanydays"+index+"'>Day"+index+"</span></td>\n" +
-            "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>"+
-            "</tr>");
-        layui.use(['form', 'layedit', 'laydate','element'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                element=layui.element,
-                laydate = layui.laydate,
-                a;
-            form.render(); //更新全部
-            form.render('select'); //刷新select选择框渲染
-        });
-    }
-
     /**
      * 点击保存按钮 响应方法 新增模板信息
      */
     function  saveTemplate() {
-        var info=$("form").serialize();
+        var temname=$("input[name=templateName]").val();
+        var items=$("tr[name=template]");
+        var info=new Array();
+        var id=$("input[name=mid]").val();
+        for(var i=1;i<=items.length;i++){
+            var xuan=$("select[name=temline"+i+"]").val();
+            info.push(xuan);
+        }
         $.ajax({
-            url:"/Template/saveTemplate",
-            data:info,
+            url:"/Tourismtemplate/saveorupdate",
+            data:{temName:temname,info:info,id:id},
             dataType:"json",
             type:"get",
             success:function (result) {
@@ -191,13 +179,54 @@
             }
         });
     }
+
+    //新增景点信息
+    function insertJingdian() {
+        var A=$("tr[name=template]");
+        if(A.length==7){
+            alert("最多可选择七天行程！");
+            return;
+        }
+        var index=parseInt(A.length)+1;
+        var content=$("select[name=temline1]").html();
+        $("#caozuo").prev().after("<tr  name='template'>\n" +
+            "<td><label class='layui-form-label'>线路</label></td>\n" +
+            "<td>\n" +
+            "<select  name='temline"+index+"' lay-verify='required' >"+content+"</select>\n" +
+            "</td>\n" +
+            "<td><span style='font-weight: bold;padding-left: 15px;margin-right: 15px;' name='howmanydays"+index+"'>Day"+index+"</span></td>\n" +
+            "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>"+
+            "</tr>");
+        layui.use(['form', 'layedit', 'laydate','element'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                element=layui.element,
+                laydate = layui.laydate,
+                a;
+            form.render(); //更新全部
+            form.render('select'); //刷新select选择框渲染
+        });
+    }
+    //删除景点
     function  san(dang){
         $(dang).parent().parent().remove();
+        //删除一个景点后给  景点内的元素进行重新排序
         var items=$("tr[name=template]");
-        for(var i=0;i<items.length;i++){
+        for(var i=1;i<=items.length;i++){
+            var item=$(items).get(i-1);
+            var infos=$(item).text().replace(/[ ]/g,"").replace(/[\r\n]/g,"");
+            var info=infos.substring(infos.length-1,infos.length);
+            if(isNaN(info)){
+                info=infos.substring(infos.length-2,infos.length-1);
+            }
+            if(info!=i){
+                $("select[name=temline"+info+"]").attr("name","temline"+i);
+                $("span[name=howmanydays"+info+"]").text("Day"+i);
+                $("span[name=howmanydays"+info+"]").attr("name","howmanydays"+i);
 
-            var item=$(items).get(i);
-            alert($(item).html());
+            }
+
         }
     }
 </script>

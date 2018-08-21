@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/Tourismtemplate")
@@ -25,6 +26,14 @@ public class TourismtemplateController {
     @Autowired
     private TourismtemplateService tourismtemplateService;
 
+    /**
+     * 获取所有模板信息
+     * @param tempname
+     * @param username
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("/listtourismtemplate")
     public ReponseResult listtourismtemplate(@RequestParam("tempname")String tempname,
                                              @RequestParam("username")String username,
@@ -43,6 +52,11 @@ public class TourismtemplateController {
         }
     }
 
+    /**
+     * 删除模板信息
+     * @param tid
+     * @return
+     */
     @RequestMapping("/removetourism")
     @LogNotes(operationType = "删除",content = "模板")
     public ReponseResult removetourism(@RequestParam("tid")Integer tid){
@@ -59,4 +73,57 @@ public class TourismtemplateController {
         }
     }
 
+    /**
+     * 判断该模板名称是否存在
+     * @param temName
+     * @return
+     */
+    @RequestMapping("/jumptempName")
+    public ReponseResult jumptempName(@RequestParam("temName")String temName){
+        try {
+            ReponseResult<Boolean> data=ReponseResult.ok(tourismtemplateService.getinfoBytemName(temName),"获取判断结果成功！");
+            logger.info("method:removetourism 获取判断信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:listtourismtemplate 系统异常！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
+
+
+    @RequestMapping("/saveorupdate")
+    public ReponseResult saveorupdate(@RequestParam("temName")String temName,
+                                      @RequestParam("info[]")Integer[] info,
+                                      @RequestParam("id")Integer id){
+        try {
+            if(id==null){
+                id=0;
+            }
+            ReponseResult<Integer> data=ReponseResult.ok(tourismtemplateService.savetourismtermplate(temName,info,id),"操作成功！");
+            logger.info("method:saveorupdate 执行添加或修改操作成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:saveorupdate 系统异常！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+
+    }
+
+    @RequestMapping("/listtandlById")
+    public ReponseResult listtandlById(@RequestParam("tid")Integer tid){
+        try {
+            ReponseResult<Map> data=ReponseResult.ok(tourismtemplateService.listtandlBytid(tid),"根据id获取线路信息成功！");
+            logger.info("methor:listtandlById 根据id获取线路信息成功");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:removeTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

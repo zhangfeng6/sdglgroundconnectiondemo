@@ -14,4 +14,9 @@
         </if>
     </select>
 
+
+    <select id="gettemplateByName" resultType="com.dyhc.sdglgroundconnection.pojo.Tourismtemplate">
+        SELECT * FROM `tourismtemplate` WHERE `tourismtemplateName`=#{tempName}
+    </select>
+
 </mapper>

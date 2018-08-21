@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,4 +62,10 @@ public interface TemplateService {
      * @return
      */
     int removetemplate(Integer mid)throws Exception;
+
+    /**
+     * 获取所有线路信息
+     * @return
+     */
+    List<Template> listtemplateall()throws Exception;
 }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TourismtemplateService {
 
@@ -24,4 +25,26 @@ public interface TourismtemplateService {
      * @throws Exception
      */
     int removetourismtemplate(Integer tid)throws Exception;
+
+    /**
+     * 根据模板名称判断该名称是否可用
+     * @param temName
+     * @return
+     * @throws Exception
+     */
+    boolean getinfoBytemName(String temName)throws Exception;
+
+    /**
+     * 新增模板操作
+     * @param temName
+     * @param info
+     * @return
+     */
+    int savetourismtermplate(String temName,Integer[] info,Integer id)throws Exception;
+    /**
+     * 根据模板id获取所有符合条件的派生表信息
+     * @param tid
+     * @return
+     */
+    Map<String,Object> listtandlBytid(Integer tid) throws  Exception;
 }

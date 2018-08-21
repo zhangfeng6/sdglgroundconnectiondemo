@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.TourismandlineMapper;
 import com.dyhc.sdglgroundconnection.mapper.TourismtemplateMapper;
+import com.dyhc.sdglgroundconnection.pojo.Tourismandline;
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
 import com.dyhc.sdglgroundconnection.service.TourismtemplateService;
 import com.github.pagehelper.PageHelper;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -48,6 +49,84 @@ public class TourismtemplateServiceImpl  implements TourismtemplateService {
             return 0;
         }
 
+    }
+
+    /**
+     * 根据模板名称判断该名称是否可用
+     * @param temName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean getinfoBytemName(String temName) throws Exception {
+        if(tourismtemplateMapper.gettemplateByName(temName)!=null){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 添加和修改模板信息
+     * @param temName
+     * @param info
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    @Transactional()
+    public int savetourismtermplate(String temName, Integer[] info,Integer id) throws Exception {
+        try {
+            Tourismtemplate tem=new Tourismtemplate();
+            tem.setTourismtemplateName(temName);
+            if(id==0||id==null){
+                tem.setStatus(0);
+                tem.setCreateBy(1);
+                tem.setCreateDate(new Date());
+                tourismtemplateMapper.insert(tem);
+            }else{
+                tem.setUpdateBy(1);
+                tem.setUpdateDate(new Date());
+                tourismtemplateMapper.updateByPrimaryKeySelective(tem);
+                tourismandlineMapper.removeTourismandline(id);
+            }
+
+            Tourismtemplate tid=tourismtemplateMapper.gettemplateByName(temName);
+            List<Tourismandline> list=new ArrayList<Tourismandline>();
+            for (int i=0; i<info.length;i++) {
+                Tourismandline tandl=new Tourismandline();
+                tandl.setTourismId(tid.getTourismId());
+                tandl.setHowmanydays(i+1);
+                tandl.setTemplateId(info[i]);
+                tandl.setStatus(0);
+                tandl.setCreateBy(1);
+                tandl.setCreateDate(new Date());
+                list.add(tandl);
+            }
+            tourismandlineMapper.insertList(list);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+    }
+
+    /**
+     * 点击修改进行查询
+     * @param tid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map<String,Object> listtandlBytid(Integer tid) throws Exception{
+        Map<String,Object> map=new HashMap<String,Object>();
+        List<Tourismandline> list=tourismandlineMapper.listtlBytid(tid);
+        Tourismtemplate tem=new Tourismtemplate();
+        Tourismtemplate info=tourismtemplateMapper.selectByPrimaryKey(tid);
+        map.put("info",info);
+        map.put("list",list);
+        return map;
     }
 
 }
