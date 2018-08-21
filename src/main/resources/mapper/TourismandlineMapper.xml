@@ -7,4 +7,7 @@
         DELETE FROM `tourismandline` WHERE `tourismId`=#{tid}
     </delete>
 
+    <select id="listtlBytid" resultType="com.dyhc.sdglgroundconnection.pojo.Tourismandline">
+        SELECT * FROM `tourismandline` WHERE `tourismId`=#{tid}
+    </select>
 </mapper>

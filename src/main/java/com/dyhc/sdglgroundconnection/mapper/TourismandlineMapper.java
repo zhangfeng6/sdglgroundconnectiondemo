@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 /**
  * 模板与线路表关联表
@@ -20,4 +22,10 @@ public interface TourismandlineMapper extends CommonMapper<Tourismandline>{
      * @throws Exception
      */
     int removeTourismandline(@Param("tid")Integer tid)throws Exception;
+
+    /**
+     * 获取指定模板的所有线路id
+     * @return
+     */
+    List<Tourismandline> listtlBytid(@Param("tid")Integer tid)throws Exception;
 }

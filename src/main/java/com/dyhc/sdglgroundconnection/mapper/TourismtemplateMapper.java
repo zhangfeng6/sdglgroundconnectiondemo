@@ -22,4 +22,11 @@ public interface TourismtemplateMapper extends CommonMapper<Tourismtemplate>{
      * @throws Exception
      */
     List<Tourismtemplate> listtemplate(@Param("tempName")String tempName, @Param("username")String username)throws Exception;
+
+    /**
+     * 根据模板名称查找信息
+     * @param tempName
+     * @return
+     */
+    Tourismtemplate gettemplateByName(@Param("tempName")String tempName)throws Exception;
 }

@@ -83,7 +83,7 @@
             })
                 var xu=(curnum-1)*limitcount+1;
                 $(e.data).each(function (i, result) {
-                    str+="<tr><td>"+xu+"</td><td>"+result.tourismtemplateName+"</td><td>"+result.userName+"</td><td>"+result.createDate+"</td><td><button  type='button'  value='" + result.templateId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='"+result.tourismId+"' ><i class='layui-icon' onclick=''>&#xe640;</i></button></td></tr>";
+                    str+="<tr><td>"+xu+"</td><td>"+result.tourismtemplateName+"</td><td>"+result.userName+"</td><td>"+result.createDate+"</td><td><button  type='button'  value='" + result.tourismId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='"+result.tourismId+" '><i class='layui-icon' onclick=''>&#xe640;</i></button></td></tr>";
                     xu++;
                 })
                 $('tbody').html(str);
@@ -98,7 +98,7 @@
         $(document).on("click","#insert",function () {
             layer.open({
                 type: 2,
-                title: '新增线路模板',
+                title: '新增模板',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['880px' , '520px'],
@@ -110,7 +110,7 @@
             var id=$(this).val();
             layer.open({
                 type: 2,
-                title: '新增线路模板',
+                title: '修改模板',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['880px' , '520px'],

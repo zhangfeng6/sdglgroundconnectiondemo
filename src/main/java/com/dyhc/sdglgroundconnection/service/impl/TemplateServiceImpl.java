@@ -264,5 +264,10 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
+    @Override
+    public List<Template> listtemplateall()throws Exception {
+        return templateMapper.selectAll();
+    }
+
 
 }
