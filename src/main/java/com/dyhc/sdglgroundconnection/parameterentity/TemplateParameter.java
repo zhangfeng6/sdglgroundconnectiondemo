@@ -4,6 +4,16 @@ package com.dyhc.sdglgroundconnection.parameterentity;
  * 添加模板时对上传的信息进行封装
  */
 public class TemplateParameter {
+    private Integer mid;
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
+    }
+
     private String templateName;
     private Integer hotelId;
     private double costprice;

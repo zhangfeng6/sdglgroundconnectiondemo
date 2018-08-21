@@ -3,4 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.TemplateScenicspotMapper">
 
+    <!--获取指定模板id的景点模板信息-->
+    <select id="listscenicspot" resultType="com.dyhc.sdglgroundconnection.pojo.TemplateScenicspot">
+          SELECT `scenicSpotId`,`costPrice`,`offer` FROM `templatescenicspot` WHERE `templateId`=#{mid}
+    </select>
+
+    <delete id="removescenicspot">
+        DELETE FROM `templatescenicspot` WHERE templateId=#{mid}
+    </delete>
 </mapper>

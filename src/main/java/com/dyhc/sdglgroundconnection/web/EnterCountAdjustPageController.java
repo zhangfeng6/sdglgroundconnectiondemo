@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -388,8 +390,27 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/savetemplate.html")
-    public String  savetemplate() {
+    public String  savetemplate(@RequestParam(value = "mid",required = false)Integer mid,Model model) {
+        if(mid!=null){
+            model.addAttribute("mid",mid);
+        }
         return "countAdjust/index/savetemplate";
     }
 
+    @RequestMapping("/total-template.html")
+    public String  totaltemplate() {
+        return "countAdjust/index/total-template";
+    }
+
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/saveTourism.html")
+    public String  saveTourism(@RequestParam(value = "mid",required = false)Integer mid,Model model) {
+        if(mid!=null){
+            model.addAttribute("mid",mid);
+        }
+        return "countAdjust/index/saveTourism";
+    }
 }
