@@ -34,7 +34,7 @@ public class Guide {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
-    private String value1;
+    private String picturePath; //头像路径
     private String value2;
     private String value3;
 
@@ -179,13 +179,13 @@ public class Guide {
     }
 
     @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    @Column(name = "picturePath")
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     @Basic
@@ -227,7 +227,7 @@ public class Guide {
                 Objects.equals(modifier, guide.modifier) &&
                 Objects.equals(modifiedData, guide.modifiedData) &&
                 Objects.equals(creationDate, guide.creationDate) &&
-                Objects.equals(value1, guide.value1) &&
+                Objects.equals(picturePath, guide.picturePath) &&
                 Objects.equals(value2, guide.value2) &&
                 Objects.equals(value3, guide.value3);
     }
@@ -235,6 +235,6 @@ public class Guide {
     @Override
     public int hashCode() {
 
-        return Objects.hash(guideId, certificate, guideName, username, password, telephone, age, sex, state, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(guideId, certificate, guideName, username, password, telephone, age, sex, state, whetherDel, creater, modifier, modifiedData, creationDate, picturePath, value2, value3);
     }
 }

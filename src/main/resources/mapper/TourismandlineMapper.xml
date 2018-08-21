@@ -3,4 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.TourismandlineMapper">
 
+    <delete id="removeTourismandline">
+        DELETE FROM `tourismandline` WHERE `tourismId`=#{tid}
+    </delete>
+
+    <select id="listtlBytid" resultType="com.dyhc.sdglgroundconnection.pojo.Tourismandline">
+        SELECT * FROM `tourismandline` WHERE `tourismId`=#{tid}
+    </select>
 </mapper>

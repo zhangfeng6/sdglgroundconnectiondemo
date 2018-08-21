@@ -7,6 +7,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 字典业务实现
@@ -21,5 +23,10 @@ public class DictionariesServiceImpl implements DictionariesService {
     public PageInfo<Dictionaries> listDictionaries()throws Exception {
 
         return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries());
+    }
+
+    @Override
+    public PageInfo<Dictionaries> listDictionaries1()throws Exception {
+        return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries1());
     }
 }

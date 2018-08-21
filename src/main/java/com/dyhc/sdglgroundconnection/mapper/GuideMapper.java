@@ -23,4 +23,13 @@ public interface GuideMapper extends CommonMapper<Guide>{
      * @return
      */
     List<Guide> listGuide(@Param("pageNo") Integer pageNo, @Param("PageSize") Integer PageSize,@Param("guideName")  String guideName);
+
+
+    /**
+     * 微信小程序之导游登录
+     * @param username
+     * @param password
+     * @return
+     */
+    Guide login(@Param("username") String username,@Param("password")String password)throws Exception;
 }

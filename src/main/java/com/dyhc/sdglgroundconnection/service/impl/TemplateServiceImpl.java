@@ -14,11 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -64,89 +63,210 @@ public class TemplateServiceImpl implements TemplateService {
     public int savetemplate(TemplateParameter template) throws Exception {
         try {
             Timestamp d = new Timestamp(System.currentTimeMillis());
+            //模板对象
             Template tem=new Template();
             tem.setTemplateName(template.getTemplateName());
             tem.setTemplateContent(template.getTemplateContent());
-            tem.setCreater(1);
-            tem.setCreationDate(d);
-            tem.setWhetherDel(0);
-            templateMapper.insert(tem);
+            Template gettem=null;
+            if(template.getMid()!=null&&template.getMid()!=0){
+                tem.setTemplateId(template.getMid());
+                tem.setModifier(1);
+                tem.setModifiedData(d);
+            }else{
+                tem.setCreater(1);
+                tem.setCreationDate(d);
+                tem.setWhetherDel(0);
+                templateMapper.insert(tem);
+                 gettem=templateMapper.gettemplateByName(template.getTemplateName());
+            }
+            //模板酒店对象
 
-            Template gettem=templateMapper.gettemplateByName(template.getTemplateName());
-            System.out.println("..."+gettem.getTemplateId()+"...");
+
             TemplateHotel temhotel=new TemplateHotel();
-            temhotel.setTemplateHotelId(1);
-            temhotel.setTemplateId(gettem.getTemplateId());
+            if(template.getMid()!=null&&template.getMid()!=0){
+                temhotel.setTemplateId(template.getMid());
+                temhotel.setModifier(1);
+                temhotel.setModifiedData(d);
+            }else{
+                temhotel.setTemplateId(gettem.getTemplateId());
+                temhotel.setCreater(1);
+                temhotel.setCreationDate(d);
+                temhotel.setWhetherDel(0);
+            }
             temhotel.setHotelId(template.getHotelId());
             temhotel.setCostPrice(template.getCostprice());
             temhotel.setOffer(template.getOffer());
-            temhotel.setCreater(1);
-            temhotel.setCreationDate(d);
-            temhotel.setWhetherDel(0);
-            templateHotelMapper.insert(temhotel);
-            List<TemplateScenicspot> temlist=new ArrayList<TemplateScenicspot>();
 
+            List<TemplateScenicspot> temlist=new ArrayList<TemplateScenicspot>();
+            //模板景点对象
             if(template.getCostprice1()!=0){
                 TemplateScenicspot temscenicspot=new TemplateScenicspot();
-                temscenicspot.setTemplateId(gettem.getTemplateId());
                 temscenicspot.setScenicSpotId(template.getScenicSpotId1());
                 temscenicspot.setCostPrice(template.getCostprice1());
                 temscenicspot.setOffer(template.getOffer1());
-                temscenicspot.setCreater(1);
-                temscenicspot.setCreationDate(d);
-                temscenicspot.setWhetherDel(0);
+                if(template.getMid()!=null&&template.getMid()!=0){
+                    temscenicspot.setTemplateId(template.getMid());
+                    temscenicspot.setModifier(1);
+                    temscenicspot.setModifiedData(d);
+                }else{
+                    temscenicspot.setTemplateId(gettem.getTemplateId());
+                    temscenicspot.setCreater(1);
+                    temscenicspot.setCreationDate(d);
+                    temscenicspot.setWhetherDel(0);
+                }
                 temlist.add(temscenicspot);
             }
             if(template.getCostprice2()!=0){
                 TemplateScenicspot temscenicspot=new TemplateScenicspot();
-                temscenicspot.setTemplateId(gettem.getTemplateId());
                 temscenicspot.setScenicSpotId(template.getScenicSpotId2());
                 temscenicspot.setCostPrice(template.getCostprice2());
                 temscenicspot.setOffer(template.getOffer2());
-                temscenicspot.setCreater(1);
-                temscenicspot.setCreationDate(d);
-                temscenicspot.setWhetherDel(0);
+                if(template.getMid()!=null&&template.getMid()!=0){
+                    temscenicspot.setTemplateId(template.getMid());
+                    temscenicspot.setModifier(1);
+                    temscenicspot.setModifiedData(d);
+                }else{
+                    temscenicspot.setTemplateId(gettem.getTemplateId());
+                    temscenicspot.setCreater(1);
+                    temscenicspot.setCreationDate(d);
+                    temscenicspot.setWhetherDel(0);
+                }
                 temlist.add(temscenicspot);
             }
             if(template.getCostprice3()!=0){
                 TemplateScenicspot temscenicspot=new TemplateScenicspot();
-                temscenicspot.setTemplateId(gettem.getTemplateId());
                 temscenicspot.setScenicSpotId(template.getScenicSpotId3());
                 temscenicspot.setCostPrice(template.getCostprice3());
                 temscenicspot.setOffer(template.getOffer3());
-                temscenicspot.setCreater(1);
-                temscenicspot.setCreationDate(d);
-                temscenicspot.setWhetherDel(0);
+                if(template.getMid()!=null&&template.getMid()!=0){
+                    temscenicspot.setTemplateId(template.getMid());
+                    temscenicspot.setModifier(1);
+                    temscenicspot.setModifiedData(d);
+                }else{
+                    temscenicspot.setTemplateId(gettem.getTemplateId());
+                    temscenicspot.setCreater(1);
+                    temscenicspot.setCreationDate(d);
+                    temscenicspot.setWhetherDel(0);
+                }
                 temlist.add(temscenicspot);
             }
             if(template.getCostprice4()!=0){
                 TemplateScenicspot temscenicspot=new TemplateScenicspot();
-                temscenicspot.setTemplateId(gettem.getTemplateId());
+
                 temscenicspot.setScenicSpotId(template.getScenicSpotId4());
                 temscenicspot.setCostPrice(template.getCostprice4());
                 temscenicspot.setOffer(template.getOffer5());
-                temscenicspot.setCreater(1);
-                temscenicspot.setCreationDate(d);
-                temscenicspot.setWhetherDel(0);
+                if(template.getMid()!=null&&template.getMid()!=0){
+                    temscenicspot.setTemplateId(template.getMid());
+                    temscenicspot.setModifier(1);
+                    temscenicspot.setModifiedData(d);
+                }else{
+                    temscenicspot.setTemplateId(gettem.getTemplateId());
+                    temscenicspot.setCreater(1);
+                    temscenicspot.setCreationDate(d);
+                    temscenicspot.setWhetherDel(0);
+                }
                 temlist.add(temscenicspot);
             }
             if(template.getCostprice5()!=0){
                 TemplateScenicspot temscenicspot=new TemplateScenicspot();
-                temscenicspot.setTemplateId(gettem.getTemplateId());
                 temscenicspot.setScenicSpotId(template.getScenicSpotId5());
                 temscenicspot.setCostPrice(template.getCostprice5());
                 temscenicspot.setOffer(template.getOffer5());
-                temscenicspot.setCreater(1);
-                temscenicspot.setCreationDate(d);
-                temscenicspot.setWhetherDel(0);
+                if(template.getMid()!=null&&template.getMid()!=0){
+                    temscenicspot.setTemplateId(template.getMid());
+                    temscenicspot.setModifier(1);
+                    temscenicspot.setModifiedData(d);
+                }else{
+                    temscenicspot.setTemplateId(gettem.getTemplateId());
+                    temscenicspot.setCreater(1);
+                    temscenicspot.setCreationDate(d);
+                    temscenicspot.setWhetherDel(0);
+                }
                 temlist.add(temscenicspot);
             }
-            templateScenicspotMapper.insertList(temlist);
+
+            if(template.getMid()!=null&&template.getMid()!=0){
+                System.out.println("..."+temhotel.getHotelId()+"...");
+                templateMapper.updateByPrimaryKeySelective(tem);
+                templateHotelMapper.updatetemhotel(temhotel);
+                templateScenicspotMapper.removescenicspot(template.getMid());
+                templateScenicspotMapper.insertList(temlist);
+            }else{
+
+                templateHotelMapper.insert(temhotel);
+                templateScenicspotMapper.insertList(temlist);
+            }
             return 1;
         }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             e.printStackTrace();
             return 0;
         }
+    }
+
+    /**
+     * 根据模板信息表的主键id进行查询
+     * @param tid   模板对象主键id
+     * @return   返回符合条件的线路对象
+     * @throws Exception  抛出异常
+     */
+    @Override
+    public Map<String,Object> gettemplateById(Integer tid) throws Exception {
+        Map<String,Object> map=new HashMap<String,Object>();
+        //创建参数类对象
+        TemplateParameter templateParameter=new TemplateParameter();
+        //根据id查询线路模板对象
+        Template template=templateMapper.selectByPrimaryKey(tid);
+        //数据填充
+        templateParameter.setTemplateName(template.getTemplateName());
+        templateParameter.setTemplateContent(template.getTemplateContent());
+        TemplateHotel hotelpm=new TemplateHotel();
+        hotelpm.setTemplateId(tid);
+        TemplateHotel temhotel=templateHotelMapper.gettemplatehotelbytemid(tid);
+        templateParameter.setHotelId(temhotel.getHotelId());
+        templateParameter.setCostprice(temhotel.getCostPrice());
+        templateParameter.setOffer(temhotel.getOffer());
+        List<TemplateScenicspot> temscenicspot=templateScenicspotMapper.listscenicspot(tid);
+        map.put("parameter",templateParameter);
+        map.put("scenicspot",temscenicspot);
+        return map;
+    }
+
+    /**
+     * 修改模板信息表中的数据
+     * @param template  模板对象
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updatetemplate(Template template) throws Exception {
+        return templateMapper.updateByPrimaryKeySelective(template);
+    }
+
+    /**
+     * 删除线路模板信息
+     * @param mid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int removetemplate(Integer mid) throws Exception {
+        try {
+            templateMapper.deleteByPrimaryKey(mid);
+            templateHotelMapper.removehotel(mid);
+            templateScenicspotMapper.removescenicspot(mid);
+            return 1;
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Template> listtemplateall()throws Exception {
+        return templateMapper.selectAll();
     }
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,6 +10,7 @@
 <div id="content">
     <form class="layui-form layui-form-pane">
         <table border="0" cellspacing="0" cellpadding="0">
+            <tr><td><input type="hidden" name="mid" th:value="${mid}"></td></tr>
             <tr>
                 <td><label class="layui-form-label">线路</label></td>
                 <td>
@@ -40,7 +41,7 @@
 
             <!--点击新增景点-->
             <tr id="onClickjd">
-                <td colspan="2"><button class="layui-btn" type="button" style="font-size: 12px" onclick="insertJingdian(this)">添加景点+</button></td>
+                <td colspan="2"><button class="layui-btn" id="newjd" type="button" style="font-size: 12px" onclick="insertJingdian()">添加景点+</button></td>
 
             </tr>
             <!--点击新增结束-->
@@ -74,8 +75,13 @@
 <script type="text/javascript" src="/layui.js"></script>
 <script type="text/javascript" src="/js/baojiadan.js"></script>
 <script type="text/javascript">
+    var xlName="";
     $(function() {
         LodingResouce();
+        var mid=$("input[name=mid]").val();
+        if(mid!=null&&mid!=0){
+            updatefuzhi(mid);
+        }
         $("input[name=templateName]").blur(function () {
             judgeName();
         });
@@ -87,11 +93,9 @@
          layedit = layui.layedit;
          element=layui.element;
          laydate = layui.laydate;
-
         form.on('select(hotel)',function (data) {
                 getHotelByid(data.value);
         });
-
 
         form.on('select(jingd1)',function(data){
             getScenicByid(data.value,1);
@@ -124,7 +128,37 @@
         form.render('select');
     });
 
-    
+
+    //执行修改操作时给文本框赋值
+    function updatefuzhi(mid){
+        $.ajax({
+            url:"/Template/gettemplateById",
+            data:{mid:mid},
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                xlName=result.data["parameter"].templateName;
+                $("input[name=templateName]").val(result.data["parameter"].templateName);
+                $("input[name=costPrice]").val(result.data["parameter"].costprice);
+                $("input[name=offer]").val(result.data["parameter"].offer);
+                $("textarea").text(result.data["parameter"].templateContent);
+                $("select[name=hotelId]").val(result.data["parameter"].hotelId);
+                getHotelByid(result.data["parameter"].hotelId);
+                $(result.data["scenicspot"]).each(function (i,e) {
+                    if(i>0){
+                        insertJingdian();
+                    }
+                    $("select[name=scenicSpotId"+(i+1)+"]").val(e.scenicSpotId);
+                    $("input[name=costprice"+(i+1)+"]").val(e.costPrice);
+                    $("input[name=offer"+(i+1)+"]").val(e.offer);
+                });
+            },
+            error:function (err) {
+                alert("系统异常！");
+            }
+        });
+    }
+
     /**
      * 加载下拉框资源
      * @constructor
@@ -155,6 +189,9 @@
     //判断用户输入的模板名称是否存在  存在则情况文本框提示用户重新输入
     function judgeName() {
          var name=$("input[name=templateName]").val();
+         if(xlName==name){
+            return;
+         }
          $.ajax({
              url:"/Template/judgeTemplateName",
              data:{templateName:name},
@@ -171,7 +208,7 @@
              }
          });
     }
-    function insertJingdian(onClickjd) {
+    function insertJingdian() {
         var A=$("tr[name=scenic]");
         if(A.length==5){
             alert("最多可选择五个景点！");
@@ -179,7 +216,7 @@
         }
         var index=parseInt(A.length)+1;
         var content=$("select[name=scenicSpotId1]").html();
-        $(onClickjd).parent().parent().next().after("<tr name='scenic'>"+
+        $("#newjd").parent().parent().next().after("<tr name='scenic'>"+
             "<td><label class='layui-form-label'>景点</label></td>"+
             "<td>"+
             "<select name='scenicSpotId"+index+"' lay-verify='required' lay-filter='jingd"+index+"'>"+content+"</select>"+
@@ -217,9 +254,9 @@
                     parent.location.reload();
                     var index=parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
-                    alert("添加成功！");
+                    alert("操作成功！");
                 }else{
-                    alert("...");
+                    alert("系统异常，请稍后重试！");
                 }
             },error:function (err) {
                 alert(err);
@@ -269,6 +306,7 @@
             data:{id:id},
             dataType: "json",
             type: "get",
+            async:false,
             success:function (result) {
                 var xingji="";
                 var jieshao="<span style='font-size: 16px;font-weight:bold'>"+result.data.hotelName+"</span>" +

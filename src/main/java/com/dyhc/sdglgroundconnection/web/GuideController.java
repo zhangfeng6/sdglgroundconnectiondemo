@@ -105,5 +105,30 @@ public class GuideController{
         }
     }
 
+    /**
+     * 微信登录
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping("guideLogin")
+    public ReponseResult guideLogin(String username,String password){
+        try {
+            Guide guide=guideService.login(username,password);
+            if (guide==null){
+                logger.error("method:login 微信登录失败");
+                return ReponseResult.err("登录失败");
+            }else {
+                logger.info("method:login 微信登录成功");
+                return ReponseResult.ok(guide,"登录成功");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:login 微信登录失败");
+            return ReponseResult.err("登录失败");
+        }
+    }
+
 
 }

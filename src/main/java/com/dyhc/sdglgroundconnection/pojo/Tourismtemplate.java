@@ -2,10 +2,7 @@ package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
@@ -24,6 +21,16 @@ public class Tourismtemplate {
     @Column(name = "status")
     private Integer status; // 是否删除（1代表已删除，0代表未删除）
 
+    @Transient
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     @Column(name = "createBy")
     private Integer createBy; // 创建人 （外键，与人员表关联）

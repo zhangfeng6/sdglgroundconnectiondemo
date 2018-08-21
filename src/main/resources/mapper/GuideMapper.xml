@@ -9,4 +9,8 @@
             and guideName like concat('%',#{guideName},'%')
         </if>
     </select>
+    
+    <select id="login" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
+        select * from guide where username=#{username} and password=#{password}
+    </select>
 </mapper>

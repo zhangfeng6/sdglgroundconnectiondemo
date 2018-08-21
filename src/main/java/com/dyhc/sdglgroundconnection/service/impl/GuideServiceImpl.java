@@ -109,4 +109,9 @@ public class GuideServiceImpl implements GuideService {
         }
         return  guide;
     }
+
+    @Override
+    public Guide login(String username, String password) throws Exception {
+        return guideMapper.login(username,password);
+    }
 }
