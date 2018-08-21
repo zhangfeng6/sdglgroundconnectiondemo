@@ -113,6 +113,7 @@ public  ReponseResult updateShowAll(@RequestParam("accountTypeId") Integer accou
  @LogNotes(operationType="账户新增",content="新增账户")
  @RequestMapping("/saveAccountType")
  public  ReponseResult saveAccountType(AccountType accountType){
+     System.out.println("新增账户");
      try {
          Integer saveAccountType=accountTypeService.saveAccountType(accountType);
          logger.info("method:saveAccountType 新增账户类型成功");

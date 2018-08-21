@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +39,33 @@ public class EnterCountAdjustPageController {
     public String  countAdjustIndex() {
         return "countAdjust/index/count-Adjust-Index";
     }
+    /**
+     * 进入类型管理单据类型管理页面
+     * @return
+     */
+    @RequestMapping("/BillType-manage.html")
+    public String  BillTypemanage() {
+        return "countAdjust/index/BillType-manage";
+    }
+    /**
+     * 进入类型管理单据类型管理页面新增
+     * @return
+     */
+    @RequestMapping("/BillType-Save.html")
+    public String  BillTySave() {
+        System.out.println("进入新增页面");
+        return "countAdjust/index/BillType-Save";
+    }
+    /**
+     * 进入类型管理单据类型管理页面修改
+     * @return
+     */
+    @RequestMapping("/BillType-Update.html")
+    public String  BillTypeUpdate(Integer billTypeId,HttpServletRequest request) {
+        request.setAttribute("billTypeId",billTypeId);
+        return "countAdjust/index/BillType-Update";
+    }
+
     /**
      * 进入管理信息
      * @return
@@ -394,8 +423,27 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/savetemplate.html")
-    public String  savetemplate() {
+    public String  savetemplate(@RequestParam(value = "mid",required = false)Integer mid,Model model) {
+        if(mid!=null){
+            model.addAttribute("mid",mid);
+        }
         return "countAdjust/index/savetemplate";
     }
 
+    @RequestMapping("/total-template.html")
+    public String  totaltemplate() {
+        return "countAdjust/index/total-template";
+    }
+
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/saveTourism.html")
+    public String  saveTourism(@RequestParam(value = "mid",required = false)Integer mid,Model model) {
+        if(mid!=null){
+            model.addAttribute("mid",mid);
+        }
+        return "countAdjust/index/saveTourism";
+    }
 }

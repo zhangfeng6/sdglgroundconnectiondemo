@@ -2,5 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.BillTypeMapper">
-
+    <!--查询单据类型表-->
+   <select id="ShowAllBillType" resultMap="billType">
+       SELECT  bill.*,sta.theUserName from billtype  bill, staff sta WHERE bill.createBy=sta.staffId AND  bill.whetherDel=0
+       <if test="typeName!=null and typeName!=''">
+           and typeName like concat('%',#{typeName},'%')
+       </if>
+   </select>
+<!--判断单据类型名称-->
+<select id="equalBillType" resultType="com.dyhc.sdglgroundconnection.pojo.BillType">
+SELECT * FROM billtype WHERE typeName=#{typeName} and whetherDel=0
+</select>
+    <!--查询单据类型信息的resultMap-->
+    <resultMap id="billType" type="com.dyhc.sdglgroundconnection.pojo.BillType">
+        <id column="billTypeId" property="billTypeId"/>
+        <association property="staff" javaType="com.dyhc.sdglgroundconnection.pojo.Staff">
+            <id column="staffId" property="staffId"/>
+        </association>
+    </resultMap>
 </mapper>

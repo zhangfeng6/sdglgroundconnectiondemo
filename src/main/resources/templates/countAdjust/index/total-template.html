@@ -8,25 +8,24 @@
 </head>
 <body>
 <div id="pTable" class="page-content-wrap" >
-        <div class="layui-form-item">
-            <div class="layui-inline tool-btn">
-                <button class='layui-btn layui-btn-small layui-btn-normal add-btn' id='insert' type='button'><i class='layui-icon'>&#xe654;</i></button>
-            </div>
-            <div class="layui-inline">
-                <input type="text" id="jiuN" name="tempname" placeholder="请输入模板名称" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-inline">
-                <input type="text" id="jiuA" name="username" placeholder="请输入创建人" autocomplete="off" class="layui-input">
-            </div>
-            <input type="button" class="layui-btn layui-btn-normal" lay-submit="search" value="搜索" onclick="loadData(1)">
+    <div class="layui-form-item">
+        <div class="layui-inline tool-btn">
+            <button class='layui-btn layui-btn-small layui-btn-normal add-btn' id='insert' type='button'><i class='layui-icon'>&#xe654;</i></button>
         </div>
+        <div class="layui-inline">
+            <input type="text" id="jiuN" name="tempname" placeholder="请输入模板名称" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline">
+            <input type="text" id="jiuA" name="username" placeholder="请输入创建人" autocomplete="off" class="layui-input">
+        </div>
+        <input type="button" class="layui-btn layui-btn-normal" lay-submit="search" value="搜索" onclick="loadData(1)">
+    </div>
     <div id="table-list">
         <table class="layui-table" lay-skin="line">
             <thead>
             <tr>
                 <th class="">序号</th>
                 <th class="">模板名称</th>
-                <th class="">行程内容</th>
                 <th class="">创建人</th>
                 <th class="">创建时间</th>
                 <th>操作</th>
@@ -58,8 +57,8 @@
         var tempname=$("input[name=tempname]").val();
         var username=$("input[name=username]").val();
         $.ajax({
-            url: "/Template/listTemplate",
-            data: {pageNo:curnum,pageSize:limitcount,tempName:tempname,username:username},
+            url: "/Tourismtemplate/listtourismtemplate",
+            data: {pageNo:curnum,pageSize:limitcount,tempname:tempname,username:username},
             dataType: "json",
             type: "get",
             success: function (e) {
@@ -81,10 +80,10 @@
                             }
                         }
                     })
-                })
+            })
                 var xu=(curnum-1)*limitcount+1;
                 $(e.data).each(function (i, result) {
-                    str+="<tr><td>"+xu+"</td><td>"+result.templateName+"</td><td>"+result.templateContent+"</td><td>"+result.staff.theUserName+"</td><td>"+result.creationDate+"</td><td><button  type='button'  value='" + result.templateId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='"+result.templateId+"' ><i class='layui-icon' onclick=''>&#xe640;</i></button></td></tr>";
+                    str+="<tr><td>"+xu+"</td><td>"+result.tourismtemplateName+"</td><td>"+result.userName+"</td><td>"+result.createDate+"</td><td><button  type='button'  value='" + result.templateId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='"+result.tourismId+"' ><i class='layui-icon' onclick=''>&#xe640;</i></button></td></tr>";
                     xu++;
                 })
                 $('tbody').html(str);
@@ -103,7 +102,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['880px' , '520px'],
-                content: 'savetemplate.html'
+                content: 'saveTourism.html'
             });
         });
         //列表添加
@@ -115,7 +114,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['880px' , '520px'],
-                content: 'savetemplate.html?mid='+id
+                content: 'saveTourism.html?mid='+id
             });
         });
         //列表删除
@@ -123,7 +122,7 @@
             var id = $(this).attr('data-id');
             if(confirm("确认要删除吗？")){
                 $.ajax({
-                    url:"/Template/removetemplate",
+                    url:"/Tourismtemplate/removetourism",
                     data:{tid:id},
                     dataType:"json",
                     type:"get",

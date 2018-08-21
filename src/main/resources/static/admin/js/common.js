@@ -71,35 +71,36 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 		dialog.tips('批量删除', '.delBtn');
 
 	})	
-	//列表添加
-	$('#table-list').on('click', '.add-btn', function() {
-		var url=$(this).attr('data-url');
-		//将iframeObj传递给父级窗口
-		parent.page("菜单添加", url, iframeObj, w = "700px", h = "620px");
-		return false;
-	})
-	//列表删除
-	$('#table-list').on('click', '.del-btn', function() {
-		var url=$(this).attr('data-url');
-		var id = $(this).attr('data-id');
-		dialog.confirm({
-			message:'您确定要进行删除吗？',
-			success:function(){
-				layer.msg('确定了')
-			},
-			cancel:function(){
-				layer.msg('取消了')
-			}
-		})
-		return false;
-	})
+//列表添加
+    /*	$('#table-list').on('click', '.add-btn', function() {
+        var url=$(this).attr('data-url');
+        //将iframeObj传递给父级窗口
+        parent.page("菜单添加", url, iframeObj, w = "700px", h = "620px");
+        return false;
+    })
+    //列表删除
+    $('#table-list').on('click', '.del-btn', function() {
+        var url=$(this).attr('data-url');
+        var id = $(this).attr('data-id');
+        dialog.confirm({
+            message:'您确定要进行删除吗？',
+            success:function(){
+                layer.msg('确定了')
+            },
+            cancel:function(){
+                layer.msg('取消了')
+            }
+        })
+        return false;
+    })*/
 	//列表跳转
-	$('#table-list,.tool-btn').on('click', '.go-btn', function() {
+/*	$('#table-list,.tool-btn').on('click', '.go-btn', function() {
+		alert("668");
 		var url=$(this).attr('data-url');
 		var id = $(this).attr('data-id');
 		window.location.href=url+"?id="+id;
 		return false;
-	})
+	})*/
 	//编辑栏目
 	$('#table-list').on('click', '.edit-btn', function() {
 		var That = $(this);
