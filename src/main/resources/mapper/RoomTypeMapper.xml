@@ -6,4 +6,9 @@
     <select id="RoomTypeShowAll" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
          select * from RoomType where  hotelId=#{hotelId}
     </select>
+
+    <!--删除酒店下面的房间：贾晓亮-->
+    <update id="removeRoomType">
+         UPDATE  RoomType SET hotelId = 0 WHERE typeId=#{hotelId}
+    </update>
 </mapper>

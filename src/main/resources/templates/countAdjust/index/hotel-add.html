@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css"/>
 	</head>
 	<body>
-	<form class="layui-form column-content-detail">
+	<form class="layui-form column-content-detail" id="uhb">
 					<div class="layui-tab">
 						<ul class="layui-tab-title">
 							<li class="layui-this">酒店信息</li>
@@ -18,82 +18,64 @@
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
 								<div class="layui-form-item">
-									<label class="layui-form-label">酒店编号：</label>
-									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入酒店编号" autocomplete="off" class="layui-input">
-									</div>
-								</div>
-								<div class="layui-form-item">
 									<label class="layui-form-label">名称：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+										<input type="text" name="hotelName" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">星级：</label>
 									<div class="layui-input-block">
-										<i class="layui-icon-rate">&#xe67b;</i>
-										<i class="layui-icon-rate">&#xe67b;</i>
-										<i class="layui-icon-rate">&#xe67b;</i>
-										<i class="layui-icon-rate">&#xe67b;</i>
-										<i class="layui-icon-rate">&#xe67b;</i>
+										<input type="number" name="starHotel" max="5" required lay-verify="required" placeholder="请输入星级" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">地址：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
+										<input type="text" name="hotelAddress" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">图片地址：</label>
 									<div class="layui-input-block">
-										<i class="layui-icon ">&#xe67c;</i>上传图片
+										<input type="file" value="" name="picturePath" id="file">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">是否提供早餐：</label>
 									<div class="layui-input-block">
-										<input type="radio" name="radio" title="是" checked="checked" />
-										<input type="radio" name="radio" title="否"/>
+										<input type="radio" name="breakfast" title="是" checked="checked" value="0" />
+										<input type="radio" name="breakfast" title="否" value="1"/>
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系人：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入联系人" autocomplete="off" class="layui-input">
+										<input type="text" name="contacts" required lay-verify="required" placeholder="请输入联系人" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系电话：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+										<input type="text" name="phone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">成本价：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入成本价" autocomplete="off" class="layui-input">
+										<input type="text" name="costprice" required lay-verify="required" placeholder="请输入成本价" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">报价：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入报价" autocomplete="off" class="layui-input">
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">备注：</label>
-									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入备注" autocomplete="off" class="layui-input">
+										<input type="text" name="offer" required lay-verify="required" placeholder="请输入报价" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">酒店描述：</label>
 									<div class="layui-input-block">
-										<textarea name="" placeholder="请输入酒店描述">
-										
-										</textarea>
+										<input type="text" name="hotelDescribe" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 							</div>
@@ -101,14 +83,63 @@
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" type="button" onclick="saveHotel()">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
 				</form>
-	<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/layui.js"></script>
+	<script src="/js/jquery-1.8.2.min.js"></script>
 	<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+
+    $(function () {
+		
+    })
+
+	 function saveHotel(){
+        alert("新增酒店");
+         var DataDeal={
+             //将从form中通过$('#refer').serialize()获取值转成json
+             formToJson:function (data) {
+                 data=data.replace(/&/g,"\",\"");
+                 data=data.replace(/=/g,"\":\"");
+                 data="{\""+data+"\"}";
+                 return data;
+             }
+         };
+         var form = $("#uhb").serialize();
+         form=decodeURIComponent(form,true);//防止乱码
+         var jsondata=DataDeal.formToJson(form)
+         var savePath="E://图片";//图片路径
+         var fileObj=document.getElementById("file").files[0];//获取文件对象
+         //formData对象，用来序列二进制数据
+         var forData=new FormData();
+         forData.append("picturePath",fileObj);
+         forData.append("savePath",savePath);
+         forData.append("form",jsondata);
+        $.ajax({
+			url:"/Hotel/saveHotel",
+			data:forData,
+			dataType:"json",
+			type:"POST",
+            cache: false, // 上传文件不需要缓存
+            processData: false, // 对参数进行序列化处理
+            contentType: false,
+            success:function (data) {
+                var index=parent.layer.getFrameIndex(window.name);
+				if (data!=null){
+					alert("酒店新增成功");
+                    parent.location.reload(index);
+				}
+            },
+			error:function () {
+				alert("错误");
+            }
+		})
+	 }
+
+
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
 				var form = layui.form(),
 					layer = layui.layer,

@@ -25,14 +25,21 @@ public class Hotel {
     private String hotelAddress; // 地址
     @Column(name = "picturePath")
     private String picturePath; // 图片地址
+    @Column(name = "breakfast")
     private Integer breakfast; // 是否提供早餐
+    @Column(name = "contacts")
     private String contacts; // 联系人
+    @Column(name = "phone")
     private String phone; // 联系电话
     @Column(name = "hotelDescribe")
     private String hotelDescribe; // 酒店描述
+    @Column(name = "remarks")
     private String remarks; // 备注
+    @Column(name = "costprice")
     private Integer costprice; // 成本价
+    @Column(name = "offer")
     private Integer offer; // 报价
+    @Column(name = "status")
     private Integer status; // 状态（1为可用，0为禁用）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）

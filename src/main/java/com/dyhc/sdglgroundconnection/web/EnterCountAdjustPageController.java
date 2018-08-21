@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -28,7 +29,47 @@ public class EnterCountAdjustPageController {
     private ShoppingService shoppingService;
     @Autowired
     private ScenicspotService scenicspotService;
-    
+
+
+
+    /**
+     *进入修改酒店页面
+     * @return
+     */
+    @RequestMapping("hotel-update")
+    public  String abcdefg(Integer hotelId,HttpServletRequest request){
+        request.setAttribute("hotelId",hotelId);
+        return "countAdjust/index/hotel-update";
+    }
+
+
+    /**
+     *进入新增酒店跳页面
+     * @return
+     */
+    @RequestMapping("hotel-add")
+    public  String hotelUpdate(){
+     return "countAdjust/index/hotel-add";
+    }
+    /**
+     *进入新增酒店
+     * @return
+     */
+    @RequestMapping("hotel-roomType-add")
+    public  String addRoomType(Integer hotelId,HttpServletRequest request){
+        request.setAttribute("hotelId",hotelId);
+        return "countAdjust/index/hotel-roomType-add";
+    }
+    /**
+     *进入修改酒店
+     * @return
+     */
+    @RequestMapping("hotel-roomType-update")
+    public  String UpdateRoomType(Integer typeId,HttpServletRequest request){
+        request.setAttribute("typeId",typeId);
+        return "countAdjust/index/hotel-roomType-update";
+    }
+
     /**
      * 进入计调首页
      * @return
