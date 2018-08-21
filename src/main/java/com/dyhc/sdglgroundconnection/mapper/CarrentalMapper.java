@@ -19,8 +19,9 @@ public interface CarrentalMapper extends CommonMapper<Carrental>{
      * 根据公司名称模糊查询公司信息
      * @param carRentalName
      * @return
+     * @throws Exception
      */
-    List<Carrental> listCarRentals(@Param("carRentalName") String carRentalName)throws Exception;
+    List<Carrental> listCarRentals(@Param("carRentalName") String carRentalName);
 
 
     /**
@@ -34,5 +35,13 @@ public interface CarrentalMapper extends CommonMapper<Carrental>{
      * @param carRentalId
      */
     void deleteCarRentalBycarRentalId(@Param("carRentalId") Integer carRentalId)throws Exception;
+
+
+    /**
+     * 查询是否有相同名称的公司
+     * @param carRentalName
+     * @return
+     */
+    List<Carrental> getCarrentalByName(@Param("carRentalName") String carRentalName);
 
 }

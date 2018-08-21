@@ -9,6 +9,7 @@ import com.dyhc.sdglgroundconnection.pojo.VehicleType;
 import com.dyhc.sdglgroundconnection.service.CarrentalService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,31 +32,32 @@ public class CarrentalServiceImpl implements CarrentalService {
     @Autowired
     private VehicleTypeMapper VehicleTypeMapper;
 
-    @Override
-    public PageInfo<Carrental> listCarRentals(String carRentalName, Integer costprice1, Integer costprice2, Integer passengervolume, Integer pageNo, Integer pageSize) throws  Exception{
-        PageHelper.startPage(pageNo, pageSize, true);
-        List<Carrental> list1=carrentalMapper.listCarRentals(carRentalName);
-        List<VehicleType> list2=VehicleTypeMapper.listVehicleTypes(costprice1,costprice2,passengervolume);
 
+    public PageInfo<Carrental> listCarRentals(String carRentalName, Integer pageNo, Integer pageSize) throws  Exception{
+
+        PageHelper.startPage(pageNo, pageSize, true);
+         List<Carrental>  list1=carrentalMapper.listCarRentals(carRentalName);
+        List<VehicleType> list2=VehicleTypeMapper.listVehicleTypes();
         for (Carrental c:list1) {
-            List<VehicleType> a=new ArrayList<VehicleType>();
+            List<VehicleType> a=new ArrayList<>();
             for (VehicleType v:list2){
-                if (c.getCarRentalId()==v.getCarRentalId()){
+                if (v.getCarRentalId()==c.getCarRentalId()){
                     a.add(v);
-                    c.setVehicleTypes(a);
-                    Dictionaries dictionaries=dictionariesMapper.getDictionaries(v.getValueId());
-                    v.setDictionaries(dictionaries);
+                    v.setDictionaries(dictionariesMapper.getDictionaries(v.getValueId()));
                 }
             }
+            c.setVehicleTypes(a);
         }
         return new PageInfo<>(list1);
+
+
     }
 
     @Override
     public Integer insertCarRental(Carrental carrental)throws Exception {
         try {
-            carrentalMapper.insertCarRental(carrental);
-            return 1;
+                carrentalMapper.insertCarRental(carrental);
+                return 1;
         }catch (Exception e){
             e.printStackTrace();
             return 0;
@@ -69,7 +71,13 @@ public class CarrentalServiceImpl implements CarrentalService {
 
     @Override
     public Integer updateCarRental(Carrental carrental) throws Exception {
-        return carrentalMapper.updateByPrimaryKeySelective(carrental);
+        try {
+            carrentalMapper.updateByPrimaryKeySelective(carrental);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
@@ -81,5 +89,10 @@ public class CarrentalServiceImpl implements CarrentalService {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public List<Carrental> getCarrentalByName(String carRentalName) {
+        return carrentalMapper.getCarrentalByName(carRentalName);
     }
 }

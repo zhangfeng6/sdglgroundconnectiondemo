@@ -9,6 +9,12 @@
 
     <select id="getDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
-        WHERE typeCode='THEROOM' and valueId=#{valueId}
+        WHERE typeCode='VEHICLE' and valueId=#{valueId}
+    </select>
+
+
+    <select id="listDictionaries1" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM `dictionaries`
+        WHERE typeCode='VEHICLE'
     </select>
 </mapper>

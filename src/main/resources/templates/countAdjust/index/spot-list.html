@@ -97,7 +97,7 @@
                 $.each(result.data,function (i,e) {
                     content+="<tr id='node-"+e.scenicSpotId+"' class='parent collapsed'><td>" +
                         "<a class='layui-btn layui-btn-mini layuis-btn-normal showSubBtn' data-id='"+e.scenicSpotId+"'>+</a></td>" +
-                        "<td class=''>"+e.scenicSpotId+"</td>" +
+                        "<td class=''>"+(i+1)+"</td>" +
                         "<td class=''>"+e.scenicSpotName+"</td>";
                     if (e.parentId==0){
                         content+="<td class=''>无</td>";

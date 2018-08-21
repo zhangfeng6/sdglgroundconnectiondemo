@@ -18,7 +18,15 @@
         INSERT INTO `carrental`(carRentalName,phone,contacts,companyAddress,whetherDel,createBy,createDate) VALUE(#{carRentalName},#{phone},#{contacts},#{companyAddress},#{whetherDel},#{createBy},#{createDate})
     </insert>
 
-    <delete id="deleteCarRentalBycarRentalId">
-        DELETE FROM `carrental` WHERE carRentalId=#{carRentalId}
-    </delete>
+    <update id="deleteCarRentalBycarRentalId">
+        update carrental set whetherDel=1 WHERE carRentalId=#{carRentalId}
+    </update>
+    
+    <select id="getCarrentalByName" resultType="com.dyhc.sdglgroundconnection.pojo.Carrental">
+        select * from carrental
+        where carRentalName=#{carRentalName}
+    </select>
+
+
+
 </mapper>
