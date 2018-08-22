@@ -46,5 +46,62 @@ public interface HotelService {
      */
     List<RoomType> roomTypeList(Integer hotelId) throws  Exception;
 
+    /**
+     * 新增酒店信息
+     * @param hotel
+     * @return
+     */
+    Integer saveHotel(Hotel hotel) throws  Exception;
 
+    /**
+     * 修改酒店信息
+     * @param hotel
+     * @return
+     * @throws Exception
+     */
+    Integer updateHotel(Hotel hotel)throws Exception;
+
+
+    /**
+     * 删除酒店下房间
+     * @param hotelId
+     * @return
+     */
+    Integer removeRoomType(Integer hotelId)throws  Exception;
+
+    /**
+     * 删除酒店信息
+     * @param removeHoter
+     * @return
+     * @throws Exception
+     */
+    Integer removeHotel(Integer removeHoter)throws  Exception;
+    /**
+     * 新增房间信息
+     * @param roomType
+     * @return
+     */
+    Integer saveRommType(RoomType roomType)throws  Exception;
+
+    /**
+     * 修改房间信息
+     * @param roomType
+     * @return
+     * @throws Exception
+     */
+    Integer updateRoomType(RoomType roomType)throws  Exception;
+
+    /**
+     * 酒店房间修改赋值:贾晓亮
+     * @param typeId
+     * @return
+     */
+    RoomType fuzhiRoomType(Integer typeId)throws  Exception;
+    /**
+     * 修改酒店进行赋值操作：贾晓亮
+     * @param hotelId
+     * @return
+     * @throws Exception
+     */
+    Hotel fuzhiHotel(Integer hotelId)throws Exception;
 }

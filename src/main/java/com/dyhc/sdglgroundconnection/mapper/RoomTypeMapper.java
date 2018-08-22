@@ -23,5 +23,10 @@ public interface RoomTypeMapper extends CommonMapper<RoomType>{
      */
     List<RoomType> RoomTypeShowAll(Integer hotelId);
 
-
+    /**
+     * 对房间类型表进行删除
+     * @param hotelId
+     * @return
+     */
+    Integer removeRoomType(@Param("hotelId")Integer hotelId);
 }

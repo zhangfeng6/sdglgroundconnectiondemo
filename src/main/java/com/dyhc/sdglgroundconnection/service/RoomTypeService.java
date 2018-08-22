@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,5 @@ import org.springframework.stereotype.Component;
  * 酒店类型业务接口
  **/
 public interface RoomTypeService {
+
 }
