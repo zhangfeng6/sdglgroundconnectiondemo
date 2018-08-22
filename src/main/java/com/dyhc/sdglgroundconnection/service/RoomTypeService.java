@@ -10,4 +10,12 @@ import org.springframework.stereotype.Component;
  **/
 public interface RoomTypeService {
 
+    /**
+     * 判断该酒店下是否存在该类型
+     * @param hotelId
+     * @param valueId
+     * @return
+     */
+    Boolean judgeTypeName(Integer hotelId,Integer valueId)throws Exception;
+    
 }

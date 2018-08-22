@@ -21,7 +21,7 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @param pageSize
      * @return
      */
-    List<Hotel> HotelShowAll(@Param("pageNo")Integer pageNo, @Param("pageSize")Integer pageSize, @Param("hotelName")String hotelName, @Param("costpriceOne")Integer costpriceOne, @Param("costpriceTwo")Integer costpriceTwo);
+    List<Hotel> HotelShowAll(@Param("pageNo")Integer pageNo, @Param("pageSize")Integer pageSize, @Param("hotelName")String hotelName);
 
 
     /**

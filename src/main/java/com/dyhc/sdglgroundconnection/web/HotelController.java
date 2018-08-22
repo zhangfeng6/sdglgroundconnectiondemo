@@ -40,11 +40,10 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/hotelShowAll")
-    public ReponseResult hotelShowAll(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam("hotelName") String hotelName,@RequestParam("costpriceOne")Integer costpriceOne,@RequestParam("costpriceTwo") Integer costpriceTwo) {
+    public ReponseResult hotelShowAll(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam("hotelName") String hotelName) {
         try {
-            PageInfo<Hotel> pageInfo = hotelService.hotelShowAll(pageNo,pageSize,hotelName,costpriceOne,costpriceTwo);
+            PageInfo<Hotel> pageInfo = hotelService.hotelShowAll(pageNo,pageSize,hotelName);
             ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取酒店成功！");
-            System.out.println(data);
             logger.info(" method:showHotel  分页获取酒店成功！");
             return data;
         } catch (Exception e) {
@@ -80,8 +79,16 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/updateRoomType")
-    public ReponseResult updateRoomType(RoomType roomType) {
+    public ReponseResult updateRoomType(@RequestParam("hotelId")Integer hotelId,
+                                        @RequestParam("valueId")Integer valueId,
+                                        @RequestParam("cbj")Double cbj,
+                                        @RequestParam("bj")Double bj) {
         try {
+            RoomType roomType=new RoomType();
+            roomType.setCostprice(cbj);
+            roomType.setOffer(bj);
+            roomType.setTypeId(hotelId);
+            roomType.setValueId(valueId);
             Integer  num =hotelService.updateRoomType(roomType);
             ReponseResult<Integer> data = ReponseResult.ok(num,"酒店房间修改成功");
             System.out.println(data);
@@ -99,8 +106,17 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/saveRoomType")
-    public ReponseResult saveRommType(RoomType roomType) {
+    public ReponseResult saveRommType(@RequestParam("hotelId")Integer hotelId,
+                                      @RequestParam("valueId")Integer valueId,
+                                      @RequestParam("cbj")Double cbj,
+                                      @RequestParam("bj")Double bj) {
         try {
+            RoomType roomType=new RoomType();
+            roomType.setCostprice(cbj);
+            roomType.setOffer(bj);
+            roomType.setHotelId(hotelId);
+            roomType.setValueId(valueId);
+            roomType.setTypecode("THEROOM");
             Integer  num =hotelService.saveRommType(roomType);
             ReponseResult<Integer> data = ReponseResult.ok(num,"酒店房间新增成功");
             System.out.println(data);
@@ -161,18 +177,16 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/saveHotel")
-    public ReponseResult saveHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath,@RequestParam("savePath") String savePath) {
+    public ReponseResult saveHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath) {
         try {
             String form =request.getParameter("form");
             //创建对象
             ObjectMapper objectMapper =new ObjectMapper();
             // 创建酒店对象
             Hotel hotel =objectMapper.readValue(form,Hotel.class);
-            String uploa=FileUploadUtil.uploadImage(picturePath,savePath,".jpg");
-            hotel.setPicturePath(picturePath+savePath);
+            hotel.setPicturePath(FileUploadUtil.uploadImage(picturePath,".jpg"));
             Integer  num =hotelService.saveHotel(hotel);
             ReponseResult<Integer> data = ReponseResult.ok(num,"酒店新增成功");
-            System.out.println(data);
             logger.info(" method:showHotel  酒店新增成功！");
             return data;
         } catch (Exception e) {
@@ -190,15 +204,15 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/updatHotel")
-    public ReponseResult updateHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath,@RequestParam("savePath") String savePath) {
+    public ReponseResult updateHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath) {
         try {
             String form =request.getParameter("form");
             //创建对象
             ObjectMapper objectMapper =new ObjectMapper();
             // 创建酒店对象
             Hotel hotel =objectMapper.readValue(form,Hotel.class);
-            String uploa=FileUploadUtil.uploadImage(picturePath,savePath,".jpg");
-            hotel.setPicturePath(picturePath+savePath);
+            hotel.setPicturePath(FileUploadUtil.uploadImage(picturePath,".jpg"));
+
             Integer  num =hotelService.updateHotel(hotel);
             ReponseResult<Integer> data = ReponseResult.ok(num,"酒店修改成功");
             System.out.println(data);
@@ -235,21 +249,6 @@ public class HotelController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 分页张峰
      * @param pageNo
@@ -270,10 +269,6 @@ public class HotelController {
             return err;
         }
     }
-
-
-
-
 
 
 

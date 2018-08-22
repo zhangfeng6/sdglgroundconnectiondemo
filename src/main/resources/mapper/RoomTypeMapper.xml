@@ -4,11 +4,15 @@
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.RoomTypeMapper">
     <!--按照酒店编号查询下面的房间信息-->
     <select id="RoomTypeShowAll" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
-         select * from RoomType where  hotelId=#{hotelId}
+         SELECT r.*,d.`valueContent1` AS 'typeName' FROM `roomtype` r,`dictionaries` d WHERE d.`typeCode`=r.`typecode` AND d.`valueId`=r.`valueId` AND r.`hotelId`=#{hotelId}
     </select>
 
     <!--删除酒店下面的房间：贾晓亮-->
     <update id="removeRoomType">
          UPDATE  RoomType SET hotelId = 0 WHERE typeId=#{hotelId}
     </update>
+
+    <select id="getroomtypeByName" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
+        SELECT * FROM `roomtype` r WHERE r.`hotelId`=#{hotelId} and r.`valueId`=#{valueId}
+    </select>
 </mapper>

@@ -17,8 +17,12 @@ public class RoomType {
     private int typeId; // 类型编号
     @Column(name = "hotelId")
     private Integer hotelId; // 酒店编号（外键，与酒店表关联）
-    @Column(name = "typeName")
-    private String typeName; // 类型名称
+
+    @Column(name = "typecode")
+    private String typecode;
+    @Column(name = "valueId")
+    private Integer valueId;
+
     @Column(name = "costprice")
     private Double costprice; // 成本价
     private Double offer; // 报价
@@ -34,6 +38,9 @@ public class RoomType {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建日期
+
+    @Transient
+    private String typeName;
     private String value1;
     private String value2;
     private String value3;
@@ -47,6 +54,24 @@ public class RoomType {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
+    @Basic
+    @Column(name = "typecode")
+    public String getTypecode() {
+        return typecode;
+    }
+
+    public void setTypecode(String typecode) {
+        this.typecode = typecode;
+    }
+    @Basic
+    @Column(name = "valueId")
+    public Integer getValueId() {
+        return valueId;
+    }
+
+    public void setValueId(Integer valueId) {
+        this.valueId = valueId;
+    }
 
     @Basic
     @Column(name = "hotelId")
@@ -58,15 +83,6 @@ public class RoomType {
         this.hotelId = hotelId;
     }
 
-    @Basic
-    @Column(name = "typeName")
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
 
     @Basic
     @Column(name = "costprice")
@@ -138,6 +154,14 @@ public class RoomType {
         this.createDate = createDate;
     }
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
     @Basic
     @Column(name = "value1")
     public String getValue1() {
@@ -175,7 +199,6 @@ public class RoomType {
         RoomType roomtype = (RoomType) o;
         return typeId == roomtype.typeId &&
                 Objects.equals(hotelId, roomtype.hotelId) &&
-                Objects.equals(typeName, roomtype.typeName) &&
                 Objects.equals(costprice, roomtype.costprice) &&
                 Objects.equals(offer, roomtype.offer) &&
                 Objects.equals(whetherDel, roomtype.whetherDel) &&
@@ -190,7 +213,6 @@ public class RoomType {
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(typeId, hotelId, typeName, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
+        return Objects.hash(typeId, hotelId, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
     }
 }

@@ -45,8 +45,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否提供早餐：</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="breakfast" title="是" checked="checked" value="0" />
-                        <input type="radio" name="breakfast" title="否" value="1"/>
+                        是<input type="radio" name="breakfast" title="是" checked="checked" value="0" />
+                        否<input type="radio" name="breakfast" title="否" value="1"/>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -95,28 +95,28 @@
 <script>
 
     $(function () {
-
+        fuzhiHotel();
     })
 
     /**
      * 酒店修改赋值
      */
     function  fuzhiHotel() {
+        var hotelId=$("#hotelId").val();
         $.ajax({
             url:"/Hotel/fuzhiHotel",
-            data:{typeId:typeId},
+            data:{hotelId:hotelId},
             dataType:"json",
             type:"get",
             success:function (data) {
-               $("input[name='hotelName']").val();
-               $("input[name='starHotel']").val();
-               $("input[name='hotelAddress']").val();
-               $("input[name='picturePath']").val();
-               $("input[name='breakfast']").val();
-               $("input[name='contacts']").val();
-               $("input[name='offer']").val();
-               $("input[name='hotelDescribe']").val();
-               $("input[name='']").val();
+               $("input[name='hotelName']").val(data.data.hotelName);
+               $("input[name='starHotel']").val(data.data.starHotel);
+               $("input[name='hotelAddress']").val(data.data.hotelAddress);
+               $("input[name='contacts']").val(data.data.contacts);
+                $("input[name='phone']").val(data.data.phone);
+                $("input[name='costprice']").val(data.data.costprice);
+               $("input[name='offer']").val(data.data.offer);
+               $("input[name='hotelDescribe']").val(data.data.hotelDescribe);
             },
             error:function () {
                 alert("酒店房间修改赋值失败！");
@@ -125,47 +125,74 @@
     }
 
     
-    function updateHotel(){
-        var DataDeal={
+    function updateHotel() {
+        var DataDeal = {
             //将从form中通过$('#refer').serialize()获取值转成json
-            formToJson:function (data) {
-                data=data.replace(/&/g,"\",\"");
-                data=data.replace(/=/g,"\":\"");
-                data="{\""+data+"\"}";
+            formToJson: function (data) {
+                data = data.replace(/&/g, "\",\"");
+                data = data.replace(/=/g, "\":\"");
+                data = "{\"" + data + "\"}";
                 return data;
             }
         };
         var form = $("#uhb").serialize();
-        form=decodeURIComponent(form,true);//防止乱码
-        var jsondata=DataDeal.formToJson(form)
-        var savePath="E://图片";//图片路径
-        var fileObj=document.getElementById("file").files[0];//获取文件对象
+        form = decodeURIComponent(form, true);//防止乱码
+        var jsondata = DataDeal.formToJson(form)
+        var savePath = "E://图片";//图片路径
+        var fileObj = document.getElementById("file").files[0];//获取文件对象
         //formData对象，用来序列二进制数据
-        var forData=new FormData();
-        forData.append("picturePath",fileObj);
-        forData.append("savePath",savePath);
-        forData.append("form",jsondata);
-        $.ajax({
-            url:"/Hotel/updatHotel",
-            data:forData,
-            dataType:"json",
-            type:"POST",
-            cache: false, // 上传文件不需要缓存
-            processData: false, // 对参数进行序列化处理
-            contentType: false,
-            success:function (data) {
-                var index=parent.layer.getFrameIndex(window.name);
-                if (data!=null){
-                    alert("酒店修改成功");
-                    parent.location.reload(index);
+        var forData = new FormData();
+        forData.append("picturePath", fileObj);
+        forData.append("savePath", savePath);
+        forData.append("form", jsondata);
+        var hotelName = $("input[name='hotelName']").val();
+        var starHotel = $("input[name='starHotel']").val();
+        var hotelAddress = $("input[name='hotelAddress']").val();
+        var contacts = $("input[name='contacts']").val();
+        var phone = $("input[name='phone']").val();
+        var costprice = $("input[name='costprice']").val();
+        var offer = $("input[name='offer']").val();
+        var hotelDescribe = $("input[name='hotelDescribe']").val();
+        if (hotelName == '' || hotelName == null || hotelName == undefined) {
+            return;
+        } else if (starHotel == '' || starHotel == null || starHotel == undefined) {
+            return;
+        } else if (hotelAddress == '' || hotelAddress == null || hotelAddress == undefined) {
+            return;
+        } else if (contacts == '' || contacts == null || contacts == undefined) {
+            return;
+        } else if (phone == '' || phone == null || phone == undefined) {
+            return;
+        } else if (costprice == '' || costprice == null || costprice == undefined) {
+            return;
+        } else if (offer == '' || offer == null || offer == undefined) {
+            return;
+        } else if (hotelName == '' || hotelName == null || hotelName == undefined) {
+            return;
+        } else if (hotelDescribe == '' || hotelDescribe == null || hotelDescribe == undefined) {
+            return;
+        } else {
+            $.ajax({
+                url: "/Hotel/updatHotel",
+                data: forData,
+                dataType: "json",
+                type: "POST",
+                cache: false, // 上传文件不需要缓存
+                processData: false, // 对参数进行序列化处理
+                contentType: false,
+                success: function (data) {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    if (data != null) {
+                        alert("酒店修改成功");
+                        parent.location.reload(index);
+                    }
+                },
+                error: function () {
+                    alert("错误");
                 }
-            },
-            error:function () {
-                alert("错误");
-            }
-        })
+            })
+        }
     }
-
 
     layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
         var form = layui.form(),

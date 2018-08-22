@@ -2,16 +2,22 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.Staff;
 import com.dyhc.sdglgroundconnection.service.StaffService;
+import com.dyhc.sdglgroundconnection.utils.FileUploadUtil;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -84,6 +90,127 @@ public class StaffController  {
             logger.info("method:login  登陆失败！");
             ReponseResult<Integer> err = ReponseResult.ok(-1,"登录失败！");
             System.out.println(err);
+            return err;
+        }
+    }
+
+    /**
+     * 分页查看全部
+     * @param pageNo
+     * @param pageSize
+     * @param staffname
+     * @return
+     */
+    @RequestMapping("/showstaffLike.html")
+    public ReponseResult StaffLike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("staffname")String staffname){
+        try{
+            System.out.println("..."+staffname+"...");
+            PageInfo<Staff> pageInfoTravel=staffService.listStaffLike(pageNo,pageSize,staffname);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取组团社成功！");
+            logger.info(" method:StaffLike  分页获取组团社成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:StaffLike  获取组团社数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 删除   修改
+     * @param staff
+     * @return
+     */
+    @RequestMapping("/StaffUpd.html")
+    public ReponseResult<Integer> StaffUpd(Staff staff){
+        try{
+            Integer result=0;
+            Integer data=0;
+            result=staffService.getStaffUpd(staff);
+            if(result>0){
+                data=1;
+            }
+            logger.info(" method:showTravelupdlala  删除人员成功！");
+            return ReponseResult.ok(data,"删除人员成功！");
+        }catch (Exception e){
+            logger.error(" method:showTravelupdlala  删除人员失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 判断用户是否存在
+     * @param
+     * @return
+     */
+    @PostMapping("/StaffSelect.html")
+    public ReponseResult StaffSelect(){
+        try{
+            Integer data=0;
+            Staff staff=staffService.getserlectBy();
+            if(staff!=null){
+                data=1;
+            }
+            System.out.println(staff.getPhone());
+            logger.info(" method:StaffSelect  修改人员成功！");
+            return ReponseResult.ok(data,"修改人员成功！");
+        }catch (Exception e){
+            logger.error(" method:StaffSelect  修改人员失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 添加
+     * @param
+     * @return
+     */
+    @PostMapping("/StaffAdd.html")
+    public ReponseResult StaffAdd(HttpServletRequest request, @RequestParam(value = "headPortraitPath",required = false)MultipartFile headPortraitPath, @RequestParam("savePath")String savePath){
+        try{
+            String staff1=request.getParameter("staff");
+            ObjectMapper objectMapper=new ObjectMapper();
+            Staff staff2=objectMapper.readValue(staff1,Staff.class);
+            Integer i=0;
+            String uploadResult=FileUploadUtil.uploadImage(headPortraitPath,savePath,".jpg");
+            staff2.setHeadPortraitPath(savePath+uploadResult);
+            if(staff2.getStaffId()!=0){
+                i=staffService.getStaffUpdTwo(staff2);
+                System.out.println("***********"+i);
+            }else{
+                staff2.setWhetherDel(0);
+                i=staffService.getStaffAdd(staff2);
+                System.out.println("***********"+i);
+            }
+            logger.info(" method:StaffAdd  保存成功！");
+            return ReponseResult.ok(i,"保存成功！");
+        }catch (Exception e){
+            logger.error(" method:StaffAdd  保存人员失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 修改    查看
+     * @param staffId
+     * @return
+     */
+    @RequestMapping("/StaffUpdTwoById.html")
+    public ReponseResult StaffUpdTwoById(Integer staffId){
+        try{
+            Staff result=staffService.getStaffUpdTwoById(staffId);
+            logger.info(" method:StaffAdd  添加人员成功！");
+            return ReponseResult.ok(result,"修改人员成功！");
+        }catch (Exception e){
+            logger.error(" method:StaffAdd  添加人员失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;
         }
     }

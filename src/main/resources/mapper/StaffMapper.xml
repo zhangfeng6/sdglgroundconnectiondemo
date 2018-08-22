@@ -6,4 +6,28 @@
         select * from staff where theUserName=#{theUserName} and password=#{password}
     </select>
 
+    <select id="getStaffAll" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT * FROM staff where 1=1
+        <if test="staffname !=null and staffname !='' ">
+            and staffname like concat('%',#{staffname},'%')
+        </if>
+        and whetherDel !=1
+    </select>
+
+    <update id="getStaffUpd">
+        UPDATE staff SET whetherDel=1 where staffId=#{staffId}
+    </update>
+
+    <update id="getStaffUpdTwo">
+        UPDATE staff SET staffname=#{staffname},sex=#{sex},theUserName=#{theUserName},cardId=#{cardId},qqnumber=#{qqnumber},currentAddress=#{currentAddress},phone=#{phone} where staffId=#{staffId}
+    </update>
+
+    <select id="getStaffUpdTwoById" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT * FROM staff WHERE staffId=#{staffId}
+    </select>
+
+    <select id="getserlectBy" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT staffname FROM staff
+    </select>
+
 </mapper>

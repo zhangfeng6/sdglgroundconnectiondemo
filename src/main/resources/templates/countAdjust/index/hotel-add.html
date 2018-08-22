@@ -44,8 +44,8 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">是否提供早餐：</label>
 									<div class="layui-input-block">
-										<input type="radio" name="breakfast" title="是" checked="checked" value="0" />
-										<input type="radio" name="breakfast" title="否" value="1"/>
+										是<input type="radio" name="breakfast" title="是" checked="checked" value="0" />
+										否<input type="radio" name="breakfast" title="否" value="1"/>
 									</div>
 								</div>
 								<div class="layui-form-item">
@@ -98,7 +98,6 @@
     })
 
 	 function saveHotel(){
-        alert("新增酒店");
          var DataDeal={
              //将从form中通过$('#refer').serialize()获取值转成json
              formToJson:function (data) {
@@ -111,12 +110,10 @@
          var form = $("#uhb").serialize();
          form=decodeURIComponent(form,true);//防止乱码
          var jsondata=DataDeal.formToJson(form)
-         var savePath="E://图片";//图片路径
          var fileObj=document.getElementById("file").files[0];//获取文件对象
          //formData对象，用来序列二进制数据
          var forData=new FormData();
          forData.append("picturePath",fileObj);
-         forData.append("savePath",savePath);
          forData.append("form",jsondata);
         $.ajax({
 			url:"/Hotel/saveHotel",

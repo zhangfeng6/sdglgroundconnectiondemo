@@ -37,7 +37,7 @@ public interface HotelService {
      * @return
      * @throws Exception
      */
-    PageInfo<Hotel> hotelShowAll(Integer pageNo,Integer pageSize,String hotelName,Integer costpriceOne,Integer costpriceTwo)throws  Exception;
+    PageInfo<Hotel> hotelShowAll(Integer pageNo,Integer pageSize,String hotelName)throws  Exception;
 
     /**
      * 根据酒店表的编号查询下面的房间:小亮

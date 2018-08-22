@@ -9,10 +9,7 @@
       <if test="hotelName!=null and hotelName!=''">
         and hotelName like  concat('%',#{hotelName},'%')
       </if>
-      <if test="costpriceOne!=null and costpriceOne!='' and costpriceTwo!=null and costpriceTwo!=''">
-        and costprice  BETWEEN  #{costpriceOne} AND #{costpriceTwo}
-      </if>
-        and whetherDel=0
+        and whetherDel != 1
     </select>
      <!--删除酒店信息:贾晓亮-->
     <update id="removeHoter">

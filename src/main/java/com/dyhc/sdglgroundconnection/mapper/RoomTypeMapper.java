@@ -29,4 +29,12 @@ public interface RoomTypeMapper extends CommonMapper<RoomType>{
      * @return
      */
     Integer removeRoomType(@Param("hotelId")Integer hotelId);
+
+    /**
+     * 判断该公司下是否存在该类型
+     * @param hotelId
+     * @param valueId
+     * @return
+     */
+    RoomType getroomtypeByName(@Param("hotelId")Integer hotelId,@Param("valueId")Integer valueId);
 }

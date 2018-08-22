@@ -43,9 +43,9 @@ public class HotelServiceImpl implements HotelService {
      * @param pageSize
      * @return
      */
-    public PageInfo<Hotel> hotelShowAll(Integer pageNo, Integer pageSize,String hotelName,Integer costpriceOne,Integer costpriceTwo)throws  Exception {
+    public PageInfo<Hotel> hotelShowAll(Integer pageNo, Integer pageSize,String hotelName)throws  Exception {
         PageHelper.startPage(pageNo, pageSize, true);
-        List<Hotel> hotels=hotelMapper.HotelShowAll(pageNo,pageSize,hotelName,costpriceOne,costpriceTwo);
+        List<Hotel> hotels=hotelMapper.HotelShowAll(pageNo,pageSize,hotelName);
         for (Hotel h :hotels) {
             Integer as =h.getHotelId();
            h.setRoomTypesList(roomTypeMapper.RoomTypeShowAll(h.getHotelId()));
@@ -157,8 +157,6 @@ public class HotelServiceImpl implements HotelService {
         roomType.setWhetherDel(0);
         roomType.setCreateBy(1);
         roomType.setCreateDate(new Date());
-        roomType.setUpdateDate(new Date());
-        roomType.setUpdateBy(2);
         Integer number=0;
         try {
             number=roomTypeMapper.insert(roomType);
@@ -174,9 +172,6 @@ public class HotelServiceImpl implements HotelService {
      * @throws Exception
      */
     public Integer updateRoomType(RoomType roomType) throws  Exception{
-        roomType.setWhetherDel(0);
-        roomType.setCreateBy(1);
-        roomType.setCreateDate(new Date());
         roomType.setUpdateDate(new Date());
         roomType.setUpdateBy(2);
         Integer number=0;
@@ -187,21 +182,6 @@ public class HotelServiceImpl implements HotelService {
         }
         return  number;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * 获取所有酒店信息

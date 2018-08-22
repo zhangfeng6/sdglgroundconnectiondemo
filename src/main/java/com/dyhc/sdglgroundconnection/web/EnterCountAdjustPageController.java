@@ -67,7 +67,7 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("hotel-roomType-update")
-    public  String UpdateRoomType(Integer typeId,HttpServletRequest request){
+    public  String UpdateRoomType(Integer typeId,Integer hotelId,HttpServletRequest request){
         request.setAttribute("typeId",typeId);
         return "countAdjust/index/hotel-roomType-update";
     }
