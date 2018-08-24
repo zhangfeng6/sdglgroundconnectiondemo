@@ -44,4 +44,12 @@ public interface CarrentalMapper extends CommonMapper<Carrental>{
      */
     List<Carrental> getCarrentalByName(@Param("carRentalName") String carRentalName);
 
+    /**
+     * 根据valueId进行查询返回车辆公司对象
+     * @param valueId
+     * @return
+     * @throws Exception
+     */
+    List<Carrental> listcarrentalByvalueId(@Param("valueId")Integer valueId)throws Exception;
+
 }

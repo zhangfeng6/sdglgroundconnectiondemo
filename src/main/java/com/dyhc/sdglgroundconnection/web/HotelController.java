@@ -79,7 +79,7 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/updateRoomType")
-    public ReponseResult updateRoomType(@RequestParam("hotelId")Integer hotelId,
+    public ReponseResult updateRoomType(@RequestParam("typeId")Integer typeId,
                                         @RequestParam("valueId")Integer valueId,
                                         @RequestParam("cbj")Double cbj,
                                         @RequestParam("bj")Double bj) {
@@ -87,7 +87,7 @@ public class HotelController {
             RoomType roomType=new RoomType();
             roomType.setCostprice(cbj);
             roomType.setOffer(bj);
-            roomType.setTypeId(hotelId);
+            roomType.setTypeId(typeId);
             roomType.setValueId(valueId);
             Integer  num =hotelService.updateRoomType(roomType);
             ReponseResult<Integer> data = ReponseResult.ok(num,"酒店房间修改成功");

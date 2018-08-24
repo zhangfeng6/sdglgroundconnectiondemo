@@ -8,7 +8,9 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +40,15 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Autowired
     private GuideMapper guideMapper;
+
+    @Autowired
+    private HotelMapper hotelMapper;
+
+    @Autowired
+    private RestaurantMapper restaurantMapper;
+
+    @Autowired
+    private CarrentalMapper carrentalMapper;
     /**
      * 根据条件查询调度信息 并分页返回
      * @param pageNo        当前页数
@@ -73,5 +84,18 @@ public class DispatchServiceImpl implements DispatchService {
         map.put("theroom",dictionariesMapper.listdictionarieslBycode("THEROOM"));
         map.put("diet",dictionariesMapper.listdictionarieslBycode("DIET"));
         return map;
+    }
+
+    @Override
+    public List listinfoByvalueId(String type, Integer valueId) throws Exception {
+        List list=null;
+        if(type.equals("hoteltype")){
+            list= hotelMapper.listhotelByvalueId(valueId);
+        }else if(type.equals("fantype")){
+            list=restaurantMapper.listrestaurantByvalueId(valueId);
+        }else if(type.equals("cartype")){
+            list=carrentalMapper.listcarrentalByvalueId(valueId);
+        }
+        return list;
     }
 }

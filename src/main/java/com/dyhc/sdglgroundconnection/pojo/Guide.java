@@ -34,6 +34,7 @@ public class Guide {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
+    @Column(name = "picturePath")
     private String picturePath; //头像路径
     private String value2;
     private String value3;
