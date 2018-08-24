@@ -62,7 +62,6 @@ function addss() {
         "	</select>" +
         "	</td>" +
         "	<td colspan='2'>&nbsp;<button type='button' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick='xianlu(this)'>自行填写</button></td>" +
-        "	<td colspan='2'>&nbsp;<button type='button' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px'>保存模板</button></td>" +
         "	</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>日期</label></td>" +

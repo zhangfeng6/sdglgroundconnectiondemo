@@ -29,4 +29,9 @@ public class DictionariesServiceImpl implements DictionariesService {
     public PageInfo<Dictionaries> listDictionaries1()throws Exception {
         return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries1());
     }
+
+    @Override
+    public List<Dictionaries> listhoteltype() throws Exception {
+        return dictionariesMapper.listdictionarieslBycode("THEROOM");
+    }
 }

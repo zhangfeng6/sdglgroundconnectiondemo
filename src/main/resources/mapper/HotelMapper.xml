@@ -9,8 +9,18 @@
       <if test="hotelName!=null and hotelName!=''">
         and hotelName like  concat('%',#{hotelName},'%')
       </if>
-      <if test="costpriceOne!=null and costpriceOne!='' and costpriceTwo!=null and costpriceTwo!=''">
-        and costprice  BETWEEN  #{costpriceOne} AND #{costpriceTwo}
-      </if>
+        and whetherDel != 1
+    </select>
+     <!--删除酒店信息:贾晓亮-->
+    <update id="removeHoter">
+     update  Hotel set whetherDel =1 where  hotelId =#{hotelId}
+    </update>
+    <!--房间修改赋值-->
+    <select id="fuzhiRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
+           select  * from  roomtype WHERE typeId=#{typeId}
+    </select>
+    <!--酒店修改赋值-->
+    <select id="fuzhiHotel"  resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+           select  * from  hotel WHERE hotelId=#{hotelId}
     </select>
 </mapper>

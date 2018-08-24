@@ -20,7 +20,7 @@ import java.util.List;
  * 字典 控制层
  **/
 @RestController
-@RequestMapping("Dictionaries")
+@RequestMapping("/Dictionaries")
 public class DictionariesController {
 
     // 日志对象
@@ -56,6 +56,23 @@ public class DictionariesController {
         try {
             PageInfo<Dictionaries> pageInfo=dictionariesService.listDictionaries1();
             ReponseResult<List> data=ReponseResult.ok(pageInfo.getList(),"获取所有的车辆类型成功");
+            return  data;
+        }catch (Exception e){
+            ReponseResult<List> data=ReponseResult.err("获取所有的车辆类型失败");
+            e.printStackTrace();
+            return  data;
+        }
+    }
+
+
+    /**
+     * 获取所有的景点等级
+     * @return
+     */
+    @RequestMapping("/listhoteltype")
+    public ReponseResult listhoteltype(){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(dictionariesService.listhoteltype(),"获取所有的车辆类型成功");
             return  data;
         }catch (Exception e){
             ReponseResult<List> data=ReponseResult.err("获取所有的车辆类型失败");

@@ -17,7 +17,7 @@
 				<tr>
 					<td><label class="layui-form-label">组团社名称</label></td>
 					<td>
-						<select name="city" lay-verify="required">
+						<select name="travel"  lay-verify="required">
 							<option value=""></option>
 							<option value="0">哈红祖</option>
 							<option value="1">无敌组</option>
@@ -51,7 +51,7 @@
 							<tr>
 								<td><label class="layui-form-label">线路</label></td>
 								<td>
-									<select name="city" lay-verify="required" lay-search>
+									<select name="template1" lay-verify="required" lay-search>
 										<option value=""></option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
@@ -61,7 +61,6 @@
 									</select>
 								</td>
 								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu(this)">自行填写</button></td>
-								<td colspan="2">&nbsp;<button type="button"  class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px'>保存模板</button></td>
 							</tr>
 							<tr>
 							<td><label class="layui-form-label">日期</label></td>
@@ -73,7 +72,7 @@
 							<tr>
 								<td><label class="layui-form-label">酒店</label></td>
 								<td>
-									<select name="city" lay-verify="required">
+									<select name="theroom1" lay-verify="required">
 										<option value=""></option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
@@ -112,7 +111,7 @@
 							<tr id="scenic">
 								<td><label class="layui-form-label">景点</label></td>
 								<td>
-									<select name="city" lay-verify="required">
+									<select name="scenicspot1" lay-verify="required">
 										<option value=""></option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
@@ -129,7 +128,7 @@
 							<tr>
 									<td><label class="layui-form-label">购物地：</label></td>
 									<td colspan="3">
-										<select name="city" lay-verify="required">
+										<select name="shopping1" lay-verify="required">
 											<option value="">无</option>
 											<option value="0">啊</option>
 											<option value="1">北大青鸟</option>
@@ -144,7 +143,7 @@
 							<tr>
 									<td><label class="layui-form-label">午餐</label></td>
 								<td>
-									<select name="city" lay-verify="required">
+									<select name="zdiet1" lay-verify="required">
 										<option value=""></option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
@@ -155,7 +154,7 @@
 								</td>
 								<td>
 									<select name="city" lay-verify="required">
-										<option value=""selected="selected">请选择酒店</option>
+										<option value=""selected="selected">请选择饭店</option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
 										<option value="2">哈皮组</option>
@@ -169,7 +168,7 @@
 							<tr>
 								<td><label class="layui-form-label">晚餐</label></td>
 								<td>
-									<select name="city" lay-verify="required">
+									<select name="wdiet1" lay-verify="required">
 										<option value=""></option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
@@ -209,7 +208,7 @@
 					<tr>
 						<td><label class="layui-form-label">导游：</label></td>
 						<td>
-							<select name="city" lay-verify="required">
+							<select name="guide" lay-verify="required">
 								<option value="" selected="selected">导游一</option>
 								<option value="0">哈红祖</option>
 								<option value="1">无敌组</option>
@@ -224,11 +223,11 @@
 					<tr>
 							<td><label class="layui-form-label">车费：</label></td>
 							<td width="300px"><input type="text" class="layui-input"></td>
-							<td>
+							<td colspan="2">
 								<table border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td><label class="layui-form-label">报停费：</label></td>
-							<td><input type="text" class="layui-input"></td>
+										<td colspan="2"><input type="text" class="layui-input"></td>
 									</tr>
 								</table>
 							</td>
@@ -240,7 +239,7 @@
 					<tr>
 						<td><label class="layui-form-label">车队：</label></td>
 								<td>
-									<select name="city" lay-verify="required">
+									<select name="vehicle" lay-verify="required">
 										<option value="" selected="selected">请选择车辆类型</option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
@@ -251,7 +250,7 @@
 								</td>
 								<td>
 									<select name="city" lay-verify="required">
-										<option value=""selected="selected">请选择车辆公司</option>
+										<option value=""selected="selected">车辆公司</option>
 										<option value="0">哈红祖</option>
 										<option value="1">无敌组</option>
 										<option value="2">哈皮组</option>
@@ -276,7 +275,24 @@
 							</table>
 						</td>
 					</tr>
-
+					<tr>
+						<td><label class="layui-form-label">车辆联系人：</label></td>
+						<td width="300px"><input type="text" class="layui-input"></td>
+						<td>(如：张师傅 13333333333 晋H:88888)</td>
+					</tr>
+					<tr>
+						<td><label class="layui-form-label">返程类型：</label></td>
+						<td>
+							<select name="traffic" lay-verify="required">
+								<option value="" selected="selected">--无--</option>
+								<option value="0">哈红祖</option>
+								<option value="1">无敌组</option>
+								<option value="2">哈皮组</option>
+								<option value="3">66组</option>
+								<option value="4">纪检组</option>
+							</select>
+						</td>
+					</tr>
 					<tr>
 										<td><label class="layui-form-label">其他：</label></td>
 										<td>
@@ -320,6 +336,7 @@
             }
 
             function add(onClickjd) {
+
                 $(onClickjd).parent().parent().next().after("<tr id='scenic'>" +
                     "<td><label class='layui-form-label'>景点</label></td>" +
                     "<td>" +
@@ -351,6 +368,8 @@
             }
 
 			$(function() {
+
+
 				layui.use(['form', 'layedit', 'laydate','element'], function() {
 					var form = layui.form,
 							layer = layui.layer,
@@ -377,8 +396,23 @@
 					});
 				});
 			});
-
+			//获取下拉框资源信息
+            function gerresource(){
+				$.ajax({
+					url:"",
+					dataType:"json",
+					type:"get",
+					success:function (result) {
+					    var content="<option value=''></option>";
+						$(result.data['travel']).each(function (i,e) {
+							
+                        });
+                    },
+					error:function (err) {
+						alert(err);
+                    }
+				});
+			}
 		</script>
 </body>
-
 </html>

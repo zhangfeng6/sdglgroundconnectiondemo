@@ -17,4 +17,11 @@
         SELECT * FROM `dictionaries`
         WHERE typeCode='VEHICLE'
     </select>
+
+    <select id="listdictionarieslBycode" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+            SELECT `valueId`,`valueContent1` FROM `dictionaries`
+        <if test="code != null and code != '' ">
+            WHERE `typeCode`=#{code}
+        </if>
+    </select>
 </mapper>

@@ -60,3 +60,6 @@ pagehelper:
   row-bounds-with-count: true
   reasonable: true
 
+file:
+    windowsUploadFolder: D:\Y2\世达国旅\sdglGroundConnection\src\main\resources\static\images
+    linuxUploadFolder:

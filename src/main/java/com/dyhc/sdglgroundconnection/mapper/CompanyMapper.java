@@ -11,4 +11,16 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface CompanyMapper extends CommonMapper<Company>{
+    /**
+     * 查看全部
+     * @return
+     */
+    Company getCompany();
+
+    /**
+     * 修改信息
+     * @param company
+     * @return
+     */
+    Integer getUpdCompany(Company company);
 }

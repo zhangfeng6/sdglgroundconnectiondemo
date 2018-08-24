@@ -2,5 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.TravelMapper">
+    <select id="listTravelLike" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">
+        SELECT * FROM travel WHERE 1=1
+        <if test="travelName !=null and travelName !='' " >
+            and travelName  like concat('%',#{travelName},'%')
+        </if>
+        and whetherDel !=1
+    </select>
+
+    <update id="getUpdTrave">
+        UPDATE travel SET whetherDel=1 WHERE travelId=#{travelId};
+    </update>
+
+    <select id="getupdBytravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">
+        SELECT * FROM travel WHERE travelId=#{travelId};
+    </select>
+
+
+    <update id="getupdlala">
+        UPDATE travel SET travelName=#{travelName},personName=#{personName},personPost=#{personPost},phone=#{phone} WHERE travelId=#{travelId}
+    </update>
 
 </mapper>

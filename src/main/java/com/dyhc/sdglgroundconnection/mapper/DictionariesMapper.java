@@ -34,4 +34,12 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * @return
      */
     List<Dictionaries> listDictionaries1()throws Exception;
+
+    /**
+     * 根据code获取字典表信息
+     * @param code
+     * @return
+     * @throws Exception
+     */
+    List<Dictionaries> listdictionarieslBycode(@Param("code")String code)throws Exception;
 }

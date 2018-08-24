@@ -25,4 +25,11 @@ public interface DictionariesService {
      * @return
      */
     PageInfo<Dictionaries> listDictionaries1()throws Exception;
+
+
+    /**
+     * 查询所有房间类型
+     * @return
+     */
+    List<Dictionaries> listhoteltype()throws Exception;
 }
