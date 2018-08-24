@@ -55,6 +55,13 @@ public class Restaurant {
     private String value2;
     private String value3;
 
+    @Transient
+    private Integer gettypeprice; //存放用户选定类型的价格 避免再次查询降低速度
+
+    public Integer getGettypeprice() {
+        return gettypeprice;
+    }
+
     @Id
     @Column(name = "restaurantId")
     public int getRestaurantId() {

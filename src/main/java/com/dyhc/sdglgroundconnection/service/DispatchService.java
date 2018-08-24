@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,4 +31,13 @@ public interface DispatchService {
      * @throws Exception
      */
     Map<String,Object> getresource()throws Exception;
+
+    /**
+     * 根据类型和类型id获取指定的信息资源
+     * @param type
+     * @param valueId
+     * @return
+     * @throws Exception
+     */
+    List listinfoByvalueId(String type,Integer valueId)throws Exception;
 }

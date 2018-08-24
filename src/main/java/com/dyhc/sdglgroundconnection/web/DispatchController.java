@@ -62,10 +62,28 @@ public class DispatchController {
     @RequestMapping("/getresource")
     public ReponseResult getresource(){
         try {
-            ReponseResult<Map> data=ReponseResult.ok(dispatchService.getresource(),"");
+            ReponseResult<Map> data=ReponseResult.ok(dispatchService.getresource(),"获取资源数据成功！");
+            logger.info("method:getresource 获取资源数据成功！");
+            return data;
         } catch (Exception e) {
             e.printStackTrace();
+            logger.debug("method:getresource 系统异常！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
         }
-        return null;
+    }
+
+    @RequestMapping("/listinfoByvalueId")
+    public ReponseResult listinfoByvalueId(@RequestParam("type")String type,@RequestParam("valueId")Integer valueId){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(dispatchService.listinfoByvalueId(type,valueId),"根据类型获取资源！");
+            logger.info("method:listinfoByvalueId 根据类型获取资源！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            logger.debug("method:listinfoBycalueId 系统异常");
+            return err;
+        }
     }
 }

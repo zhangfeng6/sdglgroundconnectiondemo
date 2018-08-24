@@ -50,6 +50,13 @@ public class Carrental {
     }
 
 
+    @Transient
+    private Integer gettypeprice; //存放用户选定类型的价格 避免再次查询降低速度
+
+    public Integer getGettypeprice() {
+        return gettypeprice;
+    }
+
 
     @Id
     @Column(name = "carRentalId")

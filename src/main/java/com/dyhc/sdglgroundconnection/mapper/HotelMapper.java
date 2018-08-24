@@ -46,4 +46,11 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @throws Exception
      */
     Hotel fuzhiHotel(Integer hotelId)throws Exception;
+
+    /**
+     * 根据房间类型id获取酒店信息   张枫
+     * @param valueId
+     * @return
+     */
+    List<Hotel> listhotelByvalueId(@Param("valueId")Integer valueId)throws Exception;
 }

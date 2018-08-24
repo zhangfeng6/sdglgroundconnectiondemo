@@ -23,4 +23,8 @@
     <select id="fuzhiHotel"  resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
            select  * from  hotel WHERE hotelId=#{hotelId}
     </select>
+    
+    <select id="listhotelByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+       SELECT h.*,r.`costprice` AS 'gettypeprice' FROM `hotel` h,`roomtype` r WHERE r.`hotelId`=h.`hotelId` AND r.`valueId`=#{valueId}
+    </select>
 </mapper>

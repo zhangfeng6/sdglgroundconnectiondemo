@@ -5,6 +5,7 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
 	<title>网站后台管理模版</title>
         <link rel="stylesheet" type="text/css" href="/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="/css/baojiadan.css" />
@@ -17,47 +18,38 @@
 				<tr>
 					<td><label class="layui-form-label">组团社名称</label></td>
 					<td>
-						<select name="travel"  lay-verify="required">
-							<option value=""></option>
+						<select name="travel" style="height: 35px;width:180px;" lay-ignore>
+							<option value="">-请选择-</option>
 							<option value="0">哈红祖</option>
-							<option value="1">无敌组</option>
-							<option value="2">哈皮组</option>
-							<option value="3">66组</option>
-							<option value="4">纪检组</option>
 						</select>
 					</td>
 					<td><label class="layui-form-label">人数</label></td>
-					<td><input type="text" class="layui-input"></td>
+					<td><input type="text" name="num" class="layui-input"></td>
 				</tr>
 				<tr>
 					<td><label class="layui-form-label">开始时间</label></td>
-					<td> <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+					<td> <input type="text" name="travelStartTime" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
 					<td><label class="layui-form-label">结束时间</label></td>
-					<td> <input type="text" name="date" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+					<td> <input type="text" name="travelEndTime" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
 				</tr>
 			</table>
 		</form>
 	</div>
 
 	<div id="zong" >
-		<div style='margin-bottom: 30px;width: 800px'>
+		<div name="xianlu" style='margin-bottom: 30px;width: 900px'>
 			<input type="image" src="/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)'/>
 
 			<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;"/>
 			<div id="content">
 					<form class="layui-form layui-form-pane" action="">
 						<table border="0" cellspacing="0" cellpadding="0">
-
 							<tr>
 								<td><label class="layui-form-label">线路</label></td>
 								<td>
-									<select name="template1" lay-verify="required" lay-search>
-										<option value=""></option>
+									<select name="d1template" style="height: 35px;width:180px;" onchange="xianluchange(this)" lay-ignore>
+										<option value="0">--请选择--</option>
 										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
 									</select>
 								</td>
 								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu(this)">自行填写</button></td>
@@ -65,76 +57,55 @@
 							<tr>
 							<td><label class="layui-form-label">日期</label></td>
 							<td>
-								<input type="text" name="date" id="date2" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+								<input type="text" name="d1data" id="date2" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
 							</td>
 						</tr>
-
 							<tr>
 								<td><label class="layui-form-label">酒店</label></td>
 								<td>
-									<select name="theroom1" lay-verify="required">
-										<option value=""></option>
+									<select name="d1hoteltype" style="height: 35px;width:180px;" onchange="typechange(this,'hoteltype')" lay-ignore>
+										<option value="0">--请选择--</option>
 										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
 									</select>
 								</td>
 								<td>
-									<select name="city" lay-verify="required">
-										<option value=""selected="selected">请选择酒店</option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="dlhotel" style="height: 35px;width:180px;" lay-ignore>
+										<option value=""selected="selected">请选择酒店房间类型</option>
+
 									</select>
 								</td>
-								<td><label class="layui-form-label">数量：</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><label class="layui-form-label" onchange="sumchange(this)">数量：</label></td>
+								<td><input name="dlnum" type="text" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input name="d1jiucb" type="text" class="layui-input"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">司陪：</label></td>
-								<td><label class="layui-form-label" style="width: 140px;">房间数：</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><label class="layui-form-label" onchange="sipeichange(this)" style="width: 140px;">房间数：</label></td>
+								<td><input name="d1spnum" type="text" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价：</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input name="d1spchengben" type="text" class="layui-input"></td>
 							</tr>
 							<!--点击新增景点-->
 							<tr id="onClickjd">
-								<td colspan="2"><button class="layui-btn" type="button" style="font-size: 12px" onclick="add(this)">添加景点+</button></td>
+								<td colspan="2"><button class="layui-btn" name="d1scenicspot" type="button" style="font-size: 12px" onclick="add(this)">添加景点+</button></td>
 							</tr>
 							<!--点击新增结束-->
-							<tr id="scenic">
+							<tr id="scenic" name="d1jingdian">
 								<td><label class="layui-form-label">景点</label></td>
 								<td>
-									<select name="scenicspot1" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="d1scenicspot1" style="height: 35px;width:180px;" onchange="jdchange(this)" lay-ignore>
+										<option value="0">--请选择--</option>
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价:</label></td>
-								<td><input type="text" class="layui-input"></td>
-								<td><label class="layui-form-label">报价:</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input type="text" name="d1costprice1" class="layui-input"></td>
 							</tr>
 							<tr>
 									<td><label class="layui-form-label">购物地：</label></td>
 									<td colspan="3">
-										<select name="shopping1" lay-verify="required">
-											<option value="">无</option>
-											<option value="0">啊</option>
-											<option value="1">北大青鸟</option>
-											<option value="2">哈皮组</option>
-											<option value="3">66组</option>
-											<option value="4">纪检组</option>
+										<select name="dlshopping" style="height: 35px;width:180px;" lay-ignore>
+											<option value="0">--请选择--</option>
 										</select>
 									</td>
 									<td></td>
@@ -143,56 +114,37 @@
 							<tr>
 									<td><label class="layui-form-label">午餐</label></td>
 								<td>
-									<select name="zdiet1" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="d1wucan" style="height: 35px;width:180px;" onchange="typechange(this,'fantype')" lay-ignore>
+										<option value="0">--请选择--</option>
 									</select>
 								</td>
 								<td>
-									<select name="city" lay-verify="required">
-										<option value=""selected="selected">请选择饭店</option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="d1wufan" style="height: 35px;width:180px;" onchange="typechange(this,'wucan')" lay-ignore>
+										<option value="0">--请选择午餐类型--</option>
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
-								<td colspan="3"><input type="text" class="layui-input"></td>
+								<td colspan="3"><input name="d1wucancb" type="text" class="layui-input"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">晚餐</label></td>
 								<td>
-									<select name="wdiet1" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="d1wancan" style="height: 35px;width:180px;" onchange="typechange(this,'fantype')" lay-ignore>
+										<option value="0">--请选择--</option>
+
 									</select>
 								</td>
 								<td>
-									<select name="city" lay-verify="required">
-										<option value=""selected="selected">请选择酒店</option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="d1wanfan" style="height: 35px;width:180px;" onchange="typechange(this,'wancan')" lay-ignore>
+										<option value="0">--请选择晚餐类型--</option>
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
-								<td colspan="3"><input type="text" class="layui-input"></td>
+								<td colspan="3"><input type="text" name="d1wancancb" class="layui-input"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">行程</label></td>
-								<td colspan="5"> <textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+								<td colspan="5"> <textarea placeholder="请输入内容" class="layui-textarea" name="d1xingcheng"></textarea></td>
 							</tr>
 						</table>
 					</form>
@@ -208,13 +160,8 @@
 					<tr>
 						<td><label class="layui-form-label">导游：</label></td>
 						<td>
-							<select name="guide" lay-verify="required">
-								<option value="" selected="selected">导游一</option>
-								<option value="0">哈红祖</option>
-								<option value="1">无敌组</option>
-								<option value="2">哈皮组</option>
-								<option value="3">66组</option>
-								<option value="4">纪检组</option>
+							<select name="guide"style="height: 35px;width:180px;" lay-ignore>
+								<option value="0">--请选择--</option>
 							</select>
 						</td>
 						<td></td>
@@ -239,29 +186,19 @@
 					<tr>
 						<td><label class="layui-form-label">车队：</label></td>
 								<td>
-									<select name="vehicle" lay-verify="required">
-										<option value="" selected="selected">请选择车辆类型</option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:180px;" lay-ignore>
+										<option value="0">--请选择--</option>
 									</select>
 								</td>
 								<td>
-									<select name="city" lay-verify="required">
-										<option value=""selected="selected">车辆公司</option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+									<select name="city" style="height: 35px;width:180px;" lay-ignore>
+										<option value="0">--请选择车队类型--</option>
 									</select>
 								</td>
 							<td>
 								<table border="0" cellspacing="0" cellpadding="0">
 									<tr>
-											<td><label class="layui-form-label" >成本价:</label></td>
+											<td><label class="layui-form-label" >数量:</label></td>
 								<td><input type="text" class="layui-input"></td>
 									</tr>
 								</table>
@@ -269,7 +206,7 @@
 						<td>
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td><label class="layui-form-label" >数量:</label></td>
+									<td><label class="layui-form-label" >成本价:</label></td>
 									<td><input type="text" class="layui-input"></td>
 								</tr>
 							</table>
@@ -278,18 +215,14 @@
 					<tr>
 						<td><label class="layui-form-label">车辆联系人：</label></td>
 						<td width="300px"><input type="text" class="layui-input"></td>
-						<td>(如：张师傅 13333333333 晋H:88888)</td>
+						<td colspan="3">(如：张师傅 13333333333 晋H:88888)</td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">返程类型：</label></td>
 						<td>
-							<select name="traffic" lay-verify="required">
+							<select name="traffic" style="height: 35px;width:180px;" lay-ignore>
 								<option value="" selected="selected">--无--</option>
 								<option value="0">哈红祖</option>
-								<option value="1">无敌组</option>
-								<option value="2">哈皮组</option>
-								<option value="3">66组</option>
-								<option value="4">纪检组</option>
 							</select>
 						</td>
 					</tr>
@@ -336,23 +269,18 @@
             }
 
             function add(onClickjd) {
-
-                $(onClickjd).parent().parent().next().after("<tr id='scenic'>" +
+				var name=$(onClickjd).attr("name");
+				var index=name.substring(1,2);
+				var html=$("select[name=d1scenicspot1]").html();
+				var leng=$("tr[name=d"+index+"jingdian]").length+1;
+                $(onClickjd).parent().parent().next().after("<tr id='scenic' name='d"+index+"jingdian'>" +
                     "<td><label class='layui-form-label'>景点</label></td>" +
                     "<td>" +
-                    "<select name='city' lay-verify='required'>" +
-                    "<option value=''></option>" +
-                    "<option value='0'>哈红祖</option>" +
-                    "<option value='1'>无敌组</option>" +
-                    "<option value='2'>哈皮组</option>" +
-                    "<option value='3'>66组</option>" +
-                    "<option value='4'>纪检组</option>" +
-                    "</select>" +
+                    "<select name='d"+index+"scenicspot"+leng+"' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
+                    ""+html+"</select>" +
                     "</td>" +
                     "<td><label class='layui-form-label'>成本价:</label></td>" +
-                    "<td><input type='text' class='layui-input'></td>" +
-                    "<td><label class='layui-form-label'>报价:</label></td>" +
-                    "<td><input type='text' class='layui-input'></td>" +
+                    "<td><input type='text' name='d"+index+"costprice"+leng+"' class='layui-input'></td>" +
                     "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>" +
                     "</tr>");
                 layui.use(['form', 'layedit', 'laydate', 'element'], function () {
@@ -366,10 +294,7 @@
                     form.render('select'); //刷新select选择框渲染
                 });
             }
-
 			$(function() {
-
-
 				layui.use(['form', 'layedit', 'laydate','element'], function() {
 					var form = layui.form,
 							layer = layui.layer,
@@ -387,32 +312,128 @@
                         elem: '#date2'
                     });
 					element.render( 'test1');
-					form.render('select', 'test1');
-					form.on('radio(*)', function(data){
-						/*console.log(data.elem); //得到radio原始DOM对象
-						 console.log(data.value); //被点击的radio的value值*/
-						alert("是是是");
 
-					});
 				});
+                gerresource();
 			});
 			//获取下拉框资源信息
             function gerresource(){
 				$.ajax({
-					url:"",
+					url:"/dispatch/getresource",
 					dataType:"json",
 					type:"get",
 					success:function (result) {
-					    var content="<option value=''></option>";
+					    //给组团社下拉框加载信息
+					    var content="<option value='0'>--请选择--</option>";
 						$(result.data['travel']).each(function (i,e) {
-							
+								content+="<option value='"+e.travelId+"'>"+e.travelName+"</option>";
                         });
+						$("select[name=travel]").html(content);
+						content="<option value='0'>--请选择--</option>";
+						//线路信息
+                        $(result.data['template']).each(function (i,e) {
+                            content+="<option value='"+e.templateId+"'>"+e.templateName+"</option>";
+                        });
+                        $("select[name=d1template]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+                        //酒店类型
+                        $(result.data['theroom']).each(function (i,e) {
+                            content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                        });
+                        $("select[name=d1hoteltype]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+						//景点资源
+                        $(result.data['scenicspot']).each(function (i,e) {
+                            content+="<option value='"+e.scenicSpotId+"'>"+e.scenicSpotName+"</option>";
+                        });
+                        $("select[name=d1scenicspot1]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+                        //购物地资源
+                        $(result.data['shopping']).each(function (i,e) {
+                            content+="<option value='"+e.shoppingId+"'>"+e.shoppingSite+"</option>";
+                        });
+                        $("select[name=dlshopping]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+                        //饭店类型
+                        $(result.data['diet']).each(function (i,e) {
+                            content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                        });
+                        $("select[name=d1wucan]").html(content);
+                        $("select[name=d1wancan]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+                        //导游
+                        $(result.data['guide']).each(function (i,e) {
+                            content+="<option value='"+e.guideId+"'>"+e.guideName+"</option>";
+                        });
+                        $("select[name=guide]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+                        //车辆类型
+                        $(result.data['vehicle']).each(function (i,e) {
+                            content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                        });
+                        $("select[name=vehicle]").html(content);
+                        content="<option value='0'>--请选择--</option>";
+                        //返程类型
+                        $(result.data['traffic']).each(function (i,e) {
+                            content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                        });
+                        $("select[name=traffic]").html(content);
+                        content="<option value='0'>--请选择--</option>";
                     },
 					error:function (err) {
 						alert(err);
                     }
 				});
 			}
+			function jdchange() {
+				
+            }
+			function xianluchange(obj) {
+				
+            }
+            function typechange(obj,type){
+                alert("666");
+                var valueId=$(obj).val();
+                if(valueId==0){
+                    return;
+				}
+				$.ajax({
+					url:"/dispatch/listinfoByvalueId",
+					data:{type:type,valueId:valueId},
+					dataType:"json",
+					type:"get",
+					success:function (result) {
+						 var content="<option value='0'>--请选择酒店--</option>";
+                        if(type=="hoteltype"){
+                            content="<option value='0'>--请选择酒店--</option>";
+                            $(result.data).each(function (i,e) {
+                                content+="<option value='"+e.hotelId+"' price='"+e.gettypeprice+"'>--"+e.hotelName+"--</option>";
+                            });
+                        }else if(type=="fantype"){
+                            content="<option value='0'>--请选择饭店--</option>";
+                            $(result.data).each(function (i,e) {
+                                content+="<option value='"+e.restaurantId+"' price='"+e.gettypeprice+"'>--"+e.restaurantName+"--</option>";
+                            });
+                        }else if(type=="cartype"){
+                            content="<option value='0'>--请选择车队公司--</option>";
+                            $(result.data).each(function (i,e) {
+                                content+="<option value='"+e.carRentalId+"'>--"+e.carRentalName+"--</option>";
+                            });
+                        }
+                        $(obj).parent().next().children("select").html(content);
+
+                    },
+					error:function (err) {
+						alert(err);
+                    }
+				});
+			}
+			function sumchange(obj){
+
+			}
+			function sipeichange(obj) {
+
+            }
 		</script>
 </body>
 </html>
