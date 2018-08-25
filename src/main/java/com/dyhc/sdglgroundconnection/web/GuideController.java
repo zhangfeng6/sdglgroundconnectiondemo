@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.service.GuideService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
+import com.dyhc.sdglgroundconnection.utils.MD5;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.dyhc.sdglgroundconnection.utils.WechatFileUploadUtil;
 import com.github.pagehelper.PageInfo;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Vector;
@@ -118,13 +118,20 @@ public class GuideController{
     @RequestMapping("guideLogin")
     public ReponseResult guideLogin(String username,String password){
         try {
-            Guide guide=guideService.login(username,password);
-            if (guide==null){
+            String mima=MD5.encodeByMD5(password);
+            System.out.println(mima);
+            Guide guide=guideService.login(username,mima);
+            if (guide!=null){
+                if(mima.equals(guide.getPassword())){
+                    logger.info("method:login 微信登录成功");
+                    return ReponseResult.ok(guide,"登录成功");
+                }else {
+                    logger.error("method:login 微信登录失败");
+                    return ReponseResult.err("登录失败");
+                }
+            }else {
                 logger.error("method:login 微信登录失败");
                 return ReponseResult.err("登录失败");
-            }else {
-                logger.info("method:login 微信登录成功");
-                return ReponseResult.ok(guide,"登录成功");
             }
 
         }catch (Exception e){
@@ -144,7 +151,6 @@ public class GuideController{
             Vector<String> list= WechatFileUploadUtil.uploadImage(request,".jpg");
             String aa= request.getParameter("guideId");
             System.out.println(aa);
-            System.out.println(list.size());
             return ReponseResult.ok(list,"上传成功");
         }catch (Exception e){
             e.printStackTrace();

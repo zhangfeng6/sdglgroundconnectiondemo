@@ -17,4 +17,6 @@ public interface LogService {
      * @throws Exception
      */
     Integer inserLog(Log log)throws Exception;
+
+
 }

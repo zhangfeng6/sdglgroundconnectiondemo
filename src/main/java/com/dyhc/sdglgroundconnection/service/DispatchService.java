@@ -40,4 +40,13 @@ public interface DispatchService {
      * @throws Exception
      */
     List listinfoByvalueId(String type,Integer valueId)throws Exception;
+
+
+
+    /**
+     * 根据导游id查询调度信息     陈庆武
+     * @param guideId 导游id
+     * @return
+     */
+    Dispatch getDispatchByguideId(Integer guideId)throws Exception;
 }

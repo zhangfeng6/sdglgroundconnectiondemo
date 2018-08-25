@@ -8,8 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -34,6 +37,9 @@ public class LogController  {
     @LogNotes(operationType="日志",content="添加")
     public ReponseResult insertLog(Log log){
         try {
+            log.setWhetherDel(0);
+            log.setCreater(1);
+            log.setCreationDate(new Date());
             Integer result=logService.inserLog(log);
             ReponseResult data=null;
             if (result==1){
