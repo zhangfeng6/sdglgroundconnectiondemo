@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
+import com.dyhc.sdglgroundconnection.pojo.VehicleType;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -17,13 +18,27 @@ public interface DictionariesService {
      * 获取所有的景点等级
      * @return
      */
+<<<<<<< HEAD
+    PageInfo<Dictionaries> listDictionaries();
+=======
     PageInfo<Dictionaries> listDictionaries()throws Exception;
 
+>>>>>>> origin/master
 
     /**
      * 查询所有的车辆类型
      * @return
      */
+<<<<<<< HEAD
+    List<VehicleType> listVehicletype();
+
+    /**
+     * 赵伟伟
+     * 按id查询
+     * @return
+     */
+    Dictionaries selectByDictionariesId(int dictionariesId);
+=======
     PageInfo<Dictionaries> listDictionaries1()throws Exception;
 
 
@@ -32,4 +47,5 @@ public interface DictionariesService {
      * @return
      */
     List<Dictionaries> listhoteltype()throws Exception;
+>>>>>>> origin/master
 }

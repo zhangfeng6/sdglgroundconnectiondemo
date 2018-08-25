@@ -17,28 +17,29 @@
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td><label class="layui-form-label">组团社名称</label></td>
-					<td>
-						<select name="city" lay-verify="required">
-							<option value=""></option>
-							<option value="0">哈红祖</option>
-							<option value="1">无敌组</option>
-							<option value="2">哈皮组</option>
-							<option value="3">66组</option>
-							<option value="4">纪检组</option>
+					<td id="xzzutuanshe">
+						<select name="travelName" lay-verify="required" lay-filter="zutuanshe">
+
 						</select>
 					</td>
 					<td><label class="layui-form-label">人数</label></td>
-					<td><input type="text" class="layui-input"></td>
+					<td><input id="number" type="text" class="layui-input"></td>
 				</tr>
 				<tr>
 					<td><label class="layui-form-label">开始时间</label></td>
-					<td> <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+					<td> <input type="text" name="travelStartTime" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
 					<td><label class="layui-form-label">结束时间</label></td>
-					<td> <input type="text" name="date" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+					<td> <input type="text" name="travelEndTime" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+				</tr>
+				<tr>
+					<td><label class="layui-form-label">选择模板</label></td>
+					<td id="xzmuban"><select name="tourismtemplateName" lay-filter="muban"></select></td>
+					<td><button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="muban1(this)">自行填写</button></td>
+					<td></td>
 				</tr>
 			</table>
 		</form>
-		<div id="zong"  lay-filter="test1">
+		<div id="zong1" name="zong" lay-filter="test1">
 			<div style='margin-bottom: 30px;width: 800px'>
 				<input type="image" src="/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)' />
 				<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right;height: 30px;width: 35px;" />
@@ -47,17 +48,12 @@
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td><label class="layui-form-label">线路</label></td>
-								<td>
-									<select name="city" lay-verify="required" lay-search>
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+								<td class='xzxianlu'>
+									<select id="xianlu" name="lineArriveName" lay-verify="required" lay-search lay-filter="xianlu">
+
 									</select>
 								</td>
-								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu(this)">自行填写</button></td>
+								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu1(this)">自行填写</button></td>
 								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px'>保存模板</button></td>
 							</tr>
 							<tr>
@@ -69,86 +65,65 @@
 
 							<tr>
 								<td><label class="layui-form-label">酒店</label></td>
-								<td>
-									<select name="city" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+								<td class="jiudian">
+									<select id="jiudian" class="hotelName" name="hotelName" lay-verify="required" lay-filter="jiudian">
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input name="jcostPrice" type="text" class="layui-input"></td>
 								<td><label class="layui-form-label">报价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input name="joffer" type="text" class="layui-input"></td>
 							</tr>
 							<!--点击新增景点-->
 							<tr id="onClickjd">
-								<td colspan="2"><button class="layui-btn" type="button" style="font-size: 12px" onclick="insertJingdian(this)">添加景点+</button></td>
+								<td colspan="2"><button id="tian" class="layui-btn" type="button" style="font-size: 12px" onclick="insertJingdian(this)">添加景点+</button></td>
 							</tr>
 							<!--点击新增结束-->
-							<tr id="scenic">
+							<tr id="scenic1" name="scenic" class="scenic">
 								<td><label class="layui-form-label">景点</label></td>
-								<td>
-									<select name="city" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+								<td class="jingdian">
+									<select id="jingdian" name="scenicSpotName" lay-verify="required" lay-filter="jingdian">
+
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价:</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input name="jdcostPrice" type="text" class="layui-input"></td>
 								<td><label class="layui-form-label">报价:</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td><input name="jdoffer" type="text" class="layui-input"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">午餐</label></td>
-								<td>
-									<select name="city" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+								<td class="wuc">
+									<select id="wucan" name="typeName" lay-verify="required" lay-filter="wucan">
+
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td class="wucb"><input type="text" class="layui-input" name="cb"></td>
 								<td><label class="layui-form-label">报价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td class="wubj"><input type="text" class="layui-input" name="bj"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">晚餐</label></td>
-								<td>
-									<select name="city" lay-verify="required">
-										<option value=""></option>
-										<option value="0">哈红祖</option>
-										<option value="1">无敌组</option>
-										<option value="2">哈皮组</option>
-										<option value="3">66组</option>
-										<option value="4">纪检组</option>
+								<td class="wanc">
+									<select id="wancan" name="typeName" lay-verify="required" lay-filter="wancan">
+
 									</select>
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td class="wancb"><input type="text" class="layui-input" name="cb"></td>
 								<td><label class="layui-form-label">报价</label></td>
-								<td><input type="text" class="layui-input"></td>
+								<td class="wanbj"><input type="text" class="layui-input" name="bj"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">行程</label></td>
-								<td colspan="5"> <textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+								<td colspan="5"> <textarea name="trip" placeholder="请输入内容" class="layui-textarea"></textarea></td>
 							</tr>
 						</table>
 					</form>
 				</div>
 			</div>
-			<button class='layui-btn layui-btn-normal layui-btn-radius' onclick='addss()' id="add">十</button>
+			<button class='layui-btn layui-btn-normal layui-btn-radius' onclick='addss1()' id="add">十</button>
 			<!---中结束-->
 		</div>
 		<div id="divfoot">
@@ -156,20 +131,15 @@
 				<table border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td><label class="layui-form-label">车队：</label></td>
-						<td>
-							<select name="city" lay-verify="required">
-								<option value="" selected="selected">请选择车队类型</option>
-								<option value="0">哈红祖</option>
-								<option value="1">无敌组</option>
-								<option value="2">哈皮组</option>
-								<option value="3">66组</option>
-								<option value="4">纪检组</option>
+						<td id="ctypeId">
+							<select name="cheduiName" lay-verify="required" lay-filter="chedui">
+
 							</select>
 						</td>
 						<td><label class="layui-form-label">成本价</label></td>
-						<td><input type="text" class="layui-input"></td>
+						<td><input id="ccostPrice" type="text" class="layui-input"></td>
 						<td><label class="layui-form-label">报价</label></td>
-						<td><input type="text" class="layui-input"></td>
+						<td><input id="coffer" type="text" class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">其他:</label></td>
@@ -177,9 +147,9 @@
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><label class="layui-form-label">成本价</label></td>
-									<td width="300px"><input type="text" class="layui-input"></td>
+									<td width="300px"><input id="qcostPrice" type="text" class="layui-input"></td>
 									<td><label class="layui-form-label">报价</label></td>
-									<td width="300px"><input type="text" class="layui-input"></td>
+									<td width="300px"><input id="qoffer" type="text" class="layui-input"></td>
 								</tr>
 							</table>
 						</td>
@@ -190,7 +160,7 @@
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
-						<td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+						<td colspan="5"><textarea id="remarks" placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">接待标准：</label></td>
@@ -200,18 +170,17 @@
 						<td></td>
 						<td><button class='layui-btn layui-btn-normal layui-btn-radius'>预览报价单</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td><button class='layui-btn layui-btn-normal layui-btn-radius' id="baocun">打印报价单</button></td>
+						<td style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun1" onclick="baocunmuban()">保存</button></td>
 					</tr>
 				</table>
 			</form>
 			<!--底部div结束-->
 		</div>
 	</table>
-		<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+		<script src="/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="/layui.js"></script>
 		<script type="text/javascript" src="/js/baojiadan.js"></script>
 		<script type="text/javascript">
-			$(function() {
-			});	
 				layui.use(['form', 'layedit', 'laydate','element'], function() {
 					var form = layui.form,
 						layer = layui.layer,
@@ -230,9 +199,433 @@
                     });
 					   element.render( 'test1');
 					   form.render('select', 'test1');
+                       form.render('select', 'jiudian');
                        form.render('select');
+
+                    form.on('select(wancan)',function(data){
+                        selectByDictionariesId(data.value,1,this);
+                    });
+                    form.on('select(wucan)',function(data){
+                        selectByDictionariesId(data.value,1,this);
+                    });
+                    form.on('select(jingdian)',function(data){
+                        selectByScenicSpotId(data.value,1,this);
+                    });
+                    form.on('select(jiudian)',function(data){
+                        selectByHotelId(data.value,1,this);
+                    });
+                    form.on('select(xianlu)',function(data){
+                        selectByofferLineRecordId(data.value,1,this);
+                    });
+                    form.on('select(muban)',function(data){
+                        selectTourismandlineAll(data.value,1,this);
+                    });
+                    form.on('select(chedui)',function(data){
+                        selectByDictionariesId(data.value,1,this);
+                    });
 				});
+                var id=0;
+				$(function(){
+                    selectTourismtemplate()
+                    selectofferline()
+                    selectHotel()
+                    listScenicspotAll()
+                    selectMealType()
+                    selectTravel()
+                    listVehicletype()
+                    var thisURL = document.URL;
+                    var  getval =thisURL.split('?')[1];
+                    if (getval!=undefined){
+                        id= getval.split("=")[1];
+                    }
+				})
+
+
+				function selectTourismtemplate(){
+				    $.ajax({
+                        url:"/Tourismtemplate/selectTourismtemplate",
+                        data:{},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+							var content="<option selected>请选择</option>";
+							$.each(data.data,function(i,e){
+								content+="<option value='"+e.tourismId+"'>"+e.tourismtemplateName+"</option>";
+							})
+							$("[name='tourismtemplateName']").html(content);
+						}
+					})
+				}
+
+            function selectofferline(){
+                $.ajax({
+                    url:"/Template/selectTemplate",
+                    data:{},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+                        var content="<option>请选择</option>";
+                        $.each(data.data,function(i,e){
+                            content+="<option value='"+e.templateId+"'>"+e.templateName+"</option>";
+                        })
+                        $("[name='lineArriveName']").html(content);
+                    }
+                })
+            }
+
+            function selectHotel(){
+                $.ajax({
+                    url:"/Hotel/selectHotel",
+                    data:{},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+                        var content="<option>请选择</option>";
+                        $.each(data.data,function(i,e){
+                            content+="<option value='"+e.hotelId+"'>"+e.hotelName+"</option>";
+                        })
+                        $("[name='hotelName']").html(content);
+                    }
+                })
+            }
+
+
+
+            function listScenicspotAll(){
+                $.ajax({
+                    url:"/Scenicspot/listScenicspotAll",
+                    data:{},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+                        var content="<option>请选择</option>";
+                        $.each(data.data,function(i,e){
+                            content+="<option value='"+e.scenicSpotId+"'>"+e.scenicSpotName+"</option>";
+                        })
+                        $("[name='scenicSpotName']").html(content);
+                    }
+                })
+            }
+
+
+            function selectMealType(){
+                $.ajax({
+                    url:"/MealType/selectMealType",
+                    data:{},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+                        var content="<option>请选择</option>";
+                        $.each(data.data,function(i,e){
+                            content+="<option value='"+e.dictionariesId+"'>"+e.valueContent1+"</option>";
+                        })
+                        $("[name='typeName']").html(content);
+                    }
+                })
+            }
+
+            function selectTravel(){
+                $.ajax({
+                    url:"/Travel/selectTravel",
+                    data:{},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+                        var content="<option>请选择</option>";
+                        $.each(data.data,function(i,e){
+                            content+="<option value='"+e.travelId+"'>"+e.travelName+"</option>";
+                        })
+                        $("[name='travelName']").html(content);
+                    }
+                })
+            }
+
+                function listVehicletype(){
+                    $.ajax({
+                        url:"/Dictionaries/listVehicletype",
+                        data:{},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            var content="<option>请选择</option>";
+                            $.each(data.data,function(i,e){
+                                content+="<option value='"+e.dictionariesId+"'>"+e.valueContent1+"</option>";
+                            })
+                            $("[name='cheduiName']").html(content);
+                        }
+                    })
+                }
+
+
+            function selectByDictionariesId(id,index,qq){
+                //var id = $("[name='typeName'] option:selected").val();
+                $.ajax({
+                    url:"/Dictionaries/selectByDictionariesId",
+                    data:{dictionariesId:id},
+                    dataType:"json",
+                    type:"get",
+                    success:function (data) {
+                        $(qq).parent().parent().parent().next().next().children().val(data.data.valueContent2);
+                        $(qq).parent().parent().parent().next().next().next().next().children().val(data.data.valueContent3);
+                    }
+                })
+			}
+
+                function selectByScenicSpotId(id,index,qq){
+                    //var id = $("[name='typeName'] option:selected").val();'
+                    $.ajax({
+                        url:"/Scenicspot/selectByScenicSpotId",
+                        data:{scenicSpotId:id},
+                        dataType:"json",
+                        type:"get",
+                        success:function (data) {
+                            $(qq).parent().parent().parent().next().next().children().val(data.data.costprice);
+                            $(qq).parent().parent().parent().next().next().next().next().children().val(data.data.offer);
+                        }
+                    })
+                }
+
+                function selectByHotelId(id,index,qq){
+                    //var id = $("[name='typeName'] option:selected").val();
+                    $.ajax({
+                        url:"/Hotel/selectByHotelId",
+                        data:{hotelId:id},
+                        dataType:"json",
+                        type:"get",
+                        success:function (data) {
+                            $(qq).parent().parent().parent().next().next().children().val(data.data.costprice);
+                            $(qq).parent().parent().parent().next().next().next().next().children().val(data.data.offer);
+                        }
+                    })
+                }
+
+
+
+
+
+                function selectByofferLineRecordId(id,index,qq){
+                    for (var k=1;k<=5;k++){
+                        $(qq).parent().parent().parent().parent().parent().find("[name=scenic]").eq(1).remove();
+                    }
+                    /*var id = $("[name='typeName'] option:selected").val();*/
+					var qq = $(qq).parent();
+					var ww;
+					if (qq.length==1){
+                        ww = qq[0].firstChild;
+					}else{
+                        ww = qq[1].firstChild;
+					}
+					var ee = $(ww).html();
+                    $.ajax({
+                        url:"/Template/selectTemplateAll",
+                        data:{templateId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            var a = $(ww).parent().parent().parent().parent().next().next().next().children().children();
+                            for (var i=1;i<data.data.scenicspotsList.length;i++) {
+                                insertJingdian(a);
+                            }
+                            for (var j=1;j<=data.data.scenicspotsList.length;j++) {
+                                $(ww).parent().parent().parent().parent().parent().children().eq(j+3).children().eq(3).children().val(data.data.scenicspotsList[j-1].costprice);
+                                $(ww).parent().parent().parent().parent().parent().children().eq(j+3).children().eq(5).children().val(data.data.scenicspotsList[j-1].offer);
+                                $(ww).parent().parent().parent().parent().parent().children().eq(j+3).children().eq(1).children().children().each(function(){
+                                    if($(this).text() ==data.data.scenicspotsList[j-1].scenicSpotName){
+                                        $(this).prop("selected",true);
+                                    }
+                                })
+                            }
+                            //$(qq).parent().parent().parent().parent().next().next().children().eq(1).children().children().append("<option>"+data.data.hotelName+"</option>");
+                            $(ww).parent().parent().parent().parent().next().next().children().eq(3).children().val(data.data.thcostPrice);
+                            $(ww).parent().parent().parent().parent().next().next().children().eq(5).children().val(data.data.thoffer);
+                            $(ww).parent().parent().parent().parent().next().next().children().eq(1).children().children().each(function(){
+                                if($(this).text() ==data.data.hotelName){
+                                    $(this).prop("selected",true);
+                                }
+                            })
+
+
+
+
+
+                            /*for (var i=1;i<=data.data.scenicspotsList.length;i++) {
+                                var sd = $("#zong1").children().children().html();
+                                var d = $(qq).parent().html();
+                                $(b).children().eq(3).children().val(data.data.scenicspotsList[i-1].costprice);
+                                $(b).children().eq(5).children().val(data.data.scenicspotsList[i-1].offer);
+                                $(b).children().eq(1).children().children().each(function(){
+                                    if($(this).text() ==data.data.scenicspotsList[i-1].scenicSpotName){
+                                        $(this).prop("selected",true);
+                                    }
+                                })
+							}*/
+                            /*$(ww).parent().parent().parent().parent().next().next().next().next().children().eq(3).children().val(data.data.scenicspotsList[0].costprice);
+                            $(ww).parent().parent().parent().parent().next().next().next().next().children().eq(5).children().val(data.data.scenicspotsList[0].offer);
+                            $(ww).parent().parent().parent().parent().next().next().next().next().children().eq(1).children().children().each(function(){
+                                if($(this).text() ==data.data.scenicspotsList[0].scenicSpotName){
+                                    $(this).prop("selected",true);
+                                }
+                            })*/
+
+                            layui.form.render('select');
+                        }
+                    })
+                }
+
+                function apps(onClickjd) {
+                    var A=$("#zong1");
+                    if(A.length==5){
+                        alert("最多可选择五天行程！");
+                        return;
+                    }
+                    var index=parseInt(A.length)+1;
+                    var content=$("#zong1").html();
+                    var a = $(onClickjd).parent().parent().parent().parent().parent().parent().html();
+                    $(onClickjd).parent().parent().parent().parent().parent().parent().parent().after("<div id='zong"+index+"' lay-filter='test1'>"+content+"</div>");
+                    layui.use(['form', 'layedit', 'laydate','element'], function() {
+                        var form = layui.form,
+                            layer = layui.layer,
+                            layedit = layui.layedit,
+                            element=layui.element,
+                            laydate = layui.laydate,
+                            a;
+                        element.render( 'test1');
+                        form.render(); //更新全部
+                        form.render('select','skt'); //刷新select选择框渲染
+                    });
+                }
+
+
+                function selectTourismandlineAll(id,index,qq){
+				    for (var i=2;i<=5;i++){
+				        var c = "#zong"+i;
+				        $(c).remove();
+					}
+                    for (var i=2;i<=5;i++){
+                        var c = "#scenic"+i;
+                        $(c).remove();
+                    }
+                    $("#zong1").find("input").val("");
+                    $("#zong1").find("select").val("请选择");
+                    $.ajax({
+                        url:"/Tourismandline/selectTourismandlineAll",
+                        data:{tourismId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+							for (var i=1;i<data.data.length;i++){
+                                addss1();
+							}
+                            for (var i=1;i<=data.data.length;i++){
+							    var c = "#zong"+i;
+							    var a = $(c).children().children().eq(2).children().children().children().eq(0).children().eq(0).children().eq(1).children().html();
+
+                                $(c).children().children().eq(2).children().children().children().eq(0).children().eq(0).children().eq(1).children().children().each(function(){
+                                    if($(this).val() ==data.data[i-1].templateId){
+                                        $(this).prop("selected",true);
+                                        var xian = $(c).children().children().eq(2).children().children().children().eq(0).children().eq(0).children().eq(1).children().children().children();
+                                        selectByofferLineRecordId(data.data[i-1].templateId,1,xian);
+                                    }
+                                })
+                                layui.form.render('select');
+                            }
+                        }
+                    })
+				}
+
+
+
+				function baocunmuban(){
+				    var tripList = new Array();
+				    var xdateList = new Array();
+				    var xianluList = new Array();
+                    var wucList = new Array();
+                    var wucbList = new Array();
+                    var wubjList = new Array();
+                    var wancList = new Array();
+                    var wancbList = new Array();
+                    var wanbjList = new Array();
+                    var jiudianList = new Array();
+                    var jcostPrice = new Array();
+                    var joffer = new Array();
+				    var xianluCount = $("[name=zong]").length;
+				    var jingdianCount = 0;
+				    var jingdianList = new Array();
+                    var jdcostPriceList = new Array();
+                    var jdofferList = new Array();
+                    for (var i=0;i<xianluCount;i++){
+                        var index = "#zong"+(i+1);
+                        jingdianCount = $(index).find("[name=scenic]").length;
+                        var jingdian = new Array();
+                        var jdcostPrice = new Array();
+                        var jdoffer = new Array();
+						for (var j=0;j<jingdianCount;j++){
+                            jingdian[j] = $(".jingdian").eq(j).children().val();
+                            jdcostPrice[j] = $("[name=jdcostPrice]").val();
+                            jdoffer[j] = $("[name=jdoffer]").val();
+						}
+                        jingdianList[i] = jingdian;
+                        jdcostPriceList[i] = jdcostPrice;
+                        jdofferList[i] = jdoffer;
+
+                        tripList[i] = $("[name=trip]").eq(i).val();
+                        xdateList[i] = $("[name=date]").eq(i).val();
+                        xianluList[i] = $(".xzxianlu").eq(i).children().val();
+                        wucList[i] = $(".wuc").eq(i).children().val();
+                        wucbList[i] = $(".wucb").eq(i).children().val();
+                        wubjList[i] = $(".wubj").eq(i).children().val();
+
+                        wancList[i] = $(".wanc").eq(i).children().val();
+                        wancbList[i] = $(".wancb").eq(i).children().val();
+                        wanbjList[i] = $(".wanbj").eq(i).children().val();
+
+                        jiudianList[i] = $(".jiudian").eq(i).children().val();
+                        jcostPrice[i] = $("[name=jcostPrice]").eq(i).val();
+                        joffer[i] = $("[name=joffer]").eq(i).val();
+                    }
+
+
+
+
+
+
+
+
+                    var travelId = $("#xzzutuanshe").children().val();
+					var number = $("#number").val();
+                    var remarks = $("#remarks").val();
+					var travelStartTime = $("[name=travelStartTime]").val();
+					var travelEndTime = $("[name=travelEndTime]").val();
+					var qcostPrice = $("#qcostPrice").val();
+					var qoffer = $("#qoffer").val();
+                    var ctypeId = $("#ctypeId").children().val();
+                    var ccostPrice = $("#ccostPrice").val();
+                    var coffer = $("#coffer").val();
+
+
+
+					$.ajax({
+                        url:"/Offer/insertOffer",
+                        data:{tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer},
+                        dataType:"json",
+                        async: false,
+                        traditional: true,
+                        type:"get",
+                        success:function (data) {
+                            alert(data.msg);
+                            location.reload();
+						}
+					})
+				}
 		</script>
 	</body>
-
 </html>

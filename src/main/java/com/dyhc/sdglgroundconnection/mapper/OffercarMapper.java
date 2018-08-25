@@ -12,4 +12,12 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface OffercarMapper extends CommonMapper<Offercar>{
+
+    /**
+     * 赵伟伟
+     * 新增汽车报价
+     * @param offercar
+     * @return
+     */
+    int insertOffercar(Offercar offercar);
 }

@@ -4,6 +4,7 @@ import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,6 +32,23 @@ public interface HotelService {
      */
     Hotel getHotelById(Integer id) throws Exception;
 
+<<<<<<< HEAD
+    /**
+     * 赵伟伟
+     * 查询酒店
+     * @return
+     * @throws Exception
+     */
+    List<Hotel> selectHotel() throws Exception;
+
+
+    /**
+     * 按编号查询景点
+     * @param
+     * @return
+     */
+    Hotel selectByHotelId(Integer hotelId);
+=======
 
     /**
      *查询酒店表:小亮
@@ -104,4 +122,5 @@ public interface HotelService {
      * @throws Exception
      */
     Hotel fuzhiHotel(Integer hotelId)throws Exception;
+>>>>>>> origin/master
 }

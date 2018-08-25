@@ -49,5 +49,10 @@ public class MealTypeServiceImpl implements MealTypeService {
         return mealTypeMapper.selectById(typeId);
     }
 
+    @Override
+    public List<Dictionaries> selectMealType() {
+        return mealTypeMapper.selectMealType();
+    }
+
 
 }

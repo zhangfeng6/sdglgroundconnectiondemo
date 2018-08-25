@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -18,8 +19,12 @@ public class Offer {
     @Column(name = "travelId")
     private Integer travelId; // 组团社编号（外键，与组团社关联）
     @Column(name = "travelStartTime")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern ="yyyy-MM-dd" )
     private Timestamp travelStartTime; // 旅行开始时间
     @Column(name = "travelEndTime")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern ="yyyy-MM-dd" )
     private Timestamp travelEndTime; // 旅行结束时间
     private Integer number; // 人数
     private String tourist; // 客源地
@@ -37,14 +42,26 @@ public class Offer {
     private Integer creater; // 创建人 （外键，与人员表关联）
     private Integer modifier; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "modifiedData")
     private Timestamp modifiedData; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Timestamp creationDate; // 创建时间
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private Travel travel;
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
+    }
 
     @Id
     @Column(name = "offerId")

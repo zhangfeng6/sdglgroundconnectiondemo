@@ -1,10 +1,16 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Travel;
+<<<<<<< HEAD
+=======
 import com.github.pagehelper.PageInfo;
+>>>>>>> origin/master
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -12,6 +18,21 @@ import org.springframework.stereotype.Service;
  **/
 public interface TravelService {
     /**
+<<<<<<< HEAD
+     * 赵伟伟
+     * 查询全部组团社
+     * @return
+     */
+    List<Travel> selectTravel();
+
+    /**
+     * 赵伟伟
+     * 查询组团社
+     * @param travelId
+     * @return
+     */
+    Travel selectTravelById(Integer travelId);
+=======
      * 添加信息
      * @param travel
      * @return
@@ -63,4 +84,5 @@ public interface TravelService {
      */
     Integer getupdlala(Travel travel);
 
+>>>>>>> origin/master
 }

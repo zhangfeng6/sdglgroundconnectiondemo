@@ -34,6 +34,78 @@ public class Template {
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private String scenicSpotName;
+    @Transient
+    private Double tsoffer;
+    @Transient
+    private Double tscostprice;
+
+    public List<Scenicspot> getScenicspotsList() {
+        return scenicspotsList;
+    }
+
+    public void setScenicspotsList(List<Scenicspot> scenicspotsList) {
+        this.scenicspotsList = scenicspotsList;
+    }
+
+    @Transient
+    private List<Scenicspot> scenicspotsList;
+
+    public String getScenicSpotName() {
+        return scenicSpotName;
+    }
+
+    public void setScenicSpotName(String scenicSpotName) {
+        this.scenicSpotName = scenicSpotName;
+    }
+
+    public Double getTsoffer() {
+        return tsoffer;
+    }
+
+    public void setTsoffer(Double tsoffer) {
+        this.tsoffer = tsoffer;
+    }
+
+    public Double getTscostprice() {
+        return tscostprice;
+    }
+
+    public void setTscostprice(Double tscostprice) {
+        this.tscostprice = tscostprice;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public Double getThcostPrice() {
+        return thcostPrice;
+    }
+
+    public void setThcostPrice(Double thcostPrice) {
+        this.thcostPrice = thcostPrice;
+    }
+
+    public Double getThoffer() {
+        return thoffer;
+    }
+
+    public void setThoffer(Double thoffer) {
+        this.thoffer = thoffer;
+    }
+
+    @Transient
+    private String hotelName;
+    @Transient
+    private Double thcostPrice;
+    @Transient
+    private Double thoffer;
 
     @Transient
     private Staff staff;

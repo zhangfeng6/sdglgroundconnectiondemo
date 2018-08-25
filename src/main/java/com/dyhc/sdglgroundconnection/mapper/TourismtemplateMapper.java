@@ -14,6 +14,23 @@ import java.util.List;
 @Mapper
 @Component
 public interface TourismtemplateMapper extends CommonMapper<Tourismtemplate>{
+<<<<<<< HEAD
+
+    /**
+     * 赵伟伟
+     * 添加模板
+     * @return
+     */
+    int addTourismtemplate(Tourismtemplate tourismtemplate) throws Exception;
+
+
+    /**
+     * 赵伟伟
+     * 按名称查询模板
+     * @return
+     */
+    Tourismtemplate selectByName(@Param("tourismtemplateName") String tourismtemplateName) throws Exception;
+=======
     /**
      * 根据模板名称和创建人查询符合条件的模板信息    张枫
      * @param tempName  模板名称
@@ -29,4 +46,5 @@ public interface TourismtemplateMapper extends CommonMapper<Tourismtemplate>{
      * @return
      */
     Tourismtemplate gettemplateByName(@Param("tempName")String tempName)throws Exception;
+>>>>>>> origin/master
 }

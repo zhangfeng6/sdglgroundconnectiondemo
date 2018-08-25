@@ -233,4 +233,37 @@ public class ScenicspotController {
         }
 
     }
+
+
+    @RequestMapping("/listScenicspotAll")
+    public ReponseResult listScenicspotAll() {
+        try {
+            List<Scenicspot> list = scenicspotService.listScenicspotAll();
+            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            logger.info(" method:selectTourismtemplate  查询景点模板成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectTourismtemplate  查询景点模板失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+    /**
+     * 获取景点
+     * @return
+     */
+    @RequestMapping("selectByScenicSpotId")
+    public ReponseResult selectByScenicSpotId(Integer scenicSpotId){
+        try {
+            Scenicspot scenicspot=scenicspotService.selectByScenicSpotId(scenicSpotId);
+            ReponseResult<Object> data=ReponseResult.ok(scenicspot,"获取景点成功");
+            return  data;
+        }catch (Exception e){
+            ReponseResult<List> data=ReponseResult.err("获取景点失败");
+            e.printStackTrace();
+            return  data;
+        }
+    }
 }

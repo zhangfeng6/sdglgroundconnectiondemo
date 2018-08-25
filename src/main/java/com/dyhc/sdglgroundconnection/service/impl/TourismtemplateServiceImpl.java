@@ -2,7 +2,10 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.TourismandlineMapper;
 import com.dyhc.sdglgroundconnection.mapper.TourismtemplateMapper;
+<<<<<<< HEAD
+=======
 import com.dyhc.sdglgroundconnection.pojo.Tourismandline;
+>>>>>>> origin/master
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
 import com.dyhc.sdglgroundconnection.service.TourismtemplateService;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.*;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -129,4 +134,36 @@ public class TourismtemplateServiceImpl  implements TourismtemplateService {
         return map;
     }
 
+    /**
+     * 赵伟伟
+     * 查询全部模板
+     * @return
+     */
+    @Override
+    public List<Tourismtemplate> selectTourismtemplate() {
+        return tourismtemplateMapper.selectAll();
+    }
+
+    /**
+     * 赵伟伟
+     * 添加线路
+     * @param tourismtemplate
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int addTourismtemplate(Tourismtemplate tourismtemplate) throws Exception {
+        return tourismtemplateMapper.addTourismtemplate(tourismtemplate);
+    }
+
+    /**
+     * 按名称查询
+     * @param tourismtemplateName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Tourismtemplate selectByName(String tourismtemplateName) throws Exception {
+        return tourismtemplateMapper.selectByName(tourismtemplateName);
+    }
 }

@@ -3,4 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.OfferlineMapper">
 
+    <select id="selectByofferLineRecordId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerline">
+        SELECT  * from offerline where whetherDel!=1 and offerLineRecordId=#{offerLineRecordId}
+    </select>
+
+    <insert id="insertOfferline">
+        insert into offerline(offerId,lineArriveName,travelContent,`date`,whetherDel,creater)
+        values(#{offerId},#{lineArriveName},#{travelContent},#{date},0,1)
+    </insert>
 </mapper>
