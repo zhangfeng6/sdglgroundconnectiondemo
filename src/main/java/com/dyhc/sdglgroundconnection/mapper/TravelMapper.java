@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Travel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,11 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface TravelMapper extends CommonMapper<Travel> {
+    /**
+     * 赵伟伟
+     * 查询组团社
+     * @param travelId
+     * @return
+     */
+    Travel selectTravelById(@Param("travelId") Integer travelId);
 }

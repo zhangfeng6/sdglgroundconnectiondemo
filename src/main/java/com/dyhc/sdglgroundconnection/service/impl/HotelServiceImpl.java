@@ -46,4 +46,14 @@ public class HotelServiceImpl implements HotelService {
     public Hotel getHotelById(Integer id) throws Exception {
         return hotelMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<Hotel> selectHotel() throws Exception {
+        return hotelMapper.selectAll();
+    }
+
+    @Override
+    public Hotel selectByHotelId(Integer hotelId) {
+        return hotelMapper.selectByHotelId(hotelId);
+    }
 }

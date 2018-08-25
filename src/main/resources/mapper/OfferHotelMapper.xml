@@ -3,4 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.OfferHotelMapper">
 
+    <insert id="insertOfferHotel">
+        insert into offerhotel(hotelId,offerId,costPrice,offer,whetherDel,creater)
+        values(#{hotelId},#{offerId},#{costPrice},#{offer},0,1)
+    </insert>
 </mapper>

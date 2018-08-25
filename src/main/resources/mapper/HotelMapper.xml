@@ -3,4 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.HotelMapper">
 
+    <select id="selectByHotelId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+        SELECT  * from hotel where whetherDel!=1 and hotelId=#{hotelId}
+    </select>
 </mapper>

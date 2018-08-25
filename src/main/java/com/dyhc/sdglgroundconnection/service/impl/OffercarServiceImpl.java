@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.OffercarMapper;
+import com.dyhc.sdglgroundconnection.pojo.Offercar;
 import com.dyhc.sdglgroundconnection.service.OffercarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class OffercarServiceImpl implements OffercarService {
 
     @Autowired
     private OffercarMapper offercarMapper;
+
+    @Override
+    public int insertOffercar(Offercar offercar) {
+        return offercarMapper.insertOffercar(offercar);
+    }
 }

@@ -4,11 +4,17 @@
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.DictionariesMapper">
     <select id="listDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
-        WHERE typeCode='ATTRACTIONS'
+        WHERE typeCode='ATTRACTIONS' and whetherDel!=1
     </select>
 
-    <select id="selectById" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+    <select id="selectByDictionariesId" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
-        WHERE typeCode='DIET' and valueId=#{valueId}
+        WHERE dictionariesId=#{dictionariesId}
     </select>
+
+
+    <select id="listVehicletype" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        select * from `dictionaries` where typeCode='VEHICLE' and whetherDel!=1
+    </select>
+
 </mapper>

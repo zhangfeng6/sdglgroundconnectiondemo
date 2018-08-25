@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.MealType;
 import com.dyhc.sdglgroundconnection.service.MealTypeService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -122,6 +123,22 @@ public class MealTypeController  {
             logger.error(" method:selectDic  饭店类型数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    @RequestMapping("/selectMealType")
+    public ReponseResult selectMealType() {
+        try {
+            List<Dictionaries> list = mealTypeService.selectMealType();
+            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            logger.info(" method:selectMealType  查询餐馆类型成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectMealType  查询餐馆类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
             return err;
         }
     }

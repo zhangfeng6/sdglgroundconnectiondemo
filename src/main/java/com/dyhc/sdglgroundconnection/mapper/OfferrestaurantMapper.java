@@ -11,4 +11,12 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface OfferrestaurantMapper extends CommonMapper<Offerrestaurant>{
+
+    /**
+     * 赵伟伟
+     * 新增餐厅报价
+     * @param offerrestaurant
+     * @return
+     */
+    int insertOfferrestaurant(Offerrestaurant offerrestaurant);
 }

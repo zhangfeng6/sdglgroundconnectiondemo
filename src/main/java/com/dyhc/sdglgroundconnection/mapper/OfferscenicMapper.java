@@ -11,4 +11,12 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface OfferscenicMapper extends CommonMapper<Offerscenic>{
+
+    /**
+     * 赵伟伟
+     * 新增景点报价
+     * @param offerscenic
+     * @return
+     */
+    int insertOfferscenic(Offerscenic offerscenic);
 }

@@ -149,5 +149,23 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
+    @Override
+    public List<Template> selectTemplate() throws Exception {
+        List<Template> list = templateMapper.selectTemplate();
+        return list;
+    }
+
+    @Override
+    public Template selectTemplateAll(int templateId) {
+        Template t = templateMapper.selectTemplateAll(templateId);
+        t.setScenicspotsList(templateMapper.selectscenicSpotById(t.getTemplateId()));
+        return t;
+    }
+
+    @Override
+    public Template selecctNameById(int templateId) {
+        return templateMapper.selecctNameById(templateId);
+    }
+
 
 }

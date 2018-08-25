@@ -7,8 +7,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+		<link rel="stylesheet" href="/css/layui.css" media="all">
+
+
 	</head>
 
 	<body>
@@ -20,12 +21,12 @@
 						<button class="layui-btn layui-btn-small layui-btn-normal go-btn hidden-xs" data-url="danye-detail.html"><i class="layui-icon">&#xe654;</i></button>
 					</div>
 					<div class="layui-inline">
-						<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+						<input type="text" id="travelName" name="travelName" placeholder="请输入标题" autocomplete="off" class="layui-input">
 					</div>
-					<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
+					<button class="layui-btn layui-btn-normal" lay-submit="search" type="button" onclick="selectOffer(1)">搜索</button>
 				</div>
 			</form>
-			<div class="layui-form" id="table-list">
+			<!--<div class="layui-form" id="table-list">
 				<table class="layui-table" lay-even lay-skin="nob">
 
 					<thead>
@@ -44,17 +45,32 @@
 
 					</tbody>
 				</table>
-				<div class="page-wrap">
-						<ul class="pagination" id="demo20">
-							
-						</ul>
-					</div>
+				<div id="laypage" style="text-align: center"></div>
+			</div>-->
+
+
+			<div id="pTable" style="width:100%;margin:0 auto">
+				<table class="layui-table">
+					<thead>
+					<tr>
+						<td class="hidden-xs">序号</td>
+						<td class="hidden-xs">组团社名字</td>
+						<td class="hidden-xs">人数</td>
+						<td class="hidden-xs">客源地</td>
+						<td class="hidden-xs">旅行开始时间</td>
+						<td class="hidden-xs">旅行结束时间</td>
+						<td class="hidden-xs">状态</td>
+						<td class="hidden-xs">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div id="laypage" style="text-align: center"></div>
 			</div>
+
 		</div>
-		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<!--<script src="/js/layui.all.js" type="text/javascript" charset="utf-8"></script>-->
-		<!--<script src="/admin/layui/lay/dest/layui.all.js"></script>-->
-		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/layui.js"></script>
+		<script src="/js/jquery-1.8.2.min.js"></script>
 		<script>
 			layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
 				var $ = layui.jquery;
@@ -73,50 +89,75 @@
 				})
 
 			});
+
+            var limitcount = 2; // 每页总记录数
+            var curnum = 1;  // 当前页码
+
+			$(function(){
+				selectOffer();
+			})
+
+			function selectOffer(j){
+                if(j==1){
+                    curnum=1;
+                }
+			    var travelName = $("#travelName").val();
+				$.ajax({
+                    url:"/Offer/selectOffer",
+                    data:{page:curnum,limit:limitcount,travelName:travelName},
+                    dataType:"json",
+                    type:"get",
+                    success:function (data) {
+                        var content = "";
+                        var xu=(curnum-1)*limitcount+1;
+                        $.each(data.data,function (i,e) {
+                            var del = "正常";
+                            if (e.whetherDel==2) {
+                                del = "禁用";
+                            }
+							content+="<tr>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travel.travelName+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.number+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.tourist+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
+                                "\t\t\t\t\t\t<td class=\"hidden-xs\"><div><button id='update' type='button' value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button></div></td>\n" +
+                                "\t\t\t\t\t</tr>";
+                        })
+						xu++;
+                        $("tbody").html(content);
+                        layui.use('table', function () {
+                            var laypage = layui.laypage;
+                            laypage.render({
+                                elem: 'laypage'
+                                , count: data.count
+                                , curr: curnum
+                                , limit: 2
+                                , layout: ['prev', 'page', 'next', 'skip', 'count']
+                                , jump: function (obj, first) {
+                                    if (!first) {
+                                        //obj包含了当前分页的所有参数，比如：
+                                        curnum = obj.curr; // 当前页面
+                                        limitcount = obj.limit; // 每页记录数
+                                        // 查询新数据
+                                        selectOffer();
+                                    }
+                                }
+                            })
+                        })
+					}
+
+				})
+			}
+
+
+			function show(id){
+			    location.href="Scheduling-detail.html?offerId="+id;
+			}
 			
-			
-			
-			
-			layui.use(['laypage', 'layer'], function(){
-  var laypage = layui.laypage
-  ,layer = layui.layer;
-  
-  
-  //测试数据
-  var data = [
-    "<tr><td>1</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>2</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>3</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>4</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>5</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>6</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>7</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>8</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>",
-	"<tr><td>9</td><td style='font-size:5px'>海南组团社</td><td style='font-size:5px'>2018-02-03</td><td style='font-size:5px'>2018-04-05</td><td style='font-size:5px'>50</td><td style='font-size:5px'>海南</td><td style='font-size:5px'>10000￥</td><td style='font-size:5px'><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status' data-status='1'>已结束</button></td><td style='font-size:5px'><div class='layui-inline'><button class='layui-btn layui-btn-mini layui-btn-normal go-btn' data-id='1' data-url='danye-detail.html'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-mini layui-btn-danger del-btn' data-id='1' data-url='del.html'><i class='layui-icon'>&#xe640;</i></button></div></td></tr>"
-    
-  ];
-  
-  //调用分页
-  laypage.render({
-    elem: 'demo20'
-    ,count: data.length
-	,limit: 3
-    ,jump: function(obj){
-      //模拟渲染
-      document.getElementById('tb').innerHTML = function(){
-        var arr = []
-        ,thisData = data.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
-        layui.each(thisData, function(index, item){
-          arr.push('<li>'+ item +'</li>');
-        });
-        return arr.join('');
-      }();
-    }
-  });
-  
-});
-			
-			
+
 		</script>
         
 	</body>

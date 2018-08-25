@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 模板业务接口
@@ -37,4 +39,33 @@ public interface TemplateService {
      * @return
      */
     int savetemplate(TemplateParameter template)throws Exception;
+
+
+    /**
+     * 赵伟伟
+     * 查询全部模板
+     * @return
+     */
+    List<Template> selectTemplate() throws Exception;
+
+
+    /**
+     * 赵伟伟
+     * 按编号查询线路信息
+     * @param templateId
+     * @return
+     */
+    Template selectTemplateAll(int templateId);
+
+
+
+    /**
+     * 赵伟伟
+     * 按编号查询
+     * @param templateId
+     * @return
+     */
+    Template selecctNameById(int templateId);
+
+
 }

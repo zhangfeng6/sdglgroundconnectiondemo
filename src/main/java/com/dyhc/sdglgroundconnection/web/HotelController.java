@@ -58,4 +58,39 @@ public class HotelController {
             return err;
         }
     }
+
+
+    @RequestMapping("/selectHotel")
+    public ReponseResult selectHotel() {
+        try {
+            List<Hotel> list = hotelService.selectHotel();
+            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            logger.info(" method:selectHotel  查询旅游线路成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectHotel  查询旅游线路失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 获取酒店
+     * @return
+     */
+    @RequestMapping("selectByHotelId")
+    public ReponseResult selectByHotelId(Integer hotelId){
+        try {
+            Hotel scenicspot=hotelService.selectByHotelId(hotelId);
+            ReponseResult<Object> data=ReponseResult.ok(scenicspot,"获取酒店成功");
+            return  data;
+        }catch (Exception e){
+            ReponseResult<List> data=ReponseResult.err("获取酒店失败");
+            e.printStackTrace();
+            return  data;
+        }
+    }
+
 }

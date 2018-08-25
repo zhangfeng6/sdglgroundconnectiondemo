@@ -128,4 +128,36 @@ public class TemplateController {
             return err;
         }
     }
+
+
+
+    @RequestMapping("/selectTemplate")
+    public ReponseResult selectTemplate() {
+        try {
+            List<Template> list = templateService.selectTemplate();
+            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            logger.info(" method:selectTemplate  查询旅游模板成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectTemplate  查询旅游模板失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+    @RequestMapping("/selectTemplateAll")
+    public ReponseResult selectTemplateAll(Integer templateId) {
+        try {
+            Template template = templateService.selectTemplateAll(templateId);
+            ReponseResult<Object> data = ReponseResult.ok(template,"查询成功！");
+            logger.info(" method:selectTemplateAll  查询线路全部信息成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
 }
