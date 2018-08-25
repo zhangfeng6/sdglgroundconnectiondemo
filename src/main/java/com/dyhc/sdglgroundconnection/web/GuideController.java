@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.service.GuideService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
-import com.dyhc.sdglgroundconnection.utils.MD5;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.dyhc.sdglgroundconnection.utils.WechatFileUploadUtil;
 import com.github.pagehelper.PageInfo;

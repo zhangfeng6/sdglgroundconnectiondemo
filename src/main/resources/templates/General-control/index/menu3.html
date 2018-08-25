@@ -16,7 +16,7 @@
 <body>
     <div style="height:30px;font-size: 16px;">
         <input type="hidden" name="year" th:value="${year}">
-        <span style="margin-left: 90px;line-height: 30px;">月份:</span><span style="width:100px;height:100px;margin-left: 10px;line-height: 30px;"><a href="javascript:void(0)" th:text="${month}"></a></span><span style="width:100px;margin-left: 45px;line-height: 30px;"><a href="javascript:void(0)" th:text="${month}+1"></a></span>
+        <span style="margin-left: 90px;line-height: 30px;">月份:</span><span style="width:100px;height:100px;margin-left: 10px;line-height: 30px;"><a href="javascript:void(0)" name="month1" th:text="${month}"></a></span><span style="width:100px;margin-left: 45px;line-height: 30px;"><a href="javascript:void(0)" name="month2"  th:text="${month}+1"></a></span>
         <span style="margin-left: 20px;">(√：已占用&nbsp;&nbsp;&nbsp;×：已请假&nbsp;&nbsp;&nbsp;空：无安排)</span>
     </div>
         <table border="2px" bordercolor="#00BBFF" cellspacing="0" cellpadding="2" style="border-collapse:collapse; width:100%">
@@ -108,7 +108,7 @@
 
     loadData();
     function loadData() {
-        return;
+        var year=$()
         var str = "";
         $.ajax({
             url: "/Guide/guideShowAll",
