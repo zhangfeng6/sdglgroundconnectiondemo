@@ -7,9 +7,28 @@
         WHERE typeCode='ATTRACTIONS' and whetherDel!=1
     </select>
 
+<<<<<<< HEAD
     <select id="selectByDictionariesId" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
         WHERE dictionariesId=#{dictionariesId}
+=======
+    <select id="getDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM `dictionaries`
+        WHERE typeCode='VEHICLE' and valueId=#{valueId}
+    </select>
+
+
+    <select id="listDictionaries1" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM `dictionaries`
+        WHERE typeCode='VEHICLE'
+    </select>
+
+    <select id="listdictionarieslBycode" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+            SELECT `valueId`,`valueContent1` FROM `dictionaries`
+        <if test="code != null and code != '' ">
+            WHERE `typeCode`=#{code}
+        </if>
+>>>>>>> origin/master
     </select>
 
 

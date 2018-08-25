@@ -3,4 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.TemplateHotelMapper">
 
+    <!--根据模板id获取符合条件的模板酒店信息-->
+    <select id="gettemplatehotelbytemid" resultType="com.dyhc.sdglgroundconnection.pojo.TemplateHotel">
+        SELECT `hotelId`,`costPrice`,`offer` FROM `templatehotel` WHERE `templateId`=#{temid}
+    </select>
+
+    <update id="updatetemhotel">
+        UPDATE  `templatehotel` SET `hotelId`= #{temhotel.hotelId},costPrice = #{temhotel.costPrice},offer=#{temhotel.offer},modifier=#{temhotel.modifier},modifiedData=#{temhotel.modifiedData} where `templateId`=#{temhotel.templateId}
+    </update>
+
+    <delete id="removehotel">
+        DELETE FROM `templatehotel` WHERE templateId=#{mid}
+    </delete>
 </mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="renderer" content="webkit">
@@ -8,38 +8,43 @@
 		<title>汽车类型</title>
 		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+
 	</head>
 	<body>
 		<div class="wrap-container">
 			<form class="layui-form" style="width: 90%;padding-top: 20px;">
 					<div class="layui-form-item">
+						<input type="hidden" name="carRentalId" th:value="${carRentalId}"/>
+						<input type="hidden" name="typeId" th:value="${typeId}"/>
 						<label class="layui-form-label">类型名称：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title1" required lay-verify="required" placeholder="请输入类型名称" autocomplete="off" class="layui-input">
+							<select name="valueId" lay-filter="valueId">
+								<option>无</option>
+							</select>
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">载客量：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title2" required lay-verify="required" placeholder="请输入载客量" autocomplete="off" class="layui-input">
+							<input type="text" name="passengervolume"  placeholder="请输入载客量" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">成本价：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title2" required lay-verify="required" placeholder="请输入成本价" autocomplete="off" class="layui-input">
+							<input type="text" name="costprice"  placeholder="请输入成本价" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">报价：</label>
 						<div class="layui-input-block" style="width: 400px;">
-							<input type="text" name="title2" required lay-verify="required" placeholder="请输入报价" autocomplete="off" class="layui-input">
+							<input type="text" name="offer" placeholder="请输入报价" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-filter="formDemo" type="button" onclick="insertVehicletype()">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -47,16 +52,166 @@
 		</div>
 
 		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/jquery-3.3.1.min.js"></script>
 		<script>
+
+
+			var id="";
+            getVehicletypeByTypeId();
+
+            /**
+			 * 查询车辆类型
+             */
+            function listDictionaries(){
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8888/Dictionaries/listDictionaries1",
+                    data:{},
+                    dataType: "json",
+                    success:function (result1) {
+                        var content="<option value='0'>请选择一个车辆类型</option>";
+                        $.each(result1.data,function (i,e) {
+                            content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                        })
+                        $("select").html(content);
+                    }
+                })
+			}
+
+
+            /**
+			 * 给指定公司编辑车辆类型
+             */
+			function insertVehicletype(){
+				var valueId=$("select[name='valueId']").val();
+                var passengervolume=$("input[name='passengervolume']").val();
+                var costprice=$("input[name='costprice']").val();
+                var offer=$("input[name='offer']").val();
+                if (valueId==0){
+                    alert("请选择车辆类型");
+                    return;
+				}else  if (passengervolume==0){
+                    alert("请输入载客量");
+                    return;
+                }else  if (costprice==0){
+                    alert("请输入成本价");
+                    return;
+                }else  if (offer==0){
+                    alert("请输入报价");
+                    return;
+                }
+                var typeId=$("input[name='typeId']").val();
+                var vehicletype=$("form").serialize();
+				if (typeId=='0'){
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/Vehicletype/insertVehicletype",
+                        data:vehicletype,
+                        dataType: "json",
+                        success:function (result1) {
+                            alert(result1.msg);
+                            parent.location.reload();
+                        }
+                    })
+				}else {
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/Vehicletype/updateVehicletype",
+                        data:vehicletype,
+                        dataType: "json",
+                        success:function (result1) {
+                            alert(result1.msg);
+                            parent.location.reload();
+                        }
+                    })
+				}
+
+			}
+
+
+            /**
+			 * 根据车辆id查询车辆信息
+             */
+			function getVehicletypeByTypeId(){
+                var typeId=$("input[name='typeId']").val();
+                if (typeId==0){
+                    listDictionaries();
+				}else {
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/Vehicletype/getVehicletypeByTypeId",
+                        data:{"typeId":typeId},
+                        dataType: "json",
+                        success:function (result1) {
+                            var content="";
+                            id=result1.data.valueId;
+                            if (result1.data.valueId==1){
+                                content+="<option value='0'>请选择一个车辆类型</option>" +
+                                    "<option value='1' selected ='selected'>大巴车</option>" +
+                                    "<option value='2'>小巴车</option>" +
+                                    "<option value='3'>商务车</option>";
+                            }
+                            if (result1.data.valueId==2){
+                                content+="<option value='0'>请选择一个车辆类型</option>" +
+                                    "<option value='1' >大巴车</option>" +
+                                    "<option value='2' selected ='selected'>小巴车</option>" +
+                                    "<option value='3'>商务车</option>";
+                            }
+                            if (result1.data.valueId==3){
+                                content+="<option value='0'>请选择一个车辆类型</option>" +
+                                    "<option value='1'>大巴车</option>" +
+                                    "<option value='2'>小巴车</option>" +
+                                    "<option value='3' selected ='selected'>商务车</option>";
+                            }
+                            $("select").html(content);
+                            $("input[name='passengervolume']").val(result1.data.passengervolume);
+                            $("input[name='costprice']").val(result1.data.costprice);
+                            $("input[name='offer']").val(result1.data.offer);
+                            $("input[name='carRentalId']").val(result1.data.carRentalId);
+                        }
+                    })
+				}
+
+			}
+
+			function cha(lala){
+                if (id==lala) {
+                    return;
+                }else {
+                    var carId=$("input[name='carRentalId']").val();
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8888/Vehicletype/chaTypeByValueId",
+                        data: {"valueId":lala,"carRentalId":carId},
+                        dataType: "json",
+                        success:function (result1) {
+                            if(result1.data.length!=0){
+                                alert("该车辆类型已存在，无法编辑");
+
+                                return;
+                            }
+                        }
+                    })
+                }
+			}
+
+
+
+
+
 			//Demo
-//			layui.use(['form'], function() {
-//				var form = layui.form();
+			layui.use(['form'], function() {
+				var form = layui.form();
 				form.render();
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
 					layer.msg(JSON.stringify(data.field));
 					return false;
 				});
+                form.on('select(valueId)', function(data) {
+                    cha(data.value);
+                    $("select[name='valueId']").value(0);
+                });
 			});
 		</script>
 	</body>

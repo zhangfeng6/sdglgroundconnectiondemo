@@ -21,11 +21,13 @@ public class DictionariesServiceImpl implements DictionariesService {
     private DictionariesMapper dictionariesMapper;
 
     @Override
-    public PageInfo<Dictionaries> listDictionaries() {
+    public PageInfo<Dictionaries> listDictionaries()throws Exception {
+
         return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries());
     }
 
     @Override
+<<<<<<< HEAD
     public List<VehicleType> listVehicletype() {
         return dictionariesMapper.listVehicletype();
     }
@@ -33,5 +35,14 @@ public class DictionariesServiceImpl implements DictionariesService {
     @Override
     public Dictionaries selectByDictionariesId(int dictionariesId) {
         return dictionariesMapper.selectByDictionariesId(dictionariesId);
+=======
+    public PageInfo<Dictionaries> listDictionaries1()throws Exception {
+        return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries1());
+    }
+
+    @Override
+    public List<Dictionaries> listhoteltype() throws Exception {
+        return dictionariesMapper.listdictionarieslBycode("THEROOM");
+>>>>>>> origin/master
     }
 }

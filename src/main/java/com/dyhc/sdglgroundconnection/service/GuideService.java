@@ -48,4 +48,12 @@ public interface GuideService {
      * @return
      */
     Guide  assignmentGuide(Integer guideId);
+
+    /**
+     * 微信小程序之导游登录
+     * @param username
+     * @param password
+     * @return
+     */
+    Guide login(String username,String password)throws Exception;
 }

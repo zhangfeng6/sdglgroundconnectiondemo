@@ -3,6 +3,8 @@ package com.dyhc.sdglgroundconnection.service.impl;
 import com.dyhc.sdglgroundconnection.mapper.StaffMapper;
 import com.dyhc.sdglgroundconnection.pojo.Staff;
 import com.dyhc.sdglgroundconnection.service.StaffService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +42,70 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> idAccountType() throws Exception{
         return staffMapper.selectAll();
     }
+
+
+    /**
+     * 分页查看全部
+     * @param pageNo
+     * @param PageSize
+     * @param staffname
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public PageInfo<Staff> listStaffLike(Integer pageNo, Integer PageSize, String staffname) throws Exception {
+        PageHelper.startPage(pageNo,PageSize,true);
+        PageInfo<Staff> staff=new PageInfo<>(staffMapper.getStaffAll(staffname));
+        return staff;
+    }
+
+    /**
+     * 删除  修改
+     * @param staff
+     * @return
+     */
+    @Override
+    public Integer getStaffUpd(Staff staff) {
+        return staffMapper.getStaffUpd(staff);
+    }
+
+    /**
+     * 修改
+     * @param staff
+     * @return
+     */
+    @Override
+    public Integer getStaffUpdTwo(Staff staff) {
+        return staffMapper.getStaffUpdTwo(staff);
+    }
+
+    /**
+     * 添加
+     * @param staff
+     * @return
+     */
+    @Override
+    public Integer getStaffAdd(Staff staff) {
+        return staffMapper.insert(staff);
+    }
+
+    /**
+     * 修改  查看
+     * @param staffId
+     * @return
+     */
+    @Override
+    public Staff getStaffUpdTwoById(Integer staffId) {
+        return staffMapper.getStaffUpdTwoById(staffId);
+    }
+
+    /**
+     * 判断用户是否存在
+     * @return
+     */
+    @Override
+    public Staff getserlectBy() {
+        return staffMapper.getserlectBy();
+    }
+
 }

@@ -1,10 +1,16 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
+<<<<<<< HEAD
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
+=======
+import com.dyhc.sdglgroundconnection.pojo.RoomType;
+>>>>>>> origin/master
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -13,6 +19,7 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface HotelMapper extends CommonMapper<Hotel>{
+<<<<<<< HEAD
 
     /**
      * 按编号查询景点
@@ -20,4 +27,44 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @return
              */
     Hotel selectByHotelId(@Param("hotelId") Integer hotelId);
+=======
+    /**
+     * 查询酒店信息表贾晓亮
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    List<Hotel> HotelShowAll(@Param("pageNo")Integer pageNo, @Param("pageSize")Integer pageSize, @Param("hotelName")String hotelName);
+
+
+    /**
+     * 删除酒店信息
+     * @param hotelId
+     * @return
+     * @throws Exception
+     */
+    Integer removeHoter(Integer hotelId)throws  Exception;
+
+    /**
+     * 房间修改赋值
+     * @param typeId
+     * @return
+     */
+    RoomType fuzhiRoomType(Integer  typeId);
+
+    /**
+     * 修改酒店进行赋值操作：贾晓亮
+     * @param hotelId
+     * @return
+     * @throws Exception
+     */
+    Hotel fuzhiHotel(Integer hotelId)throws Exception;
+
+    /**
+     * 根据房间类型id获取酒店信息   张枫
+     * @param valueId
+     * @return
+     */
+    List<Hotel> listhotelByvalueId(@Param("valueId")Integer valueId)throws Exception;
+>>>>>>> origin/master
 }

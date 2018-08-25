@@ -3,7 +3,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.HotelMapper">
 
+<<<<<<< HEAD
     <select id="selectByHotelId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
         SELECT  * from hotel where whetherDel!=1 and hotelId=#{hotelId}
+=======
+    <!--查询酒店信息-->
+    <select id="HotelShowAll" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+      select  * from  Hotel where 1=1
+      <if test="hotelName!=null and hotelName!=''">
+        and hotelName like  concat('%',#{hotelName},'%')
+      </if>
+        and whetherDel != 1
+    </select>
+     <!--删除酒店信息:贾晓亮-->
+    <update id="removeHoter">
+     update  Hotel set whetherDel =1 where  hotelId =#{hotelId}
+    </update>
+    <!--房间修改赋值-->
+    <select id="fuzhiRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
+           select  * from  roomtype WHERE typeId=#{typeId}
+    </select>
+    <!--酒店修改赋值-->
+    <select id="fuzhiHotel"  resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+           select  * from  hotel WHERE hotelId=#{hotelId}
+    </select>
+    
+    <select id="listhotelByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+       SELECT h.*,r.`costprice` AS 'gettypeprice' FROM `hotel` h,`roomtype` r WHERE r.`hotelId`=h.`hotelId` AND r.`valueId`=#{valueId}
+>>>>>>> origin/master
     </select>
 </mapper>

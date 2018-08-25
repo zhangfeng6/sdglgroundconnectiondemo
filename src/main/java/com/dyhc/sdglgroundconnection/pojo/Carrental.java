@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,6 +37,26 @@ public class Carrental {
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private List<VehicleType> vehicleTypes;     //车辆类型表
+
+    public List<VehicleType> getVehicleTypes() {
+
+        return vehicleTypes;
+    }
+
+    public void setVehicleTypes(List<VehicleType> vehicleTypes) {
+        this.vehicleTypes = vehicleTypes;
+    }
+
+
+    @Transient
+    private Integer gettypeprice; //存放用户选定类型的价格 避免再次查询降低速度
+
+    public Integer getGettypeprice() {
+        return gettypeprice;
+    }
+
 
     @Id
     @Column(name = "carRentalId")

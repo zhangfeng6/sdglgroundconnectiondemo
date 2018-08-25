@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.TourismtemplateMapper">
 
+<<<<<<< HEAD
     <insert id="addTourismtemplate">
           insert into tourismtemplate(tourismtemplateName,status,createBy,createDate)
           values(#{tourismtemplateName},0,1,#{createDate})
@@ -11,4 +12,22 @@
     <select id="selectByName" resultType="com.dyhc.sdglgroundconnection.pojo.Tourismtemplate">
         select * from tourismtemplate where tourismtemplateName=#{tourismtemplateName}
     </select>
+=======
+
+    <select id="listtemplate" resultType="com.dyhc.sdglgroundconnection.pojo.Tourismtemplate">
+      SELECT t.*,s.`theUserName` AS 'userName' FROM `tourismtemplate` t,`staff` s WHERE s.`staffId`=t.`createBy`
+        <if test="tempName != null and tempName != '' ">
+            AND t.`tourismtemplateName` LIKE CONCAT('%',#{tempName},'%')
+        </if>
+        <if test="username != null and username != '' ">
+            AND s.`theUserName` LIKE CONCAT('%',#{username},'%')
+        </if>
+    </select>
+
+
+    <select id="gettemplateByName" resultType="com.dyhc.sdglgroundconnection.pojo.Tourismtemplate">
+        SELECT * FROM `tourismtemplate` WHERE `tourismtemplateName`=#{tempName}
+    </select>
+
+>>>>>>> origin/master
 </mapper>

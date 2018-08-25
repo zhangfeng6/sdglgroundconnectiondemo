@@ -33,7 +33,7 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">类型：</label>
 						<div class="layui-input-block">
-							<select name="status" lay-verify="">
+							<select name="status" lay-verify="" id="leixing">
 								<option value="1">个人</option>
 								<option value="2">企业</option>
 							</select>
@@ -58,18 +58,19 @@
                 var  bank= $("input[name='bank']").val().trim();
                 var accountNum=  $("input[name='accountNum']").val().trim();
                 var accountName=$("input[name='accountName']").val().trim();
-                var leixing=$("#leixing").find("option:selected").val().trim();
+                var leixing=$("#leixing").find("option:selected").val();
+                alert(leixing);
                 if (bank=="" || bank==null ||bank==undefined){
-                    alert("不能为空");
+                    alert("不能为空1");
                     return;
                 } else if (accountNum=="" || accountNum==null||accountNum==undefined){
-                    alert("不能为空");
+                    alert("不能为空2");
                     return;
                 } else if (""==accountName || null==accountName||accountName==undefined){
-                    alert("不能为空");
+                    alert("不能为空3");
                     return;
-                } else if (""==leixing || null==leixing || leixing==undefined){
-                    alert("不能为空");
+                } else if (leixing=="" || leixing==null || leixing==undefined){
+                    alert("不能为空4");
                     return;
                 }else{
                 var accountType =$("form[class='layui-form']").serialize();

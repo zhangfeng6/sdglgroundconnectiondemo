@@ -2,5 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.CarrentalMapper">
+    <select id="listCarRentals" resultType="com.dyhc.sdglgroundconnection.pojo.Carrental">
+        SELECT * FROM carrental
+        <where>
+            <if test="carRentalName!=null and carRentalName!=''">
+                carRentalName like CONCAT('%',#{carRentalName},'%')
+            </if>
+            and `whetherdel`=3
+        </where>
+        order by createDate desc
+    </select>
 
+
+    <insert id="insertCarRental">
+        INSERT INTO `carrental`(carRentalName,phone,contacts,companyAddress,whetherDel,createBy,createDate) VALUE(#{carRentalName},#{phone},#{contacts},#{companyAddress},#{whetherDel},#{createBy},#{createDate})
+    </insert>
+
+    <update id="deleteCarRentalBycarRentalId">
+        update carrental set whetherDel=1 WHERE carRentalId=#{carRentalId}
+    </update>
+    
+    <select id="getCarrentalByName" resultType="com.dyhc.sdglgroundconnection.pojo.Carrental">
+        select * from carrental
+        where carRentalName=#{carRentalName}
+    </select>
+
+    <!--根据valueId进行查询-->
+    <select id="listcarrentalByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Carrental">
+SELECT c.*,v.`costprice` AS 'gettypeprice' FROM `carrental` c,`vehicletype` v WHERE v.`carRentalId`=c.`carRentalId` AND v.`valueId`=#{valueId}
+    </select>
 </mapper>

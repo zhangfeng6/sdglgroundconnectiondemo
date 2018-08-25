@@ -8,6 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Map;
+>>>>>>> origin/master
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -40,6 +44,7 @@ public interface TemplateService {
      */
     int savetemplate(TemplateParameter template)throws Exception;
 
+<<<<<<< HEAD
 
     /**
      * 赵伟伟
@@ -68,4 +73,33 @@ public interface TemplateService {
     Template selecctNameById(int templateId);
 
 
+=======
+    /**
+     * 根据线路模板id查找符合条件的信息
+     * @param tid
+     * @return
+     */
+    Map<String,Object> gettemplateById(Integer tid)throws Exception;
+
+    /**
+     * 修改模板信息
+     * @param template  模板对象
+     * @return
+     * @throws Exception
+     */
+    int updatetemplate(Template template)throws Exception;
+
+    /**
+     * 删除模板信息
+     * @param mid
+     * @return
+     */
+    int removetemplate(Integer mid)throws Exception;
+
+    /**
+     * 获取所有线路信息
+     * @return
+     */
+    List<Template> listtemplateall()throws Exception;
+>>>>>>> origin/master
 }

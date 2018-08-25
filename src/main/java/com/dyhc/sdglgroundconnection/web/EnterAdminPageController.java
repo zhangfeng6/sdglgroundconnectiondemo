@@ -90,7 +90,7 @@ public class EnterAdminPageController {
      */
     @RequestMapping("/article-list.html")
     public String  articleList() {
-        return "admin/index/article-list";
+        return "admin/index/staff-list";
     }
 
     /**
@@ -213,6 +213,9 @@ public class EnterAdminPageController {
         System.out.println(request.getAttribute("guideId"));
         return "admin/index/menu-guide-update";
     }
+
+
+
     /**
      * 进入menu-add1页面
      * @return
@@ -292,6 +295,47 @@ public class EnterAdminPageController {
     @RequestMapping("/travel_list.html")
     public String  travellist() {
         return "admin/index/travel_list";
+    }
+
+    /**
+     * 进入travel_upd.html页面   刘跃云
+     * @return
+     */
+    @RequestMapping("/travel_upd.html")
+    public String  menuUpdatel(Integer travelId, HttpServletRequest request) {
+        request.setAttribute("travelId",travelId);
+        System.out.println(11111);
+        return "admin/index/travel_upd";
+    }
+
+
+    /**
+     * 进入company_update.html页面   刘跃云
+     * @return
+     */
+    @RequestMapping("/company_update.html")
+    public String  company_update(Integer companyId, HttpServletRequest request) {
+        request.setAttribute("companyId",companyId);
+        System.out.println("112345"+companyId);
+        return "admin/index/company-update";
+    }
+    /**
+     * 进入staff-add.html页面   刘跃云
+     * @return
+     */
+    @RequestMapping("/staff-add.html")
+    public String  lllili() {
+        return "admin/index/staff-add";
+    }
+    /**
+     * 进入staff-add.html页面   刘跃云
+     * @return
+     */
+    @RequestMapping("/staff-upd.html")
+    public String  haha(Integer staffId, HttpServletRequest request) {
+        request.setAttribute("staffId",staffId);
+        System.out.println("112345"+staffId);
+        return "admin/index/staff-add";
     }
 
 }

@@ -9,9 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -28,7 +31,48 @@ public class EnterCountAdjustPageController {
     private ShoppingService shoppingService;
     @Autowired
     private ScenicspotService scenicspotService;
-    
+
+
+
+    /**
+     *进入修改酒店页面
+     * @return
+     */
+    @RequestMapping("hotel-update")
+    public  String abcdefg(Integer hotelId,HttpServletRequest request){
+        request.setAttribute("hotelId",hotelId);
+        return "countAdjust/index/hotel-update";
+    }
+
+
+    /**
+     *进入新增酒店跳页面
+     * @return
+     */
+    @RequestMapping("hotel-add")
+    public  String hotelUpdate(){
+     return "countAdjust/index/hotel-add";
+    }
+    /**
+     *进入新增酒店
+     * @return
+     */
+    @RequestMapping("hotel-roomType-add")
+    public  String addRoomType(Integer hotelId,HttpServletRequest request){
+        request.setAttribute("hotelId",hotelId);
+        return "countAdjust/index/hotel-roomType-add";
+    }
+    /**
+     *进入修改酒店
+     * @return
+     */
+    @RequestMapping("hotel-roomType-update")
+    public  String UpdateRoomType(Integer typeId,Integer hotelId,HttpServletRequest request){
+        request.setAttribute("typeId",typeId);
+        request.setAttribute("hotelId",hotelId);
+        return "countAdjust/index/hotel-roomType-update";
+    }
+
     /**
      * 进入计调首页
      * @return
@@ -37,6 +81,33 @@ public class EnterCountAdjustPageController {
     public String  countAdjustIndex() {
         return "countAdjust/index/count-Adjust-Index";
     }
+    /**
+     * 进入类型管理单据类型管理页面
+     * @return
+     */
+    @RequestMapping("/BillType-manage.html")
+    public String  BillTypemanage() {
+        return "countAdjust/index/BillType-manage";
+    }
+    /**
+     * 进入类型管理单据类型管理页面新增
+     * @return
+     */
+    @RequestMapping("/BillType-Save.html")
+    public String  BillTySave() {
+        System.out.println("进入新增页面");
+        return "countAdjust/index/BillType-Save";
+    }
+    /**
+     * 进入类型管理单据类型管理页面修改
+     * @return
+     */
+    @RequestMapping("/BillType-Update.html")
+    public String  BillTypeUpdate(Integer billTypeId,HttpServletRequest request) {
+        request.setAttribute("billTypeId",billTypeId);
+        return "countAdjust/index/BillType-Update";
+    }
+
     /**
      * 进入管理信息
      * @return
@@ -82,7 +153,9 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/carRental_add.html")
-    public String  carRentaladd() {
+    public String  carRentaladd(HttpServletRequest request) {
+        String carRentalId= request.getParameter("carRentalId");
+        request.setAttribute("carRentalId",carRentalId);
         return "countAdjust/index/carRental_add";
     }
     /**
@@ -326,7 +399,11 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/vehicleType_add.html")
-    public String  vehicleType_add() {
+    public String  vehicleType_add(HttpServletRequest request) {
+        String carRentalId= request.getParameter("carRentalId");
+        String typeId= request.getParameter("typeId");
+        request.setAttribute("typeId",typeId);
+        request.setAttribute("carRentalId",carRentalId);
         return "countAdjust/index/vehicleType_add";
     }
     /**
@@ -388,8 +465,27 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/savetemplate.html")
-    public String  savetemplate() {
+    public String  savetemplate(@RequestParam(value = "mid",required = false)Integer mid,Model model) {
+        if(mid!=null){
+            model.addAttribute("mid",mid);
+        }
         return "countAdjust/index/savetemplate";
     }
 
+    @RequestMapping("/total-template.html")
+    public String  totaltemplate() {
+        return "countAdjust/index/total-template";
+    }
+
+    /**
+     * 进入line-template.html页
+     * @return
+     */
+    @RequestMapping("/saveTourism.html")
+    public String  saveTourism(@RequestParam(value = "mid",required = false)Integer mid,Model model) {
+        if(mid!=null){
+            model.addAttribute("mid",mid);
+        }
+        return "countAdjust/index/saveTourism";
+    }
 }

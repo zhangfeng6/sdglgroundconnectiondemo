@@ -1,17 +1,13 @@
 package com.dyhc.sdglgroundconnection.web;
 
-import com.alibaba.fastjson.JSON;
-import com.dyhc.sdglgroundconnection.pojo.AccountType;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.service.GuideService;
-import com.dyhc.sdglgroundconnection.utils.GuideUtils;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -102,6 +98,31 @@ public class GuideController{
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;
+        }
+    }
+
+    /**
+     * 微信登录
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping("guideLogin")
+    public ReponseResult guideLogin(String username,String password){
+        try {
+            Guide guide=guideService.login(username,password);
+            if (guide==null){
+                logger.error("method:login 微信登录失败");
+                return ReponseResult.err("登录失败");
+            }else {
+                logger.info("method:login 微信登录成功");
+                return ReponseResult.ok(guide,"登录成功");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:login 微信登录失败");
+            return ReponseResult.err("登录失败");
         }
     }
 

@@ -7,6 +7,7 @@ import com.dyhc.sdglgroundconnection.pojo.Template;
 import com.dyhc.sdglgroundconnection.service.HotelService;
 import com.dyhc.sdglgroundconnection.service.ScenicspotService;
 import com.dyhc.sdglgroundconnection.service.TemplateService;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -115,7 +116,13 @@ public class TemplateController {
         }
     }
 
+    /**
+     * 保存模板信息
+     * @param templateParameter
+     * @return
+     */
     @RequestMapping("/saveTemplate")
+    @LogNotes(operationType="线路模板",content = "新增")
     public ReponseResult  saveTemplate(TemplateParameter templateParameter){
         try {
             ReponseResult<Integer> data=ReponseResult.ok(templateService.savetemplate(templateParameter),"添加数据成功！");
@@ -129,6 +136,7 @@ public class TemplateController {
         }
     }
 
+<<<<<<< HEAD
 
 
     @RequestMapping("/selectTemplate")
@@ -142,10 +150,47 @@ public class TemplateController {
             logger.error(" method:selectTemplate  查询旅游模板失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
+=======
+    /**
+     * 根据id查询线路模板信息   张枫
+     * @param mid
+     * @return 返回ReponseResult对象 数据类型为map
+     */
+    @RequestMapping("/gettemplateById")
+    public ReponseResult gettemplateById(@RequestParam("mid")Integer mid){
+        Map<String,Object> map= null;
+        try {
+            map = templateService.gettemplateById(mid);
+            ReponseResult<Map> data=ReponseResult.ok(map,"查询线路模板信息成功！");
+            logger.info("method:gettemplateById 查询线路模板信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:gettemplateById 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+
+    }
+
+    @RequestMapping("/removetemplate")
+    @LogNotes(operationType = "线路模板",content = "删除")
+    public ReponseResult removeTemplate(@RequestParam("tid")Integer tid){
+        try {
+            int result=templateService.removetemplate(tid);
+            ReponseResult<Integer> data=ReponseResult.ok(result,"删除线路模板信息成功！");
+            logger.info("method:removeTemplate 删除线路模板信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:removeTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+>>>>>>> origin/master
             return err;
         }
     }
 
+<<<<<<< HEAD
     @RequestMapping("/selectTemplateAll")
     public ReponseResult selectTemplateAll(Integer templateId) {
         try {
@@ -157,6 +202,18 @@ public class TemplateController {
             logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
+=======
+    @RequestMapping("/listtemplateall")
+    public ReponseResult listtemplateall(){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(templateService.listtemplateall(),"成功获取所有线路信息！");
+            logger.info("method:removeTemplate 成功获取所有线路信息！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:removeTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+>>>>>>> origin/master
             return err;
         }
     }

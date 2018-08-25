@@ -21,9 +21,10 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * 查询所有的景点等级
      * @return
      */
-    List<Dictionaries> listDictionaries();
+    List<Dictionaries> listDictionaries()throws Exception;
 
     /**
+<<<<<<< HEAD
      * 查询所有的车辆类型
      * @return
      */
@@ -46,4 +47,25 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      */
     Dictionaries selectByDictionariesId(@Param("dictionariesId")int dictionariesId);
 
+=======
+     * 根据类型id查询车辆类型
+     * @return
+     */
+    Dictionaries getDictionaries(@Param("valueId") Integer valueId)throws Exception;
+
+
+    /**
+     * 查询所有的车辆类型
+     * @return
+     */
+    List<Dictionaries> listDictionaries1()throws Exception;
+
+    /**
+     * 根据code获取字典表信息
+     * @param code
+     * @return
+     * @throws Exception
+     */
+    List<Dictionaries> listdictionarieslBycode(@Param("code")String code)throws Exception;
+>>>>>>> origin/master
 }

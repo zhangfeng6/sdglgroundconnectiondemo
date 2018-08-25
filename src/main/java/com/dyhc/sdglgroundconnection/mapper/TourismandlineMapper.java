@@ -15,6 +15,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface TourismandlineMapper extends CommonMapper<Tourismandline>{
+<<<<<<< HEAD
 
     /**
      * 赵伟伟
@@ -23,4 +24,19 @@ public interface TourismandlineMapper extends CommonMapper<Tourismandline>{
      * @return
      */
     List<Tourismandline> selectTourismandlineAll(@Param("tourismId") int tourismId);
+=======
+    /**
+     * 根据模板id删除信息   张枫
+     * @param tid
+     * @return
+     * @throws Exception
+     */
+    int removeTourismandline(@Param("tid")Integer tid)throws Exception;
+
+    /**
+     * 获取指定模板的所有线路id
+     * @return
+     */
+    List<Tourismandline> listtlBytid(@Param("tid")Integer tid)throws Exception;
+>>>>>>> origin/master
 }

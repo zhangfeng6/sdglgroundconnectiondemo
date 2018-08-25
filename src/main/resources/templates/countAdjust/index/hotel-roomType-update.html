@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店下面的房间修改</title>
+    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+</head>
+<body>
+<div class="wrap-container">
+
+    <input type="hidden" value="" th:value="${typeId}" id="typeId" >
+    <input type="hidden" value="" th:value="${hotelId}" id="hotelId">
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型名称：</label>
+        <div class="layui-input-block">
+            <select  name="typeName" style="height: 30px;" placeholder="请选择类型名称" onchange="judge()">
+
+            </select>
+        </div>
+    </div>
+    <form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxl">
+        <div class="layui-form-item">
+            <label class="layui-form-label">成本价：</label>
+            <div class="layui-input-block">
+                <input type="text" name="costprice" required lay-verify="required" placeholder="请输入成本价" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">报价：</label>
+            <div class="layui-input-block">
+                <input type="text" name="offer" required lay-verify="required" placeholder="请输入报价" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" type="button" onclick="updateRommType()">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script src="/layui.js"></script>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+    var name="";
+    $(function () {
+        getresouce();
+
+        var typeId=$("#typeId").val();
+        fuzhiRoomType(typeId);
+    })
+
+    function getresouce() {
+        $.post("/Dictionaries/listhoteltype",function (result) {
+            var content="<option value='0'>--请选择房间类型--</option>";
+            $(result.data).each(function (i,e) {
+                content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+            });
+            $("select").html(content);
+        },"json");
+    }
+    <!--修改赋值-->
+    function  fuzhiRoomType(typeId) {
+        $.ajax({
+            url:"/Hotel/fuzhiRoomType",
+            data:{typeId:typeId},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+                name=data.data.valueId;
+                $("select").val(data.data.valueId);
+                $("input[name='costprice']").val(data.data.costprice);
+                $("input[name='offer']").val(data.data.offer);
+            },
+            error:function () {
+                alert("酒店房间修改赋值失败！");
+            }
+        })
+    }
+    /**
+     * 修改酒店房间
+     */
+    function updateRommType(){
+        var typeId=$("#typeId").val();
+        var valueid=$("select").val();
+        var cb=$("input[name=costprice]").val();
+        var bj=$("input[name=offer]").val();
+        $.ajax({
+            url:"/Hotel/updateRoomType",
+            data:{typeId:typeId,valueId:valueid,cbj:cb,bj:bj},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+                parent.location.reload();
+                var index=parent.layer.getFrameIndex(window.name);
+                if (data!=null){
+                    alert("修改成功！");
+                    parent.layer.close(index);
+                }
+            },
+            error:function () {
+                alert("酒店房间修改失败！");
+            }
+        })
+    }
+    //Demo
+    layui.use(['form'], function() {
+        var form = layui.form();
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+    function judge() {
+        var info=$("select").val();
+        var hotelid=$("#hotelId").val();
+        if(info==0||name==info){
+            return;
+        }
+
+        $.post("/RoomType/judgeTypeName","hotelId="+hotelid+"&valueId="+info,function (result) {
+            if(!result.data){
+                alert("该房间类型已存在！");
+                $("select").val(0);
+            }
+        },"json");
+    }
+</script>
+</html>

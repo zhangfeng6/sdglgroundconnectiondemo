@@ -5,6 +5,7 @@
 	<title>ajax & LayUI分页插件</title>
 	<link rel="stylesheet" href="/css/layui.css" media="all">
 
+
 </head>
 <body>
 <div class="page-content-wrap">
@@ -61,7 +62,7 @@
 			</tbody>
 
 		</table>
-		<div id="laypage" style="text-align: center"></div>
+		<div id="fy" style="text-align: center"></div>
 	</div>
 </div>
 
@@ -92,10 +93,11 @@
             type: "get",
             async: false,
             success: function (result) {
+
                 $.each(result.data,function (i,e) {
                     content+="<tr id='node-"+e.scenicSpotId+"' class='parent collapsed'><td>" +
                         "<a class='layui-btn layui-btn-mini layuis-btn-normal showSubBtn' data-id='"+e.scenicSpotId+"'>+</a></td>" +
-                        "<td class=''>"+e.scenicSpotId+"</td>" +
+                        "<td class=''>"+(i+1)+"</td>" +
                         "<td class=''>"+e.scenicSpotName+"</td>";
                     if (e.parentId==0){
                         content+="<td class=''>无</td>";
@@ -191,12 +193,11 @@
 
                 })
                 $('tbody').html(content);
-
                 // 分页插件
                 layui.use('table', function () {
                     var laypage = layui.laypage;
                     laypage.render({
-                        elem: 'laypage'
+                        elem: 'fy'
                         , count: result.count
                         , curr: curnum
                         , limit: 2
@@ -212,11 +213,13 @@
                         }
                     })
                 })
+
             },
             error: function (res) {
                 alert(res);
             }
         })
+
     }
 
     $(document).on('click','#insertShopping',function(){

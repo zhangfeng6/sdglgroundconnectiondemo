@@ -3,17 +3,14 @@ package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * 模板表和线路表关联派生表
  */
-@Table(name = "TourismandlineMapper")
+@Table(name = "Tourismandline")
 public class Tourismandline {
     @Id
     @Column(name = "tourismandlineId")
@@ -42,6 +39,18 @@ public class Tourismandline {
     private String value1;
     private String value2;
     private String value3;
+
+
+    @Transient
+    private String lineName;
+
+    public String getLineName() {
+        return lineName;
+    }
+
+    public void setLineName(String lineName) {
+        this.lineName = lineName;
+    }
 
     @Id
     @Column(name = "tourismId")

@@ -84,7 +84,7 @@
                 })
                 var xu=(curnum-1)*limitcount+1;
                 $(e.data).each(function (i, result) {
-                    str+="<tr><td>"+xu+"</td><td>"+result.templateName+"</td><td>"+result.templateContent+"</td><td>"+result.staff.theUserName+"</td><td>"+result.creationDate+"</td><td><button id='update' type='button' value='\" + result.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='1' data-url='article-detail.html'><i class='layui-icon' onclick=''>&#xe640;</i></button></td></tr>";
+                    str+="<tr><td>"+xu+"</td><td>"+result.templateName+"</td><td>"+result.templateContent+"</td><td>"+result.staff.theUserName+"</td><td>"+result.creationDate+"</td><td><button  type='button'  value='" + result.templateId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='"+result.templateId+"' ><i class='layui-icon' onclick=''>&#xe640;</i></button></td></tr>";
                     xu++;
                 })
                 $('tbody').html(str);
@@ -105,17 +105,36 @@
                 area : ['880px' , '520px'],
                 content: 'savetemplate.html'
             });
-        })
-        $(document).on("click","#update",function () {
+        });
+        //列表添加
+        $(document).on('click', 'button[name=update]', function() {
             var id=$(this).val();
             layer.open({
                 type: 2,
-                title: '修改线路模板',
+                title: '新增线路模板',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
-                area : ['800px' , '520px'],
-                content: 'Restaurant-add.html?restaurantId='+id
+                area : ['880px' , '520px'],
+                content: 'savetemplate.html?mid='+id
             });
+        });
+        //列表删除
+        $('#table-list').on('click', '.del-btn', function() {
+            var id = $(this).attr('data-id');
+            if(confirm("确认要删除吗？")){
+                $.ajax({
+                    url:"/Template/removetemplate",
+                    data:{tid:id},
+                    dataType:"json",
+                    type:"get",
+                    success:function (result) {
+                        loadData(0);
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                });
+            }
         })
     });
     function like(){
