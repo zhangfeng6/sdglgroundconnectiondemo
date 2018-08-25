@@ -98,4 +98,9 @@ public class DispatchServiceImpl implements DispatchService {
         }
         return list;
     }
+
+    @Override
+    public Dispatch getDispatchByguideId(Integer guideId)throws Exception {
+        return dispatchMapper.getDispatchByguideId(guideId);
+    }
 }

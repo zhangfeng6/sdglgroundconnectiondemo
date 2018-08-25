@@ -94,7 +94,7 @@ public class GuideServiceImpl implements GuideService {
         guide.setState(3);
         Integer Ak =0;
         try {
-            Ak=guideMapper.updateByPrimaryKey(guide);
+            Ak=guideMapper.updateByPrimaryKeySelective(guide);
         } catch (Exception e) {
             e.printStackTrace();
         }

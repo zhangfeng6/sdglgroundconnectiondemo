@@ -142,5 +142,22 @@ public class GuideController{
         }
 
     }
+    /**
+     * 上传单据
+     * @return
+     */
+    @RequestMapping("upload")
+    public ReponseResult upload(HttpServletRequest request,@RequestParam("multipartFile") MultipartFile multipartFile){
+        try {
+            Vector<String> list= WechatFileUploadUtil.uploadImage(request,".jpg");
+            String aa= request.getParameter("guideId");
+            System.out.println(aa);
+            return ReponseResult.ok(list,"上传成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ReponseResult.err("上传失败");
+        }
+    }
+
 
 }

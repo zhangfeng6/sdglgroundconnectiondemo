@@ -86,4 +86,23 @@ public class DispatchController {
             return err;
         }
     }
+
+
+    /**
+     * 根据导游id查询调度信息
+     * @param guideId 导游id
+     * @return
+     */
+    @RequestMapping("getDispatchByguideId")
+    public ReponseResult getDispatchByguideId(Integer guideId){
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.getDispatchByguideId(guideId),"获取调度对象成功");
+            logger.info("method:getDispatchByguideId 获取调度对象成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:getDispatchByguideId 系统异常");
+            return ReponseResult.err("获取调度对象失败");
+        }
+    }
 }

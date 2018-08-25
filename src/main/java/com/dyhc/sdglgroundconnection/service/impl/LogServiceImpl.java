@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.LogMapper;
+import com.dyhc.sdglgroundconnection.pojo.Log;
 import com.dyhc.sdglgroundconnection.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class LogServiceImpl implements LogService {
 
     @Autowired
     private LogMapper logMapper;
+
+    @Override
+    public Integer inserLog(Log log) throws Exception {
+        return logMapper.insertSelective(log);
+    }
 }
