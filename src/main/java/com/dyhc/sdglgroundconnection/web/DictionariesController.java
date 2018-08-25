@@ -48,8 +48,6 @@ public class DictionariesController {
     }
 
 
-<<<<<<< HEAD
-=======
     /**
      * 获取所有的景点等级
      * @return
@@ -66,7 +64,7 @@ public class DictionariesController {
             return  data;
         }
     }
->>>>>>> origin/master
+
 
     /**
      * 获取所有的车辆类型
@@ -86,22 +84,22 @@ public class DictionariesController {
     }
 
     /**
-<<<<<<< HEAD
+
      * 获取餐馆类型
      * @return
      */
     @RequestMapping("selectByDictionariesId")
-    public ReponseResult selectByDictionariesId(Integer dictionariesId){
+    public ReponseResult selectByDictionariesId(Integer dictionariesId) {
         try {
-            Dictionaries dictionaries=dictionariesService.selectByDictionariesId(dictionariesId);
-            ReponseResult<Object> data=ReponseResult.ok(dictionaries,"获取餐馆类型成功");
-            return  data;
-        }catch (Exception e){
-            ReponseResult<List> data=ReponseResult.err("获取餐馆类型失败");
-=======
-     * 获取所有的景点等级
-     * @return
-     */
+            Dictionaries dictionaries = dictionariesService.selectByDictionariesId(dictionariesId);
+            ReponseResult<Object> data = ReponseResult.ok(dictionaries, "获取餐馆类型成功");
+            return data;
+        } catch (Exception e) {
+            ReponseResult<List> data = ReponseResult.err("获取餐馆类型失败");
+            ReponseResult<Object> err=ReponseResult.err("系统错误！");
+            return err;
+        }
+    }
     @RequestMapping("/listhoteltype")
     public ReponseResult listhoteltype(){
         try {
@@ -109,7 +107,6 @@ public class DictionariesController {
             return  data;
         }catch (Exception e){
             ReponseResult<List> data=ReponseResult.err("获取所有的车辆类型失败");
->>>>>>> origin/master
             e.printStackTrace();
             return  data;
         }

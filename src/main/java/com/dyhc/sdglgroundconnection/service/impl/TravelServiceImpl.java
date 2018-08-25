@@ -20,7 +20,6 @@ public class TravelServiceImpl implements TravelService {
     @Autowired
     private TravelMapper travelMapper;
 
-<<<<<<< HEAD
     @Override
     public List<Travel> selectTravel() {
         return travelMapper.selectAll();
@@ -29,7 +28,7 @@ public class TravelServiceImpl implements TravelService {
     @Override
     public Travel selectTravelById(Integer travelId) {
         return travelMapper.selectTravelById(travelId);
-=======
+    }
     /**
      * 添加信息
      * @param travel
@@ -104,6 +103,5 @@ public class TravelServiceImpl implements TravelService {
     @Override
     public Integer getupdlala(Travel travel) {
         return travelMapper.getupdlala(travel);
->>>>>>> origin/master
     }
 }

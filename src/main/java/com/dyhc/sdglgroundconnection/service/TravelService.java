@@ -1,10 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Travel;
-<<<<<<< HEAD
-=======
 import com.github.pagehelper.PageInfo;
->>>>>>> origin/master
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -32,10 +29,12 @@ public interface TravelService {
      * @return
      */
     Travel selectTravelById(Integer travelId);
-=======
-     * 添加信息
+
+    /**
+     *
      * @param travel
      * @return
+     * @throws Exception
      */
     Integer getAddTravel(Travel travel) throws Exception;
     /**
@@ -84,5 +83,4 @@ public interface TravelService {
      */
     Integer getupdlala(Travel travel);
 
->>>>>>> origin/master
 }
