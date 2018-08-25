@@ -56,4 +56,12 @@ public interface GuideService {
      * @return
      */
     Guide login(String username,String password)throws Exception;
+
+
+    /**
+     * 微信小程序之导游修改密码
+     * @param guide
+     * @return
+     */
+    Integer updateGuideByPassword(Guide guide)throws Exception;
 }

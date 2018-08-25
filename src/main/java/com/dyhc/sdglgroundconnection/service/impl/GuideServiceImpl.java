@@ -114,4 +114,11 @@ public class GuideServiceImpl implements GuideService {
     public Guide login(String username, String password) throws Exception {
         return guideMapper.login(username,password);
     }
+
+    @Override
+    public Integer updateGuideByPassword(Guide guide) throws Exception {
+        return guideMapper.updateByPrimaryKeySelective(guide);
+    }
+
+
 }
