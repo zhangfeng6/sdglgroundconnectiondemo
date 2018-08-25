@@ -124,4 +124,11 @@ public class GuideServiceImpl implements GuideService {
     public List<Guideschedule> listguidescheduleBygid(Integer guideId, String year, String month) throws Exception {
         return guidescheduleMapper.listguideschedule(guideId, year, month);
     }
+
+    @Override
+    public Integer updateGuideByPassword(Guide guide) throws Exception {
+        return guideMapper.updateByPrimaryKeySelective(guide);
+    }
+
+
 }

@@ -92,6 +92,8 @@ public class GuideController{
             return  error;
         }
     }
+
+
     @LogNotes(operationType="导游表",content="导游修改赋值 ")
     @RequestMapping("/assignmentGuide")
     public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
@@ -116,13 +118,19 @@ public class GuideController{
     @RequestMapping("guideLogin")
     public ReponseResult guideLogin(String username,String password){
         try {
+            System.out.println(password);
             Guide guide=guideService.login(username,password);
-            if (guide==null){
+            if (guide!=null){
+                if(password.equals(guide.getPassword())){
+                    logger.info("method:login 微信登录成功");
+                    return ReponseResult.ok(guide,"登录成功");
+                }else {
+                    logger.error("method:login 微信登录失败");
+                    return ReponseResult.err("登录失败");
+                }
+            }else {
                 logger.error("method:login 微信登录失败");
                 return ReponseResult.err("登录失败");
-            }else {
-                logger.info("method:login 微信登录成功");
-                return ReponseResult.ok(guide,"登录成功");
             }
 
         }catch (Exception e){
@@ -165,5 +173,53 @@ public class GuideController{
         }
     }
 
+    /**
+     * 微信小程序之判断旧密码是否输入正确
+     * @param password
+     * @return
+     */
+    @RequestMapping("pdOldPassword")
+    public ReponseResult pdOldPassword(String password,Integer guideId){
+        try {
+            Guide guide=guideService.assignmentGuide(guideId);
+            if (guide!=null){
+                if(password.equals(guide.getPassword())){
+                    logger.info("method:pdOldPassword 旧密码输入正确");
+                    return ReponseResult.ok(1,"旧密码输入正确");
+                }else {
+                    logger.error("method:pdOldPassword 旧密码输入失败");
+                    return ReponseResult.err("旧密码输入失败");
+                }
+            }else {
+                logger.error("method:pdOldPassword 旧密码输入失败");
+                return ReponseResult.err("旧密码输入失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:pdOldPassword 微信登录失败");
+            return ReponseResult.err("登录失败");
+        }
+    }
 
+    /**
+     * 微信小程序之修改密码
+     * @return
+     */
+    @RequestMapping("updateGuideByPassword")
+    public ReponseResult updateGuideByPassword(Guide guide){
+        try {
+            Integer result=guideService.updateGuideByPassword(guide);
+            if (result==1){
+                logger.info("method:updateGuideByPassword 修改密码成功");
+                return ReponseResult.ok(result,"修改成功");
+            }else {
+                logger.error("method:updateGuideByPassword 修改密码失败");
+                return ReponseResult.err("修改失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:updateGuideByPassword 修改密码失败");
+            return ReponseResult.err("修改失败");
+        }
+    }
 }

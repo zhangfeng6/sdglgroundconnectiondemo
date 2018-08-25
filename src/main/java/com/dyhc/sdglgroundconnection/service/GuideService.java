@@ -60,13 +60,11 @@ public interface GuideService {
      */
     Guide login(String username,String password)throws Exception;
 
+
     /**
-     * 根据条件获取导游安排信息
-     * @param guideId
-     * @param year
-     * @param month
+     * 微信小程序之导游修改密码
+     * @param guide
      * @return
-     * @throws Exception
      */
-    List<Guideschedule> listguidescheduleBygid(Integer guideId,String year,String month)throws Exception;
+    Integer updateGuideByPassword(Guide guide)throws Exception;
 }
