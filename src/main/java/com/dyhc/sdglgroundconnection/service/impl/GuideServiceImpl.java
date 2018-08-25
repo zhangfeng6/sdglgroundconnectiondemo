@@ -1,8 +1,10 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.GuideMapper;
+import com.dyhc.sdglgroundconnection.mapper.GuidescheduleMapper;
 import com.dyhc.sdglgroundconnection.pojo.AccountType;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
+import com.dyhc.sdglgroundconnection.pojo.Guideschedule;
 import com.dyhc.sdglgroundconnection.service.GuideService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -21,6 +24,8 @@ public class GuideServiceImpl implements GuideService {
 
     @Autowired
     private GuideMapper guideMapper;
+    @Autowired
+    private GuidescheduleMapper guidescheduleMapper;
     /**
      * 分页查询导游信息
      * @param pageNo
@@ -113,5 +118,10 @@ public class GuideServiceImpl implements GuideService {
     @Override
     public Guide login(String username, String password) throws Exception {
         return guideMapper.login(username,password);
+    }
+
+    @Override
+    public List<Guideschedule> listguidescheduleBygid(Integer guideId, String year, String month) throws Exception {
+        return guidescheduleMapper.listguideschedule(guideId, year, month);
     }
 }

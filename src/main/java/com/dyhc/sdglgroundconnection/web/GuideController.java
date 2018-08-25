@@ -126,5 +126,21 @@ public class GuideController{
         }
     }
 
+    @RequestMapping("/listguidescheduleBygid")
+    public ReponseResult listguidescheduleBygid(@RequestParam("guiId")Integer guiId,
+                                                @RequestParam("year")String year,
+                                                @RequestParam("month")String month){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(guideService.listguidescheduleBygid(guiId, year, month),"获取导游安排信息成功！");
+            logger.info("method:listguidescheduleBygid   获取导游安排信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:listguidescheduleBygid 系统异常！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+
+    }
 
 }

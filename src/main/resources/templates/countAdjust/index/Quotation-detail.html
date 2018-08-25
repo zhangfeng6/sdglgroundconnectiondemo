@@ -37,7 +37,7 @@
 	</div>
 
 	<div id="zong" >
-		<div name="xianlu" style='margin-bottom: 30px;width: 1000px'>
+		<div name="xianlu" style='margin-bottom: 30px;width: 1100px'>
 			<input type="image" src="/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)'/>
 
 			<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;"/>
@@ -51,7 +51,7 @@
 										<option value="0">--请选择--</option>
 									</select>
 								</td>
-								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu(this)">自行填写</button></td>
+								<td colspan="2">&nbsp;<button type="button" name="d1qiehuan" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu(this)">自行填写</button></td>
 							</tr>
 							<tr>
 							<td><label class="layui-form-label">日期</label></td>
@@ -76,6 +76,8 @@
 								<td><input name="dlnum" type="text" onchange="sumchange(this)" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td><input name="d1jiucb" type="text" class="layui-input"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1hotelpayment"></td>
+								<td style="width: 90px;">付现<input type="radio" name="d1hotelpayment"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">司陪：</label></td>
@@ -98,6 +100,9 @@
 								</td>
 								<td><label class="layui-form-label" style="width: 200px;">成本价:</label></td>
 								<td><input type="text" name="d1costprice1" class="layui-input"></td>
+								<td></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1jingdpayment1"></td>
+								<td style="width: 90px;">付现<input type="radio" name="d1jingdpayment1"></td>
 							</tr>
 							<tr name="d1gouwudi">
 									<td><label class="layui-form-label">购物地：</label></td>
@@ -123,6 +128,8 @@
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td colspan="3"><input name="d1wucancb" type="text" class="layui-input"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1wucanpayment"></td>
+								<td style="width: 90px;">付现<input type="radio" name="d1wucanpayment"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">晚餐</label></td>
@@ -139,6 +146,8 @@
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td colspan="3"><input type="text" name="d1wancancb" class="layui-input"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1wancanpayment"></td>
+								<td style="width: 90px;">付现<input type="radio" name="d1wancanpayment"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">行程</label></td>
@@ -167,19 +176,19 @@
 					</tr>
 					<tr>
 							<td><label class="layui-form-label">车费：</label></td>
-							<td width="300px"><input type="text" class="layui-input"></td>
+							<td width="300px"><input type="text" name="chefei" class="layui-input"></td>
 							<td colspan="2">
 								<table border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td><label class="layui-form-label">报停费：</label></td>
-										<td colspan="2"><input type="text" class="layui-input"></td>
+										<td colspan="2"><input type="text" name="baoting" class="layui-input"></td>
 									</tr>
 								</table>
 							</td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">酒水：</label></td>
-						<td width="300px"><input type="text" class="layui-input"></td>
+						<td width="300px"><input type="text" name="jiushui" class="layui-input"></td>
 					</tr>
 
 					<tr>
@@ -190,18 +199,18 @@
 							</select>
 						</td>
 						<td>
-							<select name="city" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
+							<select name="carrental" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
 								<option value="0">--请选择车队类型--</option>
 							</select>
 						</td>
 						<td><label class="layui-form-label" >数量:</label></td>
-						<td><input name="dlnum" type="text" onchange="sumchange(this)" class="layui-input"></td>
+						<td><input name="cheduinum" type="text" onchange="sumchange(this)" class="layui-input"></td>
 						<td><label class="layui-form-label" >成本价:</label></td>
-						<td><input type="text" class="layui-input"></td>
+						<td><input type="text" name="cheduicb" class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">车辆联系人：</label></td>
-						<td width="300px"><input type="text" class="layui-input"></td>
+						<td width="300px"><input type="text" name="cheduilxr" class="layui-input"></td>
 						<td colspan="3">(如：张师傅 13333333333 晋H:88888)</td>
 					</tr>
 					<tr>
@@ -219,22 +228,22 @@
 											<table border="0"  cellspacing="0"  cellpadding="0">
 											<tr>
 												<td><label class="layui-form-label">成本价：</label></td>
-						             	<td width="300px"><input type="text" class="layui-input"></td>
+						             	<td width="300px"><input type="text" name="qitacb" class="layui-input"></td>
 											</tr>
 											</table>
 										</td>
 					</tr>
 					<tr>
 										<td><label class="layui-form-label"><小费></小费>：</label></td>
-										<td width="300px"><input type="text" class="layui-input"></td>
+										<td width="300px"><input type="text" name="xiaofei"  class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
-						<td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+						<td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">接待标准：</label></td>
-						<td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+						<td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="reception"></textarea></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -269,6 +278,8 @@
                     "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
                     "<td><input type='text' name='d"+index+"costprice"+leng+"' class='layui-input'></td>" +
                     "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>" +
+                    "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"jingdpayment"+leng+"'></td>"+
+                    "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"jingdpayment"+leng+"'></td>"+
                     "</tr>");
                 layui.use(['form', 'layedit', 'laydate', 'element'], function () {
                     var form = layui.form,

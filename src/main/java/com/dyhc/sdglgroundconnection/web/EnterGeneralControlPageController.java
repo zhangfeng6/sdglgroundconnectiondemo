@@ -3,7 +3,10 @@ package com.dyhc.sdglgroundconnection.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Calendar;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -131,6 +134,19 @@ public class EnterGeneralControlPageController {
     @RequestMapping("/menu1.html")
     public String  menu1() {
         return "General-control/index/menu1";
+    }
+    /**
+     * 进入menu2页
+     * @return
+     */
+    @RequestMapping("/menu3.html")
+    public String  menu3(Model model) {
+        Calendar cale = Calendar.getInstance();
+        int year=cale.get(Calendar.YEAR);
+        int month = cale.get(Calendar.MONTH) + 1;
+        model.addAttribute("year",year);
+        model.addAttribute("month",month);
+        return "General-control/index/menu3";
     }
     /**
      * 进入menu2页
