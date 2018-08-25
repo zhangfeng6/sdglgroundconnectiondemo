@@ -23,8 +23,8 @@ public class Disrestaurant {
     private Double costPrice; // 成本价
     @Column(name = "quotePrice")
     private Double quotePrice; // 报价
-    @Column(name = "numDays")
-    private Integer numDays; // 天数
+    @Column(name = "tourismdate")
+    private Date tourismdate; // 天数
     @Column(name = "dinDate")
     private String dinDate; // 用餐时间（早、中、晚）
     private Integer status; // 是否删除（1代表已删除，0代表未删除）
@@ -93,13 +93,13 @@ public class Disrestaurant {
     }
 
     @Basic
-    @Column(name = "numDays")
-    public Integer getNumDays() {
-        return numDays;
+    @Column(name = "tourismdate")
+    public Date getTourismdate() {
+        return tourismdate;
     }
 
-    public void setNumDays(Integer numDays) {
-        this.numDays = numDays;
+    public void setTourismdate(Date tourismdate) {
+        this.tourismdate = tourismdate;
     }
 
     @Basic
@@ -202,7 +202,7 @@ public class Disrestaurant {
                 Objects.equals(offerId, that.offerId) &&
                 Objects.equals(costPrice, that.costPrice) &&
                 Objects.equals(quotePrice, that.quotePrice) &&
-                Objects.equals(numDays, that.numDays) &&
+                Objects.equals(tourismdate, that.tourismdate) &&
                 Objects.equals(dinDate, that.dinDate) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(createBy, that.createBy) &&
@@ -217,6 +217,6 @@ public class Disrestaurant {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, numDays, dinDate, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, tourismdate, dinDate, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
     }
 }

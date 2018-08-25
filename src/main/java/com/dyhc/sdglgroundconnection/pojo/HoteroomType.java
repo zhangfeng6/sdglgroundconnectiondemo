@@ -15,10 +15,10 @@ public class HoteroomType {
     @Id
     @Column(name = "hoteroomtId")
     private int hoteroomtId; // 调度酒店房间类型id
-    @Column(name = "dispatchHotelId")
-    private Integer dispatchHotelId; // 调度酒店编号（外键，与调度酒店表关联）
-    @Column(name = "typeId")
-    private Integer typeId; // 酒店房间类型编号（外键，与酒店房间类型表关联）
+    @Column(name = "offerId")
+    private Integer offerId; // 调度酒店编号（外键，与调度酒店表关联）
+    @Column(name = "templateId")
+    private Integer templateId; // 酒店房间类型编号（外键，与酒店房间类型表关联）
     private Integer status; // 是否删除（1代表已删除，0代表未删除）
     @Column(name = "createBy")
     private Integer createBy; // 创建人 （外键，与人员表关联）
@@ -45,23 +45,23 @@ public class HoteroomType {
     }
 
     @Basic
-    @Column(name = "dispatchHotelId")
-    public Integer getDispatchHotelId() {
-        return dispatchHotelId;
+    @Column(name = "templateId")
+    public Integer getTemplateId() {
+        return templateId;
     }
 
-    public void setDispatchHotelId(Integer dispatchHotelId) {
-        this.dispatchHotelId = dispatchHotelId;
+    public void setTemplateId(Integer templateId) {
+        this.templateId = templateId;
     }
 
     @Basic
-    @Column(name = "typeId")
-    public Integer getTypeId() {
-        return typeId;
+    @Column(name = "offerId")
+    public Integer getOfferId() {
+        return offerId;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setOfferId(Integer offerId) {
+        this.offerId = offerId;
     }
 
     @Basic
@@ -150,8 +150,8 @@ public class HoteroomType {
         if (o == null || getClass() != o.getClass()) return false;
         HoteroomType that = (HoteroomType) o;
         return hoteroomtId == that.hoteroomtId &&
-                Objects.equals(dispatchHotelId, that.dispatchHotelId) &&
-                Objects.equals(typeId, that.typeId) &&
+                Objects.equals(offerId, that.offerId) &&
+                Objects.equals(templateId, that.templateId) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(createBy, that.createBy) &&
                 Objects.equals(updateBy, that.updateBy) &&
@@ -165,6 +165,6 @@ public class HoteroomType {
     @Override
     public int hashCode() {
 
-        return Objects.hash(hoteroomtId, dispatchHotelId, typeId, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
     }
 }

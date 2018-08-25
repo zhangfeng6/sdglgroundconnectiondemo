@@ -3,4 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.OfferscenicMapper">
 
+    <insert id="insertOfferscenic">
+      insert into offerscenic(scenicSpotId,offerId,costPrice,offer,whetherDel,creater)
+      values(#{scenicSpotId},#{offerId},#{costPrice},#{offer},0,1)
+    </insert>
 </mapper>

@@ -2,5 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.OfferMapper">
+    <resultMap id="lianbiao" type="com.dyhc.sdglgroundconnection.pojo.Offer">
+    <id column="offerId" property="offerId"/>
+    <association property="travel" javaType="com.dyhc.sdglgroundconnection.pojo.Travel">
+        <id column="travelId" property="travelId"/>
+    </association>
+</resultMap>
 
+    <select id="selectOffer" resultMap="lianbiao">
+        SELECT o.*,t.travelName FROM offer o,`travel` t WHERE o.travelId=t.`travelId` AND t.whetherDel!=1 AND o.whetherDel!=1
+        <if test="travelName!=null and travelName!=''">
+            and t.travelName like concat("%",#{travelName},"%")
+        </if>
+    </select>
+
+    <insert id="insertOffer">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="offerId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into offer(travelId,travelStartTime,travelEndTime,`number`,tourist,trip,offer,remarks,reception,whetherDel,creater)
+        values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},0,1)
+    </insert>
 </mapper>

@@ -4,9 +4,14 @@
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.DictionariesMapper">
     <select id="listDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
-        WHERE typeCode='ATTRACTIONS'
+        WHERE typeCode='ATTRACTIONS' and whetherDel!=1
     </select>
 
+<<<<<<< HEAD
+    <select id="selectByDictionariesId" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM `dictionaries`
+        WHERE dictionariesId=#{dictionariesId}
+=======
     <select id="getDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
         WHERE typeCode='VEHICLE' and valueId=#{valueId}
@@ -23,5 +28,12 @@
         <if test="code != null and code != '' ">
             WHERE `typeCode`=#{code}
         </if>
+>>>>>>> origin/master
     </select>
+
+
+    <select id="listVehicletype" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        select * from `dictionaries` where typeCode='VEHICLE' and whetherDel!=1
+    </select>
+
 </mapper>

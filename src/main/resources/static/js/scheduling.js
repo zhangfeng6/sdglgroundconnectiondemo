@@ -44,6 +44,7 @@ function shanchu(aa) {
 }
 
 function addss() {
+    var fantype="fantype";
     var leng=$("div[name=xianlu]");
     var index=leng.length+1;
     var xlhtml=$("select[name=d1template]").html();
@@ -51,8 +52,8 @@ function addss() {
     var jdhtml=$("select[name=d1scenicspot1]").html();
     var gwdhtml=$("select[name=dlshopping]").html();
     var fanhtml=$("select[name=d1wucan]").html();
-    var a = "<div style='margin-bottom: 30px;width: 890px' name='xianlu' ><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
-        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:865px ;' />" +
+    var a = "<div style='margin-bottom: 30px;width: 990px' name='xianlu' ><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
+        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:965px ;' />" +
         "<div id='content'>" +
         "<form class='layui-form layui-form-pane' action=''>" +
         "<table border='0'  cellspacing='0' cellpadding='0' >" +
@@ -73,23 +74,23 @@ function addss() {
         "	<tr>" +
         "	<td><label class='layui-form-label'>酒店</label></td>" +
         "	<td>" +
-        "	<select name='d"+index+"hoteltype' style=\"height: 35px;width:180px;\" onchange='typechange(this,'hoteltype')' lay-ignore>" +
+        "	<select name='d"+index+"hoteltype' style=\"height: 35px;width:180px;\" onchange=\"typechange(this,'hoteltype')\" lay-ignore>" +
         ""+jiuhtml+"</select>" +
         "</td>" +
         "<td>" +
-        "<select name='d"+index+"hotel' style='height: 35px;width:180px;' lay-ignore>" +
+        "<select name='d"+index+"hotel' onchange='emptynum(this)' style='height: 35px;width:180px;' lay-ignore>" +
         "	<option value='0'selected='selected'>--请选择酒店房间类型--</option>" +
         "	</select>" +
         "	</td>" +
         "<td><label class='layui-form-label'>数量：</label></td>" +
-        "<td><input type='text' name='d"+index+"num' class='layui-input'></td>" +
+        "<td><input type='text' name='d"+index+"num' onchange='sumchange(this)' class='layui-input'></td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td><input name='d"+index+"jiucb'type='text' class='layui-input'></td>" +
         "</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>司陪：</label></td>" +
-        "<td><label class='layui-form-label' onchange='sipeichange(this)' style='width: 140px;'>请输入房间数：</label></td>" +
-        "<td><input name='d"+index+"spnum' type='text' class='layui-input'></td>" +
+        "<td><label class='layui-form-label'  style='width: 140px;'>请输入房间数：</label></td>" +
+        "<td><input name='d"+index+"spnum' type='text'onchange='sipeichange(this)' class='layui-input'></td>" +
         "<td><label class='layui-form-label'>成本价：</label></td>" +
         "<td><input name='d"+index+"spchengben' type='text' class='layui-input'></td>" +
         "</tr>" +
@@ -104,10 +105,10 @@ function addss() {
 
         ""+jdhtml+"</select>" +
         "</td>" +
-        "<td><label class='layui-form-label'>成本价:</label></td>" +
+        "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
         "<td><input type='text' name='d"+index+"costprice1' class='layui-input'></td>" +
         "</tr>" +
-        "<tr>" +
+        "<tr name='d"+index+"gouwudi'>" +
         "<td><label class='layui-form-label'>购物地：</label></td>" +
         "<td colspan='3'>" +
         "<select name='d"+index+"shopping' style='height: 35px;width:180px;' lay-ignore>" +
@@ -117,11 +118,11 @@ function addss() {
         "<tr>" +
         "<td><label class='layui-form-label'>午餐</label></td>" +
         "	<td>" +
-        "	<select name='d"+index+"wucan' style='height: 35px;width:180px;' onchange='typechange(this,'fantype')' lay-ignore>" +
+        "<select name='d"+index+"wucan' style='height: 35px;width:180px;' onchange=\"typechange(this,'fantype')\" lay-ignore>" +
         ""+fanhtml+"</select>" +
         "	</td>" +
         "<td>" +
-        "<select name='d"+index+"wufan' style='height: 35px;width:180px;' onchange='typechange(this,'wucan')' lay-ignore>" +
+        "<select name='d"+index+"wufan' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
         "<option value='0'>--请选择饭店类型--</option>"+
         "</select>" +
         "	</td>" +
@@ -131,11 +132,11 @@ function addss() {
         "	<tr>" +
         "<td><label class='layui-form-label'>晚餐</label></td>" +
         "<td>" +
-        "	<select name='d"+index+"wancan' style='height: 35px;width:180px;' onchange='typechange(this,'fantype')' lay-ignore>" +
+        "	<select name='d"+index+"wancan' style='height: 35px;width:180px;' onchange=\"typechange(this,'fantype')\" lay-ignore>" +
         ""+fanhtml+"</select>" +
         "	</td>" +
         "	<td>" +
-        "<select name='d"+index+"wanfan' style='height: 35px;width:180px;' onchange='typechange(this,'wancan')' lay-ignore>" +
+        "<select name='d"+index+"wanfan' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
         "<option value='0'>--请选择饭店类型--</option>"+
         "</select>" +
         "</td>" +

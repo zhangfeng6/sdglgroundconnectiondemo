@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
+import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.Template;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,40 @@ public interface TemplateMapper  extends CommonMapper<Template>{
      * @throws Exception
      */
     Template gettemplateByName(@Param("templateName")String templateName) throws Exception;
+
+    /**
+     * 赵伟伟
+     * 查询全部模板
+     * @return
+     */
+    List<Template> selectTemplate() throws Exception;
+
+
+    /**
+     * 赵伟伟
+     * 按编号查询线路信息
+     * @param templateId
+     * @return
+     */
+    Template selectTemplateAll(@Param("templateId") int templateId);
+
+
+
+    /**
+     * 赵伟伟
+     * 按编号查询景点信息
+     * @param templateId
+     * @return
+     */
+    List<Scenicspot> selectscenicSpotById(@Param("templateId") int templateId);
+
+
+    /**
+     * 赵伟伟
+     * 按编号查询
+     * @param templateId
+     * @return
+     */
+    Template selecctNameById(@Param("templateId") int templateId);
+
 }

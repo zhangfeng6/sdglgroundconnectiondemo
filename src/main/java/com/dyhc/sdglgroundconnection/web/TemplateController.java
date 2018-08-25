@@ -136,6 +136,21 @@ public class TemplateController {
         }
     }
 
+<<<<<<< HEAD
+
+
+    @RequestMapping("/selectTemplate")
+    public ReponseResult selectTemplate() {
+        try {
+            List<Template> list = templateService.selectTemplate();
+            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            logger.info(" method:selectTemplate  查询旅游模板成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectTemplate  查询旅游模板失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+=======
     /**
      * 根据id查询线路模板信息   张枫
      * @param mid
@@ -170,10 +185,24 @@ public class TemplateController {
             e.printStackTrace();
             logger.debug("method:removeTemplate 系统出现异常！");
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+>>>>>>> origin/master
             return err;
         }
     }
 
+<<<<<<< HEAD
+    @RequestMapping("/selectTemplateAll")
+    public ReponseResult selectTemplateAll(Integer templateId) {
+        try {
+            Template template = templateService.selectTemplateAll(templateId);
+            ReponseResult<Object> data = ReponseResult.ok(template,"查询成功！");
+            logger.info(" method:selectTemplateAll  查询线路全部信息成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+=======
     @RequestMapping("/listtemplateall")
     public ReponseResult listtemplateall(){
         try {
@@ -184,6 +213,7 @@ public class TemplateController {
             e.printStackTrace();
             logger.debug("method:removeTemplate 系统出现异常！");
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+>>>>>>> origin/master
             return err;
         }
     }

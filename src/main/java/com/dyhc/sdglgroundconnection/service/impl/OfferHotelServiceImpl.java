@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.OfferHotelMapper;
+import com.dyhc.sdglgroundconnection.pojo.OfferHotel;
 import com.dyhc.sdglgroundconnection.service.OfferHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class OfferHotelServiceImpl implements OfferHotelService {
 
     @Autowired
     private OfferHotelMapper offerHotelMapper;
+
+    @Override
+    public int insertOfferHotel(OfferHotel offerHotel) {
+        return offerHotelMapper.insertOfferHotel(offerHotel);
+    }
 }

@@ -88,5 +88,10 @@ public class ScenicspotServiceImpl implements ScenicspotService {
         return scenicspotMapper.selectAll();
     }
 
+    @Override
+    public Scenicspot selectByScenicSpotId(Integer scenicSpotId) {
+        return scenicspotMapper.selectByScenicSpotId(scenicSpotId);
+    }
+
 
 }

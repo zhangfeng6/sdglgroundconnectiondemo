@@ -40,6 +40,10 @@
         UPDATE scenicspot SET whetherDel=1 WHERE scenicSpotId=#{scenicSpotId}
     </update>
 
+    <select id="selectByScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        SELECT  * from scenicspot where whetherDel!=1 and scenicSpotId=#{scenicSpotId}
+    </select>
+
 
     <resultMap id="getScenicspotLevel" type="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
         <id column="scenicSpotId" property="scenicSpotId"/>

@@ -23,4 +23,7 @@
         UPDATE travel SET travelName=#{travelName},personName=#{personName},personPost=#{personPost},phone=#{phone} WHERE travelId=#{travelId}
     </update>
 
+    <select id="selectTravelById" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">
+        select * from travel where whetherDel!=1 and travelId=#{travelId}
+    </select>
 </mapper>

@@ -25,4 +25,8 @@
     <select id="selectById" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
         select typeId,restaurantId,typeCode,valueId,costprice,offer,whetherDel,createBy,updateBy,updateDate,createDate,value1,value2,value3 from mealType where typeId = #{typeId}
     </select>
+
+    <select id="selectMealType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM dictionaries WHERE whetherDel!=1 and typeCode="DIET"
+    </select>
 </mapper>

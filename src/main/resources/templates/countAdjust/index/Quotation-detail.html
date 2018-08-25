@@ -37,7 +37,7 @@
 	</div>
 
 	<div id="zong" >
-		<div name="xianlu" style='margin-bottom: 30px;width: 900px'>
+		<div name="xianlu" style='margin-bottom: 30px;width: 1000px'>
 			<input type="image" src="/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)'/>
 
 			<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;"/>
@@ -49,7 +49,6 @@
 								<td>
 									<select name="d1template" style="height: 35px;width:180px;" onchange="xianluchange(this)" lay-ignore>
 										<option value="0">--请选择--</option>
-										<option value="0">哈红祖</option>
 									</select>
 								</td>
 								<td colspan="2">&nbsp;<button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="xianlu(this)">自行填写</button></td>
@@ -69,20 +68,19 @@
 									</select>
 								</td>
 								<td>
-									<select name="dlhotel" style="height: 35px;width:180px;" lay-ignore>
-										<option value=""selected="selected">请选择酒店房间类型</option>
-
+									<select name="d1hotel" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
+										<option value="0"selected="selected">请选择酒店房间类型</option>
 									</select>
 								</td>
-								<td><label class="layui-form-label" onchange="sumchange(this)">数量：</label></td>
-								<td><input name="dlnum" type="text" class="layui-input"></td>
+								<td><label class="layui-form-label" >数量：</label></td>
+								<td><input name="dlnum" type="text" onchange="sumchange(this)" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td><input name="d1jiucb" type="text" class="layui-input"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">司陪：</label></td>
-								<td><label class="layui-form-label" onchange="sipeichange(this)" style="width: 140px;">房间数：</label></td>
-								<td><input name="d1spnum" type="text" class="layui-input"></td>
+								<td><label class="layui-form-label"  style="width: 140px;">房间数：</label></td>
+								<td><input name="d1spnum" type="text"  onchange="sipeichange(this)" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价：</label></td>
 								<td><input name="d1spchengben" type="text" class="layui-input"></td>
 							</tr>
@@ -98,10 +96,10 @@
 										<option value="0">--请选择--</option>
 									</select>
 								</td>
-								<td><label class="layui-form-label">成本价:</label></td>
+								<td><label class="layui-form-label" style="width: 200px;">成本价:</label></td>
 								<td><input type="text" name="d1costprice1" class="layui-input"></td>
 							</tr>
-							<tr>
+							<tr name="d1gouwudi">
 									<td><label class="layui-form-label">购物地：</label></td>
 									<td colspan="3">
 										<select name="dlshopping" style="height: 35px;width:180px;" lay-ignore>
@@ -119,7 +117,7 @@
 									</select>
 								</td>
 								<td>
-									<select name="d1wufan" style="height: 35px;width:180px;" onchange="typechange(this,'wucan')" lay-ignore>
+									<select name="d1wufan" style="height: 35px;width:180px;" onchange="jdchange(this)" lay-ignore>
 										<option value="0">--请选择午餐类型--</option>
 									</select>
 								</td>
@@ -135,7 +133,7 @@
 									</select>
 								</td>
 								<td>
-									<select name="d1wanfan" style="height: 35px;width:180px;" onchange="typechange(this,'wancan')" lay-ignore>
+									<select name="d1wanfan" style="height: 35px;width:180px;" onchange="jdchange(this)" lay-ignore>
 										<option value="0">--请选择晚餐类型--</option>
 									</select>
 								</td>
@@ -156,7 +154,7 @@
 
 	<div id="divfoot">
 		<form class="layui-form layui-form-pane" action="">
-				<table border="0	" cellspacing="0" cellpadding="0" style="width: 900px;">
+				<table border="0	" cellspacing="0" cellpadding="0" style="width: 1000px;">
 					<tr>
 						<td><label class="layui-form-label">导游：</label></td>
 						<td>
@@ -183,34 +181,23 @@
 						<td><label class="layui-form-label">酒水：</label></td>
 						<td width="300px"><input type="text" class="layui-input"></td>
 					</tr>
+
 					<tr>
-						<td><label class="layui-form-label">车队：</label></td>
-								<td>
-									<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:180px;" lay-ignore>
-										<option value="0">--请选择--</option>
-									</select>
-								</td>
-								<td>
-									<select name="city" style="height: 35px;width:180px;" lay-ignore>
-										<option value="0">--请选择车队类型--</option>
-									</select>
-								</td>
-							<td>
-								<table border="0" cellspacing="0" cellpadding="0">
-									<tr>
-											<td><label class="layui-form-label" >数量:</label></td>
-								<td><input type="text" class="layui-input"></td>
-									</tr>
-								</table>
-							</td>
+						<td><label class="layui-form-label">车队</label></td>
 						<td>
-							<table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td><label class="layui-form-label" >成本价:</label></td>
-									<td><input type="text" class="layui-input"></td>
-								</tr>
-							</table>
+							<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:180px;" lay-ignore>
+								<option value="0">--请选择--</option>
+							</select>
 						</td>
+						<td>
+							<select name="city" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
+								<option value="0">--请选择车队类型--</option>
+							</select>
+						</td>
+						<td><label class="layui-form-label" >数量:</label></td>
+						<td><input name="dlnum" type="text" onchange="sumchange(this)" class="layui-input"></td>
+						<td><label class="layui-form-label" >成本价:</label></td>
+						<td><input type="text" class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">车辆联系人：</label></td>
@@ -273,13 +260,13 @@
 				var index=name.substring(1,2);
 				var html=$("select[name=d1scenicspot1]").html();
 				var leng=$("tr[name=d"+index+"jingdian]").length+1;
-                $(onClickjd).parent().parent().next().after("<tr id='scenic' name='d"+index+"jingdian'>" +
+				$("tr[name=d"+index+"gouwudi]").prev().after("<tr id='scenic' name='d"+index+"jingdian'>" +
                     "<td><label class='layui-form-label'>景点</label></td>" +
                     "<td>" +
                     "<select name='d"+index+"scenicspot"+leng+"' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
                     ""+html+"</select>" +
                     "</td>" +
-                    "<td><label class='layui-form-label'>成本价:</label></td>" +
+                    "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
                     "<td><input type='text' name='d"+index+"costprice"+leng+"' class='layui-input'></td>" +
                     "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>" +
                     "</tr>");
@@ -344,7 +331,7 @@
                         content="<option value='0'>--请选择--</option>";
 						//景点资源
                         $(result.data['scenicspot']).each(function (i,e) {
-                            content+="<option value='"+e.scenicSpotId+"'>"+e.scenicSpotName+"</option>";
+                            content+="<option value='"+e.scenicSpotId+"' price='"+e.costprice+"'>"+e.scenicSpotName+"</option>";
                         });
                         $("select[name=d1scenicspot1]").html(content);
                         content="<option value='0'>--请选择--</option>";
@@ -385,16 +372,17 @@
                     }
 				});
 			}
-			function jdchange() {
-				
+			//选择景点后 显示成本价格
+			function jdchange(obj) {
+				var price=$(obj).find("option:selected").attr("price");
+				$(obj).parent().next().next().children("input").val(price);
             }
-			function xianluchange(obj) {
-				
-            }
+
+            //资源类型下拉框改变值后  获取当前选择类型的资源信息
             function typechange(obj,type){
-                alert("666");
                 var valueId=$(obj).val();
                 if(valueId==0){
+                    $(obj).parent().next().children("select").html("<option value='0'>--请选择--</option>");
                     return;
 				}
 				$.ajax({
@@ -417,7 +405,7 @@
                         }else if(type=="cartype"){
                             content="<option value='0'>--请选择车队公司--</option>";
                             $(result.data).each(function (i,e) {
-                                content+="<option value='"+e.carRentalId+"'>--"+e.carRentalName+"--</option>";
+                                content+="<option value='"+e.carRentalId+"' price='"+e.gettypeprice+"'>--"+e.carRentalName+"--</option>";
                             });
                         }
                         $(obj).parent().next().children("select").html(content);
@@ -428,11 +416,105 @@
                     }
 				});
 			}
+			//输入酒店和车队数量后计算成价格
 			function sumchange(obj){
-
+				var num=$(obj).val();
+				var price=$(obj).parent().prev().prev().children("select").find("option:selected").attr("price");
+				$(obj).parent().next().next().children("input").val(num*price);
 			}
+			//输入司陪房数量后  计算成本价格
 			function sipeichange(obj) {
+                var name=$(obj).attr("name");
+                var index=name.substring(1,2);
+                var hotelId=$("select[name=d"+index+"hotel]").val();
+                if(hotelId==0){
+                    alert("请先选择酒店！");
+					return;
+				}
 
+				var num=$(obj).val();
+                $.ajax({
+                    url:"/dispatch/listinfoByvalueId",
+                    data:{type:"hoteltype",valueId:3},
+                    dataType:"json",
+                    type:"get",
+                    success:function (result) {
+                            $(result.data).each(function (i,e) {
+                                if(hotelId==e.hotelId){
+                                    $(obj).parent().next().next().children("input").val(num*e.gettypeprice);
+								}
+                            });
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                });
+            }
+            //重新选择酒店等资源后清空成本价文本框
+            function emptynum(obj) {
+				$(obj).parent().next().next().children("input").val('');
+                $(obj).parent().next().next().next().next().children("input").val('');
+                var name=$(obj).attr("name");
+                var index=name.substring(1,2);
+                $("input[name=d"+index+"spchengben]").val();
+                $("input[name=d"+index+"spnum]").val();
+            }
+            //选择线路后  带出相关信息
+            function xianluchange(obj) {
+                var mid=$(obj).val();
+                if(mid==0){
+                    return;
+				}
+
+                var name=$(obj).attr("name");
+                var index=name.substring(1,2);
+                gethotelbyline(index);
+                $.ajax({
+                    url:"/Template/gettemplateById",
+                    data:{mid:mid},
+                    dataType:"json",
+                    type:"get",
+                    async:false,
+                    success:function (result) {
+                        for (var i=2;i<=7;i++){
+							$("select[name=d"+index+"scenicspot"+i+"]").parent().parent().remove();
+						}
+                        $("select[name=d"+index+"hoteltype]").val(1);
+						$("select[name=d"+index+"hotel]").val(result.data["parameter"].hotelId);
+						$("textarea[name=d"+index+"xingcheng]").text(result.data["parameter"].templateContent);
+                        $(result.data["scenicspot"]).each(function (i,e) {
+                            if(i>0){
+                                add(obj);
+                            }
+                            $("input[name=d"+index+"costprice"+(i+1)+"]").val(e.costPrice);
+                            $("select[name=d"+index+"scenicspot"+(i+1)+"]").val(e.scenicSpotId);
+                        });
+                    },
+                    error:function (err) {
+                        alert("系统异常！");
+                    }
+                });
+            }
+            
+            function gethotelbyline(index) {
+                $.ajax({
+                    url:"/dispatch/listinfoByvalueId",
+                    data:{type:"hoteltype",valueId:1},
+                    dataType:"json",
+                    type:"get",
+					async:false,
+                    success:function (result) {
+                        var content="<option value='0'>--请选择酒店--</option>";
+                            content="<option value='0'>--请选择酒店--</option>";
+                            $(result.data).each(function (i,e) {
+                                content+="<option value='"+e.hotelId+"' price='"+e.gettypeprice+"'>--"+e.hotelName+"--</option>";
+                            });
+                        $("select[name=d"+index+"hotel]").html(content);
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                });
             }
 		</script>
 </body>

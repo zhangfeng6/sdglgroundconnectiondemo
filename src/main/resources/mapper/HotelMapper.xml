@@ -3,6 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.HotelMapper">
 
+<<<<<<< HEAD
+    <select id="selectByHotelId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+        SELECT  * from hotel where whetherDel!=1 and hotelId=#{hotelId}
+=======
     <!--查询酒店信息-->
     <select id="HotelShowAll" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
       select  * from  Hotel where 1=1
@@ -26,5 +30,6 @@
     
     <select id="listhotelByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
        SELECT h.*,r.`costprice` AS 'gettypeprice' FROM `hotel` h,`roomtype` r WHERE r.`hotelId`=h.`hotelId` AND r.`valueId`=#{valueId}
+>>>>>>> origin/master
     </select>
 </mapper>

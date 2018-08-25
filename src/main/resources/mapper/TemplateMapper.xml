@@ -25,4 +25,34 @@
     <select id="gettemplateByName" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
         SELECT `templateId` FROM `template` WHERE templateName=#{templateName}
     </select>
+
+    <select id="selectTemplate" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
+        select * from template where whetherDel!=1
+    </select>
+
+    <select id="selectTemplateAll" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
+        SELECT
+        t.templateId,
+		th.hotelId,
+		h1.hotelName,
+		th.costPrice AS thcostPrice,
+		th.offer AS thoffer
+        FROM template t,templatehotel th,hotel h1
+        WHERE t.templateId=th.templateId
+        AND th.hotelId=h1.hotelId
+        AND t.templateId=#{templateId}
+    </select>
+
+    <select id="selectscenicSpotById" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        SELECT s.scenicSpotName,ts.costPrice,ts.offer FROM
+        `templatescenicspot` ts,
+        `scenicspot` s
+        WHERE ts.scenicSpotId=s.scenicSpotId
+        AND ts.templateId=#{templateId}
+    </select>
+
+    <select id="selecctNameById" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
+        select * from template where templateId=#{templateId}
+    </select>
+
 </mapper>
