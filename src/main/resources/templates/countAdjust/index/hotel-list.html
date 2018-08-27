@@ -21,10 +21,10 @@
 			</div>
 			价格区间：
 			<div class="layui-inline">
-				<input size="3" type="text" name="costpriceOne" required lay-verify="required" placeholder="最低价" autocomplete="off" class="layui-input">
+				<input size="3" type="text" name="costpriceOne" required  placeholder="最低价" autocomplete="off" class="layui-input">
 			</div>
 			<div class="layui-inline">
-				<input size="3" type="text" name="costpriceTwo" required lay-verify="required" placeholder="最高价" autocomplete="off" class="layui-input">
+				<input size="3" type="text" name="costpriceTwo" required  placeholder="最高价" autocomplete="off" class="layui-input">
 			</div>
 			<button class="layui-btn layui-btn-normal" lay-submit="search" id="ss">搜索</button>
 		</div>
@@ -216,9 +216,10 @@
             }
         })
 	}
-
+    /**
+	 * 添加酒店房间
+	 */
 	function  addFangjian(hotelId) {
-       alert(hotelId);
         $(document).on(
             layer.open({
                 type: 2,
