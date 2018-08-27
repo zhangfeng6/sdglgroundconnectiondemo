@@ -151,7 +151,7 @@ public class DispatchController {
         }
     }
 
-    @RequestMapping("/listDispatchlike.html")
+    @RequestMapping("/listDispatchlike")
     public ReponseResult listDispatchlike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("guideName")String guideName, @RequestParam("groundConnectionNumber")String groundConnectionNumber){
         try{
             System.out.println("..."+groundConnectionNumber+"...");
@@ -163,6 +163,21 @@ public class DispatchController {
             logger.error(" method:TravelLike  获取调度信息数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    @RequestMapping("/updatestateById")
+    public ReponseResult updatestateById(@RequestParam("did")Integer did,
+                                         @RequestParam("gid")Integer gid,
+                                         @RequestParam("travelStartTime")String travelStartTime,
+                                         @RequestParam("travelEndTime")String travelEndTime){
+        try {
+            ReponseResult<Integer> data=ReponseResult.ok(dispatchService.updatestateById(did, gid, travelStartTime, travelEndTime),"审核成功！");
+            logger.info("method:updatestateById 审核成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
             return err;
         }
     }

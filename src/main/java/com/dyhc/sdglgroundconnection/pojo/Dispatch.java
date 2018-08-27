@@ -42,6 +42,7 @@ public class Dispatch {
     private String reception; // 接待标准
     private Double total; // 总计
     private Double loan; // 导游借款
+    @Column(name = "`state`")
     private Integer state; // 状态（1、未开始2、进行中3、已结束）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）

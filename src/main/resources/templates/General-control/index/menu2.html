@@ -33,8 +33,8 @@
 				<td style="width: 45px">团号</td>
 				<td style="width: 45px">计调人</td>
 				<td style="width: 45px">导游名称</td>
-				<td style="width: 45px">人数</td>
-				<td style="width: 45px">报价</td>
+				<td style="width: 45px">开始时间</td>
+				<td style="width: 45px">结束时间</td>
 				<td style="width: 45px">操作</td>
 			</tr>
 			</thead>
@@ -74,7 +74,7 @@
         var haha=$("#two").val()
         var str = "";
         $.ajax({
-            url: "/dispatch/listDispatchlike.html",
+            url: "/dispatch/listDispatchlike",
             data:{page:curnum,limit:limitcount,guideName:lala,groundConnectionNumber:haha},
             dataType: "json",
             type: "get",
@@ -85,11 +85,10 @@
                         "<td>" + result.groundConnectionNumber + "</td>" +
                         "<td>" + result.theUserName + "</td>" +
                         "<td>" + result.guideName + "</td>"+
-                        "<td>" + result.num + "</td>"+
-                        "<td>" + result.offer + "</td>"+
-                        "<td><button onclick='TypeUpdate("+result.dictionariesId+")' class='layui-btn layui-btn-mini layui-btn-normal  edit-btn'><a href='#'>查看导游信息</a></button>\n" +
-                        "<button onclick='getdel(\""+result.valueContent1+"\")'class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#'>查看调度详情</a></button>" +
-                        "<button onclick='getdel(\""+result.valueContent1+"\")'class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#'>通过审核</a></button>" +
+                        "<td>" + result.travelStartTime + "</td>"+
+                        "<td>" + result.travelEndTime + "</td>"+
+                        "<td><button class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#'>查看调度详情</a></button>" +
+                        "<input type='hidden' value='"+result.travelStartTime+"'><input type='hidden' value='"+result.travelEndTime+"'>&nbsp;&nbsp;&nbsp;<button onclick='shenhe("+result.dispatchId+","+result.guideId+",this)'class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#' >通过审核</a></button>" +
                         "</td></tr>";
                     xu++;
                 })
@@ -119,6 +118,26 @@
                 alert(res);
             }
         })
+    }
+    function shenhe(did,gid,obj) {
+        var travelStartTime=$(obj).prev().prev().val();
+		var travelEndTime=$(obj).prev().val();
+		$.ajax({
+			url:"/dispatch/updatestateById",
+			data:{did:did,gid:gid,travelStartTime:travelStartTime,travelEndTime:travelEndTime},
+            dataType:"json",
+			type:"get",
+			success:function (result) {
+				if(result.data==1){
+					alert("审核成功！");
+				}else{
+				    alert("网络异常！");
+				}
+            },
+			error:function (err) {
+				alert(err);
+            }
+		});
     }
 </script>
 </body>
