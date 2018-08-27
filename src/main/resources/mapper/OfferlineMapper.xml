@@ -11,4 +11,8 @@
         insert into offerline(offerId,lineArriveName,travelContent,`date`,whetherDel,creater)
         values(#{offerId},#{lineArriveName},#{travelContent},#{date},0,1)
     </insert>
+
+    <select id="selectOfferlineByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerline">
+        select * from offerline where whetherDel!=1 and offerId=#{offerId}
+    </select>
 </mapper>

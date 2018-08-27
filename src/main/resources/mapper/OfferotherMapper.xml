@@ -7,4 +7,8 @@
         insert into offerother(offerId,costPrice,offer,remarks,whetherDel,creater)
         values(#{offerId},#{costPrice},#{offer},#{remarks},0,1)
     </insert>
+
+    <select id="selectOfferotherByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerother">
+        select * from offerother where whetherDel!=1 and offerId=#{offerId}
+    </select>
 </mapper>

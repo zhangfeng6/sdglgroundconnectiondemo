@@ -7,4 +7,8 @@
       insert into offerscenic(scenicSpotId,offerId,costPrice,offer,whetherDel,creater)
       values(#{scenicSpotId},#{offerId},#{costPrice},#{offer},0,1)
     </insert>
+
+    <select id="selectOfferscenicByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerscenic">
+        select * from offerscenic where whetherDel!=1 and offerId=#{offerId}
+    </select>
 </mapper>

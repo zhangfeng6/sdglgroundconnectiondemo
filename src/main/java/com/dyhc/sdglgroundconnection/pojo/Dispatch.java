@@ -36,7 +36,6 @@ public class Dispatch {
     private Double fare; // 车费
     @Column(name = "wineFee")
     private Double wineFee; // 酒水费
-    @Column(name = "`not`")
     private String not; // 不含
     private String remarks; // 备注
     private String supervision; // 团体监督
@@ -47,7 +46,6 @@ public class Dispatch {
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
     private Integer creater; // 创建人 （外键，与人员表关联）
-    @Column(name = "`modifier`")
     private Integer modifier; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "modifiedData")
@@ -55,9 +53,8 @@ public class Dispatch {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
-    @Column(name = "guideId")
-    private Integer guideId;    //导游id
-    private String carcontacts;     //车辆联系人
+    private Integer guideId;
+    private String value2;
     private String value3;
 
 
@@ -332,13 +329,14 @@ public class Dispatch {
         this.guideId = guideId;
     }
 
-
-    public String getCarcontacts() {
-        return carcontacts;
+    @Basic
+    @Column(name = "value2")
+    public String getValue2() {
+        return value2;
     }
 
-    public void setCarcontacts(String carcontacts) {
-        this.carcontacts = carcontacts;
+    public void setValue2(String value2) {
+        this.value2 = value2;
     }
 
     @Basic
@@ -382,13 +380,13 @@ public class Dispatch {
                 Objects.equals(modifiedData, dispatch.modifiedData) &&
                 Objects.equals(creationDate, dispatch.creationDate) &&
                 Objects.equals(guideId, dispatch.guideId) &&
-                Objects.equals(carcontacts, dispatch.carcontacts) &&
+                Objects.equals(value2, dispatch.value2) &&
                 Objects.equals(value3, dispatch.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchId, groundConnectionNumber, groupNumber, sendLine, travelStartTime, travelEndTime, num, tourist, trip, offer, aVariance, fare, wineFee, not, remarks, supervision, reception, total, loan, state, whetherDel, creater, modifier, modifiedData, creationDate, guideId, carcontacts, value3);
+        return Objects.hash(dispatchId, groundConnectionNumber, groupNumber, sendLine, travelStartTime, travelEndTime, num, tourist, trip, offer, aVariance, fare, wineFee, not, remarks, supervision, reception, total, loan, state, whetherDel, creater, modifier, modifiedData, creationDate, guideId, value2, value3);
     }
 }

@@ -23,6 +23,7 @@ public interface TravelMapper extends CommonMapper<Travel> {
      */
     Travel selectTravelById(@Param("travelId") Integer travelId);
 
+
     List<Travel> listTravelLike(@Param("travelName") String travelName);
     /**
      * 删除

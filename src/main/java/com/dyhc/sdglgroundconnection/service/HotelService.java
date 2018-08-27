@@ -48,6 +48,7 @@ public interface HotelService {
      * @return
      */
     Hotel selectByHotelId(Integer hotelId);
+
     /**
      *查询酒店表:小亮
      * @return
@@ -120,6 +121,5 @@ public interface HotelService {
      * @throws Exception
      */
     Hotel fuzhiHotel(Integer hotelId)throws Exception;
-
 
 }

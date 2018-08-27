@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import java.util.Objects;
  * 报价餐厅表
  **/
 @Table(name = "offerrestaurant")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Offerrestaurant {
     @Id
     @Column(name = "offerRestaurantId")

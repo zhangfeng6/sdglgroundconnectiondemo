@@ -7,4 +7,8 @@
         insert into offerrestaurant(offerId,typeCode,dictionariesId,costPrice,offer,`date`,havemealsdate,whetherDel,creater)
         values(#{offerId},'DIET',#{dictionariesId},#{costPrice},#{offer},#{date},#{havemealsdate},0,1)
     </insert>
+
+    <select id="selectOfferRestaurantByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerrestaurant">
+        select * from offerrestaurant where whetherDel!=1 and offerId=#{offerId}
+    </select>
 </mapper>

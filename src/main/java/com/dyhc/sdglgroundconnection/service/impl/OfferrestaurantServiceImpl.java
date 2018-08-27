@@ -6,6 +6,8 @@ import com.dyhc.sdglgroundconnection.service.OfferrestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 报价餐厅业务实现
@@ -19,5 +21,10 @@ public class OfferrestaurantServiceImpl implements OfferrestaurantService {
     @Override
     public int insertOfferrestaurant(Offerrestaurant offerrestaurant) {
         return offerrestaurantMapper.insertOfferrestaurant(offerrestaurant);
+    }
+
+    @Override
+    public List<Offerrestaurant> selectOfferRestaurantByOfferId(int offerId) {
+        return offerrestaurantMapper.selectOfferRestaurantByOfferId(offerId);
     }
 }

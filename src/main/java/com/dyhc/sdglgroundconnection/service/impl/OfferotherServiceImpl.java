@@ -20,4 +20,9 @@ public class OfferotherServiceImpl implements OfferotherService {
     public int insertOfferother(Offerother offerother) {
         return offerotherMapper.insertOfferother(offerother);
     }
+
+    @Override
+    public Offerother selectOfferotherByOfferId(int offerId) {
+        return offerotherMapper.selectOfferotherByOfferId(offerId);
+    }
 }
