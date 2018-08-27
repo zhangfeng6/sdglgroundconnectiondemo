@@ -29,11 +29,18 @@ public interface TravelService {
      * @return
      */
     Travel selectTravelById(Integer travelId);
+<<<<<<< HEAD
     /**
      *
      * 添加信息
+=======
+
+    /**
+     *
+>>>>>>> origin/master
      * @param travel
      * @return
+     * @throws Exception
      */
     Integer getAddTravel(Travel travel) throws Exception;
     /**

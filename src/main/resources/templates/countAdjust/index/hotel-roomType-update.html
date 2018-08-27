@@ -8,18 +8,14 @@
 </head>
 <body>
 <div class="wrap-container">
-
-    <input type="hidden" value="" th:value="${typeId}" id="typeId" >
-    <input type="hidden" value="" th:value="${hotelId}" id="hotelId">
-    <div class="layui-form-item">
-        <label class="layui-form-label">类型名称：</label>
-        <div class="layui-input-block">
-            <select  name="typeName" style="height: 30px;" placeholder="请选择类型名称" onchange="judge()">
-
-            </select>
-        </div>
-    </div>
     <form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxl">
+        <input type="hidden" value="" th:value="${typeId}" id="typeId" name="typeId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="typeName" required lay-verify="required" placeholder="请输入类型名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">成本价：</label>
             <div class="layui-input-block">
@@ -44,23 +40,10 @@
 <script src="/layui.js"></script>
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
-    var name="";
     $(function () {
-        getresouce();
-
-        var typeId=$("#typeId").val();
+        var typeId=$("input[name='typeId']").val();
         fuzhiRoomType(typeId);
     })
-
-    function getresouce() {
-        $.post("/Dictionaries/listhoteltype",function (result) {
-            var content="<option value='0'>--请选择房间类型--</option>";
-            $(result.data).each(function (i,e) {
-                content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
-            });
-            $("select").html(content);
-        },"json");
-    }
     <!--修改赋值-->
     function  fuzhiRoomType(typeId) {
         $.ajax({
@@ -69,8 +52,7 @@
             dataType:"json",
             type:"get",
             success:function (data) {
-                name=data.data.valueId;
-                $("select").val(data.data.valueId);
+                $("input[name='typeName']").val(data.data.typeName);
                 $("input[name='costprice']").val(data.data.costprice);
                 $("input[name='offer']").val(data.data.offer);
             },
@@ -83,13 +65,10 @@
      * 修改酒店房间
      */
     function updateRommType(){
-        var typeId=$("#typeId").val();
-        var valueid=$("select").val();
-        var cb=$("input[name=costprice]").val();
-        var bj=$("input[name=offer]").val();
+        var RoomType=$("#jxl").serialize();
         $.ajax({
             url:"/Hotel/updateRoomType",
-            data:{typeId:typeId,valueId:valueid,cbj:cb,bj:bj},
+            data:RoomType,
             dataType:"json",
             type:"get",
             success:function (data) {
@@ -115,19 +94,5 @@
             return false;
         });
     });
-    function judge() {
-        var info=$("select").val();
-        var hotelid=$("#hotelId").val();
-        if(info==0||name==info){
-            return;
-        }
-
-        $.post("/RoomType/judgeTypeName","hotelId="+hotelid+"&valueId="+info,function (result) {
-            if(!result.data){
-                alert("该房间类型已存在！");
-                $("select").val(0);
-            }
-        },"json");
-    }
 </script>
 </html>

@@ -98,4 +98,24 @@ public class DispatchServiceImpl implements DispatchService {
         }
         return list;
     }
+
+    @Override
+    public Dispatch getDispatchByguideId(Integer guideId)throws Exception {
+        return dispatchMapper.getDispatchByguideId(guideId);
+    }
+
+    /**
+     * 分页查看调度信息
+     * @param pageNo
+     * @param pageSize
+     * @param guideName
+     * @param groundConnectionNumber
+     * @return
+     */
+    @Override
+    public PageInfo<Dispatch> ListDispatchLike(Integer pageNo, Integer pageSize, String guideName, String groundConnectionNumber) {
+        PageHelper.startPage(pageNo,pageSize,true);
+        PageInfo<Dispatch> dispatch=new PageInfo<>(dispatchMapper.getDispatchLike(guideName,groundConnectionNumber));
+        return dispatch;
+    }
 }

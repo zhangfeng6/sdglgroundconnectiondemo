@@ -45,8 +45,12 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * @return
      */
     Dictionaries selectByDictionariesId(@Param("dictionariesId")int dictionariesId);
+<<<<<<< HEAD
 
    /**
+=======
+    /*
+>>>>>>> origin/master
      * 根据类型id查询车辆类型
      * @return
      */
@@ -66,4 +70,8 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * @throws Exception
      */
     List<Dictionaries> listdictionarieslBycode(@Param("code")String code)throws Exception;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }

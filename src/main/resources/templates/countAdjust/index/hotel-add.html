@@ -115,6 +115,33 @@
          var forData=new FormData();
          forData.append("picturePath",fileObj);
          forData.append("form",jsondata);
+         var  hotelName=  $("input[name='hotelName']").val();
+         var  starHotel=$("input[name='starHotel']").val();
+         var  hotelAddress=$("input[name='hotelAddress']").val();
+         var  contacts= $("input[name='contacts']").val();
+         var  phone= $("input[name='phone']").val();
+         var  costprice=$("input[name='costprice']").val();
+         var  offer= $("input[name='offer']").val();
+         var  hotelDescribe=$("input[name='hotelDescribe']").val();
+         if (hotelName=='' || hotelName==null||hotelName==undefined){
+              return;
+		 }else if (starHotel=='' || starHotel==null||starHotel==undefined){
+             return;
+		 }else if (hotelAddress=='' || hotelAddress==null||hotelAddress==undefined){
+             return;
+		 }else if (contacts=='' || contacts==null||contacts==undefined){
+             return;
+		 }else if (phone=='' || phone==null||phone==undefined){
+             return;
+		 }else if (costprice=='' || costprice==null||costprice==undefined){
+             return;
+		 }else if (offer=='' || offer==null||offer==undefined){
+             return;
+		 }else if (hotelName=='' || hotelName==null||hotelName==undefined){
+             return;
+		 }else if(hotelDescribe=='' || hotelDescribe==null||hotelDescribe==undefined){
+             return;
+		 }else {
         $.ajax({
 			url:"/Hotel/saveHotel",
 			data:forData,
@@ -134,7 +161,8 @@
 				alert("错误");
             }
 		})
-	 }
+	   }
+     }
 
 
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {

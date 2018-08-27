@@ -12,17 +12,17 @@ function qiehuan(dd) {
 
 function xianlu(obj) {
     var text = $(obj).html();
+    var name=$(obj).attr("name");
+    var index=name.substring(1,2);
     if (text == "自行填写") {
         $(obj).parent().prev().html("<input type='text' class='layui-input'>");
         $(obj).html("选择模板");
     } else {
-        $(obj).parent().prev().html("<select name='city' lay-verify='required' lay-search>" +
-            "<option value=''></option>" +
-            "<option value='0'>哈红祖</option>" +
-            "<option value='1'>无敌组</option>" +
-            "<option value='2'>纪检组</option>" +
+        $(obj).parent().prev().html("<select name='d"+index+"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +
+
             "</select>");
         $(obj).html("自行填写");
+        gerresource();
     }
 
     layui.use(['form', 'layedit', 'laydate', 'element'], function () {
@@ -52,8 +52,8 @@ function addss() {
     var jdhtml=$("select[name=d1scenicspot1]").html();
     var gwdhtml=$("select[name=dlshopping]").html();
     var fanhtml=$("select[name=d1wucan]").html();
-    var a = "<div style='margin-bottom: 30px;width: 990px' name='xianlu' ><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
-        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:965px ;' />" +
+    var a = "<div style='margin-bottom: 30px;width: 1090px' name='xianlu' ><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
+        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
         "<div id='content'>" +
         "<form class='layui-form layui-form-pane' action=''>" +
         "<table border='0'  cellspacing='0' cellpadding='0' >" +
@@ -63,7 +63,7 @@ function addss() {
         "	<select name='d\"+index+\"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +
         ""+xlhtml+"</select>" +
         "	</td>" +
-        "	<td colspan='2'>&nbsp;<button type='button' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick='xianlu(this)'>自行填写</button></td>" +
+        "	<td colspan='2'>&nbsp;<button type='button' name='d"+index+"qiehuan' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick='xianlu(this)'>自行填写</button></td>" +
         "	</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>日期</label></td>" +
@@ -86,6 +86,8 @@ function addss() {
         "<td><input type='text' name='d"+index+"num' onchange='sumchange(this)' class='layui-input'></td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td><input name='d"+index+"jiucb'type='text' class='layui-input'></td>" +
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"hotelpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"hotelpayment'></td>"+
         "</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>司陪：</label></td>" +
@@ -107,6 +109,9 @@ function addss() {
         "</td>" +
         "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
         "<td><input type='text' name='d"+index+"costprice1' class='layui-input'></td>" +
+        "<td></td>"+
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"jingdpayment1'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"jingdpayment1'></td>"+
         "</tr>" +
         "<tr name='d"+index+"gouwudi'>" +
         "<td><label class='layui-form-label'>购物地：</label></td>" +
@@ -128,6 +133,8 @@ function addss() {
         "	</td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td colspan='3'><input type='text' name='d"+index+"wucancb' class='layui-input'></td>" +
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"wucanpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"wucanpayment'></td>"+
         "</tr>" +
         "	<tr>" +
         "<td><label class='layui-form-label'>晚餐</label></td>" +
@@ -142,6 +149,8 @@ function addss() {
         "</td>" +
         "<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td colspan='3'><input type='text' name='d"+index+"wancancb' class='layui-input'></td>" +
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"wancanpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"wancanpayment'></td>"+
         "	</tr>" +
         "	<tr>" +
         "	<td><label class='layui-form-label'>行程</label></td>" +

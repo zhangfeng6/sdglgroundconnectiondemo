@@ -8,6 +8,7 @@
         <if test="guideName!=null and guideName!=''">
             and guideName like concat('%',#{guideName},'%')
         </if>
+        AND `whetherDel` != 1
     </select>
     
     <select id="login" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">

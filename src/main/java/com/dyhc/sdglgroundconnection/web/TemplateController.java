@@ -2,9 +2,11 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.parameterentity.TemplateParameter;
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
+import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.Template;
 import com.dyhc.sdglgroundconnection.service.HotelService;
+import com.dyhc.sdglgroundconnection.service.HoteroomTypeService;
 import com.dyhc.sdglgroundconnection.service.ScenicspotService;
 import com.dyhc.sdglgroundconnection.service.TemplateService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -41,6 +43,9 @@ public class TemplateController {
 
     @Autowired
     private ScenicspotService scenicspotService;
+
+    @Autowired
+    private HoteroomTypeService hoteroomTypeService;
 
 
     /**
@@ -136,13 +141,16 @@ public class TemplateController {
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     @RequestMapping("/selectTemplate")
     public ReponseResult selectTemplate() {
         try {
             List<Template> list = templateService.selectTemplate();
-            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            ReponseResult<Object> data = ReponseResult.ok(list, "查询成功！");
             logger.info(" method:selectTemplate  查询旅游模板成功！");
             return data;
         } catch (Exception e) {
@@ -190,6 +198,7 @@ public class TemplateController {
         }
     }
 
+<<<<<<< HEAD
 
 
     @RequestMapping("/listtemplateall")
@@ -206,18 +215,57 @@ public class TemplateController {
         }
     }
 
+=======
+>>>>>>> origin/master
     @RequestMapping("/selectTemplateAll")
     public ReponseResult selectTemplateAll(Integer templateId) {
         try {
             Template template = templateService.selectTemplateAll(templateId);
-            ReponseResult<Object> data = ReponseResult.ok(template,"查询成功！");
+            ReponseResult<Object> data = ReponseResult.ok(template, "查询成功！");
             logger.info(" method:selectTemplateAll  查询线路全部信息成功！");
             return data;
         } catch (Exception e) {
             logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
+<<<<<<< HEAD
+=======
             return err;
+        }
+    }
+    @RequestMapping("/listtemplateall")
+    public ReponseResult listtemplateall(){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(templateService.listtemplateall(),"成功获取所有线路信息！");
+            logger.info("method:removeTemplate 成功获取所有线路信息！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:removeTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+>>>>>>> origin/master
+            return err;
+        }
+    }
+
+
+    /**
+     * 微信小程序之获取行程内容
+     * @param dispatch
+     * @param weight
+     * @return
+     */
+    @RequestMapping("getTemplateById")
+    public ReponseResult getTemplateById(Integer dispatchId,Integer weight){
+        try {
+            HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
+            Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
+            logger.error("method:getTemplateById  获取行程内容成功");
+            return ReponseResult.ok(template,"获取行程内容成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:getTemplateById  获取行程内容失败");
+            return ReponseResult.err("获取行程内容失败");
         }
     }
 }

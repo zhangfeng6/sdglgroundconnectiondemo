@@ -28,7 +28,10 @@ public class TravelController{
     @Autowired
     private TravelService travelService;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     @RequestMapping("/selectTravel")
     public ReponseResult selectTravel() {
         try {
@@ -43,7 +46,10 @@ public class TravelController{
             return err;
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     /**
      * 修改信息
      * @param travel
@@ -114,7 +120,10 @@ public class TravelController{
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     @RequestMapping("/selectTravelById")
     public ReponseResult selectTravelById(Integer travelId) {
@@ -127,6 +136,33 @@ public class TravelController{
             logger.error(" method:selectTravelById  查询组团社失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
+<<<<<<< HEAD
+=======
+            return err;
+        }
+    }
+
+    /**
+     * 按条件查看
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/showTravelselectbyid.html")
+    public ReponseResult<Integer> showTravelselectbyid(Integer travelId){
+        try{
+            Integer result=0;
+            Integer data=0;
+            result=travelService.getselectById(travelId);
+            if(result>0){
+                data=1;
+            }
+            logger.info(" method:showTravelselectbyid  添加组团社成功！");
+            return ReponseResult.ok(data,"添加取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelselectbyid  添加组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+>>>>>>> origin/master
             return err;
         }
     }
@@ -154,6 +190,7 @@ public class TravelController{
                     return err;
                 }
             }
+<<<<<<< HEAD
 
             /**
              * 删除   修改
@@ -197,3 +234,33 @@ public class TravelController{
                 }
             }
         }
+=======
+            logger.info(" method:showTravelupdlala  添加组团社成功！");
+            return ReponseResult.ok(data,"添加取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelupdlala  添加组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 修改   chakan
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/findTravelupdlala.html")
+    public ReponseResult findTravelupdlala(Integer travelId){
+        try{
+            Travel travel=travelService.getupdBytravelId(travelId);
+            logger.info(" method:showTravelupdlala  查看组团社成功！");
+            return ReponseResult.ok(travel,"查看取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelupdlala  查看组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+}
+>>>>>>> origin/master

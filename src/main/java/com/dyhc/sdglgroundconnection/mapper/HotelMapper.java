@@ -1,8 +1,16 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
+<<<<<<< HEAD
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.RoomType;
+=======
+
+import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
+
+import com.dyhc.sdglgroundconnection.pojo.RoomType;
+
+>>>>>>> origin/master
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -16,6 +24,10 @@ import java.util.List;
 @Mapper
 @Component
 public interface HotelMapper extends CommonMapper<Hotel>{
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 
     /**
      * 按编号查询景点
@@ -62,4 +74,9 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @return
      */
     List<Hotel> listhotelByvalueId(@Param("valueId")Integer valueId)throws Exception;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
 }

@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.DisshoppMapper;
+import com.dyhc.sdglgroundconnection.pojo.Disshopp;
 import com.dyhc.sdglgroundconnection.service.DisshoppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class DisshoppServiceImpl implements DisshoppService {
 
     @Autowired
     private DisshoppMapper disshoppMapper;
+
+    @Override
+    public Disshopp getDisshoppById(Integer dispatchId, Integer weight) throws Exception {
+        return disshoppMapper.getDisshoppById(dispatchId,weight);
+    }
 }

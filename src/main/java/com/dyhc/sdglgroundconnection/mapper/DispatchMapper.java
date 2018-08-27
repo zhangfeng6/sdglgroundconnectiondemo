@@ -23,4 +23,19 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     List<Dispatch> listdispatch(@Param("djsth")String djsth,@Param("dyname")String dyname,@Param("state")Integer state);
+
+
+    /**
+     * 根据导游id查询调度信息     陈庆武
+     * @param guideId 导游id
+     * @return
+     */
+    Dispatch getDispatchByguideId(Integer guideId) throws Exception;
+    /**
+     * 分页查看调度信息                 刘跃云
+     * @param guideName
+     * @param groundConnectionNumber
+     * @return
+     */
+    List<Dispatch> getDispatchLike(@Param("guideName") String guideName, @Param("groundConnectionNumber") String groundConnectionNumber);
 }

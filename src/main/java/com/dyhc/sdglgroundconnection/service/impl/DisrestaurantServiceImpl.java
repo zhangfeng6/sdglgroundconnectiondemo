@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.DisrestaurantMapper;
+import com.dyhc.sdglgroundconnection.pojo.Disrestaurant;
 import com.dyhc.sdglgroundconnection.service.DisrestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class DisrestaurantServiceImpl implements DisrestaurantService {
 
     @Autowired
     private DisrestaurantMapper disrestaurantMapper;
+
+    @Override
+    public Disrestaurant getDisrestaurantById(Integer dispatchId, Integer weight) throws Exception {
+        return disrestaurantMapper.getDisrestaurantById(dispatchId,weight);
+    }
 }

@@ -14,6 +14,9 @@ public interface TourismandlineService {
      */
     List<Tourismandline> selectTourismandlineAll(int tourismId);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
 }

@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ReportticketMapper;
+import com.dyhc.sdglgroundconnection.pojo.Reportticket;
 import com.dyhc.sdglgroundconnection.service.ReportticketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,20 @@ public class ReportticketServiceImpl implements ReportticketService {
 
     @Autowired
     private ReportticketMapper reportticketMapper;
+
+    /**
+     *导游报账门票新增;贾晓亮
+     * @param reportticket
+     * @return
+     */
+    @Override
+    public Integer saveReportticket(Reportticket reportticket) {
+        Integer  number=0;
+        try {
+            number=reportticketMapper.insert(reportticket);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
 }

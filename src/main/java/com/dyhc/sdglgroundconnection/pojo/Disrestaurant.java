@@ -38,7 +38,7 @@ public class Disrestaurant {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
-    private String value1;
+    private int weight;  //权重
     private String value2;
     private String value3;
 
@@ -162,15 +162,7 @@ public class Disrestaurant {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
-    }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
-    }
 
     @Basic
     @Column(name = "value2")
@@ -209,7 +201,7 @@ public class Disrestaurant {
                 Objects.equals(updateBy, that.updateBy) &&
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
-                Objects.equals(value1, that.value1) &&
+                Objects.equals(weight, that.weight) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -217,6 +209,6 @@ public class Disrestaurant {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, tourismdate, dinDate, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, tourismdate, dinDate, status, createBy, updateBy, upDate, createDate, weight, value2, value3);
     }
 }

@@ -54,10 +54,17 @@ public class Dispatch {
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
     private Integer guideId;
-    private String value2;
+    private String carcontacts;
     private String value3;
+    private String theUserName;
 
+    public String getTheUserName() {
+        return theUserName;
+    }
 
+    public void setTheUserName(String theUserName) {
+        this.theUserName = theUserName;
+    }
 
     @Transient
     private String guideName;
@@ -68,7 +75,6 @@ public class Dispatch {
     public void setGuideName(String guideName) {
         this.guideName = guideName;
     }
-
     @Id
     @Column(name = "dispatchId")
     public int getDispatchId() {
@@ -330,13 +336,13 @@ public class Dispatch {
     }
 
     @Basic
-    @Column(name = "value2")
-    public String getValue2() {
-        return value2;
+    @Column(name = "carcontacts")
+    public String getCarcontacts() {
+        return carcontacts;
     }
 
-    public void setValue2(String value2) {
-        this.value2 = value2;
+    public void setCarcontacts(String carcontacts) {
+        this.carcontacts = carcontacts;
     }
 
     @Basic
@@ -380,13 +386,13 @@ public class Dispatch {
                 Objects.equals(modifiedData, dispatch.modifiedData) &&
                 Objects.equals(creationDate, dispatch.creationDate) &&
                 Objects.equals(guideId, dispatch.guideId) &&
-                Objects.equals(value2, dispatch.value2) &&
+                Objects.equals(carcontacts, dispatch.carcontacts) &&
                 Objects.equals(value3, dispatch.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchId, groundConnectionNumber, groupNumber, sendLine, travelStartTime, travelEndTime, num, tourist, trip, offer, aVariance, fare, wineFee, not, remarks, supervision, reception, total, loan, state, whetherDel, creater, modifier, modifiedData, creationDate, guideId, value2, value3);
+        return Objects.hash(dispatchId, groundConnectionNumber, groupNumber, sendLine, travelStartTime, travelEndTime, num, tourist, trip, offer, aVariance, fare, wineFee, not, remarks, supervision, reception, total, loan, state, whetherDel, creater, modifier, modifiedData, creationDate, guideId, carcontacts, value3);
     }
 }

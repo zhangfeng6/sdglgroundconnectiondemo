@@ -23,6 +23,10 @@ public interface TourismandlineMapper extends CommonMapper<Tourismandline>{
      * @return
      */
     List<Tourismandline> selectTourismandlineAll(@Param("tourismId") int tourismId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     /**
      * 根据模板id删除信息   张枫
      * @param tid
@@ -36,4 +40,8 @@ public interface TourismandlineMapper extends CommonMapper<Tourismandline>{
      * @return
      */
     List<Tourismandline> listtlBytid(@Param("tid")Integer tid)throws Exception;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }

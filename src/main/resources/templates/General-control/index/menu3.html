@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>导游时间安排</title>
+    <link rel="stylesheet" href="/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+    <style>
+        table tr td{width: 500px;text-align: center}
+        table tr td{
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div style="height:30px;font-size: 16px;">
+        <input type="hidden" name="year" th:value="${year}">
+        <span style="margin-left: 90px;line-height: 30px;">月份:</span><span style="width:100px;height:100px;margin-left: 10px;line-height: 30px;"><a href="javascript:void(0)" name="month1" onclick="clickmonth(this)" th:text="${month}"></a></span><span style="width:100px;margin-left: 45px;line-height: 30px;"><a href="javascript:void(0)" name="month2" onclick="clickmonth(this)"  th:text="${month}+1"></a></span>
+        <span style="margin-left: 20px;">(√：已占用&nbsp;&nbsp;&nbsp;×：已请假&nbsp;&nbsp;&nbsp;空：无安排)</span>
+    </div>
+        <table border="2px" bordercolor="#00BBFF" cellspacing="0" cellpadding="2" style="border-collapse:collapse; width:100%">
+        <thead>
+            <tr style="height: 40px;">
+                <td>名字\日期</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+                <td>25</td>
+                <td>26</td>
+                <td>27</td>
+                <td>28</td>
+                <td>29</td>
+                <td>30</td>
+                <td>31</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <ul id="laypage" style="text-align: center"></ul>
+</div>
+<script src="/layui.js"></script>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+    var limitcount = 2; // 每页总记录数
+    var curnum = 1;  // 当前页码
+    $(function () {
+        var year=$("input[name=year]").val();
+        var month=$("a[name=month1]").text();
+        addhead(year,month);
+        loadData(1,year,month);
+    });
+
+    /**
+     * 根据年份和月份 判断有多少天 修改thead的列数
+     * @param year
+     * @param month
+     */
+    function addhead(year,month) {
+        var days=mGetDate(year,month);
+        var content="<tr style='height: 40px;'>" +
+            "<td>名字\日期</td>";
+        for(var i=0;i<days;i++){
+            content+="<td>"+(i+1)+"</td>";
+        }
+        content+="</tr>";
+        $("thead").html(content);
+    }
+
+    /**
+     * 点击月份进行查询当月的导游请假情况
+     * @param obj
+     */
+    function clickmonth(obj) {
+
+        var year=$("input[name=year]").val();
+        var month=$(obj).html();
+        addhead(year,month);
+        loadData(1,year,month);
+    }
+    function loadData(index,year,month) {
+        if(index==1){
+            curnum=1;
+        }
+        var days=mGetDate(year,month);
+        var guis=Array();
+        var str = "";
+        async:false,
+        $.ajax({
+            url: "/Guide/guideShowAll",
+            data: {pageNo: curnum, pageSize: limitcount,guideName:''},
+            dataType: "json",
+            type: "get",
+            success: function (e) {
+                // 分页插件
+                layui.use('table', function () {
+                    var laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'laypage'
+                        , count: e.count
+                        , curr: curnum
+                        , limit: 2
+                        , layout: ['prev', 'page', 'next', 'skip', 'count']
+                        , jump: function (obj, first) {
+                            if (!first) {
+                                //obj包含了当前分页的所有参数，比如：
+                                curnum = obj.curr; // 当前页码
+                                limitcount = obj.limit; // 每页记录数
+                                // 查询新数据
+                                loadData(0,year,month);
+                            }
+                        }
+                    })
+                })
+                $(e.data).each(function (i, result) {
+                    guis.push(result.guideId);
+                    str+="<tr style='height: 40px;' name='tr"+result.guideId+"'><td>"+result.guideName+"</td>";
+                    for(var i=0;i<days;i++){
+                        str+="<td></td>";
+                    }
+                    str+="</tr>";
+                })
+                $('tbody').html(str);
+                    $.ajax({
+                        url:"/Guide/listguidescheduleBygid",
+                        data:{year:year,month:month},
+                        dataType:"json",
+                        type:"get",
+                        success:function (data) {
+                            var type="";
+                            $(data.data).each(function (q,w) {
+                                for(var i=0;i<guis.length;i++){
+                                    if(w.guideId==guis[i]){
+                                        var  items=$("tr[name=tr"+guis[i]+"]").children();
+                                        if(w.arrangetype==1){
+                                            type="×";
+                                        }else if(w.arrangetype==2){
+                                            type="√";
+                                        }
+                                        $(items).eq(w.arrangeday).html(type);
+                                    }
+                                }
+
+                            });
+                        },
+                        error:function (err) {
+                            alert(err);
+                        }
+                    });
+            },
+            error: function (res) {
+                alert(res);
+            }
+        })
+    }
+    function mGetDate(year, month){
+        var d = new Date(year, month, 0);
+        return d.getDate();
+    }
+</script>
+</body>
+</html>

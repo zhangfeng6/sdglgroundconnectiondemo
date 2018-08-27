@@ -2,15 +2,22 @@ package com.dyhc.sdglgroundconnection.web;
 
 
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
 import com.dyhc.sdglgroundconnection.service.TemplateScenicspotService;
 import com.dyhc.sdglgroundconnection.service.TourismtemplateService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
+<<<<<<< HEAD
 
 import com.github.pagehelper.PageInfo;
 
+=======
+import com.github.pagehelper.PageInfo;
+>>>>>>> origin/master
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +25,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 
 import java.util.Date;
 import java.util.List;
 
 
 import java.util.List;
+=======
+import java.util.Date;
+import java.util.List;
+>>>>>>> origin/master
 import java.util.Map;
 
 @RestController
@@ -36,12 +48,15 @@ public class TourismtemplateController {
     @Autowired
     private TourismtemplateService tourismtemplateService;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     @RequestMapping("/selectTourismtemplate")
     public ReponseResult selectTourismtemplate() {
         try {
             List<Tourismtemplate> list = tourismtemplateService.selectTourismtemplate();
-            ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
+            ReponseResult<Object> data = ReponseResult.ok(list, "查询成功！");
             logger.info(" method:selectTourismtemplate  查询旅游模板成功！");
             return data;
         } catch (Exception e) {

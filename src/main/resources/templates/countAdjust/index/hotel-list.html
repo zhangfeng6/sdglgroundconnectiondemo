@@ -17,10 +17,16 @@
 				<button class="layui-btn layui-btn-small layui-btn-normal addBtn hidden-xs" type="button" id="ppp"><i class="layui-icon">&#xe654;</i></button>
 			</div>
 			<div class="layui-inline">
-				<input type="text" name="hotelName"   placeholder="请输入酒店名称"  class="layui-input">
+				<input type="text" name="hotelName" required lay-verify="required" placeholder="请输入酒店名称" autocomplete="off" class="layui-input">
 			</div>
-
-			<button type="button" class="layui-btn layui-btn-normal" lay-submit="search" id="ss">搜索</button>
+			价格区间：
+			<div class="layui-inline">
+				<input size="3" type="text" name="costpriceOne" required lay-verify="required" placeholder="最低价" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-inline">
+				<input size="3" type="text" name="costpriceTwo" required lay-verify="required" placeholder="最高价" autocomplete="off" class="layui-input">
+			</div>
+			<button class="layui-btn layui-btn-normal" lay-submit="search" id="ss">搜索</button>
 		</div>
 	</form>
 	<div class="layui-form" id="table-list">
@@ -46,7 +52,8 @@
 				<th class="">地址</th>
 				<th class="">是否提供早餐</th>
 				<th class="">联系电话</th>
-				<th class="">标价</th>
+				<th class="">报价</th>
+				<th>状态</th>
 				<th>操作</th>
 			</tr>
 			</thead>
@@ -94,27 +101,32 @@
         )
     }
 	function hotelShowAll(){
-
+        var costpriceOne=$("input[name='costpriceOne']").val();
+        var costpriceTwo=$("input[name='costpriceTwo']").val();
         var hotelName=$("input[name='hotelName']").val();
         var str = "";
         $.ajax({
             url:"/Hotel/hotelShowAll",
-            data:{pageNo:curnum,pageSize:limitcount,hotelName:hotelName},
+            data:{pageNo:curnum,pageSize:limitcount,hotelName:hotelName,costpriceOne:costpriceOne,costpriceTwo:costpriceTwo},
             dataType:"json",
             type:"get",
             success:function (data) {
-
                 var count=0;
                 var count2=0;
                 var context2="";
                 var cc=(curnum-1)*limitcount+1;
                 var breakfast  ="";
-                if(data.data.length==0){$("tbody").html("");}
+                var zt="";
                 $.each(data.data,function (i,result) {
                     if (result.breakfast==0){
                         breakfast="提供";
                     }else {
                         breakfast="不提供";
+                    }
+                    if(result.status==0){
+                        zt="禁用";
+                    }else{
+                        zt="可用";
                     }
                     count++;
                     count2++;
@@ -131,6 +143,7 @@
                         "  <td class=''>"+breakfast+"</td>"+
                         "  <td class=''>"+result.phone+"</td>"+
                         "  <td class=''>"+result.offer+"</td>"+
+                        "  <td>"+zt+"</td>"+
                         updatedisabled+
                         "<td style='width: 180px'>\n" +
                         "<div class=\"layui-inline\">\n" +
@@ -140,44 +153,41 @@
                         "</div>\n" +
                         "</td>\n" +
                         "</tr>";
-                    	if(result.roomTypesList.length>0){
+                    if(result.roomTypesList.length>0){
                         count++;
                         context2+="<tr id='"+fuqinid+"' class=\""+erziclass+"\" style=\"display:none ;background-color: #D6E9C6;\" parentid=\"1\">\n" +
-                            "<td class=\"\"></td>\n" +
-                            "<td class=\"\"></td>\n" +
-                            "<td class=\"\">房间类型</td>\n" +
-                            "<td class=\"\">房间成本价</td>\n" +
-                            "<td class=\"\">房间报价</td>\n" +
-                            "<td class=\"\"></td>\n" +
-                            "<td class=\"\"></td>\n" +
-                            "<td class=\"\"></td>\n" +
-                            "<td class=\"\"></td>\n" +
-                            "<td class=\"\">操作</td>\n" +
-                            "</tr>";
-
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\">房间类型</td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\">房间报价</td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\"></td>\n" +
+                            "\t\t\t\t\t\t\t\t<td class=\"\">操作</td>\n" +
+                            "\t\t\t\t\t\t\t</tr>";
                         $.each(result.roomTypesList,function (j,p) {
                             count++;
                             context2+="<tr id='"+fuqinid+"' class=\""+erziclass+"\" style=\"display:none ;\" parentid=\"1\">\n" +
                                 "<td class=\"\"></td>\n" +
                                 "<td class=\"\"></td>\n" +
                                 "<td class=\"\">"+p.typeName+"</td>\n" +
-                                "<td class=\"\">"+p.costprice+"</td>\n" +
                                 "<td class=\"\">"+p.offer+"</td>\n" +
+                                "<td class=\"\"></td>\n" +
                                 "<td class=\"\"></td>\n" +
                                 "<td class=\"\"></td>\n" +
                                 "<td class=\"\"></td>\n" +
                                 "<td class=\"\"></td>\n" +
                                 "<td>\n" +
                                 "<div class=\"layui-inline\">\n" +
-                                "<button class=\"layui-btn layui-btn-mini layui-btn-normal\" id=\"update2\" value=\""+p.typeId+"\" onclick='updateFangjian("+p.typeId+","+result.hotelId+")'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
+                                "<button class=\"layui-btn layui-btn-mini layui-btn-normal\" id=\"update2\" value=\""+p.typeId+"\" onclick='updateFangjian("+p.typeId+")'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
                                 "<button class=\"layui-btn layui-btn-mini layui-btn-danger\" id=\"delete2\" value=\""+p.typeId+"\" onclick='del("+p.typeId+")'><i class=\"layui-icon\">&#xe640;</i></button>\n" +
                                 "</div>\n" +
                                 "</td>\n" +
                                 "</tr>";
                         })
-                    }else{
-                        context2+="<tr id='"+fuqinid+"' class='"+erziclass+"' style='display:none;background-color: #D6E9C6;' parentid='1'><td colspan='10' style='text-align: center'>该酒店暂无房间类型数据！</td></tr>";
-					}
+                    }
                     $("tbody").html(context2);
                     // 分页插件
                     layui.use('table', function () {
@@ -200,7 +210,7 @@
                         })
                     })
                     cc++;
-                });
+                })
             },error:function () {
                 alert(123)
             }
@@ -208,6 +218,7 @@
 	}
 
 	function  addFangjian(hotelId) {
+       alert(hotelId);
         $(document).on(
             layer.open({
                 type: 2,
@@ -224,7 +235,7 @@
 	 * 酒店修改方法修改方法
      * @param typeId
      */
-    function  updateFangjian(typeId,hotelId) {
+    function  updateFangjian(typeId) {
         $(document).on(
             layer.open({
                 type: 2,
@@ -232,7 +243,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '350px'],
-                content: '/countAdjust/hotel-roomType-update?typeId='+typeId+"&hotelId="+hotelId
+                content: '/countAdjust/hotel-roomType-update?typeId='+typeId+""
             })
         )
     }
