@@ -1,6 +1,10 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Disrestaurant;
+import com.dyhc.sdglgroundconnection.pojo.MealType;
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
+import com.dyhc.sdglgroundconnection.service.DisrestaurantService;
+import com.dyhc.sdglgroundconnection.service.MealTypeService;
 import com.dyhc.sdglgroundconnection.service.RestaurantService;
 import com.dyhc.sdglgroundconnection.utils.FileUploadUtil;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -31,6 +35,10 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+    @Autowired
+    private DisrestaurantService disrestaurantService;
+    @Autowired
+    private MealTypeService mealTypeService;
 
 
     /**
@@ -132,6 +140,29 @@ public class RestaurantController {
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
             return err;
+        }
+    }
+
+
+    /**
+     * 获取餐厅信息
+     * @param dispatchId
+     * @param weight
+     * @return
+     */
+    @RequestMapping("getRestaurantById")
+    public ReponseResult getRestaurantById(Integer dispatchId,Integer weight){
+        try {
+            Disrestaurant disrestaurant=disrestaurantService.getDisrestaurantById(dispatchId,weight);
+
+            MealType mealType=mealTypeService.selectById(disrestaurant.getTypeId());
+            Restaurant restaurant=restaurantService.selectRestaurantById(mealType.getRestaurantId());
+            logger.info(" method:getRestaurantById  获取餐厅信息成功！");
+            return ReponseResult.ok(restaurant,"获取餐厅信息成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error(" method:getRestaurantById  获取餐厅信息失败！");
+            return ReponseResult.err("获取餐厅信息失败");
         }
     }
 

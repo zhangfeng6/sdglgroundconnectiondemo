@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Disshopp;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,13 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DisshoppMapper extends CommonMapper<Disshopp>{
+
+
+    /**
+     *微信小程序之获取购物地点
+     * @param dispatchId
+     * @param weight
+     * @return
+     */
+    Disshopp getDisshoppById(@Param("dispatchId") Integer dispatchId,@Param("weight") Integer weight)throws Exception;
 }

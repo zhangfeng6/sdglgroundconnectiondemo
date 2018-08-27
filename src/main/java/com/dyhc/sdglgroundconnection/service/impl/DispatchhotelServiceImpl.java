@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.DispatchhotelMapper;
+import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
 import com.dyhc.sdglgroundconnection.service.DispatchhotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class DispatchhotelServiceImpl implements DispatchhotelService {
 
     @Autowired
     private DispatchhotelMapper dispatchhotelMapper;
+
+    @Override
+    public Dispatchhotel getDispatchHotel(Integer dispatchId,Integer weight) throws Exception {
+        return dispatchhotelMapper.getDispatchHotel(dispatchId,weight);
+    }
 }

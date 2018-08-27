@@ -1,6 +1,8 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Disshopp;
 import com.dyhc.sdglgroundconnection.pojo.Shopping;
+import com.dyhc.sdglgroundconnection.service.DisshoppService;
 import com.dyhc.sdglgroundconnection.service.ShoppingService;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
@@ -28,6 +30,8 @@ public class ShoppingController  {
 
     @Autowired
     private ShoppingService shoppingService;
+    @Autowired
+    private DisshoppService disshoppService;
 
     /**
      * 添加景点附近的购物地点
@@ -104,6 +108,27 @@ public class ShoppingController  {
             ReponseResult data=ReponseResult.err("查询购物信息失败");
             e.printStackTrace();
             return  data;
+        }
+    }
+
+
+    /**
+     *微信小程序之获取购物地点
+     * @param dispatchId
+     * @param weight
+     * @return
+     */
+    @RequestMapping("getShoppingByIdWX")
+    public ReponseResult getShoppingByIdWX(Integer dispatchId,Integer weight){
+        try {
+            Disshopp disshopp=disshoppService.getDisshoppById(dispatchId,weight);
+            Shopping shopping=shoppingService.getShoppingById(disshopp.getScenicSpotId());
+            logger.info("method:getShoppingByIdWX  获取购物信息成功！");
+            return ReponseResult.ok(shopping,"获取购物地点成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:getShoppingByIdWX  获取购物信息失败！");
+            return ReponseResult.err("获取购物地点失败");
         }
     }
 
