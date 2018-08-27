@@ -44,4 +44,9 @@ public class OfferlineServiceImpl implements OfferlineService {
     public int insertOfferline(Offerline offerline) {
         return offerlineMapper.insertOfferline(offerline);
     }
+
+    @Override
+    public List<Offerline> selectOfferlineByOfferId(int offerId) {
+        return offerlineMapper.selectOfferlineByOfferId(offerId);
+    }
 }

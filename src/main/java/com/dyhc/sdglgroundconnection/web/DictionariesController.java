@@ -48,8 +48,7 @@ public class DictionariesController {
     }
 
 
-<<<<<<< HEAD
-=======
+
     /**
      * 获取所有的景点等级
      * @return
@@ -66,7 +65,7 @@ public class DictionariesController {
             return  data;
         }
     }
->>>>>>> origin/master
+
 
     /**
      * 获取所有的车辆类型
@@ -86,7 +85,6 @@ public class DictionariesController {
     }
 
     /**
-<<<<<<< HEAD
      * 获取餐馆类型
      * @return
      */
@@ -98,7 +96,10 @@ public class DictionariesController {
             return  data;
         }catch (Exception e){
             ReponseResult<List> data=ReponseResult.err("获取餐馆类型失败");
-=======
+            return data;
+        }
+    }
+    /**
      * 获取所有的景点等级
      * @return
      */
@@ -109,7 +110,6 @@ public class DictionariesController {
             return  data;
         }catch (Exception e){
             ReponseResult<List> data=ReponseResult.err("获取所有的车辆类型失败");
->>>>>>> origin/master
             e.printStackTrace();
             return  data;
         }

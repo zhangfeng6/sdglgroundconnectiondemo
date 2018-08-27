@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.OffercarMapper;
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.Offercar;
 import com.dyhc.sdglgroundconnection.service.OffercarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,15 @@ public class OffercarServiceImpl implements OffercarService {
     @Override
     public int insertOffercar(Offercar offercar) {
         return offercarMapper.insertOffercar(offercar);
+    }
+
+    @Override
+    public Offercar selectOffercarByOfferId(int offerId) {
+        return offercarMapper.selectOffercarByOfferId(offerId);
+    }
+
+    @Override
+    public Dictionaries selectOffercarById(int valueId) {
+        return offercarMapper.selectOffercarById(valueId);
     }
 }

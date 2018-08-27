@@ -2,10 +2,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.TourismandlineMapper;
 import com.dyhc.sdglgroundconnection.mapper.TourismtemplateMapper;
-<<<<<<< HEAD
-=======
 import com.dyhc.sdglgroundconnection.pojo.Tourismandline;
->>>>>>> origin/master
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
 import com.dyhc.sdglgroundconnection.service.TourismtemplateService;
 import com.github.pagehelper.PageHelper;

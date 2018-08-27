@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +50,11 @@ public class OfferController {
     private TravelService travelService;
     @Autowired
     private TemplateService templateService;
+    @Autowired
+    private HotelService hotelService;
+    @Autowired
+    private DictionariesService dictionariesService;
+
 
     /**
      * 赵伟伟
@@ -68,6 +75,161 @@ public class OfferController {
             return err;
         }
     }
+
+
+
+
+
+    /**
+     * 赵伟伟
+     * @param
+     * @return
+     */
+    @RequestMapping("/showQuotation")
+    public ReponseResult showQuotation(HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession();
+            List allList = (List)session.getAttribute("allList");
+            ReponseResult<Object> data = ReponseResult.ok(allList, "获取报价单成功！");
+            logger.info(" method:selectOffer  获取报价单成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOffer  获取报价单数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+
+
+
+    /**
+     * 赵伟伟
+     * @param
+     * @return
+     */
+    @RequestMapping("/quotation")
+    public ReponseResult quotation(HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        String zuid = request.getParameter("zuid");
+        String number = request.getParameter("number");
+        String travelStartTime = request.getParameter("travelStartTime");
+        String travelEndTime = request.getParameter("travelEndTime");
+        String jiage = request.getParameter("jiage");
+        String wu = request.getParameter("wu");
+        String ctypeId = request.getParameter("ctypeId");
+        String remarks = request.getParameter("remarks");
+        String[] tripList = request.getParameterValues("tripList");
+
+
+
+        Dictionaries dictionaries = offercarService.selectOffercarById(Integer.parseInt(ctypeId));
+        Travel travel = travelService.selectTravelById(Integer.parseInt(zuid));
+        try {
+            List allList = new ArrayList<>();
+            allList.add(number);
+            allList.add(travelStartTime);
+            allList.add(travelEndTime);
+            allList.add(jiage);
+            allList.add(wu);
+            allList.add(dictionaries);
+            allList.add(travel);
+            allList.add(remarks);
+            allList.add(tripList);
+            session.setAttribute("allList",allList);
+            ReponseResult<Object> data = ReponseResult.err("查询成功！");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 赵伟伟
+     * @param
+     * @return
+     */
+    @RequestMapping("/Confirmation")
+    public ReponseResult Confirmation(HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        String[] tripList = request.getParameterValues("tripList");
+        String[] xdateList = request.getParameterValues("xdateList");
+        String[] xianluList = request.getParameterValues("xianluList");
+        String[] wucList = request.getParameterValues("wucList");
+        String[] wucbList = request.getParameterValues("wucbList");
+        String[] wubjList = request.getParameterValues("wubjList");
+        String[] wancList = request.getParameterValues("wancList");
+        String[] wancbList = request.getParameterValues("wancbList");
+        String[] wanbjList = request.getParameterValues("wanbjList");
+        String[] jiudianList = request.getParameterValues("jiudianList");
+        String jiedai = request.getParameter("jiedai");
+        String zuId = request.getParameter("travelId");
+        String travelStartTime = request.getParameter("travelStartTime");
+        String travelEndTime = request.getParameter("travelEndTime");
+        String number = request.getParameter("number");
+
+        Travel travel = travelService.selectTravelById(Integer.parseInt(zuId));
+        List<Hotel> hotelList = new ArrayList<>();
+        List<Dictionaries> dicList1 = new ArrayList<>();
+        List<Dictionaries> dicList2 = new ArrayList<>();
+        List<Template> templatesList = new ArrayList<>();
+        try {
+            for (int i=0;i<jiudianList.length;i++){
+                Integer hotelId = Integer.parseInt(jiudianList[i]);
+                hotelList.add(hotelService.getHotelById(hotelId));
+            }
+            for (int i=0;i<wucList.length;i++){
+                dicList1.add(dictionariesService.selectByDictionariesId(Integer.parseInt(wucList[i])));
+            }
+            for (int i=0;i<wancList.length;i++){
+                dicList2.add(dictionariesService.selectByDictionariesId(Integer.parseInt(wancList[i])));
+            }
+            for (int i=0;i<xianluList.length;i++){
+                templatesList.add(templateService.selecctNameById(Integer.parseInt(xianluList[i])));
+            }
+            List allList = new ArrayList<>();
+            allList.add(tripList);
+            allList.add(xdateList);
+            allList.add(dicList1);
+            allList.add(wucbList);
+            allList.add(wubjList);
+            allList.add(dicList2);
+            allList.add(wancbList);
+            allList.add(wanbjList);
+            allList.add(jiedai);
+            allList.add(hotelList);
+            allList.add(templatesList);
+            allList.add(travel);
+            allList.add(travelStartTime);
+            allList.add(travelEndTime);
+            allList.add(number);
+            session.setAttribute("allList",allList);
+            ReponseResult<Object> data = ReponseResult.err("查询成功！");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+
 
 
     /**
@@ -103,6 +265,7 @@ public class OfferController {
         String ctypeId = request.getParameter("ctypeId");
         String ccostPrice = request.getParameter("ccostPrice");
         String coffer = request.getParameter("coffer");
+        String des = request.getParameter("des");
 
 
         Offer offer = new Offer();
@@ -117,11 +280,25 @@ public class OfferController {
         try {
 
 
+
+            for (int z=0;z<xdateList.length;z++){
+                zongjia+=Double.parseDouble(wubjList[z]);
+                zongjia+=Double.parseDouble(wanbjList[z]);
+                zongjia+=Double.parseDouble(joffer[z]);
+
+                String[] jd = jingdianList[z].split(",");
+                String[] jdo = jdofferList[z].split(",");
+                for (int j=0;j<jd.length;j++){
+                    zongjia += Double.parseDouble(jdo[j]);
+                }
+            }
+
+
             //获取报价单
             Travel travel = travelService.selectTravelById(Integer.parseInt(travelId));
-            String str=travel.getTravelName().substring(0,travel.getTravelName().length()-3);
+            //String str=travel.getTravelName().substring(0,travel.getTravelName().length()-3);
             Timestamp ts = new Timestamp(System.currentTimeMillis());
-            offer.setTourist(str);
+            offer.setTourist(travel.getTravelName());
             offer.setOffer(zongjia);
             offer.setTravelId(Integer.parseInt(travelId));
             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -139,6 +316,7 @@ public class OfferController {
             offer.setNumber(Integer.parseInt(number));
             offer.setTrip(tripList[1]);
             offer.setRemarks(remarks);
+            offer.setReception(des);
             offerService.insertOffer(offer);
 
 
@@ -148,9 +326,6 @@ public class OfferController {
 
 
             for (int i=0;i<xdateList.length;i++){
-                zongjia+=Double.parseDouble(wubjList[i]);
-                zongjia+=Double.parseDouble(wanbjList[i]);
-                zongjia+=Double.parseDouble(joffer[i]);
 
 
                 //线路报价
@@ -188,9 +363,9 @@ public class OfferController {
 
                 //晚餐报价
                 offerrestaurant1.setOfferId(offer.getOfferId());
-                offerrestaurant1.setDictionariesId(Integer.parseInt(wucList[i]));
-                offerrestaurant1.setCostPrice(Double.parseDouble(wucbList[i]));
-                offerrestaurant1.setOffer(Double.parseDouble(wubjList[i]));
+                offerrestaurant1.setDictionariesId(Integer.parseInt(wancList[i]));
+                offerrestaurant1.setCostPrice(Double.parseDouble(wancbList[i]));
+                offerrestaurant1.setOffer(Double.parseDouble(wanbjList[i]));
                 offerrestaurant1.setDate(fTimestamp2);
                 offerrestaurant1.setHavemealsdate(fTimestamp2);
 
@@ -201,7 +376,6 @@ public class OfferController {
                 String[] jd = jingdianList[i].split(",");
 
                 for (int j=0;j<jd.length;j++){
-                    zongjia += Double.parseDouble(jdo[j]);
                     offerscenic.setScenicSpotId(Integer.parseInt(jd[j]));
                     offerscenic.setOfferId(offer.getOfferId());
                     offerscenic.setCostPrice(Double.parseDouble(jdc[j]));
@@ -247,4 +421,46 @@ public class OfferController {
         }
     }
 
+
+    /**
+     * 赵伟伟
+     * @param offerId
+     * @return
+     */
+    @RequestMapping("/selectOfferByOfferId")
+    public ReponseResult selectOfferByOfferId(@RequestParam("offerId") Integer offerId) {
+        try {
+            Offer offer = offerService.selectOfferByOfferId(offerId);
+            ReponseResult<Object> data = ReponseResult.ok(offer, "获取报价单成功！");
+            logger.info(" method:selectOfferByOfferId  获取报价单成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOfferByOfferId  报价单数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 赵伟伟
+     * @param
+     * @return
+     */
+    @RequestMapping("/showConfirmation")
+    public ReponseResult showConfirmation(HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession();
+            List allList = (List)session.getAttribute("allList");
+            ReponseResult<Object> data = ReponseResult.ok(allList, "获取确认书成功！");
+            logger.info(" method:selectOffer  获取确认书成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOffer  获取确认书数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

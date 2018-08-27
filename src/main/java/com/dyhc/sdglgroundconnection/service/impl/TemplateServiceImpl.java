@@ -205,7 +205,7 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
-<<<<<<< HEAD
+
     @Override
     public List<Template> selectTemplate() throws Exception {
         List<Template> list = templateMapper.selectTemplate();
@@ -222,7 +222,7 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public Template selecctNameById(int templateId) {
         return templateMapper.selecctNameById(templateId);
-=======
+    }
     /**
      * 根据模板信息表的主键id进行查询
      * @param tid   模板对象主键id
@@ -285,7 +285,6 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public List<Template> listtemplateall()throws Exception {
         return templateMapper.selectAll();
->>>>>>> origin/master
     }
 
 

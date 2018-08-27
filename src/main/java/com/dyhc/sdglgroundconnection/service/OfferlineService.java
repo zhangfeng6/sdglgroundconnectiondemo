@@ -34,4 +34,13 @@ public interface OfferlineService {
      * @return
      */
     int insertOfferline(Offerline offerline);
+
+
+    /**
+     * 赵伟伟
+     * 按报价单编号查询
+     * @param offerId
+     * @return
+     */
+    List<Offerline> selectOfferlineByOfferId(int offerId);
 }

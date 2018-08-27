@@ -1,9 +1,13 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
-<<<<<<< HEAD
+
+import org.apache.ibatis.annotations.Param;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
 import java.util.List;
 
 public interface TourismtemplateService {
@@ -27,14 +31,8 @@ public interface TourismtemplateService {
      * @return
      */
     Tourismtemplate selectByName(String tourismtemplateName) throws Exception;
-=======
-import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-import java.util.Map;
 
-public interface TourismtemplateService {
 
     /**
      * 根据模板名称和创建人查询符合条件的模板信息    张枫
@@ -74,5 +72,4 @@ public interface TourismtemplateService {
      * @return
      */
     Map<String,Object> listtandlBytid(Integer tid) throws  Exception;
->>>>>>> origin/master
 }

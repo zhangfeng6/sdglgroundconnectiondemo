@@ -136,7 +136,6 @@ public class TemplateController {
         }
     }
 
-<<<<<<< HEAD
 
 
     @RequestMapping("/selectTemplate")
@@ -150,7 +149,9 @@ public class TemplateController {
             logger.error(" method:selectTemplate  查询旅游模板失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
-=======
+            return err;
+        }
+    }
     /**
      * 根据id查询线路模板信息   张枫
      * @param mid
@@ -185,12 +186,26 @@ public class TemplateController {
             e.printStackTrace();
             logger.debug("method:removeTemplate 系统出现异常！");
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
->>>>>>> origin/master
             return err;
         }
     }
 
-<<<<<<< HEAD
+
+
+    @RequestMapping("/listtemplateall")
+    public ReponseResult listtemplateall(){
+        try {
+            ReponseResult<List> data=ReponseResult.ok(templateService.listtemplateall(),"成功获取所有线路信息！");
+            logger.info("method:removeTemplate 成功获取所有线路信息！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:removeTemplate 系统出现异常！");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
     @RequestMapping("/selectTemplateAll")
     public ReponseResult selectTemplateAll(Integer templateId) {
         try {
@@ -202,18 +217,6 @@ public class TemplateController {
             logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
-=======
-    @RequestMapping("/listtemplateall")
-    public ReponseResult listtemplateall(){
-        try {
-            ReponseResult<List> data=ReponseResult.ok(templateService.listtemplateall(),"成功获取所有线路信息！");
-            logger.info("method:removeTemplate 成功获取所有线路信息！");
-            return data;
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.debug("method:removeTemplate 系统出现异常！");
-            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
->>>>>>> origin/master
             return err;
         }
     }

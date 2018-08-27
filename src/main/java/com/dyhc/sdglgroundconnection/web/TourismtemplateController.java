@@ -1,18 +1,16 @@
 package com.dyhc.sdglgroundconnection.web;
 
-<<<<<<< HEAD
+
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
-=======
->>>>>>> origin/master
+
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
 import com.dyhc.sdglgroundconnection.service.TemplateScenicspotService;
 import com.dyhc.sdglgroundconnection.service.TourismtemplateService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
-<<<<<<< HEAD
-=======
+
 import com.github.pagehelper.PageInfo;
->>>>>>> origin/master
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
+
 import java.util.Date;
 import java.util.List;
 
-@RestController
-@RequestMapping("Tourismtemplate")
-=======
+
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/Tourismtemplate")
->>>>>>> origin/master
 public class TourismtemplateController {
 
     // 日志对象
@@ -41,7 +36,7 @@ public class TourismtemplateController {
     @Autowired
     private TourismtemplateService tourismtemplateService;
 
-<<<<<<< HEAD
+
     @RequestMapping("/selectTourismtemplate")
     public ReponseResult selectTourismtemplate() {
         try {
@@ -53,7 +48,9 @@ public class TourismtemplateController {
             logger.error(" method:selectTourismtemplate  查询旅游模板失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
-=======
+            return err;
+        }
+    }
     /**
      * 获取所有模板信息
      * @param tempname
@@ -76,13 +73,10 @@ public class TourismtemplateController {
             e.printStackTrace();
             logger.debug("method:listtourismtemplate 系统异常！");
             ReponseResult<Object> err=ReponseResult.err("系统异常！");
->>>>>>> origin/master
             return err;
         }
     }
 
-<<<<<<< HEAD
-=======
     /**
      * 删除模板信息
      * @param tid
@@ -157,5 +151,4 @@ public class TourismtemplateController {
             return err;
         }
     }
->>>>>>> origin/master
 }

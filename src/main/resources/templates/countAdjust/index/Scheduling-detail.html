@@ -76,7 +76,7 @@
 							</tr>
 							<!--点击新增景点-->
 							<tr id="onClickjd">
-								<td colspan="2"><button id="tian" class="layui-btn" type="button" style="font-size: 12px" onclick="insertJingdian(this)">添加景点+</button></td>
+								<td colspan="2" class="tian"><button id="tian" class="layui-btn" type="button" style="font-size: 12px" onclick="insertJingdian(this)">添加景点+</button></td>
 							</tr>
 							<!--点击新增结束-->
 							<tr id="scenic1" name="scenic" class="scenic">
@@ -164,12 +164,13 @@
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">接待标准：</label></td>
-						<td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
+						<td colspan="5"><textarea id="jiedai" placeholder="请输入内容" class="layui-textarea" name="desc"></textarea></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td><button class='layui-btn layui-btn-normal layui-btn-radius'>预览报价单</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><button class='layui-btn layui-btn-normal layui-btn-radius' id="baocun">打印报价单</button></td>
+						<td><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="baojia()">打印报价单</button></td>
+						<td style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" onclick="dayin()">生成确认书</button></td>
 						<td style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun1" onclick="baocunmuban()">保存</button></td>
 					</tr>
 				</table>
@@ -237,8 +238,221 @@
                     var  getval =thisURL.split('?')[1];
                     if (getval!=undefined){
                         id= getval.split("=")[1];
+                        selectOfferByOfferId();
+                        selectOffer();
+                        selectOfferlineByOfferId();
+                        selectOfferHotelByOfferId();
+                        selectOfferRestaurantByOfferId();
+                        selectOfferRestaurantByOfferId1();
+                        selectOfferotherByOfferId();
+                        selectOfferscenicByOfferId();
+						$("select").attr("disabled","disabled");
+                        $("input").attr("disabled","disabled");
+                        $("textarea").attr("disabled","disabled");
                     }
 				})
+
+
+				function selectOffer(){
+				    $.ajax({
+                        url:"/Offer/selectOfferByOfferId",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            $("#xzzutuanshe").children().val(data.data.travelId);
+                            $("#number").val(data.data.number);
+                            $("[name=travelStartTime]").val(data.data.travelStartTime);
+                            $("[name=travelEndTime]").val(data.data.travelEndTime);
+                            $("[name=desc]").val(data.data.reception);
+						}
+					})
+				}
+
+                function selectOfferByOfferId(){
+                    $.ajax({
+                        url:"/Offercar/selectOfferByOfferId",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            $("#ctypeId").children().val(data.data.dictionariesId);
+                            $("#ccostPrice").val(data.data.costPrice);
+                            $("#coffer").val(data.data.offer);
+                        }
+                    })
+                }
+
+
+
+
+                function selectOfferlineByOfferId(){
+                    $.ajax({
+                        url:"/Offerline/selectOfferlineByOfferId",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            for (var u=1;u<=data.data.length;u++){
+                                $(".xzxianlu").eq(u-1).children().children().each(function(){
+                                    if($(this).text() ==data.data[u-1].lineArriveName){
+                                        $(this).prop("selected",true);
+                                    }
+                                })
+                                $("[name=trip]").eq(u-1).val(data.data[u-1].travelContent);
+                                $("[name=date]").eq(u-1).val(data.data[u-1].date);
+                                if (u<data.data.length){
+                                    addss2();
+								}
+							}
+
+                        }
+                    })
+                }
+
+
+
+
+                function selectOfferHotelByOfferId(){
+                    $.ajax({
+                        url:"/OfferHotel/selectOfferHotelByOfferId",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            for (var u=1;u<=data.data.length;u++){
+                                $(".jiudian").eq(u-1).children().val(data.data[u-1].hotelId)
+                                $("[name=jcostPrice]").eq(u-1).val(data.data[u-1].costPrice);
+                                $("[name=joffer]").eq(u-1).val(data.data[u-1].offer);
+                            }
+
+                        }
+                    })
+                }
+
+
+                function selectOfferRestaurantByOfferId(){
+                    $.ajax({
+                        url:"/Offerrestaurant/selectOfferRestaurantByOfferId",
+                        data:{"offerId":id},
+                        dataType:"json",
+                        type:"get",
+                        success:function (data) {
+                            for (var u=1;u<=data.data.length;u++){
+                                $(".wuc").eq(u-1).children().val(data.data[u-1].dictionariesId)
+                                $(".wucb").eq(u-1).children().val(data.data[u-1].costPrice);
+                                $(".wubj").eq(u-1).children().val(data.data[u-1].offer);
+                            }
+                        }
+                    })
+                }
+
+
+                function selectOfferRestaurantByOfferId1(){
+                    $.ajax({
+                        url:"/Offerrestaurant/selectOfferRestaurantByOfferId1",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            for (var u=1;u<=data.data.length;u++){
+                                $(".wanc").eq(u-1).children().val(data.data[u-1].dictionariesId)
+                                $(".wancb").eq(u-1).children().val(data.data[u-1].costPrice);
+                                $(".wanbj").eq(u-1).children().val(data.data[u-1].offer);
+                            }
+
+                        }
+                    })
+                }
+
+
+
+                function selectOfferotherByOfferId(){
+                    $.ajax({
+                        url:"/Offerother/selectOfferotherByOfferId",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            $("#qcostPrice").val(data.data.costPrice);
+                            $("#qoffer").val(data.data.offer);
+                            $("#remarks").val(data.data.remarks);
+                        }
+                    })
+                }
+
+
+
+
+                function selectOfferscenicByOfferId(){
+                    $.ajax({
+                        url:"/Offerscenic/selectOfferscenicByOfferId",
+                        data:{offerId:id},
+                        dataType:"json",
+                        async: false,
+                        type:"get",
+                        success:function (data) {
+                            var p1 = 0;
+                            var p2 = 0;
+                            var p3 = 0;
+                            var p4 = 0;
+                            var p5 = 0;
+                            for (var u=0;u<data.data.length;u++) {
+                                if (data.data[u].howmanydays == 1) {
+                                    p1++;
+                                }
+                                if (data.data[u].howmanydays == 2) {
+                                    p2++;
+                                }
+                                if (data.data[u].howmanydays == 3) {
+                                    p3++;
+                                }
+                                if (data.data[u].howmanydays == 4) {
+                                    p4++;
+                                }
+                                if (data.data[u].howmanydays == 5) {
+                                    p5++;
+                                }
+                            }
+                            for (var o=1;o<p1;o++){
+                                var c = $("#zong1").find(".tian").children();
+                                insertJingdian(c);
+                            }
+                            for (var o=1;o<p2;o++){
+                                var c = $("#zong2").find(".tian").children();
+                                insertJingdian(c);
+                            }
+                            for (var o=1;o<p3;o++){
+                                var c = $("#zong3").find(".tian").children();
+                                insertJingdian(c);
+                            }
+                            for (var o=1;o<p4;o++){
+                                var c = $("#zong4").find(".tian").children();
+                                insertJingdian(c);
+                            }
+                            for (var o=1;o<p5;o++){
+                                var c = $("#zong5").find(".tian").children();
+                                insertJingdian(c);
+                            }
+                            for (var u=1;u<=data.data.length;u++){
+                                $(".jingdian").eq(u-1).children().val(data.data[u-1].scenicSpotId)
+                                $("[name=jdcostPrice]").eq(u-1).val(data.data[u-1].costPrice);
+                                $("[name=jdoffer]").eq(u-1).val(data.data[u-1].offer);
+                            }
+                        }
+                    })
+                }
+
+
+
+
+
 
 
 				function selectTourismtemplate(){
@@ -604,6 +818,7 @@
 					var number = $("#number").val();
                     var remarks = $("#remarks").val();
 					var travelStartTime = $("[name=travelStartTime]").val();
+                    var des = $("[name=desc]").val();
 					var travelEndTime = $("[name=travelEndTime]").val();
 					var qcostPrice = $("#qcostPrice").val();
 					var qoffer = $("#qoffer").val();
@@ -615,7 +830,7 @@
 
 					$.ajax({
                         url:"/Offer/insertOffer",
-                        data:{tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer},
+                        data:{tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer,des:des},
                         dataType:"json",
                         async: false,
                         traditional: true,
@@ -626,6 +841,99 @@
 						}
 					})
 				}
+
+				function dayin(){
+                    var xianluCount = $("[name=zong]").length;
+				    var zuid = $("[name=travelName]").val();
+				    var jiedai = $("#jiedai").val();
+                    var xianluList = new Array();
+                    var xdateList = new Array();
+                    var tripList = new Array();
+                    var wucList = new Array();
+                    var wucbList = new Array();
+                    var wubjList = new Array();
+                    var wancList = new Array();
+                    var wancbList = new Array();
+                    var wanbjList = new Array();
+                    var jiudianList = new Array();
+                    var travelStartTime = $("[name=travelStartTime]").val();
+                    var travelEndTime = $("[name=travelEndTime]").val();
+                    var number = $("#number").val();
+                    for (var i=0;i<xianluCount;i++){
+                        xianluList[i] = $(".xzxianlu").eq(i).children().val();
+                        xdateList[i] = $("[name=date]").eq(i).val();
+                        tripList[i] = $("[name=trip]").eq(i).val();
+
+                        wucList[i] = $(".wuc").eq(i).children().val();
+                        wucbList[i] = $(".wucb").eq(i).children().val();
+                        wubjList[i] = $(".wubj").eq(i).children().val();
+
+                        wancList[i] = $(".wanc").eq(i).children().val();
+                        wancbList[i] = $(".wancb").eq(i).children().val();
+                        wanbjList[i] = $(".wanbj").eq(i).children().val();
+
+                        jiudianList[i] = $(".jiudian").eq(i).children().val();
+					}
+				    $.ajax({
+                        url:"/Offer/Confirmation",
+                        data:{number:number,travelEndTime:travelEndTime,travelStartTime:travelStartTime,travelId:zuid,jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList},
+                        dataType:"json",
+                        async: false,
+                        traditional: true,
+                        type:"get",
+                        success:function (data) {
+							location.href="/countAdjust/Confirmation";
+						}
+					})
+				}
+
+				function baojia(){
+                    var xianluCount = $("[name=zong]").length;
+                    var zuid = $("[name=travelName]").val();
+                    var number = $("#number").val();
+                    var travelStartTime = $("[name=travelStartTime]").val();
+                    var travelEndTime = $("[name=travelEndTime]").val();
+                    var jiage = 0;
+                    var wu = 0;
+                    var ctypeId = $("#ctypeId").children().val();
+                    var remarks = $("#remarks").val();
+
+                    var tripList = new Array();
+                    var wubjList = new Array();
+                    var wanbjList = new Array();
+                    var joffer = new Array();
+                    var jdofferList = new Array();
+                    jiage += $("#qoffer").val();
+                    jiage += $("#coffer").val();
+                    var wuCount = 0;
+
+                    for (var i=0;i<xianluCount;i++){
+                        var index = "#zong"+(i+1);
+                        var jingdianCount = $(index).find("[name=scenic]").length;
+                        wuCount+=jingdianCount;
+                        for (var j=0;j<jingdianCount;j++){
+                            jiage+= $("[name=jdoffer]").val();
+                        }
+                        tripList[i] = $("[name=trip]").eq(i).val();
+                        jiage += $(".wubj").eq(i).children().val();
+                        wu += $(".wubj").eq(i).children().val();
+                        jiage += $(".wanbj").eq(i).children().val();
+                        jiage += $("[name=joffer]").eq(i).val();
+					}
+					wu = wu/wuCount;
+				    $.ajax({
+                        url:"/Offer/quotation",
+                        data:{tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
+                        dataType:"json",
+                        async: false,
+                        traditional: true,
+                        type:"get",
+                        success:function (data) {
+                            location.href="/countAdjust/quotation";
+                        }
+					})
+				}
+
 		</script>
 	</body>
 </html>

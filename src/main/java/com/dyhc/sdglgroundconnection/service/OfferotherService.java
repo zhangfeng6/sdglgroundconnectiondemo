@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Offerother;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,4 +18,12 @@ public interface OfferotherService {
      * @return
      */
     int insertOfferother(Offerother offerother);
+
+    /**
+     * 赵伟伟
+     * 按报价单编号查询
+     * @param offerId
+     * @return
+     */
+    Offerother selectOfferotherByOfferId(int offerId);
 }

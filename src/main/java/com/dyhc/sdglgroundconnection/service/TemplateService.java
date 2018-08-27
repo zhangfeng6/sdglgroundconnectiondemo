@@ -8,10 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Map;
->>>>>>> origin/master
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -44,7 +41,7 @@ public interface TemplateService {
      */
     int savetemplate(TemplateParameter template)throws Exception;
 
-<<<<<<< HEAD
+
 
     /**
      * 赵伟伟
@@ -73,7 +70,7 @@ public interface TemplateService {
     Template selecctNameById(int templateId);
 
 
-=======
+
     /**
      * 根据线路模板id查找符合条件的信息
      * @param tid
@@ -101,5 +98,4 @@ public interface TemplateService {
      * @return
      */
     List<Template> listtemplateall()throws Exception;
->>>>>>> origin/master
 }

@@ -7,4 +7,13 @@
         insert into offercar(typeId,offerId,costPrice,offer,`number`,whetherDel,creater)
         values(#{typeId},#{offerId},#{costPrice},#{offer},1,0,1)
     </insert>
+
+    <select id="selectOffercarByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offercar">
+        SELECT * FROM offercar o,vehicletype v,dictionaries d WHERE o.typeId = v.typeId AND v.valueId=d.`valueId` AND d.`typeCode`='VEHICLE' AND o.whetherDel!=1 AND o.offerId=#{offerId}
+    </select>
+
+
+    <select id="selectOffercarById" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        select * from dictionaries where whetherDel!=1 and typeCode = 'VEHICLE' and dictionariesId=#{valueId}
+    </select>
 </mapper>

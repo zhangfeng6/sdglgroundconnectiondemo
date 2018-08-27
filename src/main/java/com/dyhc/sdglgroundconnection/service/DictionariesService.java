@@ -14,22 +14,19 @@ import java.util.List;
  **/
 public interface DictionariesService {
 
-    /**
-     * 获取所有的景点等级
-     * @return
-     */
-<<<<<<< HEAD
-    PageInfo<Dictionaries> listDictionaries();
-=======
-    PageInfo<Dictionaries> listDictionaries()throws Exception;
 
->>>>>>> origin/master
+
+    /**
+     * 查询景点
+     * @return
+     * @throws Exception
+     */
+    PageInfo<Dictionaries> listDictionaries()throws Exception;
 
     /**
      * 查询所有的车辆类型
      * @return
      */
-<<<<<<< HEAD
     List<VehicleType> listVehicletype();
 
     /**
@@ -38,7 +35,6 @@ public interface DictionariesService {
      * @return
      */
     Dictionaries selectByDictionariesId(int dictionariesId);
-=======
     PageInfo<Dictionaries> listDictionaries1()throws Exception;
 
 
@@ -47,5 +43,4 @@ public interface DictionariesService {
      * @return
      */
     List<Dictionaries> listhoteltype()throws Exception;
->>>>>>> origin/master
 }

@@ -32,4 +32,9 @@ public class OfferServiceImpl implements OfferService {
     public int insertOffer(Offer offer) throws Exception {
         return offerMapper.insertOffer(offer);
     }
+
+    @Override
+    public Offer selectOfferByOfferId(int offerId) {
+        return offerMapper.selectOfferByOfferId(offerId);
+    }
 }
