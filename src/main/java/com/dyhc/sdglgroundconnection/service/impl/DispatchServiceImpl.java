@@ -2,7 +2,9 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
+import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
+import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,9 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Autowired
     private CarrentalMapper carrentalMapper;
+
+    @Autowired
+    private ReportdetailService reportdetailService;
     /**
      * 根据条件查询调度信息 并分页返回
      * @param pageNo        当前页数
@@ -102,5 +107,11 @@ public class DispatchServiceImpl implements DispatchService {
     @Override
     public Dispatch getDispatchByguideId(Integer guideId)throws Exception {
         return dispatchMapper.getDispatchByguideId(guideId);
+    }
+
+    @Override
+    public Dispatch getDispatchById(Integer reportDetailId) throws Exception {
+        Reportdetail reportdetail=reportdetailService.getReportdetailById(reportDetailId);
+        return dispatchMapper.selectByPrimaryKey(reportdetail.getDispatchId());
     }
 }

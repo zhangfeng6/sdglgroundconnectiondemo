@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style>
+        .gradient {
+
+            background: #fff;
+            background: -webkit-linear-gradient(left, #1E9FFF, #FFF); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(right, #1E9FFF, #FFF); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(right, #1E9FFF, #FFF); /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #1E9FFF, #FFF);
+            color: #FFF;
+            height: 30px;
+            line-height: 30px;
+            width: 100%;
+            padding-left: 20px;
+            margin-top: 5px
+        }
+
+        td {
+            text-align: center
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css">
+</head>
+
+<body>
+
+<div style="margin:0 auto; width:100%;">
+    <h3 class="gradient">地接导游报账明细表</h3>
+    <div style="padding-left:20px">
+        <input type="hidden" th:value="${reportDetailId}" name="${reportDetailId}"/>
+        <table>
+            <tr>
+                <td height="40px">团号:</td>
+                <td><input type="text" disabled name="groupNumber"></td>
+                <td style="padding-left:50px">抵离时间:</td>
+                <td><input type="date" name="travelStartTime" disabled>-<input type="date" name="travelEndTime" disabled></td>
+                <td style="padding-left:45px">线路:</td>
+                <td><input type="text" name="sendLine" style="width:60px; text-align:center" disabled></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>组团社(单位):</td>
+                <td><input type="text" disabled value="号锡组团社" style="width:120px; text-align:center"></td>
+                <td style="padding-left:30px">人数:</td>
+                <td><input type="text" disabled value="10" style="width:60px; text-align:center"></td>
+                <td style="padding-left:20px">天数:</td>
+                <td><input type="text" disabled value="3" style="width:60px; text-align:center"></td>
+                <td style="padding-left:20px">客源地:</td>
+                <td><input type="text" disabled value="北京" style="width:60px; text-align:center"></td>
+                <td style="padding-left:20px">单据类型<select style="margin-left:10px">
+                    <option>请选择</option>
+                </select></td>
+                <td>
+                    <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                        <button data-method="offset" data-type="auto" onclick="alertViewPictures()" class="layui-btn layui-btn-normal" style="height:23px; line-height:23px; margin-left:10px">查询</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">住宿报账</li>
+                <li>餐厅报账</li>
+                <li>门票报账</li>
+                <li>车费报账</li>
+                <li>其他支出报账</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
+                        <thead>
+                        <tr style="background-color:#1E9FFF">
+                            <td style="width:10%;"><strong>日期</strong></td>
+                            <td style="width:15%;"><strong>酒店名称</strong></td>
+                            <td style="width:10%;"><strong>房价</strong></td>
+                            <td style="width:10%;"><strong>间数</strong></td>
+                            <td style="width:12.5%;"><strong>陪同床位</strong></td>
+                            <td style="width:12.5%;"><strong>陪同床价</strong></td>
+                            <td style="width:10%;"><strong>天数</strong></td>
+                            <td style="width:10%;"><strong>小计</strong></td>
+                            <td style="width:10%;"><strong>支付方式</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>4.15</td>
+                            <td>海悦酒店</td>
+                            <td>100</td>
+                            <td>5</td>
+                            <td>2</td>
+                            <td>50</td>
+                            <td>1</td>
+                            <td>550</td>
+                            <td>签单</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr>
+                            <td style="width:12%;background-color:#09F"><strong>住宿合计</strong></td>
+                            <td style="width:20%">10000</td>
+                            <td style="width:15%;background-color:#09F"><strong>其中导游付</strong></td>
+                            <td style="width:20%">3000</td>
+                            <td style="width:13%;background-color:#09F"><strong>签单合计</strong></td>
+                            <td style="width:20%">7000</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="layui-tab-item">
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr style="background-color:#09F">
+                            <td style="width:5%"><strong>午餐日期</strong></td>
+                            <td style="width:5%"><strong>餐厅名称</strong></td>
+                            <td style="width:7%"><strong>餐标</strong></td>
+                            <td style="width:7%"><strong>人数</strong></td>
+                            <td style="width:7%"><strong>次数</strong></td>
+                            <td style="width:7%"><strong>其他</strong></td>
+                            <td style="width:7%"><strong>小计</strong></td>
+                            <td style="width:5%"><strong>支付方式</strong></td>
+                            <td style="width:5%"><strong>晚餐日期</strong></td>
+                            <td style="width:5%"><strong>餐厅名称</strong></td>
+                            <td style="width:7%"><strong>餐标</strong></td>
+                            <td style="width:7%"><strong>人数</strong></td>
+                            <td style="width:3%"><strong>次数</strong></td>
+                            <td style="width:7%"><strong>其他</strong></td>
+                            <td style="width:7%"><strong>小计</strong></td>
+                            <td style="width:9%"><strong>支付方式</strong></td>
+                        </tr>
+                        <tr>
+                            <td>4.15</td>
+                            <td>海悦酒店</td>
+                            <td>300</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <td>50</td>
+                            <td>3000</td>
+                            <td>签单</td>
+                            <td>4.15</td>
+                            <td>海神酒店</td>
+                            <td>400</td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td>60</td>
+                            <td>4000</td>
+                            <td>付现</td>
+                        </tr>
+                    </table>
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr>
+                            <td style="width:12%;background-color:#09F"><strong>用餐合计</strong></td>
+                            <td style="width:20%">10000</td>
+                            <td style="width:15%;background-color:#09F"><strong>其中导游付</strong></td>
+                            <td style="width:20%">3000</td>
+                            <td style="width:13%;background-color:#09F"><strong>签单合计</strong></td>
+                            <td style="width:20%">7000</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="layui-tab-item">
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr style="background-color:#09F">
+                            <td style="width:20%"><strong>景点门票</strong></td>
+                            <td style="width:20%"><strong>单价</strong></td>
+                            <td style="width:20%"><strong>人数</strong></td>
+                            <td style="width:20%"><strong>小计</strong></td>
+                            <td style="width:20%"><strong>支付方式</strong></td>
+                        </tr>
+                        <tr>
+                            <td>五台山门票</td>
+                            <td>100</td>
+                            <td>10</td>
+                            <td>1000</td>
+                            <td>付现</td>
+                        </tr>
+                    </table>
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr>
+                            <td style="width:12%;background-color:#09F"><strong>门票合计</strong></td>
+                            <td style="width:20%">10000</td>
+                            <td style="width:15%;background-color:#09F"><strong>其中导游付</strong></td>
+                            <td style="width:20%">3000</td>
+                            <td style="width:13%;background-color:#09F"><strong>签单合计</strong></td>
+                            <td style="width:20%">7000</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="layui-tab-item">
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr style="background-color:#09F">
+                            <td style="width:10%"><strong>过路费</strong></td>
+                            <td style="width:10%"><strong>停车费</strong></td>
+                            <td style="width:10%"><strong>预付车费</strong></td>
+                            <td style="width:10%"><strong>合计</strong></td>
+                            <td style="width:20%"><strong>出团补助(元/天)</strong></td>
+                            <td style="width:10%"><strong>天数</strong></td>
+                            <td style="width:10%"><strong>导游数</strong></td>
+                            <td style="width:10%"><strong>合计</strong></td>
+                            <td style="width:10%"><strong>支付方式</strong></td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>50</td>
+                            <td>100</td>
+                            <td>170</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td>1</td>
+                            <td>850</td>
+                            <td>导游付</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="layui-tab-item">
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr>
+                            <td valign="top"><p>请列出项目及计算过程:</p>
+                                <p style="display:inline;">上厕所一个花了5快，一人买了一瓶营养快线，一瓶10快</p></td>
+                        </tr>
+                    </table>
+                    <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <tr>
+                            <td style="width:12%;background-color:#1E9FFF"><strong>导游付</strong></td>
+                            <td style="width:20%">400</td>
+                            <td style="width:15%;background-color:#1E9FFF"><strong>签单</strong></td>
+                            <td style="width:20%">300</td>
+                            <td style="width:13%;background-color:#1E9FFF"><strong>合计</strong></td>
+                            <td style="width:20%">700</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <textarea style="resize: none; height:100px; width:869px">
+ 交回的其他单据及内容(包括购物签单):
+</textarea>
+        <textarea style="resize: none; height:100px; width:869px">
+ 现收团款明细:
+</textarea>
+        <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
+            <tr>
+                <td style="width:10%;background-color:#09F"><strong>原借款</strong></td>
+                <td style="width:15%">100</td>
+                <td style="width:10%;background-color:#09F"><strong>外售团款</strong></td>
+                <td style="width:15%">200</td>
+                <td style="width:15%;background-color:#09F"><strong>导游现付合计</strong></td>
+                <td style="width:10%">5000</td>
+                <td style="width:15%;background-color:#09F"><strong>报/退款</strong></td>
+                <td style="width:10%">1000</td>
+            </tr>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
+            <tr>
+                <th style="width:10%;background-color:#09F">备注</th>
+                <th>导游以全票制报销，………………</th>
+            </tr>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
+            <tr>
+                <td style="width:10%;background-color:#09F"><strong>报账日期</strong></td>
+                <td style="width:30%"></td>
+                <td style="width:10%;background-color:#09F"><strong>导游签字</strong></td>
+                <td style="width:20%"></td>
+                <td style="width:10%;background-color:#09F"><strong>审核人批示</strong></td>
+                <td style="width:20%"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="/layui.js"></script>
+<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/jquery-3.2.1.js"></script>
+
+
+<script>
+
+    /**
+     * 为各个模块绑定信息
+     */
+    function selectReportdetailById() {
+        $.ajax({
+            url: "/reportdetail/selectReportdetailById",
+            data: {
+                "reportDetailId": dispatchId
+            },
+            dataType: "json",
+            type: "post",
+            success: function (ReponseResult) {
+
+            },
+            error: function (res) {
+                alert(res);
+            }
+        })
+    }
+
+    //点击查询按钮进入查看图片页面
+    //为修改模块添加弹出层
+    function alertViewPictures() {
+        layer.open({
+            type: 2,
+            title: '查看票据',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['700px', '500px'],
+            content: 'viewPictures.html'
+        });
+    }
+
+    getDispatchById();
+    function getDispatchById() {
+        var reportDetailId=$("input[name='${reportDetailId}']").val();
+        $.ajax({
+            url: "http://localhost:8888/dispatch/getDispatchById",
+            data: {"reportDetailId": reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                $("input[name='groupNumber']").val(result.data.groupNumber);
+            }
+        });
+    }
+
+</script>
+</html>

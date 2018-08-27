@@ -49,4 +49,11 @@ public interface DispatchService {
      * @return
      */
     Dispatch getDispatchByguideId(Integer guideId)throws Exception;
+
+    /**
+     * 根据调度id查询调度信息     陈庆武
+     * @param reportDetailId 调度id
+     * @return
+     */
+    Dispatch getDispatchById(Integer reportDetailId)throws Exception;
 }
