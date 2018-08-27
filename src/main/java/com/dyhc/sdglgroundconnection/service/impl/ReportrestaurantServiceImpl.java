@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ReportrestaurantMapper;
+import com.dyhc.sdglgroundconnection.pojo.Reportrestaurant;
 import com.dyhc.sdglgroundconnection.service.ReportrestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,20 @@ public class ReportrestaurantServiceImpl implements ReportrestaurantService {
 
     @Autowired
     private ReportrestaurantMapper reportrestaurantMapper;
+
+    /**
+     * 导游报账餐厅新增
+     * @param reportrestaurant
+     * @return
+     */
+    @Override
+    public Integer saveReportrestaurant(Reportrestaurant reportrestaurant) {
+        Integer number=0;
+        try {
+            number=reportrestaurantMapper.insert(reportrestaurant);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
 }

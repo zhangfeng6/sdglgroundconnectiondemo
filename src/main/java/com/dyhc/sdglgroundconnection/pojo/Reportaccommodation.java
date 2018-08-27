@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +16,8 @@ public class Reportaccommodation {
     @Id
     @Column(name = "reportAccommodationId")
     private int reportAccommodationId; // 导游报账住宿表编号
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "liveDate")
     private Date liveDate; // 入住日期
     @Column(name = "hotelName")
@@ -39,8 +42,10 @@ public class Reportaccommodation {
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @Column(name = "upDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date upDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private String value1;
