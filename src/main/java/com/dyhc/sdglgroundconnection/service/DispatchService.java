@@ -49,4 +49,13 @@ public interface DispatchService {
      * @return
      */
     Dispatch getDispatchByguideId(Integer guideId)throws Exception;
+    /**
+     * 分页查看调用信息         刘跃云
+     * @param pageNo
+     * @param pageSize
+     * @param guideName
+     * @param groundConnectionNumber
+     * @return
+     */
+    PageInfo<Dispatch> ListDispatchLike(Integer pageNo, Integer pageSize, String guideName, String groundConnectionNumber);
 }

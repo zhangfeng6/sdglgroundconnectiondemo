@@ -31,4 +31,11 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     Dispatch getDispatchByguideId(Integer guideId) throws Exception;
+    /**
+     * 分页查看调度信息                 刘跃云
+     * @param guideName
+     * @param groundConnectionNumber
+     * @return
+     */
+    List<Dispatch> getDispatchLike(@Param("guideName") String guideName, @Param("groundConnectionNumber") String groundConnectionNumber);
 }

@@ -20,4 +20,14 @@
     <select id="getDispatchByguideId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         SELECT * FROM dispatch WHERE guideId=#{guideId} AND state=2
     </select>
+
+    <select id="getDispatchLike" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+        SELECT d.*,s.theUserName,g.guideName FROM Dispatch d ,staff s ,guide g WHERE d.creater=s.staffId AND d.guideId=g.guideId
+        <if test="guideName !=null and guideName !=''">
+            and g.guideName like concat('%',#{guideName},'%')
+        </if>
+        <if test="groundConnectionNumber !=null and groundConnectionNumber !=''">
+            and d.groundConnectionNumber like concat('%',#{groundConnectionNumber},'%')
+        </if>
+    </select>
 </mapper>

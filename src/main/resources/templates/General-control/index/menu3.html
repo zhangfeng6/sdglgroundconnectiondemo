@@ -16,7 +16,7 @@
 <body>
     <div style="height:30px;font-size: 16px;">
         <input type="hidden" name="year" th:value="${year}">
-        <span style="margin-left: 90px;line-height: 30px;">月份:</span><span style="width:100px;height:100px;margin-left: 10px;line-height: 30px;"><a href="javascript:void(0)" name="month1" th:text="${month}"></a></span><span style="width:100px;margin-left: 45px;line-height: 30px;"><a href="javascript:void(0)" name="month2"  th:text="${month}+1"></a></span>
+        <span style="margin-left: 90px;line-height: 30px;">月份:</span><span style="width:100px;height:100px;margin-left: 10px;line-height: 30px;"><a href="javascript:void(0)" name="month1" onclick="clickmonth(this)" th:text="${month}"></a></span><span style="width:100px;margin-left: 45px;line-height: 30px;"><a href="javascript:void(0)" name="month2" onclick="clickmonth(this)"  th:text="${month}+1"></a></span>
         <span style="margin-left: 20px;">(√：已占用&nbsp;&nbsp;&nbsp;×：已请假&nbsp;&nbsp;&nbsp;空：无安排)</span>
     </div>
         <table border="2px" bordercolor="#00BBFF" cellspacing="0" cellpadding="2" style="border-collapse:collapse; width:100%">
@@ -57,40 +57,7 @@
             </tr>
         </thead>
         <tbody>
-        <tr style="height: 40px;" name="demo">
-            <td>王三</td>
-            <td>√</td>
-            <td></td>
-            <td>√</td>
-            <td></td>
-            <td>√</td>
-            <td></td>
-            <td>√</td>
-            <td></td>
-            <td>√</td>
-            <td></td>
-            <td>√</td>
-            <td></td>
-            <td>×</td>
-            <td></td>
-            <td>×</td>
-            <td>√</td>
-            <td>×</td>
-            <td>√</td>
-            <td></td>
-            <td>×</td>
-            <td>√</td>
-            <td>√</td>
-            <td>×</td>
-            <td></td>
-            <td>×</td>
-            <td>√</td>
-            <td>×</td>
-            <td>√</td>
-            <td>√</td>
-            <td>×</td>
-            <td>√</td>
-        </tr>
+
         </tbody>
     </table>
     <ul id="laypage" style="text-align: center"></ul>
@@ -101,15 +68,47 @@
     var limitcount = 2; // 每页总记录数
     var curnum = 1;  // 当前页码
     $(function () {
-
-        /*var items=$("tr[name=demo]").children();
-        $(items).eq(8).html("钱");*/
+        var year=$("input[name=year]").val();
+        var month=$("a[name=month1]").text();
+        addhead(year,month);
+        loadData(1,year,month);
     });
 
-    loadData();
-    function loadData() {
-        var year=$()
+    /**
+     * 根据年份和月份 判断有多少天 修改thead的列数
+     * @param year
+     * @param month
+     */
+    function addhead(year,month) {
+        var days=mGetDate(year,month);
+        var content="<tr style='height: 40px;'>" +
+            "<td>名字\日期</td>";
+        for(var i=0;i<days;i++){
+            content+="<td>"+(i+1)+"</td>";
+        }
+        content+="</tr>";
+        $("thead").html(content);
+    }
+
+    /**
+     * 点击月份进行查询当月的导游请假情况
+     * @param obj
+     */
+    function clickmonth(obj) {
+
+        var year=$("input[name=year]").val();
+        var month=$(obj).html();
+        addhead(year,month);
+        loadData(1,year,month);
+    }
+    function loadData(index,year,month) {
+        if(index==1){
+            curnum=1;
+        }
+        var days=mGetDate(year,month);
+        var guis=Array();
         var str = "";
+        async:false,
         $.ajax({
             url: "/Guide/guideShowAll",
             data: {pageNo: curnum, pageSize: limitcount,guideName:''},
@@ -131,20 +130,55 @@
                                 curnum = obj.curr; // 当前页码
                                 limitcount = obj.limit; // 每页记录数
                                 // 查询新数据
-                                loadData();
+                                loadData(0,year,month);
                             }
                         }
                     })
                 })
                 $(e.data).each(function (i, result) {
-                    str += "<tr><td>" + result.guideName + "</td></tr>";
+                    guis.push(result.guideId);
+                    str+="<tr style='height: 40px;' name='tr"+result.guideId+"'><td>"+result.guideName+"</td>";
+                    for(var i=0;i<days;i++){
+                        str+="<td></td>";
+                    }
+                    str+="</tr>";
                 })
                 $('tbody').html(str);
+                    $.ajax({
+                        url:"/Guide/listguidescheduleBygid",
+                        data:{year:year,month:month},
+                        dataType:"json",
+                        type:"get",
+                        success:function (data) {
+                            var type="";
+                            $(data.data).each(function (q,w) {
+                                for(var i=0;i<guis.length;i++){
+                                    if(w.guideId==guis[i]){
+                                        var  items=$("tr[name=tr"+guis[i]+"]").children();
+                                        if(w.arrangetype==1){
+                                            type="×";
+                                        }else if(w.arrangetype==2){
+                                            type="√";
+                                        }
+                                        $(items).eq(w.arrangeday).html(type);
+                                    }
+                                }
+
+                            });
+                        },
+                        error:function (err) {
+                            alert(err);
+                        }
+                    });
             },
             error: function (res) {
                 alert(res);
             }
         })
+    }
+    function mGetDate(year, month){
+        var d = new Date(year, month, 0);
+        return d.getDate();
     }
 </script>
 </body>

@@ -76,5 +76,5 @@ public interface GuideService {
      * @return
      * @throws Exception
      */
-    List<Guideschedule>listguidescheduleBygid(Integer guideId, String year, String month)throws Exception;
+    List<Guideschedule>listguidescheduleBygid(String year, String month)throws Exception;
 }

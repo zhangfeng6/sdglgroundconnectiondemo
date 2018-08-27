@@ -5,9 +5,6 @@
     <select id="listguideschedule" resultType="com.dyhc.sdglgroundconnection.pojo.Guideschedule">
         SELECT * FROM `guideschedule`
         <where>
-            <if test="guideId != null and guideId != 0">
-                AND `guideId`=#{guideId}
-            </if>
             <if test="year != null and year != ''">
                  AND `arrangeyear`=#{year}
             </if>

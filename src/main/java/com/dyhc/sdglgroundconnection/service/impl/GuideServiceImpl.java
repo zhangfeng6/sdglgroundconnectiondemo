@@ -121,8 +121,8 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
-    public List<Guideschedule> listguidescheduleBygid(Integer guideId, String year, String month) throws Exception {
-        return guidescheduleMapper.listguideschedule(guideId, year, month);
+    public List<Guideschedule> listguidescheduleBygid(String year, String month) throws Exception {
+        return guidescheduleMapper.listguideschedule(year, month);
     }
 
     @Override

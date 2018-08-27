@@ -150,4 +150,20 @@ public class DispatchController {
             return day2-day1;
         }
     }
+
+    @RequestMapping("/listDispatchlike.html")
+    public ReponseResult listDispatchlike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("guideName")String guideName, @RequestParam("groundConnectionNumber")String groundConnectionNumber){
+        try{
+            System.out.println("..."+groundConnectionNumber+"...");
+            PageInfo<Dispatch> pageInfoTravel=dispatchService.ListDispatchLike(pageNo,pageSize,guideName,groundConnectionNumber);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取调度信息成功！");
+            logger.info(" method:TravelLike  分页获取调度信息成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:TravelLike  获取调度信息数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }
