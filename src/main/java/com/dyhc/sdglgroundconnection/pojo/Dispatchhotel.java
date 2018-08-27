@@ -41,6 +41,17 @@ public class Dispatchhotel {
     private int weight;  //权重
     private String value2;
     private String value3;
+    //酒店表
+    @Transient
+    private Hotel hotel;
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 
     @Id
     @Column(name = "dispatchHotelId")

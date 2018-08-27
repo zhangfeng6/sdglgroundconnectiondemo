@@ -20,4 +20,10 @@
     <select id="getDispatchByguideId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         SELECT * FROM dispatch WHERE guideId=#{guideId} AND state=2
     </select>
+
+    <!--查询调度信息：贾晓亮-->
+    <select id="dispatchSelectAll" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+         SELECT * FROM dispatch WHERE dispatchId=#{dispatchId}
+    </select>
+
 </mapper>

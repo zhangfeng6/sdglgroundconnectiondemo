@@ -14,14 +14,13 @@ import java.util.List;
  * 组团社业务接口
  **/
 public interface TravelService {
+
     /**
-<<<<<<< HEAD
      * 赵伟伟
      * 查询全部组团社
      * @return
      */
     List<Travel> selectTravel();
-
     /**
      * 赵伟伟
      * 查询组团社

@@ -44,5 +44,4 @@ public interface TravelMapper extends CommonMapper<Travel> {
      */
 
     Integer getupdlala(Travel travel);
-
 }

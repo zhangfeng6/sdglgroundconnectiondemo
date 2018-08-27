@@ -49,4 +49,11 @@ public interface DispatchService {
      * @return
      */
     Dispatch getDispatchByguideId(Integer guideId)throws Exception;
+
+    /**
+     * 调度表信息:贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    Dispatch dispatchSelectAll(Integer dispatchId);
 }

@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
+import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -22,6 +23,9 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Autowired
     private DispatchMapper dispatchMapper;
+
+    @Autowired
+    private DispatchhotelMapper dispatchhotelMapper;
 
     @Autowired
     private DictionariesMapper dictionariesMapper;
@@ -97,6 +101,23 @@ public class DispatchServiceImpl implements DispatchService {
             list=carrentalMapper.listcarrentalByvalueId(valueId);
         }
         return list;
+    }
+
+    /**
+     * 调度表的信息：贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    public  Dispatch dispatchSelectAll(Integer dispatchId){
+        Dispatch dispatch=null;
+        try {
+             dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
+             dispatch.setTravel(travelMappere.selectTravelById(dispatch.getGroupNumber()));
+             dispatch.setDispatchhotel(dispatchhotelMapper.dispatchhotelSelectAll(dispatch.getDispatchId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dispatch;
     }
 
     @Override

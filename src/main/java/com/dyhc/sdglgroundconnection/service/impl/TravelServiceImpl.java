@@ -25,6 +25,11 @@ public class TravelServiceImpl implements TravelService {
         return travelMapper.selectAll();
     }
 
+    /**
+     * 查询组团社方法
+     * @param travelId
+     * @return
+     */
     @Override
     public Travel selectTravelById(Integer travelId) {
         return travelMapper.selectTravelById(travelId);

@@ -31,4 +31,10 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     Dispatch getDispatchByguideId(Integer guideId) throws Exception;
+    /**
+     *查询计调的全部信息：贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    Dispatch dispatchSelectAll(Integer dispatchId);
 }
