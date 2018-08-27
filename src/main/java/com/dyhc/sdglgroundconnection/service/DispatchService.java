@@ -58,4 +58,11 @@ public interface DispatchService {
      * @return
      */
     PageInfo<Dispatch> ListDispatchLike(Integer pageNo, Integer pageSize, String guideName, String groundConnectionNumber);
+
+    /**
+     * 根据对象属性 进行修改   张枫
+     * @return
+     * @throws Exception
+     */
+    int updatestateById(Integer did, Integer gid, String travelStartTime, String travelEndTime)throws Exception;
 }

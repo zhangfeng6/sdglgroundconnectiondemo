@@ -10,6 +10,7 @@
         table tr td{width: 500px;text-align: center}
         table tr td{
             font-size: 16px;
+            width: 50px;
         }
     </style>
 </head>
@@ -65,7 +66,7 @@
 <script src="/layui.js"></script>
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
-    var limitcount = 2; // 每页总记录数
+    var limitcount = 5; // 每页总记录数
     var curnum = 1;  // 当前页码
     $(function () {
         var year=$("input[name=year]").val();
@@ -122,7 +123,7 @@
                         elem: 'laypage'
                         , count: e.count
                         , curr: curnum
-                        , limit: 2
+                        , limit: 5
                         , layout: ['prev', 'page', 'next', 'skip', 'count']
                         , jump: function (obj, first) {
                             if (!first) {

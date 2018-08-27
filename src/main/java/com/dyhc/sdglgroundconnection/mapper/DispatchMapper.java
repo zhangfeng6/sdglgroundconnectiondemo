@@ -38,4 +38,11 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     List<Dispatch> getDispatchLike(@Param("guideName") String guideName, @Param("groundConnectionNumber") String groundConnectionNumber);
+
+    /**
+     * 根据主键id修改调度表信息
+     * @param did
+     * @return
+     */
+    int updateDispatchstate(@Param("did")Integer did)throws Exception;
 }
