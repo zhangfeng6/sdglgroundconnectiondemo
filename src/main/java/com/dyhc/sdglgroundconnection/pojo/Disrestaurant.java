@@ -23,8 +23,8 @@ public class Disrestaurant {
     private Double costPrice; // 成本价
     @Column(name = "quotePrice")
     private Double quotePrice; // 报价
-    @Column(name = "numDays")
-    private Integer numDays; // 天数
+    @Column(name = "tourismdate")
+    private Date tourismdate; // 天数
     @Column(name = "dinDate")
     private String dinDate; // 用餐时间（早、中、晚）
     private Integer status; // 是否删除（1代表已删除，0代表未删除）
@@ -38,7 +38,7 @@ public class Disrestaurant {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
-    private String value1;
+    private int weight;  //权重
     private String value2;
     private String value3;
 
@@ -93,13 +93,13 @@ public class Disrestaurant {
     }
 
     @Basic
-    @Column(name = "numDays")
-    public Integer getNumDays() {
-        return numDays;
+    @Column(name = "tourismdate")
+    public Date getTourismdate() {
+        return tourismdate;
     }
 
-    public void setNumDays(Integer numDays) {
-        this.numDays = numDays;
+    public void setTourismdate(Date tourismdate) {
+        this.tourismdate = tourismdate;
     }
 
     @Basic
@@ -162,15 +162,7 @@ public class Disrestaurant {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
-    }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
-    }
 
     @Basic
     @Column(name = "value2")
@@ -202,14 +194,14 @@ public class Disrestaurant {
                 Objects.equals(offerId, that.offerId) &&
                 Objects.equals(costPrice, that.costPrice) &&
                 Objects.equals(quotePrice, that.quotePrice) &&
-                Objects.equals(numDays, that.numDays) &&
+                Objects.equals(tourismdate, that.tourismdate) &&
                 Objects.equals(dinDate, that.dinDate) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(createBy, that.createBy) &&
                 Objects.equals(updateBy, that.updateBy) &&
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
-                Objects.equals(value1, that.value1) &&
+                Objects.equals(weight, that.weight) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -217,6 +209,6 @@ public class Disrestaurant {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, numDays, dinDate, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, tourismdate, dinDate, status, createBy, updateBy, upDate, createDate, weight, value2, value3);
     }
 }

@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.OfferscenicMapper;
+import com.dyhc.sdglgroundconnection.pojo.Offerscenic;
 import com.dyhc.sdglgroundconnection.service.OfferscenicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class OfferscenicServiceImpl implements OfferscenicService {
 
     @Autowired
     private OfferscenicMapper offerscenicMapper;
+
+    @Override
+    public int insertOfferscenic(Offerscenic offerscenic) {
+        return offerscenicMapper.insertOfferscenic(offerscenic);
+    }
 }

@@ -1,9 +1,12 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Guide;
+import com.dyhc.sdglgroundconnection.pojo.Guideschedule;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -56,4 +59,22 @@ public interface GuideService {
      * @return
      */
     Guide login(String username,String password)throws Exception;
+
+
+    /**
+     * 微信小程序之导游修改密码
+     * @param guide
+     * @return
+     */
+    Integer updateGuideByPassword(Guide guide)throws Exception;
+
+    /**
+     * 根据条件获取导游安排信息
+     * @param guideId
+     * @param year
+     * @param month
+     * @return
+     * @throws Exception
+     */
+    List<Guideschedule>listguidescheduleBygid(Integer guideId, String year, String month)throws Exception;
 }

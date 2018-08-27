@@ -24,10 +24,10 @@ public class Dispatchhotel {
     private Double offer; // 报价
     private Date date; // 日期
     private String payment; // 付款方式
-    @Column(name = "companyBedNum")
-    private Integer companyBedNum; // 付款方式
-    @Column(name = "companyBedoffer")
-    private Double companyBedoffer; // 司陪床价
+    @Column(name = "roomNum")
+    private Integer roomNum; // 房间数量
+    @Column(name = "valueId")
+    private Integer valueId; // 司陪床价
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
     private Integer creater; // 创建人 （外键，与人员表关联）
@@ -38,7 +38,7 @@ public class Dispatchhotel {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建时间
-    private String value1;
+    private int weight;  //权重
     private String value2;
     private String value3;
 
@@ -113,23 +113,23 @@ public class Dispatchhotel {
     }
 
     @Basic
-    @Column(name = "companyBedNum")
-    public Integer getCompanyBedNum() {
-        return companyBedNum;
+    @Column(name = "roomNum")
+    public Integer getRoomNum() {
+        return roomNum;
     }
 
-    public void setCompanyBedNum(Integer companyBedNum) {
-        this.companyBedNum = companyBedNum;
+    public void setRoomNum(Integer roomNum) {
+        this.roomNum = roomNum;
     }
 
     @Basic
-    @Column(name = "companyBedoffer")
-    public Double getCompanyBedoffer() {
-        return companyBedoffer;
+    @Column(name = "valueId")
+    public Integer getValueId() {
+        return valueId;
     }
 
-    public void setCompanyBedoffer(Double companyBedoffer) {
-        this.companyBedoffer = companyBedoffer;
+    public void setValueId(Integer valueId) {
+        this.valueId = valueId;
     }
 
     @Basic
@@ -182,14 +182,12 @@ public class Dispatchhotel {
         this.creationDate = creationDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     @Basic
@@ -224,14 +222,14 @@ public class Dispatchhotel {
                 Objects.equals(offer, that.offer) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(payment, that.payment) &&
-                Objects.equals(companyBedNum, that.companyBedNum) &&
-                Objects.equals(companyBedoffer, that.companyBedoffer) &&
+                Objects.equals(roomNum, that.roomNum) &&
+                Objects.equals(valueId, that.valueId) &&
                 Objects.equals(whetherDel, that.whetherDel) &&
                 Objects.equals(creater, that.creater) &&
                 Objects.equals(modifier, that.modifier) &&
                 Objects.equals(modifiedData, that.modifiedData) &&
                 Objects.equals(creationDate, that.creationDate) &&
-                Objects.equals(value1, that.value1) &&
+                Objects.equals(weight, that.weight) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -239,6 +237,6 @@ public class Dispatchhotel {
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, companyBedNum, companyBedoffer, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, weight, value2, value3);
     }
 }

@@ -32,4 +32,9 @@
     <update id="updateRestaurantById">
         update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone},picturePath=#{picturePath} where restaurantId=#{restaurantId}
     </update>
+
+    <!--根据valueid获取饭店信息-->
+    <select id="listrestaurantByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Restaurant">
+SELECT r.*,m.`costprice` AS 'gettypeprice' FROM `restaurant` r,`mealtype` m WHERE m.`restaurantId`=r.`restaurantId` AND m.`valueId`=#{valueId}
+    </select>
 </mapper>

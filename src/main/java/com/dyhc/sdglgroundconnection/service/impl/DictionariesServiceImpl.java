@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.DictionariesMapper;
 import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
+import com.dyhc.sdglgroundconnection.pojo.VehicleType;
 import com.dyhc.sdglgroundconnection.service.DictionariesService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,20 @@ public class DictionariesServiceImpl implements DictionariesService {
     }
 
     @Override
+    public List<VehicleType> listVehicletype() {
+        return dictionariesMapper.listVehicletype();
+    }
+
+    @Override
+    public Dictionaries selectByDictionariesId(int dictionariesId) {
+        return dictionariesMapper.selectByDictionariesId(dictionariesId);
+    }
     public PageInfo<Dictionaries> listDictionaries1()throws Exception {
         return new PageInfo<Dictionaries>(dictionariesMapper.listDictionaries1());
+    }
+
+    @Override
+    public List<Dictionaries> listhoteltype() throws Exception {
+        return dictionariesMapper.listdictionarieslBycode("THEROOM");
     }
 }

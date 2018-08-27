@@ -39,7 +39,7 @@ public class Traffic {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate;//创建时间
-    private String value1;
+    private Integer dispatchId;
     private String value2;
     private String value3;
 
@@ -174,13 +174,13 @@ public class Traffic {
     }
 
     @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    @Column(name = "dispatchId")
+    public Integer getDispatchId() {
+        return dispatchId;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setDispatchId(Integer dispatchId) {
+        this.dispatchId = dispatchId;
     }
 
     @Basic
@@ -221,7 +221,7 @@ public class Traffic {
                 Objects.equals(updateBy, traffic.updateBy) &&
                 Objects.equals(updateDate, traffic.updateDate) &&
                 Objects.equals(createDate, traffic.createDate) &&
-                Objects.equals(value1, traffic.value1) &&
+                Objects.equals(dispatchId, traffic.dispatchId) &&
                 Objects.equals(value2, traffic.value2) &&
                 Objects.equals(value3, traffic.value3);
     }
@@ -229,6 +229,6 @@ public class Traffic {
     @Override
     public int hashCode() {
 
-        return Objects.hash(trafficId, typeCode, valueId, departureTime, arrivalTime, trainNumber, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
+        return Objects.hash(trafficId, typeCode, valueId, departureTime, arrivalTime, trainNumber, costprice, offer, whetherDel, createBy, updateBy, updateDate, createDate, dispatchId, value2, value3);
     }
 }

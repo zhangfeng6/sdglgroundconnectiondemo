@@ -4,6 +4,7 @@ import com.dyhc.sdglgroundconnection.mapper.CommonMapper;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -65,4 +66,12 @@ public interface ScenicspotService {
      * @throws Exception
      */
     List<Scenicspot> listScenicspotAll() throws Exception;
+
+
+    /**
+     * 按编号查询景点
+     * @param scenicSpotId
+     * @return
+     */
+    Scenicspot selectByScenicSpotId(Integer scenicSpotId);
 }

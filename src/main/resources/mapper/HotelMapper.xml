@@ -3,16 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.HotelMapper">
 
+
+    <select id="selectByHotelId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+        SELECT  * from hotel where whetherDel!=1 and hotelId=#{hotelId}
+    </select>
     <!--查询酒店信息-->
     <select id="HotelShowAll" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
       select  * from  Hotel where 1=1
       <if test="hotelName!=null and hotelName!=''">
         and hotelName like  concat('%',#{hotelName},'%')
       </if>
-      <if test="costpriceOne!=null and costpriceOne!='' and costpriceTwo!=null and costpriceTwo!=''">
-        and costprice  BETWEEN  #{costpriceOne} AND #{costpriceTwo}
-      </if>
-        and whetherDel=0
+        and whetherDel != 1
     </select>
      <!--删除酒店信息:贾晓亮-->
     <update id="removeHoter">
@@ -25,5 +26,9 @@
     <!--酒店修改赋值-->
     <select id="fuzhiHotel"  resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
            select  * from  hotel WHERE hotelId=#{hotelId}
+    </select>
+    
+    <select id="listhotelByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+       SELECT h.*,r.`costprice` AS 'gettypeprice' FROM `hotel` h,`roomtype` r WHERE r.`hotelId`=h.`hotelId` AND r.`valueId`=#{valueId}
     </select>
 </mapper>

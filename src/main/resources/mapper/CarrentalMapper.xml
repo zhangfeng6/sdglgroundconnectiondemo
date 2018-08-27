@@ -27,6 +27,8 @@
         where carRentalName=#{carRentalName}
     </select>
 
-
-
+    <!--根据valueId进行查询-->
+    <select id="listcarrentalByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Carrental">
+SELECT c.*,v.`costprice` AS 'gettypeprice' FROM `carrental` c,`vehicletype` v WHERE v.`carRentalId`=c.`carRentalId` AND v.`valueId`=#{valueId}
+    </select>
 </mapper>

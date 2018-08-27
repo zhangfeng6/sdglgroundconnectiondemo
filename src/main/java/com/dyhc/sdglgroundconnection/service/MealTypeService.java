@@ -55,4 +55,11 @@ public interface MealTypeService {
      * @return
      */
     MealType selectById(int typeId);
+
+    /**
+     * 赵伟伟
+     * 查询所有类型
+     * @return
+     */
+    List<Dictionaries> selectMealType();
 }

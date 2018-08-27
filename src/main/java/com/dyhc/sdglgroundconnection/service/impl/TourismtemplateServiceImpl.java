@@ -14,6 +14,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.*;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class TourismtemplateServiceImpl  implements TourismtemplateService {
@@ -129,4 +131,36 @@ public class TourismtemplateServiceImpl  implements TourismtemplateService {
         return map;
     }
 
+    /**
+     * 赵伟伟
+     * 查询全部模板
+     * @return
+     */
+    @Override
+    public List<Tourismtemplate> selectTourismtemplate() {
+        return tourismtemplateMapper.selectAll();
+    }
+
+    /**
+     * 赵伟伟
+     * 添加线路
+     * @param tourismtemplate
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int addTourismtemplate(Tourismtemplate tourismtemplate) throws Exception {
+        return tourismtemplateMapper.addTourismtemplate(tourismtemplate);
+    }
+
+    /**
+     * 按名称查询
+     * @param tourismtemplateName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Tourismtemplate selectByName(String tourismtemplateName) throws Exception {
+        return tourismtemplateMapper.selectByName(tourismtemplateName);
+    }
 }

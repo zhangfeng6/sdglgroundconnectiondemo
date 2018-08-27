@@ -31,7 +31,7 @@ public class Disshopp {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
-    private String value1;
+    private int weight;  //权重
     private String value2;
     private String value3;
 
@@ -125,15 +125,7 @@ public class Disshopp {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
-    }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
-    }
 
     @Basic
     @Column(name = "value2")
@@ -169,7 +161,7 @@ public class Disshopp {
                 Objects.equals(updateBy, disshopp.updateBy) &&
                 Objects.equals(upDate, disshopp.upDate) &&
                 Objects.equals(createDate, disshopp.createDate) &&
-                Objects.equals(value1, disshopp.value1) &&
+                Objects.equals(weight, disshopp.weight) &&
                 Objects.equals(value2, disshopp.value2) &&
                 Objects.equals(value3, disshopp.value3);
     }
@@ -177,6 +169,6 @@ public class Disshopp {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disShoppId, scenicSpotId, offerId, date, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disShoppId, scenicSpotId, offerId, date, status, createBy, updateBy, upDate, createDate, weight, value2, value3);
     }
 }

@@ -46,16 +46,6 @@
      */
     function saveRommType(){
        var RoomType=$("#jxl").serialize();
-       var typeName=$("input[name='typeName']").val();
-       var costprice=$("input[name='costprice']").val();
-       var offer=$("input[name='offer']").val();
-       if (typeName==""||typeName==null||typeName==undefined){
-                return;
-       } else if(costprice==""||costprice==null||costprice==undefined){
-           return;
-       }else if(offer==""||offer==null||offer==undefined){
-           return;
-       }else{
       $.ajax({
           url:"/Hotel/saveRoomType",
           data:RoomType,
@@ -73,7 +63,6 @@
            alert("酒店房间新增失败！");
           }
       })
-    }
     }
     //Demo
     layui.use(['form'], function() {

@@ -40,4 +40,12 @@ public interface RestaurantMapper extends CommonMapper<Restaurant>{
      * @return
      */
     int updateRestaurantById(Restaurant restaurant);
+
+    /**
+     * 根据valueId获取饭店信息
+     * @param valueId
+     * @return
+     * @throws Exception
+     */
+    List<Restaurant> listrestaurantByvalueId(@Param("valueId")Integer valueId)throws Exception;
 }

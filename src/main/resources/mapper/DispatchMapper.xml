@@ -3,4 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.DispatchMapper">
 
+    <!--根据条件获取调度信息-->
+    <select id="listdispatch" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+        SELECT d.*,g.`guideName` AS 'guideName' FROM `dispatch` d,`guide` g WHERE d.`guideId`=g.`guideId`
+        <if test="djsth != null and djsth != '' ">
+            AND d.`groundConnectionNumber` LIKE CONCAT('%',#{djsth},'%')
+        </if>
+        <if test="dyname != null and dyname != '' ">
+            AND g.`guideName` LIKE CONCAT('%',#{dyname},'%')
+        </if>
+        <if test="state != null and state != 0 ">
+            AND d.`state`=#{state}
+        </if>
+    </select>
+    
+    <select id="getDispatchByguideId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+        SELECT * FROM dispatch WHERE guideId=#{guideId} AND state=2
+    </select>
 </mapper>

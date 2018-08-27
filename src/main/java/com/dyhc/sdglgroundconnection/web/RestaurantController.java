@@ -103,7 +103,6 @@ public class RestaurantController {
                 restaurant.setWhetherDel(0);
                 i = restaurantService.insertRestaurant(restaurant);
             }
-
             ReponseResult<Object> data = ReponseResult.ok("保存成功！");
             logger.info(" method:insertRestaurant  保存饭店成功！");
             return data;

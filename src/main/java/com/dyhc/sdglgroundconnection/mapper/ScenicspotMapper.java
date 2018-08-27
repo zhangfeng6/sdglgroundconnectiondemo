@@ -43,7 +43,13 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      */
     void deleteScenicspotById(@Param("scenicSpotId") Integer scenicSpotId);
 
-    
+
+    /**
+     * 按编号查询景点
+     * @param scenicSpotId
+     * @return
+     */
+    Scenicspot selectByScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
 
 
 }

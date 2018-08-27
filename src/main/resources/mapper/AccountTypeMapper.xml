@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.AccountTypeMapper">
-    <!--删除账户类型-->
+      <!--删除账户类型-->
      <delete id="removeAccountType">
           delete  from  accounttype where  accountTypeId=#{accountTypeId}
      </delete>
 
     <!--查询账户类型信息-->
     <select id="listAccountType"  resultType="com.dyhc.sdglgroundconnection.pojo.AccountType">
-SELECT a.accountTypeId,a.bank,a.accountNum,a.accountName,a.`status`,(SELECT s.theUserName FROM staff as s WHERE s.`staffId`=a.createBy )
-as  founder, (SELECT s.staffname FROM staff as s WHERE s.`staffId`=a.updateBy ) as  modifier,a.createDate FROM accounttype as a where 1=1
-<if test="accountNum!=null and accountNum!=''">
-  and accountNum like concat('%',#{accountNum},'%')
-</if>
+        SELECT a.accountTypeId,a.bank,a.accountNum,a.accountName,a.`status`,(SELECT s.theUserName FROM staff as s WHERE s.`staffId`=a.createBy )
+        as  founder, (SELECT s.staffname FROM staff as s WHERE s.`staffId`=a.updateBy ) as  modifier,a.createDate FROM accounttype as a where 1=1
+      <if test="accountNum!=null and accountNum!=''">
+        and accountNum like concat('%',#{accountNum},'%')
+      </if>
     </select>
 
-    <!--贾晓亮修改账户类型-->
+   <!--贾晓亮修改账户类型-->
     <update id="updateAccountType">
         UPDATE accounttype set bank=#{bank},accountNum=#{accountNum},accountName=#{accountName},status=#{status},
         createBy=#{createBy},updateBy=#{updateBy},`upDate`=#{upDate} WHERE accountTypeId=#{accountTypeId}

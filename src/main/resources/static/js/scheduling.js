@@ -12,17 +12,17 @@ function qiehuan(dd) {
 
 function xianlu(obj) {
     var text = $(obj).html();
+    var name=$(obj).attr("name");
+    var index=name.substring(1,2);
     if (text == "自行填写") {
         $(obj).parent().prev().html("<input type='text' class='layui-input'>");
         $(obj).html("选择模板");
     } else {
-        $(obj).parent().prev().html("<select name='city' lay-verify='required' lay-search>" +
-            "<option value=''></option>" +
-            "<option value='0'>哈红祖</option>" +
-            "<option value='1'>无敌组</option>" +
-            "<option value='2'>纪检组</option>" +
+        $(obj).parent().prev().html("<select name='d"+index+"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +
+
             "</select>");
         $(obj).html("自行填写");
+        gerresource();
     }
 
     layui.use(['form', 'layedit', 'laydate', 'element'], function () {
@@ -44,153 +44,117 @@ function shanchu(aa) {
 }
 
 function addss() {
-    var a = "<div style='margin-bottom: 30px;width: 800px'><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
-        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:700px ;' />" +
+    var fantype="fantype";
+    var leng=$("div[name=xianlu]");
+    var index=leng.length+1;
+    var xlhtml=$("select[name=d1template]").html();
+    var jiuhtml=$("select[name=d1hoteltype]").html();
+    var jdhtml=$("select[name=d1scenicspot1]").html();
+    var gwdhtml=$("select[name=dlshopping]").html();
+    var fanhtml=$("select[name=d1wucan]").html();
+    var a = "<div style='margin-bottom: 30px;width: 1090px' name='xianlu' ><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
+        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
         "<div id='content'>" +
         "<form class='layui-form layui-form-pane' action=''>" +
-        "<table border='0'  cellspacing='0' cellpadding='0' style='width:765px'>" +
+        "<table border='0'  cellspacing='0' cellpadding='0' >" +
         "<tr>" +
         "	<td><label class='layui-form-label'>线路</label></td>" +
         "	<td>" +
-        "	<select name='city' lay-verify='required' lay-search>" +
-        "		<option value=''></option>" +
-        "	<option value='0'>哈红祖</option>" +
-        "	<option value='1'>无敌组</option>" +
-        "	<option value='2'>哈皮组</option>" +
-        "	<option value='3'>66组</option>" +
-        "	<option value='4'>纪检组</option>" +
-        "	</select>" +
+        "	<select name='d\"+index+\"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +
+        ""+xlhtml+"</select>" +
         "	</td>" +
-        "	<td colspan='2'>&nbsp;<button type='button' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick='xianlu(this)'>自行填写</button></td>" +
-        "	<td colspan='2'>&nbsp;<button type='button' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px'>保存模板</button></td>" +
+        "	<td colspan='2'>&nbsp;<button type='button' name='d"+index+"qiehuan' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick='xianlu(this)'>自行填写</button></td>" +
         "	</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>日期</label></td>" +
         "<td>" +
-        "<input type='text' class='layui-input'>" +
+        "<input type='text' name='d"+index+"data' class='layui-input'>" +
         "</td>" +
         "</tr>" +
         "	<tr>" +
         "	<td><label class='layui-form-label'>酒店</label></td>" +
         "	<td>" +
-        "	<select name='city' lay-verify='required'>" +
-        "	<option value=''></option>" +
-        "	<option value='0'>哈红祖</option>" +
-        "	<option value='1'>无敌组</option>" +
-        "	<option value='2'>哈皮组</option>" +
-        "<option value='3'>66组</option>" +
-        "<option value='4'>纪检组</option>" +
-        "</select>" +
+        "	<select name='d"+index+"hoteltype' style=\"height: 35px;width:180px;\" onchange=\"typechange(this,'hoteltype')\" lay-ignore>" +
+        ""+jiuhtml+"</select>" +
         "</td>" +
         "<td>" +
-        "<select name='city' lay-verify='required'>" +
-        "	<option value=''  selected='selected'>请选择酒店</option>" +
-        "<option value='0'>哈红祖</option>" +
-        "	<option value='1'>无敌组</option>" +
-        "	<option value='2'>哈皮组</option>" +
-        "	<option value='3'>66组</option>" +
-        "	<option value='4'>纪检组</option>" +
+        "<select name='d"+index+"hotel' onchange='emptynum(this)' style='height: 35px;width:180px;' lay-ignore>" +
+        "	<option value='0'selected='selected'>--请选择酒店房间类型--</option>" +
         "	</select>" +
         "	</td>" +
         "<td><label class='layui-form-label'>数量：</label></td>" +
-        "<td><input type='text' class='layui-input'></td>" +
+        "<td><input type='text' name='d"+index+"num' onchange='sumchange(this)' class='layui-input'></td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
-        "	<td><input type='text' class='layui-input'></td>" +
+        "	<td><input name='d"+index+"jiucb'type='text' class='layui-input'></td>" +
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"hotelpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"hotelpayment'></td>"+
         "</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>司陪：</label></td>" +
-        "<td><label class='layui-form-label' style='width: 140px;'>请输入房间数：</label></td>" +
-        "<td><input type='text' class='layui-input'></td>" +
+        "<td><label class='layui-form-label'  style='width: 140px;'>请输入房间数：</label></td>" +
+        "<td><input name='d"+index+"spnum' type='text'onchange='sipeichange(this)' class='layui-input'></td>" +
         "<td><label class='layui-form-label'>成本价：</label></td>" +
-        "<td><input type='text' class='layui-input'></td>" +
+        "<td><input name='d"+index+"spchengben' type='text' class='layui-input'></td>" +
         "</tr>" +
         "</tr>" +
-        "<tr id='onClickjd'>" +
-        "<td colspan='2'><button class='layui-btn' type='button' style='font-size:12px' onclick='add(this)'>添加景点+</button></td>" +
+        "<tr id='onClickjd' >" +
+        "<td colspan='2'><button name='d"+index+"scenicspot' class='layui-btn' type='button' style='font-size:12px' onclick='add(this)'>添加景点+</button></td>" +
         "</tr>" +
-        "<tr id='scenic'>" +
+        "<tr id='scenic' name='d"+index+"jingdian'>" +
         "<td><label class='layui-form-label'>景点</label></td>" +
         "<td>" +
-        "<select name='city' lay-verify='required'>" +
-        "<option value=''></option>" +
-        "<option value='0'>哈红祖</option>" +
-        "<option value='1'>无敌组</option>" +
-        "<option value='2'>哈皮组</option>" +
-        "<option value='3'>66组</option>" +
-        "<option value='4'>纪检组</option>" +
-        "</select>" +
+        "<select name='d"+index+"scenicspot1' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
+
+        ""+jdhtml+"</select>" +
         "</td>" +
-        "<td><label class='layui-form-label'>成本价:</label></td>" +
-        "<td><input type='text' class='layui-input'></td>" +
-        "<td><label class='layui-form-label'>报价:</l	abel></td>" +
-        "<td><input type='text' class='layui-input'></td>" +
+        "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
+        "<td><input type='text' name='d"+index+"costprice1' class='layui-input'></td>" +
+        "<td></td>"+
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"jingdpayment1'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"jingdpayment1'></td>"+
         "</tr>" +
-        "<tr>" +
+        "<tr name='d"+index+"gouwudi'>" +
         "<td><label class='layui-form-label'>购物地：</label></td>" +
         "<td colspan='3'>" +
-        "<select name='city' lay-verify='required'>" +
-        "<option value='>无</option>" +
-        "<option value='0'>啊</option>" +
-        "<option value='1'>北大青鸟</option>" +
-        "<option value='2'>哈皮组</option>" +
-        "<option value='3'>66组</option>" +
-        "<option value='4'>纪检组</option>" +
-        "</select>" +
+        "<select name='d"+index+"shopping' style='height: 35px;width:180px;' lay-ignore>" +
+        ""+gwdhtml+"</select>" +
         "</td>" +
         "	</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>午餐</label></td>" +
         "	<td>" +
-        "	<select name='city' lay-verify='required'>" +
-        "	<option value=''></option>" +
-        "	<option value='0'>哈红祖</option>" +
-        "	<option value='1'>无敌组</option>" +
-        "	<option value='2'>哈皮组</option>" +
-        "	<option value='3'>66组</option>" +
-        "	<option value='4'>纪检组</option>" +
-        "	</select>" +
+        "<select name='d"+index+"wucan' style='height: 35px;width:180px;' onchange=\"typechange(this,'fantype')\" lay-ignore>" +
+        ""+fanhtml+"</select>" +
         "	</td>" +
         "<td>" +
-        "<select name='city' lay-verify='required'>" +
-        "	<option value=''  selected='selected'>请选择酒店</option>" +
-        "	<option value='0'>哈红祖</option>" +
-        "<option value='1'>无敌组</option>" +
-        "	<option value='2'>哈皮组</option>" +
-        "	<option value='3'>66组</option>" +
-        "	<option value='4'>纪检组</option>" +
+        "<select name='d"+index+"wufan' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
+        "<option value='0'>--请选择饭店类型--</option>"+
         "</select>" +
         "	</td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
-        "	<td colspan='3'><input type='text' class='layui-input'></td>" +
+        "	<td colspan='3'><input type='text' name='d"+index+"wucancb' class='layui-input'></td>" +
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"wucanpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"wucanpayment'></td>"+
         "</tr>" +
         "	<tr>" +
         "<td><label class='layui-form-label'>晚餐</label></td>" +
         "<td>" +
-        "	<select name='city' lay-verify='required'>" +
-        "	<option value=''></option>" +
-        "	<option value='0'>哈红祖</option>" +
-        "<option value='1'>无敌组</option>" +
-        "	<option value='2'>哈皮组</option>" +
-        "	<option value='3'>66组</option>" +
-        "	<option value='4'>纪检组</option>" +
-        "	</select>" +
+        "	<select name='d"+index+"wancan' style='height: 35px;width:180px;' onchange=\"typechange(this,'fantype')\" lay-ignore>" +
+        ""+fanhtml+"</select>" +
         "	</td>" +
         "	<td>" +
-        "<select name='city' lay-verify='required'>" +
-        "<option value=''   selected='selected'>请选择酒店</option>" +
-        "<option value='0'>哈红祖</option>" +
-        "<option value='1'>无敌组</option>" +
-        "<option value='2'>哈皮组</option>" +
-        "	<option value='3'>66组</option>" +
-        "<option value='4'>纪检组</option>" +
+        "<select name='d"+index+"wanfan' style='height: 35px;width:180px;' onchange='jdchange(this)' lay-ignore>" +
+        "<option value='0'>--请选择饭店类型--</option>"+
         "</select>" +
         "</td>" +
         "<td><label class='layui-form-label'>成本价</label></td>" +
-        "	<td colspan='3'><input type='text' class='layui-input'></td>" +
+        "	<td colspan='3'><input type='text' name='d"+index+"wancancb' class='layui-input'></td>" +
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"wancanpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"wancanpayment'></td>"+
         "	</tr>" +
         "	<tr>" +
         "	<td><label class='layui-form-label'>行程</label></td>" +
-        "	<td colspan='5'> <textarea placeholder='请输入内容' class='layui-textarea' name='desc'></textarea></td>" +
+        "	<td colspan='5'> <textarea placeholder='请输入内容' class='layui-textarea' name='d"+index+"xingcheng'></textarea></td>" +
         "	</tr>" +
         "</table>	" +
         "	</form></div></div> <br />";
@@ -227,9 +191,4 @@ function addjd(obj) {
 
 function deljd(obj) {
     $(obj).parent().prev().html("<textarea placeholder='请输入内容' class='layui-textarea' name='desc'>");
-}
-
-function jiudian(obj, id) {
-    var content = "<tr><td colspan='3'><input type='image' src='images/face/0.gif'>&nbsp;&nbsp;&nbsp;<span>星级：</span>3</td></tr>";
-    $(obj).parent().parent().after(content);
 }

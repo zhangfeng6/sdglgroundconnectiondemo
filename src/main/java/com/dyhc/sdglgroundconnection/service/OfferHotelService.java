@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.OfferHotel;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,12 @@ import org.springframework.stereotype.Component;
  * 报价酒店业务接口
  **/
 public interface OfferHotelService {
+
+    /**
+     * 赵伟伟
+     * 新增酒店报价
+     * @param offerHotel
+     * @return
+     */
+    int insertOfferHotel(OfferHotel offerHotel);
 }

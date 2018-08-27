@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.CompanyMapper;
+import com.dyhc.sdglgroundconnection.pojo.Company;
 import com.dyhc.sdglgroundconnection.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,17 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     private CompanyMapper companyMapper;
+    /**
+     * 查看全部
+     * @return
+     */
+    @Override
+    public Company getCompany() {
+        return companyMapper.getCompany();
+    }
 
+    @Override
+    public Integer getUpdCompany(Company company) {
+        return companyMapper.updateByPrimaryKey(company);
+    }
 }

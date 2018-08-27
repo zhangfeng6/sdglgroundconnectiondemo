@@ -15,10 +15,10 @@ public class HoteroomType {
     @Id
     @Column(name = "hoteroomtId")
     private int hoteroomtId; // 调度酒店房间类型id
-    @Column(name = "dispatchHotelId")
-    private Integer dispatchHotelId; // 调度酒店编号（外键，与调度酒店表关联）
-    @Column(name = "typeId")
-    private Integer typeId; // 酒店房间类型编号（外键，与酒店房间类型表关联）
+    @Column(name = "offerId")
+    private Integer offerId; // 调度酒店编号（外键，与调度酒店表关联）
+    @Column(name = "templateId")
+    private Integer templateId; // 酒店房间类型编号（外键，与酒店房间类型表关联）
     private Integer status; // 是否删除（1代表已删除，0代表未删除）
     @Column(name = "createBy")
     private Integer createBy; // 创建人 （外键，与人员表关联）
@@ -30,8 +30,10 @@ public class HoteroomType {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
-    private String value1;
-    private String value2;
+    private int weight;  //权重
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date")
+    private Date date;
     private String value3;
 
     @Id
@@ -45,23 +47,23 @@ public class HoteroomType {
     }
 
     @Basic
-    @Column(name = "dispatchHotelId")
-    public Integer getDispatchHotelId() {
-        return dispatchHotelId;
+    @Column(name = "templateId")
+    public Integer getTemplateId() {
+        return templateId;
     }
 
-    public void setDispatchHotelId(Integer dispatchHotelId) {
-        this.dispatchHotelId = dispatchHotelId;
+    public void setTemplateId(Integer templateId) {
+        this.templateId = templateId;
     }
 
     @Basic
-    @Column(name = "typeId")
-    public Integer getTypeId() {
-        return typeId;
+    @Column(name = "offerId")
+    public Integer getOfferId() {
+        return offerId;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setOfferId(Integer offerId) {
+        this.offerId = offerId;
     }
 
     @Basic
@@ -114,24 +116,20 @@ public class HoteroomType {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    @Basic
-    @Column(name = "value2")
-    public String getValue2() {
-        return value2;
+    public Date getDate() {
+        return date;
     }
 
-    public void setValue2(String value2) {
-        this.value2 = value2;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Basic
@@ -150,21 +148,21 @@ public class HoteroomType {
         if (o == null || getClass() != o.getClass()) return false;
         HoteroomType that = (HoteroomType) o;
         return hoteroomtId == that.hoteroomtId &&
-                Objects.equals(dispatchHotelId, that.dispatchHotelId) &&
-                Objects.equals(typeId, that.typeId) &&
+                Objects.equals(offerId, that.offerId) &&
+                Objects.equals(templateId, that.templateId) &&
                 Objects.equals(status, that.status) &&
                 Objects.equals(createBy, that.createBy) &&
                 Objects.equals(updateBy, that.updateBy) &&
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
-                Objects.equals(value1, that.value1) &&
-                Objects.equals(value2, that.value2) &&
+                Objects.equals(weight, that.weight) &&
+                Objects.equals(date, that.date) &&
                 Objects.equals(value3, that.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(hoteroomtId, dispatchHotelId, typeId, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, upDate, createDate, weight, date, value3);
     }
 }

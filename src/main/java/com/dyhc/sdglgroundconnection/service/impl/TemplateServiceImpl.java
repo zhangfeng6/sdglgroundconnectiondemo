@@ -205,6 +205,23 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
+    @Override
+    public List<Template> selectTemplate() throws Exception {
+        List<Template> list = templateMapper.selectTemplate();
+        return list;
+    }
+
+    @Override
+    public Template selectTemplateAll(int templateId) {
+        Template t = templateMapper.selectTemplateAll(templateId);
+        t.setScenicspotsList(templateMapper.selectscenicSpotById(t.getTemplateId()));
+        return t;
+    }
+
+    @Override
+    public Template selecctNameById(int templateId) {
+        return templateMapper.selecctNameById(templateId);
+    }
     /**
      * 根据模板信息表的主键id进行查询
      * @param tid   模板对象主键id
