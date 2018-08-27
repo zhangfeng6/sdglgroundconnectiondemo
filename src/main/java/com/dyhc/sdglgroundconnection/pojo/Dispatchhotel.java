@@ -38,7 +38,7 @@ public class Dispatchhotel {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建时间
-    private String value1;
+    private int weight;  //权重
     private String value2;
     private String value3;
 
@@ -182,14 +182,12 @@ public class Dispatchhotel {
         this.creationDate = creationDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     @Basic
@@ -231,7 +229,7 @@ public class Dispatchhotel {
                 Objects.equals(modifier, that.modifier) &&
                 Objects.equals(modifiedData, that.modifiedData) &&
                 Objects.equals(creationDate, that.creationDate) &&
-                Objects.equals(value1, that.value1) &&
+                Objects.equals(weight, that.weight) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -239,6 +237,6 @@ public class Dispatchhotel {
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, weight, value2, value3);
     }
 }

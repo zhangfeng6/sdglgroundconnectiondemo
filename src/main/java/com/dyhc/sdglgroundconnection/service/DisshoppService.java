@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Disshopp;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,13 @@ import org.springframework.stereotype.Component;
  * 调度购物业务接口
  **/
 public interface DisshoppService {
+
+
+    /**
+     *微信小程序之获取购物地点
+     * @param dispatchId
+     * @param weight
+     * @return
+     */
+    Disshopp getDisshoppById(Integer dispatchId,Integer weight)throws Exception;
 }

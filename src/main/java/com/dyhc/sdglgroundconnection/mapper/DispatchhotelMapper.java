@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,12 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DispatchhotelMapper extends CommonMapper<Dispatchhotel>{
+
+
+    /**
+     * 根据调度id获取调度酒店信息
+     * @param dispatchId
+     * @return
+     */
+    Dispatchhotel getDispatchHotel(@Param("dispatchId") Integer dispatchId, @Param("weight")Integer weight);
 }

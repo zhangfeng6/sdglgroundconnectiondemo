@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Disrestaurant;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,14 @@ import org.springframework.stereotype.Component;
  * 调度餐厅业务接口
  **/
 public interface DisrestaurantService {
+
+
+    /**
+     * 根据id获取调度餐厅信息
+     * @param dispatchId
+     * @param weight
+     * @return
+     * @throws Exception
+     */
+    Disrestaurant getDisrestaurantById(Integer dispatchId,Integer weight)throws Exception;
 }

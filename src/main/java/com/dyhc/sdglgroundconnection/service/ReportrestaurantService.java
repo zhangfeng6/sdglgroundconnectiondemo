@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Reportrestaurant;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,10 @@ import org.springframework.stereotype.Component;
  * 导游报账餐厅业务接口
  **/
 public interface ReportrestaurantService {
+    /**
+     * 导游报账餐厅：贾晓亮
+     * @param reportrestaurant
+     * @return
+     */
+    Integer saveReportrestaurant(Reportrestaurant reportrestaurant);
 }

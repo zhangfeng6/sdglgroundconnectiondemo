@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,4 +9,13 @@ import org.springframework.stereotype.Component;
  * 调度酒店业务接口
  **/
 public interface DispatchhotelService {
+
+
+    /**
+     * 根据调度id获取调度酒店信息
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    Dispatchhotel getDispatchHotel(Integer dispatchId,Integer weight)throws Exception;
 }

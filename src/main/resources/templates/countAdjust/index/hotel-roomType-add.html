@@ -8,17 +8,14 @@
 </head>
 <body>
 <div class="wrap-container">
-
+    <form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxl">
         <input type="hidden" value="" th:value="${hotelId}" id="hotelId" name="hotelId">
         <div class="layui-form-item">
             <label class="layui-form-label">类型名称：</label>
             <div class="layui-input-block">
-                <select  name="typeName" style="height: 30px;" placeholder="请选择类型名称" onchange="judge()">
-
-                </select>
+                <input type="text" name="typeName" required lay-verify="required" placeholder="请输入类型名称" autocomplete="off" class="layui-input">
             </div>
         </div>
-    <form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxl">
         <div class="layui-form-item">
             <label class="layui-form-label">成本价：</label>
             <div class="layui-input-block">
@@ -44,29 +41,14 @@
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
 
-    $(function () {
-        getresouce();
-    });
-    function getresouce() {
-        $.post("/Dictionaries/listhoteltype",function (result) {
-            var content="<option value='0'>--请选择房间类型--</option>";
-            $(result.data).each(function (i,e) {
-                content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
-            });
-            $("select").html(content);
-        },"json");
-    }
     /**
      * 新增酒店房间
      */
     function saveRommType(){
-        var hotelid=$("#hotelId").val();
-        var valueid=$("select").val();
-        var cb=$("input[name=costprice]").val();
-        var bj=$("input[name=offer]").val();
+       var RoomType=$("#jxl").serialize();
       $.ajax({
           url:"/Hotel/saveRoomType",
-          data:{hotelId:hotelid,valueId:valueid,cbj:cb,bj:bj},
+          data:RoomType,
           dataType:"json",
           type:"get",
           success:function (data) {
@@ -91,22 +73,6 @@
             layer.msg(JSON.stringify(data.field));
             return false;
         });
-
     });
-    
-    function judge() {
-        var info=$("select").val();
-        var hotelid=$("#hotelId").val();
-        if(info==0){
-            return;
-        }
-
-        $.post("/RoomType/judgeTypeName","hotelId="+hotelid+"&valueId="+info,function (result) {
-            if(!result.data){
-                alert("该房间类型已存在！");
-                $("select").val(0);
-            }
-        },"json");
-    }
 </script>
 </html>

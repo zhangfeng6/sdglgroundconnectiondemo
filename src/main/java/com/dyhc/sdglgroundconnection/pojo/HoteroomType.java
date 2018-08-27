@@ -30,8 +30,10 @@ public class HoteroomType {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
-    private String value1;
-    private String value2;
+    private int weight;  //权重
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date")
+    private Date date;
     private String value3;
 
     @Id
@@ -114,24 +116,20 @@ public class HoteroomType {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    @Basic
-    @Column(name = "value2")
-    public String getValue2() {
-        return value2;
+    public Date getDate() {
+        return date;
     }
 
-    public void setValue2(String value2) {
-        this.value2 = value2;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Basic
@@ -157,14 +155,14 @@ public class HoteroomType {
                 Objects.equals(updateBy, that.updateBy) &&
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
-                Objects.equals(value1, that.value1) &&
-                Objects.equals(value2, that.value2) &&
+                Objects.equals(weight, that.weight) &&
+                Objects.equals(date, that.date) &&
                 Objects.equals(value3, that.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, upDate, createDate, weight, date, value3);
     }
 }

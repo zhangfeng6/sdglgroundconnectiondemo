@@ -121,4 +121,5 @@ public interface HotelService {
      */
     Hotel fuzhiHotel(Integer hotelId)throws Exception;
 
+
 }

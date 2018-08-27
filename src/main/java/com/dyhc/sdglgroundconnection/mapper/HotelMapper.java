@@ -67,4 +67,5 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      */
     List<Hotel> listhotelByvalueId(@Param("valueId")Integer valueId)throws Exception;
 
+
 }

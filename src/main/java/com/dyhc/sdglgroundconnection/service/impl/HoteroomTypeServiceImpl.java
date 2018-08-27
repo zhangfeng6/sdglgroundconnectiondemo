@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.HoteroomTypeMapper;
+import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
 import com.dyhc.sdglgroundconnection.service.HoteroomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,9 @@ public class HoteroomTypeServiceImpl implements HoteroomTypeService {
 
     @Autowired
     private HoteroomTypeMapper hoteroomTypeMapper;
+
+    @Override
+    public HoteroomType getHoteroomTypeById(Integer dispatchId, Integer weight) throws Exception {
+        return hoteroomTypeMapper.getHoteroomTypeById(dispatchId,weight);
+    }
 }

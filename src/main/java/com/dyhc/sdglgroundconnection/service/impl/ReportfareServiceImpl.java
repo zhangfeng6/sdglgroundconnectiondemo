@@ -1,9 +1,12 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ReportfareMapper;
+import com.dyhc.sdglgroundconnection.pojo.Reportfare;
 import com.dyhc.sdglgroundconnection.service.ReportfareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -14,4 +17,20 @@ public class ReportfareServiceImpl implements ReportfareService {
 
     @Autowired
     private ReportfareMapper reportfareMapper;
+
+    /**
+     *导游报账车费：贾晓亮
+     * @param reportfare
+     * @return
+     */
+    @Override
+    public Integer saveReportfare(Reportfare reportfare) {
+      Integer number=0;
+        try {
+            number=reportfareMapper.insertSelective(reportfare);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
 }
