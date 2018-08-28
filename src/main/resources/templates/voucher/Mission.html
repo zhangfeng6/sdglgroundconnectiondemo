@@ -34,23 +34,23 @@
 		    <thead>
 		    	<tr>
 		    		<td>导游</td>
-		    		<td>李金虎 18835107476</td>
+		    		<td id="daoyou"></td>
 		    		<td>司机</td>
-		    		<td>晋AA9279张师傅15255588847</td>
+		    		<td id="siji"></td>
 		    		<td>计调</td>
-		    		<td>崔俊娜18603416895</td>
+		    		<td id="jidiao"></td>
 		    	</tr>
 		    	   	<tr>
 		    		<td>时间</td>
-		    		<td>2018.4.15-4.22</td>
+		    		<td id="shijian"></td>
 		    		<td>人数</td>
 		    		<td colspan="3" style="border: 0px;">
 		    			<table border="1" cellspacing="0" cellpadding="0">
-		    				<tr><td>9+1T/L</td>
+		    				<tr><td id="number"></td>
 		    		<td>用房</td>
-		    		<td>5间+2司陪</td>
+		    		<td id="yongfang"></td>
 		    		<td>客源地</td>
-		    		 <td>台湾</td></tr>
+		    		 <td id="keyuan"></td></tr>
 		    			</table>
 		    		</td>
 		    	</tr>
@@ -242,8 +242,69 @@
 			<p>3. 请严格按照我公司有关地接导游带团规范进行作业，以进一步确保接待质量。</p>
 		</div>
 	</body>
-	<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+	<script src="/js/jquery-3.3.1.min.js"></script>
 	<script>
-		
+		$(function(){
+            selectGuideByTravelId();
+            selectStaffByTraveId();
+            selectDispatchByTravelId();
+            selectOfferByTravelId();
+		})
+		var id=1;
+
+		function selectGuideByTravelId(){
+			$.ajax({
+                url:"/Travel/selectGuideByTravelId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+					$("#daoyou").text(data.data.guideName+"  "+data.data.telephone);
+				}
+			})
+		}
+
+        function selectDispatchByTravelId(){
+            $.ajax({
+                url:"/Travel/selectDispatchByTravelId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    $("#siji").text(data.data.carcontacts);
+                }
+            })
+        }
+
+        function selectStaffByTraveId(){
+            $.ajax({
+                url:"/Travel/selectStaffByTraveId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    $("#jidiao").text(data.data.staffname+"  "+data.data.phone);
+                }
+            })
+        }
+
+        function selectOfferByTravelId(){
+            $.ajax({
+                url:"/Travel/selectOfferByTravelId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    $("#shijian").text(data.data.travelStartTime+"——"+data.data.travelEndTime);
+                    $("#number").text(data.data.number);
+                    $("#yongfang").text(data.data.number/2+"间");
+                    $("#keyuan").text(data.data.tourist);
+                }
+            })
+        }
 	</script>
 </html>

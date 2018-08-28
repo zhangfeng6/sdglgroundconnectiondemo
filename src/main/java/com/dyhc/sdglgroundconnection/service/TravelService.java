@@ -1,6 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
-import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -83,5 +83,37 @@ public interface TravelService {
      * @return
      */
     Integer getupdlala(Travel travel);
+
+
+
+    /**
+     * 根据组团社查询导游
+     * @param travelId
+     * @return
+     */
+    Guide selectGuideByTravelId(Integer travelId);
+
+
+    /**
+     * 根据组团社id查询司机
+     * @param travelId
+     * @return
+     */
+    Dispatch selectDispatchByTravelId(Integer travelId);
+
+    /**
+     * genju组团社id查询计调员
+     * @param travelId
+     * @return
+     */
+    Staff selectStaffByTraveId(Integer travelId);
+
+
+    /**
+     * 根据组团社id查询线路
+     * @param travelId
+     * @return
+     */
+    Offer selectOfferByTravelId(@Param("travelId") Integer travelId);
 
 }

@@ -1,6 +1,6 @@
 package com.dyhc.sdglgroundconnection.web;
 
-import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.TravelService;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
@@ -194,4 +194,84 @@ public class TravelController{
                 }
             }
 
+
+
+    /**
+     * 根据组团社编号查询导游
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectGuideByTravelId")
+    public ReponseResult selectGuideByTravelId(@RequestParam("travelId") Integer travelId){
+        try{
+            Guide guide=travelService.selectGuideByTravelId(travelId);
+            logger.info(" method:selectGuideByTravelId  查询导游成功！");
+            return ReponseResult.ok(guide,"查询导游成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectGuideByTravelId  查询导游失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 根据组团社编号查询司机
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectDispatchByTravelId")
+    public ReponseResult selectDispatchByTravelId(@RequestParam("travelId") Integer travelId){
+        try{
+            Dispatch dispatch=travelService.selectDispatchByTravelId(travelId);
+            logger.info(" method:selectDispatchByTravelId  查询司机成功！");
+            return ReponseResult.ok(dispatch,"查询司机成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectDispatchByTravelId  查询司机失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 根据组团社编号查询计调
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectStaffByTraveId")
+    public ReponseResult selectStaffByTraveId(@RequestParam("travelId") Integer travelId){
+        try{
+            Staff staff=travelService.selectStaffByTraveId(travelId);
+            logger.info(" method:selectStaffByTraveId  查询计调成功！");
+            return ReponseResult.ok(staff,"查询计调成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectStaffByTraveId  查询计调失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 根据组团社编号查询线路
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectOfferByTravelId")
+    public ReponseResult selectOfferByTravelId(@RequestParam("travelId") Integer travelId){
+        try{
+            Offer offer=travelService.selectOfferByTravelId(travelId);
+            logger.info(" method:selectOfferByTravelId  查询线路成功！");
+            return ReponseResult.ok(offer,"查询线路成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectOfferByTravelId  查询线路失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

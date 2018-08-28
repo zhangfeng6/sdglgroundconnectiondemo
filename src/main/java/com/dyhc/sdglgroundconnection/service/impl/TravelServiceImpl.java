@@ -1,7 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.TravelMapper;
-import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.TravelService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -104,5 +104,25 @@ public class TravelServiceImpl implements TravelService {
     @Override
     public Integer getupdlala(Travel travel) {
         return travelMapper.getupdlala(travel);
+    }
+
+    @Override
+    public Guide selectGuideByTravelId(Integer travelId) {
+        return travelMapper.selectGuideByTravelId(travelId);
+    }
+
+    @Override
+    public Dispatch selectDispatchByTravelId(Integer travelId) {
+        return travelMapper.selectDispatchByTravelId(travelId);
+    }
+
+    @Override
+    public Staff selectStaffByTraveId(Integer travelId) {
+        return travelMapper.selectStaffByTraveId(travelId);
+    }
+
+    @Override
+    public Offer selectOfferByTravelId(Integer travelId) {
+        return travelMapper.selectOfferByTravelId(travelId);
     }
 }
