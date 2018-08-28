@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Disrestaurant;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,15 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DisrestaurantMapper extends CommonMapper<Disrestaurant>{
+
+
+
+    /**
+     * 根据id获取调度餐厅信息
+     * @param dispatchId
+     * @param weight
+     * @return
+     * @throws Exception
+     */
+    Disrestaurant getDisrestaurantById(@Param("dispatchId") Integer dispatchId, @Param("weight") Integer weight)throws Exception;
 }

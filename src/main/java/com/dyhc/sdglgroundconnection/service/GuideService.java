@@ -77,4 +77,11 @@ public interface GuideService {
      * @throws Exception
      */
     List<Guideschedule>listguidescheduleBygid(Integer guideId, String year, String month)throws Exception;
+
+    /**
+     * 导游信息
+     * @param guideId
+     * @return
+     */
+    Guide ShowAllGuide(Integer guideId);
 }

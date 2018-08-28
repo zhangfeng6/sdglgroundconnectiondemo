@@ -57,6 +57,17 @@ public class Dispatch {
     private Integer guideId;
     private String value2;
     private String value3;
+    @Column(name = "carcontacts")
+    private  String carcontacts;
+
+    public String getCarcontacts() {
+        return carcontacts;
+    }
+
+    public void setCarcontacts(String carcontacts) {
+        this.carcontacts = carcontacts;
+    }
+
     //组团表
     @Transient
     private  Travel travel;

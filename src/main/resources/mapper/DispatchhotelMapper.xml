@@ -6,4 +6,7 @@
      <select id="dispatchhotelSelectAll" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
         select  *  from dispatchhotel where  offerId=#{offerId}
      </select>
+    <select id="getDispatchHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
+        SELECT * FROM `dispatchhotel` WHERE offerId=#{dispatchId} AND weight=#{weight}
+    </select>
 </mapper>

@@ -37,4 +37,5 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     Dispatch dispatchSelectAll(Integer dispatchId);
+
 }

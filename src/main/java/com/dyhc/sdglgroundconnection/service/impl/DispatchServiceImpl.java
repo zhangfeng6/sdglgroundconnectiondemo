@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 import com.dyhc.sdglgroundconnection.mapper.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
+import com.dyhc.sdglgroundconnection.pojo.Travel;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -26,6 +27,9 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Autowired
     private DispatchhotelMapper dispatchhotelMapper;
+
+    @Autowired
+    private  DispatchhotelServiceImpl dispatchhotelService;
 
     @Autowired
     private DictionariesMapper dictionariesMapper;
@@ -112,8 +116,16 @@ public class DispatchServiceImpl implements DispatchService {
         Dispatch dispatch=null;
         try {
              dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
-             dispatch.setTravel(travelMappere.selectTravelById(dispatch.getGroupNumber()));
-             dispatch.setDispatchhotel(dispatchhotelMapper.dispatchhotelSelectAll(dispatch.getDispatchId()));
+             Travel travel =travelMappere.selectTravelById(dispatch.getGroupNumber());
+             String A ="";
+             if (travel.getTravelName()==null){
+                 A="无组团名称";
+                 travel.setTravelName(A);
+             }
+             dispatch.setTravel(travel);
+             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
+             /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
+             dispatch.setDispatchhotel(dispatchhotels);
         } catch (Exception e) {
             e.printStackTrace();
         }

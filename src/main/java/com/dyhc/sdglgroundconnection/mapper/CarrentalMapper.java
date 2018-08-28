@@ -52,4 +52,10 @@ public interface CarrentalMapper extends CommonMapper<Carrental>{
      */
     List<Carrental> listcarrentalByvalueId(@Param("valueId")Integer valueId)throws Exception;
 
+    /**
+     * 查询汽车租赁公司表
+     * @return
+     */
+    Carrental carrental(@Param("carRentalId")Integer carRentalId);
+
 }

@@ -16,7 +16,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyMapper companyMapper;
     /**
-     * 查看全部
+     * 查看全部(单次租车：贾晓亮使用)
      * @return
      */
     @Override

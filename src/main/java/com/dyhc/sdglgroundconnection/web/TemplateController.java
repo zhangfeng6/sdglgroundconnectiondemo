@@ -2,9 +2,11 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.parameterentity.TemplateParameter;
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
+import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.Template;
 import com.dyhc.sdglgroundconnection.service.HotelService;
+import com.dyhc.sdglgroundconnection.service.HoteroomTypeService;
 import com.dyhc.sdglgroundconnection.service.ScenicspotService;
 import com.dyhc.sdglgroundconnection.service.TemplateService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -41,6 +43,9 @@ public class TemplateController {
 
     @Autowired
     private ScenicspotService scenicspotService;
+
+    @Autowired
+    private HoteroomTypeService hoteroomTypeService;
 
 
     /**
@@ -214,6 +219,27 @@ public class TemplateController {
             logger.debug("method:removeTemplate 系统出现异常！");
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
+        }
+    }
+
+
+    /**
+     * 微信小程序之获取行程内容
+     * @param dispatch
+     * @param weight
+     * @return
+     */
+    @RequestMapping("getTemplateById")
+    public ReponseResult getTemplateById(Integer dispatchId,Integer weight){
+        try {
+            HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
+            Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
+            logger.error("method:getTemplateById  获取行程内容成功");
+            return ReponseResult.ok(template,"获取行程内容成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:getTemplateById  获取行程内容失败");
+            return ReponseResult.err("获取行程内容失败");
         }
     }
 }

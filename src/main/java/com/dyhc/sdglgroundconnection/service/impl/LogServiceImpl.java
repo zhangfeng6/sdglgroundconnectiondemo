@@ -15,9 +15,26 @@ public class LogServiceImpl implements LogService {
 
     @Autowired
     private LogMapper logMapper;
+    @Autowired
+    private GuideServiceImpl guideService;
+    @Autowired
+    private  DispatchServiceImpl dispatchService;
 
     @Override
     public Integer inserLog(Log log) throws Exception {
         return logMapper.insertSelective(log);
+    }
+
+    /**
+     * 查看导游带团日志
+     * @return
+     */
+    @Override
+    public Log ShowAllLog(Integer guideId,Integer dispatchId,String creationDate) {
+        Log log=logMapper.ShowAllLog(guideId,dispatchId,creationDate);
+        Integer a =log.getGuideId();
+        log.setGuide(guideService.ShowAllGuide(log.getGuideId()));
+        log.setDispatch(dispatchService.dispatchSelectAll(log.getDispatchId()));
+        return log;
     }
 }

@@ -11,10 +11,22 @@ import java.util.List;
  * 调度酒店业务接口
  **/
 public interface DispatchhotelService {
+
     /**
      * 查询调度酒店信息：贾晓亮
      * @param offerId
      * @return
      */
     List<Dispatchhotel> dispatchhotelSelectAll(Integer  offerId);
+
+
+
+    /**
+     * 根据调度id获取调度酒店信息
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    Dispatchhotel getDispatchHotel(Integer dispatchId,Integer weight)throws Exception;
+
 }

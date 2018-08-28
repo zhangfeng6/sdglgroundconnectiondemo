@@ -52,4 +52,6 @@ public interface ShoppingService {
      * @throws Exception
      */
     Integer deleteShoppingsByscenicSpotId(Integer scenicSpotId)throws Exception;
+
+
 }

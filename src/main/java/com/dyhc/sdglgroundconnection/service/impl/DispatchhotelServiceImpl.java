@@ -3,7 +3,6 @@ package com.dyhc.sdglgroundconnection.service.impl;
 import com.dyhc.sdglgroundconnection.mapper.DispatchhotelMapper;
 import com.dyhc.sdglgroundconnection.mapper.HotelMapper;
 import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
-import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.service.DispatchhotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,16 +27,22 @@ public class DispatchhotelServiceImpl implements DispatchhotelService {
      * @param offerId
      * @return
      */
-    public List<Dispatchhotel> dispatchhotelSelectAll(Integer offerId){
-        List<Dispatchhotel> dispatchhotelSelectAll=null;
+    public List<Dispatchhotel> dispatchhotelSelectAll(Integer offerId) {
+        List<Dispatchhotel> dispatchhotelSelectAll = null;
         try {
-             dispatchhotelSelectAll=dispatchhotelMapper.dispatchhotelSelectAll(offerId);
-            for (Dispatchhotel s:dispatchhotelSelectAll) {
+            dispatchhotelSelectAll = dispatchhotelMapper.dispatchhotelSelectAll(offerId);
+            for (Dispatchhotel s : dispatchhotelSelectAll) {
+                Integer a =s.getHotelId();
                 s.setHotel(hotelMapper.selectByHotelId(s.getHotelId()));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return dispatchhotelSelectAll;
+    }
+
+    @Override
+    public Dispatchhotel getDispatchHotel(Integer dispatchId,Integer weight) throws Exception {
+        return dispatchhotelMapper.getDispatchHotel(dispatchId,weight);
     }
 }

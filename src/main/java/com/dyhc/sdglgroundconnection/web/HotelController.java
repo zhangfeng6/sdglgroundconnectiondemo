@@ -1,7 +1,9 @@
 package com.dyhc.sdglgroundconnection.web;
+import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import com.dyhc.sdglgroundconnection.pojo.Staff;
+import com.dyhc.sdglgroundconnection.service.DispatchhotelService;
 import com.dyhc.sdglgroundconnection.service.HotelService;
 import com.dyhc.sdglgroundconnection.utils.FileUploadUtil;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -32,6 +34,9 @@ public class HotelController {
 
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    private DispatchhotelService dispatchhotelService;
 
     /**
      * 酒店分页显示
@@ -322,6 +327,26 @@ public class HotelController {
             ReponseResult<List> data=ReponseResult.err("获取酒店失败");
             e.printStackTrace();
             return  data;
+        }
+    }
+
+
+    /**
+     * 获取酒店名称:陈庆武
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("getHoterById")
+    public ReponseResult getHoterById(Integer dispatchId,Integer weight){
+        try {
+            Dispatchhotel dispatchhotel=dispatchhotelService.getDispatchHotel(dispatchId,weight);
+            Hotel hotel=hotelService.getHotelById(dispatchhotel.getHotelId());
+            logger.info("method:getHoterById  获取酒店名称成功！");
+            return ReponseResult.ok(hotel,"获取酒店名称成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:getHoterById  获取酒店名称失败！");
+            return ReponseResult.err("获取酒店名称失败");
         }
     }
 

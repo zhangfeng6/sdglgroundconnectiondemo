@@ -33,4 +33,9 @@
         where carRentalId=#{carRentalId} and valueId=#{valueId} and whetherDel=3
     </select>
 
+    <!--查询车辆类型：贾晓亮-->
+    <select id="vehicleType" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
+        select   *   from    vehicletype where  typeId=#{typeId}
+    </select>
+    
 </mapper>

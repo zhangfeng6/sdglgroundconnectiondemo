@@ -15,10 +15,19 @@ import java.util.List;
 @Component
 public interface DispatchhotelMapper extends CommonMapper<Dispatchhotel>{
 
+
     /***
      * 调度酒店表信息：贾晓亮
      * @param offerId
      * @return
      */
     List<Dispatchhotel> dispatchhotelSelectAll(@Param("offerId")Integer offerId);
+
+
+    /**
+     * 根据调度id获取调度酒店信息
+     * @param dispatchId
+     * @return
+     */
+    Dispatchhotel getDispatchHotel(@Param("dispatchId") Integer dispatchId, @Param("weight")Integer weight);
 }

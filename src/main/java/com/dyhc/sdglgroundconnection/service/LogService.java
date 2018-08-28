@@ -18,5 +18,9 @@ public interface LogService {
      */
     Integer inserLog(Log log)throws Exception;
 
-
+    /**
+     * 查看导游带团日志：贾晓亮
+     * @return
+     */
+    Log ShowAllLog(Integer guideId,Integer dispatchId,String creationDate);
 }

@@ -130,5 +130,13 @@ public class GuideServiceImpl implements GuideService {
         return guideMapper.updateByPrimaryKeySelective(guide);
     }
 
-
+    /**
+     * 导游信息
+     * @param guideId
+     * @return
+     */
+    @Override
+    public Guide ShowAllGuide(Integer guideId) {
+        return guideMapper.ShowAllGuide(guideId);
+    }
 }

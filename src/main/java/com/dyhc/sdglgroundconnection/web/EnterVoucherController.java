@@ -24,6 +24,32 @@ public class EnterVoucherController {
     }
 
     /**
+     * 跳转导游带团日志
+     * @return
+     */
+    @RequestMapping("/log")
+    public  String log(){
+        return "voucher/log";
+    }
+    /**
+     * 跳转调度租赁车辆页面
+     * @return
+     */
+    @RequestMapping("/CarRenting1")
+    public  String CarRenting1(){
+        return "voucher/CarRenting1";
+    }
+
+    /**
+     * 跳转调度租赁车辆页面2
+     * @return
+     */
+    @RequestMapping("/CarRenting2")
+    public  String CarRenting2(){
+        return "voucher/CarRenting2";
+    }
+
+    /**
      * 进入旅游团队运输合同第一页 页面
      * @return
      */
