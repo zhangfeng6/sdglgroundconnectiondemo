@@ -98,7 +98,7 @@ function addss() {
         "</tr>" +
         "</tr>" +
         "<tr id='onClickjd' >" +
-        "<td colspan='2'><button name='d"+index+"scenicspot' class='layui-btn' type='button' style='font-size:12px' onclick='add(this)'>添加景点+</button></td>" +
+        "<td colspan='2'><button name='d"+index+"scenicspot' class='layui-btn' type='button' style='font-size:12px' onclick='add("+index+")'>添加景点+</button></td>" +
         "</tr>" +
         "<tr id='scenic' name='d"+index+"jingdian'>" +
         "<td><label class='layui-form-label'>景点</label></td>" +
