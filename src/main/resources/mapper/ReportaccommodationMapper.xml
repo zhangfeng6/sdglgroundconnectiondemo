@@ -2,5 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.ReportaccommodationMapper">
-
+    <select id="listReportaccommodationByreportDetailId" resultType="com.dyhc.sdglgroundconnection.pojo.Reportaccommodation">
+        SELECT * FROM `reportaccommodation` WHERE reportDetailId=#{reportDetailId} AND `status`=0
+    </select>
 </mapper>

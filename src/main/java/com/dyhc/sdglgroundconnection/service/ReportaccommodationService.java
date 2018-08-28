@@ -4,6 +4,8 @@ import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账住宿业务接口
@@ -15,4 +17,13 @@ public interface ReportaccommodationService {
      * @return
      */
    Integer saveReportaccommodation(Reportaccommodation reportaccommodation);
+
+
+    /**
+     * 根据导游到账明细id查询导游住宿报账明细信息
+     * @param reportDetailId 导游报账明细id
+     * @return
+     * @throws Exception
+     */
+   List<Reportaccommodation> listReportaccommodationByreportDetailId(Integer reportDetailId)throws Exception;
 }

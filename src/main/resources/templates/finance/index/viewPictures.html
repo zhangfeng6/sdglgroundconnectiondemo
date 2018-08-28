@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -11,6 +11,8 @@
 </head>
 <body>
 <div style="margin-left: 100px;margin-top: 40px">
+    <input type="hidden" th:value="${dispatchId}" name="dispatchId"/>
+    <input type="hidden" th:value="${billTypeId}" name="billTypeId"/>
     <div class="layui-carousel" id="test10" lay-anim="" lay-indicator="inside" lay-arrow="hover" style="width: 200px" >
         <div carousel-item="" id="viewPictures">
             <div class=""><img src="//res.layui.com/images/layui/demo/1.png"></div>
@@ -37,9 +39,8 @@
      *  显示票价图片信息(lixiaojie)
      */
     function viewPictures() {
-
-        var dispatchId = 1;
-        var billTypeId = 1;
+        var dispatchId =$("input[name='dispatchId']").val();
+        var billTypeId =$("input[name='billTypeId']").val();
         $.ajax({
             url: "/bill/selectBillByDispatchIdAndBillTypeId",
             data: {
@@ -52,14 +53,13 @@
                 if(ReponseResult.data!=null&&ReponseResult.data!=undefined&&ReponseResult.data!=""){
                     var attr=ReponseResult.data.picturePath.split(",");
                     var content="";
-                    var savePath = "/api/image/";
+                    var savePath = "D://Y2/世达国旅/sdglGroundConnection/src/main/resources/static/images/";
                     $.each(attr,function (i,e) {
-
                         content+="<div class=''><img src='"+(savePath+e)+"' ></div>";
-
                     });
                     $("#viewPictures").html(content);
                 }else {
+
 
                 }
             },

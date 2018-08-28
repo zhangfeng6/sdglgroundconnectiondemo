@@ -16,4 +16,13 @@ public interface ReportingotherexpensesService {
      * @return
      */
     Integer saveReportingotherexpenses(Reportingotherexpenses reportingotherexpenses);
+
+
+    /**
+     * 获取导游报账其他支出明细信息
+     * @param reportDetailId
+     * @return
+     * @throws Exception
+     */
+    Reportingotherexpenses listReportingotherexpensesById(Integer reportDetailId)throws Exception;
 }

@@ -71,7 +71,11 @@ public class EnterFinancePageController {
      * @return
      */
     @RequestMapping("/viewPictures.html")
-    public String EnterViewPictures(){
+    public String EnterViewPictures(HttpServletRequest request){
+        String dispatchId=request.getParameter("dispatchId");
+        String billTypeId=request.getParameter("billTypeId");
+        request.setAttribute("dispatchId",dispatchId);
+        request.setAttribute("billTypeId",billTypeId);
         return "finance/index/viewPictures";
     }
 }

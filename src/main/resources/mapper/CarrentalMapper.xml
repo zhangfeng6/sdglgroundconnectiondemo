@@ -8,7 +8,7 @@
             <if test="carRentalName!=null and carRentalName!=''">
                 carRentalName like CONCAT('%',#{carRentalName},'%')
             </if>
-            and `whetherdel`=3
+            and `whetherdel`=0
         </where>
         order by createDate desc
     </select>

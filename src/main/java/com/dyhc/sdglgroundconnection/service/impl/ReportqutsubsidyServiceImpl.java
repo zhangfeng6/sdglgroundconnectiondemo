@@ -30,4 +30,9 @@ public class ReportqutsubsidyServiceImpl implements ReportqutsubsidyService {
         }
         return number;
     }
+
+    @Override
+    public Reportqutsubsidy getReportqutsubsidyById(Integer reportDetailId)throws Exception {
+        return reportqutsubsidyMapper.getReportqutsubsidyById(reportDetailId);
+    }
 }

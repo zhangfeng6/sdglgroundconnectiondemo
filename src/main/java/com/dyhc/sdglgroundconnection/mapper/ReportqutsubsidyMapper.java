@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Reportqutsubsidy;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,11 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface ReportqutsubsidyMapper extends CommonMapper<Reportqutsubsidy>{
+
+    /**
+     * 获取导游出团补助信息
+     * @param reportDetailId
+     * @return
+     */
+    Reportqutsubsidy getReportqutsubsidyById(@Param("reportDetailId") Integer reportDetailId)throws Exception;
 }

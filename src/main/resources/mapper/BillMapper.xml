@@ -2,5 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.BillMapper">
-
+    <select id="selectBillByDispatchIdAndBillTypeId" resultType="com.dyhc.sdglgroundconnection.pojo.Bill">
+        SELECT * FROM bill WHERE dispatchId=#{dispatchId} AND billTypeId=#{billTypeId} AND whetherDel=0
+    </select>
 </mapper>
