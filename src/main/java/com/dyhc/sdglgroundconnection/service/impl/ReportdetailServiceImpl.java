@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
+import com.dyhc.sdglgroundconnection.pojo.Reportrestaurant;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.github.pagehelper.PageHelper;
@@ -20,6 +21,11 @@ public class ReportdetailServiceImpl implements ReportdetailService {
 
     @Autowired
     private ReportdetailMapper reportdetailMapper;
+    @Autowired
+    private  ReportaccommodationServiceImpl reportaccommodationService;//住宿
+    @Autowired
+    private ReportrestaurantServiceImpl reportrestaurantService;//餐厅
+
 
     @Override
     public PageInfo showInfoAll(Integer groupNumber, Integer states,Integer pageNo,Integer pageSize)throws Exception {
@@ -32,5 +38,23 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     @Override
     public Reportdetail getReportdetailById(Integer reportDetailId) throws Exception {
         return reportdetailMapper.selectByPrimaryKey(reportDetailId);
+    }
+
+    /**
+     * 查看地接报价明细信息
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Reportdetail reportdetail(Integer dispatchId) {
+        Reportdetail a = null;
+        try {
+            a = reportdetailMapper.reportdetail(dispatchId);
+            a.setReportaccommodationShow(reportaccommodationService.listReportaccommodationByreportDetailId(a.getReportDetailId()));
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return a;
     }
 }
