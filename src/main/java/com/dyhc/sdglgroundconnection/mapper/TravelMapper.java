@@ -14,10 +14,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface TravelMapper extends CommonMapper<Travel> {
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
     /**
      * 赵伟伟
      * 查询组团社
@@ -26,10 +23,7 @@ public interface TravelMapper extends CommonMapper<Travel> {
      */
     Travel selectTravelById(@Param("travelId") Integer travelId);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
     List<Travel> listTravelLike(@Param("travelName") String travelName);
     /**
      * 删除
@@ -51,8 +45,5 @@ public interface TravelMapper extends CommonMapper<Travel> {
      */
 
     Integer getupdlala(Travel travel);
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 }

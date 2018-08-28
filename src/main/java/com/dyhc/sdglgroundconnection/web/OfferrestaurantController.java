@@ -41,8 +41,8 @@ public class OfferrestaurantController {
             List<Offerrestaurant> offerrestaurant = offerrestaurantService.selectOfferRestaurantByOfferId(offerId);
             List<Offerrestaurant> wu = new ArrayList<>();
             for (Offerrestaurant offerrestaurant1: offerrestaurant) {
-                String house = offerrestaurant1.getHavemealsdate().toString().split(" ")[1].substring(0,2);
-                if (Integer.parseInt(house)>11&&Integer.parseInt(house)<18){
+                Integer house = offerrestaurant1.getHavemealsdate();
+                if (house==2){
                     wu.add(offerrestaurant1);
                 }
             }
@@ -69,8 +69,8 @@ public class OfferrestaurantController {
             List<Offerrestaurant> offerrestaurant = offerrestaurantService.selectOfferRestaurantByOfferId(offerId);
             List<Offerrestaurant> wan = new ArrayList<>();
             for (Offerrestaurant offerrestaurant1: offerrestaurant) {
-                String house = offerrestaurant1.getHavemealsdate().toString().split(" ")[1].substring(0,2);
-                if (Integer.parseInt(house)>18&&Integer.parseInt(house)<24){
+                Integer house = offerrestaurant1.getHavemealsdate();
+                if (house==3){
                     wan.add(offerrestaurant1);
                 }
             }

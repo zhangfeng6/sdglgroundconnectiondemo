@@ -1,24 +1,18 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
-<<<<<<< HEAD
 
 import org.apache.ibatis.annotations.Param;
-import com.github.pagehelper.PageInfo;
-=======
->>>>>>> origin/master
-import org.apache.ibatis.annotations.Param;
-import java.util.List;
-<<<<<<< HEAD
-import java.util.Map;
-import java.util.List;
-
-=======
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
->>>>>>> origin/master
+import java.util.List;
+
+import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+import java.util.Map;
 public interface TourismtemplateService {
     /**
      * 查询全部旅游模板
@@ -40,10 +34,7 @@ public interface TourismtemplateService {
      * @return
      */
     Tourismtemplate selectByName(String tourismtemplateName) throws Exception;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 
     /**

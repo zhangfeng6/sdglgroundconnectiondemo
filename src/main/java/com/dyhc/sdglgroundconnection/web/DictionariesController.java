@@ -48,10 +48,7 @@ public class DictionariesController {
     }
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
     /**
      * 获取所有的景点等级
      * @return
@@ -88,17 +85,12 @@ public class DictionariesController {
     }
 
     /**
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
      * 获取餐馆类型
      * @return
      */
     @RequestMapping("selectByDictionariesId")
     public ReponseResult selectByDictionariesId(Integer dictionariesId) {
         try {
-<<<<<<< HEAD
             Dictionaries dictionaries=dictionariesService.selectByDictionariesId(dictionariesId);
             ReponseResult<Object> data=ReponseResult.ok(dictionaries,"获取餐馆类型成功");
             return  data;
@@ -107,21 +99,6 @@ public class DictionariesController {
             return data;
         }
     }
-    /**
-     * 获取所有的景点等级
-     * @return
-     */
-=======
-            Dictionaries dictionaries = dictionariesService.selectByDictionariesId(dictionariesId);
-            ReponseResult<Object> data = ReponseResult.ok(dictionaries, "获取餐馆类型成功");
-            return data;
-        } catch (Exception e) {
-            ReponseResult<List> data = ReponseResult.err("获取餐馆类型失败");
-            ReponseResult<Object> err=ReponseResult.err("系统错误！");
-            return err;
-        }
-    }
->>>>>>> origin/master
     @RequestMapping("/listhoteltype")
     public ReponseResult listhoteltype(){
         try {

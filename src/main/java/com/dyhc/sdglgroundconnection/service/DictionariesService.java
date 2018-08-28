@@ -23,10 +23,6 @@ public interface DictionariesService {
      */
     PageInfo<Dictionaries> listDictionaries()throws Exception;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
     /**
      * 查询所有的车辆类型
      * @return
@@ -39,10 +35,7 @@ public interface DictionariesService {
      * @return
      */
     Dictionaries selectByDictionariesId(int dictionariesId);
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
     PageInfo<Dictionaries> listDictionaries1()throws Exception;
 
 
@@ -51,8 +44,5 @@ public interface DictionariesService {
      * @return
      */
     List<Dictionaries> listhoteltype()throws Exception;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 }

@@ -9,7 +9,7 @@
     </insert>
 
     <select id="selectOffercarByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offercar">
-        SELECT * FROM offercar o,vehicletype v,dictionaries d WHERE o.typeId = v.typeId AND v.valueId=d.`valueId` AND d.`typeCode`='VEHICLE' AND o.whetherDel!=1 AND o.offerId=#{offerId}
+        SELECT * FROM offercar o,dictionaries d WHERE o.typeId=d.`dictionariesId` and d.`typeCode`='VEHICLE' AND o.whetherDel!=1 AND o.offerId=#{offerId}
     </select>
 
 
