@@ -70,4 +70,5 @@ public interface VehicleTypeMapper extends CommonMapper<VehicleType> {
      */
     List<VehicleType> listinfoByvalueId(@Param("valueId")Integer valueId)throws Exception;
 
+
 }
