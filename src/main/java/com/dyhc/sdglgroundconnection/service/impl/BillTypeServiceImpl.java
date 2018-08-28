@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.BillTypeMapper;
+import com.dyhc.sdglgroundconnection.pojo.Bill;
 import com.dyhc.sdglgroundconnection.pojo.BillType;
 import com.dyhc.sdglgroundconnection.service.BillTypeService;
 import com.github.pagehelper.PageHelper;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -114,5 +116,10 @@ public class BillTypeServiceImpl implements BillTypeService {
             e.printStackTrace();
         }
         return  billType;
+    }
+
+    @Override
+    public List<BillType> listBillAll() throws Exception {
+        return billTypeMapper.selectAll();
     }
 }

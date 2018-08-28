@@ -126,9 +126,23 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
+    public Guide getGuideById(Integer guideId) throws Exception {
+        return guideMapper.selectByPrimaryKey(guideId);
+    }
+
+    @Override
     public Integer updateGuideByPassword(Guide guide) throws Exception {
         return guideMapper.updateByPrimaryKeySelective(guide);
     }
 
 
+    /**
+     * 导游信息
+     * @param guideId
+     * @return
+     */
+    @Override
+    public Guide ShowAllGuide(Integer guideId) {
+        return guideMapper.ShowAllGuide(guideId);
+    }
 }

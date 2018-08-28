@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.web;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
+import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -59,6 +60,26 @@ public class DispatchController {
 
     }
 
+    /**
+     * 订房通知单： 贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/dispatchSelectAll")
+    public  ReponseResult dispatchSelectAll(Integer dispatchId){
+        dispatchId=1;
+        try {
+            ReponseResult<Dispatch> data =ReponseResult.ok(dispatchService.dispatchSelectAll(dispatchId),"查询计调订房通知单成功");
+            logger.info("method:getresource 查询计调订房通知单成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("method:getresource 查询计调订房通知单失败！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
+
     @RequestMapping("/getresource")
     public ReponseResult getresource(){
         try {
@@ -97,7 +118,7 @@ public class DispatchController {
     public ReponseResult getDispatchByguideId(Integer guideId){
         try {
             Dispatch dispatch=dispatchService.getDispatchByguideId(guideId);
-            Integer date=differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
+            Integer date=DateDifference.differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
             List<Integer> list=new  ArrayList<Integer>();
             list.add(date);
             list.add(dispatch.getDispatchId());
@@ -160,7 +181,12 @@ public class DispatchController {
     @RequestMapping("getDispatchById")
     public ReponseResult getDispatchById(Integer reportDetailId){
         try {
-            ReponseResult data=ReponseResult.ok(dispatchService.getDispatchById(reportDetailId),"获取成功");
+            Dispatch dispatch=dispatchService.getDispatchById(reportDetailId);
+            Integer cha=DateDifference.differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
+            List<Object> list=new ArrayList<>();
+            list.add(0,dispatch);
+            list.add(1,cha);
+            ReponseResult data=ReponseResult.ok(list,"获取成功");
             logger.info("mothed:getDispatchById 获取调度信息成功");
             return data;
         }catch (Exception e){

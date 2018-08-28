@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
 import com.dyhc.sdglgroundconnection.pojo.Log;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,4 +13,9 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface LogMapper extends CommonMapper<Log>{
+    /**
+     * 单团日志
+     * @return
+     */
+    Log ShowAllLog(@Param("guideId")Integer guideId,@Param("dispatchId")Integer dispatchId,@Param("creationDate")String creationDate);
 }

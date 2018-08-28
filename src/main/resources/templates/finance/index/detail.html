@@ -31,7 +31,8 @@
 <div style="margin:0 auto; width:100%;">
     <h3 class="gradient">地接导游报账明细表</h3>
     <div style="padding-left:20px">
-        <input type="hidden" th:value="${reportDetailId}" name="${reportDetailId}"/>
+        <input type="hidden" th:value="${dispatchId}" name="dispatchId"/>
+        <input type="hidden" th:value="${reportDetailId}" name="reportDetailId"/>
         <table>
             <tr>
                 <td height="40px">团号:</td>
@@ -45,14 +46,14 @@
         <table>
             <tr>
                 <td>组团社(单位):</td>
-                <td><input type="text" disabled value="号锡组团社" style="width:120px; text-align:center"></td>
+                <td><input type="text" disabled name="travelName" style="width:120px; text-align:center"></td>
                 <td style="padding-left:30px">人数:</td>
-                <td><input type="text" disabled value="10" style="width:60px; text-align:center"></td>
+                <td><input type="text" disabled value="10" style="width:60px; text-align:center" name="num"></td>
                 <td style="padding-left:20px">天数:</td>
-                <td><input type="text" disabled value="3" style="width:60px; text-align:center"></td>
+                <td><input type="text" disabled name="cha" style="width:60px; text-align:center"></td>
                 <td style="padding-left:20px">客源地:</td>
-                <td><input type="text" disabled value="北京" style="width:60px; text-align:center"></td>
-                <td style="padding-left:20px">单据类型<select style="margin-left:10px">
+                <td><input type="text" disabled value="北京" style="width:60px; text-align:center" name="tourist"></td>
+                <td style="padding-left:20px">单据类型<select style="margin-left:10px" name="typeName">
                     <option>请选择</option>
                 </select></td>
                 <td>
@@ -88,8 +89,8 @@
                             <td style="width:10%;"><strong>支付方式</strong></td>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
+                        <tbody id="jiudian">
+                        <!--<tr>
                             <td>4.15</td>
                             <td>海悦酒店</td>
                             <td>100</td>
@@ -99,7 +100,7 @@
                             <td>1</td>
                             <td>550</td>
                             <td>签单</td>
-                        </tr>
+                        </tr>-->
 
                         </tbody>
 
@@ -107,22 +108,22 @@
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
                         <tr>
                             <td style="width:12%;background-color:#09F"><strong>住宿合计</strong></td>
-                            <td style="width:20%">10000</td>
+                            <td style="width:20%" id="zshj">10000</td>
                             <td style="width:15%;background-color:#09F"><strong>其中导游付</strong></td>
-                            <td style="width:20%">3000</td>
+                            <td style="width:20%" id="dyf">3000</td>
                             <td style="width:13%;background-color:#09F"><strong>签单合计</strong></td>
-                            <td style="width:20%">7000</td>
+                            <td style="width:20%" id="jdhj">7000</td>
                         </tr>
                     </table>
                 </div>
                 <div class="layui-tab-item">
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
+                        <thead>
                         <tr style="background-color:#09F">
                             <td style="width:5%"><strong>午餐日期</strong></td>
                             <td style="width:5%"><strong>餐厅名称</strong></td>
                             <td style="width:7%"><strong>餐标</strong></td>
                             <td style="width:7%"><strong>人数</strong></td>
-                            <td style="width:7%"><strong>次数</strong></td>
                             <td style="width:7%"><strong>其他</strong></td>
                             <td style="width:7%"><strong>小计</strong></td>
                             <td style="width:5%"><strong>支付方式</strong></td>
@@ -130,110 +131,123 @@
                             <td style="width:5%"><strong>餐厅名称</strong></td>
                             <td style="width:7%"><strong>餐标</strong></td>
                             <td style="width:7%"><strong>人数</strong></td>
-                            <td style="width:3%"><strong>次数</strong></td>
                             <td style="width:7%"><strong>其他</strong></td>
                             <td style="width:7%"><strong>小计</strong></td>
                             <td style="width:9%"><strong>支付方式</strong></td>
                         </tr>
-                        <tr>
-                            <td>4.15</td>
-                            <td>海悦酒店</td>
-                            <td>300</td>
-                            <td>10</td>
-                            <td>2</td>
-                            <td>50</td>
-                            <td>3000</td>
-                            <td>签单</td>
-                            <td>4.15</td>
-                            <td>海神酒店</td>
-                            <td>400</td>
-                            <td>6</td>
-                            <td>1</td>
-                            <td>60</td>
-                            <td>4000</td>
-                            <td>付现</td>
-                        </tr>
+                        </thead>
+                        <tbody id="reportrestaurant">
+                            <!--<tr>-->
+                                <!--<td>4.15</td>-->
+                                <!--<td>海悦酒店</td>-->
+                                <!--<td>300</td>-->
+                                <!--<td>10</td>-->
+                                <!--<td>2</td>-->
+                                <!--<td>50</td>-->
+                                <!--<td>3000</td>-->
+                                <!--<td>签单</td>-->
+                                <!--<td>4.15</td>-->
+                                <!--<td>海神酒店</td>-->
+                                <!--<td>400</td>-->
+                                <!--<td>6</td>-->
+                                <!--<td>1</td>-->
+                                <!--<td>60</td>-->
+                                <!--<td>4000</td>-->
+                                <!--<td>付现</td>-->
+                            <!--</tr>-->
+                        </tbody>
+
                     </table>
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
                         <tr>
                             <td style="width:12%;background-color:#09F"><strong>用餐合计</strong></td>
-                            <td style="width:20%">10000</td>
+                            <td style="width:20%" id="ychj"></td>
                             <td style="width:15%;background-color:#09F"><strong>其中导游付</strong></td>
-                            <td style="width:20%">3000</td>
+                            <td style="width:20%" id="ctdyf"></td>
                             <td style="width:13%;background-color:#09F"><strong>签单合计</strong></td>
-                            <td style="width:20%">7000</td>
+                            <td style="width:20%" id="ctqdhj"></td>
                         </tr>
                     </table>
                 </div>
                 <div class="layui-tab-item">
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
-                        <tr style="background-color:#09F">
-                            <td style="width:20%"><strong>景点门票</strong></td>
-                            <td style="width:20%"><strong>单价</strong></td>
-                            <td style="width:20%"><strong>人数</strong></td>
-                            <td style="width:20%"><strong>小计</strong></td>
-                            <td style="width:20%"><strong>支付方式</strong></td>
-                        </tr>
-                        <tr>
-                            <td>五台山门票</td>
-                            <td>100</td>
-                            <td>10</td>
-                            <td>1000</td>
-                            <td>付现</td>
-                        </tr>
+                        <thead>
+                            <tr style="background-color:#09F">
+                                <td style="width:20%"><strong>景点门票</strong></td>
+                                <td style="width:20%"><strong>单价</strong></td>
+                                <td style="width:20%"><strong>人数</strong></td>
+                                <td style="width:20%"><strong>小计</strong></td>
+                                <td style="width:20%"><strong>支付方式</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody id="reportticket">
+                            <!--<tr>-->
+                                <!--<td>五台山门票</td>-->
+                                <!--<td>100</td>-->
+                                <!--<td>10</td>-->
+                                <!--<td>1000</td>-->
+                                <!--<td>付现</td>-->
+                            <!--</tr>-->
+                        </tbody>
+
                     </table>
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
                         <tr>
                             <td style="width:12%;background-color:#09F"><strong>门票合计</strong></td>
-                            <td style="width:20%">10000</td>
+                            <td style="width:20%" id="mphj"></td>
                             <td style="width:15%;background-color:#09F"><strong>其中导游付</strong></td>
-                            <td style="width:20%">3000</td>
+                            <td style="width:20%" id="mpdyf"></td>
                             <td style="width:13%;background-color:#09F"><strong>签单合计</strong></td>
-                            <td style="width:20%">7000</td>
+                            <td style="width:20%" id="mpqdhj"></td>
                         </tr>
                     </table>
                 </div>
                 <div class="layui-tab-item">
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
-                        <tr style="background-color:#09F">
-                            <td style="width:10%"><strong>过路费</strong></td>
-                            <td style="width:10%"><strong>停车费</strong></td>
-                            <td style="width:10%"><strong>预付车费</strong></td>
-                            <td style="width:10%"><strong>合计</strong></td>
-                            <td style="width:20%"><strong>出团补助(元/天)</strong></td>
-                            <td style="width:10%"><strong>天数</strong></td>
-                            <td style="width:10%"><strong>导游数</strong></td>
-                            <td style="width:10%"><strong>合计</strong></td>
-                            <td style="width:10%"><strong>支付方式</strong></td>
-                        </tr>
-                        <tr>
-                            <td>20</td>
-                            <td>50</td>
-                            <td>100</td>
-                            <td>170</td>
-                            <td>30</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td>850</td>
-                            <td>导游付</td>
-                        </tr>
+                        <thead>
+                            <tr style="background-color:#09F">
+                                <td style="width:10%"><strong>过路费</strong></td>
+                                <td style="width:10%"><strong>停车费</strong></td>
+                                <td style="width:10%"><strong>预付车费</strong></td>
+                                <td style="width:10%"><strong>合计</strong></td>
+                                <td style="width:20%"><strong>出团补助(元/天)</strong></td>
+                                <td style="width:10%"><strong>天数</strong></td>
+                                <td style="width:10%"><strong>导游数</strong></td>
+                                <td style="width:10%"><strong>合计</strong></td>
+                                <td style="width:10%"><strong>支付方式</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody id="reportfare">
+                            <!--<tr>-->
+                                <!--<td>20</td>-->
+                                <!--<td>50</td>-->
+                                <!--<td>100</td>-->
+                                <!--<td>170</td>-->
+                                <!--<td>30</td>-->
+                                <!--<td>5</td>-->
+                                <!--<td>1</td>-->
+                                <!--<td>850</td>-->
+                                <!--<td>导游付</td>-->
+                            <!--</tr>-->
+                        </tbody>
+
                     </table>
                 </div>
                 <div class="layui-tab-item">
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
                         <tr>
                             <td valign="top"><p>请列出项目及计算过程:</p>
-                                <p style="display:inline;">上厕所一个花了5快，一人买了一瓶营养快线，一瓶10快</p></td>
+                                <p style="display:inline;" id="remarks">上厕所一个花了5快，一人买了一瓶营养快线，一瓶10快</p></td>
                         </tr>
                     </table>
                     <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" width="80%">
                         <tr>
                             <td style="width:12%;background-color:#1E9FFF"><strong>导游付</strong></td>
-                            <td style="width:20%">400</td>
+                            <td style="width:20%" id="guidedTour"></td>
                             <td style="width:15%;background-color:#1E9FFF"><strong>签单</strong></td>
-                            <td style="width:20%">300</td>
+                            <td style="width:20%" id="signing"></td>
                             <td style="width:13%;background-color:#1E9FFF"><strong>合计</strong></td>
-                            <td style="width:20%">700</td>
+                            <td style="width:20%" id="total"></td>
                         </tr>
                     </table>
                 </div>
@@ -248,27 +262,27 @@
         <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
             <tr>
                 <td style="width:10%;background-color:#09F"><strong>原借款</strong></td>
-                <td style="width:15%">100</td>
+                <td style="width:15%"></td>
                 <td style="width:10%;background-color:#09F"><strong>外售团款</strong></td>
-                <td style="width:15%">200</td>
+                <td style="width:15%" id="receipt"></td>
                 <td style="width:15%;background-color:#09F"><strong>导游现付合计</strong></td>
-                <td style="width:10%">5000</td>
+                <td style="width:10%" id="totalPayable"></td>
                 <td style="width:15%;background-color:#09F"><strong>报/退款</strong></td>
-                <td style="width:10%">1000</td>
+                <td style="width:10%" id="balanceAmount"></td>
             </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
             <tr>
                 <th style="width:10%;background-color:#09F">备注</th>
-                <th>导游以全票制报销，………………</th>
+                <th id="remarks"></th>
             </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
             <tr>
                 <td style="width:10%;background-color:#09F"><strong>报账日期</strong></td>
-                <td style="width:30%"></td>
+                <td style="width:30%" id="reportDate"></td>
                 <td style="width:10%;background-color:#09F"><strong>导游签字</strong></td>
-                <td style="width:20%"></td>
+                <td style="width:20%" id="guideName"></td>
                 <td style="width:10%;background-color:#09F"><strong>审核人批示</strong></td>
                 <td style="width:20%"></td>
             </tr>
@@ -307,29 +321,342 @@
     //点击查询按钮进入查看图片页面
     //为修改模块添加弹出层
     function alertViewPictures() {
+        var dispatchId=$("input[name='dispatchId']").val();
+        var billTypeId=$("select[name='typeName']").val();
         layer.open({
             type: 2,
             title: '查看票据',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area: ['700px', '500px'],
-            content: 'viewPictures.html'
+            content: 'viewPictures.html?dispatchId='+dispatchId+"&billTypeId="+billTypeId
         });
     }
 
     getDispatchById();
+    billType();
+    listReportAccommodationById();
+    listReportrestaurantById();
+    listReportticketById();
+    listReportfareById();
+    listReportingotherexpensesById();
+
+
     function getDispatchById() {
-        var reportDetailId=$("input[name='${reportDetailId}']").val();
+        var reportDetailId=$("input[name='reportDetailId']").val();
         $.ajax({
             url: "http://localhost:8888/dispatch/getDispatchById",
             data: {"reportDetailId": reportDetailId},
             dataType: "json",
             type: "post",
             success:function (result) {
-                $("input[name='groupNumber']").val(result.data.groupNumber);
+                $("input[name='groupNumber']").val(result.data[0].groupNumber);
+                $("input[name='travelStartTime']").val(result.data[0].travelStartTime);
+                $("input[name='travelEndTime']").val(result.data[0].travelEndTime);
+                $("input[name='sendLine']").val(result.data[0].sendLine);
+                $("input[name='cha']").val(result.data[1]+1);
+                $("input[name='dispatchId']").val(result.data[0].dispatchId);
+                getTravelName(result.data[0].groupNumber);
+                getGuideById(result.data[0].guideId);
+                getReportdetailById(reportDetailId);
             }
         });
     }
 
+    /**
+     * 获取组团社名称
+     */
+    function getTravelName(groupNumber) {
+        alert(groupNumber);
+        $.ajax({
+            url: "http://localhost:8888/Travel/getTravelName",
+            data: {"groupNumber": groupNumber},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                $("input[name='travelName']").val(result.data.travelName);
+            }
+        });
+    }
+
+    /**
+     * 获取单据类型
+     */
+    function billType() {
+        $.ajax({
+            url: "http://localhost:8888/bill/listBillAll",
+            data: {},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                var content="<option value='0'>请选择单据类型</option>";
+                $.each(result.data,function (i,e) {
+                    content+="<option value='"+e.billTypeId+"'> "+e.typeName+"</option>";
+                })
+                $("select[name='typeName']").html(content);
+            }
+        });
+    }
+
+    /**
+     * 获取导游住宿报账信息
+     */
+    function listReportAccommodationById() {
+        var reportDetailId=$("input[name='reportDetailId']").val();
+        $.ajax({
+            url: "http://localhost:8888/Reportaccommodation/listReportAccommodationById",
+            data: {"reportDetailId":reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                var content="";
+                var zshj=0;         //住宿合计
+                var dyf=0;          //导游付
+                var jdhj=0;         //签单合计
+                $.each(result.data,function (i,e) {
+                    var monthDate=0;
+                    var dayDate=0;
+
+                    if(e.liveDate!=null){       //日期
+                        monthDate=e.liveDate.substring(5,7);
+                        dayDate=e.liveDate.substring(8,10)*1+1;
+                    }
+                    //计算住宿合计
+                    zshj+=e.subtotal;
+                    //计算签单合计
+                    if (e.payMethods=="签单"){
+                        jdhj+=e.subtotal;
+                    }
+                    if (e.payMethods=="现付"){
+                        dyf+=e.subtotal;
+                    }
+                    content+="<tr>" +
+                        "<td>"+monthDate+"."+dayDate+"</td>" +
+                        "<td>"+e.hotelName+"</td>" +
+                        "<td>"+e.housePrice+"</td>" +
+                        "<td>"+e.roomNum+"</td>" +
+                        "<td>"+e.accompanyingBed+"</td>" +
+                        "<td>"+e.accompanyingPrice+"</td>" +
+                        "<td>1</td>" +
+                        "<td>"+e.subtotal+"</td>" +
+                        "<td>"+e.payMethods+"</td>" +
+                        "</tr>";
+                });
+                $("#jiudian").html(content);
+                $("#zshj").text(zshj);
+                $("#dyf").text(dyf);
+                $("#jdhj").text(jdhj);
+            }
+        });
+    }
+
+    /**
+     * 获取导游名称
+     */
+    function getGuideById(guideId) {
+        $.ajax({
+            url: "http://localhost:8888/Guide/guideId",
+            data: {"guideId":guideId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                $("#guideName").text(result.data.guideName);
+            }
+        });
+    }
+
+    /**
+     * 获取导游报账明细信息
+     * @param reportDetailId
+     */
+    function getReportdetailById(reportDetailId) {
+        $.ajax({
+            url: "http://localhost:8888/reportdetail/getReportdetailById",
+            data: {"reportDetailId":reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                var monthDate=0;
+                var dayDate=0;
+                if(result.data.reportDate!=null){       //日期
+                    monthDate=result.data.reportDate.substring(5,7);
+                    dayDate=result.data.reportDate.substring(8,10)*1+1;
+                }
+                $("#reportDate").text(monthDate+"-"+dayDate);
+                $("#receipt").text(result.data.receipt);
+                $("#totalPayable").text(result.data.totalPayable);
+                $("#balanceAmount").text(result.data.balanceAmount);
+                $("#remarks").text(result.data.remarks);
+            }
+        });
+    }
+
+    /**
+     * 获取导游餐厅报账明细信息
+     */
+    function listReportrestaurantById() {
+        var reportDetailId=$("input[name='reportDetailId']").val();
+        $.ajax({
+            url: "http://localhost:8888/Reportrestaurant/listReportrestaurantById",
+            data: {"reportDetailId":reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                var content="";
+                var ychj=0;
+                var ctdyf=0;
+                var ctqdhj=0;
+                $.each(result.data,function (i,e) {
+                    //午餐日期
+                    var monthDate=0;
+                    var dayDate=0;
+                    if(e.lunchDate!=null){
+                        monthDate=e.lunchDate.substring(5,7);
+                        dayDate=e.lunchDate.substring(8,10)*1+1;
+                    }
+                    //晚餐日期
+                    var monthDatedinner=0;
+                    var dayDatedinner=0;
+                    if(e.dinnerDate!=null){
+                        monthDatedinner=e.dinnerDate.substring(5,7);
+                        dayDatedinner=e.dinnerDate.substring(8,10)*1+1;
+                    }
+                    var wcxj=e.lunchMeal*e.lunchEatNum; //午餐小计
+                    var wchj=e.dinnerMeal*e.dinnerEatNum;   //晚餐小计
+                    //计算用餐合计
+                    ychj+=wcxj+wchj;
+                    //计算导游付
+                    if (e.lunchPayMethods=="付现") {      //午餐
+                        ctdyf+=wcxj;
+                    }
+                    if (e.dinnerPayMethods=="付现") {     //晚餐
+                        ctdyf+=wchj;
+                    }
+                    //计算签单合计
+                    if (e.lunchPayMethods=="签单") {      //午餐
+                        ctqdhj+=wcxj;
+                    }
+                    if (e.dinnerPayMethods=="签单") {     //晚餐
+                        ctqdhj+=wchj;
+                    }
+                    content+="<tr>" +
+                        "<td>"+monthDate+"."+dayDate+"</td>" +
+                        "<td>"+e.luncheonName+"</td>" +
+                        "<td>"+e.lunchMeal+"</td>" +
+                        "<td>"+e.lunchEatNum+"</td>" +
+                        "<td>"+e.lunchother+"</td>" +
+                        "<td>"+wcxj+"</td>" +
+                        "<td>"+e.lunchPayMethods+"</td>" +
+                        "<td>"+monthDatedinner+"."+dayDatedinner+"</td>" +
+                        "<td>"+e.dinnerName+"</td>" +
+                        "<td>"+e.dinnerMeal+"</td>" +
+                        "<td>"+e.dinnerEatNum+"</td>" +
+                        "<td>"+e.dinnerother+"</td>" +
+                        "<td>"+wchj+"</td>" +
+                        "<td>"+e.dinnerPayMethods+"</td>" +
+                        "</tr>";
+                })
+                $("#reportrestaurant").html(content);
+                $("#ychj").text(ychj);
+                $("#ctdyf").text(ctdyf);
+                $("#ctqdhj").text(ctqdhj);
+            }
+
+        });
+    }
+
+    /**
+     * 获取导游门票报账明细信息
+     */
+    function listReportticketById() {
+        var reportDetailId=$("input[name='reportDetailId']").val();
+        $.ajax({
+            url: "http://localhost:8888/Reportticket/listReportticketById",
+            data: {"reportDetailId":reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                var content="";
+                var mphj=0;
+                var mpdyf=0;
+                var mpqdhj=0;
+                $.each(result.data,function (i,e) {
+
+                    //计算门票合计
+                    mphj+=e.nums*e.price;
+                    //计算签单合计
+                    if (e.payMethods=="签单"){
+                        mpdyf+=e.nums*e.price;
+                    }
+                    //计算导游付
+                    if (e.payMethods=="付现"){
+                        mpdyf+=e.nums*e.price;
+                    }
+
+                    content+="<tr>" +
+                        "<td>"+e.attrName+"</td>" +
+                        "<td>"+e.price+"</td>" +
+                        "<td>"+e.nums+"</td>" +
+                        "<td>"+e.nums*e.price+"</td>" +
+                        "<td>"+e.payMethods+"</td>" +
+                        "</tr>"
+                })
+                $("#reportticket").html(content);
+                $("#mphj").text(mphj);
+                $("#mpdyf").text(mpdyf);
+                $("#mpqdhj").text(mpqdhj);
+            }
+        });
+    }
+
+    /**
+     * 获取导游车费报账明细信息
+     */
+    function listReportfareById() {
+        var reportDetailId=$("input[name='reportDetailId']").val();
+        $.ajax({
+            url: "http://localhost:8888/Reportfare/listReportfareById",
+            data: {"reportDetailId":reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                //计算车费合计
+                var hj=result.data[0].tolls+result.data[0].parkingFee+result.data[0].prepaidFare;
+                var tianshu=result.data[2]*1+1;
+                var content="<tr>" +
+                    "<td>"+result.data[0].tolls+"</td>" +
+                    "<td>"+result.data[0].parkingFee+"</td>" +
+                    "<td>"+result.data[0].prepaidFare+"</td>" +
+                    "<td>"+hj+"</td>" +
+                    "<td>"+result.data[1].dailyCost+"</td>" +
+                    "<td>"+tianshu+"</td>"+
+                    "<td>1</td>" +
+                    "<td>"+result.data[1].dailyCost*tianshu+"</td>"+
+                    "<td>导游付</td>" +
+                    "</tr>"
+                    // <input type="text" disabled name="cha" style="width:60px; text-align:center">
+                $("#reportfare").html(content);
+            }
+        });
+    }
+
+    /**
+     * 获取导游报账其他支出明细信息
+     */
+    function  listReportingotherexpensesById() {
+        var reportDetailId=$("input[name='reportDetailId']").val();
+        $.ajax({
+            url: "http://localhost:8888/Reportingotherexpenses/listReportingotherexpensesById",
+            data: {"reportDetailId":reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                $("#remarks").text(result.data.remarks);
+                $("#guidedTour").text(result.data.guidedTour);
+                $("#signing").text(result.data.signing);
+                $("#total").text(result.data.total);
+            }
+        });
+    }
 </script>
 </html>

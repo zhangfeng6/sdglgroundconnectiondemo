@@ -20,24 +20,24 @@
 			<table lay-skin="line" style="width: 600px;margin-left: 350px;" border="1" cellspacing="0" cellpadding="0" >
 				<!--第一行-->
 				<tr style="height: 60px; ">
-					<td style="width: 120px;text-align: center; ">导游员姓名</td>
-					<td style="width: 100px;text-align: center; "></td>
-					<td style="width: 80px;text-align: center; ">性别</td>
-					<td style="width: 100px;text-align: center; "></td>
+					<td style="width: 120px;text-align: center; " >导游员姓名</td>
+					<td style="width: 100px;text-align: center; " id="guideName"></td>
+					<td style="width: 80px;text-align: center; " >性别</td>
+					<td style="width: 100px;text-align: center; " id="sex"></td>
 					<td style="width: 100px;text-align: center; ">导游证号</td>
-					<td style="width: 100px;text-align: center; " colspan="2"></td>
+					<td style="width: 100px;text-align: center; " colspan="2"  id="certificate"></td>
 				</tr>
 				<!--第二行-->
 				<tr style="height: 60px; ">
 					<td style="width: 120px;text-align: center;">旅游者(团)名称</td>
-					<td style="width: 380px;text-align: center; " colspan="4"></td>
+					<td style="width: 380px;text-align: center; " colspan="4" id="travelName"></td>
 					<td style="width: 50px;text-align: center; ">等级</td>
-					<td style="width: 50px;text-align: center; "></td>
+					<td style="width: 50px;text-align: center; ">-------</td>
 				</tr>
 				<!--第三行-->
 				<tr style="height: 60px;">
 					<td style="width: 120px;text-align: center;">缴费标准</td>
-					<td style="width: 180px;text-align: center;" colspan="2"></td>
+					<td style="width: 180px;text-align: center;" colspan="2">-------</td>
 					<td style="width: 100px;text-align: center;">住宿标准</td>
 					<td style="width: 100px;text-align: center;"></td>
 					<td style="width: 50px;text-align: center;">餐标</td>
@@ -46,13 +46,13 @@
 				<!--第四行-->
 				<tr style="height: 60px;">
 					<td style="width: 120px;text-align: center;">线路</td>
-					<td colspan="6" style="width: 480px;text-align: center; "></td>
+					<td colspan="6" style="width: 480px;text-align: center; " id="sendLine"></td>
 				</tr>
 				<table border="1" cellspacing="0" cellpadding="0" style="margin-left: 350px;width: 600px;border-top:none;">
 					<!--第五行-->
 				<tr style="height: 450px;">
 					<td style="width: 60px;text-align: center;">日<br/><br/><br/><br/><br/><br/>	志</td>
-					<td style="width: 550px;text-align: center;" colspan="6"></td>
+					<td style="width: 550px;text-align: center;" colspan="6" id="content"></td>
 				</tr>
 				<!--第六行-->
 				<tr style="height: 60px;">
@@ -62,45 +62,36 @@
 				</table>
 			</table>
 		</div>
-		
-		<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/jquery-1.8.2.min.js"></script>
 		<script>
-			layui.use(['jquery'], function() {
-				var $=layui.jquery;
-				//修改状态
-				$('#table-list').on('click', '.table-list-status', function() {
-					var That = $(this);
-					var status = That.attr('data-status');
-					var id = That.parent().attr('data-id');
-					if(status == 1) {
-						That.removeClass('layui-btn-normal').addClass('layui-btn-warm').html('隐藏').attr('data-status', 2);
-					} else if(status == 2) {
-						That.removeClass('layui-btn-warm').addClass('layui-btn-normal').html('显示').attr('data-status', 1);
+			$(function () {
+                logShow();
+            })
 
-					}
+            /**
+			 * 显示导游日志信息
+             */
+			function  logShow() {
+				$.ajax({
+					url:"/log/log",
+					data:{},
+					dataType:"",
+					type:"GET",
+					success:function (e) {
+                        $("#guideName").html(e.data.guide.guideName);//名字
+						var x="";
+						if (e.data.guide.sex==0){x="女"}else{x="男"}
+                        $("#sex").html(x);//性别
+                        $("#certificate").html(e.data.guide.certificate);//导游证号
+                        $("#travelName").html(e.data.dispatch.travel.travelName);//旅游团名称
+                        $("#sendLine").html(e.data.dispatch.sendLine);//线路
+                        $("#content").html(e.data.content);//日志
+                    },
+					error:function () {
+						alert("显示错误，请联系管理员，QQ：2267523168");
+                    }
 				})
-				//栏目展示隐藏
-				$('.showSubBtn').on('click', function() {
-					var _this = $(this);
-					var id = _this.attr('data-id');
-					var parent = _this.parents('.parent');
-					var child = $('.child-node-' + id);
-					var childAll = $('tr[parentid=' + id + ']');
-					if(parent.hasClass('collapsed')) {
-						_this.html('-');
-						parent.addClass('expanded').removeClass('collapsed');
-						child.css('display', '');
-					} else {
-						_this.html('+');
-						parent.addClass('collapsed').removeClass('expanded');
-						child.css('display', 'none');
-						childAll.addClass('collapsed').removeClass('expanded').css('display', 'none');
-						childAll.find('.showSubBtn').html('+');
-					}
-
-				})
-			});
+            }
 		</script>
 	</body>
 

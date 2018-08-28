@@ -14,4 +14,9 @@
     <select id="login" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
         select * from guide where username=#{username} and password=#{password}
     </select>
+
+    <!--查询导游信息-->
+    <select id="ShowAllGuide" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
+       select  *  from guide where  guideId=#{guideId}
+    </select>
 </mapper>

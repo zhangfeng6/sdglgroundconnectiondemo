@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 导游报账住宿 控制层
  **/
 @RestController
+@RequestMapping("Reportaccommodation")
 public class ReportaccommodationController {
 
     // 日志对象
@@ -43,6 +44,25 @@ public class ReportaccommodationController {
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;
+        }
+    }
+
+
+    /**
+     * 获取导游住宿报账信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("listReportAccommodationById")
+    public ReponseResult listReportAccommodationById(Integer reportDetailId){
+        try {
+            ReponseResult data=ReponseResult.ok(reportaccommodationService.listReportaccommodationByreportDetailId(reportDetailId),"获取导游住宿报账明细成功");
+            logger.info("mothod:listReportAccommodationById 获取导游住宿报账明细成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listReportAccommodationById 获取导游住宿报账明细失败");
+            return ReponseResult.err("获取导游住宿报账明细失败");
         }
     }
 }

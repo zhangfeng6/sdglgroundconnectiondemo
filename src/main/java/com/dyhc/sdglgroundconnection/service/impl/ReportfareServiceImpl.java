@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -32,5 +33,10 @@ public class ReportfareServiceImpl implements ReportfareService {
             e.printStackTrace();
         }
         return number;
+    }
+
+    @Override
+    public Reportfare listReportfareById(Integer reportDetailId) throws Exception {
+        return reportfareMapper.listReportfareById(reportDetailId);
     }
 }

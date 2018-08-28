@@ -26,4 +26,5 @@
     <select id="selectTravelById" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">
         select * from travel where whetherDel!=1 and travelId=#{travelId}
     </select>
+
 </mapper>

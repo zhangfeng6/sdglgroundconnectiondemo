@@ -74,4 +74,10 @@ public interface ScenicspotService {
      * @return
      */
     Scenicspot selectByScenicSpotId(Integer scenicSpotId);
+    /**
+     * 按编号查询景点
+     * @param scenicSpotId
+     * @return
+     */
+    List<Scenicspot> ShowScenicSpotId(Integer scenicSpotId);
 }

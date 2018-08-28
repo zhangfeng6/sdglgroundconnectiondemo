@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -18,7 +19,7 @@ public class Dispatch {
     @Column(name = "groundConnectionNumber")
     private String groundConnectionNumber; // 地接社团号
     @Column(name = "groupNumber")
-    private String groupNumber; // 组团社团号
+    private Integer groupNumber; // 组团社团号
     @Column(name = "sendLine")
     private String sendLine; // 发往线路
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -57,10 +58,11 @@ public class Dispatch {
     private Date creationDate; // 创建日期
     @Column(name = "guideId")
     private Integer guideId;
-    private String carcontacts;
+    private String value3;
+    @Column(name = "carcontacts")
+    private  String carcontacts;
 
     public String getCarcontacts() {
-
         return carcontacts;
     }
 
@@ -68,9 +70,34 @@ public class Dispatch {
         this.carcontacts = carcontacts;
     }
 
-    private String value3;
+    //组团表
+    @Transient
+    private  Travel travel;
+    //调度酒店表
+    @Transient
+    private List<Dispatchhotel> dispatchhotel;
 
+    public Travel getTravel() {
+        return travel;
+    }
+    public void setTravel(Travel travel) {
+        this.travel = travel;
+    }
+    public List<Dispatchhotel> getDispatchhotel() {
+        return dispatchhotel;
+    }
 
+    public void setDispatchhotel(List<Dispatchhotel> dispatchhotel) {
+        this.dispatchhotel = dispatchhotel;
+    }
+
+    public Integer getGroupNumber() {
+        return groupNumber;
+    }
+
+    public void setGroupNumber(Integer groupNumber) {
+        this.groupNumber = groupNumber;
+    }
 
     @Transient
     private String guideName;
@@ -102,15 +129,6 @@ public class Dispatch {
         this.groundConnectionNumber = groundConnectionNumber;
     }
 
-    @Basic
-    @Column(name = "groupNumber")
-    public String getGroupNumber() {
-        return groupNumber;
-    }
-
-    public void setGroupNumber(String groupNumber) {
-        this.groupNumber = groupNumber;
-    }
 
     @Basic
     @Column(name = "sendLine")

@@ -58,4 +58,22 @@ public class ReportticketController {
             return  error;
         }
     }
+
+    /**
+     * 获取导游门票报账明细信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("listReportticketById")
+    public ReponseResult listReportticketById(Integer reportDetailId){
+        try {
+            ReponseResult data=ReponseResult.ok(reportticketService.listReportticketById(reportDetailId),"获取成功");
+            logger.info("mothod:listReportticketById 获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("mothod:listReportticketById 获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
 }

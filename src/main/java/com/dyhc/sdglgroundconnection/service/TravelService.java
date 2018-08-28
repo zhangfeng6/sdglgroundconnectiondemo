@@ -1,11 +1,13 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -14,14 +16,13 @@ import java.util.List;
  * 组团社业务接口
  **/
 public interface TravelService {
+
     /**
-<<<<<<< HEAD
      * 赵伟伟
      * 查询全部组团社
      * @return
      */
     List<Travel> selectTravel();
-
     /**
      * 赵伟伟
      * 查询组团社
@@ -83,5 +84,12 @@ public interface TravelService {
      * @return
      */
     Integer getupdlala(Travel travel);
+
+    /**
+     * 根据组团社号获取组团社名称
+     * @param groupNumber
+     * @return
+     */
+    Travel getTravelName(Integer groupNumber)throws Exception;
 
 }

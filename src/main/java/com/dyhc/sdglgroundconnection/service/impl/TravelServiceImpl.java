@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 import com.dyhc.sdglgroundconnection.mapper.TravelMapper;
 import com.dyhc.sdglgroundconnection.pojo.Travel;
 import com.dyhc.sdglgroundconnection.service.TravelService;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class TravelServiceImpl implements TravelService {
         return travelMapper.selectAll();
     }
 
+    /**
+     * 查询组团社方法
+     * @param travelId
+     * @return
+     */
     @Override
     public Travel selectTravelById(Integer travelId) {
         return travelMapper.selectTravelById(travelId);
@@ -104,5 +110,10 @@ public class TravelServiceImpl implements TravelService {
     @Override
     public Integer getupdlala(Travel travel) {
         return travelMapper.getupdlala(travel);
+    }
+
+    @Override
+    public Travel getTravelName(Integer groupNumber) throws Exception {
+        return travelMapper.selectByPrimaryKey(groupNumber);
     }
 }

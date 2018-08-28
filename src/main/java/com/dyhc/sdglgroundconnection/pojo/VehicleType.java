@@ -36,6 +36,15 @@ public class VehicleType {
     private String value2; // 预备
     private String value3; // 预备
     @Transient
+    private  Carrental carrental;//汽车租赁公司
+    public Carrental getCarrental() {
+        return carrental;
+    }
+    public void setCarrental(Carrental carrental) {
+        this.carrental = carrental;
+    }
+
+    @Transient
     private Dictionaries dictionaries;      //字典表
     public Dictionaries getDictionaries() {
         return dictionaries;

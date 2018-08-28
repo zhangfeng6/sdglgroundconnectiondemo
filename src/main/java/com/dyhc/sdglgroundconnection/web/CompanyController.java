@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * this class by created wuyongfei on 2018/6/5 13:50
  * 公司信息 控制层
  **/
+@RequestMapping("/CompanyController")
 @RestController
 public class CompanyController  {
 
@@ -28,12 +29,13 @@ public class CompanyController  {
      * 查看公司
      * @return
      */
-    @RequestMapping("/CompanyList.html")
+    @RequestMapping("/CompanyList")
     public ReponseResult CompanyList(){
         try{
             Company company=companyService.getCompany();
             logger.info(" method:CompanyList  添加组团社成功！");
-            return ReponseResult.ok(company,"添加取组团社成功！");
+            ReponseResult<Company> data= ReponseResult.ok(company,"添加取组团社成功！");
+            return data;
         }catch (Exception e){
             logger.error(" method:CompanyList  获取公司信息数据失败，系统出现异常！");
             e.printStackTrace();

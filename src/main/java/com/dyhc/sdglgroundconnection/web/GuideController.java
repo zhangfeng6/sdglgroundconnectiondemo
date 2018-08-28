@@ -220,4 +220,23 @@ public class GuideController{
             return ReponseResult.err("修改失败");
         }
     }
+
+
+    /**
+     * 获取导游名称
+     * @param guideId
+     * @return
+     */
+    @RequestMapping("guideId")
+    public ReponseResult getGuideById(Integer guideId){
+        try {
+            Guide guide=guideService.getGuideById(guideId);
+            logger.info("method:updateGuideByPassword 获取成功");
+            return ReponseResult.ok(guide,"获取成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:updateGuideByPassword 获取失败");
+            return ReponseResult.err("获取失败");
+        }
+    }
 }

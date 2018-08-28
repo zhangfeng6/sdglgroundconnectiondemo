@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,21 +20,53 @@ public class Log {
     private Integer guideId; // 导游id
     @Column(name = "dispatchId")
     private Integer dispatchId; // 调度表编号（外键，与调度表关联）
+    @Column(name = "content")
     private String content; // 内容
+    @Column(name = "remarks")
     private String remarks; // 备注
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除
+    @Column(name = "creater")
     private Integer creater; // 创建人 （外键，与人员表关联）
+    @Column(name = "modifier")
     private Integer modifier; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "modifiedData")
     private Date modifiedData; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
     private String value1;
     private String value2;
     private String value3;
+    /**
+     *日志表关联导游表
+     */
+    @Transient
+    private  Guide guide;
+    /**
+     * 日志表关联调度表
+     */
+    @Transient
+    private  Dispatch dispatch;
+
+    public Dispatch getDispatch() {
+        return dispatch;
+    }
+
+    public void setDispatch(Dispatch dispatch) {
+        this.dispatch = dispatch;
+    }
+
+    public Guide getGuide() {
+        return guide;
+    }
+
+    public void setGuide(Guide guide) {
+        this.guide = guide;
+    }
 
     @Id
     @Column(name = "logId")

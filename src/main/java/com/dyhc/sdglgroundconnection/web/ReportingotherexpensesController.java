@@ -63,4 +63,21 @@ public class ReportingotherexpensesController {
         }
     }
 
+    /**
+     * 获取导游报账其他支出明细信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("listReportingotherexpensesById")
+    public ReponseResult listReportingotherexpensesById(Integer reportDetailId){
+        try {
+            ReponseResult data=ReponseResult.ok(reportingotherexpensesService.listReportingotherexpensesById(reportDetailId),"获取成功");
+            logger.info("mothod:listReportingotherexpensesById 获取成功");
+            return  data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listReportingotherexpensesById 获取失败");
+            return ReponseResult.err("获取失败");
+        }
+    }
 }

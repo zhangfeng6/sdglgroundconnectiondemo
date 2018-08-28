@@ -5,7 +5,7 @@
     <select id="listVehicleTypes" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
         select  * from VehicleType
 
-        where  whetherDel=3
+        where  whetherDel=0
 
         order by createDate desc
     </select>
@@ -25,15 +25,21 @@
     </update>
     
     <update id="deleteVehicleTypeById">
-        update vehicletype set whetherDel=1 where typeId=#{typeId}
+        update vehicletype set whetherDel=0 where typeId=#{typeId}
     </update>
     
     <select id="listVehicleTypeByValueId" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
         select * from vehicleType
-        where carRentalId=#{carRentalId} and valueId=#{valueId} and whetherDel=3
+        where carRentalId=#{carRentalId} and valueId=#{valueId} and whetherDel=0
+    </select>
+
+    <!--查询车辆类型：贾晓亮-->
+    <select id="vehicleType" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
+        select   *   from    vehicletype where  typeId=#{typeId}
     </select>
 
     <select id="listinfoByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
 SELECT v.`typeId`,c.`carRentalName` AS 'carRentalName' FROM `vehicletype` v,`carrental` c WHERE v.`carRentalId`=c.`carRentalId` AND c.`whetherDel` !=1 AND v.`valueId` = #{valueId}
     </select>
+
 </mapper>

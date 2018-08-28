@@ -1,17 +1,22 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Disattr;
+import com.dyhc.sdglgroundconnection.pojo.Discar;
 import com.dyhc.sdglgroundconnection.service.DisattrService;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度景点 控制层
  **/
+@RequestMapping("/disattr")
 @RestController
 public class DisattrController {
 
@@ -20,4 +25,26 @@ public class DisattrController {
 
     @Autowired
     private DisattrService disattrService;
+
+
+
+    /**
+     * 查看调度景点
+     * @return
+     */
+    @RequestMapping("/DisattrController")
+    public ReponseResult CompanyList(Integer offerId){
+        offerId=1;
+        try{
+            Disattr disattr =disattrService.disattr(offerId);
+            logger.info(" method:CompanyList  调度景点查询成功！");
+            ReponseResult<Disattr> data= ReponseResult.ok(disattr,"调度景点查询成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:CompanyList  调度景点查询失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }
