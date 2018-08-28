@@ -31,6 +31,6 @@
     </select>
 
     <select id="listinfoByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
-        SELECT m.`typeId`,r.`restaurantName` AS 'restaurantName' FROM `mealtype` m,`restaurant` r  WHERE m.`restaurantId`=r.`restaurantId` AND m.`valueId`=#{valueId} AND r.`whetherDel` !=1
+        SELECT m.`typeId`,r.`restaurantName` AS 'restaurantName',m.`costprice` FROM `mealtype` m,`restaurant` r  WHERE m.`restaurantId`=r.`restaurantId` AND m.`valueId`=#{valueId} AND r.`whetherDel` !=1
     </select>
 </mapper>
