@@ -46,7 +46,16 @@ public class VehicleType {
     }
 
 
+    @Transient
+    private String carRentalName;
 
+    public String getCarRentalName() {
+        return carRentalName;
+    }
+
+    public void setCarRentalName(String carRentalName) {
+        this.carRentalName = carRentalName;
+    }
 
     @Column(name = "typeCode")
     private String typeCode;

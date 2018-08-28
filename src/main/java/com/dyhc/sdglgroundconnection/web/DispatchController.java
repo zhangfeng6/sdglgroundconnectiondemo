@@ -200,4 +200,23 @@ public class DispatchController {
             return err;
         }
     }
+
+    /**
+     *根据报价单Id获取报价信息 张枫
+     * @param oid
+     * @return
+     */
+    @RequestMapping("/getofferinfoById")
+    public ReponseResult getofferinfoById(@RequestParam("oid")Integer oid){
+        try {
+            ReponseResult<Map> data=ReponseResult.ok(dispatchService.getofferinfoById(oid),"获取报价信息成功！");
+            logger.info("method:getofferinfoById 获取报价信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:getofferinfoById 系统异常！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
 }
