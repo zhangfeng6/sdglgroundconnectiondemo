@@ -42,6 +42,29 @@ public class Dispatchhotel {
     private String value2;
     private String value3;
 
+    @Transient
+    private String hotelName;
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    //酒店表
+    @Transient
+    private Hotel hotel;
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     @Id
     @Column(name = "dispatchHotelId")
     public int getDispatchHotelId() {

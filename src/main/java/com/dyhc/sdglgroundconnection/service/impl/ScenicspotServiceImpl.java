@@ -88,10 +88,23 @@ public class ScenicspotServiceImpl implements ScenicspotService {
         return scenicspotMapper.selectAll();
     }
 
+    /**
+     * 查询景点
+     * @param scenicSpotId
+     * @return
+     */
     @Override
     public Scenicspot selectByScenicSpotId(Integer scenicSpotId) {
         return scenicspotMapper.selectByScenicSpotId(scenicSpotId);
     }
 
-
+    /**
+     * 查询景点（贾晓亮：调度租车查询景点）
+     * @param scenicSpotId
+     * @return
+     */
+    @Override
+    public List<Scenicspot> ShowScenicSpotId(Integer scenicSpotId) {
+        return scenicspotMapper.ShowScenicSpotId(scenicSpotId);
+    }
 }

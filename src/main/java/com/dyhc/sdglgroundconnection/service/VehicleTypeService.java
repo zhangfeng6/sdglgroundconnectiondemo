@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.VehicleType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -54,4 +55,12 @@ public interface VehicleTypeService {
      * @return
      */
     List<VehicleType> listVehicleTypeByValueId(Integer valueId,Integer carRentalId);
+
+
+    /**
+     *
+     * @param typeId
+     * @return
+     */
+    VehicleType vehicleType(@Param("typeId")Integer typeId);
 }

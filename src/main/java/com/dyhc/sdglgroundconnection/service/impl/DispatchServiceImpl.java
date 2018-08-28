@@ -2,6 +2,8 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
+import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
+import com.dyhc.sdglgroundconnection.pojo.Travel;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Guideschedule;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
@@ -26,6 +28,12 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Autowired
     private DispatchMapper dispatchMapper;
+
+    @Autowired
+    private DispatchhotelMapper dispatchhotelMapper;
+
+    @Autowired
+    private  DispatchhotelServiceImpl dispatchhotelService;
 
     @Autowired
     private DictionariesMapper dictionariesMapper;
@@ -107,6 +115,31 @@ public class DispatchServiceImpl implements DispatchService {
             list=carrentalMapper.listcarrentalByvalueId(valueId);
         }
         return list;
+    }
+
+    /**
+     * 调度表的信息：贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    public  Dispatch dispatchSelectAll(Integer dispatchId){
+        Dispatch dispatch=null;
+        try {
+             dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
+             Travel travel =travelMappere.selectTravelById(dispatch.getGroupNumber());
+             String A ="";
+             if (travel.getTravelName()==null){
+                 A="无组团名称";
+                 travel.setTravelName(A);
+             }
+             dispatch.setTravel(travel);
+             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
+             /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
+             dispatch.setDispatchhotel(dispatchhotels);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dispatch;
     }
 
     @Override

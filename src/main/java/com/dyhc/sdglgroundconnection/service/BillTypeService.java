@@ -1,10 +1,14 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Bill;
 import com.dyhc.sdglgroundconnection.pojo.BillType;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 单据类型业务接口
@@ -52,4 +56,11 @@ public interface BillTypeService {
      * @return
      */
     BillType fuzhiBillType(Integer billTypeId);
+
+    /**
+     * 获取所有单据类型
+     * @return
+     * @throws Exception
+     */
+    List<BillType> listBillAll()throws Exception;
 }

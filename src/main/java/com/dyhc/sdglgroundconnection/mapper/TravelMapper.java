@@ -76,4 +76,41 @@ public interface TravelMapper extends CommonMapper<Travel> {
      */
     Offer selectOfferByTravelId(@Param("travelId") Integer travelId);
 
+    /**
+     * 查询组团表信息
+     * @param travelId
+     * @return
+     */
+    Travel  travel(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社Id查询餐厅导游报价
+     * @param travelId
+     * @return
+     */
+    List<Reportrestaurant> selectReportrestaurantByTravelId(@Param("travelId") Integer travelId);
+
+
+
+    /**
+     * 根据组团社Id查询导游酒店报价
+     * @param travelId
+     * @return
+     */
+    List<Dispatchhotel> selectReportaccommodationByTravelId(@Param("travelId") Integer travelId);
+
+
+    /**
+     * 根据组团社Id查询导游景点门票报账
+     * @param travelId
+     * @return
+     */
+    List<Disattr> selectReportticketByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社Id查询导游车费报账
+     * @param travelId
+     * @return
+     */
+    Discar selectReportfareByTravelId(@Param("travelId") Integer travelId);
 }

@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 import com.dyhc.sdglgroundconnection.mapper.TravelMapper;
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.TravelService;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class TravelServiceImpl implements TravelService {
         return travelMapper.selectAll();
     }
 
+    /**
+     * 查询组团社方法
+     * @param travelId
+     * @return
+     */
     @Override
     public Travel selectTravelById(Integer travelId) {
         return travelMapper.selectTravelById(travelId);
@@ -124,5 +130,29 @@ public class TravelServiceImpl implements TravelService {
     @Override
     public Offer selectOfferByTravelId(Integer travelId) {
         return travelMapper.selectOfferByTravelId(travelId);
+    }
+    @Override
+    public Travel getTravelName(Integer groupNumber) throws Exception {
+        return travelMapper.selectByPrimaryKey(groupNumber);
+    }
+
+    @Override
+    public List<Reportrestaurant> selectReportrestaurantByTravelId(Integer travelId) {
+        return travelMapper.selectReportrestaurantByTravelId(travelId);
+    }
+
+    @Override
+    public List<Dispatchhotel> selectReportaccommodationByTravelId(Integer travelId) {
+        return travelMapper.selectReportaccommodationByTravelId(travelId);
+    }
+
+    @Override
+    public List<Disattr> selectReportticketByTravelId(Integer travelId) {
+        return travelMapper.selectReportticketByTravelId(travelId);
+    }
+
+    @Override
+    public Discar selectReportfareByTravelId(Integer travelId) {
+        return travelMapper.selectReportfareByTravelId(travelId);
     }
 }

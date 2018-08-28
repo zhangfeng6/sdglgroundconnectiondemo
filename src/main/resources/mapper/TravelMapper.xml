@@ -49,4 +49,20 @@
     <select id="selectOfferByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">
          SELECT * FROM offer o,travel t WHERE o.travelId=t.travelId AND t.travelId=#{travelId}
     </select>
+
+    <select id="selectReportrestaurantByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Reportrestaurant">
+        SELECT rr.* FROM Dispatch d,ReportDetail r,reportrestaurant rr WHERE d.dispatchId=r.dispatchId AND rr.reportDetailId = r.reportDetailId AND d.groupNumber=#{travelId}
+    </select>
+
+    <select id="selectReportaccommodationByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
+        SELECT rr.*,ss.hotelName FROM Dispatch d,DispatchHotel rr,hotel ss WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND ss.hotelId = rr.hotelId
+    </select>
+
+    <select id="selectReportticketByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disattr">
+         SELECT rr.*,ss.scenicSpotName FROM Dispatch d,DisAttr rr,scenicSpot ss WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND ss.scenicSpotId = rr.scenicSpotId
+    </select>
+
+    <select id="selectReportfareByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Discar">
+         SELECT rr.*,d.loan,d.wineFee,d.fare FROM Dispatch d,`disCar` rr WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId}
+    </select>
 </mapper>

@@ -57,7 +57,8 @@
 		    </thead>
 		    <tbody>
 		    	<table border="2" cellspacing="0" cellpadding="0">
-		    		<tr>
+		    		<thead>
+					<tr>
 		    			<td>日期</td>
 		    			<td>午餐</td>
 		    			<td>餐标，元/人</td>
@@ -66,7 +67,11 @@
 		    			<td>客人住宿，元/间天*间</td>
 		    			<td>司陪</td>
 		    		</tr>
-		    		<tr>
+					</thead>
+					<tbody id="tb">
+
+					</tbody>
+		    		<!--<tr>
 		    			<td>4.15</td>
 		    			<td>地狱之门</td>
 		    			<td>40*9=360<br />含酒水果盘</td>
@@ -128,11 +133,11 @@
 		    			<td>50*9=360<br />含酒水果盘</td>
 		    			<td>景江订5标<br/>签单</td>
 		    			<td>2床</td>
-		    		</tr>
-		    			<tr>
-		    			<td>总计</td>
-		    			<td colspan="6" style="background-color:  darkgrey;">餐：现付3948元，房：现付5750元，合计：现付9698</td>
-		    		</tr>
+		    		</tr>-->
+		    			<!--<tr>
+		    				<td>总计</td>
+		    				<td colspan="6" style="background-color:  darkgrey;">餐：现付3948元，房：现付5750元，合计：现付9698</td>
+		    			</tr>-->
 		    	</table>
 		    	<table border="1" cellspacing="0" cellpadding="0">
 		    		<tr>
@@ -142,8 +147,8 @@
 		    					<tr>
 		    						<td>付款方式及折扣</td>
 		    						<td style="border: 0px;">
-		    							<table border="1" cellspacing="0" cellpadding="0">
-		    								<tr>
+		    							<table border="1" cellspacing="0" cellpadding="0" id="ta">
+		    								<!--<tr>
 		    									<td>无天山</td>
 		    									<td>145*6=870</td>
 		    									<td>虎口</td>
@@ -202,13 +207,13 @@
 		    									<td>145*6=870</td>
 		    									<td>虎口</td>
 		    									<td>75*6+50=500 预约门票 15203577748</td>
-		    								</tr>
+		    								</tr>-->
 		    							</table>
 		    						</td>
 		    					</tr>
 		    					<tr>
 		    						<td style="width: 20px;">计</td>
-		    						<td style="background-color:  darkgrey;" >现付5832</td>
+									<td style="background-color:  darkgrey;" >现付<span id="jdfx"></span></td>
 		    					</tr>
 		    				</table>
 		    			</td>
@@ -219,17 +224,17 @@
 		    	<table border="1" cellspacing="0" cellpadding="0">
 		    		<tr>
 		    			<td>车费<br/>过停</td>
-		    			<td>车费2450+过停1500=3950元</td>
+		    			<td id="chefei"></td>
 		    			<td>酒水/矿泉水</td>
-		    			<td>矿泉水54元</td>
+		    			<td id="jiu"></td>
 		    		</tr>
 		    			<tr>
 		    			<td>总计</td>
-		    			<td colspan="3">现付9999元</td>
+		    			<td colspan="3">现付<span id="zongji"></span>元</td>
 		    		</tr>
 		    			<tr>
 		    			<td>导游<br/>签收</td>
-		    			<td colspan="3">1.房单（）&nbsp;&nbsp;2.餐单（）&nbsp;&nbsp;3.门票单（）&nbsp;&nbsp;4.返程机票或火车票（） &nbsp;&nbsp;5.游客意见表（）<br/>导游借款：19000元</td>
+		    			<td colspan="3">1.房单（）&nbsp;&nbsp;2.餐单（）&nbsp;&nbsp;3.门票单（）&nbsp;&nbsp;4.返程机票或火车票（） &nbsp;&nbsp;5.游客意见表（）<br/>导游借款：<span id="jie"></span>元</td>
 		    		</tr>
 		    	</table>
 		    </tfoot>
@@ -249,8 +254,12 @@
             selectStaffByTraveId();
             selectDispatchByTravelId();
             selectOfferByTravelId();
+            selectReportrestaurantByTravelId();
+            selectReportticketByTravelId();
+            selectReportfareByTravelId();
 		})
 		var id=1;
+		var zongji = 0;
 
 		function selectGuideByTravelId(){
 			$.ajax({
@@ -291,6 +300,27 @@
             })
         }
 
+
+        function selectReportfareByTravelId(){
+            $.ajax({
+                url:"/Travel/selectReportfareByTravelId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    var guoting = data.data.number+data.data.costPrice;
+                    var zong = guoting+data.data.fare;
+                    $("#chefei").text("车费"+guoting+"+过停"+data.data.fare+"="+zong+"元");
+                    $("#jie").text(data.data.loan);
+                    $("#jiu").text(data.data.wineFee+"元");
+                    zongji+=zong;
+                    $("#zongji").text(zongji);
+                }
+            })
+        }
+
+
         function selectOfferByTravelId(){
             $.ajax({
                 url:"/Travel/selectOfferByTravelId",
@@ -303,6 +333,114 @@
                     $("#number").text(data.data.number);
                     $("#yongfang").text(data.data.number/2+"间");
                     $("#keyuan").text(data.data.tourist);
+                }
+            })
+        }
+
+
+        function selectReportrestaurantByTravelId(){
+            $.ajax({
+                url:"/Travel/selectReportrestaurantByTravelId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    var content="";
+                    var canfei = 0;
+                    var fangfei = 0;
+                    for (var i=0;i<data.data[1].length;i++){
+                        var wucan = Number(data.data[0][i].lunchMeal)*Number(data.data[0][i].lunchEatNum);
+                        var wancan = Number(data.data[0][i].dinnerMeal)*Number(data.data[0][i].dinnerEatNum);
+                        var jiudian = data.data[1][i].housePrice*data.data[1][i].roomNum+data.data[1][i].accompanyingBed*data.data[1][i].accompanyingPrice;
+						if (data.data[0][i].lunchPayMethods=="付现"){
+							canfei+=wucan;
+						}
+                        if (data.data[0][i].dinnerPayMethods=="付现"){
+                            canfei+=wancan;
+                        }
+                        if (data.data[1][i].payMethods=="付现"){
+                            fangfei+=jiudian;
+                        }
+
+                        content+="<tr>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[1][i].liveDate.substring(data.data[1][i].liveDate.length-5)+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[0][i].luncheonName+"<br/>"+data.data[0][i].lunchPayMethods+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[0][i].lunchMeal+"*"+data.data[0][i].lunchEatNum+"="+wucan+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[0][i].dinnerName+"<br/>"+data.data[0][i].dinnerPayMethods+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[0][i].dinnerMeal+"*"+data.data[0][i].dinnerEatNum+"="+wancan+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[1][i].hotelName+" "+data.data[1][i].roomNum+"间+"+data.data[1][i].accompanyingBed+"司陪<br/>"+data.data[1][i].payMethods+" "+data.data[1][i].housePrice+"*"+data.data[1][i].roomNum+"+"+data.data[1][i].accompanyingBed+"*"+data.data[1][i].accompanyingPrice+"="+jiudian+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[1][i].accompanyingBed+"床</td>\n" +
+                            "\t\t    \t\t</tr>";
+					}
+					var zong= canfei+fangfei;
+                    zongji+=zong;
+					content+="<tr>\n" +
+                        "\t\t    \t\t\t\t<td>总计</td>\n" +
+                        "\t\t    \t\t\t\t<td colspan=\"6\" style=\"background-color:  darkgrey;\">餐：现付"+canfei+"元，房：现付"+fangfei+"元，合计：现付"+zong+"</td>\n" +
+                        "\t\t    \t\t\t</tr>"
+					$("#tb").html(content);
+                }
+            })
+        }
+
+
+        function selectReportticketByTravelId(){
+            $.ajax({
+                url:"/Travel/selectReportticketByTravelId",
+                data:{travelId:id},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    var zong = 0;
+                    var i=0;
+                    var content="";
+                    var xun = 0;
+                    if (data.data.length%2==0){
+                        xun = data.data.length/2;
+                        for (var j=0;j<xun;j++){
+                            var jingdian = data.data[i].costPrice*data.data[i].buynum;
+                            var jingdian1 = data.data[i+1].costPrice*data.data[i+1].buynum;
+                            zong+=(jingdian+jingdian1);
+                            content+="<tr>\n" +
+                                "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i].scenicSpotName+"</td>\n" +
+                                "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i].costPrice+"*"+data.data[i].buynum+"="+jingdian+"<br/>"+data.data[i].payMethods+"</td>\n" +
+                                "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i+1].scenicSpotName+"</td>\n" +
+                                "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i+1].costPrice+"*"+data.data[i+1].buynum+"="+jingdian1+"<br/>"+data.data[i+1].payMethods+"</td>\n" +
+                                "\t\t    \t\t\t\t\t\t\t\t</tr>";
+                            i+=2;
+                        }
+					}else{
+                        xun = parseInt(data.data.length/2+1);
+                        for (var j=0;j<xun;j++){
+                            var jingdian = 0;
+                            var jingdian1 = 0;
+                            if ((j+1)==xun){
+                                var jingdian = data.data[i].costPrice*data.data[i].buynum;
+                                zong+=jingdian;
+                                content+="<tr>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i].scenicSpotName+"</td>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i].costPrice+"*"+data.data[i].buynum+"="+jingdian+"<br/>"+data.data[i].payMethods+"</td>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t</tr>";
+							}else{
+                                var jingdian = data.data[i].costPrice*data.data[i].buynum;
+                                var jingdian1 = data.data[i+1].costPrice*data.data[i+1].buynum;
+                                zong+=(jingdian+jingdian1);
+                                content+="<tr>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i].scenicSpotName+"</td>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i].costPrice+"*"+data.data[i].buynum+"="+jingdian+"<br/>"+data.data[i].payMethods+"</td>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i+1].scenicSpotName+"</td>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t\t<td>"+data.data[i+1].costPrice+"*"+data.data[i+1].buynum+"="+jingdian1+"<br/>"+data.data[i+1].payMethods+"</td>\n" +
+                                    "\t\t    \t\t\t\t\t\t\t\t</tr>";
+							}
+                            i+=2;
+
+                        }
+					}
+                    zongji+=zong;
+					$("#jdfx").text(zong);
+					$("#ta").html(content);
                 }
             })
         }

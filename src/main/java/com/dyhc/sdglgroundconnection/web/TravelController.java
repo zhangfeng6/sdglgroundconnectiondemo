@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.TravelService;
+import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +46,6 @@ public class TravelController{
             return err;
         }
     }
-
     /**
      * 修改信息
      * @param travel
@@ -113,6 +116,7 @@ public class TravelController{
         }
     }
 
+
     @RequestMapping("/selectTravelById")
     public ReponseResult selectTravelById(Integer travelId) {
         try {
@@ -152,47 +156,67 @@ public class TravelController{
         }
     }
 
-            /**
-             * 删除   修改
-             * @param travelId
-             * @return
-             */
-            @RequestMapping("/showTravelupdlala.html")
-            public ReponseResult<Integer> showTravelupdlala (Integer travelId){
-                try {
-                    Integer result = 0;
-                    Integer data = 0;
-                    result = travelService.getUpdTrave(travelId);
-                    if (result > 0) {
-                        data = 1;
-                    }
-                    logger.info(" method:showTravelupdlala  添加组团社成功！");
-                    return ReponseResult.ok(data, "添加取组团社成功！");
-                } catch (Exception e) {
-                    logger.error(" method:showTravelupdlala  添加组团社失败，系统出现异常！");
-                    e.printStackTrace();
-                    ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
-                    return err;
-                }
+    /**
+     * 删除   修改
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/showTravelupdlala.html")
+    public ReponseResult<Integer> showTravelupdlala(Integer travelId){
+        try{
+            Integer result=0;
+            Integer data=0;
+            result=travelService.getUpdTrave(travelId);
+            if(result>0){
+                data=1;
             }
-            /**
-             * 修改   chakan
-             * @param travelId
-             * @return
-             */
-            @RequestMapping("/findTravelupdlala.html")
-            public ReponseResult findTravelupdlala (Integer travelId){
-                try {
-                    Travel travel = travelService.getupdBytravelId(travelId);
-                    logger.info(" method:showTravelupdlala  查看组团社成功！");
-                    return ReponseResult.ok(travel, "查看取组团社成功！");
-                } catch (Exception e) {
-                    logger.error(" method:showTravelupdlala  查看组团社失败，系统出现异常！");
-                    e.printStackTrace();
-                    ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
-                    return err;
-                }
-            }
+            logger.info(" method:showTravelupdlala  添加组团社成功！");
+            return ReponseResult.ok(data,"添加取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelupdlala  添加组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 修改   chakan
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/findTravelupdlala.html")
+    public ReponseResult findTravelupdlala(Integer travelId){
+        try{
+            Travel travel=travelService.getupdBytravelId(travelId);
+            logger.info(" method:showTravelupdlala  查看组团社成功！");
+            return ReponseResult.ok(travel,"查看取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelupdlala  查看组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 根据组团社号获取组团社名称
+     * @param groupNumber
+     * @return
+     */
+    @RequestMapping("getTravelName")
+    public ReponseResult getTravelName(Integer groupNumber){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.getTravelName(groupNumber),"获取成功");
+            logger.info("method:getTravelName  获取组团社名称成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:getTravelName  获取组团社名称失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
 
 
 
@@ -269,6 +293,69 @@ public class TravelController{
             return ReponseResult.ok(offer,"查询线路成功！");
         }catch (Exception e) {
             logger.error(" method:selectOfferByTravelId  查询线路失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 根据组团社编号查询导游餐厅报价
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectReportrestaurantByTravelId")
+    public ReponseResult selectReportrestaurantByTravelId(@RequestParam("travelId") Integer travelId){
+        try{
+            List<Reportrestaurant> reportrestaurant=travelService.selectReportrestaurantByTravelId(travelId);
+            List<Dispatchhotel> reportaccommodations = travelService.selectReportaccommodationByTravelId(travelId);
+            List list = new ArrayList();
+            list.add(reportrestaurant);
+            list.add(reportaccommodations);
+            logger.info(" method:selectOfferByTravelId  查询导游餐厅报账成功！");
+            return ReponseResult.ok(list,"查询导游餐厅报账成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectOfferByTravelId  查询导游餐厅报账失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 根据组团社编号查询导游景点门票
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectReportticketByTravelId")
+    public ReponseResult selectReportticketByTravelId(@RequestParam("travelId") Integer travelId){
+        try{
+            List<Disattr> reportticket=travelService.selectReportticketByTravelId(travelId);
+            logger.info(" method:selectReportticketByTravelId  查询导游景点门票成功！");
+            return ReponseResult.ok(reportticket,"查询导游景点门票成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectReportticketByTravelId  查询导游景点门票失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 根据组团社编号查询导游车费报账
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/selectReportfareByTravelId")
+    public ReponseResult selectReportfareByTravelId(@RequestParam("travelId") Integer travelId){
+        try{
+            Discar reportfare=travelService.selectReportfareByTravelId(travelId);
+            logger.info(" method:selectReportfareByTravelId  查询车费报账成功！");
+            return ReponseResult.ok(reportfare,"查询车费报账成功！");
+        }catch (Exception e) {
+            logger.error(" method:selectReportfareByTravelId  查询车费报账失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;

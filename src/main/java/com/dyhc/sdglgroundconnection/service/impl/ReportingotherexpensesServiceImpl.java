@@ -31,4 +31,9 @@ public class ReportingotherexpensesServiceImpl implements Reportingotherexpenses
         }
         return number;
     }
+
+    @Override
+    public Reportingotherexpenses listReportingotherexpensesById(Integer reportDetailId) throws Exception {
+        return reportingotherexpensesMapper.listReportingotherexpensesById(reportDetailId);
+    }
 }

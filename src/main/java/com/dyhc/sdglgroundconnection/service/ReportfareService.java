@@ -4,6 +4,8 @@ import com.dyhc.sdglgroundconnection.pojo.Reportfare;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账车费业务接口
@@ -15,4 +17,13 @@ public interface ReportfareService {
      * @return
      */
     Integer saveReportfare(Reportfare reportfare);
+
+
+    /**
+     * 获取导游车费报账明细
+     * @param reportDetailId
+     * @return
+     * @throws Exception
+     */
+    Reportfare listReportfareById(Integer reportDetailId)throws Exception;
 }

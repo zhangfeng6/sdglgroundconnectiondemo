@@ -31,7 +31,16 @@ public class Reportqutsubsidy {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "`createDate`")
     private Date createDate; // 创建时间
-    private String value1;
+    public Integer getReportDetailId() {
+        return reportDetailId;
+    }
+
+    public void setReportDetailId(Integer reportDetailId) {
+        this.reportDetailId = reportDetailId;
+    }
+
+    @Column(name = "reportDetailId")
+    private Integer reportDetailId; //导游报账明细id
     private String value2;
     private String value3;
 
@@ -125,15 +134,7 @@ public class Reportqutsubsidy {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
-    }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
-    }
 
     @Basic
     @Column(name = "value2")
@@ -169,7 +170,7 @@ public class Reportqutsubsidy {
                 Objects.equals(updateBy, that.updateBy) &&
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
-                Objects.equals(value1, that.value1) &&
+                Objects.equals(reportDetailId, that.reportDetailId) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -177,6 +178,6 @@ public class Reportqutsubsidy {
     @Override
     public int hashCode() {
 
-        return Objects.hash(reportQutSubsidyId, dailyCost, nums, guideNum, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(reportQutSubsidyId, dailyCost, nums, guideNum, status, createBy, updateBy, upDate, createDate, reportDetailId, value2, value3);
     }
 }

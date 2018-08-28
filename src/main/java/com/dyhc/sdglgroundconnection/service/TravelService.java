@@ -1,11 +1,14 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -14,14 +17,13 @@ import java.util.List;
  * 组团社业务接口
  **/
 public interface TravelService {
+
     /**
-<<<<<<< HEAD
      * 赵伟伟
      * 查询全部组团社
      * @return
      */
     List<Travel> selectTravel();
-
     /**
      * 赵伟伟
      * 查询组团社
@@ -115,5 +117,43 @@ public interface TravelService {
      * @return
      */
     Offer selectOfferByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社号获取组团社名称
+     * @param groupNumber
+     * @return
+     */
+    Travel getTravelName(Integer groupNumber)throws Exception;
+
+
+    /**
+     * 根据组团社Id查询餐厅导游报价
+     * @param travelId
+     * @return
+     */
+    List<Reportrestaurant> selectReportrestaurantByTravelId(Integer travelId);
+
+    /**
+     * 根据组团社Id查询导游酒店报价
+     * @param travelId
+     * @return
+     */
+    List<Dispatchhotel> selectReportaccommodationByTravelId(Integer travelId);
+
+
+
+    /**
+     * 根据组团社Id查询导游景点门票报账
+     * @param travelId
+     * @return
+     */
+    List<Disattr> selectReportticketByTravelId(Integer travelId);
+
+    /**
+     * 根据组团社Id查询导游车费报账
+     * @param travelId
+     * @return
+     */
+    Discar selectReportfareByTravelId(Integer travelId);
 
 }

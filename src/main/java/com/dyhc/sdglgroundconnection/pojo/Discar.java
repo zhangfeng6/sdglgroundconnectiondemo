@@ -38,6 +38,49 @@ public class Discar {
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private Double wineFee; // 酒水费
+
+    public Double getWineFee() {
+        return wineFee;
+    }
+
+    public void setWineFee(Double wineFee) {
+        this.wineFee = wineFee;
+    }
+
+    @Transient
+    private Double loan; // 导游借款
+
+    public Double getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Double loan) {
+        this.loan = loan;
+    }
+
+    public Double getFare() {
+        return fare;
+    }
+
+    public void setFare(Double fare) {
+        this.fare = fare;
+    }
+
+    @Transient
+    private Double fare;
+
+    @Transient
+    private  VehicleType vehicleType;//车辆类型表s
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
 
     @Id
     @Column(name = "disCarId")

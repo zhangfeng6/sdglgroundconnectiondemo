@@ -21,6 +21,11 @@
         SELECT * FROM dispatch WHERE guideId=#{guideId} AND state=2
     </select>
 
+    <!--查询调度信息：贾晓亮-->
+    <select id="dispatchSelectAll" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+         SELECT * FROM dispatch WHERE dispatchId=#{dispatchId}
+    </select>
+
     <select id="getDispatchLike" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         SELECT d.*,s.theUserName,g.guideName FROM Dispatch d ,staff s ,guide g WHERE d.creater=s.staffId AND d.guideId=g.guideId
         <if test="guideName !=null and guideName !=''">

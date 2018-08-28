@@ -70,4 +70,23 @@ public class ReportrestaurantController {
             return  error;
         }
     }
+
+
+    /**
+     * 获取导游餐厅报账明细信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("listReportrestaurantById")
+    public ReponseResult listReportrestaurantById(Integer reportDetailId){
+        try {
+            ReponseResult data=ReponseResult.ok(reportrestaurantService.listReportrestaurantById(reportDetailId),"获取成功");
+            logger.info("mothod:listReportrestaurantById 获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("mothod:listReportrestaurantById 获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
 }

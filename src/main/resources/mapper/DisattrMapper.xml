@@ -2,5 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.DisattrMapper">
-
+    <!--查询调度景点:贾晓亮-->
+    <select id="disattr" resultType="com.dyhc.sdglgroundconnection.pojo.Disattr">
+       select  * from  disattr where  offerId=#{offerId}
+    </select>
 </mapper>

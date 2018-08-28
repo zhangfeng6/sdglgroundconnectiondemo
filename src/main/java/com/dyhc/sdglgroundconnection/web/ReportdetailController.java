@@ -46,4 +46,23 @@ public class ReportdetailController {
             return ReponseResult.err("获取报账列表失败");
         }
     }
+
+
+    /**
+     * 获取导游报账明细信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getReportdetailById")
+    public ReponseResult getReportdetailById(Integer reportDetailId){
+        try{
+            ReponseResult data=ReponseResult.ok(reportdetailService.getReportdetailById(reportDetailId),"获取成功");
+            logger.info("method:getReportdetailById 获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:getReportdetailById 获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
 }

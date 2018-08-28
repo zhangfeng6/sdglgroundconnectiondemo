@@ -6,6 +6,8 @@ import com.dyhc.sdglgroundconnection.service.ReportaccommodationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账住宿业务实现
@@ -29,5 +31,10 @@ public class ReportaccommodationServiceImpl implements ReportaccommodationServic
             e.printStackTrace();
         }
         return  number;
+    }
+
+    @Override
+    public List<Reportaccommodation> listReportaccommodationByreportDetailId(Integer reportDetailId) throws Exception {
+        return reportaccommodationMapper.listReportaccommodationByreportDetailId(reportDetailId);
     }
 }

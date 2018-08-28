@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.web;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
+import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 import java.util.*;
 
@@ -59,6 +62,38 @@ public class DispatchController {
 
     }
 
+
+    @RequestMapping("ding")
+    public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+
+    /**
+     * 订房通知单： 贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/dispatchSelectAll")
+    public  ReponseResult dispatchSelectAll(HttpServletRequest request,Integer dispatchId){
+        HttpSession session = request.getSession();
+        try {
+            dispatchId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+            ReponseResult<Dispatch> data =ReponseResult.ok(dispatchService.dispatchSelectAll(dispatchId),"查询计调订房通知单成功");
+            logger.info("method:getresource 查询计调订房通知单成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("method:getresource 查询计调订房通知单失败！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
+
+
     @RequestMapping("/getresource")
     public ReponseResult getresource(){
         try {
@@ -97,7 +132,7 @@ public class DispatchController {
     public ReponseResult getDispatchByguideId(Integer guideId){
         try {
             Dispatch dispatch=dispatchService.getDispatchByguideId(guideId);
-            Integer date=differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
+            Integer date=DateDifference.differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
             List<Integer> list=new  ArrayList<Integer>();
             list.add(date);
             list.add(dispatch.getDispatchId());
@@ -112,44 +147,6 @@ public class DispatchController {
     }
 
 
-    /**
-     * 两个日期相差的天数
-     * @param date1
-     * @param date2
-     * @return
-     */
-    public  int differentDays(Date date1, Date date2)
-    {
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(date1);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(date2);
-        int day1= cal1.get(Calendar.DAY_OF_YEAR);
-        int day2 = cal2.get(Calendar.DAY_OF_YEAR);
-        int year1 = cal1.get(Calendar.YEAR);
-        int year2 = cal2.get(Calendar.YEAR);
-        if(year1 != year2)   //同一年
-        {
-            int timeDistance = 0 ;
-            for(int i = year1 ; i < year2 ; i ++)
-            {
-                if(i%4==0 && i%100!=0 || i%400==0)    //闰年
-                {
-                    timeDistance += 366;
-                }
-                else    //不是闰年
-                {
-                    timeDistance += 365;
-                }
-            }
-            return timeDistance + (day2-day1) ;
-        }
-        else    //不同年
-        {
-            System.out.println("判断day2 - day1 : " + (day2-day1));
-            return day2-day1;
-        }
-    }
 
 
     /**
@@ -160,7 +157,12 @@ public class DispatchController {
     @RequestMapping("getDispatchById")
     public ReponseResult getDispatchById(Integer reportDetailId){
         try {
-            ReponseResult data=ReponseResult.ok(dispatchService.getDispatchById(reportDetailId),"获取成功");
+            Dispatch dispatch=dispatchService.getDispatchById(reportDetailId);
+            Integer cha=DateDifference.differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
+            List<Object> list=new ArrayList<>();
+            list.add(0,dispatch);
+            list.add(1,cha);
+            ReponseResult data=ReponseResult.ok(list,"获取成功");
             logger.info("mothed:getDispatchById 获取调度信息成功");
             return data;
         }catch (Exception e){
@@ -200,4 +202,6 @@ public class DispatchController {
             return err;
         }
     }
+
+
 }

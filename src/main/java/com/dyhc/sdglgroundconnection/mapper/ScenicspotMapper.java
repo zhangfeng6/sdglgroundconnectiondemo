@@ -50,6 +50,10 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @return
      */
     Scenicspot selectByScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
-
-
+    /**
+     * 按编号查询景点
+     * @param scenicSpotId
+     * @return
+     */
+    List<Scenicspot> ShowScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
 }

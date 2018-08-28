@@ -13,10 +13,10 @@
            </div>
 	<h3>单次租车合同附件</h3>
   <h3 align="center">旅游团队运输合同(共2页)</h3>
-  <p align="right">合同编号: <strong style="text-decoration:underline">0415J1D</strong></p><p style="text-height:5px; height:5px">旅行社(简林甲方):<strong style="text-decoration:underline">山西世达国际旅行社有限公司</strong>&nbsp;&nbsp;&nbsp;  T: <strong style="text-decoration:underline">0351- 7896890</strong>  <strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;F:0351-7925068</strong></p>
-<p style="text-height:5px; height:5px">承运人(简称乙方):<strong style="text-decoration:underline">山西福鑫旅游汽车服务有限公司</strong>&nbsp;&nbsp;&nbsp;T: <strong style="text-decoration:underline">0351-5660997</strong>  <strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;F:0351-4640676</strong></p>
+  <p align="right">合同编号: <strong style="text-decoration:underline">0415J1D</strong></p><p style="text-height:5px; height:5px">旅行社(简林甲方):<strong style="text-decoration:underline" id="companyName">山西世达国际旅行社有限公司</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T: <strong style="text-decoration:underline" id="companyPhone">0351- 7896890</strong> &nbsp;&nbsp;&nbsp;  F:<strong style="text-decoration:underline" id="fax">&nbsp;&nbsp;&nbsp;0351-7925068</strong></p>
+<p style="text-height:5px; height:5px">承运人(简称乙方):<strong style="text-decoration:underline" id="a">山西福鑫旅游汽车服务有限公司</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T: <strong style="text-decoration:underline" id="b">0351-5660997</strong>  <strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;F:0351-4640676</strong></p>
   <p style="text-indent:4em;text-height:20px; height:20px;">甲方因组团旅游需要，由乙方提供旅游客坛服务， 为明确双方权利义务，经平等协商一致，达成本合同，以供双方共同遵照执行</p><h4 style="text-height:8px; height:8px;">第一条、旅游车辆</h4>
-  <p style="text-indent:2em;text-height:55px; height:55px;">甲方因组团去<strong style="text-decoration:underline">太原、大同、五台山、平通、查口八</strong>日游"需乙方派车型为<strong style="text-decoration:underline">37+2</strong>座旅游客车<strong style="text-decoration:underline">壹</strong>辆。起点:<strong style="text-decoration:underline">太原机场</strong>， 终点:<strong style="text-decoration:underline">太原机场</strong>。 司机: (姓名请填写全名)<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>  ，身份证号:<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;，</strong> 电话：<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;，</strong>车牌号：<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;，</strong>乙方同意提供本实团队运输服务
+    <p style="text-indent:2em;text-height:55px; height:55px;">甲方因组团去<strong style="text-decoration:underline" id="c">太原、大同、五台山、平通、查口</strong><span id="koko"></span>日游"需乙方派车型为<strong style="text-decoration:underline"><span id="num"></span>+2</strong>座旅游客车<strong style="text-decoration:underline">壹</strong>辆。起点:<strong style="text-decoration:underline">太原机场</strong>， 终点:<strong style="text-decoration:underline">太原机场</strong>。 司机: (姓名请填写全名)<strong style="text-decoration:underline" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sapn id="one"></sapn></strong>  ,身份证号:<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 电话：<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sapn id="two"></sapn></strong>车牌号：<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sapn id="three"></sapn></strong>乙方同意提供本实团队运输服务
   </p>
   <h4 style="text-height:8px; height:8px;">第二条、甲方承诺</h4>
   <p style="text-height:8px; height:8px; text-indent:1.5em">1、按时足凯支付乙方运输费用;</p><p style="text-height:8px; height:8px; text-indent:1.5em">2、 提前告知乙方发车时间和地点;</p>
@@ -39,4 +39,77 @@
   <p align="right">-1-</p>
 </div>
 </body>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+ $(function () {
+     bengonsi();//显示本公司
+     bengonsi2();//显示调度车辆信息
+     bengonsi3();//显示景点
+ })
+    function bengonsi() {
+        $.ajax({
+            url:"/CompanyController/CompanyList",
+            data:{},
+            dataType:"json",
+            type:"GET",
+            success:function (e) {
+                $("#companyName").html(e.data.companyName);
+                $("#companyPhone").html(e.data.companyPhone);
+                $("#fax").html(e.data.fax);
+            },
+            error:function () {
+                alert("错误，请联系管理员！");
+            }
+        })
+    }
+
+ function bengonsi3() {
+     $.ajax({
+         url:"/disattr/DisattrController",
+         data:{},
+         dataType:"json",
+         type:"GET",
+         success:function (e) {
+             var concat=""
+             var num=e.data.dispatch.num;
+             var time=daysBetween(e.data.dispatch.travelStartTime,e.data.dispatch.travelEndTime);
+            for (var i=0;i<e.data.scenicspot.length;i++){
+                concat+=","+e.data.scenicspot[i].scenicSpotName;
+            }
+            $("#c").html(concat);
+            $("#koko").text(time);
+            $("#num").text(num);
+             var arr =e.data.dispatch.carcontacts.split('，');
+             $("#one").text(arr[0]);
+             $("#two").text(arr[2]);
+             $("#three").text(arr[1]);
+         },
+         error:function () {
+             alert("错误，请联系管理员！");
+         }
+     })
+ }
+ function daysBetween(sDate1,sDate2){
+//Date.parse() 解析一个日期时间字符串，并返回1970/1/1 午夜距离该日期时间的毫秒数
+     var time1 = Date.parse(new Date(sDate1));
+     var time2 = Date.parse(new Date(sDate2));
+     var nDays = Math.abs(parseInt((time2 - time1)/1000/3600/24));
+     return nDays;
+ };
+ function bengonsi2() {
+     $.ajax({
+         url:"/Discar/DiscarController",
+         data:{},
+         dataType:"json",
+         type:"GET",
+         success:function (e) {
+             $("#a").html(e.data.vehicleType.carrental.carRentalName);
+             $("#b").html(e.data.vehicleType.carrental.phone);
+         },
+         error:function () {
+             alert("错误，请联系管理员！");
+         }
+     })
+ }
+</script>
 </html>
