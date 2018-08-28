@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -41,6 +42,27 @@ public class Disattr {
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private  Dispatch dispatch;//调度表
+
+    public Dispatch getDispatch() {
+        return dispatch;
+    }
+
+    public void setDispatch(Dispatch dispatch) {
+        this.dispatch = dispatch;
+    }
+
+    @Transient
+    private List<Scenicspot> scenicspot;//景点表
+
+    public List<Scenicspot> getScenicspot() {
+        return scenicspot;
+    }
+
+    public void setScenicspot(List<Scenicspot> scenicspot) {
+        this.scenicspot = scenicspot;
+    }
 
     @Id
     @Column(name = "disAttrId")

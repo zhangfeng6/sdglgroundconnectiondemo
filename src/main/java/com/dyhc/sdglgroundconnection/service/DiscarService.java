@@ -1,6 +1,8 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Discar;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,4 +10,8 @@ import org.springframework.stereotype.Component;
  * 调度用车业务接口
  **/
 public interface DiscarService {
+    /*
+    查询调度用车表
+     */
+    Discar discar(Integer disCarId);
 }

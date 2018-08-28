@@ -32,4 +32,12 @@ public interface GuideMapper extends CommonMapper<Guide>{
      * @return
      */
     Guide login(@Param("username") String username,@Param("password")String password)throws Exception;
+
+    /**
+     * 查询导游信息
+     * @param guideId
+     * @return
+     */
+    Guide ShowAllGuide(@Param("guideId")Integer guideId);
+
 }

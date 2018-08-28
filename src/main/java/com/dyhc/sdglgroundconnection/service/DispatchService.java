@@ -51,7 +51,12 @@ public interface DispatchService {
     Dispatch getDispatchByguideId(Integer guideId)throws Exception;
 
     /**
-     * 根据调度id查询调度信息     陈庆武
+     * 调度表信息:贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    Dispatch dispatchSelectAll(Integer dispatchId);
+     /* 根据调度id查询调度信息     陈庆武
      * @param reportDetailId 调度id
      * @return
      */

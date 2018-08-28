@@ -10,7 +10,6 @@
     <select id="selectByDictionariesId" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
         WHERE dictionariesId=#{dictionariesId}
-
     </select>
 
 

@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Disattr;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,10 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DisattrMapper extends CommonMapper<Disattr>{
+    /**
+     * 查询调度景点表
+     * @param offerId
+     * @return
+     */
+  Disattr disattr(@Param("offerId") Integer offerId);
 }

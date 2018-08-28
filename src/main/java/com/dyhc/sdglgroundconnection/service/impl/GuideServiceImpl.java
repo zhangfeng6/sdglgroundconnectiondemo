@@ -136,4 +136,13 @@ public class GuideServiceImpl implements GuideService {
     }
 
 
+    /**
+     * 导游信息
+     * @param guideId
+     * @return
+     */
+    @Override
+    public Guide ShowAllGuide(Integer guideId) {
+        return guideMapper.ShowAllGuide(guideId);
+    }
 }

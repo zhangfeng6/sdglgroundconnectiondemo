@@ -4,8 +4,8 @@
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.OfferrestaurantMapper">
 
     <insert id="insertOfferrestaurant">
-        insert into offerrestaurant(offerId,typeCode,dictionariesId,costPrice,offer,`date`,havemealsdate,whetherDel,creater)
-        values(#{offerId},'DIET',#{dictionariesId},#{costPrice},#{offer},#{date},#{havemealsdate},0,1)
+        insert into offerrestaurant(offerId,typeCode,dictionariesId,costPrice,offer,`date`,havemealsdate,whetherDel,creater,howmanydays)
+        values(#{offerId},'DIET',#{dictionariesId},#{costPrice},#{offer},#{date},#{havemealsdate},0,1,#{howmanydays})
     </insert>
 
     <select id="selectOfferRestaurantByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerrestaurant">

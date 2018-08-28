@@ -62,4 +62,8 @@
             <result column="valueContent1" property="valueContent1"/>
         </association>
     </resultMap>
+   <!--查询景点信息-->
+  <select id="ShowScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+     select  * from  scenicspot where  parentId=#{scenicSpotId}
+  </select>
 </mapper>

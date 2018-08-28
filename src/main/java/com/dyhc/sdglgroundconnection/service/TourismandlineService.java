@@ -14,5 +14,4 @@ public interface TourismandlineService {
      */
     List<Tourismandline> selectTourismandlineAll(int tourismId);
 
-
 }

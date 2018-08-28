@@ -2,5 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.LogMapper">
-
+     <!--查询日志信息:贾晓亮-->
+    <select id="ShowAllLog" resultType="com.dyhc.sdglgroundconnection.pojo.Log">
+          select  * from  log where  guideId=#{guideId} AND dispatchId=#{dispatchId} AND creationDate=#{creationDate}
+    </select>
 </mapper>

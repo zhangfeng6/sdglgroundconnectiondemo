@@ -60,6 +60,27 @@ public class DispatchController {
 
     }
 
+    /**
+     * 订房通知单： 贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/dispatchSelectAll")
+    public  ReponseResult dispatchSelectAll(Integer dispatchId){
+        dispatchId=1;
+        try {
+            ReponseResult<Dispatch> data =ReponseResult.ok(dispatchService.dispatchSelectAll(dispatchId),"查询计调订房通知单成功");
+            logger.info("method:getresource 查询计调订房通知单成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("method:getresource 查询计调订房通知单失败！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
+
+
     @RequestMapping("/getresource")
     public ReponseResult getresource(){
         try {

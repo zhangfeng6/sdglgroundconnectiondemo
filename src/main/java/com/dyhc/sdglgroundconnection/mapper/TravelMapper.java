@@ -46,4 +46,10 @@ public interface TravelMapper extends CommonMapper<Travel> {
 
     Integer getupdlala(Travel travel);
 
+    /**
+     * 查询组团表信息
+     * @param travelId
+     * @return
+     */
+    Travel  travel(@Param("travelId") Integer travelId);
 }

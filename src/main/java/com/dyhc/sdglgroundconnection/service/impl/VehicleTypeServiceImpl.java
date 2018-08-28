@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
+import com.dyhc.sdglgroundconnection.mapper.CarrentalMapper;
 import com.dyhc.sdglgroundconnection.mapper.VehicleTypeMapper;
 import com.dyhc.sdglgroundconnection.pojo.VehicleType;
 import com.dyhc.sdglgroundconnection.service.VehicleTypeService;
@@ -17,6 +18,10 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 
     @Autowired
     private VehicleTypeMapper vehicleTypeMapper;
+
+    @Autowired
+    private CarrentalMapper carrentalMapper;
+
 
     @Override
     public Integer deleteVehicleTypesBycarRentalId(Integer carRentalId) throws Exception {
@@ -76,5 +81,17 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
     @Override
     public List<VehicleType> listVehicleTypeByValueId(Integer valueId, Integer carRentalId) {
         return vehicleTypeMapper.listVehicleTypeByValueId(valueId,carRentalId);
+    }
+
+    /**
+     * 查询车辆类型表
+     * @param typeId
+     * @return
+     */
+    @Override
+    public VehicleType vehicleType(Integer typeId) {
+        VehicleType vehicleType=vehicleTypeMapper.vehicleType(typeId);
+        vehicleType.setCarrental(carrentalMapper.carrental(vehicleType.getCarRentalId()));
+        return vehicleType;
     }
 }
