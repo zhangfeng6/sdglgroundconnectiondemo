@@ -12,6 +12,7 @@
         WHERE dictionariesId=#{dictionariesId}
     </select>
 
+
     <select id="getDictionaries" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
         WHERE typeCode='VEHICLE' and valueId=#{valueId}

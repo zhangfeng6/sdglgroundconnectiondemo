@@ -151,6 +151,25 @@ public class DispatchController {
         }
     }
 
+
+    /**
+     *根据导游报账明细id获取调度信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getDispatchById")
+    public ReponseResult getDispatchById(Integer reportDetailId){
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.getDispatchById(reportDetailId),"获取成功");
+            logger.info("mothed:getDispatchById 获取调度信息成功");
+            return data;
+        }catch (Exception e){
+            logger.error("mothed:getDispatchById 获取调度信息失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
     @RequestMapping("/listDispatchlike")
     public ReponseResult listDispatchlike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("guideName")String guideName, @RequestParam("groundConnectionNumber")String groundConnectionNumber){
         try{

@@ -28,7 +28,6 @@ public class TravelController{
     @Autowired
     private TravelService travelService;
 
-
     @RequestMapping("/selectTravel")
     public ReponseResult selectTravel() {
         try {
@@ -49,7 +48,7 @@ public class TravelController{
      * @param travel
      * @return
      */
-    @RequestMapping("showTravelUpd.html")
+    @RequestMapping("/showTravelUpd.html")
     public ReponseResult<Integer> showTravelUpd(Travel travel){
         System.out.println(travel);
         try{
@@ -113,8 +112,6 @@ public class TravelController{
             return err;
         }
     }
-
-
 
     @RequestMapping("/selectTravelById")
     public ReponseResult selectTravelById(Integer travelId) {

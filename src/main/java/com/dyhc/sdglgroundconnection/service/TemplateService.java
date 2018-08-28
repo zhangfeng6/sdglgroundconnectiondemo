@@ -98,4 +98,5 @@ public interface TemplateService {
      * @return
      */
     List<Template> listtemplateall()throws Exception;
+
 }

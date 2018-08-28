@@ -32,6 +32,7 @@ public interface HotelService {
      */
     Hotel getHotelById(Integer id) throws Exception;
 
+
     /**
      * 赵伟伟
      * 查询酒店
@@ -120,4 +121,5 @@ public interface HotelService {
      * @throws Exception
      */
     Hotel fuzhiHotel(Integer hotelId)throws Exception;
+
 }

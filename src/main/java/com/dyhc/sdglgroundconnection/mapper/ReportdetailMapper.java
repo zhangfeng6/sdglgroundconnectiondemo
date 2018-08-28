@@ -2,7 +2,10 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -11,4 +14,12 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
+
+    /**
+     * 获取所有导游报账明细
+     * @param groupNumber
+     * @param states
+     * @return
+     */
+    List<Reportdetail> showInfoAll(@Param("groupNumber") Integer groupNumber, @Param("states")Integer states);
 }

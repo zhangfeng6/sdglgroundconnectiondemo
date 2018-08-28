@@ -48,7 +48,6 @@ public class DictionariesController {
     }
 
 
-
     /**
      * 获取所有的景点等级
      * @return
@@ -84,7 +83,7 @@ public class DictionariesController {
         }
     }
 
-    /**
+    /**origin/master
      * 获取餐馆类型
      * @return
      */
@@ -99,6 +98,7 @@ public class DictionariesController {
             return data;
         }
     }
+
     @RequestMapping("/listhoteltype")
     public ReponseResult listhoteltype(){
         try {

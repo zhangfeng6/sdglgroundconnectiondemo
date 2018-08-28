@@ -36,17 +36,18 @@ public class Dispatch {
     private Double fare; // 车费
     @Column(name = "wineFee")
     private Double wineFee; // 酒水费
+    @Column(name = "`not`")
     private String not; // 不含
     private String remarks; // 备注
     private String supervision; // 团体监督
     private String reception; // 接待标准
     private Double total; // 总计
     private Double loan; // 导游借款
-    @Column(name = "`state`")
     private Integer state; // 状态（1、未开始2、进行中3、已结束）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
     private Integer creater; // 创建人 （外键，与人员表关联）
+    @Column(name = "`modifier`")
     private Integer modifier; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "modifiedData")
@@ -54,18 +55,22 @@ public class Dispatch {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
+    @Column(name = "guideId")
     private Integer guideId;
     private String carcontacts;
+
+    public String getCarcontacts() {
+
+        return carcontacts;
+    }
+
+    public void setCarcontacts(String carcontacts) {
+        this.carcontacts = carcontacts;
+    }
+
     private String value3;
-    private String theUserName;
 
-    public String getTheUserName() {
-        return theUserName;
-    }
 
-    public void setTheUserName(String theUserName) {
-        this.theUserName = theUserName;
-    }
 
     @Transient
     private String guideName;
@@ -76,6 +81,7 @@ public class Dispatch {
     public void setGuideName(String guideName) {
         this.guideName = guideName;
     }
+
     @Id
     @Column(name = "dispatchId")
     public int getDispatchId() {
@@ -336,15 +342,6 @@ public class Dispatch {
         this.guideId = guideId;
     }
 
-    @Basic
-    @Column(name = "carcontacts")
-    public String getCarcontacts() {
-        return carcontacts;
-    }
-
-    public void setCarcontacts(String carcontacts) {
-        this.carcontacts = carcontacts;
-    }
 
     @Basic
     @Column(name = "value3")

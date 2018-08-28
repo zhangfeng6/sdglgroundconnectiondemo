@@ -205,7 +205,6 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
-
     @Override
     public List<Template> selectTemplate() throws Exception {
         List<Template> list = templateMapper.selectTemplate();

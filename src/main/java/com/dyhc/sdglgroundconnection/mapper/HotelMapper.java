@@ -7,6 +7,7 @@ import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 
 import com.dyhc.sdglgroundconnection.pojo.RoomType;
+import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
