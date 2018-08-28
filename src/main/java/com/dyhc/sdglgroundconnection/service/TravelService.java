@@ -31,6 +31,7 @@ public interface TravelService {
 
     /**
      *
+     * 添加信息
      * @param travel
      * @return
      * @throws Exception

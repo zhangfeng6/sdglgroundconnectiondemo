@@ -56,4 +56,25 @@ public interface DispatchService {
      * @return
      */
     Dispatch dispatchSelectAll(Integer dispatchId);
+     /* 根据调度id查询调度信息     陈庆武
+     * @param reportDetailId 调度id
+     * @return
+     */
+    Dispatch getDispatchById(Integer reportDetailId)throws Exception;
+    /**
+     * 分页查看调用信息         刘跃云
+     * @param pageNo
+     * @param pageSize
+     * @param guideName
+     * @param groundConnectionNumber
+     * @return
+     */
+    PageInfo<Dispatch> ListDispatchLike(Integer pageNo, Integer pageSize, String guideName, String groundConnectionNumber);
+
+    /**
+     * 根据对象属性 进行修改   张枫
+     * @return
+     * @throws Exception
+     */
+    int updatestateById(Integer did, Integer gid, String travelStartTime, String travelEndTime)throws Exception;
 }

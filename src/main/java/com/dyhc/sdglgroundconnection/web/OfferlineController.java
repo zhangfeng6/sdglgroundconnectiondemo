@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -56,6 +57,27 @@ public class OfferlineController {
             ReponseResult<List> data=ReponseResult.err("获取线路失败");
             e.printStackTrace();
             return  data;
+        }
+    }
+
+
+    /**
+     * 赵伟伟
+     * @param offerId
+     * @return
+     */
+    @RequestMapping("/selectOfferlineByOfferId")
+    public ReponseResult selectOfferlineByOfferId(@RequestParam("offerId") Integer offerId) {
+        try {
+            List<Offerline> offerline = offerlineService.selectOfferlineByOfferId(offerId);
+            ReponseResult<Object> data = ReponseResult.ok(offerline,"获取汽车报价成功！");
+            logger.info(" method:selectOfferByOfferId  获取汽车报价成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOfferByOfferId  汽车报价数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
         }
     }
 }

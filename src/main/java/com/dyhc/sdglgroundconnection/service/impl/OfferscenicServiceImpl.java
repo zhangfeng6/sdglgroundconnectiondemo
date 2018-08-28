@@ -6,6 +6,8 @@ import com.dyhc.sdglgroundconnection.service.OfferscenicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 报价景点业务实现
@@ -19,5 +21,10 @@ public class OfferscenicServiceImpl implements OfferscenicService {
     @Override
     public int insertOfferscenic(Offerscenic offerscenic) {
         return offerscenicMapper.insertOfferscenic(offerscenic);
+    }
+
+    @Override
+    public List<Offerscenic> selectOfferscenicByOfferId(int offerId) {
+        return offerscenicMapper.selectOfferscenicByOfferId(offerId);
     }
 }

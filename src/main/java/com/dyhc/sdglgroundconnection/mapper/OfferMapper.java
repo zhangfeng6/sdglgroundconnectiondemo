@@ -29,4 +29,13 @@ public interface OfferMapper extends CommonMapper<Offer>{
      * @return
      */
     int insertOffer(Offer offer) throws Exception;
+
+
+    /**
+     * 赵伟伟
+     * 按id查询报价单
+     * @param offerId
+     * @return
+     */
+    Offer selectOfferByOfferId(@Param("offerId") int offerId);
 }

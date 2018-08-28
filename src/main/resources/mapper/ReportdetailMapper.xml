@@ -2,5 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper">
-
+    <select id="showInfoAll" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
+        SELECT r.*,d.groupNumber,g.guideName FROM `reportdetail` r,`dispatch` d,guide g
+        <where>
+            <if test="groupNumber!=null and groupNumber!=''">
+                d.groupNumber like  concat('%',#{groupNumber},'%')
+            </if>
+            <if test="states!=0">
+                AND r.`status`=#{states}
+            </if>
+            and r.dispatchId=d.dispatchId AND d.guideId=g.guideId
+        </where>
+    </select>
 </mapper>

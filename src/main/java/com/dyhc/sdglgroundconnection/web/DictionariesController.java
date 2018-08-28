@@ -83,23 +83,22 @@ public class DictionariesController {
         }
     }
 
-    /**
-
+    /**origin/master
      * 获取餐馆类型
      * @return
      */
     @RequestMapping("selectByDictionariesId")
     public ReponseResult selectByDictionariesId(Integer dictionariesId) {
         try {
-            Dictionaries dictionaries = dictionariesService.selectByDictionariesId(dictionariesId);
-            ReponseResult<Object> data = ReponseResult.ok(dictionaries, "获取餐馆类型成功");
+            Dictionaries dictionaries=dictionariesService.selectByDictionariesId(dictionariesId);
+            ReponseResult<Object> data=ReponseResult.ok(dictionaries,"获取餐馆类型成功");
+            return  data;
+        }catch (Exception e){
+            ReponseResult<List> data=ReponseResult.err("获取餐馆类型失败");
             return data;
-        } catch (Exception e) {
-            ReponseResult<List> data = ReponseResult.err("获取餐馆类型失败");
-            ReponseResult<Object> err=ReponseResult.err("系统错误！");
-            return err;
         }
     }
+
     @RequestMapping("/listhoteltype")
     public ReponseResult listhoteltype(){
         try {

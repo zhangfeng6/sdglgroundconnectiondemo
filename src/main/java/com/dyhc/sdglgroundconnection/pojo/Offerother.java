@@ -31,7 +31,7 @@ public class Offerother {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Timestamp creationDate; // 创建时间
-    private Integer howmanydays;
+    private String value1;
     private String value2;
     private String value3;
 
@@ -137,12 +137,12 @@ public class Offerother {
 
     @Basic
     @Column(name = "howmanydays")
-    public int getHowmanydays() {
-        return howmanydays;
+    public String getHowmanydays() {
+        return value1;
     }
 
-    public void setHowmanydays(int howmanydays) {
-        this.howmanydays = howmanydays;
+    public void setHowmanydays(String howmanydays) {
+        this.value1 = value1;
     }
 
 
@@ -181,7 +181,7 @@ public class Offerother {
                 Objects.equals(modifier, that.modifier) &&
                 Objects.equals(modifiedData, that.modifiedData) &&
                 Objects.equals(creationDate, that.creationDate) &&
-                Objects.equals(howmanydays, that.howmanydays) &&
+                Objects.equals(value1, that.value1) &&
                 Objects.equals(value2, that.value2) &&
                 Objects.equals(value3, that.value3);
     }
@@ -189,6 +189,6 @@ public class Offerother {
     @Override
     public int hashCode() {
 
-        return Objects.hash(offerOtherId, offerId, costPrice, offer, remarks, whetherDel, creater, modifier, modifiedData, creationDate, howmanydays, value2, value3);
+        return Objects.hash(offerOtherId, offerId, costPrice, offer, remarks, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
     }
 }

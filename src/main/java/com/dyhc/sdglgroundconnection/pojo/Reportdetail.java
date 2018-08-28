@@ -29,6 +29,7 @@ public class Reportdetail {
     @Column(name = "balanceAmount")
     private Double balanceAmount; // 结余金额
     private String remarks; // 备注
+    @Column(name = "`status`")
     private Integer status; // 状态（1、审核中 2、以结算 3、未通过）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
@@ -36,12 +37,34 @@ public class Reportdetail {
     private Integer createBy; // 创建人 （外键，与人员表关联）
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
-    @Column(name = "upDate")
+    @Column(name = "`upDate`")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date upDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
+    @Transient
+    private String groupNumber;     //地接社团号
+    @Transient
+    private String guideName;       //导游姓名
+
+
+    public String getGroupNumber() {
+        return groupNumber;
+    }
+
+    public void setGroupNumber(String groupNumber) {
+        this.groupNumber = groupNumber;
+    }
+
+    public String getGuideName() {
+        return guideName;
+    }
+
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
+    }
+
     private String value1;
     private String value2;
     private String value3;

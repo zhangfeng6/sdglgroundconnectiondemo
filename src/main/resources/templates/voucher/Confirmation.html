@@ -14,12 +14,12 @@
                     <div id="tupian">
                 <img src="/images/logo.jpg" width="640px" height="50px">
         </div>
-    	<h2 style="text-align:center"><span style="text-decoration:underline">STS-RJ-2018-04-15JD</span>确认书(0326件)</h2>
+    	<h2 style="text-align:center"><span style="text-decoration:underline" id="zutuanName">STS-RJ-2018-04-15JD</span>确认书(0326件)</h2>
         <table border="1" cellspacing="0" cellpadding="0">
 
         	<tr>
                 <td>收件单位及收件人</td>
-                <td>西美 赖建章 经理</td>
+                <td id="shouren"></td>
                 <td>发件单位及发件人</td>
                 <td>山西世达国旅 崔俊娜</td>
             </tr>
@@ -27,7 +27,7 @@
         <table border="1" cellspacing="0" cellpadding="0">
         	<tr>
             	<td style="width:15%">紧急联络</td>
-                <td style="width:35%"></td>
+                <td style="width:35%" id="jinji1"></td>
                 <td style="width:15%">紧急联络</td>
                 <td style="width:35%">15235433422</td>
             </tr>
@@ -35,30 +35,25 @@
         <table border="1" cellspacing="0" cellpadding="0">
         	<tr>
             	<td style="width:13%">人数</td>
-                <td style="width:12%">19+1T/L</td>
+                <td style="width:12%" id="number"></td>
                 <td style="width:10%">客源地</td>
-                <td style="width:20%">台湾</td>
+                <td style="width:20%" id="keyuan"></td>
                 <td style="width:15%">旅行日期</td>
-                <td style="width:30%">2018年4.15-4.22</td>
+                <td style="width:30%" id="luxingDate"></td>
             </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="0">
         	<tr>
-            	<td style="width:5%; text-align:center">天数</td>
+            	<td style="width:10%; text-align:center">天数</td>
                 <td style="width:12%; text-align:center">离/抵</td>
-                <td style="width:52%; text-align:center">行程内容</td>
+                <td style="width:47%; text-align:center">行程内容</td>
                 <td style="width:15%; text-align:center">餐食</td>
                 <td style="width:15%; text-align:center">住宿</td>
             </tr>
-            <tr>
-            	<td>4.15</td>
-                <td>台北-太原</td>
-                <td>下午接待，【柳巷商业街】，晚餐，入住酒店</td>
-                <td>D 中式合菜 50</td>
-                <td>黄河京都大酒店<br/>
-                	0350-6545558
-                </td>
-            </tr>
+            <tbody id="tb">
+
+            </tbody>
+           <!--
            <tr>
             	<td>4.16</td>
                 <td>太原-雁门关-大同</td>
@@ -97,12 +92,12 @@
                 <td>时空酒店<br/>
                 	0350-6545668
                 </td>
-            </tr>
+            </tr>-->
         </table>
         <table border="1" cellspacing="0" cellpadding="0">
         	<tr>
             	<td style="width:5%; text-align:center">接<br/><br/>待<br/><br/>标<br/><br/>准</td>
-                <td>
+                <td id="jiedai">
                 	1、用房：<br/>
                     2、用餐：<br/>
                     3、交通：<br/>
@@ -132,5 +127,45 @@
         </table>
         <p style="text-align:right">2018年3月26日</p>
     </div>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function(){
+            show();
+        })
+
+        function show(){
+            $.ajax({
+                url:"/Offer/showConfirmation",
+                data:{},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    $("#shouren").text(data.data[11].personName+data.data[11].personPost);
+                    $("#zutuanName").text(data.data[11].travelName);
+                    $("#jinji1").text(data.data[11].phone);
+                    $("#keyuan").text(data.data[11].travelName.substring(0,data.data[11].travelName.length-3));
+                    $("#number").text(data.data[14]);
+                    $("#luxingDate").text(data.data[12]+"——"+data.data[13]);
+                    $("#jiedai").text(data.data[8]);
+                    var content = "";
+                    for (var i=1;i<=data.data[10].length;i++){
+                        var shijian = data.data[1][i-1];
+                        content+="<tr>\n" +
+                            "            \t<td>"+data.data[1][i-1].substring(data.data[1][i-1].length-5)+"</td>\n" +
+                            "                <td>"+data.data[10][i-1].templateName+"</td>\n" +
+                            "                <td>"+data.data[0][i-1]+"</td>\n" +
+                            "                <td>L "+data.data[2][i-1].valueContent1+" "+data.data[4][i-1]+"<br/> D "+data.data[5][i-1].valueContent1+" "+data.data[7][i-1]+"</td>\n" +
+                            "                <td>"+data.data[9][i-1].hotelName+"<br/>\n" +
+                            "                \t"+data.data[9][i-1].phone+"\n" +
+                            "                </td>\n" +
+                            "            </tr>";
+                    }
+                    $("#tb").html(content);
+
+                }
+            })
+        }
+    </script>
 </body>
 </html>

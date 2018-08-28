@@ -33,6 +33,17 @@ public class Offercar {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Timestamp creationDate; // 创建时间
+    @Transient
+    private Integer dictionariesId;
+
+    public Integer getDictionariesId() {
+        return dictionariesId;
+    }
+
+    public void setDictionariesId(Integer dictionariesId) {
+        this.dictionariesId = dictionariesId;
+    }
+
     private String value1;
     private String value2;
     private String value3;

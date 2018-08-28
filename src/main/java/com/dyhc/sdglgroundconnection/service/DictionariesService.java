@@ -14,12 +14,14 @@ import java.util.List;
  **/
 public interface DictionariesService {
 
+
+
     /**
-     * 获取所有的景点等级
+     * 查询景点
      * @return
+     * @throws Exception
      */
     PageInfo<Dictionaries> listDictionaries()throws Exception;
-
 
     /**
      * 查询所有的车辆类型

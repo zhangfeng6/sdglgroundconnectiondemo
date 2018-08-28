@@ -142,6 +142,7 @@ public class TemplateController {
     }
 
 
+
     @RequestMapping("/selectTemplate")
     public ReponseResult selectTemplate() {
         try {
@@ -194,20 +195,9 @@ public class TemplateController {
         }
     }
 
-    @RequestMapping("/selectTemplateAll")
-    public ReponseResult selectTemplateAll(Integer templateId) {
-        try {
-            Template template = templateService.selectTemplateAll(templateId);
-            ReponseResult<Object> data = ReponseResult.ok(template, "查询成功！");
-            logger.info(" method:selectTemplateAll  查询线路全部信息成功！");
-            return data;
-        } catch (Exception e) {
-            logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
-            e.printStackTrace();
-            ReponseResult<Object> err = ReponseResult.err("查询失败！");
-            return err;
-        }
-    }
+
+
+
     @RequestMapping("/listtemplateall")
     public ReponseResult listtemplateall(){
         try {
@@ -222,10 +212,26 @@ public class TemplateController {
         }
     }
 
+    @RequestMapping("/selectTemplateAll")
+    public ReponseResult selectTemplateAll(Integer templateId) {
+        try {
+            Template template = templateService.selectTemplateAll(templateId);
+            ReponseResult<Object> data = ReponseResult.ok(template, "查询成功！");
+            logger.info(" method:selectTemplateAll  查询线路全部信息成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectTemplateAll  查询线路全部信息失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("查询失败！");
+            return err;
+        }
+    }
+
+
+
 
     /**
      * 微信小程序之获取行程内容
-     * @param dispatch
      * @param weight
      * @return
      */

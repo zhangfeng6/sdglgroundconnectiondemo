@@ -1,8 +1,10 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.MealType;
 import com.dyhc.sdglgroundconnection.pojo.Offercar;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,4 +22,17 @@ public interface OffercarMapper extends CommonMapper<Offercar>{
      * @return
      */
     int insertOffercar(Offercar offercar);
+
+    /**
+     * 按报价编号查询
+     * @return
+     */
+    Offercar selectOffercarByOfferId(@Param("offerId") int offerId);
+
+    /**
+     * 按编号查询
+     * @param valueId
+     * @return
+     */
+    Dictionaries selectOffercarById(@Param("valueId") int valueId);
 }

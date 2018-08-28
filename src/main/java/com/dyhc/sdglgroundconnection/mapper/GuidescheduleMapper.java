@@ -16,10 +16,9 @@ public interface GuidescheduleMapper extends CommonMapper<Guideschedule>{
 
     /**
      * 获取导游请假信息 根据条件
-     * @param guideId
      * @param year
      * @param month
      * @return
      */
-    List<Guideschedule> listguideschedule(@Param("guideId")Integer guideId,@Param("year")String year,@Param("month")String month);
+    List<Guideschedule> listguideschedule(@Param("year")String year,@Param("month")String month);
 }

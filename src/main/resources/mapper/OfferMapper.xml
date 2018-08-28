@@ -23,4 +23,8 @@
         insert into offer(travelId,travelStartTime,travelEndTime,`number`,tourist,trip,offer,remarks,reception,whetherDel,creater)
         values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},0,1)
     </insert>
+
+    <select id="selectOfferByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">
+          select * from offer where whetherDel!=1 and offerId=#{offerId}
+    </select>
 </mapper>

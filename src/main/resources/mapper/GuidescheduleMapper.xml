@@ -5,14 +5,11 @@
     <select id="listguideschedule" resultType="com.dyhc.sdglgroundconnection.pojo.Guideschedule">
         SELECT * FROM `guideschedule`
         <where>
-            <if test="guideId != null and guideId != 0">
-                AND `guideId`=#{guideId}
-            </if>
             <if test="year != null and year != ''">
                  AND `arrangeyear`=#{year}
             </if>
             <if test="month != null and month != ''">
-                 AND `arrangemonth`=#{month}
+                 AND `arrangemonth`=#{month} or `arrangemonth`like concat('0',#{month})
             </if>
         </where>
     </select>

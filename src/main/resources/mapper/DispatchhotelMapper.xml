@@ -7,6 +7,6 @@
         select  *  from dispatchhotel where  offerId=#{offerId}
      </select>
     <select id="getDispatchHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
-        SELECT * FROM `dispatchhotel` WHERE offerId=#{dispatchId} AND weight=#{weight}
+        SELECT * FROM `dispatchhotel` WHERE offerId=#{dispatchId} AND weight=#{weight} and whetherDel=0
     </select>
 </mapper>

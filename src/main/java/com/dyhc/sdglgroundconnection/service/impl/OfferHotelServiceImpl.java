@@ -6,6 +6,8 @@ import com.dyhc.sdglgroundconnection.service.OfferHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 报价酒店业务实现
@@ -19,5 +21,10 @@ public class OfferHotelServiceImpl implements OfferHotelService {
     @Override
     public int insertOfferHotel(OfferHotel offerHotel) {
         return offerHotelMapper.insertOfferHotel(offerHotel);
+    }
+
+    @Override
+    public List<OfferHotel> selectOfferHotelByOfferId(int offerId) {
+        return offerHotelMapper.selectOfferHotelByOfferId(offerId);
     }
 }

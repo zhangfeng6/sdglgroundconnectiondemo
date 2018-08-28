@@ -1,12 +1,15 @@
 package com.dyhc.sdglgroundconnection.web;
-
-
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
+
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
-import com.dyhc.sdglgroundconnection.service.TemplateScenicspotService;
 import com.dyhc.sdglgroundconnection.service.TourismtemplateService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
+
+
+import com.github.pagehelper.PageInfo;
+
+import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import java.util.Date;
+import java.util.List;
+
+
+import java.util.List;
 
 import java.util.Date;
 import java.util.List;

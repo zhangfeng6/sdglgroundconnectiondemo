@@ -171,4 +171,54 @@ public class DispatchController {
             return day2-day1;
         }
     }
+
+
+    /**
+     *根据导游报账明细id获取调度信息
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getDispatchById")
+    public ReponseResult getDispatchById(Integer reportDetailId){
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.getDispatchById(reportDetailId),"获取成功");
+            logger.info("mothed:getDispatchById 获取调度信息成功");
+            return data;
+        }catch (Exception e){
+            logger.error("mothed:getDispatchById 获取调度信息失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+    @RequestMapping("/listDispatchlike")
+    public ReponseResult listDispatchlike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("guideName")String guideName, @RequestParam("groundConnectionNumber")String groundConnectionNumber){
+        try{
+            System.out.println("..."+groundConnectionNumber+"...");
+            PageInfo<Dispatch> pageInfoTravel=dispatchService.ListDispatchLike(pageNo,pageSize,guideName,groundConnectionNumber);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取调度信息成功！");
+            logger.info(" method:TravelLike  分页获取调度信息成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:TravelLike  获取调度信息数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    @RequestMapping("/updatestateById")
+    public ReponseResult updatestateById(@RequestParam("did")Integer did,
+                                         @RequestParam("gid")Integer gid,
+                                         @RequestParam("travelStartTime")String travelStartTime,
+                                         @RequestParam("travelEndTime")String travelEndTime){
+        try {
+            ReponseResult<Integer> data=ReponseResult.ok(dispatchService.updatestateById(did, gid, travelStartTime, travelEndTime),"审核成功！");
+            logger.info("method:updatestateById 审核成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
 }

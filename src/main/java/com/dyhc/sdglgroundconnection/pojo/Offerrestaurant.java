@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import java.util.Objects;
  * 报价餐厅表
  **/
 @Table(name = "offerrestaurant")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Offerrestaurant {
     @Id
     @Column(name = "offerRestaurantId")
@@ -25,7 +27,7 @@ public class Offerrestaurant {
     private Double costPrice; // 成本价
     private Double offer; // 报价
     private Timestamp date; // 日期
-    private Timestamp havemealsdate; // 用餐时间（早、中、晚）
+    private Integer havemealsdate; // 用餐时间（早、中、晚）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
     private Integer creater; // 创建人 （外键，与人员表关联）
@@ -112,11 +114,11 @@ public class Offerrestaurant {
 
     @Basic
     @Column(name = "havemealsdate")
-    public Timestamp getHavemealsdate() {
+    public Integer getHavemealsdate() {
         return havemealsdate;
     }
 
-    public void setHavemealsdate(Timestamp havemealsdate) {
+    public void setHavemealsdate(Integer havemealsdate) {
         this.havemealsdate = havemealsdate;
     }
 

@@ -35,6 +35,25 @@ public class EnterCountAdjustPageController {
 
 
     /**
+     *进入确认单页面
+     * @return
+     */
+    @RequestMapping("Confirmation")
+    public  String Confirmation(){
+        return "voucher/Confirmation";
+    }
+
+    /**
+     *进入报价单页面
+     * @return
+     */
+    @RequestMapping("quotation")
+    public  String quotation(){
+        return "voucher/quotation";
+    }
+
+
+    /**
      *进入修改酒店页面
      * @return
      */

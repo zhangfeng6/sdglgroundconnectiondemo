@@ -34,6 +34,7 @@ public class TravelServiceImpl implements TravelService {
     public Travel selectTravelById(Integer travelId) {
         return travelMapper.selectTravelById(travelId);
     }
+
     /**
      * 添加信息
      * @param travel
