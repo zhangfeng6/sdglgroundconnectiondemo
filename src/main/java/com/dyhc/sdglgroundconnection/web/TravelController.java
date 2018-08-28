@@ -196,7 +196,7 @@ public class TravelController{
 
 
     /**
-     * 修改   chakan
+     * 根据组团社号获取组团社名称
      * @param groupNumber
      * @return
      */
