@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.service;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -77,4 +78,11 @@ public interface DispatchService {
      * @throws Exception
      */
     int updatestateById(Integer did, Integer gid, String travelStartTime, String travelEndTime)throws Exception;
+
+    /**
+     * 查询计调表
+     * @param dispatchId
+     * @return
+     */
+    Dispatch dispatch(@Param("dispatchId") Integer dispatchId);
 }

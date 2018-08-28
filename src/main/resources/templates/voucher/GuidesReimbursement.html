@@ -21,21 +21,21 @@
 			</tr>
 			<tr>
 				<td colspan="2">团号</td>
-				<td colspan="4"></td>
+				<td colspan="4" id="groundConnectionNumber"></td>
 				<td colspan="2">抵离时间</td>
-				<td colspan="4"></td>
+				<td colspan="4" id="time"></td>
 				<td>线路</td>
 				<td colspan="4"></td>
 			</tr>
 			<tr>
 				<td colspan="3">组团社（单位）</td>
-				<td colspan="3"></td>
+				<td colspan="3" id="groupNumber"></td>
 				<td>人数</td>
-				<td colspan="4"></td>
+				<td colspan="4" id="num"></td>
 				<td>天数</td>
-				<td colspan="2"></td>
+				<td colspan="2" id="day"></td>
 				<td colspan="1">客源地</td>
-				<td colspan="2"></td>
+				<td colspan="2" id="tourist"></td>
 			</tr>
 			<tr>
 				<td rowspan="9">住<br>宿</td>				
@@ -459,4 +459,39 @@
 				</tr>
 		</table>
 	</body>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+   $(function () {
+       dispatchShow();
+   })
+
+function dispatchShow() {
+    $.ajax({
+        url:"/dispatch/dispatch",
+        data:{},
+        dataType:"json",
+        type:"GET",
+        success:function (e) {
+			$("#groundConnectionNumber").html(e.data.groundConnectionNumber);
+			$("#time").html(e.data.travelStartTime+"　到　"+e.data.travelEndTime);
+			$("#groupNumber").html(e.data.groupNumber);
+			$("#num").html(e.data.num);
+            var time=daysBetween(e.data.travelStartTime,e.data.travelEndTime);
+			$("#day").html(time);
+			$("#tourist").html(e.data.tourist);
+        },
+        error:function () {
+            alert("错误，请联系管理员！");
+        }
+    })
+}
+   function daysBetween(sDate1,sDate2){
+//Date.parse() 解析一个日期时间字符串，并返回1970/1/1 午夜距离该日期时间的毫秒数
+       var time1 = Date.parse(new Date(sDate1));
+       var time2 = Date.parse(new Date(sDate2));
+       var nDays = Math.abs(parseInt((time2 - time1)/1000/3600/24));
+       return nDays;
+   };
+	
+</script>
 </html>

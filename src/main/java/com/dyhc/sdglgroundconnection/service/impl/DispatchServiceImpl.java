@@ -218,4 +218,14 @@ public class DispatchServiceImpl implements DispatchService {
         Reportdetail reportdetail=reportdetailService.getReportdetailById(reportDetailId);
         return dispatchMapper.selectByPrimaryKey(reportdetail.getDispatchId());
     }
+
+    /***
+     * 查询计调表
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public  Dispatch dispatch(Integer dispatchId){
+         return   dispatchMapper.dispatch(dispatchId);
+    }
 }

@@ -50,6 +50,15 @@ public class EnterVoucherController {
     }
 
     /**
+     * 跳转导游报账明细表
+     * @return
+     */
+    @RequestMapping("/GuidesReimbursement")
+    public  String GuidesReimbursement(){
+        return "voucher/GuidesReimbursement";
+    }
+
+    /**
      * 进入旅游团队运输合同第一页 页面
      * @return
      */

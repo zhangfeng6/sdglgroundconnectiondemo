@@ -80,6 +80,29 @@ public class DispatchController {
     }
 
 
+    /**
+     *计调页面信息： 贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/dispatch")
+    public  ReponseResult dispatch(Integer dispatchId){
+        dispatchId=1;
+        try {
+            Dispatch dispatch =dispatchService.dispatch(dispatchId);
+            ReponseResult<Dispatch> data =ReponseResult.ok(dispatch,"查询计调成功");
+            logger.info("method:dispatch 查询计调成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("method:dispatch 查询计调失败！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
+
+
+
     @RequestMapping("/getresource")
     public ReponseResult getresource(){
         try {
