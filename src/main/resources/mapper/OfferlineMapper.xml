@@ -8,8 +8,8 @@
     </select>
 
     <insert id="insertOfferline">
-        insert into offerline(offerId,lineArriveName,travelContent,`date`,whetherDel,creater)
-        values(#{offerId},#{lineArriveName},#{travelContent},#{date},0,1)
+        insert into offerline(offerId,lineArriveName,travelContent,`date`,whetherDel,creater,howmanydays)
+        values(#{offerId},#{lineArriveName},#{travelContent},#{date},0,1,#{howmanydays})
     </insert>
 
     <select id="selectOfferlineByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerline">

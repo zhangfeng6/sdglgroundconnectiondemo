@@ -266,6 +266,7 @@ public class OfferController {
         String ccostPrice = request.getParameter("ccostPrice");
         String coffer = request.getParameter("coffer");
         String des = request.getParameter("des");
+        String jiedai = request.getParameter("jiedai");
 
 
         Offer offer = new Offer();
@@ -316,7 +317,7 @@ public class OfferController {
             offer.setNumber(Integer.parseInt(number));
             offer.setTrip(tripList[1]);
             offer.setRemarks(remarks);
-            offer.setReception(des);
+            offer.setReception(jiedai);
             offerService.insertOffer(offer);
 
 
@@ -331,11 +332,12 @@ public class OfferController {
                 //线路报价
                 offerline.setOfferId(offer.getOfferId());
                 Template template = templateService.selecctNameById(Integer.parseInt(xianluList[i]));
-                String mu = template.getTemplateName().split("-")[1];
+                String mu = template.getTemplateName();
                 offerline.setLineArriveName(mu);
                 offerline.setTravelContent(tripList[i]);
                 java.util.Date date11 = format1.parse(xdateList[i]);
                 offerline.setDate(date11);
+                offerline.setHowmanydays(i+1);
 
 
 
@@ -344,6 +346,7 @@ public class OfferController {
                 offerHotel.setOfferId(offer.getOfferId());
                 offerHotel.setCostPrice(Double.parseDouble(jcostPrice[i]));
                 offerHotel.setOffer(Double.parseDouble(joffer[i]));
+                offerHotel.setHowmanydays(i+1);
 
 
                 //午餐报价
@@ -357,7 +360,8 @@ public class OfferController {
                 String sdate2=format6.format(date2);
                 Timestamp fTimestamp2=Timestamp.valueOf(sdate2);
                 offerrestaurant.setDate(fTimestamp2);
-                offerrestaurant.setHavemealsdate(fTimestamp2);
+                offerrestaurant.setHavemealsdate(2);
+                offerrestaurant.setHowmanydays(i+1);
 
 
 
@@ -367,7 +371,8 @@ public class OfferController {
                 offerrestaurant1.setCostPrice(Double.parseDouble(wancbList[i]));
                 offerrestaurant1.setOffer(Double.parseDouble(wanbjList[i]));
                 offerrestaurant1.setDate(fTimestamp2);
-                offerrestaurant1.setHavemealsdate(fTimestamp2);
+                offerrestaurant1.setHavemealsdate(3);
+                offerrestaurant1.setHowmanydays(i+1);
 
 
                 //景点
@@ -380,6 +385,7 @@ public class OfferController {
                     offerscenic.setOfferId(offer.getOfferId());
                     offerscenic.setCostPrice(Double.parseDouble(jdc[j]));
                     offerscenic.setOffer(Double.parseDouble(jdo[j]));
+                    offerscenic.setHowmanydays(i+1);
                     offerscenicService.insertOfferscenic(offerscenic);
                 }
 

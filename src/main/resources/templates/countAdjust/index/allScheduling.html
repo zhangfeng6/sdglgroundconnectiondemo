@@ -125,8 +125,8 @@
                                 "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
                                 "\t\t\t\t\t\t<td class=\"hidden-xs\"><div><button id='update' type='button' value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button></div></td>\n" +
                                 "\t\t\t\t\t</tr>";
+                            xu++;
                         })
-						xu++;
                         $("tbody").html(content);
                         layui.use('table', function () {
                             var laypage = layui.laypage;

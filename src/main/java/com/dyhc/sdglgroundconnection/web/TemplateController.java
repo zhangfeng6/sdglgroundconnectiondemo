@@ -212,7 +212,6 @@ public class TemplateController {
         }
     }
 
-
     @RequestMapping("/selectTemplateAll")
     public ReponseResult selectTemplateAll(Integer templateId) {
         try {
@@ -227,6 +226,7 @@ public class TemplateController {
             return err;
         }
     }
+
 
 
 

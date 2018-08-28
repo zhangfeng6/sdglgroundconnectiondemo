@@ -8,7 +8,9 @@ import com.dyhc.sdglgroundconnection.service.TourismandlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 import com.dyhc.sdglgroundconnection.pojo.Tourismtemplate;
@@ -25,12 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 
-
 @Service
 public class TourismandlineServiceImpl implements TourismandlineService {
     @Autowired
     private TourismandlineMapper tourismandlineMapper;
-
 
     @Override
     public List<Tourismandline> selectTourismandlineAll(int tourismId) {

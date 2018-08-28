@@ -138,7 +138,7 @@ function insertJingdian(onClickjd) {
     var index=parseInt(A.length)+1;
     var content = $("#jingdian").html();
     //var content=$("select[name=scenicSpotName]").html();
-    $(onClickjd).parent().parent().next().after("<tr id=\"scenic1\" name=\"scenic\" class=\"scenic\">\n" +
+    $(onClickjd).parent().parent().parent().find("[name=wucai]").before("<tr id=\"scenic1\" name=\"scenic\" class=\"scenic\">\n" +
         "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">景点</label></td>\n" +
         "\t\t\t\t\t\t\t\t<td class=\"jingdian\">\n" +
         "\t\t\t\t\t\t\t\t\t<select id=\"jingdian\" name=\"scenicSpotName\" lay-verify=\"required\" lay-filter=\"jingdian\">"+content+"</select>\n" +
@@ -148,7 +148,7 @@ function insertJingdian(onClickjd) {
         "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价:</label></td>\n" +
         "\t\t\t\t\t\t\t\t<td><input name=\"jdoffer\" type=\"text\" class=\"layui-input\"></td>\n" +
         "\t\t\t\t\t\t\t</tr>");
-    /*layui.use(['form', 'layedit', 'laydate','element'], function() {
+    layui.use(['form', 'layedit', 'laydate','element'], function() {
         var form = layui.form,
             layer = layui.layer,
             layedit = layui.layedit,
@@ -157,7 +157,7 @@ function insertJingdian(onClickjd) {
             a;
         form.render(); //更新全部
         form.render('select'); //刷新select选择框渲染
-    });*/
+    });
 }
 
 
@@ -256,7 +256,7 @@ function insertJingdian(onClickjd) {
                     "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价:</label></td>\n" +
                     "\t\t\t\t\t\t\t\t<td><input name=\"jdoffer\" type=\"text\" class=\"layui-input\"></td>\n" +
                     "\t\t\t\t\t\t\t</tr>\n" +
-                    "\t\t\t\t\t\t\t<tr>\n" +
+                    "\t\t\t\t\t\t\t<tr name=\"wucai\">\n" +
                     "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">午餐</label></td>\n" +
                     "\t\t\t\t\t\t\t\t<td class=\"wuc\">\n" +
                     "\t\t\t\t\t\t\t\t\t<select name=\"typeName\" lay-verify=\"required\" lay-filter=\"wucan\">"+wucan+"</select>\n" +
@@ -284,10 +284,9 @@ function insertJingdian(onClickjd) {
                     "\t\t\t\t\t</form>\n" +
                     "\t\t\t\t</div>\n" +
                     "\t\t\t</div>\n" +
-                    "\t\t\t<button class='layui-btn layui-btn-normal layui-btn-radius' onclick='addss1()' id=\"add\">十</button>\n" +
                     "\t\t\t<!---中结束-->\n" +
                     "\t\t</div>";
-				$("#zong1").after(a);
+				$("#add").before(a);
                 /*selectTourismtemplate();
                 selectofferline();
                 selectHotel();
@@ -388,7 +387,7 @@ function addss2() {
         "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价:</label></td>\n" +
         "\t\t\t\t\t\t\t\t<td><input name=\"jdoffer\" type=\"text\" class=\"layui-input\"></td>\n" +
         "\t\t\t\t\t\t\t</tr>\n" +
-        "\t\t\t\t\t\t\t<tr>\n" +
+        "\t\t\t\t\t\t\t<tr name=\"wucai\">\n" +
         "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">午餐</label></td>\n" +
         "\t\t\t\t\t\t\t\t<td class=\"wuc\">\n" +
         "\t\t\t\t\t\t\t\t\t<select name=\"typeName\" lay-verify=\"required\" lay-filter=\"wucan\">"+wucan+"</select>\n" +
@@ -416,10 +415,9 @@ function addss2() {
         "\t\t\t\t\t</form>\n" +
         "\t\t\t\t</div>\n" +
         "\t\t\t</div>\n" +
-        "\t\t\t<button class='layui-btn layui-btn-normal layui-btn-radius' onclick='addss1()' id=\"add\">十</button>\n" +
         "\t\t\t<!---中结束-->\n" +
         "\t\t</div>";
-    $("#zong1").after(a);
+    $("#add").before(a);
     /*selectTourismtemplate();
     selectofferline();
     selectHotel();

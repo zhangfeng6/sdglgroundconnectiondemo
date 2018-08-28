@@ -23,7 +23,6 @@ public interface DictionariesService {
      */
     PageInfo<Dictionaries> listDictionaries()throws Exception;
 
-
     /**
      * 查询所有的车辆类型
      * @return
