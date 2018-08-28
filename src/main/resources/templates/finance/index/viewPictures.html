@@ -53,7 +53,7 @@
                 if(ReponseResult.data!=null&&ReponseResult.data!=undefined&&ReponseResult.data!=""){
                     var attr=ReponseResult.data.picturePath.split(",");
                     var content="";
-                    var savePath = "D://Y2/世达国旅/sdglGroundConnection/src/main/resources/static/images/";
+                    var savePath = "file:///D:/Y2/世达国旅/sdglGroundConnection/src/main/resources/static/images/";
                     $.each(attr,function (i,e) {
                         content+="<div class=''><img src='"+(savePath+e)+"' ></div>";
                     });
