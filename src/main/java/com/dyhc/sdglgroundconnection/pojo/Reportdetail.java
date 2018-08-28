@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Reportdetail {
     private int reportDetailId; // 导游报账明细表编号
     @Column(name = "dispatchId")
     private Integer dispatchId; // 调度编号（外键，与调度表关联）
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "reportDate")
     private Date reportDate; // 报账日期
     private Double receipt; // 外收团款

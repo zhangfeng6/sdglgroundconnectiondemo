@@ -6,6 +6,8 @@ import com.dyhc.sdglgroundconnection.service.ReportticketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账门票业务实现
@@ -30,5 +32,10 @@ public class ReportticketServiceImpl implements ReportticketService {
             e.printStackTrace();
         }
         return number;
+    }
+
+    @Override
+    public List<Reportticket> listReportticketById(Integer reportDetailId) throws Exception {
+        return reportticketMapper.listReportticketById(reportDetailId);
     }
 }

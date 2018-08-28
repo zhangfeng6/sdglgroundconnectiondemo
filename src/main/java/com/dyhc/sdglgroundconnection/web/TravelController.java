@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.Travel;
 import com.dyhc.sdglgroundconnection.service.TravelService;
+import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -193,4 +196,25 @@ public class TravelController{
             return err;
         }
     }
+
+
+    /**
+     * 根据组团社号获取组团社名称
+     * @param groupNumber
+     * @return
+     */
+    @RequestMapping("getTravelName")
+    public ReponseResult getTravelName(Integer groupNumber){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.getTravelName(groupNumber),"获取成功");
+            logger.info("method:getTravelName  获取组团社名称成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:getTravelName  获取组团社名称失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
 }
