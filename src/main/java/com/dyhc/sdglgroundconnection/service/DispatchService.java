@@ -113,4 +113,12 @@ public interface DispatchService {
      * @return
      */
     int saveDispatch(DispatchParameter dispatchParameter)throws Exception;
+
+    /**
+     * 根据调度id获取调度信息的相关记录        张枫
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    Map<String,Object> getDispatchinfoById(Integer dispatchId)throws Exception;
 }

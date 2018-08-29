@@ -677,6 +677,7 @@
 				dispatch.remarks=$("textarea[name=remarks]").text();
 				dispatch.reception=$("textarea[name=reception]").text();
 				dispatch.loan=$("input[name=loan]").val();
+				dispatch.guideId=$("select[name=guide]").val();
                 disguide.guideId=$("select[name=guide]").val();
                 cluster.clusterTime=$("input[name=clusterTime]").val();
                 cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
@@ -717,6 +718,7 @@
                     dispatchhotel.valueId=$("input[name=d"+(L)+"spchengben]").val();
                     dispatchhotel.sproomNum=$("input[name=d"+(L)+"spnum]").val();
                     dispatchhotel.payment=$("input[name=d"+(L)+"hotelpayment]:checked").val();
+                    dispatchhotel.hotelTypeId=$("select[name=d"+(L)+"hoteltype]").val();
                     dispatchhotelList.push(dispatchhotel);
                     if($("select[name=d"+(L)+"shopping]").val()!=0&&$("select[name=d"+(L)+"shopping]").val()!=undefined){
                         var disshopp={};
@@ -764,7 +766,8 @@
                     contentType: "application/json",
 					success:function (result) {
 						if(result.data==1){
-							alert("添加成功！");
+							alert("调度成功！");
+
 						}else{
 						    alert("系统异常："+result.data);
 						}

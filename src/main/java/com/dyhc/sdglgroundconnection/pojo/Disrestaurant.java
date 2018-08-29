@@ -43,6 +43,18 @@ public class Disrestaurant {
     private String payment;
     private String value3;
 
+    //餐厅类型表实体对象
+    @Transient
+    private MealType mealType;
+
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
+
     @Transient
     private String restaurantName;
 

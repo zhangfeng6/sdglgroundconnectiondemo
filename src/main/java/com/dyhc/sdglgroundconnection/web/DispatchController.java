@@ -1,11 +1,9 @@
 package com.dyhc.sdglgroundconnection.web;
 
-import com.dyhc.sdglgroundconnection.pojo.Cluster;
+import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.Cluster;
-import com.dyhc.sdglgroundconnection.pojo.Dispatch;
-import com.dyhc.sdglgroundconnection.pojo.Guide;
-import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
 import com.dyhc.sdglgroundconnection.service.*;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -361,5 +359,24 @@ public class DispatchController {
             return err;
         }
 
+    }
+
+    /**
+     * 根据调度id获取调度的相关信息 张枫
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/getDispatchBydispatchId")
+    public ReponseResult getDispatchBydispatchId(@RequestParam("dispatchId")Integer dispatchId){
+        try {
+            ReponseResult<Map> data=ReponseResult.ok(dispatchService.getDispatchinfoById(dispatchId),"根据id获取调度信息成功！");
+            logger.info("method:getDispatchById 获取调度信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:getDispatchById 系统异常！");
+            ReponseResult err=ReponseResult.err("系统异常！");
+            return err;
+        }
     }
 }

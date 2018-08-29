@@ -125,9 +125,27 @@ public class DispatchServiceImpl implements DispatchService {
     @Autowired
     private DisrestaurantMapper disrestaurantMapper;
 
-
-
-
+    /**
+     * 根据调度id获取调度的相关数据
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map<String, Object> getDispatchinfoById(Integer dispatchId) throws Exception {
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("dispatch",dispatchMapper.selectByPrimaryKey(dispatchId));
+        map.put("disguide",disguideMapper.getDisguideByDid(dispatchId));
+        map.put("cluster",clusterMapper.getClusterByDid(dispatchId));
+        map.put("discar",discarMapper.getDiscarByDid(dispatchId));
+        map.put("disother",disotherMapper.getDisotherByDid(dispatchId));
+        map.put("dispatchhote",dispatchhotelMapper.listDispatchhotelByDid(dispatchId));
+        map.put("hoteroomType",hoteroomTypeMapper.listHoteroomTypeByDid(dispatchId));
+        map.put("disattr",disattrMapper.listDisattrByDid(dispatchId));
+        map.put("disshopp",disshoppMapper.listDisshoppByDid(dispatchId));
+        map.put("disrestaurant",disrestaurantMapper.listDisrestaurantByDid(dispatchId));
+        return map;
+    }
 
     /**
      * 根据参数类的数据进行新增调度及调度相关信息
@@ -235,8 +253,10 @@ public class DispatchServiceImpl implements DispatchService {
             e.printStackTrace();
             return 0;
         }
-
     }
+
+
+
     /**
      * 根据报价表id获取该报价的所有信息到调度页面展示
      * @param oid

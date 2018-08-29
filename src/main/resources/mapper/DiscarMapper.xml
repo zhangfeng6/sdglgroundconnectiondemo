@@ -9,6 +9,15 @@
     </select>
 
     <select id="listDiscar" resultType="com.dyhc.sdglgroundconnection.pojo.Discar">
-SELECT carRentalName FROM disCar d,vehicleType v,carRental c,dispatch s WHERE d.typeId=v.typeId AND v.carRentalId=c.carRentalId AND d.offerId=s.dispatchId AND s.dispatchId=#{dispatchId}
-</select>
+      SELECT carRentalName FROM disCar d,vehicleType v,carRental c,dispatch s WHERE d.typeId=v.typeId AND v.carRentalId=c.carRentalId AND d.offerId=s.dispatchId AND s.dispatchId=#{dispatchId}
+    </select>
+    
+    <select id="getDiscarByDid" resultMap="getDiscarByDidMap">
+        SELECT d.`disCarId`,d.`costPrice`,d.`number`,v.`typeId`,v.`valueId` FROM `discar` d,`vehicletype` v WHERE d.`typeId`=v.`typeId` AND d.`offerId`=#{Did}
+    </select>
+    
+    <resultMap id="getDiscarByDidMap" type="com.dyhc.sdglgroundconnection.pojo.Discar">
+            <association property="vehicleType" javaType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
+            </association>
+    </resultMap>
 </mapper>
