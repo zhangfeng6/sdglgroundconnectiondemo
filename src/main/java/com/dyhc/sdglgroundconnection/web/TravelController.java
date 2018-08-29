@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -356,4 +358,33 @@ public class TravelController{
         }
     }
 
+
+    @RequestMapping("Delegation")
+    public ReponseResult Delegation(HttpServletRequest request, Integer travelId){
+        HttpSession session = request.getSession();
+        session.setAttribute("travelId",travelId);
+        return ReponseResult.ok("获取成功");
+    }
+
+    @RequestMapping("huoqu")
+    public ReponseResult huoqu(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("travelId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
+
+
+    @RequestMapping("pai")
+    public ReponseResult pai(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
+
+    @RequestMapping("jihua")
+    public ReponseResult jihua(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
 }

@@ -49,18 +49,19 @@
             },
             dataType: "json",
             type: "post",
+            async:false,
             success: function (ReponseResult) {
                 if(ReponseResult.data!=null&&ReponseResult.data!=undefined&&ReponseResult.data!=""){
                     var attr=ReponseResult.data.picturePath.split(",");
                     var content="";
                     var savePath = "/api/image/";
                     $.each(attr,function (i,e) {
-                        content+="<div class=''><img src='"+(savePath+e)+"' ></div>";
+                        content+="<div class=''><img src='"+(savePath+e)+"' style='width: 500px;height:330px;'></div>";
                     });
                     $("#viewPictures").html(content);
                 }else {
 
-
+                    $("#viewPictures").html(content);
                 }
             },
             error: function (res) {

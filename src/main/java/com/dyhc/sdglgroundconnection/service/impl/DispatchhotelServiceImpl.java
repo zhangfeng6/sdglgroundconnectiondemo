@@ -45,4 +45,13 @@ public class DispatchhotelServiceImpl implements DispatchhotelService {
     public Dispatchhotel getDispatchHotel(Integer dispatchId,Integer weight) throws Exception {
         return dispatchhotelMapper.getDispatchHotel(dispatchId,weight);
     }
+
+    /**
+     * 查看住宿地址
+     * @return
+     */
+    @Override
+    public List<String> listDispatchhotelAll(Integer dispatchId) {
+        return dispatchhotelMapper.listDispatchhotelAll(dispatchId);
+    }
 }

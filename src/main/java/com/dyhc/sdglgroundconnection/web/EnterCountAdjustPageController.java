@@ -514,4 +514,87 @@ public class EnterCountAdjustPageController {
         }
         return "countAdjust/index/saveTourism";
     }
+
+
+    /**
+     * 进入CanType-list.html页 刘跃云
+     * @return
+     */
+    @RequestMapping("/CanType-list.html")
+    public String  CanType() {
+        return "countAdjust/index/CanType-list";
+    }
+
+    /**
+     * 进入CanType-upd.html页 刘跃云
+     * @return
+     */
+    @RequestMapping("/CanType-upd.html")
+    public String  CanType(Integer dictionariesId,HttpServletRequest request) {
+        request.setAttribute("dictionariesId",dictionariesId);
+        System.out.println(123);
+        return "countAdjust/index/CanType-upd";
+    }
+
+
+    /**
+     * 进入CarType-list.html页 刘跃云
+     * @return
+     */
+    @RequestMapping("/CarType-list.html")
+    public String  CarType() {
+        return "countAdjust/index/CarType-list";
+    }
+
+    /**
+     * 进入CarType-upd.html页 刘跃云
+     * @return
+     */
+    @RequestMapping("/CarType-upd.html")
+    public String  CarType(Integer dictionariesId,HttpServletRequest request) {
+        request.setAttribute("dictionariesId",dictionariesId);
+        System.out.println(123);
+        return "countAdjust/index/CarType-upd";
+    }
+    /**
+     * 进入HotelType-list.html页 刘跃云
+     * @return
+     */
+    @RequestMapping("/HotelType-list.html")
+    public String  HotelType() {
+        return "countAdjust/index/HotelType-list";
+    }
+
+    /**
+     * 进入HotelType-upd.html页  刘跃云
+     * @return
+     */
+    @RequestMapping("/HotelType-upd.html")
+    public String  HotelType1(Integer dictionariesId,HttpServletRequest request) {
+        request.setAttribute("dictionariesId",dictionariesId);
+        System.out.println(123);
+        return "countAdjust/index/HotelType-upd";
+    }
+
+
+    /**
+     * 进入findDisguide.html页面 刘跃云
+     * @return
+     */
+    @RequestMapping("/findDisguide.html")
+    public String findDisguide(){
+        return "voucher/TravelPlan";
+
+    }
+
+
+    /**
+     * 进入ptd.html页面 刘跃云
+     * @return
+     */
+    @RequestMapping("/ptd.html")
+    public String findDisguidexxx(){
+        return "voucher/ptd";
+
+    }
 }

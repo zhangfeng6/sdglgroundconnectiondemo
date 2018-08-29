@@ -58,4 +58,11 @@ public interface StaffMapper extends CommonMapper<Staff>{
      */
     Staff getserlectBy();
 
+    /**
+     * 查看计调员
+     * @param dispatchId
+     * @return
+     */
+    Staff listStaff(Integer  dispatchId);
+
 }

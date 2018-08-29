@@ -14,4 +14,11 @@ public interface DiscarService {
     查询调度用车表
      */
     Discar discar(Integer disCarId);
+
+    /**
+     * 查看车辆公司
+     * @param dispatchId
+     * @return
+     */
+    Discar listDiscar(Integer dispatchId);
 }

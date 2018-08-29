@@ -39,7 +39,7 @@ public class Disrestaurant {
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private int weight;  //权重
-    private String value2;
+    private String payment;
     private String value3;
 
     @Transient
@@ -187,13 +187,13 @@ public class Disrestaurant {
 
 
     @Basic
-    @Column(name = "value2")
-    public String getValue2() {
-        return value2;
+    @Column(name = "payment")
+    public String getPayment() {
+        return payment;
     }
 
-    public void setValue2(String value2) {
-        this.value2 = value2;
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 
     @Basic
@@ -224,13 +224,13 @@ public class Disrestaurant {
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(weight, that.weight) &&
-                Objects.equals(value2, that.value2) &&
+                Objects.equals(payment, that.payment) &&
                 Objects.equals(value3, that.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, tourismdate, dinDate, status, createBy, updateBy, upDate, createDate, weight, value2, value3);
+        return Objects.hash(disRestaurantId, typeId, offerId, costPrice, quotePrice, tourismdate, dinDate, status, createBy, updateBy, upDate, createDate, weight, payment, value3);
     }
 }

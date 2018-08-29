@@ -99,11 +99,9 @@
             content: 'travel_add.html'
 
         });
-        alert(1111)
     })
 
     function  traveTypeUpdate(travelId) {
-        alert(11)
         $(document).on(
             layer.open({
                 type: 2,
@@ -115,7 +113,6 @@
 
             })
         )
-		alert(333)
     }
 
     var limitcount = 2; // 每页总记录数
@@ -130,7 +127,7 @@
         var haha=$("#one").val();
         var str = "";
         $.ajax({
-            url: "/showtravellike.html",
+            url: "/Travel/showtravellike.html",
             data: {page:curnum,limit:limitcount,travelName:haha},
             dataType: "json",
             type: "get",
@@ -143,7 +140,8 @@
                         "<td>" + result.personName + "</td><td>" + result.personPost + "</td><td>" + result.phone+ "</td>" +
                         "<td><div class='layui-inline'>" +
                         "<button onclick='traveTypeUpdate("+result.travelId+")' class='layui-btn layui-btn-small layui-btn-normal  edit-btn\' data-id=\'=1\'><i class='layui-icon'>&#xe642;</i></button>&nbsp;&nbsp;"+
-                        "<button  onclick='getDel("+result.travelId+")' class='layui-btn layui-btn-small layui-btn-danger del-btn\'><i class=\'layui-icon\'>&#xe640;</i></button></div></td>"+
+                        "<button  onclick='getDel("+result.travelId+")' class='layui-btn layui-btn-small layui-btn-danger del-btn\'><i class=\'layui-icon\'>&#xe640;</i></button></div>&nbsp;&nbsp;" +
+						"<button class='layui-btn layui-btn-small layui-btn-red del-btn' type='button' onclick='Delegation("+result.travelId+")'><i class='layui-icon'>&#xe615</i></button></td>"+
 
                         "</tr>";
                     xu++;
@@ -178,7 +176,7 @@
     function getDel(travelId) {
         if (confirm("确定删除吗?")) {
             $.ajax({
-                url:"/showTravelupdlala.html",
+                url:"/Travel/showTravelupdlala.html",
                 data:{"travelId":travelId},
                 type:"get",
                 dataType:"json",
@@ -194,6 +192,18 @@
 
         }
     }
+
+    function Delegation(id){
+        $.ajax({
+            url:"/Travel/Delegation",
+            data:{"travelId":id},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+				location.href="/admins/Delegation";
+			}
+		})
+	}
 
 </script>
 

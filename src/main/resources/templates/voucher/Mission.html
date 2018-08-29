@@ -250,6 +250,7 @@
 	<script src="/js/jquery-3.3.1.min.js"></script>
 	<script>
 		$(function(){
+		    kaishi();
             selectGuideByTravelId();
             selectStaffByTraveId();
             selectDispatchByTravelId();
@@ -260,6 +261,19 @@
 		})
 		var id=1;
 		var zongji = 0;
+
+		function kaishi(){
+		    $.ajax({
+                url:"/Travel/huoqu",
+                data:{},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+					id=data.data;
+				}
+			})
+		}
 
 		function selectGuideByTravelId(){
 			$.ajax({
@@ -315,6 +329,7 @@
                     $("#jie").text(data.data.loan);
                     $("#jiu").text(data.data.wineFee+"元");
                     zongji+=zong;
+                    zongji+=data.data.wineFee;
                     $("#zongji").text(zongji);
                 }
             })
@@ -362,13 +377,12 @@
                         if (data.data[1][i].payMethods=="付现"){
                             fangfei+=jiudian;
                         }
-
                         content+="<tr>\n" +
                             "\t\t    \t\t\t<td>"+data.data[1][i].date.substring(data.data[1][i].date.length-5)+"</td>\n" +
                             "\t\t    \t\t\t<td>"+data.data[0][i].restaurantName+"<br/>"+data.data[0][i].payment+"</td>\n" +
                             "\t\t    \t\t\t<td>"+data.data[0][i].costPrice+"*"+data.data[0][i].num+"="+wucan+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[2][i].restaurantName+"<br/>"+data.data[0][i].payment+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[2][i].costPrice+"*"+data.data[0][i].num+"="+wancan+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[2][i].restaurantName+"<br/>"+data.data[2][i].payment+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[2][i].costPrice+"*"+data.data[2][i].num+"="+wancan+"</td>\n" +
                             "\t\t    \t\t\t<td>"+data.data[1][i].hotelName+" "+data.data[1][i].roomNum+"间+"+data.data[1][i].sproomNum+"司陪<br/>"+data.data[1][i].payment+" "+data.data[1][i].costPrice+"*"+data.data[1][i].roomNum+"+"+data.data[1][i].valueId+"*"+data.data[1][i].sproomNum+"="+jiudian+"</td>\n" +
                             "\t\t    \t\t\t<td>"+data.data[1][i].sproomNum+"床</td>\n" +
                             "\t\t    \t\t</tr>";

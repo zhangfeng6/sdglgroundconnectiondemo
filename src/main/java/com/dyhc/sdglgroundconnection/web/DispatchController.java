@@ -1,8 +1,10 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
-import com.dyhc.sdglgroundconnection.service.DispatchService;
+import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
+import com.dyhc.sdglgroundconnection.service.*;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
@@ -65,6 +67,23 @@ public class DispatchController {
 
     @RequestMapping("ding")
     public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("pai")
+    public ReponseResult pai(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+
+    @RequestMapping("jihua")
+    public ReponseResult jihua(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
         session.setAttribute("dispatchId",dispatchId);
         ReponseResult<Object> msg=ReponseResult.err("查询成功");
@@ -217,6 +236,84 @@ public class DispatchController {
             e.printStackTrace();
             logger.debug("method:getofferinfoById 系统异常！");
             ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 查看车辆联系人
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findDispatch.html")
+    public ReponseResult findDispatch(Integer dispatchId){
+        try{
+            Dispatch dispatch=dispatchService.listDispatch(dispatchId);
+            logger.info(" method:findStaff  查看车辆联系人成功！");
+            return ReponseResult.ok(dispatch,"查看车辆联系人成功！");
+        }catch (Exception e) {
+            logger.error(" method:findStaff  查看车辆联系人失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    //酒店
+    @Autowired
+    private DispatchhotelService dispatchhotelService;
+    //餐厅
+    @Autowired
+    private DisrestaurantService disrestaurantService;
+    //购物
+    @Autowired
+    private DisshoppService disshoppService;
+    //线路
+    @Autowired
+    private HoteroomTypeService hoteroomTypeService;
+
+    /**
+     * 查看线路
+     * @param
+     * @return
+     */
+    @RequestMapping("/findDispatchxxx.html")
+    public ReponseResult findDispatchxxx(Integer dispatchId){
+        try{
+            List<String> list1=dispatchhotelService.listDispatchhotelAll(dispatchId);
+            List<String> list2=disrestaurantService.listDisrestaurantAll(dispatchId);
+            List<String> list3=disshoppService.listDisshoppAll(dispatchId);
+            List<HoteroomType> list4=hoteroomTypeService.listOfferlineAll(dispatchId);
+            List list5=new ArrayList();
+            list5.add(list1);
+            list5.add(list2);
+            list5.add(list3);
+            list5.add(list4);
+            logger.info(" method:findDispatchxxx  查看线路成功！");
+            ReponseResult<List> data= ReponseResult.ok(list5,"查看线路成功！");
+            return data;
+        }catch (Exception e) {
+            logger.error(" method:findDispatchxxx  查看线路失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 查看接团信息
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findCluster.html")
+    public ReponseResult findCluster(Integer dispatchId){
+        try{
+            Cluster cluster=dispatchService.ClusterById(dispatchId);
+            logger.info(" method:findCluster  查看接团信息成功！");
+            return ReponseResult.ok(cluster,"查看接团信息成功！");
+        }catch (Exception e) {
+            logger.error(" method:findCluster  查看接团信息失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;
         }
     }

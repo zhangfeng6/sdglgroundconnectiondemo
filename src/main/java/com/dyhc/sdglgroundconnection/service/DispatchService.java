@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -85,4 +86,17 @@ public interface DispatchService {
      * @throws Exception
      */
     Map<String,Object> getofferinfoById(Integer oid)throws Exception;
+    /**
+     * 查看车辆联系人
+     * @param dispatchId
+     * @return
+     */
+    Dispatch listDispatch(Integer dispatchId);
+
+    /**
+     * j接团信息
+     * @param dispatchId
+     * @return
+     */
+    Cluster ClusterById(Integer dispatchId);
 }

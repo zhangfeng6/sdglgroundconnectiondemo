@@ -62,7 +62,6 @@
         });
     });
     function getedit() {
-        alert(222)
         var typename=$("#one").val()
         var personName=$("#two").val()
         var personPost=$("#three").val()
@@ -80,7 +79,7 @@
             }else {
                 var travel = $("form").serialize();
                 $.ajax({
-                    url: "/showTravelAdd.html",
+                    url: "/Travel/showTravelAdd.html",
                     data: travel,
                     type: "get",
                     dataType: "json",
