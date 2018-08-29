@@ -108,4 +108,14 @@ public class StaffServiceImpl implements StaffService {
         return staffMapper.getserlectBy();
     }
 
+    /**
+     * 查看计调员
+     * @param staffId
+     * @return
+     */
+    @Override
+    public Staff listStaff(Integer staffId) {
+        return staffMapper.listStaff(staffId);
+    }
+
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -97,6 +98,10 @@ public class DispatchServiceImpl implements DispatchService {
     //餐厅类型表
     @Autowired
     private MealTypeMapper mealTypeMapper;
+    //接团信息
+    @Autowired
+    private ClusterMapper clusterMapper;
+
     /**
      * 根据报价表id获取该报价的所有信息
      * @param oid
@@ -282,5 +287,26 @@ public class DispatchServiceImpl implements DispatchService {
     public Dispatch getDispatchById(Integer reportDetailId) throws Exception {
         Reportdetail reportdetail=reportdetailService.getReportdetailById(reportDetailId);
         return dispatchMapper.selectByPrimaryKey(reportdetail.getDispatchId());
+    }
+
+    /**
+     * 查看车辆联系人
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Dispatch listDispatch(Integer dispatchId) {
+        return dispatchMapper.listDispatch(dispatchId);
+    }
+
+    /**
+     * 接团信息
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Cluster ClusterById(Integer dispatchId) {
+        return clusterMapper.ClusterById(dispatchId);
+
     }
 }

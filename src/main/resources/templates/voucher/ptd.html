@@ -1,130 +1,211 @@
+
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>layui</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-		<style type="text/css">
-			#tableone tr td {
-				width: 20px;
-				height: 12px;
-				border: 1px solid #000000;
-				text-align: center;
-				font-size: 18px;
-			}
+<head>
+	<meta charset="utf-8">
+	<title>layui</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+	<style type="text/css">
+		#tableone tr td {
+			width: 20px;
+			height: 12px;
+			border: 1px solid #000000;
+			text-align: center;
+			font-size: 18px;
+		}
+		#two tr td{
+			width: 20px;
+			height: 12px;
+			border: 1px solid #000000;
+			text-align: center;
+			font-size: 18px;
+		}
 
-			
-		</style>
-	</head>
+	</style>
+</head>
 
-	<body >
+<body >
 
-		<div style="height: 500px; width: 700px; margin: auto;">
-			<div id="tupian" style="width: 635px;">
-                <img src="/images/logo.jpg" width="640px" height="50px">
-       		 </div>
-			<h2 style="text-align: center; font-size:26px;">导游接团任务工作单(派团单)</h2>
-	<p style="text-indent: 400px; font-size: 20px;">编号:</p>
-	<p style="font-size: 18px;" >_______________:(导游证件号：1231513123)</p>
-	<P style="text-indent: 2em;font-size: 20px;">请按照旅行社确定的行程计做好导游工作，保证旅游行程	按计划执行，<br/>并按标准提供服务</P>
-	
-	<table style="" id="tableone" width="670px" height="280px">
-		<tr>
-			<td>接团时间</td>
-			<td colspan="3"></td>
-			
-		</tr>
-		<tr>
-			<td>接团地点</td>
-			<td colspan="3"></td>
-		</tr>
-		<tr>
-			<td>团队抵达/航班<br/>车次号</td>
-			<td colspan="3"></td>
-		</tr>
-		<tr>
-			<td>团队人数</td>
-			<td colspan="3"></td>
-		</tr>
-		<tr>
-			<td>团队用车车牌号</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>驾驶员姓名</td>
-			<td></td>
-			<td>联系电话</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>团队联系人姓名</td>
-			<td></td>
-			<td>联系电话</td>
-			<td></td>
-		</tr>
-		
-	</table>
-	<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
-
-
-
+<div style="height: 500px; width: 700px; margin: auto;">
+	<div id="tupian" style="width: 635px;">
+		<img src="/images/logo.jpg" width="640px" height="50px">
 	</div>
-			<div style="height: 500px; width: 700px; margin: auto; margin-top: 80px">
-			<h2 style="text-align: center; font-size:26px;">导游接团任务工作单(派团单)</h2>
+	<h2 style="text-align: center; font-size:26px;">导游接团任务工作单(派团单)</h2>
 	<p style="text-indent: 400px; font-size: 20px;">编号:</p>
-	<p style="font-size: 18px;" >_______________:(导游证件号：1231513123)</p>
+	<p style="font-size: 18px;" ><span id="one"></span>:(导游证件号：<span id="ten"></span>)</p>
 	<P style="text-indent: 2em;font-size: 20px;">请按照旅行社确定的行程计做好导游工作，保证旅游行程	按计划执行，<br/>并按标准提供服务</P>
-	
+
 	<table style="" id="tableone" width="670px" height="280px">
 		<tr>
 			<td>接团时间</td>
-			<td colspan="3"></td>
-			
+			<td colspan="3"><span id="clusterTime"></span></td>
+
 		</tr>
 		<tr>
 			<td>接团地点</td>
-			<td colspan="3"></td>
+			<td colspan="3"><span id="clusterAdderss"></span></td>
 		</tr>
 		<tr>
 			<td>团队抵达/航班<br/>车次号</td>
-			<td colspan="3"></td>
+			<td colspan="3"><span id="clusterNo"></span></td>
 		</tr>
 		<tr>
 			<td>团队人数</td>
-			<td colspan="3"></td>
+			<td colspan="3"><span id="first"></span></td>
 		</tr>
 		<tr>
 			<td>团队用车车牌号</td>
-			<td></td>
+			<td><span id="car1"></span></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td>驾驶员姓名</td>
-			<td></td>
+			<td><span id="contacts1"></span></td>
 			<td>联系电话</td>
-			<td></td>
+			<td><span id="con1"></span></td>
 		</tr>
 		<tr>
 			<td>团队联系人姓名</td>
-			<td></td>
+			<td><span id="name"></span></td>
 			<td>联系电话</td>
-			<td></td>
+			<td><span id="phone"></span></td>
 		</tr>
-		
+
 	</table>
 	<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
 
-		</div>
-	
-	
-	
-	</body>
+
+
+</div>
+<div style="height: 500px; width: 700px; margin: auto; margin-top: 80px">
+	<h2 style="text-align: center; font-size:26px;">导游接团任务工作单(派团单)</h2>
+	<p style="text-indent: 400px; font-size: 20px;">编号:</p>
+	<p style="font-size: 18px;" ><span id="one1"></span>:(导游证件号：<span id="ten1"></span>)</p>
+	<P style="text-indent: 2em;font-size: 20px;">请按照旅行社确定的行程计做好导游工作，保证旅游行程	按计划执行，<br/>并按标准提供服务</P>
+
+	<table style="" id="two" width="670px" height="280px">
+		<tr>
+			<td>接团时间</td>
+			<td colspan="3"><span id="clusterTimex"></span></td>
+
+		</tr>
+		<tr>
+			<td>接团地点</td>
+			<td colspan="3"><span id="clusterAdderssx"></span></td>
+		</tr>
+		<tr>
+			<td>团队抵达/航班<br/>车次号</td>
+			<td colspan="3"><span id="clusterNox"></span></td>
+		</tr>
+		<tr>
+			<td>团队人数</td>
+			<td colspan="3"><span id="fonr"></span></td>
+		</tr>
+		<tr>
+			<td>团队用车车牌号</td>
+			<td><span id="car"></span></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>驾驶员姓名</td>
+			<td><span id="contacts"></span></td>
+			<td>联系电话</td>
+			<td><span id="con"></span></td>
+		</tr>
+		<tr>
+			<td>团队联系人姓名</td>
+			<td><span id="name1"></span></td>
+			<td>联系电话</td>
+			<td><span id="phone1"></span></td>
+		</tr>
+
+	</table>
+	<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
+
+</div>
+
+
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+    $(function () {
+        lisrDispatch()
+        listStaff()
+        listDisguide()
+        listcluster()
+    })
+
+
+    function lisrDispatch() {
+        $.ajax({
+            url:"/dispatch/findDispatch.html",
+            data:{dispatchId:1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                $("#car").text(data.data.carcontacts.substring(17,24));
+                $("#contacts").text(data.data.carcontacts.substring(0,3));
+                $("#con").text(data.data.carcontacts.substring(4,16));
+                $("#car1").text(data.data.carcontacts.substring(17,24));
+                $("#contacts1").text(data.data.carcontacts.substring(0,3));
+                $("#con1").text(data.data.carcontacts.substring(4,16));
+
+
+            }
+        })
+    }
+    function listStaff() {
+        $.ajax({
+            url:"/Staff/findStaff.html",
+            data:{dispatchId:1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                $("#name").text(data.data.theUserName);
+                $("#phone").text(data.data.phone);
+                $("#name1").text(data.data.theUserName);
+                $("#phone1").text(data.data.phone);
+            }
+        })
+    }
+    function listDisguide() {
+        $.ajax({
+            url:"/findDisguide.html",
+            data:{dispatchId:1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                $("#one").text(data.data.guideName);
+                $("#one1").text(data.data.guideName);
+                $("#fonr").text(data.data.num);
+                $("#ten").text(data.data.certificate);
+                $("#ten1").text(data.data.certificate);
+                $("#first").text(data.data.num);
+            }
+        })
+    }
+    function listcluster() {
+        $.ajax({
+            url:"/dispatch/findCluster.html",
+            data:{dispatchId:1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                $("#clusterTime").text(data.data.clusterTime.substring(0,10));
+                $("#clusterAdderss").text(data.data.clusterAdderss);
+                $("#clusterNo").text(data.data.clusterNo);
+                $("#clusterTimex").text(data.data.clusterTime.substring(0,10));
+                $("#clusterAdderssx").text(data.data.clusterAdderss);
+                $("#clusterNox").text(data.data.clusterNo);
+            }
+        })
+    }
+</script>
+</body>
 
 </html>

@@ -2,5 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.DisguideMapper">
-
+    <select id="DisguideAll" resultType="com.dyhc.sdglgroundconnection.pojo.Disguide">
+SELECT g.guideName,g.certificate,g.telephone,o.num,o.tourist,o.travelStartTime,o.travelEndTime FROM disGuide d,guide g,dispatch o WHERE d.guideId=g.guideId AND d.offerId=o.dispatchId AND o.dispatchId=#{dispatchId}
+    </select>
 </mapper>

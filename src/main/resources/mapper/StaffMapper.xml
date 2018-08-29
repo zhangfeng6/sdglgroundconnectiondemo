@@ -30,4 +30,8 @@
         SELECT staffname FROM staff
     </select>
 
+    <select id="listStaff" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT theUserName,phone FROM staff s,dispatch d WHERE s.staffId=d.creater AND d.dispatchId=#{dispatchId}
+    </select>
+
 </mapper>

@@ -274,7 +274,7 @@
         <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
             <tr>
                 <th style="width:10%;background-color:#09F">备注</th>
-                <th id="remarks"></th>
+                <th id="beizhu"></th>
             </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="2" bordercolor="#0000FF" style="width:80%">
@@ -367,7 +367,6 @@
      * 获取组团社名称
      */
     function getTravelName(groupNumber) {
-        alert(groupNumber);
         $.ajax({
             url: "http://localhost:8888/Travel/getTravelName",
             data: {"groupNumber": groupNumber},
@@ -486,7 +485,7 @@
                 $("#receipt").text(result.data.receipt);
                 $("#totalPayable").text(result.data.totalPayable);
                 $("#balanceAmount").text(result.data.balanceAmount);
-                $("#remarks").text(result.data.remarks);
+                $("#beizhu").text(result.data.remarks);
             }
         });
     }

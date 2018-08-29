@@ -307,17 +307,27 @@ public class EnterAdminPageController {
         System.out.println(11111);
         return "admin/index/travel_upd";
     }
+    /**
+     * 进入companyone_admin.html页面   刘跃云
+     * @return
+     */
+    @RequestMapping("/companyone_admin.html")
+    public String  company_updat() {
+        System.out.println(1);
+        return "admin/index/companytwo-admin";
+    }
+
 
 
     /**
      * 进入company_update.html页面   刘跃云
      * @return
      */
-    @RequestMapping("/company_update.html")
+    @RequestMapping("/companytwo_update.html")
     public String  company_update(Integer companyId, HttpServletRequest request) {
         request.setAttribute("companyId",companyId);
         System.out.println("112345"+companyId);
-        return "admin/index/company-update";
+        return "admin/index/companytwo-update";
     }
     /**
      * 进入staff-add.html页面   刘跃云

@@ -68,4 +68,10 @@ public interface TemplateMapper  extends CommonMapper<Template>{
      */
     Template selecctNameById(@Param("templateId") int templateId);
 
+    /**
+     * 查看路线
+     * @param templateId
+     * @return
+     */
+    Template listTemplate(Integer templateId);
 }

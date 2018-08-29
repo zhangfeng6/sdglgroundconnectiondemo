@@ -36,6 +36,38 @@ public class HoteroomType {
     private Date date;
     private String value3;
 
+    @Transient
+    private String riqi;
+
+    @Transient
+    private String templateName;
+    @Transient
+    private String templateContent;
+
+    public String getRiqi() {
+        return riqi;
+    }
+
+    public void setRiqi(String riqi) {
+        this.riqi = riqi;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public String getTemplateContent() {
+        return templateContent;
+    }
+
+    public void setTemplateContent(String templateContent) {
+        this.templateContent = templateContent;
+    }
+
     @Id
     @Column(name = "hoteroomtId")
     public int getHoteroomtId() {

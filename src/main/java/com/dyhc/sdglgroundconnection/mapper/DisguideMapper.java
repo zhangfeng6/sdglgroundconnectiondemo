@@ -11,4 +11,11 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DisguideMapper extends CommonMapper<Disguide>{
+
+    /**
+     * 查看行程计划
+     * @param dispatchId
+     * @return
+     */
+    Disguide DisguideAll(Integer dispatchId);
 }

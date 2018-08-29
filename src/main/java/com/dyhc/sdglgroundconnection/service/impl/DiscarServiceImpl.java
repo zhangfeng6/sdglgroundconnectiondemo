@@ -30,4 +30,14 @@ public class DiscarServiceImpl implements DiscarService {
         discar.setVehicleType(vehicleTypeService.vehicleType(discar.getTypeId()));
         return discar;
     }
+
+    /**
+     * 查看车辆公司
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Discar listDiscar(Integer dispatchId) {
+        return discarMapper.listDiscar(dispatchId);
+    }
 }
