@@ -50,9 +50,9 @@ function addss() {
     var xlhtml=$("select[name=d1template]").html();
     var jiuhtml=$("select[name=d1hoteltype]").html();
     var jdhtml=$("select[name=d1scenicspot1]").html();
-    var gwdhtml=$("select[name=dlshopping]").html();
+    var gwdhtml=$("select[name=d1shopping]").html();
     var fanhtml=$("select[name=d1wucan]").html();
-    var a = "<div style='margin-bottom: 30px;width: 1090px' name='xianlu' ><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
+    var a = "<div style='margin-bottom: 25px;width: 1090px' name='xianlu' ><input type='hidden' value='"+index+"'/><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
         "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
         "<div id='content'>" +
         "<form class='layui-form layui-form-pane' action=''>" +
@@ -86,8 +86,8 @@ function addss() {
         "<td><input type='text' name='d"+index+"num' onchange='sumchange(this)' class='layui-input'></td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td><input name='d"+index+"jiucb'type='text' class='layui-input'></td>" +
-        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"hotelpayment'></td>"+
-        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"hotelpayment'></td>"+
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' value='签单' name='d"+index+"hotelpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' value='付现' name='d"+index+"hotelpayment'></td>"+
         "</tr>" +
         "<tr>" +
         "<td><label class='layui-form-label'>司陪：</label></td>" +
@@ -110,8 +110,10 @@ function addss() {
         "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
         "<td><input type='text' name='d"+index+"costprice1' class='layui-input'></td>" +
         "<td></td>"+
-        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"jingdpayment1'></td>"+
-        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"jingdpayment1'></td>"+
+        "<td></td>"+
+        "<td></td>"+
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' value='签单' name='d"+index+"jingdpayment1'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' value='付现' name='d"+index+"jingdpayment1'></td>"+
         "</tr>" +
         "<tr name='d"+index+"gouwudi'>" +
         "<td><label class='layui-form-label'>购物地：</label></td>" +
@@ -133,8 +135,8 @@ function addss() {
         "	</td>" +
         "	<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td colspan='3'><input type='text' name='d"+index+"wucancb' class='layui-input'></td>" +
-        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"wucanpayment'></td>"+
-        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"wucanpayment'></td>"+
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' value='签单' name='d"+index+"wucanpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' value='付现' name='d"+index+"wucanpayment'></td>"+
         "</tr>" +
         "	<tr>" +
         "<td><label class='layui-form-label'>晚餐</label></td>" +
@@ -149,8 +151,8 @@ function addss() {
         "</td>" +
         "<td><label class='layui-form-label'>成本价</label></td>" +
         "	<td colspan='3'><input type='text' name='d"+index+"wancancb' class='layui-input'></td>" +
-        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"wancanpayment'></td>"+
-        "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"wancanpayment'></td>"+
+        "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' value='签单' name='d"+index+"wancanpayment'></td>"+
+        "<td style='width: 90px;'>付现<input type='radio' value='付现' name='d"+index+"wancanpayment'></td>"+
         "	</tr>" +
         "	<tr>" +
         "	<td><label class='layui-form-label'>行程</label></td>" +

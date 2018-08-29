@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
+import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
@@ -13,12 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -34,6 +33,18 @@ public class DispatchController {
 
     @Autowired
     private DispatchService dispatchService;
+    //酒店
+    @Autowired
+    private DispatchhotelService dispatchhotelService;
+    //餐厅
+    @Autowired
+    private DisrestaurantService disrestaurantService;
+    //购物
+    @Autowired
+    private DisshoppService disshoppService;
+    //线路
+    @Autowired
+    private HoteroomTypeService hoteroomTypeService;
 
     /**
      * 返回所有调度信息
@@ -211,42 +222,7 @@ public class DispatchController {
             return err;
         }
     }
-    @RequestMapping("/saveDispatch")
-    public ReponseResult saveDispatch(@RequestBody DispatchParameter dispatchParameter){
-            System.out.println("666");
-            return null;
-    }
 
-    /**
-     * 查看车辆联系人
-     * @param dispatchId
-     * @return
-     */
-    @RequestMapping("/findDispatch.html")
-    public ReponseResult findDispatch(Integer dispatchId){
-        try{
-            Dispatch dispatch=dispatchService.listDispatch(dispatchId);
-            logger.info(" method:findStaff  查看车辆联系人成功！");
-            return ReponseResult.ok(dispatch,"查看车辆联系人成功！");
-        }catch (Exception e) {
-            logger.error(" method:findStaff  查看车辆联系人失败，系统出现异常！");
-            e.printStackTrace();
-            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
-            return err;
-        }
-    }
-    //酒店
-    @Autowired
-    private DispatchhotelService dispatchhotelService;
-    //餐厅
-    @Autowired
-    private DisrestaurantService disrestaurantService;
-    //购物
-    @Autowired
-    private DisshoppService disshoppService;
-    //线路
-    @Autowired
-    private HoteroomTypeService hoteroomTypeService;
 
     /**
      * 查看线路
@@ -293,5 +269,33 @@ public class DispatchController {
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;
         }
+    }
+
+    /**
+     * 查看车辆联系人
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findDispatch.html")
+    public ReponseResult findDispatch(Integer dispatchId){
+        try{
+            Dispatch dispatch=dispatchService.listDispatch(dispatchId);
+            logger.info(" method:findStaff  查看车辆联系人成功！");
+            return ReponseResult.ok(dispatch,"查看车辆联系人成功！");
+        }catch (Exception e) {
+            logger.error(" method:findStaff  查看车辆联系人失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    @RequestMapping(value = "/saveDispatch",method = RequestMethod.POST)
+    public ReponseResult saveDispatch(@RequestBody DispatchParameter dispatchParameter){
+        /*Date date=new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String Tuan="STS-"+sdf.format(date);
+        System.out.println(Tuan);*/
+        return null;
     }
 }

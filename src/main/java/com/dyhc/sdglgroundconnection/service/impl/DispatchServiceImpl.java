@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.*;
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
@@ -102,8 +103,50 @@ public class DispatchServiceImpl implements DispatchService {
     @Autowired
     private ClusterMapper clusterMapper;
 
+
     /**
-     * 根据报价表id获取该报价的所有信息
+     * 根据参数类的数据进行新增调度及调度相关信息
+     * @param dispatchParameter
+     * @return
+     * @throws Exception
+     */
+    @Override
+    @Transactional()
+    public int saveDispatch(DispatchParameter dispatchParameter)throws Exception {
+        try{
+            //调度表对象
+             Dispatch dispatch=dispatchParameter.getDispatch();
+            //调度导游表对象
+             Disguide disguide=dispatchParameter.getDisguide();
+            //接团信息表对象
+             Cluster cluster=dispatchParameter.getCluster();
+            //调度用车表对象
+             Discar discar=dispatchParameter.getDiscar();
+            //调度其他表对象
+             Disother disother=dispatchParameter.getDisother();
+            //调度酒店表集合
+             List<Dispatchhotel> dispatchhotelList=dispatchParameter.getDispatchhotelList();
+            //调度线路信息集合
+             List<HoteroomType> hoteroomTypeList=dispatchParameter.getHoteroomTypeList();
+            //调度景点信息集合
+             List<Disattr> disattrList=dispatchParameter.getDisattrList();
+            //调度购物地集合
+             List<Disshopp> disshoppList=dispatchParameter.getDisshoppList();
+            //调度餐厅表集合
+             List<Disrestaurant> disrestaurantList=dispatchParameter.getDisrestaurantList();
+            Date date=new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String Tuan="STS-"+sdf.format(date);
+            return 1;
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+    /**
+     * 根据报价表id获取该报价的所有信息到调度页面展示
      * @param oid
      * @return
      * @throws Exception
@@ -295,7 +338,7 @@ public class DispatchServiceImpl implements DispatchService {
      * @return
      */
     @Override
-    public Dispatch listDispatch(Integer dispatchId) {
+    public Dispatch listDispatch(Integer dispatchId)throws Exception  {
         return dispatchMapper.listDispatch(dispatchId);
     }
 
@@ -305,8 +348,9 @@ public class DispatchServiceImpl implements DispatchService {
      * @return
      */
     @Override
-    public Cluster ClusterById(Integer dispatchId) {
+    public Cluster ClusterById(Integer dispatchId)throws Exception  {
         return clusterMapper.ClusterById(dispatchId);
 
     }
+
 }

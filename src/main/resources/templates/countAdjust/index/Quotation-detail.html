@@ -38,10 +38,10 @@
 	</div>
 
 	<div id="zong" >
-		<div name="xianlu" style='margin-bottom: 30px;width: 1100px'>
+		<div name="xianlu" style='margin-bottom: 60px;width: 1100px'>
+			<input type="hidden" value="1"/>
 			<input type="image" src="/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)'/>
-
-			<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;"/>
+			<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;display: none"/>
 			<div id="content">
 					<form class="layui-form layui-form-pane" action="">
 						<table border="0" cellspacing="0" cellpadding="0">
@@ -77,8 +77,8 @@
 								<td><input name="dlnum" type="text" onchange="sumchange(this)" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td><input name="d1jiucb" type="text" class="layui-input"></td>
-								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1hotelpayment"></td>
-								<td style="width: 90px;">付现<input type="radio" name="d1hotelpayment"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" value="签单" name="d1hotelpayment"></td>
+								<td style="width: 90px;">付现<input type="radio" value="付现" name="d1hotelpayment"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">司陪：</label></td>
@@ -102,13 +102,15 @@
 								<td><label class="layui-form-label" style="width: 200px;">成本价:</label></td>
 								<td><input type="text" name="d1costprice1" class="layui-input"></td>
 								<td></td>
+								<td></td>
+								<td></td>
 								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" value="签单" name="d1jingdpayment1"></td>
 								<td style="width: 90px;">付现<input type="radio" value="付现" name="d1jingdpayment1"></td>
 							</tr>
 							<tr name="d1gouwudi">
 									<td><label class="layui-form-label">购物地：</label></td>
 									<td colspan="3">
-										<select name="dlshopping" style="height: 35px;width:180px;" lay-ignore>
+										<select name="d1shopping" style="height: 35px;width:180px;" lay-ignore>
 											<option value="0">--请选择--</option>
 										</select>
 									</td>
@@ -129,8 +131,8 @@
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td colspan="3"><input name="d1wucancb" type="text" class="layui-input"></td>
-								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1wucanpayment"></td>
-								<td style="width: 90px;">付现<input type="radio" name="d1wucanpayment"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" value="签单" name="d1wucanpayment"></td>
+								<td style="width: 90px;">付现<input type="radio" value="付现" name="d1wucanpayment"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">晚餐</label></td>
@@ -147,8 +149,8 @@
 								</td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td colspan="3"><input type="text" name="d1wancancb" class="layui-input"></td>
-								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1wancanpayment"></td>
-								<td style="width: 90px;">付现<input type="radio" name="d1wancanpayment"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" value="签单" name="d1wancanpayment"></td>
+								<td style="width: 90px;">付现<input type="radio" value="付现" name="d1wancanpayment"></td>
 							</tr>
 							<tr>
 								<td><label class="layui-form-label">行程</label></td>
@@ -183,7 +185,7 @@
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">接团地点：</label></td>
-						<td>
+						<td width="80px">
 							<input type="text" name="clusterAdderss" class="layui-input">
 						</td>
 						<td colspan="2">
@@ -195,14 +197,11 @@
 							</table>
 						</td>
 					</tr>
-					<tr>
-							<td><label class="layui-form-label">过停费：</label></td>
-							<td><input type="text" name="baoting" class="layui-input"></td>
-					</tr>
+
 					<tr>
 						<td><label class="layui-form-label">酒水：</label></td>
-						<td><input type="text" name="jiushui" class="layui-input"></td>
-						<td colspan="3">
+						<td width="80px"><input type="text" name="jiushui" class="layui-input"></td>
+						<td colspan="2">
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><label class="layui-form-label">发往线路：</label></td>
@@ -210,29 +209,6 @@
 								</tr>
 							</table>
 						</td>
-					</tr>
-
-					<tr>
-						<td><label class="layui-form-label">车队</label></td>
-						<td>
-							<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:233px;" lay-ignore>
-								<option value="0">--请选择--</option>
-							</select>
-						</td>
-						<td>
-							<select name="carrental" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
-								<option value="0">--请选择车队类型--</option>
-							</select>
-						</td>
-						<td><label class="layui-form-label" >数量:</label></td>
-						<td><input name="cheduinum" type="text" onchange="sumchange(this)" class="layui-input"></td>
-						<td><label class="layui-form-label" >成本价:</label></td>
-						<td><input type="text" name="cheduicb" class="layui-input"></td>
-					</tr>
-					<tr>
-						<td><label class="layui-form-label">车辆联系人：</label></td>
-						<td><input type="text" name="cheduilxr" class="layui-input"></td>
-						<td colspan="3">(如：张师傅 13333333333 晋H:88888)</td>
 					</tr>
 		<!--			<tr>
 						<td><label class="layui-form-label">返程类型：</label></td>
@@ -252,13 +228,48 @@
 											</tr>
 											</table>
 										</td>
+						<td colspan="2">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><label class="layui-form-label">过停费：</label></td>
+									<td><input type="text" name="baoting" class="layui-input"></td>
+								</tr>
+							</table>
+						</td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">小费：</label></td>
 						<td><input type="text" name="xiaofei"  class="layui-input"></td>
-						<td></td>
-						<td><label class="layui-form-label">导游借款：</label></td>
-						<td><input type="text" name="loan"  class="layui-input"></td>
+						<td colspan="2">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><label class="layui-form-label">导游借款：</label></td>
+									<td><input type="text" name="loan"  class="layui-input"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><label class="layui-form-label">车队</label></td>
+						<td>
+							<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:233px;" lay-ignore>
+								<option value="0">--请选择--</option>
+							</select>
+						</td>
+						<td>
+							<select name="carrental" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
+								<option value="0">--请选择车队类型--</option>
+							</select>
+						</td>
+						<td><label class="layui-form-label" >数量:</label></td>
+						<td><input name="cheduinum" type="text" onchange="sumchange(this)" class="layui-input"></td>
+						<td><label class="layui-form-label" >成本价:</label></td>
+						<td><input type="text" name="cheduicb" class="layui-input"></td>
+					</tr>
+					<tr>
+						<td><label class="layui-form-label">车联系人：</label></td>
+						<td><input type="text" name="cheduilxr" class="layui-input"></td>
+						<td colspan="3">(如：张师傅 13333333333 晋H:88888)</td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
@@ -301,8 +312,10 @@
                     "<td><label class='layui-form-label' style='width: 200px;'>成本价:</label></td>" +
                     "<td><input type='text' name='d"+index+"costprice"+leng+"' class='layui-input'></td>" +
                     "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>" +
-                    "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' name='d"+index+"jingdpayment"+leng+"'></td>"+
-                    "<td style='width: 90px;'>付现<input type='radio' name='d"+index+"jingdpayment"+leng+"'></td>"+
+					"<td></td>"+
+					"<td></td>"+
+                    "<td style='width: 90px;padding-left: 5px;'>签单<input type='radio' value='签单' name='d"+index+"jingdpayment"+leng+"'></td>"+
+                    "<td style='width: 90px;'>付现<input type='radio' value='付现' name='d"+index+"jingdpayment"+leng+"'></td>"+
                     "</tr>");
                 layui.use(['form', 'layedit', 'laydate', 'element'], function () {
                     var form = layui.form,
@@ -378,7 +391,7 @@
                         $(result.data['shopping']).each(function (i,e) {
                             content+="<option value='"+e.shoppingId+"'>"+e.shoppingSite+"</option>";
                         });
-                        $("select[name=dlshopping]").html(content);
+                        $("select[name=d1shopping]").html(content);
                         content="<option value='0'>--请选择--</option>";
                         //饭店类型
                         $(result.data['diet']).each(function (i,e) {
@@ -648,10 +661,17 @@
 				dispatch.sendLine=$("input[name=sendLine]").val();
 				var tourist="";
 				for (var i=0;i<index;i++){
-                    tourist+="第"+(i+1)+"天:"+$("textarea[name=d"+(i+1)+"xingcheng]").text()+",";
+                    var L=0;
+                    $($("div[name=xianlu]")).each(function (z,x) {
+                        if(z==i){
+                            L=$(x).children("input:first-child").val();
+                            return false;
+                        }
+                    });
+                    tourist+="第"+(i+1)+"天:"+$("textarea[name=d"+(L)+"xingcheng]").text()+",";
 				}
 				dispatch.tourist=tourist;
-				dispatch.fare=$("input[name=chefei]").val();
+				dispatch.fare=$("input[name=baoting]").val();
 				dispatch.wineFee=$("input[name=jiushui]").val();
 				dispatch.not=$("input[name=xiaofei]").val();
 				dispatch.remarks=$("textarea[name=remarks]").text();
@@ -671,75 +691,81 @@
                 var disattrList=[];
                 var disshoppList=[];
                 var disrestaurantList=[];
+
                 //循环每一天的线路
                 for (var i=0;i<index;i++){
+                    //确认元素name的名称
+                    var L=0;
+                    $($("div[name=xianlu]")).each(function (z,x) {
+                        if(z==i){
+                            L=$(x).children("input:first-child").val();
+                            return false;
+						}
+                    });
 					var hoteroomtype={};
-                    hoteroomtype.templateId=$("select[name=d"+(i+1)+"template]").val();
+                    hoteroomtype.templateId=$("select[name=d"+(L)+"template]").val();
                     hoteroomtype.weight=(i+1);
-                    hoteroomtype.date=$("input[name=d"+(i+1)+"data]").val();
-                    hoteroomtype.xingcheng=$("textarea[name=d"+(i+1)+"xingcheng]").text();
+                    hoteroomtype.date=$("input[name=d"+(L)+"data]").val();
+                    hoteroomtype.xingcheng=$("textarea[name=d"+(L)+"xingcheng]").text();
                     hoteroomTypeList.push(hoteroomtype);
                     var dispatchhotel={};
-                    dispatchhotel.hotelId=$("select[name=d"+(i+1)+"hotel]").val();
-                    dispatchhotel.costPrice=$("input[name=d"+(i+1)+"jiucb]").val();
-                    dispatchhotel.date=$("input[name=d"+(i+1)+"data]").val();
+                    dispatchhotel.hotelId=$("select[name=d"+(L)+"hotel]").val();
+                    dispatchhotel.costPrice=$("input[name=d"+(L)+"jiucb]").val();
+                    dispatchhotel.date=$("input[name=d"+(L)+"data]").val();
                     dispatchhotel.weight=(i+1);
-                    dispatchhotel.roomNum=$("input[name=d"+(i+1)+"num]").val();
-                    dispatchhotel.valueId=$("input[name=d"+(i+1)+"spchengben]").val();
-                    dispatchhotel.sproomNum=$("input[name=d"+(i+1)+"spnum]").val();
-                    dispatchhotel.payment=$("input[name=d"+(i+1)+"hotelpayment]").val();
+                    dispatchhotel.roomNum=$("input[name=d"+(L)+"num]").val();
+                    dispatchhotel.valueId=$("input[name=d"+(L)+"spchengben]").val();
+                    dispatchhotel.sproomNum=$("input[name=d"+(L)+"spnum]").val();
+                    dispatchhotel.payment=$("input[name=d"+(L)+"hotelpayment]:checked").val();
                     dispatchhotelList.push(dispatchhotel);
-                    if($("select[name=d"+(i+1)+"shopping]").val()!=0){
+                    if($("select[name=d"+(L)+"shopping]").val()!=0&&$("select[name=d"+(L)+"shopping]").val()!=undefined){
                         var disshopp={};
-                        disshopp.scenicSpotId=$("select[name=d"+(i+1)+"shopping]").val();
-                        disshopp.date=$("input[name=d"+(i+1)+"data]").val();
-                        disshopp.weight=weight=(i+1);
+                        disshopp.scenicSpotId=$("select[name=d"+(L)+"shopping]").val();
+                        disshopp.date=$("input[name=d"+(L)+"data]").val();
+                        disshopp.weight=(i+1);
                         disshoppList.push(disshopp);
 					}
 					var disrestaurant={};
-                    disrestaurant.typeId=$("select[name=d"+(i+1)+"wufan]").val();
-                    disrestaurant.costPrice=$("input[name=d"+(i+1)+"wucancb]").val();
+                    disrestaurant.typeId=$("select[name=d"+(L)+"wufan]").val();
+                    disrestaurant.costPrice=$("input[name=d"+(L)+"wucancb]").val();
                     disrestaurant.dinDate=2;
-                    disrestaurant.tourismdate=$("input[name=d"+(i+1)+"data]").val();
+                    disrestaurant.tourismdate=$("input[name=d"+(L)+"data]").val();
                     disrestaurant.weight=(i+1);
-                    disrestaurant.payment=$("input[name=d"+(i+1)+"wucanpayment]").val();
+                    disrestaurant.payment=$("input[name=d"+(L)+"wucanpayment]:checked").val();
                     disrestaurantList.push(disrestaurant);
                     var disrestaurant1={};
-                    disrestaurant1.typeId=$("select[name=d"+(i+1)+"wanfan]").val();
-                    disrestaurant1.costPrice=$("input[name=d"+(i+1)+"wancancb]").val();
+                    disrestaurant1.typeId=$("select[name=d"+(L)+"wanfan]").val();
+                    disrestaurant1.costPrice=$("input[name=d"+(L)+"wancancb]").val();
                     disrestaurant1.dinDate=3;
-                    disrestaurant1.tourismdate=$("input[name=d"+(i+1)+"data]").val();
+                    disrestaurant1.tourismdate=$("input[name=d"+(L)+"data]").val();
                     disrestaurant1.weight=(i+1);
-                    disrestaurant1.payment=$("input[name=d"+(i+1)+"wancanpayment]").val();
-                    disrestaurantList.push(disrestaurant);
-
-                    var jingdian=$("tr[name=d"+(i+1)+"jingdian]");
-                    $(jingdian).each(function (w,q) {
+                    disrestaurant1.payment=$("input[name=d"+(L)+"wancanpayment]:checked").val();
+                    disrestaurantList.push(disrestaurant1);
+                   $($("tr[name=d"+(L)+"jingdian]")).each(function (w,q) {
+                        var selectname=$(q).children("td:first-child").next().children("select").attr("name");
+						var r=selectname.substring(12,13);
 						var disattr={};
-                        disattr.scenicSpotId=$("select[name=d"+(i+1)+"scenicspot"+(w+1)+"]").val();
-                        disattr.costPrice=$("input[name=d"+(i+1)+"costprice"+(w+1)+"]").val();
-                        disattr.payMethods=$("input[name=d"+(i+1)+"jingdpayment"+(w+1)+"]").val();
-                        disattr.date=$("input[name=d"+(i+1)+"data]").val();
+                        disattr.scenicSpotId=$("select[name=d"+(L)+"scenicspot"+(r)+"]").val();
+                        disattr.costPrice=$("input[name=d"+(L)+"costprice"+(r)+"]").val();
+                        disattr.payMethods=$("input[name=d"+(L)+"jingdpayment"+(r)+"]:checked").val();
+                        disattr.date=$("input[name=d"+(L)+"data]").val();
                         disattr.weight=(i+1);
                         disattrList.push(disattr);
                     });
-
                 }
-
                 var dispatchParameter={dispatch:dispatch,disguide:disguide,cluster:cluster,
 					discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
-                    disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList
-				};
-                dispatchParameter=JSON.stringify(dispatchParameter);
-                alert(dispatchParameter);
-				$.ajax({
+                    disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList};
+                $.ajax({
 					url:"/dispatch/saveDispatch",
-					data:dispatchParameter,
-					type:"get",
+					data:JSON.stringify(dispatchParameter),
+					type:"post",
 					dataType:"json",
+                    contentType: "application/json",
 					success:function (result) {
 						
-                    },error:function (err) {
+                    },
+					error:function (err) {
 						alert(err);
                     }
 				});
