@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -97,6 +98,10 @@ public class DispatchServiceImpl implements DispatchService {
     //餐厅类型表
     @Autowired
     private MealTypeMapper mealTypeMapper;
+    //接团信息
+    @Autowired
+    private ClusterMapper clusterMapper;
+
     /**
      * 根据报价表id获取该报价的所有信息
      * @param oid
@@ -175,9 +180,9 @@ public class DispatchServiceImpl implements DispatchService {
         if(type.equals("hoteltype")){
             list= hotelMapper.listhotelByvalueId(valueId);
         }else if(type.equals("fantype")){
-            list=restaurantMapper.listrestaurantByvalueId(valueId);
+            list=mealTypeMapper.listinfoByvalueId(valueId);
         }else if(type.equals("cartype")){
-            list=carrentalMapper.listcarrentalByvalueId(valueId);
+            list=vehicleTypeMapper.listinfoByvalueId(valueId);
         }
         return list;
     }
@@ -190,17 +195,17 @@ public class DispatchServiceImpl implements DispatchService {
     public  Dispatch dispatchSelectAll(Integer dispatchId){
         Dispatch dispatch=null;
         try {
-             dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
-             Travel travel =travelMappere.selectTravelById(dispatch.getGroupNumber());
-             String A ="";
-             if (travel.getTravelName()==null){
-                 A="无组团名称";
-                 travel.setTravelName(A);
-             }
-             dispatch.setTravel(travel);
-             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
-             /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
-             dispatch.setDispatchhotel(dispatchhotels);
+            dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
+            Travel travel =travelMappere.selectTravelById(dispatch.getGroupNumber());
+            String A ="";
+            if (travel.getTravelName()==null){
+                A="无组团名称";
+                travel.setTravelName(A);
+            }
+            dispatch.setTravel(travel);
+            List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
+            /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
+            dispatch.setDispatchhotel(dispatchhotels);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -282,5 +287,29 @@ public class DispatchServiceImpl implements DispatchService {
     public Dispatch getDispatchById(Integer reportDetailId) throws Exception {
         Reportdetail reportdetail=reportdetailService.getReportdetailById(reportDetailId);
         return dispatchMapper.selectByPrimaryKey(reportdetail.getDispatchId());
+    }
+
+    /***
+     * 查询计调表
+     /**
+     * 查看车辆联系人
+     * @param dispatchId
+     * @return
+     */
+    public  Dispatch dispatch(Integer dispatchId) {
+        return dispatchMapper.dispatch(dispatchId);
+    }
+    public Dispatch listDispatch(Integer dispatchId) {
+        return dispatchMapper.listDispatch(dispatchId);
+    }
+
+    /**
+     * 接团信息
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Cluster ClusterById(Integer dispatchId) {
+        return clusterMapper.ClusterById(dispatchId);
     }
 }
