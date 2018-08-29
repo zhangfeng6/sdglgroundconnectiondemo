@@ -112,7 +112,7 @@
 						"<td>"+result.travelEndTime+"</td>" +
 						"<td>"+result.offer+"</td>" +
 						"<td>"+state+"</td>" +
-						"<td><button  type='button'value='\" + result.templateId + \"' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></td></tr>";
+						"<td><button  type='button'value='\" + result.templateId + \"' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='ding("+result.dispatchId+")'><i class='layui-icon' type='button'>&#xe68e;</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='pai("+result.dispatchId+")'><i class='layui-icon' type='button'>&#xe6b2;</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='jihua("+result.dispatchId+")'><i class='layui-icon' type='button'>&#xe60a;</i></button></td></tr>";
                     xu++;
                 })
                 $('tbody').html(str);
@@ -127,6 +127,47 @@
         layer = layui.layer;
         form.render('select');
     });
+
+    function ding(id){
+        $.ajax({
+            url:"/dispatch/ding",
+            data:{dispatchId:id},
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                location.href="/voucher/BookingNotice.html";
+            },
+		})
+	}
+
+
+
+    function pai(id){
+        $.ajax({
+            url:"/dispatch/pai",
+            data:{dispatchId:id},
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                location.href="/countAdjust/ptd.html";
+            },
+        })
+    }
+
+
+    function jihua(id){
+        $.ajax({
+            url:"/dispatch/jihua",
+            data:{dispatchId:id},
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                location.href="/countAdjust/findDisguide.html";
+            },
+        })
+    }
+
+
     $(function(){
         loadData(0);
         //列表添加

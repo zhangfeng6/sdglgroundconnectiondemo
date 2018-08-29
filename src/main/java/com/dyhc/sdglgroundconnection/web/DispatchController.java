@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 import java.util.*;
 
@@ -62,15 +64,43 @@ public class DispatchController {
 
     }
 
+
+    @RequestMapping("ding")
+    public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("pai")
+    public ReponseResult pai(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+
+    @RequestMapping("jihua")
+    public ReponseResult jihua(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+
     /**
      * 订房通知单： 贾晓亮
      * @param dispatchId
      * @return
      */
     @RequestMapping("/dispatchSelectAll")
-    public  ReponseResult dispatchSelectAll(Integer dispatchId){
-        dispatchId=1;
+    public  ReponseResult dispatchSelectAll(HttpServletRequest request,Integer dispatchId){
+        HttpSession session = request.getSession();
         try {
+            dispatchId=Integer.parseInt(session.getAttribute("dispatchId").toString());
             ReponseResult<Dispatch> data =ReponseResult.ok(dispatchService.dispatchSelectAll(dispatchId),"查询计调订房通知单成功");
             logger.info("method:getresource 查询计调订房通知单成功！");
             return data;

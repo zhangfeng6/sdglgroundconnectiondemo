@@ -1,7 +1,10 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
+import com.dyhc.sdglgroundconnection.pojo.Disrestaurant;
 import com.dyhc.sdglgroundconnection.pojo.Travel;
 import com.dyhc.sdglgroundconnection.service.TravelService;
+import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -12,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -200,18 +208,183 @@ public class TravelController{
      * @param groupNumber
      * @return
      */
-    @RequestMapping("/getTravelName")
+    @RequestMapping("getTravelName")
     public ReponseResult getTravelName(Integer groupNumber){
-        try{
-            Travel travel=travelService.getTravelName(groupNumber);
-            logger.info(" method:showTravelupdlala  获取成功！");
-            return ReponseResult.ok(travel,"获取成功！");
-        }catch (Exception e) {
-            logger.error(" method:showTravelupdlala  获取失败！");
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.getTravelName(groupNumber),"获取成功");
+            logger.info("method:getTravelName  获取组团社名称成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:getTravelName  获取组团社名称失败");
             e.printStackTrace();
-            ReponseResult<Integer> err = ReponseResult.err("获取失败！");
-            return err;
+            return ReponseResult.err("获取失败");
         }
     }
 
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectGuideByTravelId")
+    public ReponseResult selectGuideByTravelId(Integer travelId){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.selectGuideByTravelId(travelId),"获取成功");
+            logger.info("method:selectGuideByTravelId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectGuideByTravelId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectStaffByTraveId")
+    public ReponseResult selectStaffByTraveId(Integer travelId){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.selectStaffByTraveId(travelId),"获取成功");
+            logger.info("method:selectStaffByTraveId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectStaffByTraveId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectDispatchByTravelId")
+    public ReponseResult selectDispatchByTravelId(Integer travelId){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.selectDispatchByTravelId(travelId),"获取成功");
+            logger.info("method:selectDispatchByTravelId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectDispatchByTravelId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
+
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectReportrestaurantByTravelId")
+    public ReponseResult selectReportrestaurantByTravelId(Integer travelId){
+        try {
+            List<Disrestaurant> disrestaurants = travelService.selectReportrestaurantByTravelId(travelId);
+            List<Dispatchhotel> dispatchhotels = travelService.selectReportaccommodationByTravelId(travelId);
+            List<Disrestaurant> disrestaurants1 = travelService.selectReportrestaurantByTravelId1(travelId);
+            List list = new ArrayList();
+            list.add(disrestaurants);
+            list.add(dispatchhotels);
+            list.add(disrestaurants1);
+            ReponseResult data=ReponseResult.ok(list,"获取成功");
+            logger.info("method:selectReportrestaurantByTravelId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectReportrestaurantByTravelId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectOfferByTravelId")
+    public ReponseResult selectOfferByTravelId(Integer travelId){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.selectOfferByTravelId(travelId),"获取成功");
+            logger.info("method:selectOfferByTravelId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectOfferByTravelId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectReportfareByTravelId")
+    public ReponseResult selectReportfareByTravelId(Integer travelId){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.selectReportfareByTravelId(travelId),"获取成功");
+            logger.info("method:selectReportfareByTravelId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectReportfareByTravelId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+    /**
+     * 根据组团社号获取
+     * @param
+     * @return
+     */
+    @RequestMapping("selectReportticketByTravelId")
+    public ReponseResult selectReportticketByTravelId(Integer travelId){
+        try {
+            ReponseResult data=ReponseResult.ok(travelService.selectReportticketByTravelId(travelId),"获取成功");
+            logger.info("method:selectReportfareByTravelId  获取成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:selectReportfareByTravelId  获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
+    @RequestMapping("Delegation")
+    public ReponseResult Delegation(HttpServletRequest request, Integer travelId){
+        HttpSession session = request.getSession();
+        session.setAttribute("travelId",travelId);
+        return ReponseResult.ok("获取成功");
+    }
+
+    @RequestMapping("huoqu")
+    public ReponseResult huoqu(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("travelId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
+
+
+    @RequestMapping("pai")
+    public ReponseResult pai(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
+
+    @RequestMapping("jihua")
+    public ReponseResult jihua(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
 }
