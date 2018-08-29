@@ -51,4 +51,8 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     int updateDispatchstate(@Param("did")Integer did)throws Exception;
+
+    Dispatch dispatch(Integer dispatchId);
+
+    Dispatch listDispatch(Integer dispatchId);
 }

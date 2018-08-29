@@ -58,7 +58,7 @@ public interface DispatchService {
      * @return
      */
     Dispatch dispatchSelectAll(Integer dispatchId);
-     /* 根据调度id查询调度信息     陈庆武
+    /* 根据调度id查询调度信息     陈庆武
      * @param reportDetailId 调度id
      * @return
      */
@@ -86,7 +86,7 @@ public interface DispatchService {
      * @return
      */
     Dispatch dispatch(@Param("dispatchId") Integer dispatchId);
-     /* 根据报价Id查询该报价的所有信息
+    /* 根据报价Id查询该报价的所有信息
      * @param oid
      * @return
      * @throws Exception
