@@ -21,69 +21,75 @@
 		    <li>修改密码</li>
 		  </ul>
 		  <div class="layui-tab-content">
-		    <div class="layui-tab-item layui-show">
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;">
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">人员编号：</label>
-				    <div class="layui-input-block">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">用户名：</label>
-				    <div class="layui-input-block">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">姓名：</label>
-				    <div class="layui-input-block">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">性别：</label>
-				    <div class="layui-input-block">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">身份证号：</label>
-				    <div class="layui-input-block">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">现住址：</label>
-				    <div class="layui-input-block">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label">头像地址：</label>
-				    <div class="layui-input-block" id="updone">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label" >QQ号码：</label>
-				    <div class="layui-input-block" id="updtwo">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label">联系电话：</label>
-				    <div class="layui-input-block" id="updthree">
-				     <label class="layui-form-label">2871</label>	
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo">立即提交</button>
-				      <button class="layui-btn layui-btn-normal" type="button" id="upds">修改</button>
-				    </div>
-				  </div>
-				</form>
+			  <div class="layui-tab-item layui-show">
+				  <form class="layui-form"  style="width: 90%;padding-top: 20px;">
+					  <div class="layui-form-item" id="one">
+						  <div class="layui-input-block">
+							  <img id="headPortraitPath1" style="width: 100px;height: 50px"/>
+							  <!--<label class="layui-form-label">2871</label>	-->
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">人员编号：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="staffId1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">用户名：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="theUserName1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">姓名：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="staffname1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">性别：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="sex1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">身份证号：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="cardId1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">现住址：</label>
+						  <div class="layui-input-block" id="upfour">
+							  <label class="layui-form-label" id="currentAddress1" style="width: 200px;	">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item" id="two">
+						  <label class="layui-form-label">头像地址：</label>
+						  <div class="layui-input-block" id="updone">
+
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label" >QQ号码：</label>
+						  <div class="layui-input-block" id="updtwo">
+							  <label class="layui-form-label" id="qqnumber1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">联系电话：</label>
+						  <div class="layui-input-block" id="updthree">
+							  <label class="layui-form-label" id="phone1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <div class="layui-input-block">
+							  <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo" id="lijitijiao">立即提交</button>
+							  <button class="layui-btn layui-btn-normal" type="button" id="upds">修改</button>
+						  </div>
+					  </div>
+				  </form>
 		    </div>
 		    <div class="layui-tab-item">
 		    	<form class="layui-form" v style="width: 90%;padding-top: 20px;">
@@ -123,15 +129,22 @@
 	<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+        $("#two").css("display","none");
+		$("#lijitijiao").css("display","none");
 		$("#upds").click(function(){
 			var one=$("#updone");
 			var two=$("#updtwo");
 			var three=$("#updthree");
+            $("#lijitijiao").css("display","block");
+            $("#one").css("display","none");
+            $("#two").css("display","block");
+            $(this).css("display","none");
 //			var four=$("#updfour");
 			var five="<input  style='margin-top: 8px;' type='text' name='name' placeholder'请输入标' value=''>";
 			$("#updone").html(five)
 			$("#updtwo").html(five)
 			$("#updthree").html(five)
+            $("#upfour").html(five)
 		});
 	</script>
 	<script>
@@ -151,6 +164,35 @@
 		    return false;
 		  });
 		});
+
+        getAdminInfo();
+        /**
+		 * 获取当前个人信息
+         */
+		function getAdminInfo() {
+			$.ajax({
+				url:"http://localhost:8888/Staff/getStaffInfo",
+				data:"",
+				dataType:"json",
+				type:"get",
+				success:function (result) {
+					$("#staffId1").text(result.data.staffId);
+                    $("#theUserName1").text(result.data.theUserName);
+                    if (result.data.sex=="0"){
+                        $("#sex1").text("女");
+					}
+                    if (result.data.sex=="1"){
+                        $("#sex1").text("男");
+                    }
+                    $("#cardId1").text(result.data.cardId);
+                    $("#qqnumber1").text(result.data.qqnumber);
+                    $("#staffname1").text(result.data.staffname);
+                    $("#phone1").text(result.data.phone);
+                    $("#currentAddress1").text(result.data.currentAddress);
+                    $("#headPortraitPath1").attr("src","/api/image/"+result.data.headPortraitPath);
+                }
+			})
+        }
 	</script>
 	</body>
 </html>

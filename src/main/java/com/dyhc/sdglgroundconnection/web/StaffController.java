@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -232,6 +233,49 @@ public class StaffController  {
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;
+        }
+    }
+
+
+    /**
+     * 获取个人信息
+     * @return
+     */
+    @RequestMapping("getStaffInfo")
+    public ReponseResult getStaffInfo(){
+        try {
+            Staff staff=new Staff();
+            staff.setStaffId(1);
+            staff.setRoleId(1);
+            staff.setStaffname("张三");
+            staff.setTheUserName("admin1");
+            staff.setSex(0);
+            staff.setPassword("123456");
+            staff.setCardId("1111111111111");
+            staff.setQqnumber("1111111111");
+            staff.setHeadPortraitPath("20180829083431666.jpg");
+            staff.setCurrentAddress("山西省太原市小店区");
+            staff.setPhone("11111111111");
+            staff.setWhetherDel(0);
+            staff.setCreateBy(1);
+            staff.setCreateDate(new Date());
+            staff.setUpdateBy(1);
+            staff.setUpdateDate(new Date());
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session=request.getSession();//创建session对象
+            session.setAttribute("staff",staff);
+            if (session.getAttribute("staff")!=null){
+                Staff s=(Staff)session.getAttribute("staff");
+                logger.info("mothod:getStaffInfo 获取成功");
+                return ReponseResult.ok(staff,"获取成功");
+            }else {
+                logger.info("mothod:getStaffInfo 该用户还没有登录");
+                return ReponseResult.ok("该用户还没有登录");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothid:getStaffInfo 获取失败");
+            return ReponseResult.err("获取个人信息失败");
         }
     }
 }
