@@ -102,8 +102,8 @@
 								<td><label class="layui-form-label" style="width: 200px;">成本价:</label></td>
 								<td><input type="text" name="d1costprice1" class="layui-input"></td>
 								<td></td>
-								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" name="d1jingdpayment1"></td>
-								<td style="width: 90px;">付现<input type="radio" name="d1jingdpayment1"></td>
+								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" value="签单" name="d1jingdpayment1"></td>
+								<td style="width: 90px;">付现<input type="radio" value="付现" name="d1jingdpayment1"></td>
 							</tr>
 							<tr name="d1gouwudi">
 									<td><label class="layui-form-label">购物地：</label></td>
@@ -684,8 +684,65 @@
                     dispatchhotel.costPrice=$("input[name=d"+(i+1)+"jiucb]").val();
                     dispatchhotel.date=$("input[name=d"+(i+1)+"data]").val();
                     dispatchhotel.weight=(i+1);
+                    dispatchhotel.roomNum=$("input[name=d"+(i+1)+"num]").val();
+                    dispatchhotel.valueId=$("input[name=d"+(i+1)+"spchengben]").val();
+                    dispatchhotel.sproomNum=$("input[name=d"+(i+1)+"spnum]").val();
+                    dispatchhotel.payment=$("input[name=d"+(i+1)+"hotelpayment]").val();
+                    dispatchhotelList.push(dispatchhotel);
+                    if($("select[name=d"+(i+1)+"shopping]").val()!=0){
+                        var disshopp={};
+                        disshopp.scenicSpotId=$("select[name=d"+(i+1)+"shopping]").val();
+                        disshopp.date=$("input[name=d"+(i+1)+"data]").val();
+                        disshopp.weight=weight=(i+1);
+                        disshoppList.push(disshopp);
+					}
+					var disrestaurant={};
+                    disrestaurant.typeId=$("select[name=d"+(i+1)+"wufan]").val();
+                    disrestaurant.costPrice=$("input[name=d"+(i+1)+"wucancb]").val();
+                    disrestaurant.dinDate=2;
+                    disrestaurant.tourismdate=$("input[name=d"+(i+1)+"data]").val();
+                    disrestaurant.weight=(i+1);
+                    disrestaurant.payment=$("input[name=d"+(i+1)+"wucanpayment]").val();
+                    disrestaurantList.push(disrestaurant);
+                    var disrestaurant1={};
+                    disrestaurant1.typeId=$("select[name=d"+(i+1)+"wanfan]").val();
+                    disrestaurant1.costPrice=$("input[name=d"+(i+1)+"wancancb]").val();
+                    disrestaurant1.dinDate=3;
+                    disrestaurant1.tourismdate=$("input[name=d"+(i+1)+"data]").val();
+                    disrestaurant1.weight=(i+1);
+                    disrestaurant1.payment=$("input[name=d"+(i+1)+"wancanpayment]").val();
+                    disrestaurantList.push(disrestaurant);
+
+                    var jingdian=$("tr[name=d"+(i+1)+"jingdian]");
+                    $(jingdian).each(function (w,q) {
+						var disattr={};
+                        disattr.scenicSpotId=$("select[name=d"+(i+1)+"scenicspot"+(w+1)+"]").val();
+                        disattr.costPrice=$("input[name=d"+(i+1)+"costprice"+(w+1)+"]").val();
+                        disattr.payMethods=$("input[name=d"+(i+1)+"jingdpayment"+(w+1)+"]").val();
+                        disattr.date=$("input[name=d"+(i+1)+"data]").val();
+                        disattr.weight=(i+1);
+                        disattrList.push(disattr);
+                    });
 
                 }
+
+                var dispatchParameter={dispatch:dispatch,disguide:disguide,cluster:cluster,
+					discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
+                    disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList
+				};
+                dispatchParameter=JSON.stringify(dispatchParameter);
+                alert(dispatchParameter);
+				$.ajax({
+					url:"/dispatch/saveDispatch",
+					data:dispatchParameter,
+					type:"get",
+					dataType:"json",
+					success:function (result) {
+						
+                    },error:function (err) {
+						alert(err);
+                    }
+				});
             }
             
 		</script>

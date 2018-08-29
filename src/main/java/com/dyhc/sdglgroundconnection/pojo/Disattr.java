@@ -39,7 +39,8 @@ public class Disattr {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
-    private String value1;
+    @Column(name = "weight")
+    private Integer weight;
     private String value2;
     private String value3;
     @Transient
@@ -195,13 +196,13 @@ public class Disattr {
     }
 
     @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    @Column(name = "weight")
+    public Integer getWeight() {
+        return weight;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
     @Basic
@@ -242,7 +243,7 @@ public class Disattr {
                 Objects.equals(updateBy, disattr.updateBy) &&
                 Objects.equals(upDate, disattr.upDate) &&
                 Objects.equals(createDate, disattr.createDate) &&
-                Objects.equals(value1, disattr.value1) &&
+                Objects.equals(weight, disattr.weight) &&
                 Objects.equals(value2, disattr.value2) &&
                 Objects.equals(value3, disattr.value3);
     }
@@ -250,6 +251,6 @@ public class Disattr {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disAttrId, scenicSpotId, offerId, date, buynum, costPrice, quotePrice, payMethods, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disAttrId, scenicSpotId, offerId, date, buynum, costPrice, quotePrice, payMethods, status, createBy, updateBy, upDate, createDate, weight, value2, value3);
     }
 }
