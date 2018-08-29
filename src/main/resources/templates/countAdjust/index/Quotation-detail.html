@@ -176,7 +176,7 @@
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><label class="layui-form-label">接团时间：</label></td>
-									<td colspan="3"><input type="text" name="" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+									<td colspan="3"><input type="text" name="clusterTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
 								</tr>
 							</table>
 						</td>
@@ -184,32 +184,32 @@
 					<tr>
 						<td><label class="layui-form-label">接团地点：</label></td>
 						<td>
-							<input type="text" name="" class="layui-input">
+							<input type="text" name="clusterAdderss" class="layui-input">
 						</td>
 						<td colspan="2">
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><label class="layui-form-label">航班/车次：</label></td>
-									<td colspan="3"><input type="text" name="" class="layui-input"></td>
+									<td colspan="3"><input type="text" name="clusterNo" class="layui-input"></td>
 								</tr>
 							</table>
 						</td>
 					</tr>
 					<tr>
-							<td><label class="layui-form-label">车费：</label></td>
-							<td><input type="text" name="chefei" class="layui-input"></td>
-							<td colspan="3">
-								<table border="0" cellspacing="0" cellpadding="0">
-									<tr>
-										<td><label class="layui-form-label">报停费：</label></td>
-										<td colspan="2"><input type="text" name="baoting" class="layui-input"></td>
-									</tr>
-								</table>
-							</td>
+							<td><label class="layui-form-label">过停费：</label></td>
+							<td><input type="text" name="baoting" class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">酒水：</label></td>
 						<td><input type="text" name="jiushui" class="layui-input"></td>
+						<td colspan="3">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><label class="layui-form-label">发往线路：</label></td>
+									<td colspan="2"><input type="text" name="sendLine" class="layui-input"></td>
+								</tr>
+							</table>
+						</td>
 					</tr>
 
 					<tr>
@@ -256,6 +256,9 @@
 					<tr>
 						<td><label class="layui-form-label">小费：</label></td>
 						<td><input type="text" name="xiaofei"  class="layui-input"></td>
+						<td></td>
+						<td><label class="layui-form-label">导游借款：</label></td>
+						<td><input type="text" name="loan"  class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
@@ -267,8 +270,8 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><button class='layui-btn layui-btn-normal layui-btn-radius'>预览报价单</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><button class='layui-btn layui-btn-normal layui-btn-radius' id="baocun">打印报价单</button></td>
+						<td></td>
+						<td><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" onclick="saveDispatch()" id="baocun">保存</button></td>
 					</tr>
 				</table>
 			</form>
@@ -435,12 +438,12 @@
                         }else if(type=="fantype"){
                             content="<option value='0'>--请选择饭店--</option>";
                             $(result.data).each(function (i,e) {
-                                content+="<option value='"+e.typeId+"' price='"+e.gettypeprice+"'>--"+e.restaurantName+"--</option>";
+                                content+="<option value='"+e.typeId+"' price='"+e.costprice+"'>--"+e.restaurantName+"--</option>";
                             });
                         }else if(type=="cartype"){
                             content="<option value='0'>--请选择车队公司--</option>";
                             $(result.data).each(function (i,e) {
-                                content+="<option value='"+e.typeId+"' price='"+e.gettypeprice+"'>--"+e.carRentalName+"--</option>";
+                                content+="<option value='"+e.typeId+"' price='"+e.costprice+"'>--"+e.carRentalName+"--</option>";
                             });
                         }
                         $(obj).parent().next().children("select").html(content);
@@ -589,7 +592,6 @@
 							if(i>0){
 								addss();
 							}
-							$("select[name=d"+(i+1)+"template]").val(e.lineArriveName);
 							$("textarea[name=d"+(i+1)+"xingcheng]").text(e.travelContent);
 							$("input[name=d"+(i+1)+"data]").val(e.date);
                             $("select[name=d"+(i+1)+"hoteltype]").val(1);
@@ -609,6 +611,11 @@
 								$("select[name=d"+(i+1)+"scenicspot"+(r+1)+"]").val(id[r]);
                                 $("input[name=d"+(i+1)+"costprice"+(r+1)+"]").val(cb[r]);
 							}
+                            $("select[name=d"+(i+1)+"template]").children().each(function(){
+                                if($(this).text() ==e.lineArriveName){
+                                    $(this).prop("selected",true);
+                                }
+                            })
                         });
 						$(result.data["hotel"]).each(function (i,e) {
                             hotelresource((i+1));
@@ -623,6 +630,64 @@
                     }
 				});
             }
+			//新增调度信息
+			function saveDispatch() {
+                var index=$("div[name=xianlu]").length;
+                //创建json对象
+                var dispatch={};
+                var disguide={};
+                var cluster={};
+                var discar={};
+                var disother={};
+
+				//填充数据
+				dispatch.groupNumber=$("select[name=travel]").val();
+                dispatch.num=$("input[name=num]").val();
+                dispatch.travelStartTime=$("input[name=travelStartTime]").val();
+                dispatch.travelEndTime=$("input[name=travelEndTime]").val();
+				dispatch.sendLine=$("input[name=sendLine]").val();
+				var tourist="";
+				for (var i=0;i<index;i++){
+                    tourist+="第"+(i+1)+"天:"+$("textarea[name=d"+(i+1)+"xingcheng]").text()+",";
+				}
+				dispatch.tourist=tourist;
+				dispatch.fare=$("input[name=chefei]").val();
+				dispatch.wineFee=$("input[name=jiushui]").val();
+				dispatch.not=$("input[name=xiaofei]").val();
+				dispatch.remarks=$("textarea[name=remarks]").text();
+				dispatch.reception=$("textarea[name=reception]").text();
+				dispatch.loan=$("input[name=loan]").val();
+                disguide.guideId=$("select[name=guide]").val();
+                cluster.clusterTime=$("input[name=clusterTime]").val();
+                cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
+                cluster.clusterNo=$("input[name=clusterNo]").val();
+                discar.typeId=$("select[name=carrental]").val();
+                discar.costPrice=$("input[name=cheduicb]").val();
+                discar.number=$("input[name=cheduinum]").val();
+                disother.costPrice=$("input[name=qitacb]").val();
+                //每一天的资源集合
+                var dispatchhotelList=[];
+                var hoteroomTypeList=[];
+                var disattrList=[];
+                var disshoppList=[];
+                var disrestaurantList=[];
+                //循环每一天的线路
+                for (var i=0;i<index;i++){
+					var hoteroomtype={};
+                    hoteroomtype.templateId=$("select[name=d"+(i+1)+"template]").val();
+                    hoteroomtype.weight=(i+1);
+                    hoteroomtype.date=$("input[name=d"+(i+1)+"data]").val();
+                    hoteroomtype.xingcheng=$("textarea[name=d"+(i+1)+"xingcheng]").text();
+                    hoteroomTypeList.push(hoteroomtype);
+                    var dispatchhotel={};
+                    dispatchhotel.hotelId=$("select[name=d"+(i+1)+"hotel]").val();
+                    dispatchhotel.costPrice=$("input[name=d"+(i+1)+"jiucb]").val();
+                    dispatchhotel.date=$("input[name=d"+(i+1)+"data]").val();
+                    dispatchhotel.weight=(i+1);
+
+                }
+            }
+            
 		</script>
 </body>
 </html>

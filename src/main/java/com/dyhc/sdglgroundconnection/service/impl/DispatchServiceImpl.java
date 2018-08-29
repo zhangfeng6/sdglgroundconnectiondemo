@@ -180,9 +180,9 @@ public class DispatchServiceImpl implements DispatchService {
         if(type.equals("hoteltype")){
             list= hotelMapper.listhotelByvalueId(valueId);
         }else if(type.equals("fantype")){
-            list=restaurantMapper.listrestaurantByvalueId(valueId);
+            list=mealTypeMapper.listinfoByvalueId(valueId);
         }else if(type.equals("cartype")){
-            list=carrentalMapper.listcarrentalByvalueId(valueId);
+            list=vehicleTypeMapper.listinfoByvalueId(valueId);
         }
         return list;
     }
