@@ -27,4 +27,48 @@
         select * from travel where whetherDel!=1 and travelId=#{travelId}
     </select>
 
+    <select id="selectGuideByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
+        SELECT g.* FROM guide g,Dispatch d,disGuide dg,travel t
+        WHERE dg.guideId = g.guideId
+        AND dg.offerId = d.dispatchId
+        AND d.groupNumber = t.travelId
+        AND t.travelId = #{travelId}
+    </select>
+
+    <select id="selectDispatchByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+          SELECT * FROM dispatch d,travel t WHERE d.groupNumber = t.travelId AND t.travelId=#{travelId}
+    </select>
+
+    <select id="selectStaffByTraveId" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT s.* FROM staff s,travel t,Dispatch d
+        WHERE d.groupNumber = t.travelId
+        AND d.creater = s.staffId
+        AND t.travelId = #{travelId}
+    </select>
+
+    <select id="selectOfferByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">
+         SELECT * FROM offer o,travel t WHERE o.travelId=t.travelId AND t.travelId=#{travelId}
+    </select>
+
+    <select id="selectReportrestaurantByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
+        SELECT rr.*,d.num,re.restaurantName FROM Dispatch d,DisRestaurant rr,mealType m,restaurant re WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='2'
+
+    </select>
+
+    <select id="selectReportrestaurantByTravelId1" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
+        SELECT rr.*,d.num,re.restaurantName FROM Dispatch d,DisRestaurant rr,mealType m,restaurant re WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='3'
+
+    </select>
+
+    <select id="selectReportaccommodationByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
+        SELECT rr.*,ss.hotelName FROM Dispatch d,DispatchHotel rr,hotel ss WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND ss.hotelId = rr.hotelId
+    </select>
+
+    <select id="selectReportticketByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disattr">
+         SELECT rr.*,ss.scenicSpotName FROM Dispatch d,DisAttr rr,scenicSpot ss WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND ss.scenicSpotId = rr.scenicSpotId
+    </select>
+
+    <select id="selectReportfareByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Discar">
+         SELECT rr.*,d.loan,d.wineFee,d.fare FROM Dispatch d,`disCar` rr WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId}
+    </select>
 </mapper>

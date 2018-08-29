@@ -14,4 +14,8 @@
             and r.dispatchId=d.dispatchId AND d.guideId=g.guideId
         </where>
     </select>
+    <!--查询地接导游报账明细信息：贾晓亮-->
+    <select id="reportdetail" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
+       select  * from  reportdetail where  dispatchId=#{dispatchId}
+    </select>
 </mapper>

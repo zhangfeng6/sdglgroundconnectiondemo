@@ -22,6 +22,7 @@ public class Dispatchhotel {
     @Column(name = "costPrice")
     private Double costPrice; // 成本价
     private Double offer; // 报价
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date; // 日期
     private String payment; // 付款方式
     @Column(name = "roomNum")
@@ -42,6 +43,18 @@ public class Dispatchhotel {
     @Column(name = "sproomNum")
     private Integer sproomNum;
     private String value3;
+
+    @Transient
+    private String hotelName;
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
     //酒店表
     @Transient
     private Hotel hotel;

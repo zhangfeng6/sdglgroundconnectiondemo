@@ -37,6 +37,16 @@ public class EnterAdminPageController {
     }
 
 
+
+    /**
+     * 派团单
+     * @return
+     */
+    @RequestMapping("/Delegation")
+    public String Delegation() {
+        return "voucher/Mission";
+    }
+
     /**
      * 分页demo2
      * @return

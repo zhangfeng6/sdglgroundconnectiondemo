@@ -30,4 +30,11 @@ public interface ReportdetailService {
      * @throws Exception
      */
     Reportdetail getReportdetailById(Integer reportDetailId)throws Exception;
+
+    /**
+     * 查询地接导游报账明细：贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    Reportdetail reportdetail(Integer dispatchId);
 }
