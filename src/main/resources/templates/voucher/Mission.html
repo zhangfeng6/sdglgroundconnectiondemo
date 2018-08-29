@@ -350,13 +350,13 @@
                     var canfei = 0;
                     var fangfei = 0;
                     for (var i=0;i<data.data[1].length;i++){
-                        var wucan = Number(data.data[0][i].lunchMeal)*Number(data.data[0][i].lunchEatNum);
-                        var wancan = Number(data.data[0][i].dinnerMeal)*Number(data.data[0][i].dinnerEatNum);
-                        var jiudian = data.data[1][i].housePrice*data.data[1][i].roomNum+data.data[1][i].accompanyingBed*data.data[1][i].accompanyingPrice;
-						if (data.data[0][i].lunchPayMethods=="付现"){
+                       var wucan = Number(data.data[0][i].costPrice)*Number(data.data[0][i].num);
+                        var wancan = Number(data.data[2][i].costPrice)*Number(data.data[2][i].num);
+                        var jiudian = Number(data.data[1][i].costPrice)*Number(data.data[1][i].roomNum)+Number(data.data[1][i].valueId)*Number(data.data[1][i].sproomNum);
+						if (data.data[0][i].payment=="付现"){
 							canfei+=wucan;
 						}
-                        if (data.data[0][i].dinnerPayMethods=="付现"){
+                        if (data.data[2][i].payment=="付现"){
                             canfei+=wancan;
                         }
                         if (data.data[1][i].payMethods=="付现"){
@@ -364,13 +364,13 @@
                         }
 
                         content+="<tr>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[1][i].liveDate.substring(data.data[1][i].liveDate.length-5)+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[0][i].luncheonName+"<br/>"+data.data[0][i].lunchPayMethods+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[0][i].lunchMeal+"*"+data.data[0][i].lunchEatNum+"="+wucan+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[0][i].dinnerName+"<br/>"+data.data[0][i].dinnerPayMethods+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[0][i].dinnerMeal+"*"+data.data[0][i].dinnerEatNum+"="+wancan+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[1][i].hotelName+" "+data.data[1][i].roomNum+"间+"+data.data[1][i].accompanyingBed+"司陪<br/>"+data.data[1][i].payMethods+" "+data.data[1][i].housePrice+"*"+data.data[1][i].roomNum+"+"+data.data[1][i].accompanyingBed+"*"+data.data[1][i].accompanyingPrice+"="+jiudian+"</td>\n" +
-                            "\t\t    \t\t\t<td>"+data.data[1][i].accompanyingBed+"床</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[1][i].date.substring(data.data[1][i].date.length-5)+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[0][i].restaurantName+"<br/>"+data.data[0][i].payment+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[0][i].costPrice+"*"+data.data[0][i].num+"="+wucan+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[2][i].restaurantName+"<br/>"+data.data[0][i].payment+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[2][i].costPrice+"*"+data.data[0][i].num+"="+wancan+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[1][i].hotelName+" "+data.data[1][i].roomNum+"间+"+data.data[1][i].sproomNum+"司陪<br/>"+data.data[1][i].payment+" "+data.data[1][i].costPrice+"*"+data.data[1][i].roomNum+"+"+data.data[1][i].valueId+"*"+data.data[1][i].sproomNum+"="+jiudian+"</td>\n" +
+                            "\t\t    \t\t\t<td>"+data.data[1][i].sproomNum+"床</td>\n" +
                             "\t\t    \t\t</tr>";
 					}
 					var zong= canfei+fangfei;

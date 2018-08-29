@@ -367,6 +367,7 @@
      * 获取组团社名称
      */
     function getTravelName(groupNumber) {
+        alert(groupNumber);
         $.ajax({
             url: "http://localhost:8888/Travel/getTravelName",
             data: {"groupNumber": groupNumber},

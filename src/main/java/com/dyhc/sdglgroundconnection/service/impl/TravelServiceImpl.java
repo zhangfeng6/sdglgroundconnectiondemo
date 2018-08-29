@@ -137,8 +137,13 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public List<Reportrestaurant> selectReportrestaurantByTravelId(Integer travelId) {
+    public List<Disrestaurant> selectReportrestaurantByTravelId(Integer travelId) {
         return travelMapper.selectReportrestaurantByTravelId(travelId);
+    }
+
+    @Override
+    public List<Disrestaurant> selectReportrestaurantByTravelId1(Integer travelId) {
+        return travelMapper.selectReportrestaurantByTravelId1(travelId);
     }
 
     @Override

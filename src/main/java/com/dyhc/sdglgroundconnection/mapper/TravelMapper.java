@@ -88,7 +88,14 @@ public interface TravelMapper extends CommonMapper<Travel> {
      * @param travelId
      * @return
      */
-    List<Reportrestaurant> selectReportrestaurantByTravelId(@Param("travelId") Integer travelId);
+    List<Disrestaurant> selectReportrestaurantByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社Id查询餐厅导游报价
+     * @param travelId
+     * @return
+     */
+    List<Disrestaurant> selectReportrestaurantByTravelId1(@Param("travelId") Integer travelId);
 
 
 

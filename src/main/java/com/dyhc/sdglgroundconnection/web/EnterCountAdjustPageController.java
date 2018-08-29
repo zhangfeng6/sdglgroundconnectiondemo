@@ -466,7 +466,14 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/Quotation-detail.html")
-    public String  QuotationDetail() {
+    public String  QuotationDetail(@RequestParam(value = "id",required = false)Integer id,
+                                   @RequestParam(value = "did",required = false)Integer did,Model model) {
+        if(id!=null&&id!=0){
+            model.addAttribute("id",id);
+        }
+        if(did!=null&&did!=0){
+            model.addAttribute("did",did);
+        }
         return "countAdjust/index/Quotation-detail";
     }
 

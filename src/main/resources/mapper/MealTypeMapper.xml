@@ -29,4 +29,8 @@
     <select id="selectMealType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM dictionaries WHERE whetherDel!=1 and typeCode="DIET"
     </select>
+
+    <select id="listinfoByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
+        SELECT m.`typeId`,r.`restaurantName` AS 'restaurantName',m.`costprice` FROM `mealtype` m,`restaurant` r  WHERE m.`restaurantId`=r.`restaurantId` AND m.`valueId`=#{valueId} AND r.`whetherDel` !=1
+    </select>
 </mapper>

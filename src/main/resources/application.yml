@@ -60,6 +60,8 @@ pagehelper:
   row-bounds-with-count: true
   reasonable: true
 
+# 文件内外映射配置
 file:
-    windowsUploadFolder: D:\Y2\世达国旅\sdglGroundConnection\src\main\resources\static\images
-    linuxUploadFolder:
+  staticAccessPath: /api/image/**  # 静态资源对外暴露的访问路径
+  windowsUploadFolder: D://Y2\世达国旅/sdglGroundConnection/src/main/resources/static/images/  # windows文件上传目录
+  linuxUploadFolder: /root/uploadFiles/  # linux文件上传目录

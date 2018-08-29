@@ -60,7 +60,7 @@ function addss() {
         "<tr>" +
         "	<td><label class='layui-form-label'>线路</label></td>" +
         "	<td>" +
-        "	<select name='d\"+index+\"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +
+        "	<select name='d"+index+"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +
         ""+xlhtml+"</select>" +
         "	</td>" +
         "	<td colspan='2'>&nbsp;<button type='button' name='d"+index+"qiehuan' class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick='xianlu(this)'>自行填写</button></td>" +
@@ -74,7 +74,7 @@ function addss() {
         "	<tr>" +
         "	<td><label class='layui-form-label'>酒店</label></td>" +
         "	<td>" +
-        "	<select name='d"+index+"hoteltype' style=\"height: 35px;width:180px;\" onchange=\"typechange(this,'hoteltype')\" lay-ignore>" +
+        "	<select name='d"+index+"hoteltype' style='height: 35px;width:180px;' onchange='typechange(this,'hoteltype')' lay-ignore>" +
         ""+jiuhtml+"</select>" +
         "</td>" +
         "<td>" +
@@ -98,7 +98,7 @@ function addss() {
         "</tr>" +
         "</tr>" +
         "<tr id='onClickjd' >" +
-        "<td colspan='2'><button name='d"+index+"scenicspot' class='layui-btn' type='button' style='font-size:12px' onclick='add(this)'>添加景点+</button></td>" +
+        "<td colspan='2'><button name='d"+index+"scenicspot' class='layui-btn' type='button' style='font-size:12px' onclick='add("+index+")'>添加景点+</button></td>" +
         "</tr>" +
         "<tr id='scenic' name='d"+index+"jingdian'>" +
         "<td><label class='layui-form-label'>景点</label></td>" +

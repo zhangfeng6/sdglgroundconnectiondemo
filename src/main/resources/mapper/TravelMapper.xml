@@ -50,8 +50,14 @@
          SELECT * FROM offer o,travel t WHERE o.travelId=t.travelId AND t.travelId=#{travelId}
     </select>
 
-    <select id="selectReportrestaurantByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Reportrestaurant">
-        SELECT rr.* FROM Dispatch d,ReportDetail r,reportrestaurant rr WHERE d.dispatchId=r.dispatchId AND rr.reportDetailId = r.reportDetailId AND d.groupNumber=#{travelId}
+    <select id="selectReportrestaurantByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
+        SELECT rr.*,d.num,re.restaurantName FROM Dispatch d,DisRestaurant rr,mealType m,restaurant re WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='2'
+
+    </select>
+
+    <select id="selectReportrestaurantByTravelId1" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
+        SELECT rr.*,d.num,re.restaurantName FROM Dispatch d,DisRestaurant rr,mealType m,restaurant re WHERE d.dispatchId = rr.offerId AND d.groupNumber=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='3'
+
     </select>
 
     <select id="selectReportaccommodationByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">

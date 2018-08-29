@@ -26,7 +26,7 @@ public class Disrestaurant {
     @Column(name = "tourismdate")
     private Date tourismdate; // 天数
     @Column(name = "dinDate")
-    private String dinDate; // 用餐时间（早、中、晚）
+    private Integer dinDate; // 用餐时间（早、中、晚）
     private Integer status; // 是否删除（1代表已删除，0代表未删除）
     @Column(name = "createBy")
     private Integer createBy; // 创建人 （外键，与人员表关联）
@@ -41,6 +41,28 @@ public class Disrestaurant {
     private int weight;  //权重
     private String value2;
     private String value3;
+
+    @Transient
+    private String restaurantName;
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    @Transient
+    private Integer num;
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
 
     @Id
     @Column(name = "disRestaurantId")
@@ -104,11 +126,11 @@ public class Disrestaurant {
 
     @Basic
     @Column(name = "dinDate")
-    public String getDinDate() {
+    public Integer getDinDate() {
         return dinDate;
     }
 
-    public void setDinDate(String dinDate) {
+    public void setDinDate(Integer dinDate) {
         this.dinDate = dinDate;
     }
 

@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.*;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
 import com.dyhc.sdglgroundconnection.pojo.Travel;
@@ -67,6 +68,70 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Autowired
     private ReportdetailService reportdetailService;
+
+    //报价用车表对象
+    @Autowired
+    private OffercarMapper offercarMapper;
+
+    //报价表
+    @Autowired
+    private OfferMapper offerMapper;
+    //报价模板信息表
+    @Autowired
+    private OfferlineMapper offerlineMapper;
+    //报价酒店信息表
+    @Autowired
+    private OfferHotelMapper offerHotelMapper;
+    //报价餐厅信息表
+    @Autowired
+    private OfferrestaurantMapper offerrestaurantMapper;
+    //报价其他表
+    @Autowired
+    private OfferotherMapper offerotherMapper;
+    //报价景点表
+    @Autowired
+    private OfferscenicMapper offerscenicMapper;
+    //车辆类型表
+    @Autowired
+    private VehicleTypeMapper vehicleTypeMapper;
+    //餐厅类型表
+    @Autowired
+    private MealTypeMapper mealTypeMapper;
+    /**
+     * 根据报价表id获取该报价的所有信息
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map<String, Object> getofferinfoById(Integer oid) throws Exception {
+        Map<String,Object> map=new HashMap<String,Object>();
+        Offercar offercar=offercarMapper.selectOffercarByOfferId(oid);
+        Dictionaries dictionaries=dictionariesMapper.selectByPrimaryKey(offercar.getDictionariesId());
+        map.put("car",dictionaries.getValueId());
+        map.put("offer",offerMapper.selectOfferByOfferId(oid));
+        map.put("line",offerlineMapper.selectOfferlineByOfferId(oid));
+        map.put("hotel",offerHotelMapper.selectOfferHotelByOfferId(oid));
+        List<Offerrestaurant> offerrestaurant=offerrestaurantMapper.selectOfferRestaurantByOfferId(oid);
+        List<Dictionaries> wan = new ArrayList<>();
+        List<Dictionaries> wu = new ArrayList<>();
+        for (Offerrestaurant offerrestaurant1: offerrestaurant) {
+            Integer house = offerrestaurant1.getHavemealsdate();
+            Dictionaries dictionaries1=dictionariesMapper.selectByPrimaryKey(offerrestaurant1.getDictionariesId());
+            if (house==2){
+                wu.add(dictionaries1);
+            }
+            if (house==3){
+                wan.add(dictionaries1);
+            }
+        }
+        map.put("wu",wu);
+        map.put("wan",wan);
+        map.put("other",offerotherMapper.selectOfferotherByOfferId(oid));
+        map.put("scenic",offerscenicMapper.selectOfferscenicByOfferId(oid));
+        return map;
+    }
+
     /**
      * 根据条件查询调度信息 并分页返回
      * @param pageNo        当前页数
@@ -110,9 +175,9 @@ public class DispatchServiceImpl implements DispatchService {
         if(type.equals("hoteltype")){
             list= hotelMapper.listhotelByvalueId(valueId);
         }else if(type.equals("fantype")){
-            list=restaurantMapper.listrestaurantByvalueId(valueId);
+            list=mealTypeMapper.listinfoByvalueId(valueId);
         }else if(type.equals("cartype")){
-            list=carrentalMapper.listcarrentalByvalueId(valueId);
+            list=vehicleTypeMapper.listinfoByvalueId(valueId);
         }
         return list;
     }

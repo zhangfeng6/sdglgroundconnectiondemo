@@ -35,6 +35,16 @@ public class HoteroomType {
     @Column(name = "date")
     private Date date;
     private String value3;
+    @Column(name = "xingcheng")
+    private String xingcheng;
+
+    public String getXingcheng() {
+        return xingcheng;
+    }
+
+    public void setXingcheng(String xingcheng) {
+        this.xingcheng = xingcheng;
+    }
 
     @Id
     @Column(name = "hoteroomtId")

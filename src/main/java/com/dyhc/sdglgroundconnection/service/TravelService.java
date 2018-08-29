@@ -131,7 +131,14 @@ public interface TravelService {
      * @param travelId
      * @return
      */
-    List<Reportrestaurant> selectReportrestaurantByTravelId(Integer travelId);
+    List<Disrestaurant> selectReportrestaurantByTravelId(Integer travelId);
+
+    /**
+     * 根据组团社Id查询餐厅导游报价
+     * @param travelId
+     * @return
+     */
+    List<Disrestaurant> selectReportrestaurantByTravelId1(Integer travelId);
 
     /**
      * 根据组团社Id查询导游酒店报价

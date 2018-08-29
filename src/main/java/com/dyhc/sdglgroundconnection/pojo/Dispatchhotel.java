@@ -22,6 +22,7 @@ public class Dispatchhotel {
     @Column(name = "costPrice")
     private Double costPrice; // 成本价
     private Double offer; // 报价
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date; // 日期
     private String payment; // 付款方式
     @Column(name = "roomNum")
@@ -39,7 +40,8 @@ public class Dispatchhotel {
     @Column(name = "creationDate")
     private Date creationDate; // 创建时间
     private int weight;  //权重
-    private String value2;
+    @Column(name = "sproomNum")
+    private Integer sproomNum;
     private String value3;
 
     @Transient
@@ -214,13 +216,13 @@ public class Dispatchhotel {
     }
 
     @Basic
-    @Column(name = "value2")
-    public String getValue2() {
-        return value2;
+    @Column(name = "sproomNum")
+    public Integer getSproomNum() {
+        return sproomNum;
     }
 
-    public void setValue2(String value2) {
-        this.value2 = value2;
+    public void setSproomNum(Integer sproomNum) {
+        this.sproomNum = sproomNum;
     }
 
     @Basic
@@ -253,13 +255,13 @@ public class Dispatchhotel {
                 Objects.equals(modifiedData, that.modifiedData) &&
                 Objects.equals(creationDate, that.creationDate) &&
                 Objects.equals(weight, that.weight) &&
-                Objects.equals(value2, that.value2) &&
+                Objects.equals(sproomNum, that.sproomNum) &&
                 Objects.equals(value3, that.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, weight, value2, value3);
+        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, weight, sproomNum, value3);
     }
 }
