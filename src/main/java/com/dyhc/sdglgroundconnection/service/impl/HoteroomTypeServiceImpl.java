@@ -6,6 +6,8 @@ import com.dyhc.sdglgroundconnection.service.HoteroomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度酒店房间类型业务实现
@@ -19,5 +21,13 @@ public class HoteroomTypeServiceImpl implements HoteroomTypeService {
     @Override
     public HoteroomType getHoteroomTypeById(Integer dispatchId, Integer weight) throws Exception {
         return hoteroomTypeMapper.getHoteroomTypeById(dispatchId,weight);
+    }
+    /**
+     * 查看线路信息
+     * @return
+     */
+    @Override
+    public List<HoteroomType> listOfferlineAll(Integer dispatchId) {
+        return hoteroomTypeMapper.listOfferlineAll(dispatchId);
     }
 }

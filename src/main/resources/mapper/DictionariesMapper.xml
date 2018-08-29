@@ -36,4 +36,68 @@
         select * from `dictionaries` where typeCode='VEHICLE' and whetherDel!=1
     </select>
 
+    <!--餐厅类型-->
+    <select id="getDictionariesCan" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  d.*,s.theUserName FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='DIET' AND d.whetherDel!=1
+        <if test="valueContent1 !=null and valueContent1 !=''">
+            and valueContent1 like concat('%',#{valueContent1},'%')
+        </if>
+    </select>
+    <!--车队类型-->
+    <select id="getDictionariesCar" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  d.*,s.theUserName FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='VEHICLE' AND d.whetherDel!=1
+        <if test="valueContent1 !=null and valueContent1 !=''">
+            and valueContent1 like concat('%',#{valueContent1},'%')
+        </if>
+    </select>
+    <!--酒店类型-->
+    <select id="getDictionariesHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  d.*,s.theUserName FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='THEROOM' AND d.whetherDel!=1
+        <if test="valueContent1 !=null and valueContent1 !=''">
+            and valueContent1 like concat('%',#{valueContent1},'%')
+        </if>
+    </select>
+
+
+    <!--餐厅类型-->
+    <update id="getDictionariesByOne">
+        UPDATE dictionaries SET whetherDel=1 WHERE valueContent1=#{valueContent1}
+    </update>
+    <!--车队类型-->
+    <update id="getDictionariesByDel">
+        UPDATE dictionaries SET whetherDel=1 WHERE valueContent1=#{valueContent1}
+    </update>
+    <!--酒店类型-->
+    <update id="getDictionariesHotelDel">
+        UPDATE dictionaries SET whetherDel=1 WHERE valueContent1=#{valueContent1}
+    </update>
+
+
+
+
+    <!--餐厅类型-->
+    <update id="getDictionariesByUpd">
+        UPDATE dictionaries SET valueContent1=#{valueContent1} WHERE dictionariesId=#{dictionariesId}
+    </update>
+    <!--车队类型-->
+    <update id="getDictionariescarUpd">
+        UPDATE dictionaries SET valueContent1=#{valueContent1} WHERE dictionariesId=#{dictionariesId}
+    </update>
+    <!--酒店类型-->
+    <update id="getDictionariesHotelByUpd">
+        UPDATE dictionaries SET valueContent1=#{valueContent1} WHERE dictionariesId=#{dictionariesId}
+    </update>
+
+    <!--餐厅类型-->
+    <select id="getgetDictionariesSelect" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM dictionaries WHERE dictionariesId=#{dictionariesId}
+    </select>
+    <!--车队类型-->
+    <select id="getgetDictionariesCarSelect" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM dictionaries WHERE dictionariesId=#{dictionariesId}
+    </select>
+    <!--酒店类型-->
+    <select id="getgetDictionariesHotelSelect" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM dictionaries WHERE dictionariesId=#{dictionariesId}
+    </select>
 </mapper>

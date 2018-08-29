@@ -29,4 +29,11 @@ public interface DispatchhotelService {
      */
     Dispatchhotel getDispatchHotel(Integer dispatchId,Integer weight)throws Exception;
 
+
+    /**
+     * 查看住宿地点
+     * @return
+     */
+    List<String> listDispatchhotelAll(Integer dispatchId);
+
 }

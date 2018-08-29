@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -108,6 +110,298 @@ public class DictionariesController {
             ReponseResult<List> data=ReponseResult.err("获取所有的车辆类型失败");
             e.printStackTrace();
             return  data;
+        }
+    }
+
+    /**
+     * 分页查看餐厅类型
+     * @param pageNo
+     * @param pageSize
+     * @param
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesCan.html")
+    public ReponseResult DictionariesCan(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("valueContent1")String valueContent1){
+        try{
+            System.out.println(pageNo);
+            PageInfo<Dictionaries> pageInfoTravel=dictionariesService.listDictionariesCan(pageNo,pageSize,valueContent1);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取餐厅类型成功！");
+            logger.info(" method:DictionariesCan  分页获取餐厅类型成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:DictionariesCan  获取餐厅类型数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 分页查看车辆类型
+     * @param pageNo
+     * @param pageSize
+     * @param
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesCar.html")
+    public ReponseResult DictionariesCar(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize,@RequestParam("valueContent1")String valueContent1){
+        try{
+            System.out.println(pageNo);
+            PageInfo<Dictionaries> pageInfoTravel=dictionariesService.listDictionariesCar(pageNo,pageSize,valueContent1);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取餐厅类型成功！");
+            logger.info(" method:DictionariesCan  分页获取餐厅类型成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:DictionariesCan  获取餐厅类型数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 分页查看酒店类型
+     * @param pageNo
+     * @param pageSize
+     * @param
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesHotel.html")
+    public ReponseResult DictionariesHotel(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize,@RequestParam("valueContent1")String valueContent1){
+        try{
+            System.out.println(pageNo);
+            PageInfo<Dictionaries> pageInfoTravel=dictionariesService.listDictionariesHotel(pageNo,pageSize,valueContent1);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取餐厅类型成功！");
+            logger.info(" method:DictionariesCan  分页获取餐厅类型成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:DictionariesCan  获取餐厅类型数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+    /**
+     * 餐厅类型删除    修改
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesCanOne")
+    public ReponseResult<Integer> DictionariesCanOne(String valueContent1){
+        try{
+            System.out.println(valueContent1);
+            Integer result=0;
+            Integer data=0;
+            result=dictionariesService.getDictionariesByOne(valueContent1);
+            if(result>0){
+                data=1;
+            }logger.info(" method:DictionariesCanOne  删除餐厅类型成功！");
+            return ReponseResult.ok(data,"删除餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanOne  删除餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 车辆类型删除    修改
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesByDel.html")
+    public ReponseResult<Integer> getDictionariesByDel(String valueContent1){
+        try{
+            System.out.println(valueContent1);
+            Integer result=0;
+            Integer data=0;
+            result=dictionariesService.getDictionariesByDel(valueContent1);
+            if(result>0){
+                data=1;
+            }logger.info(" method:DictionariesCanOne  删除餐厅类型成功！");
+            return ReponseResult.ok(data,"删除餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanOne  删除餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 酒店类型删除    修改
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesHotelByDel.html")
+    public ReponseResult<Integer> getDictionariesHotelByDel(String valueContent1){
+        try{
+            System.out.println(valueContent1);
+            Integer result=0;
+            Integer data=0;
+            result=dictionariesService.getDictionariesHotelByDel(valueContent1);
+            if(result>0){
+                data=1;
+            }logger.info(" method:DictionariesCanOne  删除餐厅类型成功！");
+            return ReponseResult.ok(data,"删除餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanOne  删除餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+
+
+
+    /**
+     * 餐厅类型添加    修改
+     * @param dictionaries
+     * @return
+     */
+    @RequestMapping("/DictionariesCanthree")
+    public ReponseResult<Integer> DictionariesCanthree( Dictionaries dictionaries){
+        try{
+            Integer data=0;
+            if(dictionaries.getDictionariesId()!=0){
+                data=dictionariesService.getDictionariesByUpd(dictionaries);
+                System.out.println(789);
+            }else {
+                dictionaries.setTypeCode("DIET");
+                dictionaries.setTypeName("饮食类型");
+                dictionaries.setWhetherDel(0);
+                dictionaries.setCreateBy(1);
+                dictionaries.setCreateDate(new Date());
+                data=dictionariesService.getDictionariesAdd(dictionaries);
+                System.out.println(data);
+            }
+            logger.info(" method:DictionariesCanthree  操作餐厅类型成功！");
+            return ReponseResult.ok(data,"操作餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanthree  操作餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 车辆类型添加    修改
+     * @param dictionaries
+     * @return
+     */
+    @RequestMapping("/DictionariesCarthree.html")
+    public ReponseResult<Integer> DictionariesCarthree( Dictionaries dictionaries){
+        try{
+            System.out.println(dictionaries);
+            Integer data=0;
+            if(dictionaries.getDictionariesId()!=0){
+                data=dictionariesService.getDictionariesCarUpd(dictionaries);
+                System.out.println(789);
+            }else {
+                dictionaries.setTypeCode("VEHICLE");
+                dictionaries.setTypeName("车辆类型");
+                dictionaries.setWhetherDel(0);
+                dictionaries.setCreateBy(1);
+                dictionaries.setCreateDate(new Date());
+                data=dictionariesService.getDictionariescarAdd(dictionaries);
+                System.out.println(data);
+            }
+            logger.info(" method:DictionariesCarthree  操作车辆类型成功！");
+            return ReponseResult.ok(data,"操作车辆类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCarthree  操作车辆类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 酒店类型添加    修改
+     * @param dictionaries
+     * @return
+     */
+    @RequestMapping("/DictionariesHotelthree.html")
+    public ReponseResult<Integer> DictionariesHotelthree( Dictionaries dictionaries){
+        try{
+            System.out.println(dictionaries);
+            Integer data=0;
+            if(dictionaries.getDictionariesId()!=0){
+                data=dictionariesService.getDictionariesHotelUpd(dictionaries);
+                System.out.println(789);
+            }else {
+                dictionaries.setTypeCode("THEROOM");
+                dictionaries.setTypeName("酒店类型");
+                dictionaries.setWhetherDel(0);
+                dictionaries.setCreateBy(1);
+                dictionaries.setCreateDate(new Date());
+                data=dictionariesService.getDictionariesHotelAdd(dictionaries);
+                System.out.println(data);
+            }
+            logger.info(" method:DictionariesHotelthree  操作酒店类型成功！");
+            return ReponseResult.ok(data,"操作酒店类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesHotelthree  操作酒店类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 餐厅类型修改   chakan
+     * @param dictionariesId
+     * @return
+     */
+    @RequestMapping("/DictionariesCanSelect.html")
+    public ReponseResult DictionariesCanSelect(Integer dictionariesId){
+        try{
+            Dictionaries dictionaries=dictionariesService.getgetDictionariesSelect(dictionariesId);
+            logger.info(" method:DictionariesCanSelect  查看餐厅类型成功！");
+            return ReponseResult.ok(dictionaries,"查看餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanSelect  查看餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 车辆类型修改   chakan
+     * @param dictionariesId
+     * @return
+     */
+    @RequestMapping("/DictionariesCarSelect.html")
+    public ReponseResult DictionariesCarSelect(Integer dictionariesId){
+        try{
+            Dictionaries dictionaries=dictionariesService.getgetDictionariesCarSelect(dictionariesId);
+            logger.info(" method:DictionariesCanSelect  查看餐厅类型成功！");
+            return ReponseResult.ok(dictionaries,"查看餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanSelect  查看餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 酒店类型修改   chakan
+     * @param dictionariesId
+     * @return
+     */
+    @RequestMapping("/DictionariesHotelSelect.html")
+    public ReponseResult DictionariesHotelSelect(Integer dictionariesId){
+        try{
+            Dictionaries dictionaries=dictionariesService.getgetDictionariesHotelSelect(dictionariesId);
+            logger.info(" method:DictionariesCanSelect  查看餐厅类型成功！");
+            return ReponseResult.ok(dictionaries,"查看餐厅类型成功！");
+        }catch (Exception e) {
+            logger.error(" method:DictionariesCanSelect  查看餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
         }
     }
 }

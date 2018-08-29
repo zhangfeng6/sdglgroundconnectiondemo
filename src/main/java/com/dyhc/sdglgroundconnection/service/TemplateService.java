@@ -99,4 +99,11 @@ public interface TemplateService {
      */
     List<Template> listtemplateall()throws Exception;
 
+    /**
+     * 查看路线
+     * @param dispatchId
+     * @return
+     */
+    Template listTemplate(Integer dispatchId);
+
 }

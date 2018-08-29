@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax & LayUI分页插件</title>
+    <link rel="stylesheet" href="/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+</head>
+<body>
+<div class="page-content-wrap">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline tool-btn">
+                <button class="layui-btn layui-btn-small layui-btn-normal addBtn"  id="ooo" type="button"><i class="layui-icon">&#xe654;</i></button>
+            </div>
+            <div class="layui-inline">
+                <input type="text" name="valueContent1" placeholder="请输入车辆类型姓名" autocomplete="off" class="layui-input" id="one">
+            </div>
+            <button class="layui-btn layui-btn-normal"  onclick="loadData(1)" type="button">搜索</button>
+        </div>
+    </form>
+    <div class="layui-form" id="table-list">
+        <table class="layui-table" lay-even lay-skin="nob">
+            <colgroup>
+                <col width="50">
+                <col class="hidden-xs" width="50">
+                <col class="hidden-xs" width="100">
+                <col>
+                <col width="80">
+                <col width="150">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="width: 60px;">序号</th>
+                <th style="width: 45px;">车辆类型名称</th>
+                <th style="width: 45px;">创建人</th>
+                <th style="width: 45px;">创建时间</th>
+                <th style="width: 80px; font-size: small;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="two">
+
+            </tbody>
+        </table>
+    </div>
+    <ui id="laypage" style="text-align: center;margin-left:300px"></ui>
+</div>
+
+
+
+<script src="/layui.js"></script>
+<script src="/js/jquery-1.8.2.min.js"></script>
+<script>
+
+    $(document).on("click","#ooo",function () {
+        layer.open({
+            type: 2,
+            title: '车辆类型',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '220px'],
+            content: '/countAdjust/CarType-upd.html'
+        });
+    })
+
+    function  TypeUpdate(dictionariesId) {
+        $(document).on(
+            layer.open({
+                type: 2,
+                title: '车辆类型',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['800px' , '220px'],
+                content: '/countAdjust/CanType-upd.html?dictionariesId='+dictionariesId
+            })
+        )
+    }
+
+    var limitcount = 2; // 每页总记录数
+    var curnum = 1;  // 当前页码
+    loadData();
+    function loadData(j) {
+        if(j==1){
+            curnum =1;
+        }
+        var lala=$("#one").val()
+        var str = "";
+        $.ajax({
+            url: "/Dictionaries/DictionariesCar.html",
+            data:{page:curnum,limit:limitcount,valueContent1:lala},
+            dataType: "json",
+            type: "get",
+            success: function (e) {
+                var xu=(curnum-1)*limitcount+1;
+                $(e.data).each(function (i, result) {
+                    str += "<tr><td>" + xu +"</td>" +
+                        "<td>" + result.valueContent1 + "</td>" +
+                        "<td>" + result.theUserName + "</td>" +
+                        "<td>" + result.createDate + "</td>"+
+                        "<td><button onclick='TypeUpdate("+result.dictionariesId+")' class='layui-btn layui-btn-mini layui-btn-normal  edit-btn'><i class='layui-icon'>&#xe642;</i></button>\n" +
+                        "<button onclick='getcardel(\""+result.valueContent1+"\")'class='layui-btn layui-btn-mini layui-btn-danger del-btn'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "</td></tr>";
+                    xu++;
+                })
+                $('#two').html(str);
+                // 分页插件
+                layui.use('table', function () {
+                    var laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'laypage'
+                        , count: e.count
+                        , curr: curnum
+                        , limit: 2
+                        , layout: ['prev', 'page', 'next', 'skip', 'count']
+                        , jump: function (obj, first) {
+                            if (!first) {
+                                //obj包含了当前分页的所有参数，比如：
+                                curnum = obj.curr; // 当前页码
+                                limitcount = obj.limit; // 每页记录数
+                                // 查询新数据
+                                loadData();
+                            }
+                        }
+                    })
+                })
+            },
+            error: function (res) {
+                alert(res);
+            }
+        })
+    }
+    function getcardel(valueContent1) {
+        if (confirm("确定删除吗?")) {
+            $.ajax({
+                url:"/Dictionaries/DictionariesByDel.html",
+                data:{"valueContent1":valueContent1},
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    if(data.data==1){
+                        alert("删除成功")
+                        loadData()
+                    }else{
+                        alert("删除失败")
+                    }
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

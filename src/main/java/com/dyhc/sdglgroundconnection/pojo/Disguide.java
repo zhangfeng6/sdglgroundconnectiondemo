@@ -34,6 +34,70 @@ public class Disguide {
     private String value2;
     private String value;
 
+    private String guideName;
+    private String certificate;
+    private String telephone;
+    private Integer num;
+    private String tourist;
+    private String travelStartTime;
+    private String travelEndTime;
+
+    public String getGuideName() {
+        return guideName;
+    }
+
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    public String getTourist() {
+        return tourist;
+    }
+
+    public void setTourist(String tourist) {
+        this.tourist = tourist;
+    }
+
+    public String getTravelStartTime() {
+        return travelStartTime;
+    }
+
+    public void setTravelStartTime(String travelStartTime) {
+        this.travelStartTime = travelStartTime;
+    }
+
+    public String getTravelEndTime() {
+        return travelEndTime;
+    }
+
+    public void setTravelEndTime(String travelEndTime) {
+        this.travelEndTime = travelEndTime;
+    }
+
     @Id
     @Column(name = "disGuideId")
     public int getDisGuideId() {

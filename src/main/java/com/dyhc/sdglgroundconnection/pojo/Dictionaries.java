@@ -42,6 +42,16 @@ public class Dictionaries {
     private String value1;
     private String value2;
     private String value3;
+    @Transient
+    private String theUserName;
+
+    public String getTheUserName() {
+        return theUserName;
+    }
+
+    public void setTheUserName(String theUserName) {
+        this.theUserName = theUserName;
+    }
 
     @Id
     @Column(name = "dictionariesId")
@@ -212,12 +222,13 @@ public class Dictionaries {
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(value1, that.value1) &&
                 Objects.equals(value2, that.value2) &&
-                Objects.equals(value3, that.value3);
+                Objects.equals(value3, that.value3)&&
+                Objects.equals(theUserName, that.theUserName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dictionariesId, typeCode, typeName, valueId, valueContent1, valueContent2, valueContent2, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3);
+        return Objects.hash(dictionariesId, typeCode, typeName, valueId, valueContent1, valueContent2, valueContent2, whetherDel, createBy, updateBy, updateDate, createDate, value1, value2, value3,theUserName);
     }
 }

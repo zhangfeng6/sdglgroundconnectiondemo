@@ -72,4 +72,10 @@ public interface StaffService {
      * @return
      */
     Staff getserlectBy();
+    /**
+     * 查看计调员
+     * @param dispatchId
+     * @return
+     */
+    Staff listStaff(Integer  dispatchId);
 }

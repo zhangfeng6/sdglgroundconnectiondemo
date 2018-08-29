@@ -44,4 +44,22 @@ public class DiscarController {
             return err;
         }
     }
+    /**
+     * 查看车辆公司
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findDiscar.html")
+    public ReponseResult findDiscar(Integer dispatchId){
+        try{
+            Discar discar=discarService.listDiscar(dispatchId);
+            logger.info(" method:findDiscar  查看车辆公司成功！");
+            return ReponseResult.ok(discar,"查看车辆公司成功！");
+        }catch (Exception e) {
+            logger.error(" method:findDiscar  查看车辆公司失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

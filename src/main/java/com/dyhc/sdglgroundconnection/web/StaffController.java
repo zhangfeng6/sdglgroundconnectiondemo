@@ -214,4 +214,24 @@ public class StaffController  {
             return err;
         }
     }
+
+
+    /**
+     * 查看计调员
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findStaff.html")
+    public ReponseResult findStaff(Integer dispatchId){
+        try{
+            Staff staff=staffService.listStaff(dispatchId);
+            logger.info(" method:findStaff  查看计调员成功！");
+            return ReponseResult.ok(staff,"查看计调员成功！");
+        }catch (Exception e) {
+            logger.error(" method:findStaff  查看计调员失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

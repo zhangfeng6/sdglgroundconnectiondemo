@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度酒店房间类型
@@ -21,4 +23,10 @@ public interface HoteroomTypeMapper extends CommonMapper<HoteroomType>{
      * @return
      */
     HoteroomType getHoteroomTypeById(@Param("dispatchId") Integer dispatchId,@Param("weight") Integer weight)throws Exception;
+
+    /**
+     * 查看线路信息
+     * @return
+     */
+    List<HoteroomType> listOfferlineAll(Integer dispatchId);
 }

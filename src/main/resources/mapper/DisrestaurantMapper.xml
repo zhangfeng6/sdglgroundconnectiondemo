@@ -5,4 +5,7 @@
     <select id="getDisrestaurantById" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
         SELECT * FROM `disrestaurant` WHERE offerId=#{dispatchId} AND weight=#{weight} and `status`=0
     </select>
+    <select id="listDisrestaurantAll" resultType="java.lang.String">
+SELECT r.restaurantName FROM DisRestaurant d,restaurant r,dispatch s WHERE d.disRestaurantId=r.restaurantId AND d.offerId=s.dispatchId AND s.dispatchId =#{dispatchId}
+    </select>
 </mapper>

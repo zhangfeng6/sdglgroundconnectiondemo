@@ -286,5 +286,14 @@ public class TemplateServiceImpl implements TemplateService {
         return templateMapper.selectAll();
     }
 
+    /**
+     * 查看路线
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Template listTemplate(Integer dispatchId) {
+        return templateMapper.listTemplate(dispatchId);
+    }
 
 }
