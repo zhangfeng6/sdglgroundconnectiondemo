@@ -22,4 +22,11 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     List<Reportdetail> showInfoAll(@Param("groupNumber") Integer groupNumber, @Param("states")Integer states);
+
+    /**
+     * 查询地接导游报账明细：贾晓亮
+     * @param dispatchId
+     * @return
+     */
+    Reportdetail reportdetail(@Param("dispatchId")Integer dispatchId);
 }

@@ -39,8 +39,4 @@
     <update id="updateDispatchstate">
         UPDATE `dispatch` SET `state`=2 WHERE `dispatchId`=#{did}
     </update>
-
-    <select id="listDispatch" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
-        SELECT carcontacts,groundConnectionNumber FROM dispatch WHERE dispatchId=#{dispatchId}
-    </select>
 </mapper>

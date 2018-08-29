@@ -48,6 +48,7 @@ public class ReportdetailController {
     }
 
 
+
     /**
      * 获取导游报账明细信息
      * @param reportDetailId
@@ -61,6 +62,26 @@ public class ReportdetailController {
             return data;
         }catch (Exception e){
             logger.error("method:getReportdetailById 获取失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
+    /**
+     * 获取导游报账明细信息:贾晓亮
+     * @return
+     */
+    @RequestMapping("/reportdetail")
+    public ReponseResult reportdetail(Integer dispatchId){
+        dispatchId=1;
+        try{
+            System.out.println("进来了");
+            ReponseResult data=ReponseResult.ok(reportdetailService.reportdetail(dispatchId),"获取获取导游报账明细信息成功");
+            logger.info("method:reportdetail 获取获取导游报账明细信息成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:reportdetail 获取获取导游报账明细信息失败");
             e.printStackTrace();
             return ReponseResult.err("获取失败");
         }
