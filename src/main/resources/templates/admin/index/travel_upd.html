@@ -81,7 +81,7 @@
                     }else{
                         var travel = $("form").serialize();
                         $.ajax({
-                            url:"/showTravelUpd.html",
+                            url:"/Travel/showTravelUpd.html",
                             data:travel,
                             type:"get",
                             dataType:"json",
@@ -104,7 +104,7 @@
             function getbyupd(travelId) {
                 var lala=$("#travelId").val();
 				$.ajax({
-					url:"/findTravelupdlala.html",
+					url:"/Travel/findTravelupdlala.html",
 					data:{travelId:lala},
 					type:"get",
 					dataType:"json",

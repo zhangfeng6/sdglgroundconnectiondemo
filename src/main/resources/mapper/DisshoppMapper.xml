@@ -5,4 +5,8 @@
     <select id="getDisshoppById" resultType="com.dyhc.sdglgroundconnection.pojo.Disshopp">
         SELECT * FROM `disshopp` WHERE offerId=#{dispatchId} AND weight=#{weight} and `status`=0
     </select>
+
+    <select id="listDisshoppAll" resultType="java.lang.String">
+SELECT s.scenicSpotAddress FROM DisShopp d,scenicSpot s,dispatch w WHERE d.scenicSpotId=s.scenicSpotId AND d.offerId=w.dispatchId AND w.dispatchId=#{dispatchId}
+    </select>
 </mapper>

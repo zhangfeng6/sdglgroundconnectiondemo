@@ -5,4 +5,8 @@
     <select id="getHoteroomTypeById" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
         SELECT * FROM `hoteroomtype` WHERE offerId=#{dispatchId} AND weight=#{weight} and `status`=0
     </select>
+
+    <select id="listOfferlineAll" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
+      SELECT SUBSTRING(CONCAT(h.date),6,11)AS 'riqi',SUBSTRING(CONCAT(t.templateName),4,6) AS 'templateName',t.templateContent FROM template t,hoteroomtype h,dispatch s WHERE t.templateId=h.templateId AND h.offerId=s.dispatchId AND s.dispatchId=#{dispatchId}
+    </select>
 </mapper>

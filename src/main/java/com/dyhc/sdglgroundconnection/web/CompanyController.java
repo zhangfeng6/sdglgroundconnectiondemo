@@ -33,11 +33,11 @@ public class CompanyController  {
     public ReponseResult CompanyList(){
         try{
             Company company=companyService.getCompany();
-            logger.info(" method:CompanyList  添加组团社成功！");
-            ReponseResult<Company> data= ReponseResult.ok(company,"添加取组团社成功！");
+            logger.info(" method:CompanyList  查看公司信息成功！");
+            ReponseResult<Company> data= ReponseResult.ok(company,"查看取组团社成功！");
             return data;
         }catch (Exception e){
-            logger.error(" method:CompanyList  获取公司信息数据失败，系统出现异常！");
+            logger.error(" method:CompanyList  查看公司信息数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -54,10 +54,10 @@ public class CompanyController  {
             if(result>0){
                 data=1;
             }
-            logger.info(" method:getcompanyupd  修改组团社成功！");
-            return ReponseResult.ok(data,"修改取组团社成功！");
+            logger.info(" method:getcompanyupd  修改公司信息成功！");
+            return ReponseResult.ok(data,"修改公司信息成功！");
         }catch (Exception e) {
-            logger.error(" method:getcompanyupd  修改组团社失败，系统出现异常！");
+            logger.error(" method:getcompanyupd  修改公司信息失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;

@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度购物
@@ -21,4 +23,10 @@ public interface DisshoppMapper extends CommonMapper<Disshopp>{
      * @return
      */
     Disshopp getDisshoppById(@Param("dispatchId") Integer dispatchId,@Param("weight") Integer weight)throws Exception;
+
+    /**
+     * 查看购物地点
+     * @return
+     */
+    List<String> listDisshoppAll(Integer dispatchId);
 }

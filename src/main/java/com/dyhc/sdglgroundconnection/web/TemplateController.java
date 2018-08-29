@@ -248,4 +248,23 @@ public class TemplateController {
             return ReponseResult.err("获取行程内容失败");
         }
     }
+
+    /**
+     * 查看路线
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findTemplate.html")
+    public ReponseResult findTemplate(Integer dispatchId){
+        try{
+            Template template=templateService.listTemplate(dispatchId);
+            logger.info(" method:findStaff  查看路线成功！");
+            return ReponseResult.ok(template,"查看路线成功！");
+        }catch (Exception e) {
+            logger.error(" method:findStaff  查看路线失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }

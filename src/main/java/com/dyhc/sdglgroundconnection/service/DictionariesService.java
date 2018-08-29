@@ -45,4 +45,106 @@ public interface DictionariesService {
      */
     List<Dictionaries> listhoteltype()throws Exception;
 
+    /**
+     * 分页查看餐厅类型
+     * @param pageNo
+     * @param PageSize
+     * @param valueContent1
+     * @return
+     * @throws Exception
+     */
+    PageInfo<Dictionaries> listDictionariesCan(Integer pageNo, Integer PageSize,String valueContent1) throws Exception;
+
+    /**
+     * 分页查看车辆类型
+     * @param pageNo
+     * @param PageSize
+     * @param valueContent1
+     * @return
+     * @throws Exception
+     */
+    PageInfo<Dictionaries> listDictionariesCar(Integer pageNo, Integer PageSize,String valueContent1) throws Exception;
+    /**
+     * 分页查看酒店类型
+     * @param pageNo
+     * @param PageSize
+     * @param valueContent1
+     * @return
+     * @throws Exception
+     */
+    PageInfo<Dictionaries> listDictionariesHotel(Integer pageNo, Integer PageSize,String valueContent1) throws Exception;
+    /**
+     * 餐厅类型删除    修改
+     * @param valueContent1
+     * @return
+     */
+    Integer getDictionariesByOne(String valueContent1);
+    /**
+     * 车辆类型删除    修改
+     * @param valueContent1
+     * @return
+     */
+    Integer getDictionariesByDel(String valueContent1);
+    /**
+     * 酒店类型删除    修改
+     * @param valueContent1
+     * @return
+     */
+    Integer getDictionariesHotelByDel(String valueContent1);
+
+    /**
+     * 餐厅添加信息
+     * @param dictionaries
+     * @return
+     */
+    Integer getDictionariesAdd(Dictionaries dictionaries);
+    /**
+     * 车辆添加信息
+     * @param dictionaries
+     * @return
+     */
+    Integer getDictionariescarAdd(Dictionaries dictionaries);
+    /**
+     * j酒店添加信息
+     * @param dictionaries
+     * @return
+     */
+    Integer getDictionariesHotelAdd(Dictionaries dictionaries);
+    /**
+     * 餐厅类型修改
+     * @param dictionaries
+     * @return
+     */
+    Integer getDictionariesByUpd(Dictionaries dictionaries);
+    /**
+     * 车辆类型修改
+     * @param dictionaries
+     * @return
+     */
+    Integer getDictionariesCarUpd(Dictionaries dictionaries);
+    /**
+     * 酒店类型修改
+     * @param dictionaries
+     * @return
+     */
+    Integer getDictionariesHotelUpd(Dictionaries dictionaries);
+    /**
+     * 餐厅类型修改  查看
+     * @param dictionariesId
+     * @return
+     */
+    Dictionaries getgetDictionariesSelect(Integer dictionariesId);
+    /**
+     * 车辆类型修改  查看
+     * @param dictionariesId
+     * @return
+     */
+    Dictionaries getgetDictionariesCarSelect(Integer dictionariesId);
+    /**
+     * 酒店类型修改  查看
+     * @param dictionariesId
+     * @return
+     */
+    Dictionaries getgetDictionariesHotelSelect(Integer dictionariesId);
+
 }

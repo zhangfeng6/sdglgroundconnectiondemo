@@ -60,17 +60,16 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/admin/admins/companyone_update.html?companyId='+$(ss).val()+''
+                content: '/admins/companytwo_update.html?companyId='+$(ss).val()+''
             })
         )
     }
     $(function () {
         getCompay()
     })
-
     function getCompay() {
         $.ajax({
-            url:"/CompanyList.html",
+            url:"/CompanyController/CompanyList",
             type:"get",
             dataType:"json",
             success:function (e) {

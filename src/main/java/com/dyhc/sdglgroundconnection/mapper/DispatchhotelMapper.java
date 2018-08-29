@@ -30,4 +30,10 @@ public interface DispatchhotelMapper extends CommonMapper<Dispatchhotel>{
      * @return
      */
     Dispatchhotel getDispatchHotel(@Param("dispatchId") Integer dispatchId, @Param("weight")Integer weight);
+
+    /**
+     * 查看住宿地点
+     * @return
+     */
+    List<String> listDispatchhotelAll(Integer dispatchId);
 }

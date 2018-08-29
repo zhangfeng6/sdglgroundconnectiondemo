@@ -39,6 +39,17 @@ public class Discar {
     private String value2;
     private String value3;
     @Transient
+    private String carRentalName;
+
+    public String getCarRentalName() {
+        return carRentalName;
+    }
+
+    public void setCarRentalName(String carRentalName) {
+        this.carRentalName = carRentalName;
+    }
+
+    @Transient
     private  VehicleType vehicleType;//车辆类型表s
 
     public VehicleType getVehicleType() {
