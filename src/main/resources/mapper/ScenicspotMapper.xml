@@ -15,18 +15,17 @@
             <if test="typeId!=0">
                 and  typeId=#{typeId}
             </if>
-            <if test="whetherDel!=0">
-               and whetherDel=#{whetherDel}
+            <if test="whetherDel!=3 and whetherDel!=1">
+               and whetherDel=#{whetherDel} and whetherDel!=1
             </if>
-            and whetherDel!=1
-            and whetherDel!=2
+
         </where>
         ORDER BY `createDate` DESC
     </select>
 
 
     <select id="getScenicspotByParentId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        select * from scenicspot  where parentId=#{parentId} and whetherDel=3
+        select * from scenicspot  where parentId=#{parentId} and whetherDel=0
     </select>
     
     <update id="updateScenicspot">
@@ -41,7 +40,7 @@
     </update>
 
     <select id="selectByScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        SELECT  * from scenicspot where whetherDel!=1 and scenicSpotId=#{scenicSpotId}
+        SELECT  * from scenicspot where whetherDel!=0 and scenicSpotId=#{scenicSpotId}
     </select>
 
 
