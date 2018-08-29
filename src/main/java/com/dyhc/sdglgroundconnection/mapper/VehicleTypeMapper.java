@@ -62,4 +62,13 @@ public interface VehicleTypeMapper extends CommonMapper<VehicleType> {
      * @return
      */
     VehicleType vehicleType(@Param("typeId")Integer typeId);
+    /**
+     * 根据valueId查找车辆信息
+     * @param valueId
+     * @return
+     * @throws Exception
+     */
+    List<VehicleType> listinfoByvalueId(@Param("valueId")Integer valueId)throws Exception;
+
+
 }

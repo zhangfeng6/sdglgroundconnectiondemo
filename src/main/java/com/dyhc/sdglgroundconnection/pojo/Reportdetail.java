@@ -55,7 +55,37 @@ public class Reportdetail {
     @Transient
     List<Reportrestaurant> reportrestaurant;//导游报价餐厅集合
     @Transient
-    List<Reportticket> Reportticket;//导游报价门票集合
+    List<Reportticket> reportticket;//导游报价门票集合
+    @Transient
+    private  Reportfare reportfare;//导游报价车费
+    @Transient
+    private  Reportqutsubsidy reportqutsubsidy;//导游报价出团补助
+    @Transient
+    private  Reportingotherexpenses reportingotherexpenses;//导游报账其他支出表
+
+    public Reportfare getReportfare() {
+        return reportfare;
+    }
+
+    public void setReportfare(Reportfare reportfare) {
+        this.reportfare = reportfare;
+    }
+
+    public Reportqutsubsidy getReportqutsubsidy() {
+        return reportqutsubsidy;
+    }
+
+    public void setReportqutsubsidy(Reportqutsubsidy reportqutsubsidy) {
+        this.reportqutsubsidy = reportqutsubsidy;
+    }
+
+    public Reportingotherexpenses getReportingotherexpenses() {
+        return reportingotherexpenses;
+    }
+
+    public void setReportingotherexpenses(Reportingotherexpenses reportingotherexpenses) {
+        this.reportingotherexpenses = reportingotherexpenses;
+    }
 
     public List<Reportaccommodation> getReportaccommodationShow() {
         return reportaccommodationShow;
@@ -73,12 +103,12 @@ public class Reportdetail {
         this.reportrestaurant = reportrestaurant;
     }
 
-    public List<com.dyhc.sdglgroundconnection.pojo.Reportticket> getReportticket() {
-        return Reportticket;
+    public List<Reportticket> getReportticket() {
+        return reportticket;
     }
 
-    public void setReportticket(List<com.dyhc.sdglgroundconnection.pojo.Reportticket> reportticket) {
-        Reportticket = reportticket;
+    public void setReportticket(List<Reportticket> reportticket) {
+        this.reportticket = reportticket;
     }
 
     public String getGroupNumber() {

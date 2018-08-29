@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="renderer" content="webkit">
@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="page-content-wrap">
+	<input type="hidden" name="offerId" th:value="${id}"/>
 	<div id="divhead">
 	<form class="layui-form layui-form-pane" action="">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -88,7 +89,7 @@
 							</tr>
 							<!--点击新增景点-->
 							<tr id="onClickjd">
-								<td colspan="2"><button class="layui-btn" name="d1scenicspot" type="button" style="font-size: 12px" onclick="add(this)">添加景点+</button></td>
+								<td colspan="2"><button class="layui-btn" name="d1scenicspot" type="button" style="font-size: 12px" onclick="add(1)">添加景点+</button></td>
 							</tr>
 							<!--点击新增结束-->
 							<tr id="scenic" name="d1jingdian">
@@ -167,17 +168,37 @@
 					<tr>
 						<td><label class="layui-form-label">导游：</label></td>
 						<td>
-							<select name="guide"style="height: 35px;width:180px;" lay-ignore>
+							<select name="guide"style="height: 35px;width:233px;" lay-ignore>
 								<option value="0">--请选择--</option>
 							</select>
 						</td>
-						<td></td>
-						<td></td>
+						<td colspan="2">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><label class="layui-form-label">接团时间：</label></td>
+									<td colspan="3"><input type="text" name="" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><label class="layui-form-label">接团地点：</label></td>
+						<td>
+							<input type="text" name="" class="layui-input">
+						</td>
+						<td colspan="2">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><label class="layui-form-label">航班/车次：</label></td>
+									<td colspan="3"><input type="text" name="" class="layui-input"></td>
+								</tr>
+							</table>
+						</td>
 					</tr>
 					<tr>
 							<td><label class="layui-form-label">车费：</label></td>
-							<td width="300px"><input type="text" name="chefei" class="layui-input"></td>
-							<td colspan="2">
+							<td><input type="text" name="chefei" class="layui-input"></td>
+							<td colspan="3">
 								<table border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td><label class="layui-form-label">报停费：</label></td>
@@ -188,13 +209,13 @@
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">酒水：</label></td>
-						<td width="300px"><input type="text" name="jiushui" class="layui-input"></td>
+						<td><input type="text" name="jiushui" class="layui-input"></td>
 					</tr>
 
 					<tr>
 						<td><label class="layui-form-label">车队</label></td>
 						<td>
-							<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:180px;" lay-ignore>
+							<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:233px;" lay-ignore>
 								<option value="0">--请选择--</option>
 							</select>
 						</td>
@@ -210,32 +231,31 @@
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">车辆联系人：</label></td>
-						<td width="300px"><input type="text" name="cheduilxr" class="layui-input"></td>
+						<td><input type="text" name="cheduilxr" class="layui-input"></td>
 						<td colspan="3">(如：张师傅 13333333333 晋H:88888)</td>
 					</tr>
-					<tr>
+		<!--			<tr>
 						<td><label class="layui-form-label">返程类型：</label></td>
 						<td>
-							<select name="traffic" style="height: 35px;width:180px;" lay-ignore>
-								<option value="" selected="selected">--无--</option>
-								<option value="0">哈红祖</option>
+							<select name="traffic" onchange="fancheng(this)" style="height: 35px;width:180px;" lay-ignore>
+								<option value="" selected="selected">&#45;&#45;无&#45;&#45;</option>
 							</select>
 						</td>
-					</tr>
+					</tr>-->
 					<tr>
 										<td><label class="layui-form-label">其他：</label></td>
 										<td>
 											<table border="0"  cellspacing="0"  cellpadding="0">
 											<tr>
 												<td><label class="layui-form-label">成本价：</label></td>
-						             	<td width="300px"><input type="text" name="qitacb" class="layui-input"></td>
+						             	<td><input type="text" name="qitacb" class="layui-input"></td>
 											</tr>
 											</table>
 										</td>
 					</tr>
 					<tr>
-										<td><label class="layui-form-label"><小费></小费>：</label></td>
-										<td width="300px"><input type="text" name="xiaofei"  class="layui-input"></td>
+						<td><label class="layui-form-label">小费：</label></td>
+						<td><input type="text" name="xiaofei"  class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
@@ -260,13 +280,13 @@
 		<script type="text/javascript" src="/layui.js"></script>
 		<script type="text/javascript" src="/js/scheduling.js"></script>
 		<script type="text/javascript">
+			//删除景点信息
             function san(dang) {
                 $(dang).parent().parent().remove();
             }
-
-            function add(onClickjd) {
-				var name=$(onClickjd).attr("name");
-				var index=name.substring(1,2);
+			//增加景点信息
+            function add(qwe) {
+				var index=qwe;
 				var html=$("select[name=d1scenicspot1]").html();
 				var leng=$("tr[name=d"+index+"jingdian]").length+1;
 				$("tr[name=d"+index+"gouwudi]").prev().after("<tr id='scenic' name='d"+index+"jingdian'>" +
@@ -292,6 +312,7 @@
                     form.render('select'); //刷新select选择框渲染
                 });
             }
+            //窗体加载事件
 			$(function() {
 				layui.use(['form', 'layedit', 'laydate','element'], function() {
 					var form = layui.form,
@@ -313,6 +334,10 @@
 
 				});
                 gerresource();
+                var offerId=$("input[name=offerId]").val();
+                if(offerId!=null&&offerId!=0){
+                    getofferById(offerId);
+				}
 			});
 			//获取下拉框资源信息
             function gerresource(){
@@ -388,7 +413,6 @@
 				var price=$(obj).find("option:selected").attr("price");
 				$(obj).parent().next().next().children("input").val(price);
             }
-
             //资源类型下拉框改变值后  获取当前选择类型的资源信息
             function typechange(obj,type){
                 var valueId=$(obj).val();
@@ -411,12 +435,12 @@
                         }else if(type=="fantype"){
                             content="<option value='0'>--请选择饭店--</option>";
                             $(result.data).each(function (i,e) {
-                                content+="<option value='"+e.restaurantId+"' price='"+e.gettypeprice+"'>--"+e.restaurantName+"--</option>";
+                                content+="<option value='"+e.typeId+"' price='"+e.gettypeprice+"'>--"+e.restaurantName+"--</option>";
                             });
                         }else if(type=="cartype"){
                             content="<option value='0'>--请选择车队公司--</option>";
                             $(result.data).each(function (i,e) {
-                                content+="<option value='"+e.carRentalId+"' price='"+e.gettypeprice+"'>--"+e.carRentalName+"--</option>";
+                                content+="<option value='"+e.typeId+"' price='"+e.gettypeprice+"'>--"+e.carRentalName+"--</option>";
                             });
                         }
                         $(obj).parent().next().children("select").html(content);
@@ -427,6 +451,26 @@
                     }
 				});
 			}
+			//获取酒店资源
+			function hotelresource(index) {
+                $.ajax({
+                    url:"/dispatch/listinfoByvalueId",
+                    data:{type:'hoteltype',valueId:1},
+                    dataType:"json",
+                    type:"get",
+                    async:false,
+                    success:function (result) {
+                        var content="<option value='0'>--请选择酒店--</option>";
+						$(result.data).each(function (i,e) {
+							content+="<option value='"+e.hotelId+"' price='"+e.gettypeprice+"'>--"+e.hotelName+"--</option>";
+						});
+                        $("select[name=d"+index+"hotel]").html(content);
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                });
+            }
 			//输入酒店和车队数量后计算成价格
 			function sumchange(obj){
 				var num=$(obj).val();
@@ -495,7 +539,7 @@
 						$("textarea[name=d"+index+"xingcheng]").text(result.data["parameter"].templateContent);
                         $(result.data["scenicspot"]).each(function (i,e) {
                             if(i>0){
-                                add(obj);
+                                add(index);
                             }
                             $("input[name=d"+index+"costprice"+(i+1)+"]").val(e.costPrice);
                             $("select[name=d"+index+"scenicspot"+(i+1)+"]").val(e.scenicSpotId);
@@ -506,17 +550,15 @@
                     }
                 });
             }
-            
+            //根据类型获取酒店信息
             function gethotelbyline(index) {
                 $.ajax({
                     url:"/dispatch/listinfoByvalueId",
                     data:{type:"hoteltype",valueId:1},
                     dataType:"json",
                     type:"get",
-					async:false,
                     success:function (result) {
                         var content="<option value='0'>--请选择酒店--</option>";
-                            content="<option value='0'>--请选择酒店--</option>";
                             $(result.data).each(function (i,e) {
                                 content+="<option value='"+e.hotelId+"' price='"+e.gettypeprice+"'>--"+e.hotelName+"--</option>";
                             });
@@ -526,6 +568,60 @@
                         alert(err);
                     }
                 });
+            }
+            //根据报价页面传来的报价id获取该报价的所有信息
+            function getofferById(id) {
+				$.ajax({
+					url:"/dispatch/getofferinfoById",
+					data:{oid:id},
+					dataType:"json",
+					type:"get",
+					success:function (result) {
+                        $("select[name=travel]").val(result.data["offer"].travelId);
+                        $("input[name=num]").val(result.data["offer"].number);
+                        $("input[name=travelStartTime]").val(result.data["offer"].travelStartTime);
+                        $("input[name=travelEndTime]").val(result.data["offer"].travelEndTime);
+						$("textarea[name=remarks]").text(result.data["offer"].remarks);
+                        $("textarea[name=reception]").text(result.data["offer"].reception);
+                        $("input[name=qitacb]").val(result.data["other"].costPrice);
+                        $("select[name=vehicle]").val(result.data["car"]);
+						$(result.data["line"]).each(function (i,e) {
+							if(i>0){
+								addss();
+							}
+							$("select[name=d"+(i+1)+"template]").val(e.lineArriveName);
+							$("textarea[name=d"+(i+1)+"xingcheng]").text(e.travelContent);
+							$("input[name=d"+(i+1)+"data]").val(e.date);
+                            $("select[name=d"+(i+1)+"hoteltype]").val(1);
+
+							var id=Array();
+							var cb=Array();
+                            $(result.data["scenic"]).each(function (q,w) {
+									if(w.howmanydays==(i+1)){
+									    id.push(w.scenicSpotId);
+									    cb.push(w.costPrice);
+									}
+                            });
+                            for (var r=0;r<id.length;r++){
+                                if(r>0){
+									add((i+1));
+								}
+								$("select[name=d"+(i+1)+"scenicspot"+(r+1)+"]").val(id[r]);
+                                $("input[name=d"+(i+1)+"costprice"+(r+1)+"]").val(cb[r]);
+							}
+                        });
+						$(result.data["hotel"]).each(function (i,e) {
+                            hotelresource((i+1));
+                            $("select[name=d"+(i+1)+"hotel]").val(e.hotelId);
+                            $("select[name=d"+(i+1)+"wucan]").val(result.data["wu"][i].valueId);
+                            $("select[name=d"+(i+1)+"wancan]").val(result.data["wan"][i].valueId);
+                        });
+
+                    },
+					error:function (err) {
+						alert(err);
+                    }
+				});
             }
 		</script>
 </body>

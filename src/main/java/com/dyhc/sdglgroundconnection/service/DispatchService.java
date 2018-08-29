@@ -85,4 +85,10 @@ public interface DispatchService {
      * @return
      */
     Dispatch dispatch(@Param("dispatchId") Integer dispatchId);
+     /* 根据报价Id查询该报价的所有信息
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    Map<String,Object> getofferinfoById(Integer oid)throws Exception;
 }

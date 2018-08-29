@@ -61,6 +61,17 @@ public class MealType {
 
     private String valueContent1;
 
+    @Transient
+    private String restaurantName;
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
     @Id
     @Column(name = "typeId")
     public int getTypeId() {

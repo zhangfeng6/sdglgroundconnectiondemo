@@ -25,7 +25,14 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     private  ReportaccommodationServiceImpl reportaccommodationService;//住宿
     @Autowired
     private ReportrestaurantServiceImpl reportrestaurantService;//餐厅
-
+    @Autowired
+    private  ReportticketServiceImpl reportticketService;//门票
+    @Autowired
+    private  ReportfareServiceImpl reportfareService;//车票
+    @Autowired
+    private ReportqutsubsidyServiceImpl reportqutsubsidyService;//导游报价出团补助
+    @Autowired
+    private  ReportingotherexpensesServiceImpl reportingotherexpensesService;//其他支出
 
     @Override
     public PageInfo showInfoAll(Integer groupNumber, Integer states,Integer pageNo,Integer pageSize)throws Exception {
@@ -51,7 +58,11 @@ public class ReportdetailServiceImpl implements ReportdetailService {
         try {
             a = reportdetailMapper.reportdetail(dispatchId);
             a.setReportaccommodationShow(reportaccommodationService.listReportaccommodationByreportDetailId(a.getReportDetailId()));
-            
+            a.setReportrestaurant(reportrestaurantService.listReportrestaurantById(a.getReportDetailId()));
+            a.setReportticket(reportticketService.listReportticketById(a.getReportDetailId()));
+            a.setReportfare(reportfareService.listReportfareById(a.getReportDetailId()));
+            a.setReportqutsubsidy(reportqutsubsidyService.getReportqutsubsidyById(a.getReportDetailId()));
+            a.setReportingotherexpenses(reportingotherexpensesService.listReportingotherexpensesById(a.getReportDetailId()));
         } catch (Exception e) {
             e.printStackTrace();
         }

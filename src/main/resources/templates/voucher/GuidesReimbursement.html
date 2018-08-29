@@ -3,7 +3,7 @@
 	<style>
 		*{margin: 0 auto;}
         table,table tr th, table tr td { border:1px solid #0094ff; height: 20px;}
-        table { width: 60%; min-height: 20px; line-height: 20px; text-align: center; border-collapse: collapse;} 
+        table { min-height: 20px; line-height: 20px; text-align: center; border-collapse: collapse;width: 70%}
         .cc{text-align: left;}  
     </style>
 	<head>
@@ -14,7 +14,7 @@
 		<div id="tupian" style="width: 635px;margin-left: 365px;">
                 <img src="/images/logo.jpg" width="640px" height="50px">
        		 </div>
-		<table>   
+		<table>
 
 			<tr>
 				<td colspan="17" style="text-align: center;">地铁导游报账明细表</td>
@@ -38,104 +38,33 @@
 				<td colspan="2" id="tourist"></td>
 			</tr>
 			<tr>
-				<td rowspan="9">住<br>宿</td>				
-				<td>日期</td>
-				<td colspan="2">酒店名称</td>
-				<td colspan="2">房价</td>
-				<td>间数</td>
-				<td colspan="2">陪同床位</td>
-				<td colspan="2">陪同床价</td>
-				<td colspan="2">天数</td>
-				<td colspan="2">小计</td>
-				<td colspan="2">支付方式</td>
-			</tr>
-			<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-			</tr>
-						<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-			</tr>
-						<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-			</tr>
-						<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-			</tr>
-						<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-			</tr>
-						<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-			</tr>
-						<tr>				
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
+				<td rowspan="2">住<br>宿</td>
+				<td colspan="20" >
+				<table border="0"  cellspacing="0" cellpadding="0" style="width: 1100px">
+					<thead>
+					<td>日期</td>
+					<td colspan="2">酒店名称</td>
+					<td colspan="2">房价</td>
+					<td>间数</td>
+					<td colspan="2">陪同床位</td>
+					<td colspan="2">陪同床价</td>
+					<td colspan="2">天数</td>
+					<td colspan="2">小计</td>
+					<td colspan="2">支付方式</td></thead>
+					<tbody id="zhusu"></tbody>
+				</table>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2">住宿合计</td>
-				<td colspan="3"></td>
+				<td colspan="3" id="zshj"></td>
 				<td colspan="2">其中导游付</td>
-				<td colspan="4"></td>
+				<td colspan="4" id="xianfu"></td>
 				<td colspan="2">签单合计</td>
-				<td colspan="3"></td>
+				<td colspan="3" id="qiandan"></td>
 			</tr>
-			<tr>
-					<td rowspan="8">餐厅</td>
+			<tr id="reportrestaurant">
+					<td rowspan="4">餐厅</td>
 					<td>午餐日期</td>
 					<td>餐厅名称</td>
 					<td>餐标</td>
@@ -154,122 +83,14 @@
 					<td>支付方式</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
 					<td colspan="2">用餐合计</td>
-					<td colspan="3"></td>
+					<td colspan="3" id="wucan"></td>
 					<td colspan="2">其中导游付</td>
-					<td colspan="4"></td>
+					<td colspan="4" id="xianfu2"></td>
 					<td colspan="2">签单合计</td>
-					<td colspan="3"></td>
+					<td colspan="3" id="qiandan2"></td>
 				</tr>
-				<tr>
+				<tr id="menpiao">
 					<td rowspan="9">门票</td>
 					<td colspan="2">景点门票</td>
 					<td colspan="2">单价</td>
@@ -282,45 +103,7 @@
 					<td>小计</td>
 					<td colspan="3">支付方式</td>
 				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+
 				<tr>
 					<td colspan="2"></td>
 					<td colspan="2"></td>
@@ -375,11 +158,11 @@
 				</tr>
 				<tr>
 					<td colspan="2">门票合计</td>
-					<td colspan="3"></td>
+					<td colspan="3" id="xj3"></td>
 					<td colspan="2">其中导游付</td>
-					<td colspan="4"></td>
+					<td colspan="4" id="xianfu3"></td>
 					<td colspan="2">签单合计</td>
-					<td colspan="3"></td>
+					<td colspan="3" id="qiandan3"></td>
 				</tr>
 				<tr>
 					<td rowspan="2">车费</td>
@@ -395,14 +178,14 @@
 					<td>支付方式</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="3"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
+					<td id="guolufei"></td>
+					<td id="tingchefei"></td>
+					<td id="yufuchefei"></td>
+					<td colspan="2" id="chefeiheji"></td>
+					<td colspan="3" id="yuan"></td>
+					<td colspan="2" id="tianshu"></td>
+					<td colspan="2" id="daoyoushu"></td>
+					<td colspan="2" id="buzhuheji"></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -410,18 +193,18 @@
 					<td colspan="15">请列出项目及计算过程：</td>
 				</tr>
 				<tr>
-					<td colspan="15"></td>
+					<td colspan="15" id="bbk1"></td>
 				</tr>
 				<tr>
 					<td colspan="15"></td>
 				</tr>
 				<tr>
 					<td>导游付</td>
-					<td colspan="3"></td>
+					<td colspan="3" id="bbk2"></td>
 					<td>签单</td>
-					<td colspan="5"></td>
+					<td colspan="5" id="bbk3"></td>
 					<td>合计</td>
-					<td colspan="4"></td>
+					<td colspan="4" id="bbk4"></td>
 				</tr>
 				<tr>
 					<td class="cc" colspan="17">交回其它单据及内容（包括购物签单）：</td>
@@ -463,8 +246,142 @@
 <script>
    $(function () {
        dispatchShow();
+       ReportDetail();//报账总表
    })
 
+    function  ReportDetail() {
+        $.ajax({
+            url:"/reportdetail/reportdetail",
+            data:{},
+            dataType:"json",
+            type:"GET",
+            success:function (e) {
+             var one="";
+             var two="";
+             var three="";
+             var xj=0;
+             var xj2=0;
+             var xj3=0;
+             var xianfu=0;
+             var qiandan=0;
+             var xianfu2=0;
+             var qiandan2=0;
+             var xianfu3=0;
+             var qiandan3=0;
+             $("#guolufei").html(e.data.reportfare.tolls);
+             $("#tingchefei").html(e.data.reportfare.parkingFee);
+             $("#yufuchefei").html(e.data.reportfare.prepaidFare);
+             var hj4=Number($("#guolufei").text())+Number($("#tingchefei").text())+Number($("#yufuchefei").text());
+             //开始出团补助
+                $("#yuan").html(e.data.reportqutsubsidy.dailyCost);
+                $("#tianshu").html(e.data.reportqutsubsidy.nums);
+                $("#daoyoushu").html(e.data.reportqutsubsidy.guideNum);
+                var buzhuzhichu=Number($("#yuan").text())*Number( $("#tianshu").text());
+				$("#buzhuheji").html(buzhuzhichu);
+				$("#chefeiheji").html(hj4);
+               //其他支出
+				$("#bbk1").html(e.data.reportingotherexpenses.remarks);
+                $("#bbk2").html(e.data.reportingotherexpenses.guidedTour);
+                $("#bbk3").html(e.data.reportingotherexpenses.signing);
+                $("#bbk4").html(e.data.reportingotherexpenses.total);
+             for (var i=0;i<e.data.reportaccommodationShow.length;i++){
+				 one+="<tr><td>"+e.data.reportaccommodationShow[i].liveDate+"</td>" +
+                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].hotelName+"</td>" +
+                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].housePrice+"</td>" +
+                     "<td>"+e.data.reportaccommodationShow[i].roomNum+"</td>" +
+                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].accompanyingBed+"</td>" +
+                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].accompanyingPrice+"</td>" +
+                     "<td colspan='2'>1</td>" +
+                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].subtotal+"</td>" +
+                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].payMethods+"</td></tr>";
+				 xj+=e.data.reportaccommodationShow[i].subtotal;
+				 if (e.data.reportaccommodationShow[i].payMethods=="签单"){
+                     qiandan+=e.data.reportaccommodationShow[i].subtotal;
+				 } else if(e.data.reportaccommodationShow[i].payMethods=="现付"){
+                     xianfu+=e.data.reportaccommodationShow[i].subtotal;
+				 }
+			 }
+             $("#zshj").html(xj);
+             $("#xianfu").html(xianfu);
+             $("#qiandan").html(qiandan);
+			 for (var i=0;i<e.data.reportrestaurant.length;i++){
+			     var wubao=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
+                 var wubao2=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
+                    two+="<tr>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].lunchDate+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].luncheonName+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].lunchMeal+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].lunchEatNum+"</td>\n" +
+                        "\t\t\t\t\t<td>1</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].lunchother+"</td>\n" +
+                        "\t\t\t\t\t<td>"+wubao+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].lunchPayMethods+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerDate+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerName+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerMeal+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerEatNum+"</td>\n" +
+                        "\t\t\t\t\t<td>1</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerother+"</td>\n" +
+                        "\t\t\t\t\t<td>"+wubao2+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerPayMethods+"</td>\n" +
+                        "\t\t\t\t</tr>";
+                    xj2+=Number(wubao)+Number(wubao2);
+                 if (e.data.reportrestaurant[i].lunchPayMethods=="签单"){
+                     var wubaoa=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
+                     qiandan2+=wubaoa;
+                 } else if(e.data.reportrestaurant[i].lunchPayMethods=="付现"){
+                     var wubaoa=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
+                     xianfu2+=wubaoa;
+                 }
+                 if (e.data.reportrestaurant[i].dinnerPayMethods=="签单"){
+                     var wubaog=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
+                     qiandan2+=wubaog;
+                 } else if(e.data.reportrestaurant[i].dinnerPayMethods=="付现"){
+                     var wubaog=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
+                     xianfu2+=wubaog;
+                 }
+
+
+                }
+                $("#wucan").html(xj2);
+                $("#xianfu2").html(xianfu2);
+				$("#qiandan2").html(qiandan2);
+                for (var i=0;i<e.data.reportticket.length;i++){
+                    var bbk=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
+                    three+="<tr>\n" +
+                        "\t\t\t\t\t<td colspan='2'>"+e.data.reportticket[i].attrName+"</td>\n" +
+                        "\t\t\t\t\t<td colspan='2'>"+e.data.reportticket[i].price+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportticket[i].nums+"</td>\n" +
+                        "\t\t\t\t\t<td colspan='2'>"+bbk+"</td>\n" +
+                        "\t\t\t\t\t<td colspan='2'>"+e.data.reportticket[i].payMethods+"</td>\n" +
+                        "\t\t\t\t\t<td colspan='2'></td>\n" +
+                        "\t\t\t\t\t<td></td>\n" +
+                        "\t\t\t\t\t<td></td>\n" +
+                        "\t\t\t\t\t<td></td>\n" +
+                        "\t\t\t\t\t<td></td>\n" +
+                        "\t\t\t\t\t<td></td>\n" +
+                        "\t\t\t\t</tr>";
+                         xj3+=bbk;
+                    if (e.data.reportticket[i].payMethods=="签单"){
+                        var bbk2=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
+                        qiandan3+=bbk2;
+                    } else if(e.data.reportticket[i].payMethods=="付现"){
+                        var bbk3=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
+                        xianfu3+=bbk3;
+                    }
+                }
+              $("#xj3").html(xj3);
+              $("#xianfu3").html(xianfu3);
+              $("#qiandan3").html(qiandan3);
+             $("#zhusu").html(one);
+			 $("#reportrestaurant").after(two);
+			 $("#menpiao").after(three);
+            },
+            error:function () {
+                alert("错误，请联系管理员！");
+            }
+        })
+    }
 function dispatchShow() {
     $.ajax({
         url:"/dispatch/dispatch",
@@ -486,7 +403,7 @@ function dispatchShow() {
     })
 }
    function daysBetween(sDate1,sDate2){
-//Date.parse() 解析一个日期时间字符串，并返回1970/1/1 午夜距离该日期时间的毫秒数
+  //Date.parse() 解析一个日期时间字符串，并返回1970/1/1 午夜距离该日期时间的毫秒数
        var time1 = Date.parse(new Date(sDate1));
        var time2 = Date.parse(new Date(sDate2));
        var nDays = Math.abs(parseInt((time2 - time1)/1000/3600/24));

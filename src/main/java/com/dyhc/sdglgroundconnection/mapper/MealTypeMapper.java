@@ -65,4 +65,11 @@ public interface MealTypeMapper extends CommonMapper<MealType> {
      * @return
      */
     List<Dictionaries> selectMealType();
+
+    /**
+     * 根据valueId获取所有类型信息
+     * @param valueId
+     * @return
+     */
+    List<MealType> listinfoByvalueId(@Param("valueId")Integer valueId)throws Exception;
 }
