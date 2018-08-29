@@ -32,6 +32,7 @@ public class DispatchServiceImpl implements DispatchService {
     @Autowired
     private DispatchMapper dispatchMapper;
 
+    //调度酒店表对象
     @Autowired
     private DispatchhotelMapper dispatchhotelMapper;
 
@@ -102,6 +103,30 @@ public class DispatchServiceImpl implements DispatchService {
     //接团信息
     @Autowired
     private ClusterMapper clusterMapper;
+    //调度导游表
+    @Autowired
+    private DisguideMapper disguideMapper;
+    //调度用车表
+    @Autowired
+    private DiscarMapper discarMapper;
+       //调度其他表
+    @Autowired
+    private DisotherMapper disotherMapper;
+    //调度线路信息表
+    @Autowired
+    private HoteroomTypeMapper hoteroomTypeMapper;
+    //调度景点表
+    @Autowired
+    private DisattrMapper disattrMapper;
+    //调度购物表
+    @Autowired
+    private DisshoppMapper disshoppMapper;
+    //调度餐厅表
+    @Autowired
+    private DisrestaurantMapper disrestaurantMapper;
+
+
+
 
 
     /**
@@ -137,6 +162,73 @@ public class DispatchServiceImpl implements DispatchService {
             Date date=new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             String Tuan="STS-"+sdf.format(date);
+            dispatch.setGroundConnectionNumber(Tuan);
+            dispatch.setState(1);
+            dispatch.setWhetherDel(0);
+            dispatch.setCreater(1);
+            dispatch.setCreationDate(new Date());
+            dispatchMapper.insert(dispatch);
+            Dispatch infoId=dispatchMapper.getsavedispatchId();
+            disguide.setOfferId(infoId.getDispatchId());
+            disguide.setStatus(0);
+            disguide.setCreateBy(1);
+            disguide.setCreateDate(new Date());
+            disguideMapper.insert(disguide);
+            cluster.setDispatchId(infoId.getDispatchId());
+            cluster.setWhetherDel(0);
+            cluster.setCreateBy(1);
+            cluster.setCreateDate(new Date());
+            clusterMapper.insert(cluster);
+            discar.setOfferId(infoId.getDispatchId());
+            discar.setStatus(0);
+            discar.setCreateBy(1);
+            discar.setCreateDate(new Date());
+            discarMapper.insert(discar);
+            disother.setOfferId(infoId.getDispatchId());
+            disother.setCreateBy(1);
+            disother.setCreateDate(new Date());
+            disother.setStatus(0);
+            disotherMapper.insert(disother);
+            for (Dispatchhotel hotel:dispatchhotelList) {
+                hotel.setOfferId(infoId.getDispatchId());
+                hotel.setWhetherDel(0);
+                hotel.setCreater(1);
+                hotel.setCreationDate(new Date());
+            }
+            dispatchhotelMapper.insertList(dispatchhotelList);
+            for (HoteroomType h:hoteroomTypeList) {
+                h.setOfferId(infoId.getDispatchId());
+                h.setStatus(0);
+                h.setCreateBy(1);
+                h.setCreateDate(new Date());
+            }
+            hoteroomTypeMapper.insertList(hoteroomTypeList);
+            for (Disattr d:disattrList) {
+                d.setOfferId(infoId.getDispatchId());
+                d.setBuynum(dispatch.getNum());
+                d.setStatus(0);
+                d.setCreateBy(1);
+                d.setCreateDate(new Date());
+            }
+            disattrMapper.insertList(disattrList);
+            for (Disshopp s:disshoppList) {
+                s.setOfferId(infoId.getDispatchId());
+                s.setStatus(0);
+                s.setCreateBy(1);
+                s.setCreateDate(new Date());
+            }
+            disshoppMapper.insertList(disshoppList);
+            for (Disrestaurant r:disrestaurantList) {
+                r.setOfferId(infoId.getDispatchId());
+                r.setStatus(0);
+                r.setCreateBy(1);
+                r.setCreateDate(new Date());
+            }
+            disrestaurantMapper.insertList(disrestaurantList);
+            Offer offer=new Offer();
+            offer.setOfferId(dispatchParameter.getOfferId());
+            offer.setWhetherDel(4);
+            offerMapper.updateByPrimaryKeySelective(offer);
             return 1;
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -339,10 +431,10 @@ public class DispatchServiceImpl implements DispatchService {
      * @return
      */
     @Override
-    public Dispatch listDispatch(Integer dispatchId)throws Exception  {
     public  Dispatch dispatch(Integer dispatchId) {
         return dispatchMapper.dispatch(dispatchId);
     }
+
     public Dispatch listDispatch(Integer dispatchId) {
         return dispatchMapper.listDispatch(dispatchId);
     }

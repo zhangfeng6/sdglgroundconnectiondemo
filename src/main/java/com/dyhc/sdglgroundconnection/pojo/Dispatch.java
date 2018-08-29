@@ -37,13 +37,14 @@ public class Dispatch {
     private Double fare; // 车费
     @Column(name = "wineFee")
     private Double wineFee; // 酒水费
-    @Column(name = "`not`")
-    private String not; // 不含
+    @Column(name = "notcontain")
+    private String notcontain ; // 不含
     private String remarks; // 备注
     private String supervision; // 团体监督
     private String reception; // 接待标准
     private Double total; // 总计
     private Double loan; // 导游借款
+    @Column(name = "`state`")
     private Integer state; // 状态（1、未开始2、进行中3、已结束）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
@@ -231,13 +232,13 @@ public class Dispatch {
     }
 
     @Basic
-    @Column(name = "not")
-    public String getNot() {
-        return not;
+    @Column(name = "notcontain")
+    public String getNotcontain() {
+        return notcontain ;
     }
 
-    public void setNot(String not) {
-        this.not = not;
+    public void setNotcontain(String notcontain) {
+        this.notcontain  = notcontain;
     }
 
     @Basic
@@ -389,7 +390,7 @@ public class Dispatch {
                 Objects.equals(aVariance, dispatch.aVariance) &&
                 Objects.equals(fare, dispatch.fare) &&
                 Objects.equals(wineFee, dispatch.wineFee) &&
-                Objects.equals(not, dispatch.not) &&
+                Objects.equals(notcontain , dispatch.notcontain ) &&
                 Objects.equals(remarks, dispatch.remarks) &&
                 Objects.equals(supervision, dispatch.supervision) &&
                 Objects.equals(reception, dispatch.reception) &&
@@ -409,6 +410,6 @@ public class Dispatch {
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchId, groundConnectionNumber, groupNumber, sendLine, travelStartTime, travelEndTime, num, tourist, trip, offer, aVariance, fare, wineFee, not, remarks, supervision, reception, total, loan, state, whetherDel, creater, modifier, modifiedData, creationDate, guideId, carcontacts, value3);
+        return Objects.hash(dispatchId, groundConnectionNumber, groupNumber, sendLine, travelStartTime, travelEndTime, num, tourist, trip, offer, aVariance, fare, wineFee, notcontain , remarks, supervision, reception, total, loan, state, whetherDel, creater, modifier, modifiedData, creationDate, guideId, carcontacts, value3);
     }
 }

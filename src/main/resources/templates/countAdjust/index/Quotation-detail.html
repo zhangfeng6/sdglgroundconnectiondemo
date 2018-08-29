@@ -652,7 +652,7 @@
                 var cluster={};
                 var discar={};
                 var disother={};
-
+                var offerId =$("input[name=offerId]").val();
 				//填充数据
 				dispatch.groupNumber=$("select[name=travel]").val();
                 dispatch.num=$("input[name=num]").val();
@@ -670,10 +670,10 @@
                     });
                     tourist+="第"+(i+1)+"天:"+$("textarea[name=d"+(L)+"xingcheng]").text()+",";
 				}
-				dispatch.tourist=tourist;
+				dispatch.trip=tourist;
 				dispatch.fare=$("input[name=baoting]").val();
 				dispatch.wineFee=$("input[name=jiushui]").val();
-				dispatch.not=$("input[name=xiaofei]").val();
+				dispatch.notcontain =$("input[name=xiaofei]").val();
 				dispatch.remarks=$("textarea[name=remarks]").text();
 				dispatch.reception=$("textarea[name=reception]").text();
 				dispatch.loan=$("input[name=loan]").val();
@@ -753,7 +753,7 @@
                         disattrList.push(disattr);
                     });
                 }
-                var dispatchParameter={dispatch:dispatch,disguide:disguide,cluster:cluster,
+                var dispatchParameter={offerId:offerId,dispatch:dispatch,disguide:disguide,cluster:cluster,
 					discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
                     disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList};
                 $.ajax({
@@ -763,7 +763,11 @@
 					dataType:"json",
                     contentType: "application/json",
 					success:function (result) {
-						
+						if(result.data==1){
+							alert("添加成功！");
+						}else{
+						    alert("系统异常："+result.data);
+						}
                     },
 					error:function (err) {
 						alert(err);

@@ -27,9 +27,9 @@ public class Disother {
     private Integer createBy; // 创建人 （外键，与人员表关联）
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
-    @Column(name = "upDate")
+    @Column(name = "updateDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date upDate; // 修改日期
+    private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
@@ -118,13 +118,13 @@ public class Disother {
     }
 
     @Basic
-    @Column(name = "upDate")
-    public Date getUpDate() {
-        return upDate;
+    @Column(name = "updateDate")
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpDate(Date upDate) {
-        this.upDate = upDate;
+    public void setUpdateDate(Date upDate) {
+        this.updateDate = upDate;
     }
 
     @Basic
@@ -180,7 +180,7 @@ public class Disother {
                 Objects.equals(status, disother.status) &&
                 Objects.equals(createBy, disother.createBy) &&
                 Objects.equals(updateBy, disother.updateBy) &&
-                Objects.equals(upDate, disother.upDate) &&
+                Objects.equals(updateDate, disother.updateDate) &&
                 Objects.equals(createDate, disother.createDate) &&
                 Objects.equals(value1, disother.value1) &&
                 Objects.equals(value2, disother.value2) &&
@@ -190,6 +190,6 @@ public class Disother {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disOtherId, offerId, costPrice, quotePrice, remarks, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disOtherId, offerId, costPrice, quotePrice, remarks, status, createBy, updateBy, updateDate, createDate, value1, value2, value3);
     }
 }

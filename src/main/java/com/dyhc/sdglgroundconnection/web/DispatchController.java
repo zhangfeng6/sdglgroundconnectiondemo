@@ -343,12 +343,23 @@ public class DispatchController {
         }
     }
 
+    /**
+     * 新增调度信息  张枫
+     * @param dispatchParameter
+     * @return
+     */
     @RequestMapping(value = "/saveDispatch",method = RequestMethod.POST)
     public ReponseResult saveDispatch(@RequestBody DispatchParameter dispatchParameter){
-        /*Date date=new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String Tuan="STS-"+sdf.format(date);
-        System.out.println(Tuan);*/
-        return null;
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.saveDispatch(dispatchParameter),"");
+            logger.info("method:saveDispatch 保存调度信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:saveDispatch 系统出现错误！");
+            ReponseResult<Object> err=ReponseResult.err("系统出现错误!");
+            return err;
+        }
+
     }
 }

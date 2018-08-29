@@ -33,7 +33,7 @@ public class Disrestaurant {
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "upDate")
+    @Column(name = "`upDate`")
     private Date upDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
@@ -175,7 +175,7 @@ public class Disrestaurant {
     }
 
     @Basic
-    @Column(name = "upDate")
+    @Column(name = "`upDate`")
     public Date getUpDate() {
         return upDate;
     }
