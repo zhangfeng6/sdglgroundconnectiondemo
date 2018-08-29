@@ -45,28 +45,9 @@
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
     $(function () {
-        bengonsi();//显示本公司
         bengonsi2();//显示调度车辆信息
         bengonsi3();//显示景点
     })
-
-    function bengonsi() {
-        $.ajax({
-            url:"/CompanyController/CompanyList",
-            data:{},
-            dataType:"json",
-            type:"GET",
-            success:function (e) {
-              /*  $("#companyName").html(e.data.companyName);
-                $("#companyPhone").html(e.data.companyPhone);
-                $("#fax").html(e.data.fax);*/
-            },
-            error:function () {
-                alert("错误，请联系管理员！");
-            }
-        })
-    }
-
     function bengonsi3() {
         $.ajax({
             url:"/disattr/DisattrController",
@@ -107,8 +88,6 @@
             dataType:"json",
             type:"GET",
             success:function (e) {
-                /*$("#a").html(e.data.vehicleType.carrental.carRentalName);
-                $("#b").html(e.data.vehicleType.carrental.phone);*/
                 $("#offer").html(e.data.vehicleType.offer);
             },
             error:function () {

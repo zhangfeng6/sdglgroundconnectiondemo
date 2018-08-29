@@ -134,17 +134,34 @@
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
     $(function () {
+        kaishi();
         lisrDispatch()
         listStaff()
         listDisguide()
         listcluster()
     })
 
+	var id;
+
+    function kaishi(){
+        $.ajax({
+            url:"/Travel/pai",
+            data:{},
+            dataType:"json",
+            async: false,
+            type:"get",
+            success:function (data) {
+                id=data.data;
+            }
+        })
+    }
+
+
 
     function lisrDispatch() {
         $.ajax({
             url:"/dispatch/findDispatch.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -162,7 +179,7 @@
     function listStaff() {
         $.ajax({
             url:"/Staff/findStaff.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -176,7 +193,7 @@
     function listDisguide() {
         $.ajax({
             url:"/findDisguide.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -192,7 +209,7 @@
     function listcluster() {
         $.ajax({
             url:"/dispatch/findCluster.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {

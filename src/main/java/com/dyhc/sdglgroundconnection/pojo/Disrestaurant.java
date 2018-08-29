@@ -43,6 +43,28 @@ public class Disrestaurant {
     private String payment;
     private String value3;
 
+    @Transient
+    private String restaurantName;
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    @Transient
+    private Integer num;
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     @Column(name = "weight")
     public int getWeight() {
         return weight;

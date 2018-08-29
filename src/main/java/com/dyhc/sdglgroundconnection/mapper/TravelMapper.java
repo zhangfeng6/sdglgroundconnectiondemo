@@ -1,6 +1,6 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
-import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -46,10 +46,78 @@ public interface TravelMapper extends CommonMapper<Travel> {
 
     Integer getupdlala(Travel travel);
 
+
+    /**
+     * 根据组团社查询导游
+     * @param travelId
+     * @return
+     */
+    Guide selectGuideByTravelId(@Param("travelId") Integer travelId);
+
+
+    /**
+     * 根据组团社id查询司机
+     * @param travelId
+     * @return
+     */
+    Dispatch selectDispatchByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * genju组团社id查询计调员
+     * @param travelId
+     * @return
+     */
+    Staff selectStaffByTraveId(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社id查询线路
+     * @param travelId
+     * @return
+     */
+    Offer selectOfferByTravelId(@Param("travelId") Integer travelId);
+
     /**
      * 查询组团表信息
      * @param travelId
      * @return
      */
     Travel  travel(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社Id查询餐厅导游报价
+     * @param travelId
+     * @return
+     */
+    List<Disrestaurant> selectReportrestaurantByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社Id查询餐厅导游报价
+     * @param travelId
+     * @return
+     */
+    List<Disrestaurant> selectReportrestaurantByTravelId1(@Param("travelId") Integer travelId);
+
+
+
+    /**
+     * 根据组团社Id查询导游酒店报价
+     * @param travelId
+     * @return
+     */
+    List<Dispatchhotel> selectReportaccommodationByTravelId(@Param("travelId") Integer travelId);
+
+
+    /**
+     * 根据组团社Id查询导游景点门票报账
+     * @param travelId
+     * @return
+     */
+    List<Disattr> selectReportticketByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * 根据组团社Id查询导游车费报账
+     * @param travelId
+     * @return
+     */
+    Discar selectReportfareByTravelId(@Param("travelId") Integer travelId);
 }

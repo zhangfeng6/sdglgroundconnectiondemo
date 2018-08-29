@@ -142,6 +142,7 @@
 
 <script>
     $(function () {
+        kaishi();
         listDisguide()
         listStaff()
         listDiscar()
@@ -149,10 +150,27 @@
         listTemplate()
         listDispatchAll()
     })
+
+    var id;
+
+
+    function kaishi(){
+        $.ajax({
+            url:"/Travel/jihua",
+            data:{},
+            dataType:"json",
+            async: false,
+            type:"get",
+            success:function (data) {
+                id=data.data;
+            }
+        })
+    }
+
     function listDisguide() {
         $.ajax({
             url:"/findDisguide.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -170,7 +188,7 @@
     function listStaff() {
         $.ajax({
             url:"/Staff/findStaff.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -182,7 +200,7 @@
     function listDiscar() {
         $.ajax({
             url:"/Discar/findDiscar.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -193,7 +211,7 @@
     function lisrDispatch() {
         $.ajax({
             url:"/dispatch/findDispatch.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -208,7 +226,7 @@
     function listTemplate() {
         $.ajax({
             url:"/Template/findTemplate.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -220,7 +238,7 @@
     function listDispatchAll() {
         $.ajax({
             url:"/dispatch/findDispatchxxx.html",
-            data:{dispatchId:1},
+            data:{dispatchId:id},
             type:"get",
             dataType:"json",
             success:function (data) {

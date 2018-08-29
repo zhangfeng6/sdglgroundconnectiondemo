@@ -41,6 +41,19 @@ public class Disattr {
     private Date createDate; // 创建时间
     @Column(name = "weight")
     private Integer weight;
+
+    @Transient
+    private String scenicSpotName;
+
+    public String getScenicSpotName() {
+        return scenicSpotName;
+    }
+
+    public void setScenicSpotName(String scenicSpotName) {
+        this.scenicSpotName = scenicSpotName;
+    }
+
+    private String value1;
     private String value2;
     private String value3;
     @Transient

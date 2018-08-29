@@ -52,10 +52,7 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      */
     int updateDispatchstate(@Param("did")Integer did)throws Exception;
 
-    /**
-     * 查看车辆联系人
-     * @param dispatchId
-     * @return
-     */
+    Dispatch dispatch(Integer dispatchId);
+
     Dispatch listDispatch(Integer dispatchId);
 }

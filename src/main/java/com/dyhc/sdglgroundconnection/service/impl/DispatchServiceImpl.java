@@ -238,17 +238,17 @@ public class DispatchServiceImpl implements DispatchService {
     public  Dispatch dispatchSelectAll(Integer dispatchId){
         Dispatch dispatch=null;
         try {
-             dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
-             Travel travel =travelMappere.selectTravelById(dispatch.getGroupNumber());
-             String A ="";
-             if (travel.getTravelName()==null){
-                 A="无组团名称";
-                 travel.setTravelName(A);
-             }
-             dispatch.setTravel(travel);
-             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
-             /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
-             dispatch.setDispatchhotel(dispatchhotels);
+            dispatch =dispatchMapper.dispatchSelectAll(dispatchId);
+            Travel travel =travelMappere.selectTravelById(dispatch.getGroupNumber());
+            String A ="";
+            if (travel.getTravelName()==null){
+                A="无组团名称";
+                travel.setTravelName(A);
+            }
+            dispatch.setTravel(travel);
+            List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
+            /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
+            dispatch.setDispatchhotel(dispatchhotels);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -332,13 +332,18 @@ public class DispatchServiceImpl implements DispatchService {
         return dispatchMapper.selectByPrimaryKey(reportdetail.getDispatchId());
     }
 
-    /**
+
+     /**
      * 查看车辆联系人
      * @param dispatchId
      * @return
      */
     @Override
     public Dispatch listDispatch(Integer dispatchId)throws Exception  {
+    public  Dispatch dispatch(Integer dispatchId) {
+        return dispatchMapper.dispatch(dispatchId);
+    }
+    public Dispatch listDispatch(Integer dispatchId) {
         return dispatchMapper.listDispatch(dispatchId);
     }
 
@@ -350,7 +355,6 @@ public class DispatchServiceImpl implements DispatchService {
     @Override
     public Cluster ClusterById(Integer dispatchId)throws Exception  {
         return clusterMapper.ClusterById(dispatchId);
-
     }
 
 }

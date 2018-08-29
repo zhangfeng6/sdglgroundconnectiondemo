@@ -1,7 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.TravelMapper;
-import com.dyhc.sdglgroundconnection.pojo.Travel;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.TravelService;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageHelper;
@@ -113,7 +113,51 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
+    public Guide selectGuideByTravelId(Integer travelId) {
+        return travelMapper.selectGuideByTravelId(travelId);
+    }
+
+    @Override
+    public Dispatch selectDispatchByTravelId(Integer travelId) {
+        return travelMapper.selectDispatchByTravelId(travelId);
+    }
+
+    @Override
+    public Staff selectStaffByTraveId(Integer travelId) {
+        return travelMapper.selectStaffByTraveId(travelId);
+    }
+
+    @Override
+    public Offer selectOfferByTravelId(Integer travelId) {
+        return travelMapper.selectOfferByTravelId(travelId);
+    }
+    @Override
     public Travel getTravelName(Integer groupNumber) throws Exception {
         return travelMapper.selectByPrimaryKey(groupNumber);
+    }
+
+    @Override
+    public List<Disrestaurant> selectReportrestaurantByTravelId(Integer travelId) {
+        return travelMapper.selectReportrestaurantByTravelId(travelId);
+    }
+
+    @Override
+    public List<Disrestaurant> selectReportrestaurantByTravelId1(Integer travelId) {
+        return travelMapper.selectReportrestaurantByTravelId1(travelId);
+    }
+
+    @Override
+    public List<Dispatchhotel> selectReportaccommodationByTravelId(Integer travelId) {
+        return travelMapper.selectReportaccommodationByTravelId(travelId);
+    }
+
+    @Override
+    public List<Disattr> selectReportticketByTravelId(Integer travelId) {
+        return travelMapper.selectReportticketByTravelId(travelId);
+    }
+
+    @Override
+    public Discar selectReportfareByTravelId(Integer travelId) {
+        return travelMapper.selectReportfareByTravelId(travelId);
     }
 }

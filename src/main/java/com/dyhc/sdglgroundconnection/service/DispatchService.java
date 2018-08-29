@@ -5,6 +5,7 @@ import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public interface DispatchService {
      * @return
      */
     Dispatch dispatchSelectAll(Integer dispatchId);
-     /* 根据调度id查询调度信息     陈庆武
+    /* 根据调度id查询调度信息     陈庆武
      * @param reportDetailId 调度id
      * @return
      */
@@ -81,7 +82,12 @@ public interface DispatchService {
     int updatestateById(Integer did, Integer gid, String travelStartTime, String travelEndTime)throws Exception;
 
     /**
-     * 根据报价Id查询该报价的所有信息
+     * 查询计调表
+     * @param dispatchId
+     * @return
+     */
+    Dispatch dispatch(@Param("dispatchId") Integer dispatchId);
+    /* 根据报价Id查询该报价的所有信息
      * @param oid
      * @return
      * @throws Exception

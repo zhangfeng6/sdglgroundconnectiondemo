@@ -133,10 +133,31 @@
             type: "get",
             async: false,
             success: function (result) {
+                // 分页插件
+                layui.use('table', function () {
+                    var laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'fy'
+                        , count: result.count
+                        , curr: curnum
+                        , limit: 2
+                        , layout: ['prev', 'page', 'next', 'skip', 'count']
+                        , jump: function (obj, first) {
+                            if (!first) {
+                                //obj包含了当前分页的所有参数，比如：
+                                curnum = obj.curr; // 当前页码
+                                limitcount = 2; // 每页记录数
+                                // 查询新数据
+                                listCarRentals();
+                            }
+                        }
+                    })
+                })
+                var xu=(curnum-1)*limitcount+1;
                 $.each(result.data,function (i,e) {
                     content+="<tr id='node-"+e.carRentalId+"' class='parent collapsed'>" +
                         "<td></td>" +
-                        "<td style='width: 80px;'>"+(i+1)+"</td>" +
+                        "<td style='width: 80px;'>"+xu+"</td>" +
                         " <td style='width: 120px;'>"+e.carRentalName+
                         "<a class='layui-btn layui-btn-mini layui-btn-normal showSubBtn' data-id='"+e.carRentalId+"'" +
                         "'>+</a>" +
@@ -183,29 +204,10 @@
                                 "</tr>";
                         })
                     }
-
+					xu++;
                 })
                 $('tbody').html(content);
-                // 分页插件
-                layui.use('table', function () {
-                    var laypage = layui.laypage;
-                    laypage.render({
-                        elem: 'fy'
-                        , count: result.count
-                        , curr: curnum
-                        , limit: 2
-                        , layout: ['prev', 'page', 'next', 'skip', 'count']
-                        , jump: function (obj, first) {
-                            if (!first) {
-                                //obj包含了当前分页的所有参数，比如：
-                                curnum = obj.curr; // 当前页码
-                                limitcount = 2; // 每页记录数
-                                // 查询新数据
-                                listCarRentals();
-                            }
-                        }
-                    })
-                })
+
             },
             error: function (res) {
                 alert(res);

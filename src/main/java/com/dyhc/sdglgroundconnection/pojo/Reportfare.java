@@ -42,6 +42,8 @@ public class Reportfare {
         this.reportDetailId = reportDetailId;
     }
 
+
+
     @Column(name = "reportDetailId")
     private Integer reportDetailId; //导游报账明细id
     private String value2;
