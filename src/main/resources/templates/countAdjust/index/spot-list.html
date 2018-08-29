@@ -93,11 +93,31 @@
             type: "get",
             async: false,
             success: function (result) {
-
+				// 分页插件
+                layui.use('table', function () {
+                    var laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'fy'
+                        , count: result.count
+                        , curr: curnum
+                        , limit: 2
+                        , layout: ['prev', 'page', 'next', 'skip', 'count']
+                        , jump: function (obj, first) {
+                            if (!first) {
+                                //obj包含了当前分页的所有参数，比如：
+                                curnum = obj.curr; // 当前页码
+                                limitcount = obj.limit; // 每页记录数
+                                // 查询新数据
+                                loadData();
+                            }
+                        }
+                    })
+                })
+                var xu=(curnum-1)*limitcount+1;
                 $.each(result.data,function (i,e) {
                     content+="<tr id='node-"+e.scenicSpotId+"' class='parent collapsed'><td>" +
                         "<a class='layui-btn layui-btn-mini layuis-btn-normal showSubBtn' data-id='"+e.scenicSpotId+"'>+</a></td>" +
-                        "<td class=''>"+(i+1)+"</td>" +
+                        "<td class=''>"+xu+"</td>" +
                         "<td class=''>"+e.scenicSpotName+"</td>";
                     if (e.parentId==0){
                         content+="<td class=''>无</td>";
@@ -184,29 +204,11 @@
                                 "</tr>" ;
                         });
 					}
+					xu++;
 
                 })
                 $('tbody').html(content);
-                // 分页插件
-                layui.use('table', function () {
-                    var laypage = layui.laypage;
-                    laypage.render({
-                        elem: 'fy'
-                        , count: result.count
-                        , curr: curnum
-                        , limit: 2
-                        , layout: ['prev', 'page', 'next', 'skip', 'count']
-                        , jump: function (obj, first) {
-                            if (!first) {
-                                //obj包含了当前分页的所有参数，比如：
-                                curnum = obj.curr; // 当前页码
-                                limitcount = obj.limit; // 每页记录数
-                                // 查询新数据
-                                loadData();
-                            }
-                        }
-                    })
-                })
+
 
             },
             error: function (res) {
