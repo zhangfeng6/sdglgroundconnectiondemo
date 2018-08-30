@@ -11,4 +11,8 @@
     <select id="listDiscar" resultType="com.dyhc.sdglgroundconnection.pojo.Discar">
 SELECT carRentalName FROM disCar d,vehicleType v,carRental c,dispatch s WHERE d.typeId=v.typeId AND v.carRentalId=c.carRentalId AND d.offerId=s.dispatchId AND s.dispatchId=#{dispatchId}
 </select>
+
+    <select id="selectDiscarByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Discar">
+        select * from discar where offerId=#{offerId}
+    </select>
 </mapper>

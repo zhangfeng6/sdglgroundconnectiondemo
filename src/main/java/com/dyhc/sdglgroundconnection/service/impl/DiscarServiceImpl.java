@@ -40,4 +40,9 @@ public class DiscarServiceImpl implements DiscarService {
     public Discar listDiscar(Integer dispatchId) {
         return discarMapper.listDiscar(dispatchId);
     }
+
+    @Override
+    public Discar selectDiscarByOfferId(Integer offerId) {
+        return discarMapper.selectDiscarByOfferId(offerId);
+    }
 }

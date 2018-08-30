@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度景点 控制层
@@ -33,8 +36,9 @@ public class DisattrController {
      * @return
      */
     @RequestMapping("/DisattrController")
-    public ReponseResult CompanyList(Integer offerId){
-        offerId=1;
+    public ReponseResult CompanyList(HttpServletRequest request, Integer offerId){
+        HttpSession session = request.getSession();
+        offerId=Integer.parseInt(session.getAttribute("dispatchId").toString());
         try{
             Disattr disattr =disattrService.disattr(offerId);
             logger.info(" method:CompanyList  调度景点查询成功！");

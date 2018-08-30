@@ -21,4 +21,6 @@ public interface DiscarService {
      * @return
      */
     Discar listDiscar(Integer dispatchId);
+
+    Discar selectDiscarByOfferId(Integer offerId);
 }

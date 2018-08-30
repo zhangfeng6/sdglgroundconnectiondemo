@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
+
 </head>
 
 <body>
@@ -36,6 +37,7 @@
 <p style="text-height:8px; height:8px; text-indent:1.5em">5、乙方客运驾驶员有权拒绝甲方导游提出的违反安全行车和冒险行车的要求。</p>
 <p style="text-height:8px; height:8px; text-indent:1.5em">6、乙方客运驾驶员不准诱导客人计划外增加景点或煽动购物，不得从事任何违法活动。</p><p style="text-height:8px; height:8px; text-indent:1.5em">7、乙方不得调配非乙方公司车辆接待甲方团队，由此产生的一切责任全部由乙方负责</p>
 <p style="text-height:20px; height:20px; text-indent:1.5em">8、乙方需按双方合同规定的行车路线行车，否则多产生的费用均由甲方承担。在带团过程中，导游交给</p>
+    <p align="right"><button type='button' onclick='xia()'><i type='button'>下一页</i></button></p>
   <p align="right">-1-</p>
 </div>
 </body>
@@ -46,6 +48,12 @@
      bengonsi2();//显示调度车辆信息
      bengonsi3();//显示景点
  })
+
+ function xia(){
+     location.href="CarRenting2.html";
+ }
+
+
     function bengonsi() {
         $.ajax({
             url:"/CompanyController/CompanyList",

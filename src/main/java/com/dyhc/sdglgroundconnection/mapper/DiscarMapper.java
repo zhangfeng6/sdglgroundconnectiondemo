@@ -24,4 +24,6 @@ public interface DiscarMapper extends CommonMapper<Discar>{
      * @return
      */
     Discar listDiscar(Integer dispatchId);
+
+    Discar selectDiscarByOfferId(@Param("offerId") Integer offerId);
 }
