@@ -230,4 +230,61 @@ public class DictionariesServiceImpl implements DictionariesService {
         return dictionariesMapper.getgetDictionariesHotelSelect(dictionariesId);
     }
 
+
+    /**
+     *判断餐厅类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    @Override
+    public Dictionaries getDictionariesByNameTypecan(String valueContent1) {
+        return dictionariesMapper.getDictionariesByNameTypecan(valueContent1);
+    }
+
+    /**
+     *判断车辆类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    @Override
+    public Dictionaries getDictionariesByNameTypecar(String valueContent1) {
+        return dictionariesMapper.getDictionariesByNameTypecar(valueContent1);
+    }
+
+    /**
+     * 判断酒店类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    @Override
+    public Dictionaries AAA(String valueContent1) {
+        return dictionariesMapper.getDictionariesByNameType(valueContent1);
+    }
+    /**
+     * 添加餐厅编号
+     * @param
+     * @return
+     */
+    @Override
+    public Dictionaries DictionariesCanMax() {
+        return dictionariesMapper.DictionariesCanMax();
+    }
+    /**
+     * 添加车辆编号
+     * @param
+     * @return
+     */
+    @Override
+    public Dictionaries DictionariesCarMax() {
+        return dictionariesMapper.DictionariesCarMax();
+    }
+    /**
+     * 添加酒店编号
+     * @param
+     * @return
+     */
+    @Override
+    public Dictionaries DictionariesHotelMax() {
+        return dictionariesMapper.DictionariesHotelMax();
+    }
 }

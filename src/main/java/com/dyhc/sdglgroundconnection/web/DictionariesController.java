@@ -266,10 +266,15 @@ public class DictionariesController {
     public ReponseResult<Integer> DictionariesCanthree( Dictionaries dictionaries){
         try{
             Integer data=0;
+            Integer num;
+            Dictionaries d=dictionariesService.DictionariesCanMax();
+            num=d.getValueId();
+            num++;
             if(dictionaries.getDictionariesId()!=0){
                 data=dictionariesService.getDictionariesByUpd(dictionaries);
                 System.out.println(789);
             }else {
+                dictionaries.setValueId(num);
                 dictionaries.setTypeCode("DIET");
                 dictionaries.setTypeName("饮食类型");
                 dictionaries.setWhetherDel(0);
@@ -297,10 +302,15 @@ public class DictionariesController {
         try{
             System.out.println(dictionaries);
             Integer data=0;
+            Integer num;
+            Dictionaries d=dictionariesService.DictionariesCarMax();
+            num=d.getValueId();
+            num++;
             if(dictionaries.getDictionariesId()!=0){
                 data=dictionariesService.getDictionariesCarUpd(dictionaries);
                 System.out.println(789);
             }else {
+                dictionaries.setValueId(num);
                 dictionaries.setTypeCode("VEHICLE");
                 dictionaries.setTypeName("车辆类型");
                 dictionaries.setWhetherDel(0);
@@ -328,10 +338,15 @@ public class DictionariesController {
         try{
             System.out.println(dictionaries);
             Integer data=0;
+            Integer num;
+            Dictionaries d=dictionariesService.DictionariesHotelMax();
+            num=d.getValueId();
+            num++;
             if(dictionaries.getDictionariesId()!=0){
                 data=dictionariesService.getDictionariesHotelUpd(dictionaries);
                 System.out.println(789);
             }else {
+                dictionaries.setValueId(num);
                 dictionaries.setTypeCode("THEROOM");
                 dictionaries.setTypeName("酒店类型");
                 dictionaries.setWhetherDel(0);
@@ -399,6 +414,76 @@ public class DictionariesController {
             return ReponseResult.ok(dictionaries,"查看餐厅类型成功！");
         }catch (Exception e) {
             logger.error(" method:DictionariesCanSelect  查看餐厅类型失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 判断酒店类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesByNameType")
+    public ReponseResult DictionariesByNameType(String valueContent1){
+        try{
+            Integer data=0;
+            Dictionaries dictionaries=dictionariesService.AAA(valueContent1);
+            if(dictionaries!=null){
+                data=1;
+            }
+            logger.info(" method:DictionariesByNameType  判断酒店类型是否存在成功！");
+            return ReponseResult.ok(data,"判断酒店类型是否存在成功！");
+        }catch (Exception e){
+            logger.error(" method:DictionariesByNameType  判断酒店类型是否存在失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 判断餐厅类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesByNameTypecan")
+    public ReponseResult DictionariesByNameTypecan(String valueContent1){
+        try{
+            Integer data=0;
+            Dictionaries dictionaries=dictionariesService.getDictionariesByNameTypecan(valueContent1);
+            if(dictionaries!=null){
+                data=1;
+            }
+            logger.info(" method:DictionariesByNameTypecan  判断餐厅类型是否存在成功！");
+            return ReponseResult.ok(data,"判断餐厅类型是否存在成功！");
+        }catch (Exception e){
+            logger.error(" method:DictionariesByNameTypecan  判断餐厅类型是否存在失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 判断车辆类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    @RequestMapping("/DictionariesByNameTypecar")
+    public ReponseResult DictionariesByNameTypecar(String valueContent1){
+        System.out.println("........................................");
+        try{
+            Integer data=0;
+            Dictionaries dictionaries=dictionariesService.getDictionariesByNameTypecar(valueContent1);
+            if(dictionaries!=null){
+                data=1;
+            }
+            logger.info(" method:DictionariesByNameTypecan  判断车辆类型是否存在成功！");
+            return ReponseResult.ok(data,"判断车辆类型是否存在成功！");
+        }catch (Exception e){
+            logger.error(" method:DictionariesByNameTypecan  判断车辆类型是否存在失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;

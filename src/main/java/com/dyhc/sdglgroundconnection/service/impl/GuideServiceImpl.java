@@ -26,6 +26,17 @@ public class GuideServiceImpl implements GuideService {
     private GuideMapper guideMapper;
     @Autowired
     private GuidescheduleMapper guidescheduleMapper;
+
+    /**
+     * 判断导游是否有重复的导游证件号
+     * @param certificate
+     * @return
+     */
+    @Override
+    public Guide pdcertificate(String certificate) {
+        return guideMapper.pdcertificate(certificate);
+    }
+
     /**
      * 分页查询导游信息
      * @param pageNo

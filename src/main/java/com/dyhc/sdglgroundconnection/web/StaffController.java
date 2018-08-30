@@ -178,7 +178,7 @@ public class StaffController  {
             Staff staff2=objectMapper.readValue(staff1,Staff.class);
             Integer i=0;
             String uploadResult=FileUploadUtil.uploadImage(headPortraitPath,savePath,".jpg");
-            staff2.setHeadPortraitPath(savePath+uploadResult);
+            staff2.setHeadPortraitPath(uploadResult);
             if(staff2.getStaffId()!=0){
                 i=staffService.getStaffUpdTwo(staff2);
                 System.out.println("***********"+i);
@@ -276,6 +276,31 @@ public class StaffController  {
             e.printStackTrace();
             logger.error("mothid:getStaffInfo 获取失败");
             return ReponseResult.err("获取个人信息失败");
+        }
+    }
+
+    /**
+     * 判断用户名是否存在
+     * @param theUserName
+     * @return
+     */
+    @RequestMapping("/ShowStafftheUserName")
+    public ReponseResult StaffByName(String theUserName){
+        System.out.println("........................................");
+        try{
+            Integer data=0;
+
+            Staff staff=staffService.StaffByName(theUserName);
+            if(staff!=null){
+                data=1;
+            }
+            logger.info(" method:StaffByName  判断车辆类型是否存在成功！");
+            return ReponseResult.ok(data,"判断车辆类型是否存在成功！");
+        }catch (Exception e){
+            logger.error(" method:StaffByName  判断车辆类型是否存在失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
         }
     }
 }

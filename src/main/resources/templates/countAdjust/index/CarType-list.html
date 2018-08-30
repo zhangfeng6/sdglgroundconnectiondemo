@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +66,7 @@
     })
 
     function  TypeUpdate(dictionariesId) {
+        alert(555444)
         $(document).on(
             layer.open({
                 type: 2,
@@ -72,7 +74,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '220px'],
-                content: '/countAdjust/CanType-upd.html?dictionariesId='+dictionariesId
+                content: '/countAdjust/CarType-upd.html?dictionariesId='+dictionariesId
             })
         )
     }
