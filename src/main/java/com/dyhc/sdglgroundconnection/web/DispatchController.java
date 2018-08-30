@@ -4,6 +4,11 @@ import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.Cluster;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
+import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.service.*;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -45,6 +50,9 @@ public class DispatchController {
     //线路
     @Autowired
     private HoteroomTypeService hoteroomTypeService;
+    @Autowired
+    private DiscarService discarService;
+
 
     /**
      * 返回所有调度信息
@@ -76,14 +84,6 @@ public class DispatchController {
     }
 
 
-    @RequestMapping("ding")
-    public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
-        HttpSession session = request.getSession();
-        session.setAttribute("dispatchId",dispatchId);
-        ReponseResult<Object> msg=ReponseResult.err("查询成功");
-        return msg;
-    }
-
     @RequestMapping("pai")
     public ReponseResult pai(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -101,6 +101,40 @@ public class DispatchController {
         return msg;
     }
 
+    @RequestMapping("rizhi")
+    public ReponseResult rizhi(HttpServletRequest request, Integer dispatchId,Integer guideId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        session.setAttribute("guideId",guideId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("zuche")
+    public ReponseResult zuche(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        Discar discar = discarService.selectDiscarByOfferId(dispatchId);
+        session.setAttribute("disCarId",discar.getDisCarId());
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("bao")
+    public ReponseResult bao(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("ding")
+    public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
 
     /**
      * 订房通知单： 贾晓亮
@@ -130,7 +164,6 @@ public class DispatchController {
      */
     @RequestMapping("/dispatch")
     public  ReponseResult dispatch(Integer dispatchId){
-        dispatchId=1;
         try {
             Dispatch dispatch =dispatchService.dispatch(dispatchId);
             ReponseResult<Dispatch> data =ReponseResult.ok(dispatch,"查询计调成功");

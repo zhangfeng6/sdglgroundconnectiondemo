@@ -157,6 +157,8 @@
                     type: "post",
                     success: function (data) {
                         alert(data.msg);
+                        var index=parent.layer.getFrameIndex(window.name);
+                        parent.location.reload(index);
                     }
                 })
 			}

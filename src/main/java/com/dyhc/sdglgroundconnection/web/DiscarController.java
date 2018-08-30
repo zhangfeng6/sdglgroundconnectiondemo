@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度用车 控制层
@@ -30,8 +33,9 @@ public class DiscarController {
      * @return
      */
     @RequestMapping("/DiscarController")
-    public ReponseResult CompanyList(Integer disCarId){
-        disCarId=1;
+    public ReponseResult CompanyList(HttpServletRequest request, Integer disCarId){
+        HttpSession session = request.getSession();
+        disCarId=Integer.parseInt(session.getAttribute("disCarId").toString());
         try{
             Discar discar=discarService.discar(disCarId);
             logger.info(" method:CompanyList  调度车辆查询成功！");

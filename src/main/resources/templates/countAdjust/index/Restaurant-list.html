@@ -217,7 +217,7 @@
                        })
                        xu++;
                    }
-                   $("tbody").html(context2);
+
                    // 分页插件
                    layui.use('table', function () {
                        var laypage = layui.laypage;
@@ -239,6 +239,7 @@
                        })
                    })
                })
+               $("tbody").html(context2);
            },error:function () {
                alert(123)
            }

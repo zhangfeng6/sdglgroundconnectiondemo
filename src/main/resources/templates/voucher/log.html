@@ -7,6 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
+		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
 	</head>
@@ -61,12 +62,34 @@
 				</tr>
 				</table>
 			</table>
+			<p><button style=" margin-left: 650px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印导游日志</button></p>
 		</div>
 		<script src="/js/jquery-1.8.2.min.js"></script>
 		<script>
 			$(function () {
+			    kaishi();
                 logShow();
             })
+
+			var dispatchId;
+			var guideId;
+			var creationDate;
+
+            function kaishi(){
+                $.ajax({
+                    url:"/Travel/rizhi",
+                    data:{},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+                        dispatchId=data.data[0];
+                        guideId=data.data[1];
+                        creationDate=prompt("请输入日志的创建时间");
+                    }
+                })
+            }
+
 
             /**
 			 * 显示导游日志信息
@@ -74,7 +97,7 @@
 			function  logShow() {
 				$.ajax({
 					url:"/log/log",
-					data:{},
+					data:{guideId:guideId,dispatchId:dispatchId,creationDate:creationDate},
 					dataType:"",
 					type:"GET",
 					success:function (e) {
