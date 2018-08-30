@@ -53,7 +53,7 @@ function addss() {
     var gwdhtml=$("select[name=d1shopping]").html();
     var fanhtml=$("select[name=d1wucan]").html();
     var a = "<div style='margin-bottom: 25px;width: 1090px' name='xianlu' ><input type='hidden' value='"+index+"'/><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
-        "<input type='image' id='sc'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
+        "<input type='image' name='hiddendel'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
         "<div id='content'>" +
         "<form class='layui-form layui-form-pane' action=''>" +
         "<table border='0'  cellspacing='0' cellpadding='0' >" +
@@ -74,7 +74,7 @@ function addss() {
         "	<tr>" +
         "	<td><label class='layui-form-label'>酒店</label></td>" +
         "	<td>" +
-        "	<select name='d"+index+"hoteltype' style='height: 35px;width:180px;' onchange='typechange(this,'hoteltype')' lay-ignore>" +
+        "	<select name='d"+index+"hoteltype' style='height: 35px;width:180px;'onchange=\"typechange(this,'hoteltype')\" lay-ignore>" +
         ""+jiuhtml+"</select>" +
         "</td>" +
         "<td>" +

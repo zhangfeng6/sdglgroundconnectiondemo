@@ -13,6 +13,7 @@
 <body>
 <div class="page-content-wrap">
 	<input type="hidden" name="offerId" th:value="${id}"/>
+	<input type="hidden" name="Did" th:value="${did}"/>
 	<div id="divhead">
 	<form class="layui-form layui-form-pane" action="">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -41,7 +42,7 @@
 		<div name="xianlu" style='margin-bottom: 60px;width: 1100px'>
 			<input type="hidden" value="1"/>
 			<input type="image" src="/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)'/>
-			<input type="image" id="sc" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;display: none"/>
+			<input type="image" name="hiddendel" src="/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right; height: 30px;width: 35px;display: none"/>
 			<div id="content">
 					<form class="layui-form layui-form-pane" action="">
 						<table border="0" cellspacing="0" cellpadding="0">
@@ -74,7 +75,7 @@
 									</select>
 								</td>
 								<td><label class="layui-form-label" >数量：</label></td>
-								<td><input name="dlnum" type="text" onchange="sumchange(this)" class="layui-input"></td>
+								<td><input name="d1num" type="text" onchange="sumchange(this)" class="layui-input"></td>
 								<td><label class="layui-form-label">成本价</label></td>
 								<td><input name="d1jiucb" type="text" class="layui-input"></td>
 								<td style="width: 90px;padding-left: 5px;">签单<input type="radio" value="签单" name="d1hotelpayment"></td>
@@ -294,6 +295,39 @@
 		<script type="text/javascript" src="/layui.js"></script>
 		<script type="text/javascript" src="/js/scheduling.js"></script>
 		<script type="text/javascript">
+            //窗体加载事件
+            $(function() {
+                layui.use(['form', 'layedit', 'laydate','element'], function() {
+                    var form = layui.form,
+                        layer = layui.layer,
+                        layedit = layui.layedit,
+                        element=layui.element,
+                        laydate = layui.laydate;
+                    //日期
+                    laydate.render({
+                        elem: '#date'
+                    });
+                    laydate.render({
+                        elem: '#date1'
+                    });
+                    laydate.render({
+                        elem: '#date2'
+                    });
+                    element.render( 'test1');
+
+                });
+                gerresource();
+                var offerId=$("input[name=offerId]").val();
+                var Did=$("input[name=Did]").val();
+                if(offerId!=null&&offerId!=0){
+                    getofferById(offerId);
+                }
+                if(Did!=null&&Did!=0){
+					getdispatchById(Did);
+
+				}
+
+            });
 			//删除景点信息
             function san(dang) {
                 $(dang).parent().parent().remove();
@@ -328,39 +362,13 @@
                     form.render('select'); //刷新select选择框渲染
                 });
             }
-            //窗体加载事件
-			$(function() {
-				layui.use(['form', 'layedit', 'laydate','element'], function() {
-					var form = layui.form,
-							layer = layui.layer,
-							layedit = layui.layedit,
-							element=layui.element,
-							laydate = layui.laydate;
-                    //日期
-                    laydate.render({
-                        elem: '#date'
-                    });
-                    laydate.render({
-                        elem: '#date1'
-                    });
-                    laydate.render({
-                        elem: '#date2'
-                    });
-					element.render( 'test1');
-
-				});
-                gerresource();
-                var offerId=$("input[name=offerId]").val();
-                if(offerId!=null&&offerId!=0){
-                    getofferById(offerId);
-				}
-			});
 			//获取下拉框资源信息
             function gerresource(){
 				$.ajax({
 					url:"/dispatch/getresource",
 					dataType:"json",
 					type:"get",
+					async:false,
 					success:function (result) {
 					    //给组团社下拉框加载信息
 					    var content="<option value='0'>--请选择--</option>";
@@ -441,6 +449,7 @@
 					data:{type:type,valueId:valueId},
 					dataType:"json",
 					type:"get",
+					async:false,
 					success:function (result) {
 						 var content="<option value='0'>--请选择酒店--</option>";
                         if(type=="hoteltype"){
@@ -592,6 +601,7 @@
 					data:{oid:id},
 					dataType:"json",
 					type:"get",
+                    async:false,
 					success:function (result) {
                         $("select[name=travel]").val(result.data["offer"].travelId);
                         $("input[name=num]").val(result.data["offer"].number);
@@ -601,6 +611,7 @@
                         $("textarea[name=reception]").text(result.data["offer"].reception);
                         $("input[name=qitacb]").val(result.data["other"].costPrice);
                         $("select[name=vehicle]").val(result.data["car"]);
+                        $("select[name=vehicle]").change();
 						$(result.data["line"]).each(function (i,e) {
 							if(i>0){
 								addss();
@@ -634,7 +645,9 @@
                             hotelresource((i+1));
                             $("select[name=d"+(i+1)+"hotel]").val(e.hotelId);
                             $("select[name=d"+(i+1)+"wucan]").val(result.data["wu"][i].valueId);
+                            $("select[name=d"+(i+1)+"wucan]").change();
                             $("select[name=d"+(i+1)+"wancan]").val(result.data["wan"][i].valueId);
+                            $("select[name=d"+(i+1)+"wancan]").change();
                         });
 
                     },
@@ -643,30 +656,171 @@
                     }
 				});
             }
-			//新增调度信息
+			//保存调度信息
 			function saveDispatch() {
-                //获取页面数据
-                var dispatchParameter=saveorupinfo();
-                $.ajax({
-					url:"/dispatch/saveDispatch",
-					data:JSON.stringify(dispatchParameter),
-					type:"post",
-					dataType:"json",
-                    contentType: "application/json",
-					success:function (result) {
-						if(result.data==1){
-							alert("调度成功！");
-						}else{
-						    alert("系统异常："+result.data);
-						}
-                    },
-					error:function (err) {
-						alert(err);
-                    }
-				});
+				var Did=$("input[name=Did]").val();
+                if(Did!=null&&Did!=0){
+                    updategetinfo();
+                }else{
+					savegetinfo();
+				}
             }
-            //获取页面数据
-            function saveorupinfo() {
+             //修改时获取页面数据
+            function updategetinfo() {
+                var index=$("div[name=xianlu]").length;
+                //创建json对象
+                var dispatch={};
+                var disguide={};
+                var cluster={};
+                var discar={};
+                var disother={};
+                var offerId =$("input[name=offerId]").val();
+                //填充数据
+                dispatch.groupNumber=$("select[name=travel]").val();
+                dispatch.num=$("input[name=num]").val();
+                dispatch.travelStartTime=$("input[name=travelStartTime]").val();
+                dispatch.travelEndTime=$("input[name=travelEndTime]").val();
+                dispatch.sendLine=$("input[name=sendLine]").val();
+                dispatch.dispatchId=$("input[name=Did]").val();
+                var tourist="";
+                for (var i=0;i<index;i++){
+                    var L=0;
+                    $($("div[name=xianlu]")).each(function (z,x) {
+                        if(z==i){
+                            L=$(x).children("input:first-child").val();
+                            return false;
+                        }
+                    });
+                    tourist+="第"+(i+1)+"天:"+$("textarea[name=d"+(L)+"xingcheng]").text()+",";
+                }
+                dispatch.trip=tourist;
+                dispatch.fare=$("input[name=baoting]").val();
+                dispatch.wineFee=$("input[name=jiushui]").val();
+                dispatch.notcontain =$("input[name=xiaofei]").val();
+                dispatch.remarks=$("textarea[name=remarks]").text();
+                dispatch.reception=$("textarea[name=reception]").text();
+                dispatch.loan=$("input[name=loan]").val();
+                dispatch.guideId=$("select[name=guide]").val();
+                dispatch.carcontacts=$("input[name=cheduilxr]").val();
+                disguide.guideId=$("select[name=guide]").val();
+                disguide.disGuideId=$("select[name=guide]").attr("disGuideId");
+                cluster.clusterTime=$("input[name=clusterTime]").val();
+                cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
+                cluster.clusterNo=$("input[name=clusterNo]").val();
+                cluster.clusterId=$("input[name=clusterTime]").attr("clusterId");
+                discar.typeId=$("select[name=carrental]").val();
+                discar.costPrice=$("input[name=cheduicb]").val();
+                discar.number=$("input[name=cheduinum]").val();
+                discar.disCarId=$("select[name=carrental]").attr("disCarId");
+                disother.costPrice=$("input[name=qitacb]").val();
+                disother.disOtherId=$("input[name=qitacb]").attr("disOtherId");
+                //每一天的资源集合
+                var dispatchhotelList=[];
+                var hoteroomTypeList=[];
+                var disattrList=[];
+                var disshoppList=[];
+                var disrestaurantList=[];
+
+                //循环每一天的线路
+                for (var i=0;i<index;i++){
+                    //确认元素name的名称
+                    var L=0;
+                    $($("div[name=xianlu]")).each(function (z,x) {
+                        if(z==i){
+                            L=$(x).children("input:first-child").val();
+                            return false;
+                        }
+                    });
+                    var hoteroomtype={};
+                    if($("input[name=d"+(L)+"template]").val()!=null&&$("input[name=d"+(L)+"template]").val()!=undefined){
+                        hoteroomtype.temName=$("input[name=d"+(L)+"template]").val();
+                    }else{
+                        hoteroomtype.templateId=$("select[name=d"+(L)+"template]").val();
+                    }
+                    hoteroomtype.weight=(i+1);
+                    hoteroomtype.date=$("input[name=d"+(L)+"data]").val();
+                    hoteroomtype.xingcheng=$("textarea[name=d"+(L)+"xingcheng]").text();
+                    hoteroomtype.hoteroomtId=$("textarea[name=d"+L+"xingcheng]").attr("hoteroomtId");
+
+                    hoteroomTypeList.push(hoteroomtype);
+                    var dispatchhotel={};
+                    dispatchhotel.hotelId=$("select[name=d"+(L)+"hotel]").val();
+                    dispatchhotel.costPrice=$("input[name=d"+(L)+"jiucb]").val();
+                    dispatchhotel.date=$("input[name=d"+(L)+"data]").val();
+                    dispatchhotel.weight=(i+1);
+                    dispatchhotel.roomNum=$("input[name=d"+(L)+"num]").val();
+                    dispatchhotel.valueId=$("input[name=d"+(L)+"spchengben]").val();
+                    dispatchhotel.sproomNum=$("input[name=d"+(L)+"spnum]").val();
+                    dispatchhotel.payment=$("input[name=d"+(L)+"hotelpayment]:checked").val();
+                    dispatchhotel.hotelTypeId=$("select[name=d"+(L)+"hoteltype]").val();
+                    dispatchhotel.dispatchHotelId=$("select[name=d"+L+"hotel]").attr("dispatchHotelId");
+                    dispatchhotelList.push(dispatchhotel);
+                    if($("select[name=d"+(L)+"shopping]").val()!=0&&$("select[name=d"+(L)+"shopping]").val()!=undefined){
+                        var disshopp={};
+                        disshopp.scenicSpotId=$("select[name=d"+(L)+"shopping]").val();
+                        disshopp.date=$("input[name=d"+(L)+"data]").val();
+                        disshopp.weight=(i+1);
+                        disshopp.disShoppId=$("select[name=d"+L+"shopping]").attr("disShoppId");
+                        disshoppList.push(disshopp);
+                    }
+                    var disrestaurant={};
+                    disrestaurant.typeId=$("select[name=d"+(L)+"wufan]").val();
+                    disrestaurant.costPrice=$("input[name=d"+(L)+"wucancb]").val();
+                    disrestaurant.dinDate=2;
+                    disrestaurant.tourismdate=$("input[name=d"+(L)+"data]").val();
+                    disrestaurant.weight=(i+1);
+                    disrestaurant.payment=$("input[name=d"+(L)+"wucanpayment]:checked").val();
+                    disrestaurant.disRestaurantId=$("select[name=d"+(L)+"wufan]").attr("disRestaurantId");
+                    disrestaurantList.push(disrestaurant);
+                    var disrestaurant1={};
+                    disrestaurant1.typeId=$("select[name=d"+(L)+"wanfan]").val();
+                    disrestaurant1.costPrice=$("input[name=d"+(L)+"wancancb]").val();
+                    disrestaurant1.dinDate=3;
+                    disrestaurant1.tourismdate=$("input[name=d"+(L)+"data]").val();
+                    disrestaurant1.weight=(i+1);
+                    disrestaurant1.payment=$("input[name=d"+(L)+"wancanpayment]:checked").val();
+                    disrestaurant1.disRestaurantId=$("select[name=d"+(L)+"wanfan]").attr("disRestaurantId");
+                    disrestaurantList.push(disrestaurant1);
+                    $($("tr[name=d"+(L)+"jingdian]")).each(function (w,q) {
+                        var selectname=$(q).children("td:first-child").next().children("select").attr("name");
+                        var r=selectname.substring(12,13);
+                        var disattr={};
+                        disattr.scenicSpotId=$("select[name=d"+(L)+"scenicspot"+(r)+"]").val();
+                        disattr.costPrice=$("input[name=d"+(L)+"costprice"+(r)+"]").val();
+                        disattr.payMethods=$("input[name=d"+(L)+"jingdpayment"+(r)+"]:checked").val();
+                        disattr.date=$("input[name=d"+(L)+"data]").val();
+                        disattr.weight=(i+1);
+                        disattrList.push(disattr);
+                    });
+                }
+                var dispatchParameter={offerId:offerId,dispatch:dispatch,disguide:disguide,cluster:cluster,
+                    discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
+                    disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList};
+
+                $.ajax({
+                    url:"/dispatch/updateDispatch",
+                    data:JSON.stringify(dispatchParameter),
+                    type:"post",
+                    dataType:"json",
+                    contentType: "application/json",
+                    success:function (result) {
+                        if(result.data==1){
+                            parent.location.reload();
+                            var index=parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            alert("保存成功！");
+                        }else{
+                            alert("系统异常："+result.data);
+                        }
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                });
+
+            }
+            //添加时获取页面数据
+            function savegetinfo() {
                 var index=$("div[name=xianlu]").length;
                 //创建json对象
                 var dispatch={};
@@ -700,6 +854,7 @@
                 dispatch.reception=$("textarea[name=reception]").text();
                 dispatch.loan=$("input[name=loan]").val();
                 dispatch.guideId=$("select[name=guide]").val();
+                dispatch.carcontacts=$("input[name=cheduilxr]").val();
                 disguide.guideId=$("select[name=guide]").val();
                 cluster.clusterTime=$("input[name=clusterTime]").val();
                 cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
@@ -785,8 +940,170 @@
                     discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
                     disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList};
 
-                return dispatchParameter;
+                $.ajax({
+                    url:"/dispatch/saveDispatch",
+                    data:JSON.stringify(dispatchParameter),
+                    type:"post",
+                    dataType:"json",
+                    contentType: "application/json",
+                    success:function (result) {
+                        if(result.data==1){
+                            parent.location.reload();
+                            var index=parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            alert("保存成功！");
+                            alert("保存成功！");
+                        }else{
+                            alert("系统异常："+result.data);
+                        }
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                });
             }
+            //根据调度id获取调度详情进行展示
+			function getdispatchById(Did){
+				$.ajax({
+					url:"/dispatch/getDispatchBydispatchId",
+					data:{dispatchId:Did},
+					type:"get",
+					dataType:"json",
+					success:function (result) {
+						$("select[name=travel]").val(result.data["dispatch"].groupNumber);
+						$("input[name=num]").val(result.data["dispatch"].num);
+						$("input[name=travelStartTime]").val(result.data["dispatch"].travelStartTime);
+                        $("input[name=travelEndTime]").val(result.data["dispatch"].travelEndTime);
+                        $("select[name=guide]").val(result.data["disguide"].guideId);
+                        $("select[name=guide]").attr("disGuideId",result.data["disguide"].disGuideId);
+                        $("input[name=clusterTime]").val(result.data["cluster"].clusterTime);
+                        $("input[name=clusterTime]").attr("clusterId",result.data["cluster"].clusterId);
+                        $("input[name=clusterAdderss]").val(result.data["cluster"].clusterAdderss);
+                        $("input[name=clusterNo]").val(result.data["cluster"].clusterNo);
+                        $("input[name=jiushui]").val(result.data["dispatch"].wineFee);
+                        $("input[name=sendLine]").val(result.data["dispatch"].sendLine);
+                        $("input[name=baoting]").val(result.data["dispatch"].fare);
+                        $("input[name=qitacb]").val(result.data["disother"].costPrice);
+                        $("input[name=qitacb]").attr("disOtherId",result.data["disother"].disOtherId);
+                        $("input[name=xiaofei]").val(result.data["dispatch"].notcontain);
+                        $("input[name=loan]").val(result.data["dispatch"].loan);
+                        $("input[name=cheduilxr]").val(result.data["dispatch"].carcontacts);
+                        $("textarea[name=remarks]").text(result.data["dispatch"].remarks);
+                        $("textarea[name=reception]").text(result.data["dispatch"].reception);
+                        $("select[name=vehicle]").val(result.data["discar"].vehicleType.valueId);
+                        $("select[name=vehicle]").change();
+                        $("select[name=carrental]").val(result.data["discar"].typeId);
+                        $("input[name=cheduinum]").val(result.data["discar"].number);
+                        $("input[name=cheduicb]").val(result.data["discar"].costPrice);
+                        $("select[name=carrental]").attr("disCarId",result.data["discar"].disCarId);
+
+                        $(result.data["hoteroomType"]).each(function (i,e) {
+                            if(i>0){
+                                addss();
+                            }
+						});
+                        //给景点信息赋值
+                        $(result.data["hoteroomType"]).each(function (i,e) {
+							var w=0;
+							var q=0;
+							var t=1;
+                            //给景点信息赋值
+                            $(result.data["disattr"]).each(function (z,x) {
+                                w=x.weight;
+								if(w==(i+1)){
+									var pd=$("select[name=d"+(i+1)+"scenicspot"+t+"]").length;
+                                    if (pd<1) {
+                                        add((i+1));
+                                    }
+									$("select[name=d"+(i+1)+"scenicspot"+t+"]").val(x.scenicSpotId);
+                                    $("select[name=d"+(i+1)+"scenicspot"+t+"]").attr("disAttrId",x.disAttrId);
+                                    $("input[name=d"+(i+1)+"costprice"+t+"]").val(x.costPrice);
+                                    if(x.payMethods=='付现'){
+                                        $("input[name=d"+(i+1)+"jingdpayment"+t+"]").get(1).checked=true;
+									}else{
+                                        $("input[name=d"+(i+1)+"jingdpayment"+t+"]").get(0).checked=true;
+									}
+								    t+=1;
+								}
+                                q=result.data["disattr"][i+1].weight;
+								if(w!=q){
+									t=1;
+								}
+                            });
+						});
+                        //给线路信息赋值
+                        $(result.data["hoteroomType"]).each(function (i,e) {
+                            var R=e.weight;
+							if(e.temName != null && e.temName != ''){
+								$("button[name=d"+R+"qiehuan]").click();
+								$("input[name=d"+R+"template]").val(e.temName);
+							}
+                            $("select[name=d"+R+"template]").val(e.templateId);
+							$("textarea[name=d"+R+"xingcheng]").val(e.xingcheng);
+                            $("textarea[name=d"+R+"xingcheng]").attr("hoteroomtId",e.hoteroomtId);
+                            $("input[name=d"+R+"data]").val(e.date);
+                        });
+                        //给酒店信息赋值
+                        $(result.data["dispatchhote"]).each(function (i,e) {
+                            var R=e.weight;
+                            $("select[name=d"+R+"hoteltype]").val(e.hotelTypeId);
+                            $("select[name=d"+R+"hoteltype]").change();
+                            $("select[name=d"+R+"hotel]").val(e.hotelId);
+                            $("input[name=d"+R+"num]").val(e.roomNum);
+                            $("input[name=d"+R+"jiucb]").val(e.costPrice);
+                            $("input[name=d"+R+"spnum]").val(e.sproomNum);
+                            $("input[name=d"+R+"spchengben]").val(e.valueId);
+                            $("select[name=d"+R+"hotel]").attr("dispatchHotelId",e.dispatchHotelId);
+                            if(e.payment=='付现'){
+                                $("input[name=d"+R+"hotelpayment]").get(1).checked=true;
+							}else{
+                                $("input[name=d"+R+"hotelpayment]").get(0).checked=true;
+							}
+                        });
+                        //给购物地信息赋值
+                        $(result.data["disshopp"]).each(function (i,e) {
+                            var R=e.weight;
+                            $("select[name=d"+R+"shopping]").val(e.scenicSpotId);
+                            $("select[name=d"+R+"shopping]").attr("disShoppId",e.disShoppId);
+                        });
+                        //给餐厅信息赋值
+                        $(result.data["disrestaurant"]).each(function (i,e) {
+                            var R=e.weight;
+                            if(e.dinDate==2){
+								$("select[name=d"+R+"wucan]").val(e.mealType.valueId);
+                                $("select[name=d"+R+"wucan]").change();
+								$("select[name=d"+R+"wufan]").val(e.typeId);
+								$("input[name=d"+R+"wucancb]").val(e.costPrice);
+                                $("select[name=d"+R+"wufan]").attr("disRestaurantId",e.disRestaurantId);
+                                if(e.payment=='付现'){
+                                    $("input[name=d"+R+"wucanpayment]").get(1).checked=true;
+								}else{
+                                    $("input[name=d"+R+"wucanpayment]").get(0).checked=true;
+								}
+							}else if(e.dinDate==3){
+                                $("select[name=d"+R+"wancan]").val(e.mealType.valueId);
+                                $("select[name=d"+R+"wancan]").change();
+                                $("select[name=d"+R+"wanfan]").val(e.typeId);
+                                $("input[name=d"+R+"wancancb]").val(e.costPrice);
+                                $("select[name=d"+R+"wanfan]").attr("disRestaurantId",e.disRestaurantId);
+                                if(e.payment=='付现'){
+                                    $("input[name=d"+R+"wancanpayment]").get(1).checked=true;
+                                }else{
+                                    $("input[name=d"+R+"wancanpayment]").get(0).checked=true;
+                                }
+							}
+                        });
+
+                        $($("input[name=hiddendel]")).each(function (i,e) {
+							$(e).css("display","none");
+                        });
+                        $("#add").css("display","none");
+                    },
+					error:function (err) {
+						alert(err);
+                    }
+				});
+			}
 		</script>
 </body>
 </html>
