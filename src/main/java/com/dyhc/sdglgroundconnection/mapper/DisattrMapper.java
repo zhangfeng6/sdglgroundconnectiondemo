@@ -28,4 +28,12 @@ public interface DisattrMapper extends CommonMapper<Disattr>{
      * @throws Exception
      */
   List<Disattr> listDisattrByDid(@Param("Did")Integer Did)throws Exception;
+
+    /**
+     * 根据调度id删除 调度景点信息  张枫
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+  int removeDisattrByDid(@Param("Did")Integer Did)throws Exception;
 }

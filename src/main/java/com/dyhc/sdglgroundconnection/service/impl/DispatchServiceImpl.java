@@ -147,6 +147,20 @@ public class DispatchServiceImpl implements DispatchService {
         return map;
     }
 
+    @Override
+    @Transactional
+    public int updateDispatch(DispatchParameter dispatchParameter) throws Exception {
+        try{
+
+            return 1;
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            e.printStackTrace();
+            return 0;
+
+        }
+    }
+
     /**
      * 根据参数类的数据进行新增调度及调度相关信息
      * @param dispatchParameter
@@ -207,6 +221,14 @@ public class DispatchServiceImpl implements DispatchService {
             disother.setCreateDate(new Date());
             disother.setStatus(0);
             disotherMapper.insert(disother);
+            hoteroomTypeMapper.insertList(hoteroomTypeList);
+            for (Disattr d:disattrList) {
+                d.setOfferId(infoId.getDispatchId());
+                d.setBuynum(dispatch.getNum());
+                d.setStatus(0);
+                d.setCreateBy(1);
+                d.setCreateDate(new Date());
+            }
             for (Dispatchhotel hotel:dispatchhotelList) {
                 hotel.setOfferId(infoId.getDispatchId());
                 hotel.setWhetherDel(0);
@@ -219,14 +241,6 @@ public class DispatchServiceImpl implements DispatchService {
                 h.setStatus(0);
                 h.setCreateBy(1);
                 h.setCreateDate(new Date());
-            }
-            hoteroomTypeMapper.insertList(hoteroomTypeList);
-            for (Disattr d:disattrList) {
-                d.setOfferId(infoId.getDispatchId());
-                d.setBuynum(dispatch.getNum());
-                d.setStatus(0);
-                d.setCreateBy(1);
-                d.setCreateDate(new Date());
             }
             disattrMapper.insertList(disattrList);
             for (Disshopp s:disshoppList) {

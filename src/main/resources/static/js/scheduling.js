@@ -15,7 +15,7 @@ function xianlu(obj) {
     var name=$(obj).attr("name");
     var index=name.substring(1,2);
     if (text == "自行填写") {
-        $(obj).parent().prev().html("<input type='text' class='layui-input'>");
+        $(obj).parent().prev().html("<input type='text' name='d"+index+"template' class='layui-input'>");
         $(obj).html("选择模板");
     } else {
         $(obj).parent().prev().html("<select name='d"+index+"template' style='height: 35px;width:180px;' onchange='xianluchange(this)' lay-ignore>" +

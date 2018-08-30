@@ -645,6 +645,28 @@
             }
 			//新增调度信息
 			function saveDispatch() {
+                //获取页面数据
+                var dispatchParameter=saveorupinfo();
+                $.ajax({
+					url:"/dispatch/saveDispatch",
+					data:JSON.stringify(dispatchParameter),
+					type:"post",
+					dataType:"json",
+                    contentType: "application/json",
+					success:function (result) {
+						if(result.data==1){
+							alert("调度成功！");
+						}else{
+						    alert("系统异常："+result.data);
+						}
+                    },
+					error:function (err) {
+						alert(err);
+                    }
+				});
+            }
+            //获取页面数据
+            function saveorupinfo() {
                 var index=$("div[name=xianlu]").length;
                 //创建json对象
                 var dispatch={};
@@ -653,14 +675,14 @@
                 var discar={};
                 var disother={};
                 var offerId =$("input[name=offerId]").val();
-				//填充数据
-				dispatch.groupNumber=$("select[name=travel]").val();
+                //填充数据
+                dispatch.groupNumber=$("select[name=travel]").val();
                 dispatch.num=$("input[name=num]").val();
                 dispatch.travelStartTime=$("input[name=travelStartTime]").val();
                 dispatch.travelEndTime=$("input[name=travelEndTime]").val();
-				dispatch.sendLine=$("input[name=sendLine]").val();
-				var tourist="";
-				for (var i=0;i<index;i++){
+                dispatch.sendLine=$("input[name=sendLine]").val();
+                var tourist="";
+                for (var i=0;i<index;i++){
                     var L=0;
                     $($("div[name=xianlu]")).each(function (z,x) {
                         if(z==i){
@@ -669,15 +691,15 @@
                         }
                     });
                     tourist+="第"+(i+1)+"天:"+$("textarea[name=d"+(L)+"xingcheng]").text()+",";
-				}
-				dispatch.trip=tourist;
-				dispatch.fare=$("input[name=baoting]").val();
-				dispatch.wineFee=$("input[name=jiushui]").val();
-				dispatch.notcontain =$("input[name=xiaofei]").val();
-				dispatch.remarks=$("textarea[name=remarks]").text();
-				dispatch.reception=$("textarea[name=reception]").text();
-				dispatch.loan=$("input[name=loan]").val();
-				dispatch.guideId=$("select[name=guide]").val();
+                }
+                dispatch.trip=tourist;
+                dispatch.fare=$("input[name=baoting]").val();
+                dispatch.wineFee=$("input[name=jiushui]").val();
+                dispatch.notcontain =$("input[name=xiaofei]").val();
+                dispatch.remarks=$("textarea[name=remarks]").text();
+                dispatch.reception=$("textarea[name=reception]").text();
+                dispatch.loan=$("input[name=loan]").val();
+                dispatch.guideId=$("select[name=guide]").val();
                 disguide.guideId=$("select[name=guide]").val();
                 cluster.clusterTime=$("input[name=clusterTime]").val();
                 cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
@@ -701,10 +723,14 @@
                         if(z==i){
                             L=$(x).children("input:first-child").val();
                             return false;
-						}
+                        }
                     });
-					var hoteroomtype={};
-                    hoteroomtype.templateId=$("select[name=d"+(L)+"template]").val();
+                    var hoteroomtype={};
+                    if($("input[name=d"+(L)+"template]").val()!=null&&$("input[name=d"+(L)+"template]").val()!=undefined){
+                        hoteroomtype.temName=$("input[name=d"+(L)+"template]").val();
+                    }else{
+                        hoteroomtype.templateId=$("select[name=d"+(L)+"template]").val();
+                    }
                     hoteroomtype.weight=(i+1);
                     hoteroomtype.date=$("input[name=d"+(L)+"data]").val();
                     hoteroomtype.xingcheng=$("textarea[name=d"+(L)+"xingcheng]").text();
@@ -726,8 +752,8 @@
                         disshopp.date=$("input[name=d"+(L)+"data]").val();
                         disshopp.weight=(i+1);
                         disshoppList.push(disshopp);
-					}
-					var disrestaurant={};
+                    }
+                    var disrestaurant={};
                     disrestaurant.typeId=$("select[name=d"+(L)+"wufan]").val();
                     disrestaurant.costPrice=$("input[name=d"+(L)+"wucancb]").val();
                     disrestaurant.dinDate=2;
@@ -743,10 +769,10 @@
                     disrestaurant1.weight=(i+1);
                     disrestaurant1.payment=$("input[name=d"+(L)+"wancanpayment]:checked").val();
                     disrestaurantList.push(disrestaurant1);
-                   $($("tr[name=d"+(L)+"jingdian]")).each(function (w,q) {
+                    $($("tr[name=d"+(L)+"jingdian]")).each(function (w,q) {
                         var selectname=$(q).children("td:first-child").next().children("select").attr("name");
-						var r=selectname.substring(12,13);
-						var disattr={};
+                        var r=selectname.substring(12,13);
+                        var disattr={};
                         disattr.scenicSpotId=$("select[name=d"+(L)+"scenicspot"+(r)+"]").val();
                         disattr.costPrice=$("input[name=d"+(L)+"costprice"+(r)+"]").val();
                         disattr.payMethods=$("input[name=d"+(L)+"jingdpayment"+(r)+"]:checked").val();
@@ -756,28 +782,11 @@
                     });
                 }
                 var dispatchParameter={offerId:offerId,dispatch:dispatch,disguide:disguide,cluster:cluster,
-					discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
+                    discar:discar,disother:disother,dispatchhotelList:dispatchhotelList,hoteroomTypeList:hoteroomTypeList,
                     disattrList:disattrList,disshoppList:disshoppList,disrestaurantList:disrestaurantList};
-                $.ajax({
-					url:"/dispatch/saveDispatch",
-					data:JSON.stringify(dispatchParameter),
-					type:"post",
-					dataType:"json",
-                    contentType: "application/json",
-					success:function (result) {
-						if(result.data==1){
-							alert("调度成功！");
 
-						}else{
-						    alert("系统异常："+result.data);
-						}
-                    },
-					error:function (err) {
-						alert(err);
-                    }
-				});
+                return dispatchParameter;
             }
-            
 		</script>
 </body>
 </html>
