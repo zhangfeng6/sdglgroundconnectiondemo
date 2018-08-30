@@ -387,4 +387,31 @@ public class TravelController{
         Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
         return ReponseResult.ok(travelId,"获取成功");
     }
+
+
+    @RequestMapping("bao")
+    public ReponseResult bao(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
+
+    @RequestMapping("ding")
+    public ReponseResult ding(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        return ReponseResult.ok(travelId,"获取成功");
+    }
+
+
+    @RequestMapping("rizhi")
+    public ReponseResult rizhi(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer travelId=Integer.parseInt(session.getAttribute("dispatchId").toString());
+        Integer guideId=Integer.parseInt(session.getAttribute("guideId").toString());
+        List list = new ArrayList();
+        list.add(travelId);
+        list.add(guideId);
+        return ReponseResult.ok(list,"获取成功");
+    }
 }

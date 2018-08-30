@@ -115,7 +115,7 @@ public class ScenicspotController {
            scenicspot2.setCreateDate(new Date());
            scenicspot2.setCreateBy(1);
            scenicspot2.setPicturePath(uploadResult);
-           scenicspot2.setWhetherDel(3);
+           scenicspot2.setWhetherDel(0);
 
             ReponseResult<Integer> data=null;
             if (!"".equals(uploadResult)) {

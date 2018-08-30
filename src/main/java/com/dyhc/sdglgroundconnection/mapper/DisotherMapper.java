@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Disother;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,4 +12,11 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface DisotherMapper extends CommonMapper<Disother>{
+    /**
+     * 根据调度id获取调度其他表信息
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+    Disother getDisotherByDid(@Param("Did")Integer Did)throws Exception;
 }

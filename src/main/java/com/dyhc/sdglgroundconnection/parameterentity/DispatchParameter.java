@@ -25,8 +25,10 @@ public class DispatchParameter {
     private List<Disshopp> disshoppList;
     //调度餐厅表集合
     private List<Disrestaurant> disrestaurantList;
+    //报价单id
+    private Integer offerId;
 
-//getter/setter方法
+    //getter/setter方法
     public Dispatch getDispatch() {
         return dispatch;
     }
@@ -105,5 +107,12 @@ public class DispatchParameter {
 
     public void setDisrestaurantList(List<Disrestaurant> disrestaurantList) {
         this.disrestaurantList = disrestaurantList;
+    }
+    public Integer getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(Integer offerId) {
+        this.offerId = offerId;
     }
 }

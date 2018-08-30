@@ -134,6 +134,10 @@
             formData.append("multipartFile", fileObj);
             formData.append("savePath", savePath);
             formData.append("restaurant",jsondata)
+			var phone = $("[name=phone]").val();
+            if (phone=='' || phone==null||phone==undefined){
+                return;
+			}
 		    $.ajax({
                 url: "/Restaurant/insertRestaurant",
                 data:formData,
@@ -144,7 +148,8 @@
                 contentType: false,
                 success: function (e) {
 					alert(e.msg);
-                    window.location.reload();
+                    var index=parent.layer.getFrameIndex(window.name);
+                    parent.location.reload(index);
                 }
 			})
 		}
@@ -156,6 +161,8 @@
             if (getval!=undefined){
                 var id= getval.split("=")[1];
 			}
+
+
             $.ajax({
                 url: "/Restaurant/selectRestaurantById",
                 data:{restaurantId:id},

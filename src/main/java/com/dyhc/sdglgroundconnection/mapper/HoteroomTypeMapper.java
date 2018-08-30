@@ -29,4 +29,12 @@ public interface HoteroomTypeMapper extends CommonMapper<HoteroomType>{
      * @return
      */
     List<HoteroomType> listOfferlineAll(Integer dispatchId);
+
+    /**
+     * 根据调度id获取调度线路信息表数据
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+    List<HoteroomType> listHoteroomTypeByDid(@Param("Did")Integer Did)throws Exception;
 }

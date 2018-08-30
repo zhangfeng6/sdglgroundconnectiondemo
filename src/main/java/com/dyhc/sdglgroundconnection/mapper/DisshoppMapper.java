@@ -29,4 +29,12 @@ public interface DisshoppMapper extends CommonMapper<Disshopp>{
      * @return
      */
     List<String> listDisshoppAll(Integer dispatchId);
+
+    /**
+     * 根据调度id获取调度购物地表数据  张枫
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+    List<Disshopp> listDisshoppByDid(@Param("Did")Integer Did)throws Exception;
 }

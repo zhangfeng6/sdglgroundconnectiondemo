@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Disguide;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,4 +19,11 @@ public interface DisguideMapper extends CommonMapper<Disguide>{
      * @return
      */
     Disguide DisguideAll(Integer dispatchId);
+
+    /**
+     * 根据调度id获取调度导游表数据  张枫
+     * @return
+     * @throws Exception
+     */
+    Disguide getDisguideByDid(@Param("Did")Integer Did)throws Exception;
 }

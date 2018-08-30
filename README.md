@@ -4,7 +4,7 @@
 跳转页面：
 web
 EnterAdminPageController:管理员页面
-管理员首页：http://localhost:8888/admin/adminIndex.html
+管理员首页：http://localhost:8888/admins/adminIndex.html
 EnterCountAdjustPageController:计调页面
 计调首页：http://localhost:8888/countAdjust/count-Adjust-Index.html
 EnterGeneralControlPageController：总控页面

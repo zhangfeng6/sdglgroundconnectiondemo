@@ -8,4 +8,12 @@
     <select id="listDisrestaurantAll" resultType="java.lang.String">
 SELECT r.restaurantName FROM DisRestaurant d,restaurant r,dispatch s WHERE d.disRestaurantId=r.restaurantId AND d.offerId=s.dispatchId AND s.dispatchId =#{dispatchId}
     </select>
+
+    <!--根据调度id获取调度餐厅表数据 张枫-->
+    <select id="listDisrestaurantByDid" resultMap="listDisrestaurantByDidMap">
+        SELECT d.`disRestaurantId`,d.`typeId`,d.`costPrice`,d.`dinDate`,d.`weight`,d.`payment`,m.`valueId` FROM `disrestaurant` d, `mealtype` m WHERE d.`typeId`=m.`typeId` AND d.`offerId`=#{Did}
+    </select>
+    <resultMap id="listDisrestaurantByDidMap" type="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
+        <association property="mealType" javaType="com.dyhc.sdglgroundconnection.pojo.MealType"></association>
+    </resultMap>
 </mapper>

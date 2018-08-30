@@ -7,4 +7,9 @@
     <select id="ClusterById" resultType="com.dyhc.sdglgroundconnection.pojo.Cluster">
         SELECT clusterTime,clusterAdderss,clusterNo FROM cluster c,dispatch d WHERE c.dispatchId=d.dispatchId AND d.dispatchId=#{dispatchId}
     </select>
+
+    <!--根据调度id获取接团信息表数据-->
+    <select id="getClusterByDid" resultType="com.dyhc.sdglgroundconnection.pojo.Cluster">
+        SELECT `clusterId`,`clusterTime`,`clusterAdderss`,`clusterNo` FROM `cluster` WHERE `dispatchId`=#{Did}
+    </select>
 </mapper>
