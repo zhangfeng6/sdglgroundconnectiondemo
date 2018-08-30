@@ -96,16 +96,18 @@ public interface GuideService {
     Guide getGuideById(Integer guideId)throws Exception;
 
     /**
+     * 判断是否有重复的导游证件数据
+     * @param certificate
+     * @return
+     */
+    Guide  pdcertificate(@Param("certificate") String certificate);
+
+    /**
      * 获取所有导游名称
      * @return
      * @throws Exception
      */
     List<Guide> listGuideName()throws Exception;
 
-    /**
-     * 判断是否有重复的导游证件数据
-     * @param certificate
-     * @return
-     */
-    Guide  pdcertificate(@Param("certificate") String certificate);
+
 }

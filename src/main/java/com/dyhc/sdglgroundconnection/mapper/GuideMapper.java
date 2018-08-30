@@ -41,6 +41,8 @@ public interface GuideMapper extends CommonMapper<Guide>{
     Guide ShowAllGuide(@Param("guideId")Integer guideId);
 
 
+
+
     /**
      * 获取所有导游名称
      * @return
