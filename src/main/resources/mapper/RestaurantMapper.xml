@@ -15,13 +15,13 @@
     <select id="selectByEx" resultMap="lianbiao">
         select * from restaurant where whetherDel!=1
         <if test="restaurantName!=null and restaurantName!=''">
-            and r.restaurantName like concat("%",#{restaurantName},"%")
+            and restaurantName like concat("%",#{restaurantName},"%")
         </if>
         <if test="restaurantAddress!=null and restaurantAddress!=''">
-            and r.restaurantAddress like concat("%",#{restaurantAddress},"%")
+            and restaurantAddress like concat("%",#{restaurantAddress},"%")
         </if>
         <if test="whetherDel!=null">
-            and r.whetherDel = #{whetherDel}
+            and whetherDel = #{whetherDel}
         </if>
     </select>
 

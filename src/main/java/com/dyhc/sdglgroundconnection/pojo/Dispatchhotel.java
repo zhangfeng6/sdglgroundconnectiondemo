@@ -42,7 +42,8 @@ public class Dispatchhotel {
     private int weight;  //权重
     @Column(name = "sproomNum")
     private Integer sproomNum;
-    private String value3;
+    @Column(name = "hotelTypeId")
+    private Integer hotelTypeId;
 
     @Transient
     private String hotelName;
@@ -226,13 +227,13 @@ public class Dispatchhotel {
     }
 
     @Basic
-    @Column(name = "value3")
-    public String getValue3() {
-        return value3;
+    @Column(name = "hotelTypeId")
+    public Integer getHotelTypeId() {
+        return hotelTypeId;
     }
 
-    public void setValue3(String value3) {
-        this.value3 = value3;
+    public void setHotelTypeId(Integer value3) {
+        this.hotelTypeId = value3;
     }
 
     @Override
@@ -256,12 +257,12 @@ public class Dispatchhotel {
                 Objects.equals(creationDate, that.creationDate) &&
                 Objects.equals(weight, that.weight) &&
                 Objects.equals(sproomNum, that.sproomNum) &&
-                Objects.equals(value3, that.value3);
+                Objects.equals(hotelTypeId, that.hotelTypeId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, weight, sproomNum, value3);
+        return Objects.hash(dispatchHotelId, hotelId, offerId, costPrice, offer, date, payment, roomNum, valueId, whetherDel, creater, modifier, modifiedData, creationDate, weight, sproomNum, hotelTypeId);
     }
 }

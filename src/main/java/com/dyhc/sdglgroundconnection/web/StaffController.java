@@ -255,7 +255,7 @@ public class StaffController  {
             staff.setPassword("123456");
             staff.setCardId("1111111111111");
             staff.setQqnumber("1111111111");
-            staff.setHeadPortraitPath("20180829184117832.jpg");
+            staff.setHeadPortraitPath("20180829083431666.jpg");
             staff.setCurrentAddress("山西省太原市小店区");
             staff.setPhone("11111111111");
             staff.setWhetherDel(0);
@@ -269,7 +269,7 @@ public class StaffController  {
             if (session.getAttribute("staff")!=null){
                 Staff s=(Staff)session.getAttribute("staff");
                 logger.info("mothod:getStaffInfo 获取成功");
-                return ReponseResult.ok(s,"获取成功");
+                return ReponseResult.ok(staff,"获取成功");
             }else {
                 logger.info("mothod:getStaffInfo 该用户还没有登录");
                 return ReponseResult.ok("该用户还没有登录");
@@ -451,6 +451,31 @@ public class StaffController  {
             return new String(str);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    /**
+     * 判断用户名是否存在
+     * @param theUserName
+     * @return
+     */
+    @RequestMapping("/ShowStafftheUserName")
+    public ReponseResult StaffByName(String theUserName){
+        System.out.println("........................................");
+        try{
+            Integer data=0;
+
+            Staff staff=staffService.StaffByName(theUserName);
+            if(staff!=null){
+                data=1;
+            }
+            logger.info(" method:StaffByName  判断车辆类型是否存在成功！");
+            return ReponseResult.ok(data,"判断车辆类型是否存在成功！");
+        }catch (Exception e){
+            logger.error(" method:StaffByName  判断车辆类型是否存在失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
         }
     }
 }

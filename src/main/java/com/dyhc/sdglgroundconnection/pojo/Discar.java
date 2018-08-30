@@ -30,8 +30,8 @@ public class Discar {
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "upDate")
-    private Date upDate; // 修改日期
+    @Column(name = "updateDate")
+    private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
@@ -173,13 +173,13 @@ public class Discar {
     }
 
     @Basic
-    @Column(name = "upDate")
-    public Date getUpDate() {
-        return upDate;
+    @Column(name = "updateDate")
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpDate(Date upDate) {
-        this.upDate = upDate;
+    public void setUpdateDate(Date upDate) {
+        this.updateDate = upDate;
     }
 
     @Basic
@@ -236,7 +236,7 @@ public class Discar {
                 Objects.equals(status, discar.status) &&
                 Objects.equals(createBy, discar.createBy) &&
                 Objects.equals(updateBy, discar.updateBy) &&
-                Objects.equals(upDate, discar.upDate) &&
+                Objects.equals(updateDate, discar.updateDate) &&
                 Objects.equals(createDate, discar.createDate) &&
                 Objects.equals(value1, discar.value1) &&
                 Objects.equals(value2, discar.value2) &&
@@ -246,6 +246,6 @@ public class Discar {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disCarId, typeId, offerId, costPrice, quotePrice, number, status, createBy, updateBy, upDate, createDate, value1, value2, value3);
+        return Objects.hash(disCarId, typeId, offerId, costPrice, quotePrice, number, status, createBy, updateBy, updateDate, createDate, value1, value2, value3);
     }
 }

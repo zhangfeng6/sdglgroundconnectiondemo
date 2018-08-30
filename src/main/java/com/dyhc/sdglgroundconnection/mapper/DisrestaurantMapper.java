@@ -31,4 +31,12 @@ public interface DisrestaurantMapper extends CommonMapper<Disrestaurant>{
      * @return
      */
     List<String> listDisrestaurantAll(Integer dispatchId);
+
+    /**
+     * 根据调度id获取调度餐厅表数据  张枫
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+    List<Disrestaurant> listDisrestaurantByDid(@Param("Did")Integer Did)throws Exception;
 }

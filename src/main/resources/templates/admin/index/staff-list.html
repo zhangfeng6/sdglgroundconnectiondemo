@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html class="iframe-h">
 
@@ -69,28 +70,28 @@
 <script>
 
 
-        $(document).on("click","#ooo",function () {
+    $(document).on("click","#ooo",function () {
+        layer.open({
+            type: 2,
+            title: '人员信息',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '520px'],
+            content: '/admins/staff-add.html'
+        });
+    })
+    function gettiao(staffId){
+        $(document).on(
             layer.open({
                 type: 2,
-                title: '人员信息',
+                title: '账户',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/admins/staff-add.html'
-            });
-        })
-        function gettiao(staffId){
-            $(document).on(
-                layer.open({
-                    type: 2,
-                    title: '账户',
-                    maxmin: true,
-                    shadeClose: true, //点击遮罩关闭层
-                    area : ['800px' , '520px'],
-                    content: '/admins/staff-upd.html?staffId='+staffId
-                })
-            )
-        }
+                content: '/admins/staff-upd.html?staffId='+staffId
+            })
+        )
+    }
 
     var limitcount = 2; // 每页总记录数
     var curnum = 1;  // 当前页码

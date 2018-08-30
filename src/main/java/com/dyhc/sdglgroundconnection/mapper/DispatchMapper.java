@@ -55,4 +55,11 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
     Dispatch dispatch(Integer dispatchId);
 
     Dispatch listDispatch(Integer dispatchId);
+
+    /**
+     * 查看最新增加的调度信息的id
+     * @return
+     * @throws Exception
+     */
+    Dispatch getsavedispatchId()throws Exception;
 }

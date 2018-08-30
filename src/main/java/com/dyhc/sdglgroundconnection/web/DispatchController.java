@@ -1,9 +1,14 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.Cluster;
-import com.dyhc.sdglgroundconnection.pojo.Dispatch;
-import com.dyhc.sdglgroundconnection.pojo.Guide;
-import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
+import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.service.*;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -12,13 +17,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -34,6 +38,21 @@ public class DispatchController {
 
     @Autowired
     private DispatchService dispatchService;
+    //酒店
+    @Autowired
+    private DispatchhotelService dispatchhotelService;
+    //餐厅
+    @Autowired
+    private DisrestaurantService disrestaurantService;
+    //购物
+    @Autowired
+    private DisshoppService disshoppService;
+    //线路
+    @Autowired
+    private HoteroomTypeService hoteroomTypeService;
+    @Autowired
+    private DiscarService discarService;
+
 
     /**
      * 返回所有调度信息
@@ -65,14 +84,6 @@ public class DispatchController {
     }
 
 
-    @RequestMapping("ding")
-    public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
-        HttpSession session = request.getSession();
-        session.setAttribute("dispatchId",dispatchId);
-        ReponseResult<Object> msg=ReponseResult.err("查询成功");
-        return msg;
-    }
-
     @RequestMapping("pai")
     public ReponseResult pai(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -90,6 +101,40 @@ public class DispatchController {
         return msg;
     }
 
+    @RequestMapping("rizhi")
+    public ReponseResult rizhi(HttpServletRequest request, Integer dispatchId,Integer guideId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        session.setAttribute("guideId",guideId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("zuche")
+    public ReponseResult zuche(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        Discar discar = discarService.selectDiscarByOfferId(dispatchId);
+        session.setAttribute("disCarId",discar.getDisCarId());
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("bao")
+    public ReponseResult bao(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
+
+    @RequestMapping("ding")
+    public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
+        ReponseResult<Object> msg=ReponseResult.err("查询成功");
+        return msg;
+    }
 
     /**
      * 订房通知单： 贾晓亮
@@ -119,7 +164,6 @@ public class DispatchController {
      */
     @RequestMapping("/dispatch")
     public  ReponseResult dispatch(Integer dispatchId){
-        dispatchId=1;
         try {
             Dispatch dispatch =dispatchService.dispatch(dispatchId);
             ReponseResult<Dispatch> data =ReponseResult.ok(dispatch,"查询计调成功");
@@ -263,36 +307,6 @@ public class DispatchController {
         }
     }
 
-    /**
-     * 查看车辆联系人
-     * @param dispatchId
-     * @return
-     */
-    @RequestMapping("/findDispatch.html")
-    public ReponseResult findDispatch(Integer dispatchId){
-        try{
-            Dispatch dispatch=dispatchService.listDispatch(dispatchId);
-            logger.info(" method:findStaff  查看车辆联系人成功！");
-            return ReponseResult.ok(dispatch,"查看车辆联系人成功！");
-        }catch (Exception e) {
-            logger.error(" method:findStaff  查看车辆联系人失败，系统出现异常！");
-            e.printStackTrace();
-            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
-            return err;
-        }
-    }
-    //酒店
-    @Autowired
-    private DispatchhotelService dispatchhotelService;
-    //餐厅
-    @Autowired
-    private DisrestaurantService disrestaurantService;
-    //购物
-    @Autowired
-    private DisshoppService disshoppService;
-    //线路
-    @Autowired
-    private HoteroomTypeService hoteroomTypeService;
 
     /**
      * 查看线路
@@ -337,6 +351,64 @@ public class DispatchController {
             logger.error(" method:findCluster  查看接团信息失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 查看车辆联系人
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/findDispatch.html")
+    public ReponseResult findDispatch(Integer dispatchId){
+        try{
+            Dispatch dispatch=dispatchService.listDispatch(dispatchId);
+            logger.info(" method:findStaff  查看车辆联系人成功！");
+            return ReponseResult.ok(dispatch,"查看车辆联系人成功！");
+        }catch (Exception e) {
+            logger.error(" method:findStaff  查看车辆联系人失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 新增调度信息  张枫
+     * @param dispatchParameter
+     * @return
+     */
+    @RequestMapping(value = "/saveDispatch",method = RequestMethod.POST)
+    public ReponseResult saveDispatch(@RequestBody DispatchParameter dispatchParameter){
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.saveDispatch(dispatchParameter),"");
+            logger.info("method:saveDispatch 保存调度信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:saveDispatch 系统出现错误！");
+            ReponseResult<Object> err=ReponseResult.err("系统出现错误!");
+            return err;
+        }
+
+    }
+
+    /**
+     * 根据调度id获取调度的相关信息 张枫
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/getDispatchBydispatchId")
+    public ReponseResult getDispatchBydispatchId(@RequestParam("dispatchId")Integer dispatchId){
+        try {
+            ReponseResult<Map> data=ReponseResult.ok(dispatchService.getDispatchinfoById(dispatchId),"根据id获取调度信息成功！");
+            logger.info("method:getDispatchById 获取调度信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:getDispatchById 系统异常！");
+            ReponseResult err=ReponseResult.err("系统异常！");
             return err;
         }
     }

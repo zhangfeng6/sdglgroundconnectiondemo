@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import org.omg.SendingContext.RunTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -49,13 +50,21 @@ public class EnterVoucherController {
         return "voucher/CarRenting2";
     }
 
+
+
     /**
      * 跳转导游报账明细表
      * @return
      */
     @RequestMapping("/GuidesReimbursement")
     public  String GuidesReimbursement(){
-        return "voucher/GuidesReimbursement";
+        String url = "voucher/GuidesReimbursement";
+        /*try{
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+url);
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+        return url;
     }
 
     /**

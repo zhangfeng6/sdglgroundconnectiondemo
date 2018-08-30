@@ -33,7 +33,8 @@ public class Offer {
     @Column(name = "aVariance")
     private Double aVariance; // 单间房差
     private String shopping; // 购物
-    private String not; // 不含
+    @Column(name = "notcontain")
+    private String notcontain; // 不含
     private String remarks; // 备注
     private String supervision; // 团体监督
     private String reception; // 接待标准
@@ -164,13 +165,13 @@ public class Offer {
     }
 
     @Basic
-    @Column(name = "not")
-    public String getNot() {
-        return not;
+    @Column(name = "notcontain")
+    public String getNotcontain() {
+        return notcontain;
     }
 
-    public void setNot(String not) {
-        this.not = not;
+    public void setNotcontain(String not) {
+        this.notcontain = not;
     }
 
     @Basic
@@ -298,7 +299,7 @@ public class Offer {
                 Objects.equals(offer, offer1.offer) &&
                 Objects.equals(aVariance, offer1.aVariance) &&
                 Objects.equals(shopping, offer1.shopping) &&
-                Objects.equals(not, offer1.not) &&
+                Objects.equals(notcontain, offer1.notcontain) &&
                 Objects.equals(remarks, offer1.remarks) &&
                 Objects.equals(supervision, offer1.supervision) &&
                 Objects.equals(reception, offer1.reception) &&
@@ -315,6 +316,6 @@ public class Offer {
     @Override
     public int hashCode() {
 
-        return Objects.hash(offerId, travelId, travelStartTime, travelEndTime, number, tourist, trip, offer, aVariance, shopping, not, remarks, supervision, reception, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(offerId, travelId, travelStartTime, travelEndTime, number, tourist, trip, offer, aVariance, shopping, notcontain, remarks, supervision, reception, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
     }
 }

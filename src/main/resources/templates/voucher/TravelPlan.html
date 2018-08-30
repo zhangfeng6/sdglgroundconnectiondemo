@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>无标题文档</title>
+    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
     <style>
         #two{
             text-align: center;width:100%
@@ -137,6 +138,7 @@
 
         </tbody>
     </table>
+    <button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印地接行程计划单</button>
 </div>
 <script src="/js/jquery-1.8.2.min.js"></script>
 
@@ -247,13 +249,13 @@
                 $.each(data.data[0],function (i,e) {
                     num++
                     content+="<tr>" +
-                        "<td>"+num+"</td>"+
-                        "<td>"+data.data[3][i].riqi+"</td>"+
-                        "<td>"+data.data[3][i].templateContent+"</td>"+
-                        "<td>"+data.data[3][i].templateName+"</td>"+
-                        "<td>"+data.data[2][i]+"</td>"+
-                        "<td>"+data.data[1][i]+"</td>"+
-                        "<td>"+e+"</td>"+
+                            "<td>"+num+"</td>"+
+                            "<td>"+data.data[3][i].riqi+"</td>"+
+                            "<td>"+data.data[3][i].templateContent+"</td>"+
+                            "<td>"+data.data[3][i].templateName+"</td>"+
+                            "<td>"+data.data[2][i]+"</td>"+
+                            "<td>"+data.data[1][i]+"</td>"+
+                            "<td>"+e+"</td>"+
                         "</tr>";
                 })
                 $("#xx").html(content);

@@ -155,4 +155,15 @@ public class StaffServiceImpl implements StaffService {
 
     }
 
+    /**
+     * 判断用户名是否存在
+     * @param theUserName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Staff StaffByName(String theUserName) throws Exception {
+        return staffMapper.StaffByName(theUserName);
+    }
+
 }

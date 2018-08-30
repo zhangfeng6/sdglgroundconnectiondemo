@@ -24,4 +24,14 @@ public interface DiscarMapper extends CommonMapper<Discar>{
      * @return
      */
     Discar listDiscar(Integer dispatchId);
+
+    Discar selectDiscarByOfferId(@Param("offerId") Integer offerId);
+
+    /**
+     * 根据调度id获取调度用车数据
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+    Discar getDiscarByDid(@Param("Did")Integer Did)throws Exception;
 }

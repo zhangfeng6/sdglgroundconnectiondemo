@@ -65,9 +65,6 @@ public class LogController  {
     @RequestMapping("/log")
     @LogNotes(operationType="日志",content="显示")
     public  ReponseResult logShowAll(Integer guideId,Integer dispatchId,String creationDate){
-        guideId=1;
-        dispatchId=1;
-        creationDate="2018-04-14";
         try {
              Log log=logService.ShowAllLog(guideId,dispatchId,creationDate);
              ReponseResult<Log> data=ReponseResult.ok(log,"日志显示成功");

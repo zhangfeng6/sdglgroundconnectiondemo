@@ -25,8 +25,8 @@ public class Disguide {
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "upDate")
-    private Date upDate; // 修改日期
+    @Column(name = "updateDate")
+    private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
@@ -34,12 +34,19 @@ public class Disguide {
     private String value2;
     private String value;
 
+    @Transient
     private String guideName;
+    @Transient
     private String certificate;
+    @Transient
     private String telephone;
+    @Transient
     private Integer num;
+    @Transient
     private String tourist;
+    @Transient
     private String travelStartTime;
+    @Transient
     private String travelEndTime;
 
     public String getGuideName() {
@@ -159,13 +166,13 @@ public class Disguide {
     }
 
     @Basic
-    @Column(name = "upDate")
-    public Date getUpDate() {
-        return upDate;
+    @Column(name = "updateDate")
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpDate(Date upDate) {
-        this.upDate = upDate;
+    public void setUpdateDate(Date upDate) {
+        this.updateDate = upDate;
     }
 
     @Basic
@@ -219,7 +226,7 @@ public class Disguide {
                 Objects.equals(status, disguide.status) &&
                 Objects.equals(createBy, disguide.createBy) &&
                 Objects.equals(updateBy, disguide.updateBy) &&
-                Objects.equals(upDate, disguide.upDate) &&
+                Objects.equals(updateDate, disguide.updateDate) &&
                 Objects.equals(createDate, disguide.createDate) &&
                 Objects.equals(value1, disguide.value1) &&
                 Objects.equals(value2, disguide.value2) &&
@@ -229,6 +236,6 @@ public class Disguide {
     @Override
     public int hashCode() {
 
-        return Objects.hash(disGuideId, guideId, offerId, status, createBy, updateBy, upDate, createDate, value1, value2, value);
+        return Objects.hash(disGuideId, guideId, offerId, status, createBy, updateBy, updateDate, createDate, value1, value2, value);
     }
 }

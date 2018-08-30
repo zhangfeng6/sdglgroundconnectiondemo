@@ -74,7 +74,6 @@ public class ReportdetailController {
      */
     @RequestMapping("/reportdetail")
     public ReponseResult reportdetail(Integer dispatchId){
-        dispatchId=1;
         try{
             System.out.println("进来了");
             ReponseResult data=ReponseResult.ok(reportdetailService.reportdetail(dispatchId),"获取获取导游报账明细信息成功");

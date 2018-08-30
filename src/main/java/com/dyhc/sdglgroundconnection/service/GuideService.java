@@ -4,6 +4,7 @@ import com.dyhc.sdglgroundconnection.pojo.Guide;
 import com.dyhc.sdglgroundconnection.pojo.Guideschedule;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -100,4 +101,11 @@ public interface GuideService {
      * @throws Exception
      */
     List<Guide> listGuideName()throws Exception;
+
+    /**
+     * 判断是否有重复的导游证件数据
+     * @param certificate
+     * @return
+     */
+    Guide  pdcertificate(@Param("certificate") String certificate);
 }

@@ -36,4 +36,12 @@ public interface DispatchhotelMapper extends CommonMapper<Dispatchhotel>{
      * @return
      */
     List<String> listDispatchhotelAll(Integer dispatchId);
+
+    /**
+     * 根据调度id获取调度酒店表信息
+     * @param Did
+     * @return
+     * @throws Exception
+     */
+    List<Dispatchhotel> listDispatchhotelByDid(@Param("Did")Integer Did)throws Exception;
 }

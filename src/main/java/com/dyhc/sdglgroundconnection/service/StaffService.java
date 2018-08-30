@@ -112,4 +112,12 @@ public interface StaffService {
      */
     Integer updatePassword(Integer staffId,String password)throws Exception;
 
+
+    /**
+     * 判断用户名是否存在
+     * @param theUserName
+     * @return
+     * @throws Exception
+     */
+    Staff StaffByName(String theUserName) throws Exception;
 }

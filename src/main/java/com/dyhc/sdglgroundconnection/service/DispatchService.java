@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.github.pagehelper.PageInfo;
@@ -97,12 +98,27 @@ public interface DispatchService {
      * @param dispatchId
      * @return
      */
-    Dispatch listDispatch(Integer dispatchId);
+    Dispatch listDispatch(Integer dispatchId)throws Exception;
 
     /**
      * j接团信息
      * @param dispatchId
      * @return
      */
-    Cluster ClusterById(Integer dispatchId);
+    Cluster ClusterById(Integer dispatchId)throws Exception;
+
+    /**
+     * 增加调度信息并修改报价信息的状态
+     * @param dispatchParameter
+     * @return
+     */
+    int saveDispatch(DispatchParameter dispatchParameter)throws Exception;
+
+    /**
+     * 根据调度id获取调度信息的相关记录        张枫
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    Map<String,Object> getDispatchinfoById(Integer dispatchId)throws Exception;
 }

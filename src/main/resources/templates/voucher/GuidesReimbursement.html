@@ -9,6 +9,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
 	</head>
 	<body>
 		<div id="tupian" style="width: 635px;margin-left: 365px;">
@@ -241,18 +242,37 @@
 					<td colspan="4"></td>
 				</tr>
 		</table>
+	<p><button style=" margin-left: 500px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印地接导游报账明细</button></p>
 	</body>
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
    $(function () {
+       kaishi();
        dispatchShow();
        ReportDetail();//报账总表
    })
 
+var id;
+
+   function kaishi(){
+       $.ajax({
+           url:"/Travel/bao",
+           data:{},
+           dataType:"json",
+           async: false,
+           type:"get",
+           success:function (data) {
+               id=data.data;
+           }
+       })
+   }
+
+
+
     function  ReportDetail() {
         $.ajax({
             url:"/reportdetail/reportdetail",
-            data:{},
+            data:{dispatchId:id},
             dataType:"json",
             type:"GET",
             success:function (e) {
@@ -385,7 +405,7 @@
 function dispatchShow() {
     $.ajax({
         url:"/dispatch/dispatch",
-        data:{},
+        data:{dispatchId:id},
         dataType:"json",
         type:"GET",
         success:function (e) {
