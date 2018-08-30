@@ -38,7 +38,8 @@
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">图片地址：</label>
-									<input type="file" name="file" id="file" accept="image/*">
+									<input type="file" name="file" id="file" accept="image/*" onchange="bian()">
+									<img id="img1" src="" height="100px" width="100px"/>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系电话：</label>
@@ -52,7 +53,7 @@
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="insertRestaurant()" type="button">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="panduan()" type="button">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -111,7 +112,74 @@
 
 		$(function(){
             selectById();
+
 		})
+
+
+		function panduan(){
+		    var a = $("#file").val();
+		    if (a=='' || a==null||a==undefined){
+                insertRestaurant1();
+			}else{
+                insertRestaurant();
+			}
+		}
+
+
+
+
+        function insertRestaurant1(){
+            var DataDeal = {
+                //将从form中通过$('#refer').serialize()获取的值转成json
+                formToJson: function (data) {
+                    data=data.replace(/&/g,"\",\"");
+                    data=data.replace(/=/g,"\":\"");
+                    data="{\""+data+"\"}";
+                    return data;
+                }
+            };
+            var restaurant = $("form").serialize();
+            restaurant= decodeURIComponent(restaurant,true);//防止中文乱码
+            var jsondata=DataDeal.formToJson(restaurant)
+            var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/"; // 图片保存路径
+            var fileObj = document.getElementById("file").files[0]; // 获取文件对象
+            // formData对象，用来序列化二进制数据
+            var formData = new FormData();
+            formData.append("restaurant",jsondata)
+            var phone = $("[name=phone]").val();
+            if (phone=='' || phone==null||phone==undefined){
+                return;
+            }
+            $.ajax({
+                url: "/Restaurant/insertRestaurant1",
+                data:formData,
+                dataType: "json",
+                type: "post",
+                cache: false, // 上传文件不需要缓存
+                processData: false, // 对参数进行序列化处理
+                contentType: false,
+                success: function (e) {
+                    alert(e.msg);
+                    if(e.msg=="图片不能为空！"){
+						return;
+					}else{
+                        var index=parent.layer.getFrameIndex(window.name);
+                        parent.location.reload(index);
+					}
+                }
+            })
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 		function insertRestaurant(){
@@ -127,7 +195,7 @@
             var restaurant = $("form").serialize();
             restaurant= decodeURIComponent(restaurant,true);//防止中文乱码
             var jsondata=DataDeal.formToJson(restaurant)
-            var savePath = "D://"; // 图片保存路径
+            var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/"; // 图片保存路径
             var fileObj = document.getElementById("file").files[0]; // 获取文件对象
             // formData对象，用来序列化二进制数据
             var formData = new FormData();
@@ -173,9 +241,20 @@
                     $("[name='restaurantName']").val(e.data.restaurantName);
                     $("[name='restaurantAddress']").val(e.data.restaurantAddress);
                     $("[name='phone']").val(e.data.phone);
-				}
+                    $("#img1").attr('src',"/api/image/"+e.data.picturePath);
+                }
 			})
         }
+
+        function bian(){
+            var oFReader = new FileReader();
+            var file = document.getElementById('file').files[0];
+            oFReader.readAsDataURL(file);
+            oFReader.onloadend = function(oFRevent){
+                var src = oFRevent.target.result;
+                $('#img1').attr('src',src);
+            }
+		}
 
 	</script>
 	</body>

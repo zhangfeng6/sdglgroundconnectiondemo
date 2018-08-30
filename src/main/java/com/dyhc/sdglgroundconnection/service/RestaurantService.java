@@ -47,6 +47,14 @@ public interface RestaurantService {
      */
     int updateRestaurantById(Restaurant restaurant);
 
+    /**
+     * 赵伟伟
+     * 修改饭店
+     * @param restaurant
+     * @return
+     */
+    int updateRestaurantById1(Restaurant restaurant);
+
 
     /**
      * 根据id查询餐馆数量
