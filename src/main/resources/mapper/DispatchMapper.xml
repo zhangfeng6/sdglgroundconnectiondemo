@@ -49,6 +49,7 @@
         SELECT dispatchId FROM dispatch ORDER BY dispatchId DESC LIMIT 0,1
     </select>
 
+
       <select id="dispatch" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         select  * from dispatch where dispatchId=#{dispatchId}
     </select>
