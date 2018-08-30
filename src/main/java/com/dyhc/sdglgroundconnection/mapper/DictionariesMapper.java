@@ -149,4 +149,45 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      */
     Dictionaries getgetDictionariesHotelSelect(Integer dictionariesId);
 
+    /**
+     * 判断餐厅类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    Dictionaries getDictionariesByNameTypecan(String valueContent1);
+
+    /**
+     * 判断车辆类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    Dictionaries getDictionariesByNameTypecar(String valueContent1);
+
+
+    /**
+     * 判断酒店类型是否存在
+     * @param valueContent1
+     * @return
+     */
+    Dictionaries getDictionariesByNameType(String valueContent1);
+
+
+    /**
+     * 添加餐厅编号
+     * @param
+     * @return
+     */
+    Dictionaries DictionariesCanMax();
+    /**
+     * 添加车辆编号
+     * @param
+     * @return
+     */
+    Dictionaries DictionariesCarMax();
+    /**
+     * 添加酒店编号
+     * @param
+     * @return
+     */
+    Dictionaries DictionariesHotelMax();
 }

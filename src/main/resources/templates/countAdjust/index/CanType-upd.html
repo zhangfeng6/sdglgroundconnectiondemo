@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,7 +22,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="getedit()">立即提交</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="validate()">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -53,25 +54,6 @@
         });
     });
 
-
-     function getedit() {
-         var haha=$("#one").val()
-         var lala=$("form").serialize()
-         if(haha.value =="" || haha.length==0){
-             alert("餐厅类型名称不能为空")
-         }else{
-             $.ajax({
-                 url:"/Dictionaries/DictionariesCanthree",
-                 data:lala,
-                 type:"get",
-                 dateType:"json",
-                 success:function (data) {
-                     alert(data.msg);
-                      parent.location.reload();
-                 }
-             })
-         }
-     }
     function getbang(dictionariesId) {
         var haha=$("#dictionariesId").val()
         $.ajax({
@@ -83,6 +65,38 @@
                 $("#one").val(e.data.valueContent1);
                 $("#two").val(e.data.createBy);
                 $("#three").val(e.data.createDate);
+            }
+        })
+    }
+    function validate() {
+        var lala=$("#one").val()
+        $.ajax({
+            url:"/Dictionaries/DictionariesByNameTypecan",
+            data:{valueContent1:lala},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                if(data.data==1){
+                    alert("类型已存在")
+                }else{
+                    alert("可以使用该类型")
+                    var haha=$("#one").val()
+                    var lala=$("form").serialize()
+                    if(haha.value =="" || haha.length==0){
+                        alert("餐厅类型名称不能为空")
+                    }else{
+                        $.ajax({
+                            url:"/Dictionaries/DictionariesCanthree",
+                            data:lala,
+                            type:"get",
+                            dateType:"json",
+                            success:function (data) {
+                                alert(data.msg);
+                                parent.location.reload();
+                            }
+                        })
+                    }
+                }
             }
         })
     }

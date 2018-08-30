@@ -34,4 +34,7 @@
         SELECT theUserName,phone FROM staff s,dispatch d WHERE s.staffId=d.creater AND d.dispatchId=#{dispatchId}
     </select>
 
+    <select id="StaffByName" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT * FROM staff WHERE theUserName=#{theUserName}
+    </select>
 </mapper>
