@@ -56,4 +56,6 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @return
      */
     List<Scenicspot> ShowScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
+
+
 }

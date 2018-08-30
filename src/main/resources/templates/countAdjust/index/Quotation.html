@@ -113,7 +113,7 @@
 						"<td>"+result.travelEndTime+"</td>" +
 						"<td>"+result.offer+"</td>" +
 						"<td>"+state+"</td>" +
-						"<td><button  type='button'value='\" + result.templateId + \"' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button></td></tr>";
+						"<td><button  type='button'value='" + result.dispatchId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button></td></tr>";
                     xu++;
                 })
                 $('tbody').html(str);
@@ -237,11 +237,11 @@
             var id=$(this).val();
             layer.open({
                 type: 2,
-                title: '新增线路模板',
+                title: '查看调度详情',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['1200px' , '800px'],
-                content: 'Quotation-detail.html'
+                content: 'Quotation-detail.html?did='+id
             });
         });
         //列表删除

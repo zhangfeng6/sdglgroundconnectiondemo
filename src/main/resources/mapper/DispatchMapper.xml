@@ -54,4 +54,7 @@
         select  * from dispatch where dispatchId=#{dispatchId}
     </select>
 
+    <delete id="removeDisattrByDid">
+        DELETE FROM `disattr` WHERE `offerId`=#{Did}
+    </delete>
 </mapper>
