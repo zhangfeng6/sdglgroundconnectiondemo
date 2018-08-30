@@ -37,7 +37,7 @@ public class VehicleTypeController  {
     @LogNotes(operationType="车辆类型",content="添加")
     public ReponseResult insertVehicletype(VehicleType vehicleType){
         try {
-            vehicleType.setWhetherDel(3);
+            vehicleType.setWhetherDel(0);
             vehicleType.setCreateBy(1);
             vehicleType.setCreateDate(new Date());
             Integer result=vehicleTypeService.insertVehicleType(vehicleType);

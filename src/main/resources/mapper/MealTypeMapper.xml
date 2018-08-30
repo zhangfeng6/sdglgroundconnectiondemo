@@ -27,7 +27,7 @@
     </select>
 
     <select id="selectMealType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
-        SELECT * FROM dictionaries WHERE whetherDel!=1 and typeCode="DIET"
+        SELECT * FROM dictionaries WHERE whetherDel!=0 and typeCode="DIET"
     </select>
 
     <select id="listinfoByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
