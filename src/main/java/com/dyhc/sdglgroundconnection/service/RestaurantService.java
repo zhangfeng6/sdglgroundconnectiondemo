@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.MealType;
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -45,4 +46,16 @@ public interface RestaurantService {
      * @return
      */
     int updateRestaurantById(Restaurant restaurant);
+
+
+    /**
+     * 根据id查询餐馆数量
+     * @param valueId
+     * @param restaurantId
+     * @return
+     */
+    int selectTypeById(Integer valueId,Integer restaurantId);
+
+
+    MealType selectMealTypeByTypeId(Integer typeId);
 }

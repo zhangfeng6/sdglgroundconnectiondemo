@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
+import com.dyhc.sdglgroundconnection.pojo.MealType;
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -48,4 +49,16 @@ public interface RestaurantMapper extends CommonMapper<Restaurant>{
      * @throws Exception
      */
     List<Restaurant> listrestaurantByvalueId(@Param("valueId")Integer valueId)throws Exception;
+
+
+    /**
+     * 根据id查询餐馆数量
+     * @param valueId
+     * @param restaurantId
+     * @return
+     */
+    int selectTypeById(@Param("valueId") Integer valueId,@Param("restaurantId") Integer restaurantId);
+
+
+    MealType selectMealTypeByTypeId(@Param("typeId") Integer typeId);
 }

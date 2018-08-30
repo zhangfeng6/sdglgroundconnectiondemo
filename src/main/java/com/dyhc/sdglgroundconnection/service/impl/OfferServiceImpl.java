@@ -37,4 +37,9 @@ public class OfferServiceImpl implements OfferService {
     public Offer selectOfferByOfferId(int offerId) {
         return offerMapper.selectOfferByOfferId(offerId);
     }
+
+    @Override
+    public int queren(int offerId) {
+        return offerMapper.queren(offerId);
+    }
 }
