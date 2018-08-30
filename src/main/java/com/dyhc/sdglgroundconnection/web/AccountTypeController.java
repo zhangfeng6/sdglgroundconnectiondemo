@@ -32,14 +32,14 @@ public class AccountTypeController {
      * 账户模糊分页
      * @param pageNo
      * @param pageSize
-     * @param accountNum
+     * @param bank
      * @return
      */
     @LogNotes(operationType="账户分类",content="模糊分页查询")
     @RequestMapping("/showAllAccountType")
-    public ReponseResult showAccountType(@RequestParam("pageNo")Integer pageNo,@RequestParam("pageSize")Integer pageSize,@RequestParam("accountNum")String accountNum){
+    public ReponseResult showAccountType(@RequestParam("pageNo")Integer pageNo,@RequestParam("pageSize")Integer pageSize,@RequestParam("bank")String bank){
         try {
-            PageInfo<AccountType> pageInfo=accountTypeService.listAccountType(pageNo,pageSize,accountNum);
+            PageInfo<AccountType> pageInfo=accountTypeService.listAccountType(pageNo,pageSize,bank);
             ReponseResult<List> data =ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"账户类型分页成功!");
             logger.info("method:showAccountType 账户类型分页成功");
             System.out.println(data);

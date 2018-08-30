@@ -33,7 +33,7 @@ public interface AccountTypeMapper extends CommonMapper<AccountType>{
     /*
       账户类型模糊查询分页接口
      */
-    List<AccountType> listAccountType(@Param(value = "pageNo")Integer pageNo, @Param(value = "PageSize")Integer PageSize, @Param(value = "accountNum")String accountNum) throws Exception;
+    List<AccountType> listAccountType(@Param(value = "pageNo")Integer pageNo, @Param(value = "PageSize")Integer PageSize, @Param(value = "bank")String bank) throws Exception;
 
     /**
      * 修改账户类别信息

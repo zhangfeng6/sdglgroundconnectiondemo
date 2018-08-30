@@ -36,7 +36,6 @@
                 <th style="width: 45px;">导游证件号</th>
                 <th style="width: 45px;">导游姓名</th>
                 <th style="width: 45px;">用户名</th>
-                <th style="width: 45px;">密码</th>
                 <th style="width: 45px;">联系电话</th>
                 <th style="width: 45px;">年龄</th>
                 <th style="width: 45px;">性别</th>
@@ -128,7 +127,7 @@
                         xing="男";
                     }
                     str += "<tr><td>" + xu + "</td><td>" + result.certificate + "</td>" +
-                        "<td>" + result.guideName + "</td><td>" + result.username + "</td><td>" + result.password + "</td><td>" + result.telephone + "</td><td>" + result.age + "</td><td>" + xing + "</td><td>\n" +
+                        "<td>" + result.guideName + "</td><td>" + result.username + "</td><td>" + result.telephone + "</td><td>" + result.age + "</td><td>" + xing + "</td><td>\n" +
                         "<div class=\"layui-inline\">\n" +
                         "<button class=\"layui-btn layui-btn-mini layui-btn-normal  edit-btn\" data-id=\"1\"  onclick='accountTypeUpdate("+result.guideId+")' id='save2' style='width: 50px;height: 40px;'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
                         "<button class=\"layui-btn layui-btn-mini layui-btn-danger del-btn\" data-id=\"1\" onclick='removeAccountType("+result.guideId+")' style='width: 50px;height: 40px;'><i class=\"layui-icon\">&#xe640;</i></button>\n" +

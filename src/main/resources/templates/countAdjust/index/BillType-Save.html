@@ -37,7 +37,6 @@
 
    function  panduan() {
        var typeName =$("input[name='typeName']").val();
-       alert(typeName);
        $.ajax({
            url: "/billType/equalBillType",
            data: {typeName:typeName},
@@ -45,10 +44,7 @@
            type: "get",
            async : false,
            success: function (data) {
-               alert(typeName);
-               alert(data);
               if (typeName==data.data.typeName){
-                  alert(data.data.typeName);
                   alert("名称相同，请重新输入！");
               }else{
                   save();

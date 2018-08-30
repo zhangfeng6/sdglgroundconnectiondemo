@@ -11,8 +11,8 @@
     <select id="listAccountType"  resultType="com.dyhc.sdglgroundconnection.pojo.AccountType">
         SELECT a.accountTypeId,a.bank,a.accountNum,a.accountName,a.`status`,(SELECT s.theUserName FROM staff as s WHERE s.`staffId`=a.createBy )
         as  founder, (SELECT s.staffname FROM staff as s WHERE s.`staffId`=a.updateBy ) as  modifier,a.createDate FROM accounttype as a where 1=1
-      <if test="accountNum!=null and accountNum!=''">
-        and accountNum like concat('%',#{accountNum},'%')
+      <if test="bank!=null and bank!=''">
+        and bank like concat('%',#{bank},'%')
       </if>
     </select>
 

@@ -29,9 +29,9 @@ public class AccountTypeServiceImpl implements AccountTypeService {
      * @return
      */
     @Override
-    public PageInfo<AccountType> listAccountType(Integer pageNo, Integer PageSize,String accountNum) throws Exception {
+    public PageInfo<AccountType> listAccountType(Integer pageNo, Integer PageSize,String bank) throws Exception {
         PageHelper.startPage(pageNo,PageSize,true);
-        PageInfo<AccountType>pageInfo=new PageInfo<>(accountTypeMapper.listAccountType(pageNo,PageSize,accountNum));
+        PageInfo<AccountType>pageInfo=new PageInfo<>(accountTypeMapper.listAccountType(pageNo,PageSize,bank));
         return pageInfo;
     }
     /**
