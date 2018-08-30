@@ -66,6 +66,31 @@ public class RestaurantController {
     }
 
 
+
+    /**
+     * 赵伟伟
+     * @return
+     */
+    @RequestMapping("/selectTypeById")
+    public ReponseResult selectTypeById(Integer valueId, Integer restaurantId,Integer typeId) {
+        int count =0;
+        try {
+            if (restaurantId==0){
+                MealType mealType = restaurantService.selectMealTypeByTypeId(typeId);
+                restaurantId = mealType.getRestaurantId();
+            }
+            count = restaurantService.selectTypeById(valueId,restaurantId);
+            ReponseResult<Object> data = ReponseResult.ok(count, "查询成功！");
+            logger.info(" method:showHotel  查询成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  查询失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
     /**
      * 赵伟伟
      * @param restaurantId

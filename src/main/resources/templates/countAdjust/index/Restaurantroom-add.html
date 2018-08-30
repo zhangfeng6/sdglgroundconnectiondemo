@@ -42,7 +42,7 @@
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="insertMealType()" type="button">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="panduan()" type="button">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -100,6 +100,8 @@
 			});
 
 			var id=0;
+			var restaurantid=0;
+			var value1=0;
 			$(function(){
                 var thisURL = document.URL;
                 var  getval =thisURL.split('?')[1];
@@ -107,6 +109,9 @@
                 id= getval.split("=")[1];
                 if (aa=="codeType"){
 					$("#typeId").val(id);
+				}
+				if (aa=="restaurantId"){
+                    restaurantid = id;
 				}
                 selectDic();
                 selectById();
@@ -123,6 +128,7 @@
                         $("[name='costprice']").val(e.data.costprice);
                         $("[name='offer']").val(e.data.offer);
                         $("[name='valueId']").val(e.data.valueId);
+                        value1 = e.data.valueId;
                     }
 				})
 			}
@@ -144,6 +150,30 @@
                     }
 				})
             }
+
+            function panduan(){
+                var valueId = $("select option:selected").val();
+				$.ajax({
+                    url: "/Restaurant/selectTypeById",
+                    data: {valueId:valueId,restaurantId:restaurantid,typeId:id},
+                    dataType: "json",
+                    type: "post",
+                    success: function (data) {
+                        if (value1==valueId){
+                            insertMealType();
+						}else{
+                            if (data.data>0){
+                                alert("该餐厅已有此类型");
+                                return;
+                            }else{
+                                insertMealType();
+                            }
+						}
+					}
+				})
+			}
+
+
 
             function insertMealType(){
 			    var costprice = $("[name='costprice']").val();

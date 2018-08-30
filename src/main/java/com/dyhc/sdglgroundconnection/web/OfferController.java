@@ -315,7 +315,7 @@ public class OfferController {
             Timestamp fTimestamp1=Timestamp.valueOf(sdate1);
             offer.setTravelEndTime(fTimestamp1);
             offer.setNumber(Integer.parseInt(number));
-            offer.setTrip(tripList[1]);
+            offer.setTrip(tripList[0]);
             offer.setRemarks(remarks);
             offer.setReception(jiedai);
             offerService.insertOffer(offer);
@@ -331,8 +331,14 @@ public class OfferController {
 
                 //线路报价
                 offerline.setOfferId(offer.getOfferId());
-                Template template = templateService.selecctNameById(Integer.parseInt(xianluList[i]));
-                String mu = template.getTemplateName();
+                String mu="";
+                if(xianluList[i] instanceof String){
+                    mu = xianluList[i];
+                }else{
+                    Template template = templateService.selecctNameById(Integer.parseInt(xianluList[i]));
+                    mu = template.getTemplateName();
+                }
+
                 offerline.setLineArriveName(mu);
                 offerline.setTravelContent(tripList[i]);
                 java.util.Date date11 = format1.parse(xdateList[i]);
@@ -464,6 +470,26 @@ public class OfferController {
             return data;
         } catch (Exception e) {
             logger.error(" method:selectOffer  获取确认书数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 赵伟伟
+     * @param
+     * @return
+     */
+    @RequestMapping("/que")
+    public ReponseResult que(Integer offerId) {
+        try {
+            int a = offerService.queren(offerId);
+            ReponseResult<Object> data = ReponseResult.ok("确认成团成功！");
+            logger.info(" method:selectOffer  确认成团成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOffer  确认成团失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

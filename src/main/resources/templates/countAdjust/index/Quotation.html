@@ -28,7 +28,7 @@
 			</select>
 		</div>
 		<input type="button" class="layui-btn layui-btn-normal" lay-submit="search" value="搜索" onclick="loadData(1)"><br/>
-			<button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='ding("+result.dispatchId+")'><i class='layui-icon' type='button'>订房通知单</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='pai("+result.dispatchId+")'><i class='layui-icon' type='button'>导游接团任务工作单</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='jihua("+result.dispatchId+")'><i class='layui-icon' type='button'>地接行程计划单</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='rizhi()'><i class='layui-icon' type='button'>导游日志</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='zuche()'><i class='layui-icon' type='button'>租车合同单</i></button>
+			<button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='ding("+result.dispatchId+")'><i class='layui-icon' type='button'>订房通知单</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='pai("+result.dispatchId+")'><i class='layui-icon' type='button'>导游接团任务工作单</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='jihua("+result.dispatchId+")'><i class='layui-icon' type='button'>地接行程计划单</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='rizhi()'><i class='layui-icon' type='button'>导游日志</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='zuche()'><i class='layui-icon' type='button'>租车合同单</i></button><button class='layui-btn layui-btn-small layui-btn-red del-btn' type='button' onclick='Delegation()'><i class='layui-icon'>派团单</i></button>
 	</div>
 	<div id="table-list">
 		<table class="layui-table" lay-skin="line">
@@ -105,7 +105,7 @@
 					}else if(result.state==3){
                         state="已结束";
 					}
-                    str+="<tr onclick='xuan("+result.guideId+","+result.dispatchId+",this)'><td>"+xu+"</td>" +
+                    str+="<tr onclick='xuan("+result.guideId+","+result.dispatchId+","+result.groupNumber+",this)'><td>"+xu+"</td>" +
 						"<td>"+result.groundConnectionNumber+"</td>" +
 						"<td>"+result.num+"</td>" +
 						"<td>"+result.guideName+"</td>" +
@@ -131,9 +131,11 @@
 
     var dispatchId;
     var guideId;
-    function xuan(guideid,id,qq){
+    var groupNumber;
+    function xuan(guideid,id,travelId,qq){
 		dispatchId=id;
 		guideId=guideid;
+        groupNumber = travelId;
         $(qq).parents().children().css("background","");
 		$(qq).css("background","#F2F2F2");
 	}
@@ -212,6 +214,18 @@
             success:function (result) {
                 location.href="/countAdjust/findDisguide.html";
             },
+        })
+    }
+
+    function Delegation(){
+        $.ajax({
+            url:"/Travel/Delegation",
+            data:{travelId:groupNumber},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                location.href="/admins/Delegation";
+            }
         })
     }
 

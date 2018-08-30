@@ -184,21 +184,16 @@
                         url: "http://localhost:8888/Vehicletype/chaTypeByValueId",
                         data: {"valueId":lala,"carRentalId":carId},
                         dataType: "json",
+						async:false,
                         success:function (result1) {
                             if(result1.data.length!=0){
                                 alert("该车辆类型已存在，无法编辑");
-
                                 return;
                             }
                         }
                     })
                 }
 			}
-
-
-
-
-
 			//Demo
 			layui.use(['form'], function() {
 				var form = layui.form();
@@ -210,7 +205,7 @@
 				});
                 form.on('select(valueId)', function(data) {
                     cha(data.value);
-                    $("select[name='valueId']").value(0);
+                    //$("select[name='valueId']").value(0);
                 });
 			});
 		</script>

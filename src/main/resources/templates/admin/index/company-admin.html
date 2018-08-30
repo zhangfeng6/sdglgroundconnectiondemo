@@ -116,7 +116,7 @@
         var str = "";
         $.ajax({
             url: "/AccountType/showAllAccountType",
-            data: {pageNo:curnum,pageSize:limitcount,accountNum:sousuo},
+            data: {pageNo:curnum,pageSize:limitcount,bank:sousuo},
             dataType: "json",
             type: "get",
             success: function (e) {

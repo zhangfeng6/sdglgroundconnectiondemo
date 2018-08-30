@@ -25,13 +25,21 @@
 
 
     <select id="getScenicspotByParentId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        select * from scenicspot  where parentId=#{parentId} and whetherDel=0
+        select * from scenicspot  where scenicSpotId=#{parentId} and whetherDel=0
     </select>
     
     <update id="updateScenicspot">
-        UPDATE scenicspot
-        SET scenicSpotName=#{scenicSpotName},parentId=#{parentId},scenicSpotAddress=#{scenicSpotAddress},costprice=#{costprice},offer=#{offer},typeId=#{typeId},picturePath=#{picturePath},remarks=#{remarks},updateBy=#{updateBy},updateDate=#{updateDate}
-        WHERE scenicSpotId=#{scenicSpotId}
+        <if test="picturePath==null">
+            UPDATE scenicspot
+            SET scenicSpotName=#{scenicSpotName},parentId=#{parentId},scenicSpotAddress=#{scenicSpotAddress},costprice=#{costprice},offer=#{offer},typeId=#{typeId},remarks=#{remarks},updateBy=#{updateBy},updateDate=#{updateDate}
+            WHERE scenicSpotId=#{scenicSpotId}
+        </if>
+        <if test="picturePath!=null">
+            UPDATE scenicspot
+            SET scenicSpotName=#{scenicSpotName},parentId=#{parentId},scenicSpotAddress=#{scenicSpotAddress},costprice=#{costprice},offer=#{offer},typeId=#{typeId},picturePath=#{picturePath},remarks=#{remarks},updateBy=#{updateBy},updateDate=#{updateDate}
+            WHERE scenicSpotId=#{scenicSpotId}
+        </if>
+
     </update>
 
 
@@ -40,7 +48,7 @@
     </update>
 
     <select id="selectByScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        SELECT  * from scenicspot where whetherDel!=0 and scenicSpotId=#{scenicSpotId}
+        SELECT  * from scenicspot where whetherDel!=1 and scenicSpotId=#{scenicSpotId}
     </select>
 
 

@@ -38,4 +38,12 @@ public interface OfferService {
      * @return
      */
     Offer selectOfferByOfferId(int offerId);
+
+
+    /**
+     * 赵伟伟
+     * 确认成团
+     * @return
+     */
+    int queren(int offerId);
 }
