@@ -13,7 +13,7 @@ public interface AccountTypeService {
     /*
     账户类型模糊查询分页接口
      */
-    PageInfo<AccountType> listAccountType(Integer pageNo, Integer PageSize,String accountNum) throws Exception;
+    PageInfo<AccountType> listAccountType(Integer pageNo, Integer PageSize,String bank) throws Exception;
 
     /**
      * 删除账户类型

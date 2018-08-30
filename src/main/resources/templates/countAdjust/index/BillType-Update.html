@@ -26,7 +26,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="updateA()">立即提交</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="panduan()">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -37,6 +37,28 @@
 <script src="/layui.js"></script>
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
+
+    //修改判断是否有重复账户类型
+    function  panduan() {
+        var typeName =$("input[name='typeName']").val();
+        $.ajax({
+            url: "/billType/equalBillType",
+            data: {typeName:typeName},
+            dataType: "json",
+            type: "get",
+            async : false,
+            success: function (data) {
+                if (typeName==data.data.typeName){
+                    alert("名称相同，请重新输入！");
+                }else{
+                    updateA();
+                }
+            },
+            error: function () {
+                alert("错误！");
+            }
+        });
+    }
     //修改赋值
     function updataShow(guideId){
         var billTypeId=$("input[name='billTypeId']").val();
@@ -65,6 +87,7 @@
                 data: billType,
                 dataType: "json",
                 type: "get",
+                async : false,
                 success: function (data) {
                     parent.location.reload();
                     var index=parent.layer.getFrameIndex(window.name);
@@ -81,7 +104,6 @@
             })
         }
     }
-
     $(function () {
       updataShow();
     })
