@@ -425,12 +425,11 @@ public class DispatchServiceImpl implements DispatchService {
      * @param end
      * @return
      */
-    private List<Date> getBetweenDates(Date begin, Date end) {
+    public List<Date> getBetweenDates(Date begin, Date end) {
         List<Date> result = new ArrayList<Date>();
         Calendar tempStart = Calendar.getInstance();
         tempStart.setTime(begin);
         while(begin.getTime()<=end.getTime()){
-
             result.add(tempStart.getTime());
             tempStart.add(Calendar.DAY_OF_YEAR, 1);
             begin = tempStart.getTime();

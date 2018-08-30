@@ -205,5 +205,13 @@ public class EnterGeneralControlPageController {
         return "General-control/index/welcome";
     }
 
+    /**
+     * 进入welcome页
+     * @return
+     */
+    @RequestMapping("/guide-schedule.html")
+    public String  guideschedule() {
+        return "General-control/index/guide-schedule.html";
+    }
 
 }

@@ -101,4 +101,13 @@ public interface GuideService {
      * @return
      */
     Guide  pdcertificate(@Param("certificate") String certificate);
+
+    /**
+     * 获取所有导游名称
+     * @return
+     * @throws Exception
+     */
+    List<Guide> listGuideName()throws Exception;
+
+
 }

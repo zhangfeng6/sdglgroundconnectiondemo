@@ -15,7 +15,7 @@ public interface DiscarMapper extends CommonMapper<Discar>{
     /*
     查询调度用车表
      */
-    Discar discar(@Param("disCarId") Integer disCarId);
+    Discar discar(@Param("disCarId") Integer disCarI);
 
 
     /**

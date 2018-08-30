@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import sun.security.provider.MD5;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
 import java.util.Date;
 import java.util.List;
 
@@ -178,7 +180,7 @@ public class StaffController  {
             Staff staff2=objectMapper.readValue(staff1,Staff.class);
             Integer i=0;
             String uploadResult=FileUploadUtil.uploadImage(headPortraitPath,savePath,".jpg");
-            staff2.setHeadPortraitPath(uploadResult);
+            staff2.setHeadPortraitPath(savePath+uploadResult);
             if(staff2.getStaffId()!=0){
                 i=staffService.getStaffUpdTwo(staff2);
                 System.out.println("***********"+i);
@@ -276,6 +278,179 @@ public class StaffController  {
             e.printStackTrace();
             logger.error("mothid:getStaffInfo 获取失败");
             return ReponseResult.err("获取个人信息失败");
+        }
+    }
+
+
+    /**
+     * 修改用户信息并上传头像
+     * @param multipartFile
+     * @return
+     */
+    @RequestMapping("updateStaffInfo1")
+    @LogNotes(operationType="工作人员",content="修改")
+    public ReponseResult updateStaffInfo1(HttpServletRequest request ,@RequestParam("multipartFile") MultipartFile multipartFile, @RequestParam("savePath") String savePath){
+        try {
+            String currentAddress=request.getParameter("currentAddress");
+            String phone=request.getParameter("phone");
+            String qqnumber=request.getParameter("qqnumber");
+            String id=request.getParameter("staffId");
+            Integer staffId=Integer.parseInt(id);
+            String uploadResult = FileUploadUtil.uploadImage(multipartFile, savePath, ".jpg");
+            ReponseResult<Integer> data=null;
+            if (!"".equals(uploadResult)) {
+                logger.info(" method:updateStaffInfo 上传图片成功！");
+                Integer result=staffService.updateStaffInfo1(currentAddress,phone,qqnumber,uploadResult,staffId);
+                if (result==1){
+                    HttpSession session=request.getSession();//创建session对象
+                    Staff staff=(Staff) session.getAttribute("staff");
+                    staff.setCurrentAddress(currentAddress);
+                    staff.setPhone(phone);
+                    staff.setQqnumber(qqnumber);
+                    staff.setHeadPortraitPath(uploadResult);
+                    session.setAttribute("staff",staff);
+                    data=ReponseResult.ok(result,"修改成功");
+                    logger.info("method:updateStaffInfo1 修改成功");
+                }else if (result==0){
+                    data=ReponseResult.err("修改失败");
+                    logger.info("method:updateStaffInfo1 修改失败");
+                }
+            } else {
+                logger.error(" method:updateStaffInfo1 上传图片失败，请稍后再试！");
+                data=ReponseResult.err("上传图片失败，请稍后再试！");
+            }
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:updateStaffInfo1 修改失败");
+            return ReponseResult.err("修改失败");
+        }
+    }
+
+    /**
+     * 修改用户信息不上传头像
+     * @return
+     */
+    @RequestMapping("updateStaffInfo2")
+    @LogNotes(operationType="工作人员",content="修改")
+    public ReponseResult updateStaffInfo2(HttpServletRequest request){
+        try {
+            String currentAddress=request.getParameter("currentAddress");
+            String phone=request.getParameter("phone");
+            String qqnumber=request.getParameter("qqnumber");
+            String id=request.getParameter("staffId");
+            Integer staffId=Integer.parseInt(id);
+            Integer result=staffService.updateStaffInfo2(currentAddress,phone,qqnumber,staffId);
+            ReponseResult<Integer> data=null;
+            if (result==1){
+                HttpSession session=request.getSession();//创建session对象
+                Staff staff=(Staff) session.getAttribute("staff");
+                staff.setCurrentAddress(currentAddress);
+                staff.setPhone(phone);
+                staff.setQqnumber(qqnumber);
+                session.setAttribute("staff",staff);
+                data=ReponseResult.ok(result,"修改成功");
+                logger.info("method:updateStaffInfo2 修改成功");
+            }else if (result==0){
+                data=ReponseResult.err("修改失败");
+                logger.info("method:updateStaffInfo2 修改失败");
+            }
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:updateStaffInfo2 修改失败");
+            return ReponseResult.err("修改失败");
+        }
+    }
+
+
+    /**
+     * 判断旧密码是否正确
+     * @param staffId
+     * @param oldPassword
+     * @return
+     */
+    @RequestMapping("pdPassword")
+    public ReponseResult pdPassword(Integer staffId,String oldPassword){
+        try {
+            String aa=MD5(oldPassword);
+            Staff staff=staffService.pdPassword(staffId);
+            ReponseResult data=null;
+            if (aa.equals(staff.getPassword())){
+                logger.info("mothod:pdPassword 获取成功");
+                data=ReponseResult.ok("获取成功");
+            }else {
+                logger.error("mothod:pdPassword 获取失败");
+                data=ReponseResult.ok("获取失败");
+            }
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:pdPassword 获取失败");
+            return ReponseResult.err("获取失败");
+        }
+    }
+
+
+    /**
+     * 修改密码
+     * @param staffId
+     * @param password
+     * @return
+     */
+    @RequestMapping("updatePassword")
+    public ReponseResult updatePassword(Integer staffId,String password){
+        try {
+            String aa=MD5(password);
+            Integer result=staffService.updatePassword(staffId,aa);
+            ReponseResult data=null;
+            if (result==1){
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                HttpSession session=request.getSession();//创建session对象
+                session.removeAttribute("staff");
+                logger.info("mothod:updatePassword 修改成功");
+                data=ReponseResult.ok(result,"修改成功");
+            }else {
+                logger.error("mothod:updatePassword 修改失败");
+                data=ReponseResult.ok("修改失败");
+            }
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:pdPassword 修改失败");
+            return ReponseResult.err("修改失败");
+        }
+    }
+
+    /**
+     * MD5加密
+     * @param key
+     * @return
+     */
+    public static String MD5(String key) {
+        char hexDigits[] = {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+        };
+        try {
+            byte[] btInput = key.getBytes();
+            // 获得MD5摘要算法的 MessageDigest 对象
+            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            // 使用指定的字节更新摘要
+            mdInst.update(btInput);
+            // 获得密文
+            byte[] md = mdInst.digest();
+            // 把密文转换成十六进制的字符串形式
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i < j; i++) {
+                byte byte0 = md[i];
+                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+                str[k++] = hexDigits[byte0 & 0xf];
+            }
+            return new String(str);
+        } catch (Exception e) {
+            return null;
         }
     }
 
