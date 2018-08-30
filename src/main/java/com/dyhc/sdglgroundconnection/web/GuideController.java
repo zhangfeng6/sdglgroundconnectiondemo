@@ -239,4 +239,21 @@ public class GuideController{
             return ReponseResult.err("获取失败");
         }
     }
+    /**
+     * 获取所有导游名称
+     * @return
+     */
+    @RequestMapping("listGuideName")
+    public ReponseResult listGuideName(){
+        try {
+            List<Guide> guide=guideService.listGuideName();
+            logger.info("method:listGuideName 获取成功");
+            return ReponseResult.ok(guide,"获取成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:listGuideName 获取失败");
+            return ReponseResult.err("获取失败");
+        }
+    }
+
 }

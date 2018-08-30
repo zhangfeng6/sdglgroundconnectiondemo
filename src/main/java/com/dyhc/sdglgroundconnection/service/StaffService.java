@@ -78,4 +78,38 @@ public interface StaffService {
      * @return
      */
     Staff listStaff(Integer  dispatchId);
+
+    /**
+     * 修改个人信息并上传头像
+     * @param currentAddress
+     * @param phone
+     * @param qqnumber
+     * @param uploadResult
+     */
+    Integer updateStaffInfo1(String currentAddress,String phone,String qqnumber,String uploadResult,Integer staffId)throws Exception;
+
+    /**
+     * 修改个人信息不上传头像
+     * @param currentAddress
+     * @param phone
+     * @param qqnumber
+     */
+    Integer updateStaffInfo2(String currentAddress,String phone,String qqnumber,Integer staffId)throws Exception;
+
+    /**
+     * 判断旧密码是否正确
+     * @param staffId
+     * @return
+     * @throws Exception
+     */
+    Staff pdPassword(Integer staffId)throws Exception;
+
+    /**
+     * 修改密码
+     * @param staffId
+     * @param password
+     * @throws Exception
+     */
+    Integer updatePassword(Integer staffId,String password)throws Exception;
+
 }

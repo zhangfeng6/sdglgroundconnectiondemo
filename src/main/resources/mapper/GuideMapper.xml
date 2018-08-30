@@ -19,4 +19,8 @@
     <select id="ShowAllGuide" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
        select  *  from guide where  guideId=#{guideId}
     </select>
+    
+    <select id="listGuideName" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
+        select  *  from guide where  whetherDel=0
+    </select>
 </mapper>

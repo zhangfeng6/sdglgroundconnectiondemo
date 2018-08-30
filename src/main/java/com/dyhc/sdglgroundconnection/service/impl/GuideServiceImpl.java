@@ -131,6 +131,11 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
+    public List<Guide> listGuideName() throws Exception {
+        return guideMapper.listGuideName();
+    }
+
+    @Override
     public Integer updateGuideByPassword(Guide guide) throws Exception {
         return guideMapper.updateByPrimaryKeySelective(guide);
     }

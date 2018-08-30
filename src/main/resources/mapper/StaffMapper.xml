@@ -33,5 +33,20 @@
     <select id="listStaff" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
         SELECT theUserName,phone FROM staff s,dispatch d WHERE s.staffId=d.creater AND d.dispatchId=#{dispatchId}
     </select>
+    
+    
+    <update id="updateStaffInfo1">
+        UPDATE `staff` SET currentAddress=#{currentAddress},phone=#{phone},qqnumber=#{qqnumber},headPortraitPath=#{uploadResult} WHERE staffId=#{staffId}
+    </update>
+    <update id="updateStaffInfo2">
+        UPDATE `staff` SET currentAddress=#{currentAddress},phone=#{phone},qqnumber=#{qqnumber} WHERE staffId=#{staffId}
+    </update>
+    
+    <select id="pdPassword" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT * FROM `staff` WHERE staffId=#{staffId}
+    </select>
 
+    <update id="updatePassword">
+        update staff set password=#{password} where staffId=#{staffId}
+    </update>
 </mapper>

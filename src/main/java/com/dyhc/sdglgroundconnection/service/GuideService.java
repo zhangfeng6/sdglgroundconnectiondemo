@@ -93,4 +93,11 @@ public interface GuideService {
      * @throws Exception
      */
     Guide getGuideById(Integer guideId)throws Exception;
+
+    /**
+     * 获取所有导游名称
+     * @return
+     * @throws Exception
+     */
+    List<Guide> listGuideName()throws Exception;
 }

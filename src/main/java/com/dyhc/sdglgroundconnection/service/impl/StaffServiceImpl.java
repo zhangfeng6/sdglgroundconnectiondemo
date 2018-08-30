@@ -118,4 +118,41 @@ public class StaffServiceImpl implements StaffService {
         return staffMapper.listStaff(staffId);
     }
 
+
+    @Override
+    public Integer updateStaffInfo2(String currentAddress, String phone, String qqnumber, Integer staffId) throws Exception {
+        try {
+            staffMapper.updateStaffInfo2(currentAddress,phone,qqnumber,staffId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
+    @Override
+    public Staff pdPassword(Integer staffId) throws Exception {
+        return staffMapper.pdPassword(staffId);
+    }
+
+    @Override
+    public Integer updatePassword(Integer staffId, String password) throws Exception {
+        try {
+            staffMapper.updatePassword(staffId,password);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer updateStaffInfo1(String currentAddress, String phone, String qqnumber, String uploadResult, Integer staffId)throws Exception {
+        try {
+            staffMapper.updateStaffInfo1(currentAddress,phone,qqnumber,uploadResult,staffId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+
+    }
+
 }
