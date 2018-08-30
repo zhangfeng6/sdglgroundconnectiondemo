@@ -63,6 +63,23 @@ public class GuideController{
             return  error;
         }
     }
+
+    @LogNotes(operationType="导游表",content="导游判断是否有重复的证件号")
+    @RequestMapping("/pdcertificate")
+    public  ReponseResult pdcertificate(@RequestParam("certificate")String certificate){
+        try {
+            ReponseResult<Guide> data =ReponseResult.ok(guideService.pdcertificate(certificate),"导游判断是否有重复的证件号成功!");
+            logger.info("method:showAccountType 导游判断是否有重复的证件号成功");
+            return  data;
+        } catch (Exception e) {
+            logger.info("method:showAccountType 导游判断是否有重复的证件号失败");
+            e.printStackTrace();
+            ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
+            return  error;
+        }
+    }
+
+
     @LogNotes(operationType="导游表",content="导游新增")
     @RequestMapping("/guideSave")
     public  ReponseResult saveGuide(Guide guide){
@@ -77,6 +94,11 @@ public class GuideController{
             return  error;
         }
     }
+
+
+
+
+
     @LogNotes(operationType="导游表",content="导游修改")
     @RequestMapping("/guideUpdate")
     public  ReponseResult updateGuide(Guide guide){

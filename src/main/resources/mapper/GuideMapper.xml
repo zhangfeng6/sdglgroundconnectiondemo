@@ -19,4 +19,8 @@
     <select id="ShowAllGuide" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
        select  *  from guide where  guideId=#{guideId}
     </select>
+   <!--查询导游证件号是否有重复数据-->
+    <select id="pdcertificate" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
+      select  * from  guide where  certificate=#{certificate}
+    </select>
 </mapper>

@@ -40,4 +40,11 @@ public interface GuideMapper extends CommonMapper<Guide>{
      */
     Guide ShowAllGuide(@Param("guideId")Integer guideId);
 
+    /**
+     * 判断是否有重复的导游证件数据
+     * @param certificate
+     * @return
+     */
+    Guide  pdcertificate(@Param("certificate") String certificate);
+
 }

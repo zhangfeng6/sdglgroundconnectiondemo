@@ -60,7 +60,7 @@ public class CarrentalController  {
     @LogNotes(operationType="车队公司",content="添加")
     public ReponseResult insertCarRental(Carrental carrental){
         try {
-            carrental.setWhetherDel(3);
+            carrental.setWhetherDel(0);
             carrental.setCreateBy(1);
             carrental.setCreateDate(new Date());
             Integer result=carrentalService.insertCarRental(carrental);
@@ -87,7 +87,7 @@ public class CarrentalController  {
     @LogNotes(operationType="车队公司",content="修改")
     public ReponseResult updateCarRental(Carrental carrental){
         try {
-            carrental.setWhetherDel(3);
+            carrental.setWhetherDel(0);
             carrental.setUpdateBy(1);
             carrental.setUpdateDate(new Date());
 

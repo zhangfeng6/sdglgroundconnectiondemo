@@ -41,7 +41,7 @@
 					<th style="width: 30px;">类型</th>
 					<th style="width: 80px;">用户名</th>
 					<th style="width: 100px;">创建时间</th>
-					<th style="width: 120px; font-size: small;">操作</th>
+					<th style="width: 160px; font-size: small;">操作</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -86,7 +86,6 @@
             })
         )
     }
-
     /**
      * 删除账户类型
      */
@@ -132,8 +131,8 @@
                     str += "<tr><td>" + xu + "</td><td>" + result.bank + "</td>" +
                         "<td>" + result.accountNum + "</td><td>" + result.accountName + "</td><td>" + zhuangtai + "</td><td>" + result.founder + "</td><td>" + result.createDate + "</td><td>\n" +
                         "<div class=\"layui-inline\">\n" +
-                        "<button class=\"layui-btn layui-btn-mini layui-btn-normal  edit-btn\" data-id=\"1\"  onclick='accountTypeUpdate("+result.accountTypeId+")' id='save2' style='width: 50px;height: 40px;'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
-                        "<button class=\"layui-btn layui-btn-mini layui-btn-danger del-btn\" data-id=\"1\" onclick='removeAccountType("+result.accountTypeId+")' style='width: 50px;height: 40px;'><i class=\"layui-icon\">&#xe640;</i></button>\n" +
+                        "<button class=\"layui-btn layui-btn-mini layui-btn-normal  edit-btn\" data-id=\"1\"  onclick='accountTypeUpdate("+result.accountTypeId+")' id='save2' style='width: 40px;height: 40px;'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
+                        "<button class=\"layui-btn layui-btn-mini layui-btn-danger del-btn\" data-id=\"1\" onclick='removeAccountType("+result.accountTypeId+")' style='width: 40px;height: 40px;'><i class=\"layui-icon\">&#xe640;</i></button>\n" +
                         "</div>\n" +
                         "</td></tr>";
                     xu++;

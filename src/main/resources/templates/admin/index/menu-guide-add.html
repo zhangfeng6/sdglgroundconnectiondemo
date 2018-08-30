@@ -59,7 +59,7 @@
 					</div>
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="save()">立即提交</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="panduan()">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -70,7 +70,32 @@
 		<script src="/layui.js"></script>
 		<script src="/js/jquery-1.8.2.min.js"></script>
 		<script>
-
+            /**
+			 * 判断导游是否有重复证件号
+             */
+			function panduan() {
+                var certificate=$("input[name='certificate']").val().trim();
+				 $.ajax({
+					 url:"/Guide/pdcertificate",
+					 async:false,
+					 data:{certificate:certificate},
+					 dataType:"json",
+					 type:"POST",
+					 success:function (e) {
+						 if (e.data!=null){
+						     alert("该证件号已重复，请重新填写！");
+							 return;
+						 } else{
+                             save();
+						 }
+                     },
+					 error:function () {
+						 alert("系统出错");
+                     }
+				 })
+            }
+			
+			
             //新增账户信息
             function save() {
                 var certificate=$("input[name='certificate']").val().trim();
@@ -95,10 +120,14 @@
                     return;
                 }else if (""==sex || null==sex || sex==undefined){
                     return;
-                }else{
+                }else if(telephone.length>11 || telephone.length<10){
+                    alert("请输入11位电话号码!");
+ 					return;
+				} else{
                 var guide=$("#jxlshuai").serialize();
                 $.ajax({
                     url: "/Guide/guideSave",
+                    async:false,
                     data: guide,
                     dataType: "json",
                     type: "get",
