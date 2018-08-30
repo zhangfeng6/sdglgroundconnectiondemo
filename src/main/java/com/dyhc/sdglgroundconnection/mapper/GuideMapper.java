@@ -40,6 +40,16 @@ public interface GuideMapper extends CommonMapper<Guide>{
      */
     Guide ShowAllGuide(@Param("guideId")Integer guideId);
 
+
+
+
+    /**
+     * 获取所有导游名称
+     * @return
+     * @throws Exception
+     */
+    List<Guide> listGuideName()throws Exception;
+
     /**
      * 判断是否有重复的导游证件数据
      * @param certificate

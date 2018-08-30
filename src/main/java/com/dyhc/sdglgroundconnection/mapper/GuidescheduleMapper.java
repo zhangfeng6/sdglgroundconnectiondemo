@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +22,6 @@ public interface GuidescheduleMapper extends CommonMapper<Guideschedule>{
      * @return
      */
     List<Guideschedule> listguideschedule(@Param("year")String year,@Param("month")String month);
+
+
 }

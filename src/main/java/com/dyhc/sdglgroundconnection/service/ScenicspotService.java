@@ -32,6 +32,12 @@ public interface ScenicspotService {
      */
     PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId)throws Exception;
 
+    /**
+     * 根据父景点名称
+     * @return
+     */
+    List<Scenicspot> getScenicspotParentName()throws Exception;
+
 
     /**
      * 添加景点信息
@@ -53,6 +59,8 @@ public interface ScenicspotService {
      * @param scenicspot
      */
     Integer updateScenicspot(Scenicspot scenicspot)throws Exception;
+
+
 
     /**
      * 根据景点id删除该景点

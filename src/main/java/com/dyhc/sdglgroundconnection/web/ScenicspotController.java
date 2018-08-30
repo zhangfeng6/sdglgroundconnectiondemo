@@ -87,8 +87,8 @@ public class ScenicspotController {
     @RequestMapping("listScenicspot")
     public ReponseResult listScenicspot(){
         try {
-            PageInfo<Scenicspot> pageInfo=scenicspotService.getScenicspotByParentId(0);
-            ReponseResult<List> data=ReponseResult.ok(pageInfo.getList(),"获取所有父景点成功");
+            List<Scenicspot> list=scenicspotService.getScenicspotParentName();
+            ReponseResult<List> data=ReponseResult.ok(list,"获取所有父景点成功");
             return data;
         }catch (Exception e){
             ReponseResult data=ReponseResult.err("获取所有父景点失败");
@@ -158,7 +158,7 @@ public class ScenicspotController {
     }
 
     /**
-     * 修改景点
+     * 修改景点并修改图片
      * @return
      */
     @PostMapping("updateScenicspotInfo")
@@ -192,6 +192,35 @@ public class ScenicspotController {
                 return ReponseResult.err("上传图片失败，请稍后再试！");
             }
 
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("修改失败");
+            return ReponseResult.err("修改失败");
+        }
+    }
+
+    /**
+     * 修改景点不修改图片
+     * @return
+     */
+    @PostMapping("updateScenicspotInfo1")
+    @LogNotes(operationType="景点",content="修改")
+    public ReponseResult updateScenicspotInfo1(Scenicspot scenicspot){
+        try {
+            scenicspot.setTypeCode("ATTRACTIONS");
+            scenicspot.setUpdateDate(new Date());
+            scenicspot.setUpdateBy(1);
+            scenicspot.setWhetherDel(3);
+            ReponseResult<Integer> data=null;
+            Integer result=scenicspotService.updateScenicspot(scenicspot);
+            if (result==1){
+                data=ReponseResult.ok(result,"修改景点成功");
+                logger.info("修改景点成功");
+            }else if (result==0){
+                data=ReponseResult.err("修改加景点失败");
+                logger.info("修改景点失败");
+            }
             return data;
         }catch (Exception e){
             e.printStackTrace();

@@ -100,4 +100,37 @@
     <select id="getgetDictionariesHotelSelect" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM dictionaries WHERE dictionariesId=#{dictionariesId}
     </select>
+
+    <!--判断餐厅类型名称是否存在-->
+    <select id="getDictionariesByNameTypecan" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  d.*,s.theUserName FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='DIET' AND valueContent1=#{valueContent1} AND d.whetherDel!=1
+    </select>
+
+
+    <!--判断车辆类型名称是否存在-->
+    <select id="getDictionariesByNameTypecar" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  d.*,s.theUserName FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='VEHICLE' AND valueContent1=#{valueContent1} AND d.whetherDel!=1
+    </select>
+
+    <!--判断酒店类型名称是否存在-->
+    <select id="getDictionariesByNameType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  d.*,s.theUserName FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='THEROOM' AND valueContent1=#{valueContent1} AND d.whetherDel!=1
+      </select>
+
+    <!--餐厅-->
+    <select id="DictionariesCanMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='DIET' AND d.whetherDel!=1
+    </select>
+
+
+    <!--车辆-->
+    <select id="DictionariesCarMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='VEHICLE' AND d.whetherDel!=1
+    </select>
+
+    <!--酒店-->
+    <select id="DictionariesHotelMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='THEROOM' AND d.whetherDel!=1
+    </select>
+
 </mapper>

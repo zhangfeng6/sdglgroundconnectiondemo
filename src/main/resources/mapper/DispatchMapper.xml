@@ -52,4 +52,5 @@
       <select id="dispatch" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         select  * from dispatch where dispatchId=#{dispatchId}
     </select>
+
 </mapper>

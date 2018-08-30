@@ -50,8 +50,8 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图片地址：</label>
 									<div class="layui-input-block">
-										<input type="file" id="imageFile" name="multipartFile"/>
-										<img src="" id="tp" style="width: 100px;height: 50px;">
+										<input type="file" id="imageFile" name="multipartFile" style="float: left"/>
+										<img src="" id="tp" style="width: 100px;height: 50px;float: left">
 										<!--<i class="layui-icon ">&#xe67c;</i>上传图片-->
 									</div>
 
@@ -135,10 +135,19 @@
 					}
 				});
 			});
+		$(function () {
 
-        bd6DropBox();
-        bdScenicspotLevel();
-        getScenicspotById();
+            bd6DropBox();
+            bdScenicspotLevel();
+            getScenicspotById();
+            var lujing=$("#tp").attr("src");
+            if (lujing=="") {
+                $("#tp").css("display","none");
+            }else {
+                $("#tp").css("display","block");
+            }
+        });
+
 
         /**
 		 * 获取所有父景点
@@ -149,6 +158,7 @@
                 url: "http://localhost:8888/Scenicspot/listScenicspot",
                 data:{},
                 dataType: "json",
+				async:false,
                 success:function (result1) {
                     var content="<option value='0'>无</option>";
                     $.each(result1.data,function (i,e) {
@@ -168,6 +178,7 @@
                 url: "http://localhost:8888/Dictionaries/listDictionaries",
                 data:{},
                 dataType: "json",
+				async:false,
                 success:function (result1) {
                     var content="<option value='0'>无</option>";
                     $.each(result1.data,function (i,e) {
@@ -182,6 +193,7 @@
 		 * 添加景点信息
          */
         function insertScenicspotInfo() {
+            $("#tp").css("display","none");
             var scenicSpotName=$("input[name='scenicSpotName']").val();
             var typeId=$("select[name='typeId']").val();
             var scenicSpotAddress=$("input[name='scenicSpotAddress']").val();
@@ -198,9 +210,6 @@
                 return;
             }else if (scenicSpotAddress==""){
                 alert("请输入景点的地址")
-                return;
-            }else if (tp==""){
-                alert("请选择景点图片")
                 return;
             }else if (costprice==""){
                 alert("请输入景点的成本价")
@@ -224,44 +233,66 @@
                 var scenicspot=$("form").serialize();
                 scenicspot= decodeURIComponent(scenicspot,true);//防止中文乱码
                 var jsondata=DataDeal.formToJson(scenicspot);//转化为json
-                var savePath = "D://北大青鸟/万达国旅地接社系统/images"; // 图片保存路径
+                var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/"; // 图片保存路径
                 var fileObj = document.getElementById("imageFile").files[0];  // 获取图片对象
-                // formData对象，用来序列化二进制数据
+                //formData对象，用来序列化二进制数据
                 var formData = new FormData();
                 formData.append("multipartFile", fileObj);
                 formData.append("savePath", savePath);
                 formData.append("scenicspot",jsondata);
                 var scenicSpotId=$("input[name='scenicSpotId']").val();
                 if (scenicSpotId==0){
-                    // 发送请求到服务器
-                    $.ajax({
-                        type: "post",
-                        url: "http://localhost:8888/Scenicspot/insertScenicspotInfo",
-                        data:formData,
-                        dataType: "json",
-                        cache: false, // 上传文件不需要缓存
-                        processData: false, // 对参数进行序列化处理
-                        contentType: false,
-                        success:function (result1) {
-                            alert(result1.msg);
-                            parent.location.reload();
-                        }
-                    })
+                	if (tp==""){
+                        alert("请选择景点图片")
+                        return;
+                    }else {
+						// 发送请求到服务器
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:8888/Scenicspot/insertScenicspotInfo",
+                            data:formData,
+                            dataType: "json",
+                            cache: false, // 上传文件不需要缓存
+                            processData: false, // 对参数进行序列化处理
+                            contentType: false,
+                            success:function (result1) {
+                                alert(result1.msg);
+                                parent.location.reload();
+                            }
+                        })
+					}
+
                 }else {
-                    // 发送请求到服务器
-                    $.ajax({
-                        type: "post",
-                        url: "http://localhost:8888/Scenicspot/updateScenicspotInfo",
-                        data: formData,
-                        dataType: "json",
-                        cache: false, // 上传文件不需要缓存
-                        processData: false, // 对参数进行序列化处理
-                        contentType: false,
-                        success: function (result1) {
-                            alert(result1.msg);
-                            parent.location.reload();
-                        }
-                    })
+                    if (tp==""){
+                        // 发送请求到服务器
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:8888/Scenicspot/updateScenicspotInfo1",
+                            data: scenicspot,
+                            dataType: "json",
+                            success: function (result1) {
+                                alert(result1.msg);
+                                parent.location.reload();
+                            }
+                        })
+                        return;
+                    }else {
+						// 发送请求到服务器
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:8888/Scenicspot/updateScenicspotInfo",
+                            data: formData,
+                            dataType: "json",
+                            cache: false, // 上传文件不需要缓存
+                            processData: false, // 对参数进行序列化处理
+                            contentType: false,
+                            success: function (result1) {
+                                alert(result1.msg);
+                                parent.location.reload();
+                            }
+                        })
+					}
+
                 }
 			}
 
@@ -282,8 +313,10 @@
                     url: "http://localhost:8888/Scenicspot/getScenicspotById",
                     data:{"scenicSpotId":scenicSpotId},
                     dataType: "json",
+					async:false,
                     success:function (result1) {
                         $("input[name='scenicSpotName']").val(result1.data.scenicSpotName);
+                        $("select[name='parentId']").val(result1.data.parentId);
                         $("input[name='costprice']").val(result1.data.costprice);
                         $("input[name='offer']").val(result1.data.offer);
                         $("input[name='remarks']").val(result1.data.remarks);

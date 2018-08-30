@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,7 +22,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button id="car" type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+                <button onclick="validate()" type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -33,13 +34,9 @@
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
     $(function () {
-        getcarbang
-
-        $("#car").click(function () {
-            getcaredit();
-        });
+        alert(123);
+        getcarbang();
     })
-
     //Demo
     layui.use(['form', 'layedit', 'laydate', 'element'], function () {
         var form = layui.form,
@@ -58,31 +55,15 @@
     });
 
 
-    function getcaredit() {
-        var haha=$("#one").val();
-        var lala=$("form").serialize()
-        if(haha.value =="" || haha.length==0){
-            alert("车辆类型名称不能为空")
-        }else{
-            $.ajax({
-                url:"/Dictionaries/DictionariesCarthree.html",
-                data:lala,
-                type:"get",
-                dateType:"json",
-                success:function (data) {
-                    alert(231)
-                    alert(data.msg);
-                    parent.location.reload();
-                }
-            })
-        }
-    }
     function getcarbang(dictionariesId) {
         var haha=$("#dictionariesId").val()
+        alert(haha)
+        alert(0000)
         $.ajax({
             url:"/Dictionaries/DictionariesCarSelect.html",
             data:{"dictionariesId":haha},
             type:"get",
+            async: false,
             dataType:"json",
             success:function (data) {
                 $("#one").val(data.data.valueContent1);
@@ -91,6 +72,43 @@
             },
             error:function () {
                 alert("失败 ")
+            }
+        })
+    }
+
+    function validate() {
+        alert("666");
+        var lala=$("#one").val()
+        $.ajax({
+            url:"/Dictionaries/DictionariesByNameTypecar",
+            data:{valueContent1:lala},
+            type:"get",
+            async: false,
+            dataType:"json",
+            success:function (data) {
+                alert("555");
+                if(data.data==1){
+                    alert("类型已存在")
+                }else{
+                    alert("可以使用该类型!!!")
+                    var haha=$("#one").val();
+                    var lala=$("form").serialize()
+                    if(haha.value =="" || haha.length==0){
+                        alert("车辆类型名称不能为空")
+                    }else{
+                        $.ajax({
+                            url:"/Dictionaries/DictionariesCarthree.html",
+                            data:lala,
+                            type:"get",
+                            async: false,
+                            dateType:"json",
+                            success:function (data) {
+                                alert(data.msg);
+                                parent.location.reload();
+                            }
+                        })
+                    }
+                }
             }
         })
     }

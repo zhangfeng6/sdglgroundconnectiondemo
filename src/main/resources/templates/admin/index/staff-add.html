@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -32,7 +33,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="text" name="theUserName" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" id="three">
+                <input type="text" name="theUserName" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" id="three" onblur="validate();">
             </div>
         </div>
         <div class="layui-form-item">
@@ -110,10 +111,13 @@
             alert("用户名不能为空")
             return;
         }else if(!IdCard.exec(cardId) && cardId.length !=18){
-            alert("身份证号不正确")
+            alert("身份证格式不正确")
             return;
-        }else if(qqnumber.length<=5 || qqnumber.length>=10){
+        }else if(qqnumber.length<=5 || qqnumber.length>=11){
             alert("QQ号码格式不正确")
+            return;
+        }else if(document.getElementById("file").value == null || document.getElementById("file").value == ""){
+            alert("请选择上传文件");
             return;
         }else if(currentAddress.value =="" || currentAddress.length ==0){
             alert("现住址不能为空")
@@ -159,47 +163,54 @@
             }
         }
     }
-        function getby(staffId) {
-            var sex;
-            var staffId = $("#staffId").val();
-            $.ajax({
-                url: "/Staff/StaffUpdTwoById.html",
-                data: {"staffId": staffId},
-                type: "POST",
-                dataType: "json",
-                success: function (e) {
-                    $("#one").val(e.data.staffname);
+    function getby(staffId) {
+        var sex;
+        var staffId = $("#staffId").val();
+        $.ajax({
+            url: "/Staff/StaffUpdTwoById.html",
+            data: {"staffId": staffId},
+            type: "POST",
+            dataType: "json",
+            success: function (e) {
+                $("#one").val(e.data.staffname);
 
-                    $("input[name=sex]").get(e.data.sex).checked=true;
+                $("input[name=sex]").get(e.data.sex).checked=true;
 
-                    $("#three").val(e.data.theUserName);
-                    $("#fonr").val(e.data.cardId);
-                    $("#five").val(e.data.qqnumber);
-                    $("#enth").val(e.data.headPortraitPath);
-                    $("#six").val(e.data.currentAddress);
-                    $("#serve").val(e.data.phone);
+                $("#three").val(e.data.theUserName);
+                $("#fonr").val(e.data.cardId);
+                $("#five").val(e.data.qqnumber);
+                $("#enth").val(e.data.headPortraitPath);
+                $("#six").val(e.data.currentAddress);
+                $("#serve").val(e.data.phone);
+            }
+        })
+    }
+    function validate() {
+        var lala=$("#three").val()
+        alert(lala)
+        $.ajax({
+            url:"/Staff/ShowStafftheUserName",
+            data:{theUserName:lala},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                if(data.data==1){
+                    alert("用户名已存在")
+                }else{
+                    alert("可以使用该用户")
                 }
-            })
+            }
+        })
+    }
+    function check(){
+        var str = document.getElementById("file").value;
+        if(str.length==0)
+        {
+            alert("请选择上传");
+            return false;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return true;
+    }
 </script>
 </body>
 

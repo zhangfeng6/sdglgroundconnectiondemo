@@ -65,4 +65,46 @@ public interface StaffMapper extends CommonMapper<Staff>{
      */
     Staff listStaff(Integer  dispatchId);
 
+    /**
+     * 修改个人信息并修改图片
+     * @param currentAddress
+     * @param phone
+     * @param qqnumber
+     * @param uploadResult
+     */
+    void updateStaffInfo1(@Param("currentAddress")String currentAddress,@Param("phone")String phone,@Param("qqnumber")String qqnumber,@Param("uploadResult")String uploadResult,@Param("staffId")Integer staffId)throws Exception;
+
+    /**
+     * 修改个人信息不修改图片
+     * @param currentAddress
+     * @param phone
+     * @param qqnumber
+     */
+    void updateStaffInfo2(@Param("currentAddress")String currentAddress,@Param("phone")String phone,@Param("qqnumber")String qqnumber,@Param("staffId")Integer staffId)throws Exception;
+
+
+    /**
+     * 判断旧密码是否正确
+     * @param staffId
+     * @return
+     * @throws Exception
+     */
+    Staff pdPassword(@Param("staffId") Integer staffId)throws Exception;
+
+
+    /**
+     * 修改密码
+     * @param staffId
+     * @param password
+     * @throws Exception
+     */
+    void updatePassword(@Param("staffId") Integer staffId,@Param("password") String password)throws Exception;
+    /**
+     * 判断用户名是否存在
+     * @param theUserName
+     * @return
+     * @throws Exception
+     */
+    Staff StaffByName(String theUserName) throws Exception;
+
 }

@@ -8,6 +8,11 @@
 		<title>网站后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="/admin/css/admin.css"/>
+		<style type="text/css">
+			.layui-input-block label{
+				text-align: left;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="layui-tab page-content-wrap">
@@ -16,83 +21,88 @@
 		    <li>修改密码</li>
 		  </ul>
 		  <div class="layui-tab-content">
-		    <div class="layui-tab-item layui-show">
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;">
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">人员编号：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="id" disabled autocomplete="off" class="layui-input layui-disabled" value="1">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">用户名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label">姓名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				     <div class="layui-form-item">
-				    <label class="layui-form-label">性别：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">身份证号：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">现住址：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">头像地址：</label>
-				    <div class="layui-input-block">
-						<input type="file" name="file" class="layui-upload-file">
-					</div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">QQ号码：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">联系电话：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
-				    </div>
-				  </div>
-				  
-				  
-				  <div class="layui-form-item">
-				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo">立即提交</button>
-				    </div>
-				  </div>
-				</form>
+			  <div class="layui-tab-item layui-show">
+				  <form class="layui-form"  style="width: 90%;padding-top: 20px;">
+					  <div class="layui-form-item" id="one">
+						  <div class="layui-input-block">
+							  <img id="headPortraitPath1" style="width: 100px;height: 50px"/>
+							  <!--<label class="layui-form-label">2871</label>	-->
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">人员编号：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="staffId1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">用户名：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="theUserName1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">姓名：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="staffname1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">性别：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="sex1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">身份证号：</label>
+						  <div class="layui-input-block">
+							  <label class="layui-form-label" id="cardId1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">现住址：</label>
+						  <div class="layui-input-block" id="upfour">
+							  <label class="layui-form-label" id="currentAddress1" style="width: 200px;	">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item" id="two">
+						  <label class="layui-form-label">上传头像：</label>
+						  <div class="layui-input-block" id="updone">
+							  <input type="file" id="imageFile" name="multipartFile"/>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label" >QQ号码：</label>
+						  <div class="layui-input-block" id="updtwo">
+							  <label class="layui-form-label" id="qqnumber1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <label class="layui-form-label">联系电话：</label>
+						  <div class="layui-input-block" id="updthree">
+							  <label class="layui-form-label" id="phone1">2871</label>
+						  </div>
+					  </div>
+					  <div class="layui-form-item">
+						  <div class="layui-input-block">
+							  <button class="layui-btn layui-btn-normal"  id="lijitijiao">立即提交</button>
+							  <button class="layui-btn layui-btn-normal" type="button" id="upds" >修改</button>
+						  </div>
+					  </div>
+				  </form>
 		    </div>
 		    <div class="layui-tab-item">
 		    	<form class="layui-form" v style="width: 90%;padding-top: 20px;">
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">用户名：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
+				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">旧密码：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password1" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" id="password1" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
@@ -109,7 +119,7 @@
 				  </div>
 				  <div class="layui-form-item">
 				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminPassword">立即提交</button>
+				      <button class="layui-btn layui-btn-normal" type="button" onclick="updatePassword()">立即提交</button>
 				    </div>
 				  </div>
 				</form>
@@ -117,10 +127,28 @@
 		  </div>
 		</div>
 	<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-
+	<script src="/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+        $("#two").css("display","none");
+		$("#lijitijiao").css("display","none");
+
+		$("#upds").click(function(){
+			var one=$("#updone");
+			var two=$("#updtwo");
+			var three=$("#updthree");
+            $("#lijitijiao").css("display","block");
+            $("#one").css("display","none");
+            $("#two").css("display","block");
+            $(this).css("display","none");
+            var currentAddress=$("#currentAddress1").text();
+            var phone=$("#phone1").text();
+            var qqnumber=$("#qqnumber1").text();
+			$("#updtwo").html("<input  style='margin-top: 8px;' type='text' name='qqnumber1' value='"+qqnumber+"'>")
+			$("#updthree").html("<input  style='margin-top: 8px;' type='text' name='phone1' value='"+phone+"'>")
+            $("#upfour").html("<input  style='margin-top: 8px;' type='text' name='currentAddress1' value='"+currentAddress+"'>")
+		});
 		//Demo
-		layui.use(['form','element'], function(){
+		 layui.use(['form','element'], function(){
 		  var form = layui.form();
 		  var element = layui.element();
 		  form.render();
@@ -134,7 +162,133 @@
 		    layer.msg(JSON.stringify(data.field));
 		    return false;
 		  });
-		});
+		 });
+		 $("#lijitijiao").click(function () {
+             var currentAddress=$("input[name='currentAddress1']").val();
+             var phone=$("input[name='phone1']").val();
+             var qqnumber=$("input[name='qqnumber1']").val();
+             var staffId=$("#staffId1").text();
+             var savePath = "D://北大青鸟/万达国旅地接社系统/images"; // 图片保存路径
+             var fileObj = document.getElementById("imageFile").files[0];  // 获取图片对象
+             // formData对象，用来序列化二进制数据
+             var formData = new FormData();
+             formData.append("currentAddress", currentAddress);
+             formData.append("phone", phone);
+             formData.append("qqnumber", qqnumber);
+             formData.append("staffId", staffId);
+             if (currentAddress=="" || phone=="" || qqnumber=="" ) {
+                 alert("信息不完整");
+                 return;
+             }else if (fileObj!=undefined) {
+                 formData.append("multipartFile", fileObj);
+                 formData.append("savePath", savePath);
+                 $.ajax({
+                     type: "post",
+                     url: "http://localhost:8888/Staff/updateStaffInfo1",
+                     data: formData,
+                     dataType: "json",
+                     cache: false, // 上传文件不需要缓存
+                     processData: false, // 对参数进行序列化处理
+                     contentType: false,
+					 async:false,
+                     success: function (result1) {
+                         alert(result1.msg);
+                         getAdminInfo();
+
+                     }
+                 })
+             }else if(fileObj==undefined){
+                 $.ajax({
+                     type: "post",
+                     url: "http://localhost:8888/Staff/updateStaffInfo2",
+                     data: formData,
+                     dataType: "json",
+                     cache: false, // 上传文件不需要缓存
+                     processData: false, // 对参数进行序列化处理
+                     contentType: false,
+                     async:false,
+                     success: function (result1) {
+                         alert(result1.msg);
+                     }
+                 })
+			 }
+         })
+
+        getAdminInfo();
+        /**
+		 * 获取当前个人信息
+         */
+		function getAdminInfo() {
+			$.ajax({
+				url:"http://localhost:8888/Staff/getStaffInfo",
+				data:"",
+				dataType:"json",
+				type:"get",
+				success:function (result) {
+					$("#staffId1").text(result.data.staffId);
+                    $("#theUserName1").text(result.data.theUserName);
+                    if (result.data.sex=="0"){
+                        $("#sex1").text("女");
+					}
+                    if (result.data.sex=="1"){
+                        $("#sex1").text("男");
+                    }
+                    $("#cardId1").text(result.data.cardId);
+                    $("input[name='username']").val(result.data.theUserName);
+                    $("#qqnumber1").text(result.data.qqnumber);
+                    $("#staffname1").text(result.data.staffname);
+                    $("#phone1").text(result.data.phone);
+                    $("#currentAddress1").text(result.data.currentAddress);
+                    $("#headPortraitPath1").attr("src","/api/image/"+result.data.headPortraitPath);
+                }
+			})
+        }
+
+        /**
+         * 判断旧密码是否正确
+         */
+        $("#password1").blur(function () {
+            var staffId=$("#staffId1").text();
+            var oldPassword=$(this).val();
+            $.ajax({
+                url:"http://localhost:8888/Staff/pdPassword",
+                data:{"staffId":staffId,"oldPassword":oldPassword},
+                dataType:"json",
+                type:"get",
+                success:function (result) {
+                    if (result.msg!="获取成功"){
+                        alert("旧密码不正确");
+					}
+                }
+            })
+        });
+
+        /**
+		 * 修改密码
+         */
+        function updatePassword() {
+			var password1=$("input[name='password2']").val();
+            var password2=$("input[name='password3']").val();
+            var staffId=$("#staffId1").text();
+            if (password1!=password2){
+                alert("两次输入的密码不一致");
+                return;
+			}else {
+                $.ajax({
+                    url:"http://localhost:8888/Staff/updatePassword",
+                    data:{"password":password1,"staffId":staffId},
+                    dataType:"json",
+                    type:"get",
+                    success:function (result) {
+                        if (result.msg=="修改成功") {
+                            alert(result.msg+"将返回登陆页面");
+                            location.href="http://localhost:8888/admins/login.html";
+						}
+                    }
+                })
+			}
+        }
+
 	</script>
 	</body>
 </html>
