@@ -40,7 +40,7 @@
     </update>
 
     <select id="selectByScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        SELECT  * from scenicspot where whetherDel!=0 and scenicSpotId=#{scenicSpotId}
+        SELECT  * from scenicspot where whetherDel!=1 and scenicSpotId=#{scenicSpotId}
     </select>
 
 

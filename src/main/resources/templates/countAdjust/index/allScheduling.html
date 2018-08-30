@@ -119,16 +119,27 @@
 							}else if(e.whetherDel==4){
                                 del = "已详设";
                             }
-							content+="<tr>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travel.travelName+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.number+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.tourist+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
-                                "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button></div>\n" ;
- 								//如果状态为已确认 即可进行详细设计
+                            if (e.whetherDel==3){
+                                content+="<tr>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travel.travelName+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.number+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.tourist+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button></div>\n" ;
+							} else{
+                                content+="<tr>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travel.travelName+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.number+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.tourist+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='que("+e.offerId+")'><i class='layui-icon'>确认成团</i></button></div>\n" ;
+							}
  								if(e.whetherDel==3){
  								    content+="<div style='display: inline-block'><button  type='button'   data-url='Quotation-detail.html' data-id='"+e.offerId+"' onclick='xiangshe(this)' value='" + e.restaurantId + "' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>详细设计</i></button></div>" ;
 								}
@@ -170,6 +181,27 @@
 				window.location.href=url+"?id="+id;
                 return false;
             }
+
+            function que(id){
+				$.ajax({
+                    url:"/Offer/que",
+                    data:{offerId:id},
+                    dataType:"json",
+                    type:"get",
+                    success:function (data) {
+                        alert(data.msg);
+                        selectOffer();
+					}
+				})
+			}
+
+/*            function xuan(offerId,qq){
+                dispatchId=id;
+                guideId=guideid;
+                groupNumber = travelId;
+                $(qq).parents().children().css("background","");
+                $(qq).css("background","#F2F2F2");
+            }*/
 
 		</script>
         

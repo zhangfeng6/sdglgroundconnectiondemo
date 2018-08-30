@@ -38,4 +38,11 @@ public interface OfferMapper extends CommonMapper<Offer>{
      * @return
      */
     Offer selectOfferByOfferId(@Param("offerId") int offerId);
+
+    /**
+     * 赵伟伟
+     * 确认成团
+     * @return
+     */
+    int queren(@Param("offerId") int offerId);
 }

@@ -34,8 +34,6 @@
 				<tr>
 					<td><label class="layui-form-label">选择模板</label></td>
 					<td id="xzmuban"><select name="tourismtemplateName" lay-filter="muban"></select></td>
-					<td><button type="button" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick="muban1(this)">自行填写</button></td>
-					<td></td>
 				</tr>
 			</table>
 		</form>
@@ -136,10 +134,20 @@
 
 							</select>
 						</td>
-						<td><label class="layui-form-label">成本价</label></td>
-						<td><input id="ccostPrice" type="text" class="layui-input"></td>
-						<td><label class="layui-form-label">报价</label></td>
-						<td><input id="coffer" type="text" class="layui-input"></td>
+						<td><table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td><label class="layui-form-label">成本价</label></td>
+								<td><input id="ccostPrice" type="text" class="layui-input"></td>
+							</tr>
+						</table>
+						</td>
+						<td><table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td><label class="layui-form-label">报价</label></td>
+								<td><input id="coffer" type="text" class="layui-input"></td>
+							</tr>
+						</table>
+						</td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">其他:</label></td>
@@ -149,13 +157,13 @@
 									<td><label class="layui-form-label">成本价</label></td>
 									<td width="300px"><input id="qcostPrice" type="text" class="layui-input"></td>
 									<td><label class="layui-form-label">报价</label></td>
-									<td width="300px"><input id="qoffer" type="text" class="layui-input"></td>
+									<td width="323px"><input id="qoffer" type="text" class="layui-input"></td>
 								</tr>
 							</table>
 						</td>
 					</tr>
 					<tr>
-						<td><label class="layui-form-label">司机导游:</label></td>
+						<td><label class="layui-form-label">小费:</label></td>
 						<td colspan="5"><input type="text" class="layui-input"></td>
 					</tr>
 					<tr>
@@ -168,10 +176,9 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><button class='layui-btn layui-btn-normal layui-btn-radius'>预览报价单</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="baojia()">生成报价单</button></td>
-						<td style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" onclick="dayin()">生成确认书</button></td>
-						<td style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun1" onclick="baocunmuban()">保存</button></td>
+						<td class="hi"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="baojia()">预览报价单</button></td>
+						<td style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" onclick="dayin()">生成确认书</button></td>-->
+						<td class="hi" style="padding: 0px 80px"><button class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun1" onclick="baocunmuban()">保存</button></td>
 					</tr>
 				</table>
 			</form>
@@ -222,7 +229,7 @@
                         selectTourismandlineAll(data.value,1,this);
                     });
                     form.on('select(chedui)',function(data){
-                        selectByDictionariesId(data.value,1,this);
+                        selectByDictionariesId1(data.value,1,this);
                     });
 				});
                 var id=0;
@@ -249,6 +256,7 @@
 						$("select").attr("disabled","disabled");
                         $("input").attr("disabled","disabled");
                         $("textarea").attr("disabled","disabled");
+                        $(".hi").hide();
                     }
 				})
 
@@ -300,13 +308,14 @@
                                 if (u<data.data.length){
                                     addss2();
                                 }
-                                $(".xzxianlu").eq(u-1).children().children().each(function(){
+                                $(".xzxianlu").eq(u-1).children().children().eq(0).text(data.data[u-1].lineArriveName);
+                                /*$(".xzxianlu").eq(u-1).children().children().each(function(){
                                     var a = $(this).text();
                                     var b = data.data[u-1].lineArriveName;
                                     if($(this).text() ==data.data[u-1].lineArriveName){
                                         $(this).prop("selected",true);
                                     }
-                                })
+                                })*/
                                 $("[name=trip]").eq(u-1).val(data.data[u-1].travelContent);
                                 $("[name=date]").eq(u-1).val(data.data[u-1].date);
 
@@ -594,6 +603,20 @@
                     }
                 })
 			}
+
+               function selectByDictionariesId1(id,index,qq){
+                    //var id = $("[name='typeName'] option:selected").val();
+                    $.ajax({
+                        url:"/Dictionaries/selectByDictionariesId",
+                        data:{dictionariesId:id},
+                        dataType:"json",
+                        type:"get",
+                        success:function (data) {
+                            $("#ccostPrice").val(data.data.valueContent2);
+                            $("#coffer").val(data.data.valueContent3);
+                        }
+                    })
+                }
 
                 function selectByScenicSpotId(id,index,qq){
                     //var id = $("[name='typeName'] option:selected").val();'
