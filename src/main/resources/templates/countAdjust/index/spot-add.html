@@ -124,6 +124,8 @@
 					});
 					form.render('checkbox');
 				});
+
+
 				form.render();
 
 				layui.upload({
@@ -134,7 +136,6 @@
 				});
 			});
 		$(function () {
-
             bd6DropBox();
             bdScenicspotLevel();
             getScenicspotById();
@@ -145,6 +146,8 @@
                 $("#tp").css("display","block");
             }
         });
+		
+
 
 
         /**
@@ -199,8 +202,14 @@
             var costprice=$("input[name='costprice']").val();
             var offer=$("input[name='offer']").val();
             var remarks=$("input[name='remarks']").val();
+            var scenicSpotId=$("input[name='scenicSpotId']").val();
+            var parentId=$("select[name='parentId']").val();
 
-            if (scenicSpotName==""){
+
+            if (scenicSpotId==parentId){
+                alert("自己本身不能成为父景点")
+                return;
+            }else if (scenicSpotName==""){
                 alert("请输入景点名称")
 				return;
 			}else if (typeId=="0"){
