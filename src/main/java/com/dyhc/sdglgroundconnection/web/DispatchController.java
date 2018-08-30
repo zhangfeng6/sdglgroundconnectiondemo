@@ -1,5 +1,9 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
+import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.mapper.DiscarMapper;
 import com.dyhc.sdglgroundconnection.pojo.*;
@@ -34,8 +38,6 @@ public class DispatchController {
 
     @Autowired
     private DispatchService dispatchService;
-    @Autowired
-    private DiscarService discarService;
     //酒店
     @Autowired
     private DispatchhotelService dispatchhotelService;
@@ -48,6 +50,9 @@ public class DispatchController {
     //线路
     @Autowired
     private HoteroomTypeService hoteroomTypeService;
+    @Autowired
+    private DiscarService discarService;
+
 
     /**
      * 返回所有调度信息
