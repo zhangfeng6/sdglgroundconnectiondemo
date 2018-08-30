@@ -40,8 +40,13 @@ public class ScenicspotServiceImpl implements ScenicspotService {
     @Override
     public PageInfo<Scenicspot> getScenicspotByParentId(Integer parentId) throws Exception{
         List<Scenicspot> list1=scenicspotMapper.getScenicspotByParentId(parentId);
-        PageInfo<Scenicspot> pageInfo=new PageInfo<Scenicspot>(scenicspotMapper.getScenicspotByParentId(parentId));
+        PageInfo<Scenicspot> pageInfo=new PageInfo<Scenicspot>(list1);
         return pageInfo;
+    }
+
+    @Override
+    public List<Scenicspot> getScenicspotParentName() throws Exception {
+        return scenicspotMapper.selectAll();
     }
 
     @Override
