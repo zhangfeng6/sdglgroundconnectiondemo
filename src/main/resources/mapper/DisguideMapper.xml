@@ -5,4 +5,10 @@
     <select id="DisguideAll" resultType="com.dyhc.sdglgroundconnection.pojo.Disguide">
 SELECT g.guideName,g.certificate,g.telephone,o.num,o.tourist,o.travelStartTime,o.travelEndTime FROM disGuide d,guide g,dispatch o WHERE d.guideId=g.guideId AND d.offerId=o.dispatchId AND o.dispatchId=#{dispatchId}
     </select>
+
+    <!--根据调度Id获取调度导游表数据-->
+    <select id="getDisguideByDid" resultType="com.dyhc.sdglgroundconnection.pojo.Disguide">
+        SELECT `disGuideId`,guideId FROM disguide WHERE `offerId`=#{Did} AND `status`!=1
+    </select>
+
 </mapper>

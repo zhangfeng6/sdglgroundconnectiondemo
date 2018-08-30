@@ -33,14 +33,27 @@ public class Disrestaurant {
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "upDate")
+    @Column(name = "`upDate`")
     private Date upDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private int weight;  //权重
+    @Column(name = "payment")
     private String payment;
     private String value3;
+
+    //餐厅类型表实体对象
+    @Transient
+    private MealType mealType;
+
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
 
     @Transient
     private String restaurantName;
@@ -62,6 +75,15 @@ public class Disrestaurant {
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+
+    @Column(name = "weight")
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     @Id
@@ -165,7 +187,7 @@ public class Disrestaurant {
     }
 
     @Basic
-    @Column(name = "upDate")
+    @Column(name = "`upDate`")
     public Date getUpDate() {
         return upDate;
     }

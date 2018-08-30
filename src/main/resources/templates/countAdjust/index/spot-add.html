@@ -51,8 +51,10 @@
 									<label class="layui-form-label">图片地址：</label>
 									<div class="layui-input-block">
 										<input type="file" id="imageFile" name="multipartFile"/>
+										<img src="" id="tp" style="width: 100px;height: 50px;">
 										<!--<i class="layui-icon ">&#xe67c;</i>上传图片-->
 									</div>
+
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">成本价：</label>
@@ -287,6 +289,7 @@
                         $("input[name='remarks']").val(result1.data.remarks);
                         $("input[name='scenicSpotAddress']").val(result1.data.scenicSpotAddress);
                         $("input[name='scenicSpotId']").val(result1.data.scenicSpotId);
+                        $("#tp").attr("src","/api/image/"+result1.data.picturePath);
                         var content="";
                         var typeId=result1.data.typeId;
                         if (typeId==1){

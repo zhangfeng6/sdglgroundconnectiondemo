@@ -49,4 +49,8 @@
     </select>
 
 
+
+    <select id="getsavedispatchId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+        SELECT dispatchId FROM dispatch ORDER BY dispatchId DESC LIMIT 0,1
+    </select>
 </mapper>

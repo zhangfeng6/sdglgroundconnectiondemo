@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.*;
+import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
@@ -31,6 +32,7 @@ public class DispatchServiceImpl implements DispatchService {
     @Autowired
     private DispatchMapper dispatchMapper;
 
+    //调度酒店表对象
     @Autowired
     private DispatchhotelMapper dispatchhotelMapper;
 
@@ -101,9 +103,162 @@ public class DispatchServiceImpl implements DispatchService {
     //接团信息
     @Autowired
     private ClusterMapper clusterMapper;
+    //调度导游表
+    @Autowired
+    private DisguideMapper disguideMapper;
+    //调度用车表
+    @Autowired
+    private DiscarMapper discarMapper;
+       //调度其他表
+    @Autowired
+    private DisotherMapper disotherMapper;
+    //调度线路信息表
+    @Autowired
+    private HoteroomTypeMapper hoteroomTypeMapper;
+    //调度景点表
+    @Autowired
+    private DisattrMapper disattrMapper;
+    //调度购物表
+    @Autowired
+    private DisshoppMapper disshoppMapper;
+    //调度餐厅表
+    @Autowired
+    private DisrestaurantMapper disrestaurantMapper;
 
     /**
-     * 根据报价表id获取该报价的所有信息
+     * 根据调度id获取调度的相关数据
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map<String, Object> getDispatchinfoById(Integer dispatchId) throws Exception {
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("dispatch",dispatchMapper.selectByPrimaryKey(dispatchId));
+        map.put("disguide",disguideMapper.getDisguideByDid(dispatchId));
+        map.put("cluster",clusterMapper.getClusterByDid(dispatchId));
+        map.put("discar",discarMapper.getDiscarByDid(dispatchId));
+        map.put("disother",disotherMapper.getDisotherByDid(dispatchId));
+        map.put("dispatchhote",dispatchhotelMapper.listDispatchhotelByDid(dispatchId));
+        map.put("hoteroomType",hoteroomTypeMapper.listHoteroomTypeByDid(dispatchId));
+        map.put("disattr",disattrMapper.listDisattrByDid(dispatchId));
+        map.put("disshopp",disshoppMapper.listDisshoppByDid(dispatchId));
+        map.put("disrestaurant",disrestaurantMapper.listDisrestaurantByDid(dispatchId));
+        return map;
+    }
+
+    /**
+     * 根据参数类的数据进行新增调度及调度相关信息
+     * @param dispatchParameter
+     * @return
+     * @throws Exception
+     */
+    @Override
+    @Transactional()
+    public int saveDispatch(DispatchParameter dispatchParameter)throws Exception {
+        try{
+            //调度表对象
+             Dispatch dispatch=dispatchParameter.getDispatch();
+            //调度导游表对象
+             Disguide disguide=dispatchParameter.getDisguide();
+            //接团信息表对象
+             Cluster cluster=dispatchParameter.getCluster();
+            //调度用车表对象
+             Discar discar=dispatchParameter.getDiscar();
+            //调度其他表对象
+             Disother disother=dispatchParameter.getDisother();
+            //调度酒店表集合
+             List<Dispatchhotel> dispatchhotelList=dispatchParameter.getDispatchhotelList();
+            //调度线路信息集合
+             List<HoteroomType> hoteroomTypeList=dispatchParameter.getHoteroomTypeList();
+            //调度景点信息集合
+             List<Disattr> disattrList=dispatchParameter.getDisattrList();
+            //调度购物地集合
+             List<Disshopp> disshoppList=dispatchParameter.getDisshoppList();
+            //调度餐厅表集合
+             List<Disrestaurant> disrestaurantList=dispatchParameter.getDisrestaurantList();
+            Date date=new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String Tuan="STS-"+sdf.format(date);
+            dispatch.setGroundConnectionNumber(Tuan);
+            dispatch.setState(1);
+            dispatch.setWhetherDel(0);
+            dispatch.setCreater(1);
+            dispatch.setCreationDate(new Date());
+            dispatchMapper.insert(dispatch);
+            Dispatch infoId=dispatchMapper.getsavedispatchId();
+            disguide.setOfferId(infoId.getDispatchId());
+            disguide.setStatus(0);
+            disguide.setCreateBy(1);
+            disguide.setCreateDate(new Date());
+            disguideMapper.insert(disguide);
+            cluster.setDispatchId(infoId.getDispatchId());
+            cluster.setWhetherDel(0);
+            cluster.setCreateBy(1);
+            cluster.setCreateDate(new Date());
+            clusterMapper.insert(cluster);
+            discar.setOfferId(infoId.getDispatchId());
+            discar.setStatus(0);
+            discar.setCreateBy(1);
+            discar.setCreateDate(new Date());
+            discarMapper.insert(discar);
+            disother.setOfferId(infoId.getDispatchId());
+            disother.setCreateBy(1);
+            disother.setCreateDate(new Date());
+            disother.setStatus(0);
+            disotherMapper.insert(disother);
+            for (Dispatchhotel hotel:dispatchhotelList) {
+                hotel.setOfferId(infoId.getDispatchId());
+                hotel.setWhetherDel(0);
+                hotel.setCreater(1);
+                hotel.setCreationDate(new Date());
+            }
+            dispatchhotelMapper.insertList(dispatchhotelList);
+            for (HoteroomType h:hoteroomTypeList) {
+                h.setOfferId(infoId.getDispatchId());
+                h.setStatus(0);
+                h.setCreateBy(1);
+                h.setCreateDate(new Date());
+            }
+            hoteroomTypeMapper.insertList(hoteroomTypeList);
+            for (Disattr d:disattrList) {
+                d.setOfferId(infoId.getDispatchId());
+                d.setBuynum(dispatch.getNum());
+                d.setStatus(0);
+                d.setCreateBy(1);
+                d.setCreateDate(new Date());
+            }
+            disattrMapper.insertList(disattrList);
+            for (Disshopp s:disshoppList) {
+                s.setOfferId(infoId.getDispatchId());
+                s.setStatus(0);
+                s.setCreateBy(1);
+                s.setCreateDate(new Date());
+            }
+            disshoppMapper.insertList(disshoppList);
+            for (Disrestaurant r:disrestaurantList) {
+                r.setOfferId(infoId.getDispatchId());
+                r.setStatus(0);
+                r.setCreateBy(1);
+                r.setCreateDate(new Date());
+            }
+            disrestaurantMapper.insertList(disrestaurantList);
+            Offer offer=new Offer();
+            offer.setOfferId(dispatchParameter.getOfferId());
+            offer.setWhetherDel(4);
+            offerMapper.updateByPrimaryKeySelective(offer);
+            return 1;
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
+
+    /**
+     * 根据报价表id获取该报价的所有信息到调度页面展示
      * @param oid
      * @return
      * @throws Exception
@@ -289,16 +444,17 @@ public class DispatchServiceImpl implements DispatchService {
         return dispatchMapper.selectByPrimaryKey(reportdetail.getDispatchId());
     }
 
-    /***
-     * 查询计调表
+
      /**
      * 查看车辆联系人
      * @param dispatchId
      * @return
      */
+    @Override
     public  Dispatch dispatch(Integer dispatchId) {
         return dispatchMapper.dispatch(dispatchId);
     }
+
     public Dispatch listDispatch(Integer dispatchId) {
         return dispatchMapper.listDispatch(dispatchId);
     }
@@ -309,7 +465,8 @@ public class DispatchServiceImpl implements DispatchService {
      * @return
      */
     @Override
-    public Cluster ClusterById(Integer dispatchId) {
+    public Cluster ClusterById(Integer dispatchId)throws Exception  {
         return clusterMapper.ClusterById(dispatchId);
     }
+
 }

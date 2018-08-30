@@ -25,8 +25,8 @@ public class HoteroomType {
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "upDate")
-    private Date upDate; // 修改日期
+    @Column(name = "updateDate")
+    private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
@@ -139,13 +139,13 @@ public class HoteroomType {
     }
 
     @Basic
-    @Column(name = "upDate")
-    public Date getUpDate() {
-        return upDate;
+    @Column(name = "updateDate")
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpDate(Date upDate) {
-        this.upDate = upDate;
+    public void setUpdateDate(Date upDate) {
+        this.updateDate = upDate;
     }
 
     @Basic
@@ -195,7 +195,7 @@ public class HoteroomType {
                 Objects.equals(status, that.status) &&
                 Objects.equals(createBy, that.createBy) &&
                 Objects.equals(updateBy, that.updateBy) &&
-                Objects.equals(upDate, that.upDate) &&
+                Objects.equals(updateDate, that.updateDate) &&
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(weight, that.weight) &&
                 Objects.equals(date, that.date) &&
@@ -205,6 +205,6 @@ public class HoteroomType {
     @Override
     public int hashCode() {
 
-        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, upDate, createDate, weight, date, value3);
+        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, updateDate, createDate, weight, date, value3);
     }
 }

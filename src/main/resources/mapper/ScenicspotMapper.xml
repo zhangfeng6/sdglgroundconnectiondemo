@@ -15,10 +15,10 @@
             <if test="typeId!=0">
                 and  typeId=#{typeId}
             </if>
-            <if test="whetherDel!=3 and whetherDel!=1">
-               and whetherDel=#{whetherDel} and whetherDel!=1
+            <if test="whetherDel!=3">
+               and whetherDel=#{whetherDel}
             </if>
-
+            and whetherDel!=1
         </where>
         ORDER BY `createDate` DESC
     </select>

@@ -9,4 +9,9 @@
     <select id="listOfferlineAll" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
       SELECT SUBSTRING(CONCAT(h.date),6,11)AS 'riqi',SUBSTRING(CONCAT(t.templateName),4,6) AS 'templateName',t.templateContent FROM template t,hoteroomtype h,dispatch s WHERE t.templateId=h.templateId AND h.offerId=s.dispatchId AND s.dispatchId=#{dispatchId}
     </select>
+
+    <!--根据调度id获取调度线路表数据-->
+    <select id="listHoteroomTypeByDid" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
+        SELECT `hoteroomtId`,`templateId`,`xingcheng`,`weight` FROM `hoteroomtype` WHERE `offerId`=#{Did}
+    </select>
 </mapper>
