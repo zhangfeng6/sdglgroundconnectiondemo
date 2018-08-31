@@ -84,6 +84,7 @@ public class AccountType {
         this.bank = bank;
     }
 
+
     @Basic
     @Column(name = "accountNum")
     public String getAccountNum() {

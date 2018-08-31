@@ -1,8 +1,6 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
-import com.dyhc.sdglgroundconnection.pojo.Hotel;
-import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
-import com.dyhc.sdglgroundconnection.pojo.RoomType;
+import com.dyhc.sdglgroundconnection.pojo.*;
 
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 
@@ -68,5 +66,8 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @return
      */
     List<Hotel> listhotelByvalueId(@Param("valueId")Integer valueId)throws Exception;
+
+
+    List<Dictionaries> selectRoomType();
 
 }

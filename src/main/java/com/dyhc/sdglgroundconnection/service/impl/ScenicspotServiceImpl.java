@@ -26,9 +26,9 @@ public class ScenicspotServiceImpl implements ScenicspotService {
     private ShoppingMapper shoppingMapper;
 
     @Override
-    public PageInfo<Scenicspot> listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer whetherDel, Integer pageNo, Integer pageSize) throws Exception {
+    public PageInfo<Scenicspot> listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer pageNo, Integer pageSize) throws Exception {
         PageHelper.startPage(pageNo, pageSize, true);
-        List<Scenicspot> list1=scenicspotMapper.listScenicspots(typeId,scenicSpotName,scenicSpotAddress,whetherDel);
+        List<Scenicspot> list1=scenicspotMapper.listScenicspots(typeId,scenicSpotName,scenicSpotAddress);
         for (Scenicspot s:list1) {
             List<Shopping> list2=shoppingMapper.listShoppingByScenicSpotId(s.getScenicSpotId());
             s.setShoppings(list2);

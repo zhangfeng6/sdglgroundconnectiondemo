@@ -21,7 +21,7 @@
     </update>
     <!--房间修改赋值-->
     <select id="fuzhiRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
-           select  * from  roomtype WHERE typeId=#{typeId}
+           SELECT * FROM roomtype r,dictionaries d WHERE r.typeId=#{typeId} AND d.typeCode='THEROOM' AND r.valueId = d.valueId
     </select>
     <!--酒店修改赋值-->
     <select id="fuzhiHotel"  resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
@@ -30,5 +30,9 @@
     
     <select id="listhotelByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
        SELECT h.*,r.`costprice` AS 'gettypeprice' FROM `hotel` h,`roomtype` r WHERE r.`hotelId`=h.`hotelId` AND r.`valueId`=#{valueId}
+    </select>
+
+    <select id="selectRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+        SELECT * FROM dictionaries WHERE typeCode='THEROOM' AND whetherDel!=1
     </select>
 </mapper>

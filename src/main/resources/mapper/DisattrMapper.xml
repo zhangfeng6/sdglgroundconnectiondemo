@@ -7,6 +7,10 @@
        select  * from  disattr where  offerId=#{offerId}
     </select>
 
+    <delete id="removeDisattrByDid">
+        DELETE FROM `disattr` WHERE `offerId`=#{Did}
+    </delete>
+
     <!--根据调度id获取调度景点表数据 张枫-->
     <select id="listDisattrByDid" resultType="com.dyhc.sdglgroundconnection.pojo.Disattr">
         SELECT `scenicSpotId`,`costPrice`,`payMethods`,`weight` FROM `disattr` WHERE `offerId`=#{Did}

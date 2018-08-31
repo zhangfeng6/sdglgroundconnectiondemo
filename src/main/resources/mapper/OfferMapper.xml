@@ -20,11 +20,15 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="offerId">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into offer(travelId,travelStartTime,travelEndTime,`number`,tourist,trip,offer,remarks,reception,whetherDel,creater)
-        values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},0,1)
+        insert into offer(travelId,travelStartTime,travelEndTime,`number`,tourist,trip,offer,remarks,reception,whetherDel,creater,costPrice,notcontain)
+        values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},0,1,#{costPrice},#{notcontain})
     </insert>
 
     <select id="selectOfferByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">
           select * from offer where whetherDel!=1 and offerId=#{offerId}
     </select>
+
+    <update id="queren">
+        update offer set whetherDel=3 where offerId=#{offerId}
+    </update>
 </mapper>

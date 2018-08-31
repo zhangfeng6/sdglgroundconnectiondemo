@@ -18,7 +18,13 @@
         UPDATE staff SET whetherDel=1 where staffId=#{staffId}
     </update>
 
+    <!--修改图片-->
     <update id="getStaffUpdTwo">
+      UPDATE staff SET staffname=#{staffname},sex=#{sex},theUserName=#{theUserName},cardId=#{cardId},qqnumber=#{qqnumber},headPortraitPath=#{headPortraitPath},currentAddress=#{currentAddress},phone=#{phone} where staffId=#{staffId}
+    </update>
+
+    <!--不修改图片-->
+    <update id="getStaffUpdThree">
         UPDATE staff SET staffname=#{staffname},sex=#{sex},theUserName=#{theUserName},cardId=#{cardId},qqnumber=#{qqnumber},currentAddress=#{currentAddress},phone=#{phone} where staffId=#{staffId}
     </update>
 

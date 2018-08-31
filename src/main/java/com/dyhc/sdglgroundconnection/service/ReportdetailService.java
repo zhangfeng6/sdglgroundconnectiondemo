@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
+import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -37,4 +38,26 @@ public interface ReportdetailService {
      * @return
      */
     Reportdetail reportdetail(Integer dispatchId);
+
+
+    /**
+     * 通过导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    Integer tgShenHe(Integer reportDetailId)throws Exception;
+
+    /**
+     * 通过导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    Integer bhShenHe(Integer reportDetailId)throws Exception;
+
+    /**
+     * 结算导游报账
+     * @param reportDetailId
+     * @return
+     */
+    Integer jsShenHe(Integer reportDetailId)throws Exception;
 }

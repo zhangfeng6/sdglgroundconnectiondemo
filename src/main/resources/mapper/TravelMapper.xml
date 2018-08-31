@@ -10,6 +10,10 @@
         and whetherDel !=1
     </select>
 
+    <select id="selectTravel" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">
+        select * from travel where whetherDel !=1
+    </select>
+
     <update id="getUpdTrave">
         UPDATE travel SET whetherDel=1 WHERE travelId=#{travelId};
     </update>

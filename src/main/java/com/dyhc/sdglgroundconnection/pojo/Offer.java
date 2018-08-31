@@ -50,7 +50,8 @@ public class Offer {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Timestamp creationDate; // 创建时间
-    private String value1;
+    @Column(name = "costPrice")
+    private double costPrice;
     private String value2;
     private String value3;
     @Transient
@@ -255,13 +256,13 @@ public class Offer {
     }
 
     @Basic
-    @Column(name = "value1")
-    public String getValue1() {
-        return value1;
+    @Column(name = "costPrice")
+    public Double getCostPrice() {
+        return costPrice;
     }
 
-    public void setValue1(String value1) {
-        this.value1 = value1;
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
     }
 
     @Basic
@@ -308,7 +309,7 @@ public class Offer {
                 Objects.equals(modifier, offer1.modifier) &&
                 Objects.equals(modifiedData, offer1.modifiedData) &&
                 Objects.equals(creationDate, offer1.creationDate) &&
-                Objects.equals(value1, offer1.value1) &&
+                Objects.equals(costPrice, offer1.costPrice) &&
                 Objects.equals(value2, offer1.value2) &&
                 Objects.equals(value3, offer1.value3);
     }
@@ -316,6 +317,6 @@ public class Offer {
     @Override
     public int hashCode() {
 
-        return Objects.hash(offerId, travelId, travelStartTime, travelEndTime, number, tourist, trip, offer, aVariance, shopping, notcontain, remarks, supervision, reception, whetherDel, creater, modifier, modifiedData, creationDate, value1, value2, value3);
+        return Objects.hash(offerId, travelId, travelStartTime, travelEndTime, number, tourist, trip, offer, aVariance, shopping, notcontain, remarks, supervision, reception, whetherDel, creater, modifier, modifiedData, creationDate, costPrice, value2, value3);
     }
 }

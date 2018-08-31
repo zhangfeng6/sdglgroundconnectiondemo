@@ -9,6 +9,9 @@ EnterCountAdjustPageController:计调页面
 计调首页：http://localhost:8888/countAdjust/count-Adjust-Index.html
 EnterGeneralControlPageController：总控页面
 总控首页：http://localhost:8888/General/count-Adjust-Index.html
+EnterFinancePageController:财务页面
+财务首页：http://localhost:8888/finance/finance-Index.html
+
 
 实体类：pojo
 accounttype 账户类型

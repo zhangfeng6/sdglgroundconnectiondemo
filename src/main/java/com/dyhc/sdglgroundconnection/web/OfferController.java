@@ -123,6 +123,7 @@ public class OfferController {
         String ctypeId = request.getParameter("ctypeId");
         String remarks = request.getParameter("remarks");
         String[] tripList = request.getParameterValues("tripList");
+        String xiaofei = request.getParameter("xiaofei");
 
 
 
@@ -139,6 +140,7 @@ public class OfferController {
             allList.add(travel);
             allList.add(remarks);
             allList.add(tripList);
+            allList.add(xiaofei);
             session.setAttribute("allList",allList);
             ReponseResult<Object> data = ReponseResult.err("查询成功！");
             return data;
@@ -267,6 +269,7 @@ public class OfferController {
         String coffer = request.getParameter("coffer");
         String des = request.getParameter("des");
         String jiedai = request.getParameter("jiedai");
+        String xiaofei = request.getParameter("xiaofei");
 
 
         Offer offer = new Offer();
@@ -278,6 +281,7 @@ public class OfferController {
         Offerscenic offerscenic = new Offerscenic();
         Offerother offerother = new Offerother();
         Double zongjia = 0.0;
+        Double zongjia1 = 0.0;
         try {
 
 
@@ -287,10 +291,16 @@ public class OfferController {
                 zongjia+=Double.parseDouble(wanbjList[z]);
                 zongjia+=Double.parseDouble(joffer[z]);
 
+                zongjia1+=Double.parseDouble(wucbList[z]);
+                zongjia1+=Double.parseDouble(wancbList[z]);
+                zongjia1+=Double.parseDouble(jcostPrice[z]);
+
                 String[] jd = jingdianList[z].split(",");
                 String[] jdo = jdofferList[z].split(",");
+                String[] jdc = jdcostPriceList[z].split(",");
                 for (int j=0;j<jd.length;j++){
                     zongjia += Double.parseDouble(jdo[j]);
+                    zongjia1 += Double.parseDouble(jdc[j]);
                 }
             }
 
@@ -301,6 +311,7 @@ public class OfferController {
             Timestamp ts = new Timestamp(System.currentTimeMillis());
             offer.setTourist(travel.getTravelName());
             offer.setOffer(zongjia);
+            offer.setCostPrice(zongjia1);
             offer.setTravelId(Integer.parseInt(travelId));
             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date date = format1.parse(travelStartTime);
@@ -315,9 +326,10 @@ public class OfferController {
             Timestamp fTimestamp1=Timestamp.valueOf(sdate1);
             offer.setTravelEndTime(fTimestamp1);
             offer.setNumber(Integer.parseInt(number));
-            offer.setTrip(tripList[1]);
+            offer.setTrip(tripList[0]);
             offer.setRemarks(remarks);
             offer.setReception(jiedai);
+            offer.setNotcontain(xiaofei);
             offerService.insertOffer(offer);
 
 
@@ -331,8 +343,23 @@ public class OfferController {
 
                 //线路报价
                 offerline.setOfferId(offer.getOfferId());
-                Template template = templateService.selecctNameById(Integer.parseInt(xianluList[i]));
-                String mu = template.getTemplateName();
+                String mu="";
+
+                boolean is = true;
+                try {
+                    Integer.parseInt(xianluList[i]);
+                    is = false;
+                } catch (NumberFormatException e) {
+                    is = true;
+                }
+
+                if(is){
+                    mu = xianluList[i];
+                }else{
+                    Template template = templateService.selecctNameById(Integer.parseInt(xianluList[i]));
+                    mu = template.getTemplateName();
+                }
+
                 offerline.setLineArriveName(mu);
                 offerline.setTravelContent(tripList[i]);
                 java.util.Date date11 = format1.parse(xdateList[i]);
@@ -464,6 +491,26 @@ public class OfferController {
             return data;
         } catch (Exception e) {
             logger.error(" method:selectOffer  获取确认书数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 赵伟伟
+     * @param
+     * @return
+     */
+    @RequestMapping("/que")
+    public ReponseResult que(Integer offerId) {
+        try {
+            int a = offerService.queren(offerId);
+            ReponseResult<Object> data = ReponseResult.ok("确认成团成功！");
+            logger.info(" method:selectOffer  确认成团成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOffer  确认成团失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

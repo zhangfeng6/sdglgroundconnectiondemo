@@ -26,6 +26,7 @@
                         <option value="1">审核中</option>
                         <option value="2">以结算</option>
                         <option value="3">未通过</option>
+                        <option value="3">已通过</option>
                     </select>
                 </div>
                 <input class="layui-btn layui-btn-normal" id="search" type="button" lay-submit="search" value="搜索"/>
@@ -70,6 +71,59 @@
     );
     search();
 
+    //通过审核
+    function tgShenHe(reportDetailId) {
+        $.ajax({
+            url: "http://localhost:8888/reportdetail/tgShenHe",
+            data: {"reportDetailId": reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                if (result.data==1){
+                    alert("审核成功");
+                    search();
+                }
+
+            }
+        });
+    }
+
+
+    //驳回审核
+    function bhShenHe(reportDetailId) {
+        $.ajax({
+            url: "http://localhost:8888/reportdetail/bhShenHe",
+            data: {"reportDetailId": reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                if (result.data==1){
+                    alert("驳回成功");
+                    search();
+                }
+
+            }
+        });
+    }
+
+    //结算审核
+    function jsShenHe(reportDetailId) {
+        $.ajax({
+            url: "http://localhost:8888/reportdetail/jsShenHe",
+            data: {"reportDetailId": reportDetailId},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                if (result.data==1){
+                    alert("结算成功");
+                    search();
+                }
+
+            }
+        });
+    }
+
+
     //查询（dubingkun）
     function search() {
         var groupNumber=$("#groupNumber").val();
@@ -92,6 +146,9 @@
                     if(e.status==3){
                         status="未通过";
                     }
+                    if(e.status==4){
+                        status="已通过";
+                    }
                     context += "<tr>\n" +
                         "<td class=\"hidden-xs\">" + (i+1) + "</td>\n" +
                         "<td class=\"hidden-xs\">" + e.groupNumber + "</td>\n" +
@@ -102,11 +159,19 @@
                         "<td class=\"hidden-xs\">" + status + "</td>\n" +
                         "<td class=\"hidden-xs\">\n" +
                         "<li class=\"layui-nav-item\">\n" +
-                        "<a href=\"detail.html?reportDetailId="+e.reportDetailId+"\"'>详细信息</a>\n" +
-                        "</li>\n" +
-                        "</td>\n" +
-                        "<td>\n" +
-                        "</tr>";
+                        "<a href=\"detail.html?reportDetailId="+e.reportDetailId+"\"' style='color:blue'>详细信息</a>\n";
+                        if (e.status==1) {
+                            context+="<a href='javascript:void(0)' onclick='tgShenHe("+e.reportDetailId+")' style='color:blue'>通过审核</a>\n"+
+                                "<a href='javascript:void(0)' onclick='bhShenHe("+e.reportDetailId+")' style='color:blue'>驳回审核</a>\n";
+                        }
+                        if (e.status==4) {
+                            context+="<a href='javascript:void(0)' onclick='jsShenHe("+e.reportDetailId+")' style='color:blue'>结算报账</a>\n";
+                        }
+
+                        context+="</li>\n" +
+                                "</td>\n" +
+                                "<td>\n" +
+                                "</tr>";
                 })
                 $("tbody").html(context);
 

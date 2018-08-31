@@ -12,6 +12,6 @@
 
     <!--根据调度id获取调度线路表数据-->
     <select id="listHoteroomTypeByDid" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
-        SELECT `hoteroomtId`,`templateId`,`xingcheng`,`weight` FROM `hoteroomtype` WHERE `offerId`=#{Did}
+        SELECT `hoteroomtId`,`templateId`,`xingcheng`,`weight`,`date`,`temName`  FROM `hoteroomtype` WHERE `offerId`=#{Did}
     </select>
 </mapper>

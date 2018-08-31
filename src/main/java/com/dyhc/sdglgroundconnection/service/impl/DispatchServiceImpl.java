@@ -147,6 +147,86 @@ public class DispatchServiceImpl implements DispatchService {
         return map;
     }
 
+    @Override
+    @Transactional
+    public int updateDispatch(DispatchParameter dispatchParameter) throws Exception {
+        Integer userId=1;
+        try{
+            //调度表对象
+            Dispatch dispatch=dispatchParameter.getDispatch();
+            //调度导游表对象
+            Disguide disguide=dispatchParameter.getDisguide();
+            //接团信息表对象
+            Cluster cluster=dispatchParameter.getCluster();
+            //调度用车表对象
+            Discar discar=dispatchParameter.getDiscar();
+            //调度其他表对象
+            Disother disother=dispatchParameter.getDisother();
+            //调度酒店表集合
+            List<Dispatchhotel> dispatchhotelList=dispatchParameter.getDispatchhotelList();
+            //调度线路信息集合
+            List<HoteroomType> hoteroomTypeList=dispatchParameter.getHoteroomTypeList();
+            //调度景点信息集合
+            List<Disattr> disattrList=dispatchParameter.getDisattrList();
+            //调度购物地集合
+            List<Disshopp> disshoppList=dispatchParameter.getDisshoppList();
+            //调度餐厅表集合
+            List<Disrestaurant> disrestaurantList=dispatchParameter.getDisrestaurantList();
+            dispatch.setModifier(userId);
+            dispatch.setModifiedData(new Date());
+            dispatchMapper.updateByPrimaryKeySelective(dispatch);
+            disguide.setUpdateBy(userId);
+            disguide.setUpdateDate(new Date());
+            disguideMapper.updateByPrimaryKeySelective(disguide);
+            cluster.setDispatchId(dispatch.getDispatchId());
+            cluster.setUpdateBy(userId);
+            cluster.setUpadateDate(new Date());
+            clusterMapper.updateByPrimaryKeySelective(cluster);
+            discar.setUpdateBy(userId);
+            discar.setUpdateDate(new Date());
+            discarMapper.updateByPrimaryKeySelective(discar);
+            disother.setUpdateBy(userId);
+            disother.setUpdateDate(new Date());
+            disotherMapper.updateByPrimaryKeySelective(disother);
+            for (Disattr d:disattrList) {
+                d.setOfferId(dispatch.getDispatchId());
+                d.setBuynum(dispatch.getNum());
+                d.setStatus(0);
+                d.setCreateBy(userId);
+                d.setCreateDate(new Date());
+            }
+            disattrMapper.removeDisattrByDid(dispatch.getDispatchId());
+            disattrMapper.insertList(disattrList);
+            for (Dispatchhotel hotel:dispatchhotelList) {
+                hotel.setModifier(userId);
+                hotel.setModifiedData(new Date());
+                dispatchhotelMapper.updateByPrimaryKeySelective(hotel);
+            }
+            for (HoteroomType h:hoteroomTypeList) {
+                System.out.println("..."+h.getXingcheng());
+                h.setUpdateBy(userId);
+                h.setUpdateDate(new Date());
+                hoteroomTypeMapper.updateByPrimaryKeySelective(h);
+            }
+            for (Disshopp s:disshoppList) {
+                s.setUpDate(new Date());
+                s.setUpdateBy(userId);
+                disshoppMapper.updateByPrimaryKeySelective(s);
+            }
+            for (Disrestaurant r:disrestaurantList) {
+                r.setUpDate(new Date());
+                r.setUpdateBy(userId);
+                disrestaurantMapper.updateByPrimaryKeySelective(r);
+            }
+            return 1;
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            e.printStackTrace();
+            return 0;
+
+        }
+    }
+
     /**
      * 根据参数类的数据进行新增调度及调度相关信息
      * @param dispatchParameter
@@ -207,6 +287,15 @@ public class DispatchServiceImpl implements DispatchService {
             disother.setCreateDate(new Date());
             disother.setStatus(0);
             disotherMapper.insert(disother);
+
+            for (Disattr d:disattrList) {
+                d.setOfferId(infoId.getDispatchId());
+                d.setBuynum(dispatch.getNum());
+                d.setStatus(0);
+                d.setCreateBy(1);
+                d.setCreateDate(new Date());
+            }
+            disattrMapper.insertList(disattrList);
             for (Dispatchhotel hotel:dispatchhotelList) {
                 hotel.setOfferId(infoId.getDispatchId());
                 hotel.setWhetherDel(0);
@@ -221,14 +310,6 @@ public class DispatchServiceImpl implements DispatchService {
                 h.setCreateDate(new Date());
             }
             hoteroomTypeMapper.insertList(hoteroomTypeList);
-            for (Disattr d:disattrList) {
-                d.setOfferId(infoId.getDispatchId());
-                d.setBuynum(dispatch.getNum());
-                d.setStatus(0);
-                d.setCreateBy(1);
-                d.setCreateDate(new Date());
-            }
-            disattrMapper.insertList(disattrList);
             for (Disshopp s:disshoppList) {
                 s.setOfferId(infoId.getDispatchId());
                 s.setStatus(0);
@@ -254,9 +335,6 @@ public class DispatchServiceImpl implements DispatchService {
             return 0;
         }
     }
-
-
-
     /**
      * 根据报价表id获取该报价的所有信息到调度页面展示
      * @param oid

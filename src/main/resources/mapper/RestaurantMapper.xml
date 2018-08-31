@@ -33,8 +33,20 @@
         update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone},picturePath=#{picturePath} where restaurantId=#{restaurantId}
     </update>
 
+    <update id="updateRestaurantById1">
+        update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone} where restaurantId=#{restaurantId}
+    </update>
+
     <!--根据valueid获取饭店信息-->
     <select id="listrestaurantByvalueId" resultType="com.dyhc.sdglgroundconnection.pojo.Restaurant">
 SELECT r.*,m.`costprice` AS 'gettypeprice' FROM `restaurant` r,`mealtype` m WHERE m.`restaurantId`=r.`restaurantId` AND m.`valueId`=#{valueId}
+    </select>
+
+    <select id="selectTypeById" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM restaurant WHERE restaurantId IN (SELECT restaurantId FROM mealType WHERE typeCode='DIET' AND valueId=#{valueId} AND restaurantId=#{restaurantId} AND whetherDel!=1)
+    </select>
+
+    <select id="selectMealTypeByTypeId" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
+        SELECT * FROM mealtype WHERE typeId=#{typeId} AND whetherDel!=1
     </select>
 </mapper>

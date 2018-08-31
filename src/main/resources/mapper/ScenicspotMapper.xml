@@ -15,10 +15,7 @@
             <if test="typeId!=0">
                 and  typeId=#{typeId}
             </if>
-            <if test="whetherDel!=3">
-               and whetherDel=#{whetherDel}
-            </if>
-            and whetherDel!=1
+            and whetherDel=0
         </where>
         ORDER BY `createDate` DESC
     </select>
@@ -48,7 +45,7 @@
     </update>
 
     <select id="selectByScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
-        SELECT  * from scenicspot where whetherDel!=0 and scenicSpotId=#{scenicSpotId}
+        SELECT  * from scenicspot where whetherDel!=1 and scenicSpotId=#{scenicSpotId}
     </select>
 
 

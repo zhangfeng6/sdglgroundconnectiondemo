@@ -64,4 +64,20 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantMapper.updateRestaurantById(restaurant);
     }
 
+    @Override
+    public int updateRestaurantById1(Restaurant restaurant) {
+        return restaurantMapper.updateRestaurantById1(restaurant);
+    }
+
+    @Override
+    public int selectTypeById(Integer valueId, Integer restaurantId) {
+        return restaurantMapper.selectTypeById(valueId,restaurantId);
+    }
+
+    @Override
+    public MealType selectMealTypeByTypeId(Integer typeId) {
+        return restaurantMapper.selectMealTypeByTypeId(typeId);
+    }
+
+
 }

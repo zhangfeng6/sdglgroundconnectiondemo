@@ -66,6 +66,31 @@ public class RestaurantController {
     }
 
 
+
+    /**
+     * 赵伟伟
+     * @return
+     */
+    @RequestMapping("/selectTypeById")
+    public ReponseResult selectTypeById(Integer valueId, Integer restaurantId,Integer typeId) {
+        int count =0;
+        try {
+            if (restaurantId==0){
+                MealType mealType = restaurantService.selectMealTypeByTypeId(typeId);
+                restaurantId = mealType.getRestaurantId();
+            }
+            count = restaurantService.selectTypeById(valueId,restaurantId);
+            ReponseResult<Object> data = ReponseResult.ok(count, "查询成功！");
+            logger.info(" method:showHotel  查询成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  查询失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
     /**
      * 赵伟伟
      * @param restaurantId
@@ -121,6 +146,48 @@ public class RestaurantController {
             return err;
         }
     }
+
+
+
+
+
+
+    /**
+     * 赵伟伟
+     * @param request
+     * @return
+     */
+    @PostMapping("/insertRestaurant1")
+    @LogNotes(operationType="饭店",content="新增")
+    public ReponseResult insertRestaurant1(HttpServletRequest request) {
+        try {
+            String restaurant2 = request.getParameter("restaurant");
+            ObjectMapper objectMapper = new ObjectMapper();
+            Restaurant restaurant=objectMapper.readValue(restaurant2,Restaurant.class);
+            Integer i = 0;
+            String smg = "";
+            if (restaurant.getRestaurantId()!=0){
+                i = restaurantService.updateRestaurantById1(restaurant);
+                smg = "保存成功！";
+            }else{
+                smg = "图片不能为空！";
+            }
+            ReponseResult<Object> data = ReponseResult.ok(smg);
+            logger.info(" method:insertRestaurant  "+smg);
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:insertRestaurant  保存饭店失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("保存失败！");
+            return err;
+        }
+    }
+
+
+
+
+
+
 
 
     /**

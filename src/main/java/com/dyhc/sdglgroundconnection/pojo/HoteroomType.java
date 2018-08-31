@@ -31,10 +31,11 @@ public class HoteroomType {
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private int weight;  //权重
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "date")
     private Date date;
-    private String value3;
+    @Column(name = "temName")
+    private String temName;
     @Column(name = "xingcheng")
     private String xingcheng;
 
@@ -175,13 +176,13 @@ public class HoteroomType {
     }
 
     @Basic
-    @Column(name = "value3")
-    public String getValue3() {
-        return value3;
+    @Column(name = "temName")
+    public String getTemName() {
+        return temName;
     }
 
-    public void setValue3(String value3) {
-        this.value3 = value3;
+    public void setTemName(String value3) {
+        this.temName = value3;
     }
 
     @Override
@@ -199,12 +200,12 @@ public class HoteroomType {
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(weight, that.weight) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(value3, that.value3);
+                Objects.equals(temName, that.temName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, updateDate, createDate, weight, date, value3);
+        return Objects.hash(hoteroomtId, offerId, templateId, status, createBy, updateBy, updateDate, createDate, weight, date, temName);
     }
 }

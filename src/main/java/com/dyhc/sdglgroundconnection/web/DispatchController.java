@@ -379,7 +379,7 @@ public class DispatchController {
      * @param dispatchParameter
      * @return
      */
-    @RequestMapping(value = "/saveDispatch",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveDispatch")
     public ReponseResult saveDispatch(@RequestBody DispatchParameter dispatchParameter){
         try {
             ReponseResult data=ReponseResult.ok(dispatchService.saveDispatch(dispatchParameter),"");
@@ -411,5 +411,26 @@ public class DispatchController {
             ReponseResult err=ReponseResult.err("系统异常！");
             return err;
         }
+    }
+
+    /**
+     * 修改调度信息  张枫
+     * @param dispatchParameter
+     * @return
+     */
+    @RequestMapping(value = "/updateDispatch",method = RequestMethod.POST)
+    public ReponseResult updateDispatch(@RequestBody DispatchParameter dispatchParameter){
+        System.out.println("...........................");
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.updateDispatch(dispatchParameter),"调用修改调度信息成功！");
+            logger.info("method:saveDispatch 保存调度信息成功！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:saveDispatch 系统出现错误！");
+            ReponseResult<Object> err=ReponseResult.err("系统出现错误!");
+            return err;
+        }
+
     }
 }
