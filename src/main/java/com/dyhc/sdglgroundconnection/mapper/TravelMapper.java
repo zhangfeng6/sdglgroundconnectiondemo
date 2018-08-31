@@ -15,6 +15,16 @@ import java.util.List;
 @Component
 public interface TravelMapper extends CommonMapper<Travel> {
 
+
+
+    /**
+     * 赵伟伟
+     * 查询全部组团社
+     * @return
+     */
+    List<Travel> selectTravel();
+
+
     /**
      * 赵伟伟
      * 查询组团社

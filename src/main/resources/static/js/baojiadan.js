@@ -222,7 +222,6 @@ function insertJingdian(onClickjd) {
                     "\t\t\t\t\t\t\t\t\t<select name=\"lineArriveName\" lay-verify=\"required\" lay-search lay-filter=\"xianlu\">"+xianlu+"</select>\n" +
                     "\t\t\t\t\t\t\t\t</td>\n" +
                     "\t\t\t\t\t\t\t\t<td colspan=\"2\">&nbsp;<button type=\"button\" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick=\"xianlu1(this)\">自行填写</button></td>\n" +
-                    "\t\t\t\t\t\t\t\t<td colspan=\"2\">&nbsp;<button type=\"button\" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px'>保存模板</button></td>\n" +
                     "\t\t\t\t\t\t\t</tr>\n" +
                     "\t\t\t\t\t\t\t<tr>\n" +
                     "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">日期</label></td>\n" +
@@ -353,7 +352,6 @@ function addss2() {
         "\t\t\t\t\t\t\t\t\t<select name=\"lineArriveName\" lay-verify=\"required\" lay-search lay-filter=\"xianlu\">"+xianlu+"</select>\n" +
         "\t\t\t\t\t\t\t\t</td>\n" +
         "\t\t\t\t\t\t\t\t<td colspan=\"2\">&nbsp;<button type=\"button\" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick=\"xianlu1(this)\">自行填写</button></td>\n" +
-        "\t\t\t\t\t\t\t\t<td colspan=\"2\">&nbsp;<button type=\"button\" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px'>保存模板</button></td>\n" +
         "\t\t\t\t\t\t\t</tr>\n" +
         "\t\t\t\t\t\t\t<tr>\n" +
         "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">日期</label></td>\n" +

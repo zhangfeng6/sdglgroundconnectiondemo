@@ -14,6 +14,7 @@
 <div class="page-content-wrap">
 	<input type="hidden" name="offerId" th:value="${id}"/>
 	<input type="hidden" name="Did" th:value="${did}"/>
+	<input type="hidden" name="offer" th:value="${offer}"/>
 	<div id="divhead">
 	<form class="layui-form layui-form-pane" action="">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -560,8 +561,14 @@
 							$("select[name=d"+index+"scenicspot"+i+"]").parent().parent().remove();
 						}
                         $("select[name=d"+index+"hoteltype]").val(1);
-						$("select[name=d"+index+"hotel]").val(result.data["parameter"].hotelId);
+                        $("select[name=d"+index+"hoteltype]").change();
 						$("textarea[name=d"+index+"xingcheng]").text(result.data["parameter"].templateContent);
+                        $("select[name=d"+index+"hotel]").children().each(function(){
+                            if($(this).val() ==result.data["parameter"].hotelId){
+                                $(this).prop("selected",true);
+                            }
+                        })
+                        //$("select[name=d"+index+"hotel]").val(result.data["parameter"].hotelId);
                         $(result.data["scenicspot"]).each(function (i,e) {
                             if(i>0){
                                 add(index);
@@ -619,7 +626,7 @@
 							$("textarea[name=d"+(i+1)+"xingcheng]").text(e.travelContent);
 							$("input[name=d"+(i+1)+"data]").val(e.date);
                             $("select[name=d"+(i+1)+"hoteltype]").val(1);
-
+                            $("select[name=d"+(i+1)+"hoteltype]").change();
 							var id=Array();
 							var cb=Array();
                             $(result.data["scenic"]).each(function (q,w) {
@@ -642,7 +649,6 @@
                             })
                         });
 						$(result.data["hotel"]).each(function (i,e) {
-                            hotelresource((i+1));
                             $("select[name=d"+(i+1)+"hotel]").val(e.hotelId);
                             $("select[name=d"+(i+1)+"wucan]").val(result.data["wu"][i].valueId);
                             $("select[name=d"+(i+1)+"wucan]").change();
@@ -739,7 +745,8 @@
                     }
                     hoteroomtype.weight=(i+1);
                     hoteroomtype.date=$("input[name=d"+(L)+"data]").val();
-                    hoteroomtype.xingcheng=$("textarea[name=d"+(L)+"xingcheng]").text();
+                    hoteroomtype.xingcheng=$("textarea[name=d"+(L)+"xingcheng]").val();
+
                     hoteroomtype.hoteroomtId=$("textarea[name=d"+L+"xingcheng]").attr("hoteroomtId");
 
                     hoteroomTypeList.push(hoteroomtype);
@@ -835,6 +842,7 @@
                 dispatch.travelStartTime=$("input[name=travelStartTime]").val();
                 dispatch.travelEndTime=$("input[name=travelEndTime]").val();
                 dispatch.sendLine=$("input[name=sendLine]").val();
+                dispatch.offer=$("input[name=offer]").val();
                 var tourist="";
                 for (var i=0;i<index;i++){
                     var L=0;
@@ -948,10 +956,7 @@
                     contentType: "application/json",
                     success:function (result) {
                         if(result.data==1){
-                            parent.location.reload();
-                            var index=parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
-                            alert("保存成功！");
+                            location.href="/Quotation.html";
                             alert("保存成功！");
                         }else{
                             alert("系统异常："+result.data);
@@ -1025,7 +1030,10 @@
 									}
 								    t+=1;
 								}
-                                q=result.data["disattr"][i+1].weight;
+
+								if(result.data["disattr"][i+1]!=undefined){
+                                    q=result.data["disattr"][i+1].weight;
+								}
 								if(w!=q){
 									t=1;
 								}
@@ -1037,8 +1045,9 @@
 							if(e.temName != null && e.temName != ''){
 								$("button[name=d"+R+"qiehuan]").click();
 								$("input[name=d"+R+"template]").val(e.temName);
+							}else{
+                                $("select[name=d"+R+"template]").val(e.templateId);
 							}
-                            $("select[name=d"+R+"template]").val(e.templateId);
 							$("textarea[name=d"+R+"xingcheng]").val(e.xingcheng);
                             $("textarea[name=d"+R+"xingcheng]").attr("hoteroomtId",e.hoteroomtId);
                             $("input[name=d"+R+"data]").val(e.date);

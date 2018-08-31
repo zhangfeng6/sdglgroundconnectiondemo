@@ -23,7 +23,7 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public List<Travel> selectTravel() {
-        return travelMapper.selectAll();
+        return travelMapper.selectTravel();
     }
 
     /**

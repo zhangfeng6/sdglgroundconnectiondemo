@@ -114,7 +114,7 @@ table{
 		<tr>
 			<td>不含</td>
 			<td colspan="5" id="t1">
-			往返机票及税、旅游人身意外伤害险30元/人、酒店行李生小费、计划外项目、司机导游小费（<span>_________</span>元/人•天）
+			往返机票及税、旅游人身意外伤害险30元/人、酒店行李生小费、计划外项目、司机导游小费（<span id="xiaofei" style="text-decoration: underline"></span>元/人•天）
 			</td>
 		</tr>
 		<tr>
@@ -203,6 +203,7 @@ table{
                 }
                 $("#zuo").text(valueContent1);
 				$(".bei").text(data.data[7]);
+				$("#xiaofei").text(data.data[9]);
 			}
 		})
 	}
