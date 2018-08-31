@@ -1,8 +1,5 @@
 package com.dyhc.sdglgroundconnection.web;
-import com.dyhc.sdglgroundconnection.pojo.Dispatchhotel;
-import com.dyhc.sdglgroundconnection.pojo.Hotel;
-import com.dyhc.sdglgroundconnection.pojo.RoomType;
-import com.dyhc.sdglgroundconnection.pojo.Staff;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.DispatchhotelService;
 import com.dyhc.sdglgroundconnection.service.HotelService;
 import com.dyhc.sdglgroundconnection.utils.FileUploadUtil;
@@ -85,9 +82,9 @@ public class HotelController {
      */
     @RequestMapping("/updateRoomType")
     public ReponseResult updateRoomType(@RequestParam("typeId")Integer typeId,
-                                        @RequestParam("valueId")Integer valueId,
-                                        @RequestParam("cbj")Double cbj,
-                                        @RequestParam("bj")Double bj) {
+                                        @RequestParam("typeName")Integer valueId,
+                                        @RequestParam("costprice")Double cbj,
+                                        @RequestParam("offer")Double bj) {
         try {
             RoomType roomType=new RoomType();
             roomType.setCostprice(cbj);
@@ -175,6 +172,26 @@ public class HotelController {
         }
     }
 
+
+    /**
+     * 酒店修改赋值
+     * @return
+     */
+    @RequestMapping("/selectRoomType")
+    public ReponseResult selectRoomType() {
+        try {
+            List<Dictionaries> dictionaries = hotelService.selectRoomType();
+            ReponseResult<Object> data = ReponseResult.ok(dictionaries,"酒店房间赋值成功");
+            System.out.println(data);
+            logger.info(" method:showHotel  酒店房间赋值成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showHotel  酒店房间赋值失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 
 
     /**
