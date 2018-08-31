@@ -43,6 +43,14 @@ public interface RestaurantMapper extends CommonMapper<Restaurant>{
     int updateRestaurantById(Restaurant restaurant);
 
     /**
+     * 赵伟伟
+     * 修改饭店
+     * @param restaurant
+     * @return
+     */
+    int updateRestaurantById1(Restaurant restaurant);
+
+    /**
      * 根据valueId获取饭店信息
      * @param valueId
      * @return

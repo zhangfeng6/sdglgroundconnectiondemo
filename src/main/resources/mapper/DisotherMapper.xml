@@ -5,6 +5,6 @@
 
     <!--根据调度id获取调度其他表数据-->
     <select id="getDisotherByDid" resultType="com.dyhc.sdglgroundconnection.pojo.Disother">
-        SELECT `costPrice` FROM `disother` WHERE `offerId`=#{Did}
+        SELECT `disOtherId`,`costPrice` FROM `disother` WHERE `offerId`=#{Did}
     </select>
 </mapper>

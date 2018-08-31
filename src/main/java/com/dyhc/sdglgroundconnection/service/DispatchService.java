@@ -108,7 +108,7 @@ public interface DispatchService {
     Cluster ClusterById(Integer dispatchId)throws Exception;
 
     /**
-     * 增加调度信息并修改报价信息的状态
+     * 增加调度信息并修改报价信息的状态     张枫
      * @param dispatchParameter
      * @return
      */
@@ -121,4 +121,12 @@ public interface DispatchService {
      * @throws Exception
      */
     Map<String,Object> getDispatchinfoById(Integer dispatchId)throws Exception;
+
+    /**
+     * 修改调度信息       张枫
+     * @param dispatchParameter
+     * @return
+     * @throws Exception
+     */
+    int updateDispatch(DispatchParameter dispatchParameter)throws Exception;
 }

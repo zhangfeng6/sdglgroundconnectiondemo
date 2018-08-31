@@ -16,6 +16,7 @@ public class Cluster {
     private int clusterId; // 接团表
     @Column(name = "dispatchId")
     private int dispatchId;//调度表id
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "clusterTime")
     private Date clusterTime;//接团日期
     @Column(name = "clusterAdderss")

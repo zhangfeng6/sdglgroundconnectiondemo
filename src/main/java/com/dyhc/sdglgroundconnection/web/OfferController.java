@@ -278,6 +278,7 @@ public class OfferController {
         Offerscenic offerscenic = new Offerscenic();
         Offerother offerother = new Offerother();
         Double zongjia = 0.0;
+        Double zongjia1 = 0.0;
         try {
 
 
@@ -287,10 +288,16 @@ public class OfferController {
                 zongjia+=Double.parseDouble(wanbjList[z]);
                 zongjia+=Double.parseDouble(joffer[z]);
 
+                zongjia1+=Double.parseDouble(wucbList[z]);
+                zongjia1+=Double.parseDouble(wancbList[z]);
+                zongjia1+=Double.parseDouble(jcostPrice[z]);
+
                 String[] jd = jingdianList[z].split(",");
                 String[] jdo = jdofferList[z].split(",");
+                String[] jdc = jdcostPriceList[z].split(",");
                 for (int j=0;j<jd.length;j++){
                     zongjia += Double.parseDouble(jdo[j]);
+                    zongjia1 += Double.parseDouble(jdc[j]);
                 }
             }
 
@@ -301,6 +308,7 @@ public class OfferController {
             Timestamp ts = new Timestamp(System.currentTimeMillis());
             offer.setTourist(travel.getTravelName());
             offer.setOffer(zongjia);
+            offer.setCostPrice(zongjia1);
             offer.setTravelId(Integer.parseInt(travelId));
             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date date = format1.parse(travelStartTime);
