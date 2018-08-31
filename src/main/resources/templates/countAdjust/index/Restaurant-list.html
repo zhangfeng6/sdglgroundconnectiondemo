@@ -19,7 +19,7 @@
             <div class="layui-inline">
                 <input type="text" id="jiuA" name="title1" placeholder="请输入饭店地址" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-inline">
+            <div class="layui-inline" id="hi">
                 <select name="states" id="jiuS" lay-filter="status">
                     <option value="">请选择一个状态</option>
                     <option value="2">禁用</option>
@@ -96,6 +96,7 @@
     $(function(){
         loadData();
 
+        $("#hi").hide();
 
         $(document).on("click","#insert",function () {
             layer.open({

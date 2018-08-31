@@ -78,6 +78,15 @@ public class StaffServiceImpl implements StaffService {
     public Integer getStaffUpdTwo(Staff staff) {
         return staffMapper.getStaffUpdTwo(staff);
     }
+    /**
+     * 不修改图片
+     * @param staff
+     * @return
+     */
+    @Override
+    public Integer getStaffUpdThree(Staff staff) {
+        return staffMapper.getStaffUpdThree(staff);
+    }
 
     /**
      * 添加
