@@ -33,9 +33,9 @@
 					<ul class="layui-nav" lay-filter="rightNav">
 					  
 					  <li class="layui-nav-item">
-					    <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息">个人信息</a>
+						  <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息">个人信息</a>
 					  </li>
-					  <li class="layui-nav-item"><a href="javascript:;">退出</a></li>
+					  <li class="layui-nav-item"><a href="javascript:;" onclick="qingkong()">退出</a></li>
 					</ul>
 				</div>
 				<!--主体内容-->
@@ -60,10 +60,25 @@
 				
 			</div>
 		</div>
-		<script type="text/javascript">
+		<script src="/js/jquery-3.2.1.js" type="text/javascript"></script>
+		<script>
 			var scope={
 				link:'./welcome.html'
 			}
+            //退出按钮,清空session
+            function qingkong() {
+                $.ajax({
+                    url:"http://localhost:8888/Staff/qingkong",
+                    data:{},
+                    dataType:"json",
+                    type:"get",
+                    success:function (result) {
+                        if(result.data==1){
+                            window.parent.location.href="http://localhost:8888/admins/login.html";
+                        }
+                    }
+                });
+            }
 		</script>
 		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>

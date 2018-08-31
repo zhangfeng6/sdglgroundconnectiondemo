@@ -78,4 +78,13 @@ public class EnterFinancePageController {
         request.setAttribute("billTypeId",billTypeId);
         return "finance/index/viewPictures";
     }
+
+    /**
+     * 进入article-list.html页面
+     * @return
+     */
+    @RequestMapping("/admin-info.html")
+    public String  admininfo() {
+        return "finance/index/admin-info";
+    }
 }

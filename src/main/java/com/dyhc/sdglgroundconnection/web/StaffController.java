@@ -508,4 +508,28 @@ public class StaffController  {
             return err;
         }
     }
+
+    /**
+     * 退出登录,清空session
+     * @return
+     */
+    @RequestMapping("qingkong")
+    public ReponseResult qingkong(){
+        try {
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session=request.getSession();
+            session.removeAttribute("staff");
+            if (session.getAttribute("staff")==null){
+                logger.info("mothod:qingkong 清空session成功");
+                return ReponseResult.ok(1,"清空session成功");
+            }else {
+                logger.error("mothod:qingkong 清空session失败");
+                return ReponseResult.err("清空session失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:qingkong 清空session失败");
+            return ReponseResult.err("清空session失败");
+        }
+    }
 }
