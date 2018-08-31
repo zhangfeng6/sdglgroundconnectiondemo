@@ -18,4 +18,16 @@
     <select id="reportdetail" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
        select  * from  reportdetail where  dispatchId=#{dispatchId}
     </select>
+    
+    <update id="tgShenHe">
+        UPDATE `reportdetail` SET `status`=4 WHERE reportDetailId=#{reportDetailId}
+    </update>
+
+    <update id="bhShenHe">
+        UPDATE `reportdetail` SET `status`=3 WHERE reportDetailId=#{reportDetailId}
+    </update>
+
+    <update id="jsShenHe">
+        UPDATE `reportdetail` SET `status`=2 WHERE reportDetailId=#{reportDetailId}
+    </update>
 </mapper>

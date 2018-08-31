@@ -68,4 +68,34 @@ public class ReportdetailServiceImpl implements ReportdetailService {
         }
         return a;
     }
+
+    @Override
+    public Integer tgShenHe(Integer reportDetailId) throws Exception {
+        try {
+            reportdetailMapper.tgShenHe(reportDetailId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer bhShenHe(Integer reportDetailId) throws Exception {
+        try {
+            reportdetailMapper.bhShenHe(reportDetailId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer jsShenHe(Integer reportDetailId) throws Exception {
+        try {
+            reportdetailMapper.jsShenHe(reportDetailId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
 }

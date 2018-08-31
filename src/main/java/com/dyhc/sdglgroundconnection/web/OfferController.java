@@ -123,6 +123,7 @@ public class OfferController {
         String ctypeId = request.getParameter("ctypeId");
         String remarks = request.getParameter("remarks");
         String[] tripList = request.getParameterValues("tripList");
+        String xiaofei = request.getParameter("xiaofei");
 
 
 
@@ -139,6 +140,7 @@ public class OfferController {
             allList.add(travel);
             allList.add(remarks);
             allList.add(tripList);
+            allList.add(xiaofei);
             session.setAttribute("allList",allList);
             ReponseResult<Object> data = ReponseResult.err("查询成功！");
             return data;
@@ -267,6 +269,7 @@ public class OfferController {
         String coffer = request.getParameter("coffer");
         String des = request.getParameter("des");
         String jiedai = request.getParameter("jiedai");
+        String xiaofei = request.getParameter("xiaofei");
 
 
         Offer offer = new Offer();
@@ -326,6 +329,7 @@ public class OfferController {
             offer.setTrip(tripList[0]);
             offer.setRemarks(remarks);
             offer.setReception(jiedai);
+            offer.setNotcontain(xiaofei);
             offerService.insertOffer(offer);
 
 
@@ -340,7 +344,16 @@ public class OfferController {
                 //线路报价
                 offerline.setOfferId(offer.getOfferId());
                 String mu="";
-                if(xianluList[i] instanceof String){
+
+                boolean is = true;
+                try {
+                    Integer.parseInt(xianluList[i]);
+                    is = false;
+                } catch (NumberFormatException e) {
+                    is = true;
+                }
+
+                if(is){
                     mu = xianluList[i];
                 }else{
                     Template template = templateService.selecctNameById(Integer.parseInt(xianluList[i]));

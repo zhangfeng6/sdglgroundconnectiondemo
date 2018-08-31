@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>ajax & LayUI分页插件</title>
-	<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-	<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+	<title>展示车队信息</title>
+	<link rel="stylesheet" href="/css/layui.css" media="all">
 
 </head>
 <body>
@@ -51,14 +50,13 @@
 	</div>
 	<div id="fy" style="text-align: center"></div>
 </div>
+
 </body>
 </html>
-<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="/layui.js"></script>
+<script src="/js/jquery-1.8.2.min.js"></script>
 <script src="/js/jquery-3.2.1.js"></script>
 <script>
-
 
     $(document).on('click','#innerCarRental',function(){
         layer.open({
@@ -117,7 +115,7 @@
     listCarRentals();
 
     /**
-	 * 查询车队信息并分页
+     * 查询车队信息并分页
      * @param aa
      */
     function listCarRentals(aa) {
@@ -204,7 +202,7 @@
                                 "</tr>";
                         })
                     }
-					xu++;
+                    xu++;
                 })
                 $('tbody').html(content);
 
@@ -217,7 +215,7 @@
 
 
     /**
-	 * 删除车队公司及下面的车辆类型
+     * 删除车队公司及下面的车辆类型
      * @param carRentalId
      */
     function deleteCarRentals(carRentalId){
@@ -235,15 +233,15 @@
                     listCarRentals(1);
                 }
             })
-		}
+        }
 
-	}
+    }
 
 
     /**
-	 * 根据车辆id删除车辆
+     * 根据车辆id删除车辆
      */
-	function deleteVehicleTypeById(typeId){
+    function deleteVehicleTypeById(typeId){
         var tishi=window.confirm("确认要删除该车辆类型吗?");
         if (tishi==true){
             $.ajax({
@@ -259,7 +257,7 @@
                 }
             })
         }
-	}
+    }
 
     /**
      * 查询车辆类型
@@ -314,5 +312,4 @@
             }
         })
     });
-
 </script>
