@@ -180,7 +180,7 @@ public class StaffController  {
             Staff staff2=objectMapper.readValue(staff1,Staff.class);
             Integer i=0;
             String uploadResult=FileUploadUtil.uploadImage(headPortraitPath,savePath,".jpg");
-            staff2.setHeadPortraitPath(savePath+uploadResult);
+            staff2.setHeadPortraitPath(uploadResult);
             if(staff2.getStaffId()!=0){
                 i=staffService.getStaffUpdTwo(staff2);
                 System.out.println("***********"+i);
@@ -473,6 +473,36 @@ public class StaffController  {
             return ReponseResult.ok(data,"判断车辆类型是否存在成功！");
         }catch (Exception e){
             logger.error(" method:StaffByName  判断车辆类型是否存在失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 不修改图片
+     * @param
+     * @return
+     */
+    @PostMapping("/findStaffThree")
+    public ReponseResult findStaffThree(HttpServletRequest request){
+        String file="";
+        try{
+            String staff1=request.getParameter("staff");
+            ObjectMapper objectMapper=new ObjectMapper();
+            Staff staff2=objectMapper.readValue(staff1,Staff.class);
+            Integer i=0;
+            if(staff2.getStaffId()!=0){
+                file="保存成功";
+                i=staffService.getStaffUpdThree(staff2);
+                System.out.println("***********"+i);
+            }else{
+                file="图片不能为空";
+            }
+            logger.info(" method:StaffAdd  保存成功！");
+            return ReponseResult.ok(i,file);
+        }catch (Exception e){
+            logger.error(" method:StaffAdd  保存人员失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;
