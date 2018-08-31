@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -83,6 +84,68 @@ public class ReportdetailController {
             logger.error("method:reportdetail 获取获取导游报账明细信息失败");
             e.printStackTrace();
             return ReponseResult.err("获取失败");
+        }
+    }
+
+    /**
+     * 通过导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("tgShenHe")
+    @LogNotes(operationType="导游报账",content="修改审核状态")
+    public ReponseResult tgShenHe(Integer reportDetailId){
+        try {
+            Integer result=reportdetailService.tgShenHe(reportDetailId);
+            ReponseResult data=ReponseResult.ok(result,"报账审核成功");
+            logger.info("mothod:tgShenHe 报账审核成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:tgShenHe 报账审核失败");
+            return ReponseResult.err("报账审核失败");
+        }
+    }
+
+
+    /**
+     * 驳回导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("bhShenHe")
+    @LogNotes(operationType="导游报账",content="修改审核状态")
+    public ReponseResult bhShenHe(Integer reportDetailId){
+        try {
+            Integer result=reportdetailService.bhShenHe(reportDetailId);
+            ReponseResult data=ReponseResult.ok(result,"报账驳回审核成功");
+            logger.info("mothod:bhShenHe 报账驳回审核成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:bhShenHe 报账驳回审核失败");
+            return ReponseResult.err("报账驳回审核失败");
+        }
+    }
+
+
+    /**
+     * 驳回导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("jsShenHe")
+    @LogNotes(operationType="导游报账",content="修改审核状态")
+    public ReponseResult jsShenHe(Integer reportDetailId){
+        try {
+            Integer result=reportdetailService.jsShenHe(reportDetailId);
+            ReponseResult data=ReponseResult.ok(result,"报账结算成功");
+            logger.info("mothod:jsShenHe 报账结算成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:jsShenHe 报账结算失败");
+            return ReponseResult.err("报账结算失败");
         }
     }
 }

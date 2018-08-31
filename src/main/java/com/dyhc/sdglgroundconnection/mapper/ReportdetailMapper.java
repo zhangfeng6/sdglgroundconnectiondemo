@@ -29,4 +29,25 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     Reportdetail reportdetail(@Param("dispatchId")Integer dispatchId);
+
+    /**
+     * 通过导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    void tgShenHe(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 通过导游报账的审核
+     * @param reportDetailId
+     * @return
+     */
+    void bhShenHe(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 结算导游报账
+     * @param reportDetailId
+     * @return
+     */
+    void jsShenHe(@Param("reportDetailId") Integer reportDetailId)throws Exception;
 }
