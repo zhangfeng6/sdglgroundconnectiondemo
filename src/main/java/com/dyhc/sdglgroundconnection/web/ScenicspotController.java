@@ -40,14 +40,13 @@ public class ScenicspotController {
      * @param typeId
      * @param scenicSpotName
      * @param scenicSpotAddress
-     * @param whetherDel
      * @param pageNo
      * @return
      */
     @RequestMapping("/listScenicspots")
-    public ReponseResult listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer whetherDel, Integer pageNo,Integer pageSize) {
+    public ReponseResult listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer pageNo,Integer pageSize) {
         try {
-            PageInfo<Scenicspot> scenicspotPageInfo = scenicspotService.listScenicspots(typeId, scenicSpotName, scenicSpotAddress, whetherDel, pageNo, pageSize);
+            PageInfo<Scenicspot> scenicspotPageInfo = scenicspotService.listScenicspots(typeId, scenicSpotName, scenicSpotAddress, pageNo, pageSize);
             ReponseResult<List> data = ReponseResult.ok(scenicspotPageInfo.getList(), scenicspotPageInfo.getTotal(), "分页获取景点成功！");
             logger.info(" method:showHotel  分页获取景点成功！");
             return data;

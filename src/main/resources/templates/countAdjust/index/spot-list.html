@@ -31,13 +31,7 @@
 					<option value="5">A</option>
 				</select>
 			</div>
-			<div class="layui-inline">
-				<select name="whetherDel" lay-filter="status">
-					<option value="3">请选择一个状态</option>
-					<option value="0">正常</option>
-					<option value="2">禁用</option>
-				</select>
-			</div>
+
 			<button class="layui-btn layui-btn-normal" onclick="loadData(1)" type="button">搜索</button>
 		</div>
 	</form>
@@ -54,7 +48,6 @@
 				<th class="">景点等级</th>
 				<th class="">备注</th>
 				<th class="">报价</th>
-				<th>状态</th>
 				<th>操作</th>
 			</tr>
 			</thead>
@@ -88,7 +81,7 @@
         var whetherDel=$("select[name='whetherDel']").val();
         $.ajax({
             url: "http://localhost:8888/Scenicspot/listScenicspots",
-            data: {"typeId":typeId,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"whetherDel":whetherDel,"pageNo":curnum,"pageSize":2},
+            data: {"typeId":typeId,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"pageNo":curnum,"pageSize":2},
             dataType: "json",
             type: "get",
             async: false,
@@ -144,14 +137,6 @@
                     }
                     content+="<td class=''>"+e.remarks+"</td>"+
                         " <td class=''>"+e.offer+"</td>" +
-                        "<td><button class='layui-btn layui-btn-mini layui-btn-normal table-list-status'>";
-                    if (e.whetherDel==0) {
-                        content+="正常";
-                    }
-                    if (e.whetherDel==2) {
-                        content+="禁用";
-                    }
-                    content+="</button></td>" +
                         "<td>" +
                         "<div class='layui-inline'>" +
                         "<button class='layui-btn layui-btn-mini layui-btn-normal  add-btn' data-id='1' data-url='spotshopping-add.html' type='button' id='insertShopping' value='"+e.scenicSpotId+"'><i class='layui-icon'>&#xe654;</i></button>" +
@@ -251,7 +236,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'spot-add.html?id=0'
+            content:'spot-add.html?id=tianjia'
         });
     });
 

@@ -21,7 +21,7 @@ public interface ScenicspotService {
      * @param typeId
      * @return
      */
-    PageInfo<Scenicspot> listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer whetherDel, Integer pageNo, Integer pageSize) throws Exception;
+    PageInfo<Scenicspot> listScenicspots(Integer typeId, String scenicSpotName, String scenicSpotAddress, Integer pageNo, Integer pageSize) throws Exception;
 
 
 
