@@ -24,16 +24,6 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 100px;height: 50px;line-height: 50px">请&nbsp;&nbsp;假&nbsp;&nbsp;类&nbsp;&nbsp;型：</td>
-            <td>
-                <select name="arrangetype">
-                    <option value="0">请选择一个请假类型</option>
-                    <option value="1">请假</option>
-                    <option value="2">工作中</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
             <td style="width: 100px;height: 50px;line-height: 50px">请假开始日期：</td>
             <td>
                 <input type="date" name="startDate" />
@@ -81,12 +71,11 @@
      */
     function insertGuideSchedule() {
         var guideId=$("select[name='guideName']").val();
-        var arrangetype=$("select[name='arrangetype']").val();
         var startDate=$("input[name='startDate']").val();
         var endDate=$("input[name='endDate']").val();
         $.ajax({
             url:"http://localhost:8888/GuideSchedule/insertGuideSchedule",
-            data:{"guideId":guideId,"startDate":startDate,"endDate":endDate,"arrangetype":arrangetype},
+            data:{"guideId":guideId,"startDate":startDate,"endDate":endDate},
             dataType:"json",
             type:"get",
             success:function (result) {

@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,8 +27,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
             <div class="layui-input-block">
-                男&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="0" title="男" checked>
-                女&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="1" title="女">
+                男&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="0" >
+                女&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="1" >
             </div>
         </div>
         <div class="layui-form-item">
@@ -51,7 +52,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上传头像：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="file" id="file" name="headPortraitPath"/>
+                <input type="file" id="file" name="headPortraitPath" onchange="img3()"/>
+                <img src="" width="100px;" height="100px;" id="img1"/>
             </div>
         </div>
         <div class="layui-form-item">
@@ -68,7 +70,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button  class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="gettian()">立即提交</button>
+                <button  class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="pan()">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -93,7 +95,6 @@
             return false;
         });
     });
-
     function gettian() {
         var staffname=$("#one").val()
         var theUserName=$("#three").val()
@@ -139,7 +140,7 @@
                 var staff = $("form").serialize();
                 staff = decodeURIComponent(staff, true);//防止乱码
                 var jsondata = DataDeal.formToJson(staff)
-                var savePath = "E://图片";//图片路径
+                var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/";//图片路径
                 var fileObj = document.getElementById("file").files[0];//获取文件对象
                 //formData对象，用来序列二进制数据
                 var forData = new FormData();
@@ -154,6 +155,7 @@
                     cache: false, // 上传文件不需要缓存
                     processData: false, // 对参数进行序列化处理
                     contentType: false,
+                    async: false,
                     success: function (e) {
                         alert(e.msg);
                         parent.location.reload();
@@ -171,23 +173,26 @@
             data: {"staffId": staffId},
             type: "POST",
             dataType: "json",
+            async: false,
             success: function (e) {
                 $("#one").val(e.data.staffname);
-
-                $("input[name=sex]").get(e.data.sex).checked=true;
-
+                /*$("radio[name='sex'][value='"+e.data.sex+"']").attr("checked",true);*/
+                $("input[name='sex']").each(function(){
+                    if($(this).val() == e.data.sex){
+                        $(this).attr( "checked", "checked" );
+                    }
+                });
                 $("#three").val(e.data.theUserName);
                 $("#fonr").val(e.data.cardId);
                 $("#five").val(e.data.qqnumber);
-                $("#enth").val(e.data.headPortraitPath);
                 $("#six").val(e.data.currentAddress);
                 $("#serve").val(e.data.phone);
+                $("#img1").attr("src","/api/image/"+e.data.headPortraitPath);
             }
         })
     }
     function validate() {
         var lala=$("#three").val()
-        alert(lala)
         $.ajax({
             url:"/Staff/ShowStafftheUserName",
             data:{theUserName:lala},
@@ -196,20 +201,95 @@
             success:function (data) {
                 if(data.data==1){
                     alert("用户名已存在")
-                }else{
-                    alert("可以使用该用户")
                 }
             }
         })
     }
-    function check(){
-        var str = document.getElementById("file").value;
-        if(str.length==0)
-        {
-            alert("请选择上传");
-            return false;
+    function img3() {
+        var oFReader = new FileReader();
+        var file = document.getElementById('file').files[0];
+        oFReader.readAsDataURL(file);
+        oFReader.onloadend = function(oFRevent){
+            var src = oFRevent.target.result;
+            $('#img1').attr('src',src);
         }
-        return true;
+
+    }
+    function pan() {
+        var file=$("#file").val();
+        if(file==null || file=='' || file==undefined){
+            getbu()
+        }else{
+            gettian()
+        }
+    }
+    function getbu() {
+        var staffname=$("#one").val()
+        var theUserName=$("#three").val()
+        var cardId=$("#fonr").val()
+        var qqnumber=$("#five").val()
+        var headPortraitPath=$("#enth").val()
+        var currentAddress=$("#six").val()
+        var phone=$("#serve").val().trim();
+        var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
+        var IdCard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        var reg=/^\d{5,10}$/;
+        if(staffname.value =="" || staffname.length ==0){
+            alert("姓名不能为空")
+        }else if(theUserName.value =="" || theUserName.length ==0){
+            alert("用户名不能为空")
+            return;
+        }else if(!IdCard.exec(cardId) && cardId.length !=18){
+            alert("身份证格式不正确")
+            return;
+        }else if(qqnumber.length<=5 || qqnumber.length>=11){
+            alert("QQ号码格式不正确")
+            return;
+        }else if(currentAddress.value =="" || currentAddress.length ==0){
+            alert("现住址不能为空")
+            return;
+        }else if(phone.substring(0,1)){
+            if(!isMobile.exec(phone) && phone.length != 11){
+                alert("电话号码格式不正确")
+                return;
+            }else{
+                var DataDeal = {
+                    //将从form中通过$('#refer').serialize()获取值转成json
+                    formToJson: function (data) {
+                        data = data.replace(/&/g, "\",\"");
+                        data = data.replace(/=/g, "\":\"");
+                        data = "{\"" + data + "\"}";
+                        return data;
+                    }
+                };
+                var staff = $("form").serialize();
+                staff = decodeURIComponent(staff, true);//防止乱码
+                var jsondata = DataDeal.formToJson(staff)
+                var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/";//图片路径
+                var fileObj = document.getElementById("file").files[0];//获取文件对象
+                //formData对象，用来序列二进制数据
+                var forData = new FormData();
+                forData.append("staff", jsondata);
+                $.ajax({
+                    url: "/Staff/findStaffThree",
+                    data: forData,
+                    type: "POST",
+                    dataType: "json",
+                    cache: false, // 上传文件不需要缓存
+                    processData: false, // 对参数进行序列化处理
+                    contentType: false,
+                    async: false,
+                    success: function (e) {
+                        alert(e.msg);
+                        if(e.msg=="图片不能为空"){
+                            return;
+                        }
+                        parent.location.reload();
+                        window.location.reload();
+                    }
+                })
+            }
+        }
     }
 </script>
 </body>

@@ -52,6 +52,12 @@ public interface StaffService {
      * @return
      */
     Integer getStaffUpdTwo(Staff staff);
+    /**
+     * 不修改图片
+     * @param staff
+     * @return
+     */
+    Integer getStaffUpdThree(Staff staff);
 
     /**
      * 添加
