@@ -31,7 +31,7 @@ public class HoteroomType {
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private int weight;  //权重
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "date")
     private Date date;
     @Column(name = "temName")

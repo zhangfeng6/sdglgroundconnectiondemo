@@ -45,6 +45,16 @@ public class RoomType {
     private String value2;
     private String value3;
 
+    @Transient
+    private String valueContent1;
+    public String getValueContent1() {
+        return valueContent1;
+    }
+
+    public void setValueContent1(String valueContent1) {
+        this.valueContent1 = valueContent1;
+    }
+
     @Id
     @Column(name = "typeId")
     public int getTypeId() {

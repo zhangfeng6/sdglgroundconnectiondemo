@@ -163,7 +163,7 @@
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">小费:</label></td>
-						<td colspan="5"><input type="text" class="layui-input"></td>
+						<td colspan="5"><input id="xiaofei" type="text" class="layui-input"></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
@@ -256,6 +256,7 @@
                         $("input").attr("disabled","disabled");
                         $("textarea").attr("disabled","disabled");
                         $(".hi").hide();
+                        $("#add").hide();
                     }
 				})
 
@@ -273,6 +274,7 @@
                             $("[name=travelStartTime]").val(data.data.travelStartTime);
                             $("[name=travelEndTime]").val(data.data.travelEndTime);
                             $("[name=desc]").val(data.data.reception);
+                            $("#xiaofei").val(data.data.notcontain);
 						}
 					})
 				}
@@ -840,6 +842,7 @@
 
 
                     var travelId = $("#xzzutuanshe").children().val();
+                    var xiaofei = $("#xiaofei").val();
 					var number = $("#number").val();
                     var remarks = $("#remarks").val();
 					var travelStartTime = $("[name=travelStartTime]").val();
@@ -856,7 +859,7 @@
 
 					$.ajax({
                         url:"/Offer/insertOffer",
-                        data:{jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer,des:des},
+                        data:{xiaofei:xiaofei,jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer,des:des},
                         dataType:"json",
                         async: false,
                         traditional: true,
@@ -923,6 +926,7 @@
                     var wu = 0;
                     var ctypeId = $("#ctypeId").children().val();
                     var remarks = $("#remarks").val();
+                    var xiaofei = $("#xiaofei").val();
 
                     var tripList = new Array();
                     var wubjList = new Array();
@@ -949,7 +953,7 @@
 					wu = wu/wuCount;
 				    $.ajax({
                         url:"/Offer/quotation",
-                        data:{tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
+                        data:{xiaofei:xiaofei,tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
                         dataType:"json",
                         async: false,
                         traditional: true,

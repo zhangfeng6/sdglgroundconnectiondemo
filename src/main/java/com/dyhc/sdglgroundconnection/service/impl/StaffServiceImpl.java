@@ -95,6 +95,7 @@ public class StaffServiceImpl implements StaffService {
      */
     @Override
     public Integer getStaffAdd(Staff staff) {
+
         return staffMapper.insert(staff);
     }
 

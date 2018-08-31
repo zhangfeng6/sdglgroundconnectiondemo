@@ -13,7 +13,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">类型名称：</label>
             <div class="layui-input-block">
-                <input type="text" name="typeName" required lay-verify="required" placeholder="请输入类型名称" autocomplete="off" class="layui-input">
+                <select name="typeName" class="layui-select">
+
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -40,10 +42,30 @@
 <script src="/layui.js"></script>
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script>
+    var typeId=$("input[name='typeId']").val();
     $(function () {
-        var typeId=$("input[name='typeId']").val();
+
+        fuzhi();
         fuzhiRoomType(typeId);
     })
+
+    function fuzhi(){
+        $.ajax({
+            url:"/Hotel/selectRoomType",
+            data:{},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+                var content = "";
+                $.each(data.data,function(i,e){
+                    content += "<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                })
+                $("[name='typeName']").html(content);
+            }
+        })
+    }
+
+
     <!--修改赋值-->
     function  fuzhiRoomType(typeId) {
         $.ajax({
@@ -52,7 +74,11 @@
             dataType:"json",
             type:"get",
             success:function (data) {
-                $("input[name='typeName']").val(data.data.typeName);
+                $("[name='typeName']").children().each(function(){
+                    if($(this).text() ==data.data.valueContent1){
+                        $(this).prop("selected",true);
+                    }
+                })
                 $("input[name='costprice']").val(data.data.costprice);
                 $("input[name='offer']").val(data.data.offer);
             },

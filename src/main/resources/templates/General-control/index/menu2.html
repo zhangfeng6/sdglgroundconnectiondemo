@@ -63,6 +63,18 @@
             })
         )
     }
+    function  getdispatchinfo(dispatchId) {
+        $(document).on(
+			layer.open({
+            type: 2,
+            title: '查看调度详情',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['1200px' , '800px'],
+            content: '/countAdjust/Quotation-detail.html?did='+dispatchId
+        })
+        )
+    }
     var limitcount = 2; // 每页总记录数
     var curnum = 1;  // 当前页码
     loadData();
@@ -83,11 +95,11 @@
                 $(e.data).each(function (i, result) {
                     str += "<tr><td>" + xu +"</td>" +
                         "<td>" + result.groundConnectionNumber + "</td>" +
-                        "<td>" + result.theUserName + "</td>" +
+                        "<td>" + result.jiDiaoName + "</td>" +
                         "<td>" + result.guideName + "</td>"+
                         "<td>" + result.travelStartTime + "</td>"+
                         "<td>" + result.travelEndTime + "</td>"+
-                        "<td><button class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#'>查看调度详情</a></button>" +
+                        "<td><button type='button' onclick='getdispatchinfo("+result.dispatchId+")' class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#'>修改调度详情</a></button>" +
                         "<input type='hidden' value='"+result.travelStartTime+"'><input type='hidden' value='"+result.travelEndTime+"'>&nbsp;&nbsp;&nbsp;<button onclick='shenhe("+result.dispatchId+","+result.guideId+",this)'class='layui-btn layui-btn-mini layui-btn-normal del-btn'><a href='#' >通过审核</a></button>" +
                         "</td></tr>";
                     xu++;
@@ -130,6 +142,7 @@
 			success:function (result) {
 				if(result.data==1){
 					alert("审核成功！");
+                    loadData(1);
 				}else{
 				    alert("网络异常！");
 				}

@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.HotelMapper;
 import com.dyhc.sdglgroundconnection.mapper.RoomTypeMapper;
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.RoomType;
 import com.dyhc.sdglgroundconnection.service.HotelService;
@@ -130,6 +131,11 @@ public class HotelServiceImpl implements HotelService {
     public Hotel fuzhiHotel(Integer hotelId) throws  Exception{
         Hotel number =hotelMapper.fuzhiHotel(hotelId);
         return  number;
+    }
+
+    @Override
+    public List<Dictionaries> selectRoomType() {
+        return hotelMapper.selectRoomType();
     }
 
 

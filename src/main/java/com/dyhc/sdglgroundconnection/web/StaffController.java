@@ -186,6 +186,7 @@ public class StaffController  {
                 System.out.println("***********"+i);
             }else{
                 staff2.setWhetherDel(0);
+                staff2.setPassword(MD5("123456"));
                 i=staffService.getStaffAdd(staff2);
                 System.out.println("***********"+i);
             }

@@ -20,8 +20,8 @@
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="offerId">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into offer(travelId,travelStartTime,travelEndTime,`number`,tourist,trip,offer,remarks,reception,whetherDel,creater,costPrice)
-        values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},0,1,#{costPrice})
+        insert into offer(travelId,travelStartTime,travelEndTime,`number`,tourist,trip,offer,remarks,reception,whetherDel,creater,costPrice,notcontain)
+        values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},0,1,#{costPrice},#{notcontain})
     </insert>
 
     <select id="selectOfferByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">

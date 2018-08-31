@@ -22,10 +22,10 @@ public class Dispatch {
     private Integer groupNumber; // 组团社团号
     @Column(name = "sendLine")
     private String sendLine; // 发往线路
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "travelStartTime")
     private Date travelStartTime; // 旅行开始时间
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "travelEndTime")
     private Date travelEndTime; // 旅行结束时间
     private Integer num; // 人数
@@ -51,10 +51,10 @@ public class Dispatch {
     private Integer creater; // 创建人 （外键，与人员表关联）
     @Column(name = "`modifier`")
     private Integer modifier; // 修改人（外键，与人员表关联）
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "modifiedData")
     private Date modifiedData; // 修改日期
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "creationDate")
     private Date creationDate; // 创建日期
     @Column(name = "guideId")
@@ -108,6 +108,17 @@ public class Dispatch {
 
     public void setGuideName(String guideName) {
         this.guideName = guideName;
+    }
+
+    @Transient
+    private String jiDiaoName;
+
+    public String getJiDiaoName() {
+        return jiDiaoName;
+    }
+
+    public void setJiDiaoName(String jiDiaoName) {
+        this.jiDiaoName = jiDiaoName;
     }
 
     @Id

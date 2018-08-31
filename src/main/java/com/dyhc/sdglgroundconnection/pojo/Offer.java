@@ -50,6 +50,7 @@ public class Offer {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "creationDate")
     private Timestamp creationDate; // 创建时间
+    @Column(name = "costPrice")
     private double costPrice;
     private String value2;
     private String value3;
