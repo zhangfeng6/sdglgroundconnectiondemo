@@ -205,8 +205,7 @@
             var scenicSpotId=$("input[name='scenicSpotId']").val();
             var parentId=$("select[name='parentId']").val();
 
-
-            if (scenicSpotId==parentId){
+			if (scenicSpotId==parentId){
                 alert("自己本身不能成为父景点")
                 return;
             }else if (scenicSpotName==""){

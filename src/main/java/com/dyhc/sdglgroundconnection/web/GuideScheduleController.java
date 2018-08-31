@@ -41,7 +41,7 @@ public class GuideScheduleController {
      * @return
      */
     @RequestMapping("insertGuideSchedule")
-    public ReponseResult insertGuideSchedule(Integer guideId,String startDate,String endDate,Integer arrangetype){
+    public ReponseResult insertGuideSchedule(Integer guideId,String startDate,String endDate){
         try {
             SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
             Date date1=dateFormat.parse(startDate);
@@ -56,7 +56,7 @@ public class GuideScheduleController {
                 guideschedule.setArrangeyear(bb[0]);
                 guideschedule.setArrangemonth(bb[1]);
                 guideschedule.setArrangeday(bb[2]);
-                guideschedule.setArrangetype(arrangetype);
+                guideschedule.setArrangetype(1);
                 guideschedule.setCreateBy(1);
                 guideschedule.setCreateDate(new Date());
                 guideschedule.setWhetherDel(0);

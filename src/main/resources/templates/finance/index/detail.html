@@ -418,7 +418,7 @@
 
                     if(e.liveDate!=null){       //日期
                         monthDate=e.liveDate.substring(5,7);
-                        dayDate=e.liveDate.substring(8,10)*1+1;
+                        dayDate=e.liveDate.substring(8,10)*1;
                     }
                     //计算住宿合计
                     zshj+=e.subtotal;
@@ -479,7 +479,7 @@
                 var dayDate=0;
                 if(result.data.reportDate!=null){       //日期
                     monthDate=result.data.reportDate.substring(5,7);
-                    dayDate=result.data.reportDate.substring(8,10)*1+1;
+                    dayDate=result.data.reportDate.substring(8,10)*1;
                 }
                 $("#reportDate").text(monthDate+"-"+dayDate);
                 $("#receipt").text(result.data.receipt);
@@ -511,14 +511,14 @@
                     var dayDate=0;
                     if(e.lunchDate!=null){
                         monthDate=e.lunchDate.substring(5,7);
-                        dayDate=e.lunchDate.substring(8,10)*1+1;
+                        dayDate=e.lunchDate.substring(8,10)*1;
                     }
                     //晚餐日期
                     var monthDatedinner=0;
                     var dayDatedinner=0;
                     if(e.dinnerDate!=null){
                         monthDatedinner=e.dinnerDate.substring(5,7);
-                        dayDatedinner=e.dinnerDate.substring(8,10)*1+1;
+                        dayDatedinner=e.dinnerDate.substring(8,10)*1;
                     }
                     var wcxj=e.lunchMeal*e.lunchEatNum; //午餐小计
                     var wchj=e.dinnerMeal*e.dinnerEatNum;   //晚餐小计

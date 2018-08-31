@@ -17,11 +17,11 @@ import java.util.List;
 public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
 
     /**
-     * 根据名称、地址、等级状态查询景点
+     * 根据名称、地址、等级查询景点
      * @param typeId
      * @return
      */
-    List<Scenicspot> listScenicspots(@Param("typeId") Integer typeId, @Param("scenicSpotName")String scenicSpotName, @Param("scenicSpotAddress") String scenicSpotAddress, @Param("whetherDel")Integer whetherDel)throws Exception;
+    List<Scenicspot> listScenicspots(@Param("typeId") Integer typeId, @Param("scenicSpotName")String scenicSpotName, @Param("scenicSpotAddress") String scenicSpotAddress)throws Exception;
 
     /**
      * 根据父景点编号查询景点名称

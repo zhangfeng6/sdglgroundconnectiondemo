@@ -21,7 +21,7 @@
 
     <select id="listDictionaries1" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM `dictionaries`
-        WHERE typeCode='VEHICLE'
+        WHERE typeCode='VEHICLE' and whetherDel=0
     </select>
 
     <select id="listdictionarieslBycode" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
