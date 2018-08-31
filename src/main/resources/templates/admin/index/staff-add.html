@@ -50,6 +50,18 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</label>
+            <div  class="layui-input-block" id="roleId" style="width: 400px;">
+                <select type="text" style="width:210px ;height: 40px" name="roleId">
+                    <option value="0">--请选择角色类型--</option>
+                    <option value="1">--管理员--</option>
+                    <option value="3">--计调--</option>
+                    <option value="4">--总控--</option>
+                    <option value="5">--财务--</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">上传头像：</label>
             <div class="layui-input-block" style="width: 400px;">
                 <input type="file" id="file" name="headPortraitPath" onchange="img3()"/>
@@ -187,6 +199,7 @@
                 $("#five").val(e.data.qqnumber);
                 $("#six").val(e.data.currentAddress);
                 $("#serve").val(e.data.phone);
+                $("select[name=roleId]").val(e.data.roleId);
                 $("#img1").attr("src","/api/image/"+e.data.headPortraitPath);
             }
         })
