@@ -109,9 +109,9 @@ public class HotelController {
      */
     @RequestMapping("/saveRoomType")
     public ReponseResult saveRommType(@RequestParam("hotelId")Integer hotelId,
-                                      @RequestParam("valueId")Integer valueId,
-                                      @RequestParam("cbj")Double cbj,
-                                      @RequestParam("bj")Double bj) {
+                                      @RequestParam("typeName")Integer valueId,
+                                      @RequestParam("costprice")Double cbj,
+                                      @RequestParam("offer")Double bj) {
         try {
             RoomType roomType=new RoomType();
             roomType.setCostprice(cbj);
@@ -364,6 +364,28 @@ public class HotelController {
             e.printStackTrace();
             logger.error("method:getHoterById  获取酒店名称失败！");
             return ReponseResult.err("获取酒店名称失败");
+        }
+    }
+
+
+    /**
+     * 赵伟伟
+     * @return
+     */
+    @RequestMapping("/selectTypeById")
+    public ReponseResult selectTypeById(@RequestParam("hotelId")Integer hotelId,
+                                        @RequestParam("typeName")Integer valueId) {
+        int count =0;
+        try {
+            count = hotelService.selectTypeById(valueId,hotelId);
+            ReponseResult<Object> data = ReponseResult.ok(count, "查询成功！");
+            logger.info(" method:showHotel  查询成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  查询失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
         }
     }
 

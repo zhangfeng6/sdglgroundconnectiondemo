@@ -174,7 +174,7 @@
                                 "<td class=\"\"></td>\n" +
                                 "<td>\n" +
                                 "<div class=\"layui-inline\">\n" +
-                                "<button class=\"layui-btn layui-btn-mini layui-btn-normal\" id=\"update2\" value=\""+p.typeId+"\" onclick='updateFangjian("+p.typeId+")'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
+                                "<button class=\"layui-btn layui-btn-mini layui-btn-normal\" id=\"update2\" value=\""+p.typeId+"\" onclick='updateFangjian("+p.typeId+","+result.hotelId+")'><i class=\"layui-icon\">&#xe642;</i></button>\n" +
                                 "<button class=\"layui-btn layui-btn-mini layui-btn-danger\" id=\"delete2\" value=\""+p.typeId+"\" onclick='del("+p.typeId+")'><i class=\"layui-icon\">&#xe640;</i></button>\n" +
                                 "</div>\n" +
                                 "</td>\n" +
@@ -211,7 +211,6 @@
 	}
 
 	function  addFangjian(hotelId) {
-       alert(hotelId);
         $(document).on(
             layer.open({
                 type: 2,
@@ -228,7 +227,7 @@
 	 * 酒店修改方法修改方法
      * @param typeId
      */
-    function  updateFangjian(typeId) {
+    function  updateFangjian(typeId,hotelId) {
         $(document).on(
             layer.open({
                 type: 2,
@@ -236,7 +235,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '350px'],
-                content: '/countAdjust/hotel-roomType-update?typeId='+typeId+""
+                content: '/countAdjust/hotel-roomType-update?typeId='+typeId+"&hotelId="+hotelId
             })
         )
     }

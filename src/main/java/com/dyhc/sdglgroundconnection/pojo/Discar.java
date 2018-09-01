@@ -12,9 +12,20 @@ import java.util.Objects;
  **/
 @Table(name = "discar")
 public class Discar {
+    public String getCarRentalName() {
+        return carRentalName;
+    }
+
+    public void setCarRentalName(String carRentalName) {
+        this.carRentalName = carRentalName;
+    }
+
     @Id
     @Column(name = "disCarId")
+
     private int disCarId; // 调度用车id
+    @Transient
+    private String carRentalName;
     @Column(name = "typeId")
     private Integer typeId; // 用车类型编号（外键，与用车类型表关联）
     @Column(name = "offerId")
