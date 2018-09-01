@@ -46,7 +46,7 @@ public class ScenicspotServiceImpl implements ScenicspotService {
 
     @Override
     public List<Scenicspot> getScenicspotParentName() throws Exception {
-        return scenicspotMapper.selectAll();
+        return scenicspotMapper.getScenicspotParentName();
     }
 
     @Override
@@ -111,5 +111,10 @@ public class ScenicspotServiceImpl implements ScenicspotService {
     @Override
     public List<Scenicspot> ShowScenicSpotId(Integer scenicSpotId) {
         return scenicspotMapper.ShowScenicSpotId(scenicSpotId);
+    }
+
+    @Override
+    public List<Scenicspot> selectAllScenic() {
+        return scenicspotMapper.selectAllScenic();
     }
 }

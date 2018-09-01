@@ -38,7 +38,7 @@
             <th class="">名称</th>
             <th class="">地址</th>
             <th class="">联系电话</th>
-            <th>状态</th>
+            <th>餐馆图片</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -169,10 +169,7 @@
                var context2="";
                var xu=(curnum-1)*limitcount+1;
                $.each(data.data,function (i,e) {
-                   var del = "正常";
-                   if (e.whetherDel==2) {
-                       del = "禁用";
-                   }
+
                    count++;
                    count2++;
                    var fuqinid="node-"+count;
@@ -184,7 +181,7 @@
                        "\t\t\t\t\t\t\t\t<td class=\"\">"+e.restaurantName+"</td>\n" +
                        "\t\t\t\t\t\t\t\t<td class=\"\">"+e.restaurantAddress+"</td>\n" +
                        "\t\t\t\t\t\t\t\t<td class=\"\">"+e.phone+"</td>\n" +
-                       "\t\t\t\t\t\t\t\t<td class=\"\">"+del+"</td>\n" +
+                       "\t\t\t\t\t\t\t\t<td class=\"\"><img src='/api/image/"+e.picturePath+"' width='100px' height='50px'> </td>\n" +
                        "\t\t\t\t\t\t\t\t<td>\n" +
                        "\t\t\t\t\t\t\t\t\t<div class='layui-inline'><button class='layui-btn layui-btn-small layui-btn-normal add-btn' value='"+e.restaurantId+"' id='insertR' type='button'><i class='layui-icon'>&#xe654;</i></button><button id='update' type='button' value='" + e.restaurantId + "' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='1' data-url='article-detail.html'><i class='layui-icon' onclick='delRestaurantById(" + e.restaurantId + ")'>&#xe640;</i></button></div>\n" +
                        "\t\t\t\t\t\t\t\t</td>\n" +

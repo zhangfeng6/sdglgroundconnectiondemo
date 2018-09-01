@@ -112,24 +112,6 @@ public class ShoppingController  {
     }
 
 
-    /**
-     *微信小程序之获取购物地点
-     * @param dispatchId
-     * @param weight
-     * @return
-     */
-    @RequestMapping("getShoppingByIdWX")
-    public ReponseResult getShoppingByIdWX(Integer dispatchId,Integer weight){
-        try {
-            Disshopp disshopp=disshoppService.getDisshoppById(dispatchId,weight);
-            Shopping shopping=shoppingService.getShoppingById(disshopp.getScenicSpotId());
-            logger.info("method:getShoppingByIdWX  获取购物信息成功！");
-            return ReponseResult.ok(shopping,"获取购物地点成功");
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("method:getShoppingByIdWX  获取购物信息失败！");
-            return ReponseResult.err("获取购物地点失败");
-        }
-    }
+
 
 }
