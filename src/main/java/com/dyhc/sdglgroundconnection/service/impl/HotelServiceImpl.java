@@ -138,6 +138,11 @@ public class HotelServiceImpl implements HotelService {
         return hotelMapper.selectRoomType();
     }
 
+    @Override
+    public int selectTypeById(Integer valueId, Integer hotelId) {
+        return hotelMapper.selectTypeById(valueId,hotelId);
+    }
+
 
     /**
      * 删除酒店信息
