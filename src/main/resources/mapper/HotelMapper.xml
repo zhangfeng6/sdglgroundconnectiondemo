@@ -35,4 +35,8 @@
     <select id="selectRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT * FROM dictionaries WHERE typeCode='THEROOM' AND whetherDel!=1
     </select>
+
+    <select id="selectTypeById" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM hotel WHERE hotelId IN (SELECT hotelId FROM roomType WHERE typeCode='THEROOM' AND valueId=#{valueId} AND hotelId=#{hotelId} AND whetherDel!=1)
+    </select>
 </mapper>

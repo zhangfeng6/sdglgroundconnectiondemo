@@ -126,4 +126,13 @@ public interface HotelService {
 
     List<Dictionaries> selectRoomType();
 
+
+    /**
+     * 根据id查询餐馆数量
+     * @param valueId
+     * @param
+     * @return
+     */
+    int selectTypeById(Integer valueId,Integer hotelId);
+
 }

@@ -13,7 +13,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">类型名称：</label>
             <div class="layui-input-block">
-                <input type="text" name="typeName" required lay-verify="required" placeholder="请输入类型名称" autocomplete="off" class="layui-input">
+                <select name="typeName" class="layui-select">
+
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -30,7 +32,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" type="button" onclick="saveRommType()">立即提交</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" type="button" onclick="panduan()">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -74,5 +76,57 @@
             return false;
         });
     });
+
+    $(function(){
+        fuzhi();
+    })
+
+    function fuzhi(){
+        $.ajax({
+            url:"/Hotel/selectRoomType",
+            data:{},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+                var content = "<option value='0'>请选择</option>";
+                $.each(data.data,function(i,e){
+                    content += "<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
+                })
+                $("[name='typeName']").html(content);
+            }
+        })
+    }
+
+
+    function panduan(){
+        var typeName = $("[name=typeName]").val();
+        var costprice = $("[name=costprice]").val();
+        var offer = $("[name=offer]").val();
+        if (typeName=='' || typeName==null||typeName==undefined||typeName==0){
+            return;
+        }
+        if (costprice=='' || costprice==null||costprice==undefined){
+            return;
+        }
+        if (offer=='' || offer==null||offer==undefined){
+            return;
+        }
+        var valueId = $("select option:selected").val();
+        var hotelId = $("#hotelId").val();
+        $.ajax({
+            url: "/Hotel/selectTypeById",
+            data: {hotelId:hotelId,typeName:valueId},
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                    if (data.data>0){
+                        alert("该餐厅已有此类型");
+                        return;
+                    }else{
+                        saveRommType();
+                    }
+            }
+        })
+    }
 </script>
 </html>
