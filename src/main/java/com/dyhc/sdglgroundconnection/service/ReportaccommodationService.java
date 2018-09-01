@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -26,4 +27,11 @@ public interface ReportaccommodationService {
      * @throws Exception
      */
    List<Reportaccommodation> listReportaccommodationByreportDetailId(Integer reportDetailId)throws Exception;
+
+    /**
+     * 新增报账住宿
+     * @param reportaccommodation
+     * @return
+     */
+    Integer   save_Reportaccommodation(Reportaccommodation reportaccommodation);
 }
