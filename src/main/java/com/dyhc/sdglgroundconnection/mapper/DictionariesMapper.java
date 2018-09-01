@@ -190,4 +190,12 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      * @return
      */
     Dictionaries DictionariesHotelMax();
+
+    /**
+     * 查询房间类型名称（贾晓亮：在字典表）
+     * @param valueId
+     * @return
+     */
+    Dictionaries  dis_All(@Param("valueId")Integer valueId);
+
 }

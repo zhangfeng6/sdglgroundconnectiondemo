@@ -37,4 +37,18 @@ public interface RoomTypeMapper extends CommonMapper<RoomType>{
      * @return
      */
     RoomType getroomtypeByName(@Param("hotelId")Integer hotelId,@Param("valueId")Integer valueId);
+    /**
+     * 查询房间类型(贾晓亮：房间名称)
+     * @param hotelId
+     * @return
+     */
+    List<RoomType> roomType_All(@Param("hotelId")Integer hotelId);
+
+    /**
+     * 查询酒店Id
+     * @param typeId
+     * @return
+     */
+    RoomType type_Id(@Param("typeId")Integer typeId);
+
 }

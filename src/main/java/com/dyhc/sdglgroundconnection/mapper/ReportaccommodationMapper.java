@@ -22,4 +22,13 @@ public interface ReportaccommodationMapper extends CommonMapper<Reportaccommodat
      * @throws Exception
      */
     List<Reportaccommodation> listReportaccommodationByreportDetailId(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 查询全部酒店：贾晓亮
+     * @return
+     */
+    List<Reportaccommodation>  reportaccommodation();
+
+
+
 }

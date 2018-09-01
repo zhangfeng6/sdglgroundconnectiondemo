@@ -42,6 +42,7 @@ public class Dictionaries {
     private String value1;
     private String value2;
     private String value3;
+
     @Transient
     private String theUserName;
 

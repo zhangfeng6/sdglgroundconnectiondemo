@@ -1,7 +1,10 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
+import com.dyhc.sdglgroundconnection.mapper.HotelMapper;
 import com.dyhc.sdglgroundconnection.mapper.ReportaccommodationMapper;
+import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
+import com.dyhc.sdglgroundconnection.service.HotelService;
 import com.dyhc.sdglgroundconnection.service.ReportaccommodationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ public class ReportaccommodationServiceImpl implements ReportaccommodationServic
 
     @Autowired
     private ReportaccommodationMapper reportaccommodationMapper;
+
+    @Autowired
+    private HotelService hotelService;
 
     /**
      * 导游报账住宿：贾晓亮
@@ -36,5 +42,15 @@ public class ReportaccommodationServiceImpl implements ReportaccommodationServic
     @Override
     public List<Reportaccommodation> listReportaccommodationByreportDetailId(Integer reportDetailId) throws Exception {
         return reportaccommodationMapper.listReportaccommodationByreportDetailId(reportDetailId);
+    }
+
+    /**
+     * 新增报账住宿
+     * @param reportaccommodation
+     * @return
+     */
+    @Override
+    public Integer save_Reportaccommodation(Reportaccommodation reportaccommodation) {
+        return reportaccommodationMapper.insert(reportaccommodation);
     }
 }
