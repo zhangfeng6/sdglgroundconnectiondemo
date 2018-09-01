@@ -70,7 +70,7 @@
 			    var password=$("[name='password']").val();
 			    password = hex_md5(password);
                 $.ajax({
-                    url:"/login",
+                    url:"/Staff/login",
                     data:{"theUserName":theUserName,"password":password},
                     dataType:"Json",
                     type:"get",
@@ -84,6 +84,9 @@
                         }
                         if (data.data==4){
                             location.href="http://localhost:8888/General/count-Adjust-Index.html";
+                        }
+                        if (data.data==5){
+                            location.href="http://localhost:8888/finance/finance-Index.html";
                         }
                     }
 				})

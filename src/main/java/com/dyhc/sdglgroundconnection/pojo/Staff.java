@@ -46,6 +46,7 @@ public class Staff {
     private String value2;
     private String value3;
 
+
     @Id
     @Column(name = "staff\nId")
     public int getStaffId() {
