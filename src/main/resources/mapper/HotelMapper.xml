@@ -39,4 +39,8 @@
     <select id="selectTypeById" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM hotel WHERE hotelId IN (SELECT hotelId FROM roomType WHERE typeCode='THEROOM' AND valueId=#{valueId} AND hotelId=#{hotelId} AND whetherDel!=1)
     </select>
+    <!--获取所有未删除的酒店信息-->
+    <select id="listNoDelHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+        SELECT * FROM `hotel` WHERE `whetherDel`!=1
+    </select>
 </mapper>

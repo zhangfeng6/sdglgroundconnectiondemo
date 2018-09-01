@@ -17,7 +17,7 @@
 
     <insert id="insertVehicleType">
         INSERT INTO `vehicletype`(valueId,passengervolume,costprice,offer,typeCode,carRentalId,whetherDel,createBy,createDate)
-        VALUE(#{valueId},#{passengervolume},#{costprice},#{offer},'THEROOM',#{carRentalId},#{whetherDel},#{createBy},#{createDate})
+        VALUE(#{valueId},#{passengervolume},#{costprice},#{offer},'VEHICLE',#{carRentalId},#{whetherDel},#{createBy},#{createDate})
     </insert>
     
     <update id="updateVehicleType">

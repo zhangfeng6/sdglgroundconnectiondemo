@@ -201,7 +201,7 @@ public class HotelServiceImpl implements HotelService {
      */
     @Override
     public List<Hotel> listHotelNoPage() throws Exception {
-        return hotelMapper.selectAll();
+        return hotelMapper.listNoDelHotel();
     }
     public PageInfo<Hotel> listHotels(Integer pageNo, Integer PageSize) {
         PageHelper.startPage(pageNo, PageSize, true);

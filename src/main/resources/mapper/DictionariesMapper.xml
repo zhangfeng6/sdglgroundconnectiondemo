@@ -27,7 +27,7 @@
     <select id="listdictionarieslBycode" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
             SELECT `valueId`,`valueContent1` FROM `dictionaries`
         <if test="code != null and code != '' ">
-            WHERE `typeCode`=#{code}
+            WHERE `typeCode`=#{code} and `whetherDel`!=1
         </if>
     </select>
 
