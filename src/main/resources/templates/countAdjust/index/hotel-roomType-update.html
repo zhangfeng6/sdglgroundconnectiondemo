@@ -9,6 +9,7 @@
 <body>
 <div class="wrap-container">
     <form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxl">
+        <input type="hidden" value="" th:value="${hotelId}" id="hotelId">
         <input type="hidden" value="" th:value="${typeId}" id="typeId" name="typeId">
         <div class="layui-form-item">
             <label class="layui-form-label">类型名称：</label>
@@ -32,7 +33,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" type="button" onclick="updateRommType()">立即提交</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" type="button" onclick="panduan()">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -49,6 +50,7 @@
         fuzhiRoomType(typeId);
     })
 
+    var value1;
     function fuzhi(){
         $.ajax({
             url:"/Hotel/selectRoomType",
@@ -79,6 +81,7 @@
                         $(this).prop("selected",true);
                     }
                 })
+                value1 = data.data.valueId;
                 $("input[name='costprice']").val(data.data.costprice);
                 $("input[name='offer']").val(data.data.offer);
             },
@@ -120,5 +123,29 @@
             return false;
         });
     });
+
+
+    function panduan(){
+        var valueId = $("select option:selected").val();
+        var hotelId = $("#hotelId").val();
+        $.ajax({
+            url: "/Hotel/selectTypeById",
+            data: {hotelId:hotelId,typeName:valueId},
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                if (value1==valueId){
+                    updateRommType();
+                } else{
+                    if (data.data>0){
+                        alert("该餐厅已有此类型");
+                        return;
+                    }else{
+                        updateRommType();
+                    }
+                }
+            }
+        })
+    }
 </script>
 </html>

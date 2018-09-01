@@ -109,9 +109,9 @@ public class HotelController {
      */
     @RequestMapping("/saveRoomType")
     public ReponseResult saveRommType(@RequestParam("hotelId")Integer hotelId,
-                                      @RequestParam("valueId")Integer valueId,
-                                      @RequestParam("cbj")Double cbj,
-                                      @RequestParam("bj")Double bj) {
+                                      @RequestParam("typeName")Integer valueId,
+                                      @RequestParam("costprice")Double cbj,
+                                      @RequestParam("offer")Double bj) {
         try {
             RoomType roomType=new RoomType();
             roomType.setCostprice(cbj);
@@ -348,22 +348,27 @@ public class HotelController {
     }
 
 
+
+
+
     /**
-     * 获取酒店名称:陈庆武
-     * @param dispatchId
+     * 赵伟伟
      * @return
      */
-    @RequestMapping("getHoterById")
-    public ReponseResult getHoterById(Integer dispatchId,Integer weight){
+    @RequestMapping("/selectTypeById")
+    public ReponseResult selectTypeById(@RequestParam("hotelId")Integer hotelId,
+                                        @RequestParam("typeName")Integer valueId) {
+        int count =0;
         try {
-            Dispatchhotel dispatchhotel=dispatchhotelService.getDispatchHotel(dispatchId,weight);
-            Hotel hotel=hotelService.getHotelById(dispatchhotel.getHotelId());
-            logger.info("method:getHoterById  获取酒店名称成功！");
-            return ReponseResult.ok(hotel,"获取酒店名称成功");
-        }catch (Exception e){
+            count = hotelService.selectTypeById(valueId,hotelId);
+            ReponseResult<Object> data = ReponseResult.ok(count, "查询成功！");
+            logger.info(" method:showHotel  查询成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:showRestaurant  查询失败，系统出现异常！");
             e.printStackTrace();
-            logger.error("method:getHoterById  获取酒店名称失败！");
-            return ReponseResult.err("获取酒店名称失败");
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
         }
     }
 

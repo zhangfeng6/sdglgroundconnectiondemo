@@ -266,7 +266,7 @@ public class ScenicspotController {
     @RequestMapping("/listScenicspotAll")
     public ReponseResult listScenicspotAll() {
         try {
-            List<Scenicspot> list = scenicspotService.listScenicspotAll();
+            List<Scenicspot> list = scenicspotService.selectAllScenic();
             ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
             logger.info(" method:selectTourismtemplate  查询景点模板成功！");
             return data;

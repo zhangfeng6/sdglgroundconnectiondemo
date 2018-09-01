@@ -110,6 +110,17 @@ public class Dispatch {
         this.guideName = guideName;
     }
 
+    @Transient
+    private String jiDiaoName;
+
+    public String getJiDiaoName() {
+        return jiDiaoName;
+    }
+
+    public void setJiDiaoName(String jiDiaoName) {
+        this.jiDiaoName = jiDiaoName;
+    }
+
     @Id
     @Column(name = "dispatchId")
     public int getDispatchId() {

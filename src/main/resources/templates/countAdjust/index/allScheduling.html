@@ -8,8 +8,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
 		<link rel="stylesheet" href="/css/layui.css" media="all">
-
-
 	</head>
 
 	<body>
@@ -111,7 +109,7 @@
                         var content = "";
                         var xu=(curnum-1)*limitcount+1;
                         $.each(data.data,function (i,e) {
-                            var del = "正常";
+                            var del = "报价中";
                             if (e.whetherDel==2) {
                                 del = "报价中";
                             }else if(e.whetherDel==3){
@@ -128,8 +126,18 @@
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button><button  type='button'   data-url='Quotation-detail.html' data-id='\"+e.offerId+\"' onclick='xiangshe(this)' value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>详细设计</i></button></div>\n" ;
+							}else if (e.whetherDel==4){
+                                content+="<tr>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travel.travelName+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.number+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.tourist+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button></div>\n" ;
-							} else{
+							}  else{
                                 content+="<tr>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travel.travelName+"</td>\n" +
@@ -140,9 +148,6 @@
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='que("+e.offerId+")'><i class='layui-icon'>确认成团</i></button></div>\n" ;
 							}
- 								if(e.whetherDel==3){
- 								    content+="<div style='display: inline-block'><button  type='button'   data-url='Quotation-detail.html' data-id='"+e.offerId+"' onclick='xiangshe(this)' value='" + e.restaurantId + "' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>详细设计</i></button></div>" ;
-								}
 								content+="</td>\t\t\t\t\t</tr>";
                             xu++;1
                         })

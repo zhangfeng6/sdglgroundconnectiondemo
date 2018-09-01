@@ -70,4 +70,12 @@ public interface HotelMapper extends CommonMapper<Hotel>{
 
     List<Dictionaries> selectRoomType();
 
+    /**
+     * 根据id查询餐馆数量
+     * @param valueId
+     * @param
+     * @return
+     */
+    int selectTypeById(@Param("valueId") Integer valueId,@Param("hotelId") Integer hotelId);
+
 }

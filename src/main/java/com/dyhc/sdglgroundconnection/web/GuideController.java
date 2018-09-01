@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Vector;
 
@@ -129,36 +132,7 @@ public class GuideController{
         }
     }
 
-    /**
-     * 微信登录
-     * @param username
-     * @param password
-     * @return
-     */
-    @RequestMapping("guideLogin")
-    public ReponseResult guideLogin(String username,String password){
-        try {
-            System.out.println(password);
-            Guide guide=guideService.login(username,password);
-            if (guide!=null){
-                if(password.equals(guide.getPassword())){
-                    logger.info("method:login 微信登录成功");
-                    return ReponseResult.ok(guide,"登录成功");
-                }else {
-                    logger.error("method:login 微信登录失败");
-                    return ReponseResult.err("登录失败");
-                }
-            }else {
-                logger.error("method:login 微信登录失败");
-                return ReponseResult.err("登录失败");
-            }
 
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("method:login 微信登录失败");
-            return ReponseResult.err("登录失败");
-        }
-    }
 
     @RequestMapping("/listguidescheduleBygid")
     public ReponseResult listguidescheduleBygid(@RequestParam("year")String year,
@@ -175,72 +149,11 @@ public class GuideController{
         }
 
     }
-    /**
-     * 上传单据
-     * @return
-     */
-    @RequestMapping("upload")
-    public ReponseResult upload(HttpServletRequest request,@RequestParam("multipartFile") MultipartFile multipartFile){
-        try {
-//            Vector<String> list= WechatFileUploadUtil.uploadImage(request,".jpg");
-            String aa= request.getParameter("guideId");
-            System.out.println(aa);
-            return ReponseResult.ok("上传成功");
-        }catch (Exception e){
-            e.printStackTrace();
-            return ReponseResult.err("上传失败");
-        }
-    }
 
-    /**
-     * 微信小程序之判断旧密码是否输入正确
-     * @param password
-     * @return
-     */
-    @RequestMapping("pdOldPassword")
-    public ReponseResult pdOldPassword(String password,Integer guideId){
-        try {
-            Guide guide=guideService.assignmentGuide(guideId);
-            if (guide!=null){
-                if(password.equals(guide.getPassword())){
-                    logger.info("method:pdOldPassword 旧密码输入正确");
-                    return ReponseResult.ok(1,"旧密码输入正确");
-                }else {
-                    logger.error("method:pdOldPassword 旧密码输入失败");
-                    return ReponseResult.err("旧密码输入失败");
-                }
-            }else {
-                logger.error("method:pdOldPassword 旧密码输入失败");
-                return ReponseResult.err("旧密码输入失败");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("method:pdOldPassword 微信登录失败");
-            return ReponseResult.err("登录失败");
-        }
-    }
 
-    /**
-     * 微信小程序之修改密码
-     * @return
-     */
-    @RequestMapping("updateGuideByPassword")
-    public ReponseResult updateGuideByPassword(Guide guide){
-        try {
-            Integer result=guideService.updateGuideByPassword(guide);
-            if (result==1){
-                logger.info("method:updateGuideByPassword 修改密码成功");
-                return ReponseResult.ok(result,"修改成功");
-            }else {
-                logger.error("method:updateGuideByPassword 修改密码失败");
-                return ReponseResult.err("修改失败");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("method:updateGuideByPassword 修改密码失败");
-            return ReponseResult.err("修改失败");
-        }
-    }
+
+
+
 
 
     /**

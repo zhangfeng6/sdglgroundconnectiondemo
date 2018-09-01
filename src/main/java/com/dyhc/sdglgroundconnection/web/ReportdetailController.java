@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -37,8 +38,8 @@ public class ReportdetailController {
     @RequestMapping("showInfoAll")
     public ReponseResult showInfoAll(Integer pageNo,Integer pageSize,Integer groupNumber,Integer states){
         try{
-            PageInfo pageInfo=reportdetailService.showInfoAll(groupNumber,states,pageNo,pageSize);
-            ReponseResult data=ReponseResult.ok(pageInfo,"获取报账列表成功");
+            PageInfo<Reportdetail> pageInfo=reportdetailService.showInfoAll(groupNumber,states,pageNo,pageSize);
+            ReponseResult data=ReponseResult.ok(pageInfo,pageInfo.getTotal(),"获取报账列表成功");
             logger.info("method:showInfoAll 获取报账列表成功");
             return data;
         }catch (Exception e){

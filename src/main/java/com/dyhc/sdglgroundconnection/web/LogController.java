@@ -29,34 +29,7 @@ public class LogController  {
     @Autowired
     private LogService logService;
 
-    /**
-     * 添加带团日志
-     * @param log
-     * @return
-     */
-    @RequestMapping("insertLog")
-    @LogNotes(operationType="日志",content="添加")
-    public ReponseResult insertLog(Log log){
-        try {
-            log.setWhetherDel(0);
-            log.setCreater(1);
-            log.setCreationDate(new Date());
-            Integer result=logService.inserLog(log);
-            ReponseResult data=null;
-            if (result==1){
-                logger.info("Mothod:insertLog  上传日志成功");
-                data=ReponseResult.ok(result,"上传日志成功");
-            }else {
-                logger.info("Mothod:insertLog  上传日志失败");
-                data=ReponseResult.ok(result,"上传日志失败");
-            }
-            return data;
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("Mothod:insertLog  上传日志失败");
-            return ReponseResult.err("上传日志失败");
-        }
-    }
+
 
     /**
      * 导游日志表

@@ -5,4 +5,14 @@
     <select id="selectBillByDispatchIdAndBillTypeId" resultType="com.dyhc.sdglgroundconnection.pojo.Bill">
         SELECT * FROM bill WHERE dispatchId=#{dispatchId} AND billTypeId=#{billTypeId} AND whetherDel=0
     </select>
+
+    <insert id="insertBill">
+        INSERT INTO bill(dispatchId,billTypeId,picturePath,whetherDel,createBy,createDate)
+        value (#{dispatchId},#{billTypeId},#{picturePath},#{whetherDel},#{createBy},#{createDate})
+    </insert>
+    
+    <update id="updateBillById">
+        update bill set picturePath=#{picturePath} where billId=#{billId}
+    </update>
+
 </mapper>

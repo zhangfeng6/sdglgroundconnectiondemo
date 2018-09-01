@@ -88,4 +88,11 @@ public interface ScenicspotService {
      * @return
      */
     List<Scenicspot> ShowScenicSpotId(Integer scenicSpotId);
+
+
+    /**
+     * 查询所有景点
+     * @return
+     */
+    List<Scenicspot> selectAllScenic();
 }

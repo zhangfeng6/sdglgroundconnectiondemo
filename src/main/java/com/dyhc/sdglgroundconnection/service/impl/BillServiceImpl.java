@@ -23,4 +23,24 @@ public class BillServiceImpl implements BillService {
         return billMapper.selectBillByDispatchIdAndBillTypeId(dispatchId,billTypeId);
     }
 
+    @Override
+    public Integer insertBill(Bill bill) throws Exception {
+        try {
+            billMapper.insertBill(bill);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer updateBillById(Bill bill) throws Exception {
+        try {
+            billMapper.updateBillById(bill);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
 }

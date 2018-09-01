@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,7 +8,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>网站后台管理模版</title>
+    <title>餐厅类型</title>
     <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
 </head>
@@ -15,10 +16,20 @@
 <div class="wrap-container">
     <form class="layui-form" style="width: 90%;padding-top: 20px;" id="jxlshuai">
         <div class="layui-form-item">
-            <label class="layui-form-label" style="width:100px">餐厅类型名称：</label>
+            <label class="layui-form-label" style="width:100px">餐厅类型：</label>
             <div class="layui-input-block">
                 <input type="hidden" name="dictionariesId" id="dictionariesId" th:value="${dictionariesId}==null?0:${dictionariesId}"/>
-                <input type="text" name="valueContent1" required lay-verify="required" placeholder="输入餐厅类型名称" autocomplete="off" class="layui-input" id="one"style="width:550px;">
+                <input type="text" name="valueContent1" required lay-verify="required" placeholder="输入餐厅类型" autocomplete="off" class="layui-input" id="one"style="width:550px;">
+            </div>
+            <div style="height:20px"></div>
+            <label class="layui-form-label" style="width:100px">成本价：</label>
+            <div class="layui-input-block">
+                <input type="text" name="valueContent2" required lay-verify="required" placeholder="输入成本价" autocomplete="off" class="layui-input" id="two"style="width:550px;margin-left:20px">
+            </div>
+            <div style="height:20px"></div>
+            <label class="layui-form-label" style="width:100px">报价：</label>
+            <div class="layui-input-block">
+                <input type="text" name="valueContent3" required lay-verify="required" placeholder="输入报价" autocomplete="off" class="layui-input" id="three"style="width:550px;margin-left:20px">
             </div>
         </div>
         <div class="layui-form-item">
@@ -66,6 +77,8 @@
             success:function (e) {
                 value=e.data.valueContent1;
                 $("#one").val(e.data.valueContent1);
+                $("#two").val(e.data.valueContent2);
+                $("#three").val(e.data.valueContent3);
             }
         })
     }
@@ -86,7 +99,7 @@
                         var haha=$("#one").val()
                         var lala=$("form").serialize()
                         if(haha.value =="" || haha.length==0){
-                            alert("餐厅类型名称不能为空")
+                            alert("餐厅类型不能为空")
                         }else{
                             $.ajax({
                                 url:"/Dictionaries/DictionariesCanthree",

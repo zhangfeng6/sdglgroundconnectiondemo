@@ -70,4 +70,12 @@
   <select id="ShowScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
      select  * from  scenicspot where  parentId=#{scenicSpotId}
   </select>
+
+    <select id="selectAllScenic" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        select  * from  scenicspot where whetherDel!=1
+    </select>
+
+    <select id="getScenicspotParentName" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        select  * from  scenicspot where whetherDel=0
+    </select>
 </mapper>

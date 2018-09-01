@@ -21,7 +21,7 @@
 				  <li class="layui-nav-item layui-nav-itemed">
 				    <a href="javascript:;"><i class="iconfont">&#xe607;</i>审核</a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javascript:;" data-url="menu2.html" data-id='2' data-text="为旅行团安排导游"><span class="l-line"></span>为旅行团安排导游</a></dd>
+				      <dd><a href="javascript:;" data-url="menu2.html" data-id='2' data-text="审核调度"><span class="l-line"></span>审核调度</a></dd>
 				    </dl>
 				  </li>
 				  </li>
@@ -58,10 +58,24 @@
 				
 			</div>
 		</div>
-		<script type="text/javascript">
+		<script src="/js/jquery-1.8.2.min.js" type="text/javascript">
 			var scope={
 				link:'./welcome.html'
 			}
+            //退出按钮,清空session
+            function qingkong() {
+                $.ajax({
+                    url:"http://localhost:8888/Staff/qingkong",
+                    data:{},
+                    dataType:"json",
+                    type:"get",
+                    success:function (result) {
+                        if(result.data==1){
+                            window.parent.location.href="http://localhost:8888/admins/login.html";
+                        }
+                    }
+                });
+            }
 		</script>
 		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
