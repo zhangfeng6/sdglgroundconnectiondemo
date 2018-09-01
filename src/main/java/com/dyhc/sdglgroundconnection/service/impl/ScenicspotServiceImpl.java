@@ -46,7 +46,7 @@ public class ScenicspotServiceImpl implements ScenicspotService {
 
     @Override
     public List<Scenicspot> getScenicspotParentName() throws Exception {
-        return scenicspotMapper.selectAll();
+        return scenicspotMapper.getScenicspotParentName();
     }
 
     @Override

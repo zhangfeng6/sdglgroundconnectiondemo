@@ -230,24 +230,7 @@ public class TemplateController {
 
 
 
-    /**
-     * 微信小程序之获取行程内容
-     * @param weight
-     * @return
-     */
-    @RequestMapping("getTemplateById")
-    public ReponseResult getTemplateById(Integer dispatchId,Integer weight){
-        try {
-            HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
-            Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
-            logger.error("method:getTemplateById  获取行程内容成功");
-            return ReponseResult.ok(template,"获取行程内容成功");
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("method:getTemplateById  获取行程内容失败");
-            return ReponseResult.err("获取行程内容失败");
-        }
-    }
+
 
     /**
      * 查看路线
