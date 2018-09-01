@@ -16,4 +16,18 @@ public interface BillService {
      */
     Bill selectBillByDispatchIdAndBillTypeId(Integer dispatchId, Integer billTypeId)throws Exception;
 
+    /**
+     * 添加单据
+     * @param bill
+     * @throws Exception
+     */
+    Integer insertBill(Bill bill)throws Exception;
+
+
+    /**
+     * 修改单据
+     * @throws Exception
+     */
+    Integer updateBillById(Bill bill)throws Exception;
+
 }

@@ -348,23 +348,6 @@ public class HotelController {
     }
 
 
-    /**
-     * 获取酒店名称:陈庆武
-     * @param dispatchId
-     * @return
-     */
-    @RequestMapping("getHoterById")
-    public ReponseResult getHoterById(Integer dispatchId,Integer weight){
-        try {
-            Dispatchhotel dispatchhotel=dispatchhotelService.getDispatchHotel(dispatchId,weight);
-            Hotel hotel=hotelService.getHotelById(dispatchhotel.getHotelId());
-            logger.info("method:getHoterById  获取酒店名称成功！");
-            return ReponseResult.ok(hotel,"获取酒店名称成功");
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error("method:getHoterById  获取酒店名称失败！");
-            return ReponseResult.err("获取酒店名称失败");
-        }
-    }
+
 
 }

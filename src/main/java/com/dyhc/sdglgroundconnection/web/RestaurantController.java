@@ -211,27 +211,7 @@ public class RestaurantController {
     }
 
 
-    /**
-     * 获取餐厅信息
-     * @param dispatchId
-     * @param weight
-     * @return
-     */
-    @RequestMapping("getRestaurantById")
-    public ReponseResult getRestaurantById(Integer dispatchId,Integer weight){
-        try {
-            Disrestaurant disrestaurant=disrestaurantService.getDisrestaurantById(dispatchId,weight);
 
-            MealType mealType=mealTypeService.selectById(disrestaurant.getTypeId());
-            Restaurant restaurant=restaurantService.selectRestaurantById(mealType.getRestaurantId());
-            logger.info(" method:getRestaurantById  获取餐厅信息成功！");
-            return ReponseResult.ok(restaurant,"获取餐厅信息成功");
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error(" method:getRestaurantById  获取餐厅信息失败！");
-            return ReponseResult.err("获取餐厅信息失败");
-        }
-    }
 
 
 }

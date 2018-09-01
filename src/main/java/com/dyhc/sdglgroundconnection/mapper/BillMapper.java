@@ -21,4 +21,18 @@ public interface BillMapper extends CommonMapper<Bill>{
      * @return
      */
     Bill selectBillByDispatchIdAndBillTypeId(@Param("dispatchId") Integer dispatchId, @Param("billTypeId") Integer billTypeId)throws Exception;
+
+
+    /**
+     * 添加单据
+     * @param bill
+     * @throws Exception
+     */
+    void insertBill(Bill bill)throws Exception;
+
+    /**
+     * 修改单据
+     * @throws Exception
+     */
+    void updateBillById(Bill bill)throws Exception;
 }
