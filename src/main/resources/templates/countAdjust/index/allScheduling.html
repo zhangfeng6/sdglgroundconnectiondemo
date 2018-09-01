@@ -176,7 +176,8 @@
 			function xiangshe(obj) {
 				var url=$(obj).attr('data-url');
 				var id = $(obj).attr('data-id');
-				window.location.href=url+"?id="+id;
+				var offer="";
+				window.location.href=url+"?id="+id+"&offer="+offer;
                 return false;
             }
 

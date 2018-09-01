@@ -45,7 +45,7 @@ public class ShoppingController  {
         shopping.setShoppingSite(shoppingSite);
         shopping.setScenicSpotId(scenicSpotId);
         shopping.setCreater(1);
-        shopping.setWhetherDel(3);
+        shopping.setWhetherDel(0);
         shopping.setCreationDate(new Date());
         try {
             ReponseResult<Integer> data=ReponseResult.ok(shoppingService.insertShopping(shopping),"添加购物地点成功");

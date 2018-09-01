@@ -395,11 +395,11 @@ public class DispatchServiceImpl implements DispatchService {
     @Override
     public Map<String, Object> getresource() throws Exception {
         Map<String,Object> map=new HashMap<String,Object>();
-        map.put("travel",travelMappere.selectAll());
+        map.put("travel",travelMappere.listNoDelTravel());
         map.put("template",templateMapper.selectAll());
-        map.put("scenicspot",scenicspotMapper.selectAll());
-        map.put("shopping",shoppingMapper.selectAll());
-        map.put("guide",guideMapper.selectAll());
+        map.put("scenicspot",scenicspotMapper.listNoDelScenicspot());
+        map.put("shopping",shoppingMapper.listNoDelShopping());
+        map.put("guide",guideMapper.listNoDelGuide());
         map.put("vehicle",dictionariesMapper.listdictionarieslBycode("VEHICLE"));
         map.put("traffic",dictionariesMapper.listdictionarieslBycode("TRAFFIC"));
         map.put("theroom",dictionariesMapper.listdictionarieslBycode("THEROOM"));
