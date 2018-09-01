@@ -57,5 +57,11 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      */
     List<Scenicspot> ShowScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
 
+    /**
+     * 根据父景点名称
+     * @return
+     */
+    List<Scenicspot> getScenicspotParentName()throws Exception;
+
 
 }
