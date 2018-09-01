@@ -112,4 +112,9 @@ public class ScenicspotServiceImpl implements ScenicspotService {
     public List<Scenicspot> ShowScenicSpotId(Integer scenicSpotId) {
         return scenicspotMapper.ShowScenicSpotId(scenicSpotId);
     }
+
+    @Override
+    public List<Scenicspot> selectAllScenic() {
+        return scenicspotMapper.selectAllScenic();
+    }
 }

@@ -58,4 +58,10 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
     List<Scenicspot> ShowScenicSpotId(@Param("scenicSpotId") Integer scenicSpotId);
 
 
+    /**
+     * 查询所有景点
+     * @return
+     */
+    List<Scenicspot> selectAllScenic();
+
 }
