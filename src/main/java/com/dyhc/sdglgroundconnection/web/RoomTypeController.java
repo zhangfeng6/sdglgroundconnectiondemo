@@ -38,4 +38,22 @@ public class RoomTypeController{
             return err;
         }
     }
+
+    /**
+     * 查询酒店房间类型名称（贾晓亮）
+     * @return
+     */
+    @RequestMapping("/roomType_All")
+    public ReponseResult roomType_All(@RequestParam("hotelId")Integer hotelId){
+        try {
+            ReponseResult<Object> data=ReponseResult.ok(roomTypeService.roomType_All(hotelId),"查询成功成功！");
+            logger.info("method:judgeTypeName 查询成功成功!");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:judgeTypeName 系统异常！");
+            ReponseResult<Object> err=ReponseResult.err("系统异常！");
+            return err;
+        }
+    }
 }

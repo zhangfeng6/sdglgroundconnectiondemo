@@ -18,7 +18,7 @@ public class Reportaccommodation {
     private int reportAccommodationId; // 导游报账住宿表编号
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "liveDate")
+    @Column(name = "`liveDate`")
     private Date liveDate; // 入住日期
     @Column(name = "hotelName")
     private String hotelName; // 酒店名称
@@ -40,13 +40,15 @@ public class Reportaccommodation {
     private Integer createBy; // 创建人 （外键，与人员表关联）
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
-    @Column(name = "upDate")
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date upDate; // 修改日期
+    @Column(name = "`updateDate`")
+
+    private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "createDate")
+    @Column(name = "`createDate`")
     private Date createDate; // 创建时间
 
     public Integer getReportDetailId() {
@@ -73,7 +75,7 @@ public class Reportaccommodation {
     }
 
     @Basic
-    @Column(name = "liveDate")
+    @Column(name = "`liveDate`")
     public Date getLiveDate() {
         return liveDate;
     }
@@ -192,18 +194,16 @@ public class Reportaccommodation {
         this.updateBy = updateBy;
     }
 
-    @Basic
-    @Column(name = "upDate")
-    public Date getUpDate() {
-        return upDate;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpDate(Date upDate) {
-        this.upDate = upDate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     @Basic
-    @Column(name = "createDate")
+    @Column(name = "`createDate`")
     public Date getCreateDate() {
         return createDate;
     }
@@ -251,7 +251,7 @@ public class Reportaccommodation {
                 Objects.equals(status, that.status) &&
                 Objects.equals(createBy, that.createBy) &&
                 Objects.equals(updateBy, that.updateBy) &&
-                Objects.equals(upDate, that.upDate) &&
+                Objects.equals(updateDate, that.updateDate) &&
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(reportDetailId, that.reportDetailId) &&
                 Objects.equals(value2, that.value2) &&
@@ -261,6 +261,6 @@ public class Reportaccommodation {
     @Override
     public int hashCode() {
 
-        return Objects.hash(reportAccommodationId, liveDate, hotelName, typeId, housePrice, roomNum, accompanyingBed, accompanyingPrice, subtotal, payMethods, status, createBy, updateBy, upDate, createDate, reportDetailId, value2, value3);
+        return Objects.hash(reportAccommodationId, liveDate, hotelName, typeId, housePrice, roomNum, accompanyingBed, accompanyingPrice, subtotal, payMethods, status, createBy, updateBy, updateDate, createDate, reportDetailId, value2, value3);
     }
 }

@@ -237,12 +237,12 @@ public class ScenicspotController {
     @LogNotes(operationType="景点",content="删除")
     public ReponseResult deleteScenicspotById(Integer scenicSpotId){
         try {
-            Integer result=scenicspotService.deleteScenicspotById(scenicSpotId);
+            Integer result=shoppingService.deleteShoppingsByscenicSpotId(scenicSpotId);
             ReponseResult data=null;
             if (result==1){
                data=ReponseResult.ok(result,"删除景点成功");
                 logger.info("删除景点成功");
-                Integer result1=shoppingService.deleteShoppingsByscenicSpotId(scenicSpotId);
+                Integer result1=scenicspotService.deleteScenicspotById(scenicSpotId);
                 if (result1==1){
                     data=ReponseResult.ok(result1,"删除景点成功");
                     logger.info("删除景点成功");

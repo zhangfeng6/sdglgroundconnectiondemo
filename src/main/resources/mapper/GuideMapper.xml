@@ -27,4 +27,8 @@
     <select id="pdcertificate" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
       select  * from  guide where  certificate=#{certificate}
     </select>
+    
+    <select id="listNoDelGuide" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
+        SELECT * FROM guide WHERE whetherDel != 1
+    </select>
 </mapper>

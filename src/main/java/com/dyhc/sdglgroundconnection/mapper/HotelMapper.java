@@ -78,4 +78,11 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      */
     int selectTypeById(@Param("valueId") Integer valueId,@Param("hotelId") Integer hotelId);
 
+    /**
+     * 获取所有未删除的酒店信息
+     * @return
+     * @throws Exception
+     */
+    List<Hotel>   listNoDelHotel()throws Exception;
+
 }

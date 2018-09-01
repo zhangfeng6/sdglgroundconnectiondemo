@@ -42,4 +42,6 @@ public interface AccountTypeMapper extends CommonMapper<AccountType>{
      * @throws Exception
      */
     Integer updateAccountType(AccountType accountType)throws Exception;
+
+
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
-
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 房间类型表
@@ -19,9 +18,9 @@ public class RoomType {
     private Integer hotelId; // 酒店编号（外键，与酒店表关联）
 
     @Column(name = "typecode")
-    private String typecode;
+    private String typecode; // 字段code
     @Column(name = "valueId")
-    private Integer valueId;
+    private Integer valueId; // 字典ID
 
     @Column(name = "costprice")
     private Double costprice; // 成本价
@@ -38,15 +37,28 @@ public class RoomType {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "createDate")
     private Date createDate; // 创建日期
+    @Transient
+    private  Dictionaries dictionaries;//存放字典表的酒店类型名称（贾晓亮）
+
+
+
+    public Dictionaries getDictionaries() {
+        return dictionaries;
+    }
+
+    public void setDictionaries(Dictionaries dictionaries) {
+        this.dictionaries = dictionaries;
+    }
 
     @Transient
     private String typeName;
+
     private String value1;
     private String value2;
     private String value3;
 
     @Transient
-    private String valueContent1;
+    private String valueContent1;//保存酒店的房间类型名称
     public String getValueContent1() {
         return valueContent1;
     }

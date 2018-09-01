@@ -130,4 +130,11 @@ public interface TravelMapper extends CommonMapper<Travel> {
      * @return
      */
     Discar selectReportfareByTravelId(@Param("travelId") Integer travelId);
+
+    /**
+     * 查找所有未删除的组团社信息
+     * @return
+     * @throws Exception
+     */
+    List<Travel> listNoDelTravel()throws Exception;
 }

@@ -15,4 +15,12 @@
     <select id="getroomtypeByName" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
         SELECT * FROM `roomtype` r WHERE r.`hotelId`=#{hotelId} and r.`valueId`=#{valueId}
     </select>
+    <!--查询酒店下面的房间名称：（贾晓亮）-->
+    <select id="roomType_All" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
+        select  * from  `roomtype` where hotelId=#{hotelId}
+    </select>
+    <!--查询酒店名称-->
+    <select id="type_Id"  resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
+        select  *   from  `roomtype`  where  typeId=#{typeId}
+    </select>
 </mapper>
