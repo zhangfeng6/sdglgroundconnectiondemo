@@ -1,7 +1,9 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
 import com.dyhc.sdglgroundconnection.pojo.Hotel;
 import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
+import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.service.HotelService;
 import com.dyhc.sdglgroundconnection.service.ReportaccommodationService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -33,11 +35,14 @@ public class ReportaccommodationController {
 
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    private ReportdetailMapper reportdetailMapper;
     /**
      * 导游报账住宿新增
      * @param
      * @return
-     */
+     *//*
     @LogNotes(operationType="导游报账",content="住宿新增")
     @RequestMapping("/save_Reportaccommodation")
     public ReponseResult saveAccountType(
@@ -49,8 +54,11 @@ public class ReportaccommodationController {
             @RequestParam("accompanyingPrice")Double accompanyingPrice,
             @RequestParam("subtotal")Double subtotal,
             @RequestParam("payMethods")String payMethods){
+        //创建总报账表的对象
+        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(1);
         //创建报账住宿
         Reportaccommodation reportaccommodation =new Reportaccommodation();
+        reportaccommodation.setReportDetailId(reportdetail.getReportDetailId());
         reportaccommodation.setHotelName(hotelName);
         reportaccommodation.setTypeId(typeId);
         reportaccommodation.setHousePrice(housePrice);
@@ -73,7 +81,7 @@ public class ReportaccommodationController {
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;
         }
-    }
+    }*/
 
 
     /**
@@ -96,7 +104,6 @@ public class ReportaccommodationController {
             return  error;
         }
     }
-
     /**
      * 获取导游住宿报账信息
      * @param reportDetailId

@@ -5,6 +5,7 @@ import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 导游报账明细 控制层
  **/
 @RestController
-@RequestMapping("reportdetail")
+@RequestMapping("/reportdetail")
 public class ReportdetailController {
 
     // 日志对象
@@ -48,7 +49,6 @@ public class ReportdetailController {
             return ReponseResult.err("获取报账列表失败");
         }
     }
-
 
 
     /**

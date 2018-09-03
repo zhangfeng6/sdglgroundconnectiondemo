@@ -1,6 +1,8 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
+import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Reportfare;
 import com.dyhc.sdglgroundconnection.pojo.Reportqutsubsidy;
 import com.dyhc.sdglgroundconnection.service.DispatchService;
@@ -34,7 +36,8 @@ public class ReportfareController{
 
     @Autowired
     private ReportfareService reportfareService;
-
+    @Autowired
+    private ReportdetailMapper reportdetailMapper;
     @Autowired
     private ReportqutsubsidyService reportqutsubsidyService;
     @Autowired
@@ -47,9 +50,9 @@ public class ReportfareController{
     @LogNotes(operationType="导游车费",content="车费新增")
     @RequestMapping("/savereportaccommodation")
     public ReponseResult savereportfare(@RequestParam("tolls")Double tolls,@RequestParam("parkingFee")Double parkingFee,@RequestParam("PrepaidFare")Double PrepaidFare) {
-        System.out.println(tolls);
-        System.out.println(parkingFee);
-        System.out.println(PrepaidFare);
+        Integer dispatchId=1;
+        //创建总报账表的对象
+        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
         Reportfare reportfare=new Reportfare();
         reportfare.setParkingFee(parkingFee);
         reportfare.setTolls(tolls);
@@ -59,7 +62,6 @@ public class ReportfareController{
         reportfare.setCreateDate(new Date());
         reportfare.setUpDate(new Date());
         reportfare.setUpdateBy(2);
-        /*reportfare.setReportDetailId("");*/
         reportfare.setValue2("");
         reportfare.setValue3("");
         try {

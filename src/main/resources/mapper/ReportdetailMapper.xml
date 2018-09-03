@@ -30,4 +30,12 @@
     <update id="jsShenHe">
         UPDATE `reportdetail` SET `status`=2 WHERE reportDetailId=#{reportDetailId}
     </update>
+    <!--查询报账类型名称-->
+    <select id="baozhangType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+      select  * from   `dictionaries`  where typeCode="BILL"
+    </select>
+     <!--查询宗总报账的ID-->
+    <select id="All_dispatchId" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
+     select * from  `reportdetail` where  dispatchId=#{dispatchId}
+    </select>
 </mapper>
