@@ -62,6 +62,7 @@ public class StaffController  {
 
     /**
      * 赵伟伟
+     * 登录
      * @param theUserName
      * @param password
      * @return
@@ -125,6 +126,7 @@ public class StaffController  {
      * @param staff
      * @return
      */
+    @LogNotes(operationType="人员信息",content="删除")
     @RequestMapping("/StaffUpd.html")
     public ReponseResult<Integer> StaffUpd(Staff staff){
         try{
@@ -168,10 +170,11 @@ public class StaffController  {
         }
     }
     /**
-     * 添加
+     * 人员信息添加
      * @param
      * @return
      */
+    @LogNotes(operationType="人员信息",content="添加")
     @PostMapping("/StaffAdd.html")
     public ReponseResult StaffAdd(HttpServletRequest request, @RequestParam(value = "headPortraitPath",required = false)MultipartFile headPortraitPath, @RequestParam("savePath")String savePath){
         try{
@@ -205,6 +208,7 @@ public class StaffController  {
      * @param staffId
      * @return
      */
+    @LogNotes(operationType="人员信息",content="修改")
     @RequestMapping("/StaffUpdTwoById.html")
     public ReponseResult StaffUpdTwoById(Integer staffId){
         try{
@@ -383,6 +387,7 @@ public class StaffController  {
      * @return
      */
     @RequestMapping("updatePassword")
+    @LogNotes(operationType="密码",content="修改")
     public ReponseResult updatePassword(Integer staffId,String password){
         try {
             String aa=MD5(password);
@@ -469,6 +474,7 @@ public class StaffController  {
      * @return
      */
     @PostMapping("/findStaffThree")
+    @LogNotes(operationType="人员信息",content="修改")
     public ReponseResult findStaffThree(HttpServletRequest request){
         String file="";
         try{

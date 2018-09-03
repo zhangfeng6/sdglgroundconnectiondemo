@@ -184,5 +184,4 @@ public interface DictionariesService {
      * @return
      */
     Dictionaries DictionariesHotelMax();
-
 }

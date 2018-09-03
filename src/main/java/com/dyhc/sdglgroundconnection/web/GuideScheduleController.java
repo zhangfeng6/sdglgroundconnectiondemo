@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.web;
 import com.dyhc.sdglgroundconnection.pojo.Guideschedule;
 import com.dyhc.sdglgroundconnection.service.GuideScheduleService;
 import com.dyhc.sdglgroundconnection.service.impl.DispatchServiceImpl;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class GuideScheduleController {
      * @param endDate
      * @return
      */
+    @LogNotes(operationType="导游请假信息",content="添加")
     @RequestMapping("insertGuideSchedule")
     public ReponseResult insertGuideSchedule(Integer guideId,String startDate,String endDate){
         try {

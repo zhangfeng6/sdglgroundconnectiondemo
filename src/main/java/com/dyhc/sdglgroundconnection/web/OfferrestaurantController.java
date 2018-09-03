@@ -32,6 +32,7 @@ public class OfferrestaurantController {
 
     /**
      * 赵伟伟
+     * 查询午餐报价
      * @param offerId
      * @return
      */
@@ -60,6 +61,7 @@ public class OfferrestaurantController {
 
     /**
      * 赵伟伟
+     * 查询晚餐报价
      * @param offerId
      * @return
      */

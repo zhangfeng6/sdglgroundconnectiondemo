@@ -56,6 +56,7 @@
             url:"/Hotel/selectRoomType",
             data:{},
             dataType:"json",
+            async: false,
             type:"get",
             success:function (data) {
                 var content = "";
@@ -74,6 +75,7 @@
             url:"/Hotel/fuzhiRoomType",
             data:{typeId:typeId},
             dataType:"json",
+            async: false,
             type:"get",
             success:function (data) {
                 $("[name='typeName']").children().each(function(){
@@ -138,7 +140,7 @@
                     updateRommType();
                 } else{
                     if (data.data>0){
-                        alert("该餐厅已有此类型");
+                        alert("该酒店已有此类型");
                         return;
                     }else{
                         updateRommType();

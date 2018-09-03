@@ -24,6 +24,12 @@ public class RoomTypeController{
     @Autowired
     private RoomTypeService roomTypeService;
 
+    /**
+     * 判断酒店类型是否相同
+     * @param hotelId
+     * @param valueId
+     * @return
+     */
     @RequestMapping("/judgeTypeName")
     public ReponseResult judgeTypeName(@RequestParam("hotelId")Integer hotelId,@RequestParam("valueId")Integer valueId){
         try {

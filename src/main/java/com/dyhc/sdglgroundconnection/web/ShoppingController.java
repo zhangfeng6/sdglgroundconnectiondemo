@@ -4,6 +4,7 @@ import com.dyhc.sdglgroundconnection.pojo.Disshopp;
 import com.dyhc.sdglgroundconnection.pojo.Shopping;
 import com.dyhc.sdglgroundconnection.service.DisshoppService;
 import com.dyhc.sdglgroundconnection.service.ShoppingService;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -40,6 +41,7 @@ public class ShoppingController  {
      * @return
      */
     @RequestMapping("insertShopping")
+    @LogNotes(operationType="购物地点",content="添加")
     public ReponseResult insertShopping(Integer scenicSpotId,String shoppingSite){
         Shopping shopping=new Shopping();
         shopping.setShoppingSite(shoppingSite);
@@ -62,6 +64,7 @@ public class ShoppingController  {
      * @param shoppingId
      * @return
      */
+    @LogNotes(operationType="购物地点",content="修改")
     @RequestMapping("updateShopping")
     public ReponseResult updateShopping(Integer shoppingId,String shoppingSite){
 
@@ -78,10 +81,11 @@ public class ShoppingController  {
     }
 
     /**
-     * 修改景点附近的购物地点
+     * 删除景点附近的购物地点
      * @param shoppingId
      * @return
      */
+    @LogNotes(operationType="购物地点",content="删除")
     @RequestMapping("deleteShoppingById")
     public ReponseResult deleteShoppingById(Integer shoppingId){
         try {

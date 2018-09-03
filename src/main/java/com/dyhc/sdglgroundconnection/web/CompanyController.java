@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.Company;
 import com.dyhc.sdglgroundconnection.service.CompanyService;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,7 @@ public class CompanyController  {
     }
 
     @RequestMapping("/companyupd.html")
+    @LogNotes(operationType="公司信息",content="修改")
     public ReponseResult<Integer> getcompanyupd(Company company){
         System.out.println(company.getCompanyName());
         try{

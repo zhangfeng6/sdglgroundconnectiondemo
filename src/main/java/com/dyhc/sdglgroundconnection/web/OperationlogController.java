@@ -60,6 +60,11 @@ public class OperationlogController {
         }
     }
 
+    /**
+     * 删除日志
+     * @param id
+     * @return
+     */
     @RequestMapping("/removeOperationlog")
     @LogNotes(operationType = "日志",content = "删除")
     public ReponseResult removeOperationlog(@RequestParam("id") Integer id) {

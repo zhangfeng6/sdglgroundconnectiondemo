@@ -4,6 +4,7 @@ import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
 import com.dyhc.sdglgroundconnection.pojo.VehicleType;
 import com.dyhc.sdglgroundconnection.service.DictionariesService;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -101,6 +102,10 @@ public class DictionariesController {
         }
     }
 
+    /**
+     * 获取车辆类型
+     * @return
+     */
     @RequestMapping("/listhoteltype")
     public ReponseResult listhoteltype(){
         try {
@@ -212,6 +217,7 @@ public class DictionariesController {
      * @param valueContent1
      * @return
      */
+    @LogNotes(operationType="餐厅类型",content="删除")
     @RequestMapping("/DictionariesByDel.html")
     public ReponseResult<Integer> getDictionariesByDel(String valueContent1){
         try{
@@ -235,6 +241,7 @@ public class DictionariesController {
      * @param valueContent1
      * @return
      */
+    @LogNotes(operationType="酒店类型",content="删除")
     @RequestMapping("/DictionariesHotelByDel.html")
     public ReponseResult<Integer> getDictionariesHotelByDel(String valueContent1){
         try{
@@ -262,6 +269,7 @@ public class DictionariesController {
      * @param dictionaries
      * @return
      */
+    @LogNotes(operationType="餐厅类型",content="保存")
     @RequestMapping("/DictionariesCanthree")
     public ReponseResult<Integer> DictionariesCanthree( Dictionaries dictionaries){
         try{
@@ -297,6 +305,7 @@ public class DictionariesController {
      * @param dictionaries
      * @return
      */
+    @LogNotes(operationType="车辆类型",content="保存")
     @RequestMapping("/DictionariesCarthree.html")
     public ReponseResult<Integer> DictionariesCarthree( Dictionaries dictionaries){
         try{
@@ -308,7 +317,6 @@ public class DictionariesController {
             num++;
             if(dictionaries.getDictionariesId()!=0){
                 data=dictionariesService.getDictionariesCarUpd(dictionaries);
-                System.out.println(789);
             }else {
                 dictionaries.setValueId(num);
                 dictionaries.setTypeCode("VEHICLE");
@@ -333,6 +341,7 @@ public class DictionariesController {
      * @param dictionaries
      * @return
      */
+    @LogNotes(operationType="酒店类型",content="保存")
     @RequestMapping("/DictionariesHotelthree.html")
     public ReponseResult<Integer> DictionariesHotelthree( Dictionaries dictionaries){
         try{
