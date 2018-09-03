@@ -14,7 +14,7 @@
 <div class="page-content-wrap">
 	<input type="hidden" name="offerId" th:value="${id}"/>
 	<input type="hidden" name="Did" th:value="${did}"/>
-	<input type="text" id="offer" name="offer" th:value="${offer}"/>
+	<input type="hidden" id="offer" name="offer" th:value="${offer}"/>
 	<div id="divhead">
 	<form class="layui-form layui-form-pane" action="">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -322,7 +322,6 @@
                 var Did=$("input[name=Did]").val();
                 if(offerId!=null&&offerId!=0){
                     getofferById(offerId);
-                    alert($("#offer").val());
                 }
                 if(Did!=null&&Did!=0){
 					getdispatchById(Did);

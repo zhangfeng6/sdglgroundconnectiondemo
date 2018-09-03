@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
@@ -60,4 +61,16 @@ public interface ReportdetailService {
      * @return
      */
     Integer jsShenHe(Integer reportDetailId)throws Exception;
+
+    /**
+     * 查询报账类型
+     * @return
+     */
+    List<Dictionaries> baozhangType();
+
+    /**
+     * 新增导游报账信息主表（贾晓亮）
+     * @return
+     */
+    Integer save_Reportfetails(Reportdetail  reportdetail);
 }

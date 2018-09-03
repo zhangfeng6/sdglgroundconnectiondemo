@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -50,4 +51,16 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     void jsShenHe(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+    /**
+     * 查询报账类型
+     * @return
+     */
+    List<Dictionaries> baozhangType();
+
+    /**
+     * 报账字表插入总表的报账ID
+     * @param dispatchId
+     * @return
+     */
+    Reportdetail All_dispatchId(@Param("dispatchId")Integer dispatchId);
 }

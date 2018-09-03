@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
+import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Reportrestaurant;
 import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
@@ -33,6 +34,8 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     private ReportqutsubsidyServiceImpl reportqutsubsidyService;//导游报价出团补助
     @Autowired
     private  ReportingotherexpensesServiceImpl reportingotherexpensesService;//其他支出
+
+
 
     @Override
     public PageInfo showInfoAll(Integer groupNumber, Integer states,Integer pageNo,Integer pageSize)throws Exception {
@@ -97,5 +100,24 @@ public class ReportdetailServiceImpl implements ReportdetailService {
         }catch (Exception e){
             return 0;
         }
+    }
+
+    /**
+     * 查询报账类型名称:贾晓亮
+     * @return
+     */
+    @Override
+    public List<Dictionaries> baozhangType() {
+        return reportdetailMapper.baozhangType();
+    }
+
+    /**
+     * 新增总报账：贾晓亮
+     * @param reportdetail
+     * @return
+     */
+    @Override
+    public Integer save_Reportfetails(Reportdetail reportdetail) {
+        return reportdetailMapper.insert(reportdetail);
     }
 }

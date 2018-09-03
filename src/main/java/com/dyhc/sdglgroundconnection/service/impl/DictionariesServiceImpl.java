@@ -287,4 +287,5 @@ public class DictionariesServiceImpl implements DictionariesService {
     public Dictionaries DictionariesHotelMax() {
         return dictionariesMapper.DictionariesHotelMax();
     }
+
 }
