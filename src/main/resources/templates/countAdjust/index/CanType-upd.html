@@ -83,13 +83,23 @@
         })
     }
     function validate() {
-        var lala=$("#one").val()
-        if(value==lala){
-            return;
+        var lala=$("form").serialize();
+        var la=$("#one").val();
+        if(value==la){
+            $.ajax({
+                url:"/Dictionaries/DictionariesCanthree",
+                data:lala,
+                type:"get",
+                dateType:"json",
+                success:function (data) {
+                    alert(data.msg);
+                    parent.location.reload();
+                }
+            })
         }else{
             $.ajax({
                 url:"/Dictionaries/DictionariesByNameTypecan",
-                data:{valueContent1:lala},
+                data:{valueContent1:la},
                 type:"get",
                 dataType:"json",
                 success:function (data) {
@@ -97,7 +107,6 @@
                         alert("类型已存在")
                     }else{
                         var haha=$("#one").val()
-                        var lala=$("form").serialize()
                         if(haha.value =="" || haha.length==0){
                             alert("餐厅类型不能为空")
                         }else{

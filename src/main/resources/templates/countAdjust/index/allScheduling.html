@@ -126,7 +126,7 @@
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelStartTime+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+e.travelEndTime+"</td>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+del+"</td>\n" +
-                                    "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button><button  type='button'   data-url='Quotation-detail.html' data-id='\"+e.offerId+\"' onclick='xiangshe(this)' value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>详细设计</i></button></div>\n" ;
+                                    "\t\t\t\t\t\t<td class=\"hidden-xs\"><div style='display: inline-block'><button id='update' type='button'  value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn' onclick='show("+e.offerId+")'><i class='layui-icon'>显示详情</i></button><button  type='button'   data-url='Quotation-detail.html' data-id='"+e.offerId+"' onclick='xiangshe(this,"+e.offer+")' value='\" + e.restaurantId + \"' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>详细设计</i></button></div>\n" ;
 							}else if (e.whetherDel==4){
                                 content+="<tr>\n" +
                                     "\t\t\t\t\t\t<td class=\"hidden-xs\">"+xu+"</td>\n" +
@@ -180,10 +180,10 @@
 			function show(id){
 			    location.href="Scheduling-detail.html?offerId="+id;
 			}
-			function xiangshe(obj) {
+			function xiangshe(obj,offer) {
 				var url=$(obj).attr('data-url');
 				var id = $(obj).attr('data-id');
-				var offer="";
+				var offer=offer;
 				window.location.href=url+"?id="+id+"&offer="+offer;
                 return false;
             }
