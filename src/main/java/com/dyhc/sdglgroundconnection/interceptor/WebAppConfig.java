@@ -14,7 +14,7 @@ public class WebAppConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new InterceptorConfig()).addPathPatterns("/**").excludePathPatterns("/admins/login.html","/static/**","/Staff/login","/admin/**","/css/**","/font/**","/images/**","/js/**","/lay/modules/**","/WeChat/guideLogin","/WeChat/pdOldPassword","/WeChat/updateGuideByPassword","/WeChat/insertLog","/WeChat/getDispatchByguideId","/WeChat/assignmentGuide","/WeChat/getHoterById","/WeChat/getRestaurantById","/WeChat/getShoppingByIdWX","/WeChat/getTemplateById","/WeChat/upload");
+        registry.addInterceptor(new InterceptorConfig()).addPathPatterns("/**").excludePathPatterns("/admins/login.html","/static/**","/Staff/login","/admin/**","/css/**","/font/**","/images/**","/js/**","/lay/modules/**","/WeChat/guideLogin","/WeChat/pdOldPassword","/WeChat/updateGuideByPassword","/WeChat/insertLog","/WeChat/getDispatchByguideId","/WeChat/assignmentGuide","/WeChat/getHoterById","/WeChat/getRestaurantById","/WeChat/getShoppingByIdWX","/WeChat/getTemplateById","/WeChat/upload","/WeChat/updateTX");
     }
 
 }

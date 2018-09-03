@@ -57,4 +57,12 @@ public interface GuideMapper extends CommonMapper<Guide>{
      */
     Guide  pdcertificate(@Param("certificate") String certificate);
 
+    /**
+     *修改导游头像
+     * @param guideId
+     * @param tx
+     * @throws Exception
+     */
+    void updateTX(@Param("guideId") Integer guideId,@Param("tx") String tx)throws Exception ;
+
 }

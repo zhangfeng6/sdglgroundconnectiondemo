@@ -351,4 +351,30 @@ public class WeChatController {
             return ReponseResult.err("获取行程内容失败");
         }
     }
+
+    /**
+     * 修改导游头像
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateTX")
+    @ResponseBody
+    public ReponseResult updateTX(HttpServletRequest request){
+        try {
+            Integer guideId=Integer.parseInt(request.getParameter("guideId"));
+            String tx=WechatFileUploadUtil.uploadImage(request,".jpg");
+            Integer result=guideService.updateTX(guideId,tx);
+            if (result==1){
+                logger.error("method:updateTX  修改头像成功");
+                return ReponseResult.ok(tx,"修改头像成功");
+            }else {
+                logger.error("method:updateTX  修改头像失败");
+                return ReponseResult.err("修改头像失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:updateTX  修改头像失败");
+            return ReponseResult.err("修改头像失败");
+        }
+    }
 }
