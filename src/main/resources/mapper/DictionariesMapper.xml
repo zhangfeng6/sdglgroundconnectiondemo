@@ -27,7 +27,7 @@
     <select id="listdictionarieslBycode" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
             SELECT `valueId`,`valueContent1` FROM `dictionaries`
         <if test="code != null and code != '' ">
-            WHERE `typeCode`=#{code}
+            WHERE `typeCode`=#{code} and `whetherDel`!=1
         </if>
     </select>
 
@@ -77,7 +77,8 @@
 
     <!--餐厅类型-->
     <update id="getDictionariesByUpd">
-        UPDATE dictionaries SET valueContent1=#{valueContent1} WHERE dictionariesId=#{dictionariesId}
+        UPDATE dictionaries SET valueContent1=#{valueContent1},valueContent2=#{valueContent2},valueContent3=#{valueContent3} WHERE dictionariesId=#{dictionariesId}
+
     </update>
     <!--车队类型-->
     <update id="getDictionariescarUpd">
@@ -132,5 +133,8 @@
     <select id="DictionariesHotelMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
         SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='THEROOM' AND d.whetherDel!=1
     </select>
-
+    <!--查询酒店房间类型名称:贾晓亮-->
+    <select id="dis_All" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
+      select  *  from dictionaries where  typeCode="THEROOM" and  valueId=#{valueId}
+    </select>
 </mapper>

@@ -22,7 +22,7 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">类型名称： </label>
 									<div class="layui-input-block">
-										<select name="valueId" id="valueContent1"></select>
+										<select name="valueId" id="valueContent1" class="layui-select"></select>
 									</div>
 								</div>
 								<div class="layui-form-item">
@@ -123,6 +123,7 @@
                     url: "/MealType/selectById",
                     data:{typeId:typeId},
                     dataType: "json",
+                    async: false,
                     type: "get",
                     success: function (e) {
                         $("[name='costprice']").val(e.data.costprice);
@@ -140,6 +141,7 @@
 				$.ajax({
                     url: "/MealType/selectDic",
                     dataType: "json",
+					async: false,
                     type: "post",
                     success: function (data) {
                         var content = "";

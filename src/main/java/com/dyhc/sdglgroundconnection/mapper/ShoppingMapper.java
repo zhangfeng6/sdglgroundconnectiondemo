@@ -36,4 +36,11 @@ public interface ShoppingMapper extends CommonMapper<Shopping>{
      * @throws Exception
      */
     void deleteShoppingsByscenicSpotId(@Param("scenicSpotId") Integer scenicSpotId)throws Exception;
+
+    /**
+     * 获取所有未删除的购物地信息
+     * @return
+     * @throws Exception
+     */
+    List<Shopping> listNoDelShopping()throws Exception;
 }

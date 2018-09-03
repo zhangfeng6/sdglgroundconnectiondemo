@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -90,7 +91,7 @@
                         var haha=$("#one").val()
                         var dictionaries=$("form").serialize()
                         if(haha.value =="" || haha.length==0){
-                            alert("酒店类型名称不能为空")
+                            alert("房间类型不能为空")
                         }else{
                             $.ajax({
                                 url:"/Dictionaries/DictionariesHotelthree.html",

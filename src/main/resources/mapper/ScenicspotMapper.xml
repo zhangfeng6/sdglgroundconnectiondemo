@@ -70,8 +70,17 @@
   <select id="ShowScenicSpotId" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
      select  * from  scenicspot where  parentId=#{scenicSpotId}
   </select>
-    
+
+    <select id="selectAllScenic" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        select  * from  scenicspot where whetherDel!=1
+    </select>
+
     <select id="getScenicspotParentName" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
         select  * from  scenicspot where whetherDel=0
+    </select>
+
+    <!--获取所有未删除的景点信息-->
+    <select id="listNoDelScenicspot" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        SELECT * FROM `scenicspot` WHERE `whetherDel`!=1
     </select>
 </mapper>

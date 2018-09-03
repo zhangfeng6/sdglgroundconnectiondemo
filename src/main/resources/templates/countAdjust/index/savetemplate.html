@@ -138,12 +138,12 @@
             type:"get",
             success:function (result) {
                 xlName=result.data["parameter"].templateName;
-                $("input[name=templateName]").val(result.data["parameter"].templateName);
-                $("input[name=costPrice]").val(result.data["parameter"].costprice);
-                $("input[name=offer]").val(result.data["parameter"].offer);
-                $("textarea").text(result.data["parameter"].templateContent);
                 $("select[name=hotelId]").val(result.data["parameter"].hotelId);
                 getHotelByid(result.data["parameter"].hotelId);
+                $("input[name=templateName]").val(result.data["parameter"].templateName);
+                $("input[name=costprice]").val(result.data["parameter"].costprice);
+                $("input[name=offer]").val(result.data["parameter"].offer);
+                $("textarea").text(result.data["parameter"].templateContent);
                 $(result.data["scenicspot"]).each(function (i,e) {
                     if(i>0){
                         insertJingdian();

@@ -14,7 +14,7 @@
 <div class="page-content-wrap">
 	<input type="hidden" name="offerId" th:value="${id}"/>
 	<input type="hidden" name="Did" th:value="${did}"/>
-	<input type="hidden" name="offer" th:value="${offer}"/>
+	<input type="hidden" id="offer" name="offer" th:value="${offer}"/>
 	<div id="divhead">
 	<form class="layui-form layui-form-pane" action="">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -271,7 +271,7 @@
 					<tr>
 						<td><label class="layui-form-label">车联系人：</label></td>
 						<td><input type="text" name="cheduilxr" class="layui-input"></td>
-						<td colspan="3">(如：张师傅 13333333333 晋H:88888)</td>
+						<td colspan="3">(如：张师傅，13333333333，晋H:88888)</td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
@@ -617,6 +617,7 @@
 						$("textarea[name=remarks]").text(result.data["offer"].remarks);
                         $("textarea[name=reception]").text(result.data["offer"].reception);
                         $("input[name=qitacb]").val(result.data["other"].costPrice);
+                        $("input[name=xiaofei]").val(result.data["offer"].notcontain);
                         $("select[name=vehicle]").val(result.data["car"]);
                         $("select[name=vehicle]").change();
 						$(result.data["line"]).each(function (i,e) {
@@ -842,7 +843,7 @@
                 dispatch.travelStartTime=$("input[name=travelStartTime]").val();
                 dispatch.travelEndTime=$("input[name=travelEndTime]").val();
                 dispatch.sendLine=$("input[name=sendLine]").val();
-                dispatch.offer=$("input[name=offer]").val();
+                dispatch.offer=$("#offer").val();
                 var tourist="";
                 for (var i=0;i<index;i++){
                     var L=0;

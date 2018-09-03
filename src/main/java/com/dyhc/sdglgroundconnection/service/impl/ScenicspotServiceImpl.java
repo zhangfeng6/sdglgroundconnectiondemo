@@ -90,7 +90,7 @@ public class ScenicspotServiceImpl implements ScenicspotService {
      */
     @Override
     public List<Scenicspot> listScenicspotAll() throws Exception {
-        return scenicspotMapper.selectAll();
+        return scenicspotMapper.listNoDelScenicspot();
     }
 
     /**
@@ -111,5 +111,10 @@ public class ScenicspotServiceImpl implements ScenicspotService {
     @Override
     public List<Scenicspot> ShowScenicSpotId(Integer scenicSpotId) {
         return scenicspotMapper.ShowScenicSpotId(scenicSpotId);
+    }
+
+    @Override
+    public List<Scenicspot> selectAllScenic() {
+        return scenicspotMapper.selectAllScenic();
     }
 }

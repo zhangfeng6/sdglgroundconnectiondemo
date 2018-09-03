@@ -1,7 +1,9 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
 import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.*;
+import com.dyhc.sdglgroundconnection.service.impl.DictionariesServiceImpl;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -58,7 +60,103 @@ public class WeChatController {
     private TemplateService templateService;
     @Autowired
     private BillService billService;
+    @Autowired
+    private ReportdetailService reportdetailService;
+    @Autowired
+    private DictionariesServiceImpl dictionariesService;
+    @Autowired
+    private ReportdetailMapper reportdetailMapper;
+    @Autowired
+    private ReportaccommodationService reportaccommodationService;
 
+
+    /**
+     * 导游报账住宿新增
+     * @param
+     * @return
+     */
+    @LogNotes(operationType="导游报账",content="住宿新增")
+    @RequestMapping("/saveReportaccommodation")
+    @ResponseBody
+    public ReponseResult saveAccountType(
+            @RequestParam("hotelName")String hotelName,
+            @RequestParam("typeId")Integer typeId,
+            @RequestParam("housePrice")Double housePrice,
+            @RequestParam("roomNum")Integer roomNum,
+            @RequestParam("accompanyingBed")Integer accompanyingBed,
+            @RequestParam("accompanyingPrice")Double accompanyingPrice,
+            @RequestParam("subtotal")Double subtotal,
+            @RequestParam("payMethods")String payMethods){
+        Integer dispatchId=1;
+        //创建总报账表的对象
+        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
+        //创建报账住宿
+        Reportaccommodation reportaccommodation =new Reportaccommodation();
+        reportaccommodation.setReportDetailId(reportdetail.getReportDetailId());
+        reportaccommodation.setHotelName(hotelName);
+        reportaccommodation.setTypeId(typeId);
+        reportaccommodation.setHousePrice(housePrice);
+        reportaccommodation.setRoomNum(roomNum);
+        reportaccommodation.setAccompanyingBed(accompanyingBed);
+        reportaccommodation.setAccompanyingPrice(accompanyingPrice);
+        reportaccommodation.setSubtotal(subtotal);
+        reportaccommodation.setPayMethods(payMethods);
+        reportaccommodation.setLiveDate(new Date());
+        reportaccommodation.setStatus(0);
+        try {
+            Integer num=reportaccommodationService.saveReportaccommodation(reportaccommodation) ;
+            logger.info("method:savereportaccommodation 导游报账住宿新增成功");
+            ReponseResult<Integer> data =ReponseResult.ok(num,"保存成功");
+            data.setMsg("住宿报账成功");
+            return  data;
+        } catch (Exception e) {
+            logger.info("method:savereportaccommodation 导游报账住宿新增失败");
+            e.printStackTrace();
+            ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
+            return  error;
+        }
+    }
+
+
+
+    /**
+     * 新增导游报账总信息（贾晓亮）
+     * @return
+     */
+    @RequestMapping("/dictionaries")
+    @ResponseBody
+    public ReponseResult dictionaries(
+            @RequestParam("valueId")Integer valueId,
+            @RequestParam("remarks")String remarks,
+            @RequestParam("receipt")Double receipt,
+            @RequestParam("totalPayable")Double totalPayable,
+            @RequestParam("balanceAmount")Double balanceAmount
+    ){
+        //创建导游报账总表信息
+        try{
+            Reportdetail reportdetail =new Reportdetail();
+            reportdetail.setDispatchId(1);
+            reportdetail.setReportDate(new Date());
+            reportdetail.setReceipt(receipt);
+            reportdetail.setTotalPayable(totalPayable);
+            reportdetail.setTypeCode("BILL");
+            reportdetail.setValueId(valueId);
+            reportdetail.setBalanceAmount(balanceAmount);
+            reportdetail.setRemarks(remarks);
+            reportdetail.setStatus(1);
+            reportdetail.setWhetherDel(0);
+            reportdetail.setCreateBy(1);
+            Integer A =reportdetailService.save_Reportfetails(reportdetail);
+            ReponseResult data=ReponseResult.ok(A,"新增总报账成功");
+            data.setMsg("总报账成功");
+            logger.info("method:dictionaries 新增总报账成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:dictionaries 新增总报账失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
 
 
     /**
@@ -95,6 +193,26 @@ public class WeChatController {
             return ReponseResult.err("登录失败");
         }
     }
+
+
+    /**
+     * 获取导游报账信息的类型名称
+     * @return
+     */
+    @RequestMapping("/baozhangType")
+    @ResponseBody
+    public ReponseResult baozhangType(){
+        try{
+            ReponseResult data=ReponseResult.ok(reportdetailService.baozhangType(),"获取类型名称成功");
+            logger.info("method:getReportdetailById 获取类型名称成功");
+            return data;
+        }catch (Exception e){
+            logger.error("method:getReportdetailById 获取类型名称失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+
 
 
     /**

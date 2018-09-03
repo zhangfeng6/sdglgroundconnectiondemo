@@ -65,4 +65,11 @@ public interface GuideMapper extends CommonMapper<Guide>{
      */
     void updateTX(@Param("guideId") Integer guideId,@Param("tx") String tx)throws Exception ;
 
+    /**
+     * 获取没删除的所有导游信息
+     * @return
+     * @throws Exception
+     */
+    List<Guide> listNoDelGuide()throws Exception;
+
 }
