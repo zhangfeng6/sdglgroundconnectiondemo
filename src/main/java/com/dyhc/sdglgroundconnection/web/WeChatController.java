@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -170,10 +171,12 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult guideLogin(String username,String password){
         try {
-            System.out.println(password);
-            Guide guide=guideService.login(username,password);
+
+            String mima=MD5(password);
+            System.out.println(mima);
+            Guide guide=guideService.login(username,mima);
             if (guide!=null){
-                if(password.equals(guide.getPassword())){
+                if(mima.equals(guide.getPassword())){
                     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                     HttpSession session=request.getSession();//创建session对象
                     session.setAttribute("staff",guide);
@@ -192,6 +195,38 @@ public class WeChatController {
             e.printStackTrace();
             logger.error("method:login 微信登录失败");
             return ReponseResult.err("登录失败");
+        }
+    }
+
+    /**
+     * MD5加密
+     * @param key
+     * @return
+     */
+    public static String MD5(String key) {
+        char hexDigits[] = {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+        };
+        try {
+            byte[] btInput = key.getBytes();
+            // 获得MD5摘要算法的 MessageDigest 对象
+            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            // 使用指定的字节更新摘要
+            mdInst.update(btInput);
+            // 获得密文
+            byte[] md = mdInst.digest();
+            // 把密文转换成十六进制的字符串形式
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i < j; i++) {
+                byte byte0 = md[i];
+                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+                str[k++] = hexDigits[byte0 & 0xf];
+            }
+            return new String(str);
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -273,9 +308,10 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult pdOldPassword(String password,Integer guideId){
         try {
+            String mima=MD5(password);
             Guide guide=guideService.assignmentGuide(guideId);
             if (guide!=null){
-                if(password.equals(guide.getPassword())){
+                if(mima.equals(guide.getPassword())){
                     logger.info("method:pdOldPassword 旧密码输入正确");
                     return ReponseResult.ok(1,"旧密码输入正确");
                 }else {
@@ -302,6 +338,7 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult updateGuideByPassword(Guide guide){
         try {
+            guide.setPassword(MD5(guide.getPassword()));
             Integer result=guideService.updateGuideByPassword(guide);
             if (result==1){
                 logger.info("method:updateGuideByPassword 修改密码成功");
