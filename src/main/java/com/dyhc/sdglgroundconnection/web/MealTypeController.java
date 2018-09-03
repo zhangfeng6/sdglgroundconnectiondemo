@@ -31,6 +31,7 @@ public class MealTypeController  {
 
     /**
      * 赵伟伟
+     * 获取饭店类型
      * @param restaurantId
      * @return
      */
@@ -49,6 +50,11 @@ public class MealTypeController  {
     }
 
 
+    /**
+     * 按编号获取饭店
+     * @param typeId
+     * @return
+     */
     @RequestMapping("/selectById")
     public ReponseResult selectById(Integer typeId) {
         try {
@@ -64,6 +70,7 @@ public class MealTypeController  {
     }
     /**
      * 赵伟伟
+     * 保存饭店
      * @param
      * @return
      */
@@ -95,6 +102,11 @@ public class MealTypeController  {
     }
 
 
+    /**
+     * 删除饭店
+     * @param restaurantId
+     * @return
+     */
     @RequestMapping("/delMealTypeById")
     @LogNotes(operationType="饭店类型",content="删除")
     public ReponseResult delMealTypeById(Integer restaurantId) {
@@ -113,6 +125,10 @@ public class MealTypeController  {
         }
     }
 
+    /**
+     * 查询饭店类型
+     * @return
+     */
     @RequestMapping("/selectDic")
     public ReponseResult selectDic() {
         try {
@@ -128,6 +144,10 @@ public class MealTypeController  {
     }
 
 
+    /**
+     * 查询餐馆类型
+     * @return
+     */
     @RequestMapping("/selectMealType")
     public ReponseResult selectMealType() {
         try {

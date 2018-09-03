@@ -263,6 +263,10 @@ public class ScenicspotController {
     }
 
 
+    /**
+     * 景点模板查询
+     * @return
+     */
     @RequestMapping("/listScenicspotAll")
     public ReponseResult listScenicspotAll() {
         try {

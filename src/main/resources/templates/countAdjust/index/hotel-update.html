@@ -95,28 +95,30 @@
 <script>
 
     $(function () {
-
+        fuzhiHotel();
     })
 
     /**
      * 酒店修改赋值
      */
     function  fuzhiHotel() {
+        var typeId = $("#hotelId").val();
         $.ajax({
             url:"/Hotel/fuzhiHotel",
             data:{typeId:typeId},
             dataType:"json",
             type:"get",
             success:function (data) {
-               $("input[name='hotelName']").val();
-               $("input[name='starHotel']").val();
-               $("input[name='hotelAddress']").val();
-               $("input[name='picturePath']").val();
-               $("input[name='breakfast']").val();
-               $("input[name='contacts']").val();
-               $("input[name='offer']").val();
-               $("input[name='hotelDescribe']").val();
-               $("input[name='']").val();
+               $("input[name='hotelName']").val(data.data.hotelName);
+               $("input[name='starHotel']").val(data.data.starHotel);
+               $("input[name='hotelAddress']").val(data.data.hotelAddress);
+               $("input[name='picturePath']").val(data.data.picturePath);
+               $("[name='breakfast']").val(data.data.breakfast);
+               $("[name='contacts']").val(data.data.contacts);
+               $("[name='offer']").val(data.data.offer);
+               $("[name='hotelDescribe']").val(data.data.hotelDescribe);
+               $("[name='phone']").val(data.data.phone);
+               $("[name='costprice']").val(data.data.costprice);
             },
             error:function () {
                 alert("酒店房间修改赋值失败！");

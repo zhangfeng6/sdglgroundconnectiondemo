@@ -60,6 +60,7 @@ public class HotelController {
      * 酒店房间删除
      * @return
      */
+    @LogNotes(operationType="酒店房间",content="删除")
     @RequestMapping("/removeRoomType")
     public ReponseResult removeRoomType(@RequestParam("hotelId") Integer hotelId) {
         try {
@@ -80,6 +81,7 @@ public class HotelController {
      * 酒店房间修改
      * @return
      */
+    @LogNotes(operationType="酒店房间",content="修改")
     @RequestMapping("/updateRoomType")
     public ReponseResult updateRoomType(@RequestParam("typeId")Integer typeId,
                                         @RequestParam("typeName")Integer valueId,
@@ -107,6 +109,7 @@ public class HotelController {
      * 酒店房间新增
      * @return
      */
+    @LogNotes(operationType="酒店房间",content="新增")
     @RequestMapping("/saveRoomType")
     public ReponseResult saveRommType(@RequestParam("hotelId")Integer hotelId,
                                       @RequestParam("typeName")Integer valueId,
@@ -157,7 +160,7 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/fuzhiHotel")
-    public ReponseResult fuzhiHotel(Integer hotelId) {
+    public ReponseResult fuzhiHotel(@RequestParam("typeId") Integer hotelId) {
         try {
             Hotel  num =hotelService.fuzhiHotel(hotelId);
             ReponseResult<Hotel> data = ReponseResult.ok(num,"酒店房间修改赋值成功");
@@ -198,6 +201,7 @@ public class HotelController {
      * 酒店新增:贾晓亮
      * @return
      */
+    @LogNotes(operationType="酒店",content="添加")
     @RequestMapping("/saveHotel")
     public ReponseResult saveHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath) {
         try {
@@ -226,6 +230,7 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/updatHotel")
+    @LogNotes(operationType="酒店",content="修改")
     public ReponseResult updateHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath) {
         try {
             String form =request.getParameter("form");
@@ -254,6 +259,7 @@ public class HotelController {
      * @return
      */
     @RequestMapping("/removeHoter")
+    @LogNotes(operationType="酒店",content="删除")
     public ReponseResult removeHotel(@RequestParam("hotelId") Integer hotelId) {
         try {
             Integer  num =hotelService.removeHotel(hotelId);
@@ -314,6 +320,10 @@ public class HotelController {
     }
 
 
+    /**
+     * 查询旅游线路
+     * @return
+     */
     @RequestMapping("/selectHotel")
     public ReponseResult selectHotel() {
         try {
@@ -353,6 +363,7 @@ public class HotelController {
 
     /**
      * 赵伟伟
+     * 按编号查询酒店
      * @return
      */
     @RequestMapping("/selectTypeById")

@@ -1,5 +1,7 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
+import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Reportingotherexpenses;
 import com.dyhc.sdglgroundconnection.service.ReportingotherexpensesService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -19,7 +21,7 @@ import java.util.Date;
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账其他支出 控制层
  **/
-@RequestMapping("Reportingotherexpenses")
+@RequestMapping("/Reportingotherexpenses")
 @RestController
 public class ReportingotherexpensesController {
 
@@ -28,7 +30,8 @@ public class ReportingotherexpensesController {
 
     @Autowired
     private ReportingotherexpensesService reportingotherexpensesService;
-
+    @Autowired
+    private ReportdetailMapper reportdetailMapper;
     /**
      * 导游报账其他新增
      * @param
@@ -37,11 +40,14 @@ public class ReportingotherexpensesController {
     @LogNotes(operationType="导游其他明细",content="其他新增")
     @RequestMapping("/saveReportingotherexpenses")
     public ReponseResult saveReportingotherexpenses(
+            @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("Remarks")String Remarks,
             @RequestParam("GuidedTour")Double GuidedTour,
             @RequestParam("Signing")Double Signing,
             @RequestParam("total")Double total){
+        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
         Reportingotherexpenses reportingotherexpenses=new Reportingotherexpenses();
+        reportingotherexpenses.setReportDetailId(reportdetail.getReportDetailId());
         reportingotherexpenses.setCreateBy(1);
         reportingotherexpenses.setCreateDate(new Date());
         reportingotherexpenses.setStatus(0);

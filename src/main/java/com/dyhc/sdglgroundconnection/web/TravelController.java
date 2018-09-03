@@ -5,6 +5,7 @@ import com.dyhc.sdglgroundconnection.pojo.Disrestaurant;
 import com.dyhc.sdglgroundconnection.pojo.Travel;
 import com.dyhc.sdglgroundconnection.service.TravelService;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -36,6 +37,10 @@ public class TravelController{
     @Autowired
     private TravelService travelService;
 
+    /**
+     * 查询旅游模板
+     * @return
+     */
     @RequestMapping("/selectTravel")
     public ReponseResult selectTravel() {
         try {
@@ -55,6 +60,7 @@ public class TravelController{
      * @param travel
      * @return
      */
+    @LogNotes(operationType="组团社信息",content="修改")
     @RequestMapping("/showTravelUpd.html")
     public ReponseResult<Integer> showTravelUpd(Travel travel){
         System.out.println(travel);
@@ -78,6 +84,7 @@ public class TravelController{
      * @param travel
      * @return
      */
+    @LogNotes(operationType="组团社信息",content="添加")
     @RequestMapping("/showTravelAdd.html")
     public ReponseResult<Integer> showTravelAdd(Travel travel){
         System.out.println(travel);
@@ -121,6 +128,11 @@ public class TravelController{
     }
 
 
+    /**
+     * 查询组团社
+     * @param travelId
+     * @return
+     */
     @RequestMapping("/selectTravelById")
     public ReponseResult selectTravelById(Integer travelId) {
         try {
@@ -165,6 +177,7 @@ public class TravelController{
      * @param travelId
      * @return
      */
+    @LogNotes(operationType="组团社信息",content="删除")
     @RequestMapping("/showTravelupdlala.html")
     public ReponseResult<Integer> showTravelupdlala(Integer travelId){
         try{
@@ -359,6 +372,12 @@ public class TravelController{
     }
 
 
+    /**
+     * 派传单
+     * @param request
+     * @param travelId
+     * @return
+     */
     @RequestMapping("Delegation")
     public ReponseResult Delegation(HttpServletRequest request, Integer travelId){
         HttpSession session = request.getSession();
@@ -374,6 +393,11 @@ public class TravelController{
     }
 
 
+    /**
+     * 派传单
+     * @param request
+     * @return
+     */
     @RequestMapping("pai")
     public ReponseResult pai(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -381,6 +405,11 @@ public class TravelController{
         return ReponseResult.ok(travelId,"获取成功");
     }
 
+    /**
+     * 计划行程单
+     * @param request
+     * @return
+     */
     @RequestMapping("jihua")
     public ReponseResult jihua(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -389,6 +418,11 @@ public class TravelController{
     }
 
 
+    /**
+     * 报价单
+     * @param request
+     * @return
+     */
     @RequestMapping("bao")
     public ReponseResult bao(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -396,6 +430,11 @@ public class TravelController{
         return ReponseResult.ok(travelId,"获取成功");
     }
 
+    /**
+     * 订房通知单
+     * @param request
+     * @return
+     */
     @RequestMapping("ding")
     public ReponseResult ding(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -404,6 +443,11 @@ public class TravelController{
     }
 
 
+    /**
+     * 导游日志
+     * @param request
+     * @return
+     */
     @RequestMapping("rizhi")
     public ReponseResult rizhi(HttpServletRequest request){
         HttpSession session = request.getSession();

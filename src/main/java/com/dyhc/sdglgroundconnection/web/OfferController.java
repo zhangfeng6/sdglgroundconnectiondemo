@@ -58,6 +58,7 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 查询报价单
      * @param
      * @return
      */
@@ -82,6 +83,7 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 查询报价单
      * @param
      * @return
      */
@@ -107,6 +109,7 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 获取报价信息
      * @param
      * @return
      */
@@ -163,6 +166,7 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 获取报价单信息
      * @param
      * @return
      */
@@ -457,6 +461,7 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 查询报价单
      * @param offerId
      * @return
      */
@@ -478,6 +483,7 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 查询确认书
      * @param
      * @return
      */
@@ -499,10 +505,13 @@ public class OfferController {
 
     /**
      * 赵伟伟
+     * 确认成团
      * @param
      * @return
      */
+
     @RequestMapping("/que")
+    @LogNotes(operationType="报价信息",content="修改")
     public ReponseResult que(Integer offerId) {
         try {
             int a = offerService.queren(offerId);
