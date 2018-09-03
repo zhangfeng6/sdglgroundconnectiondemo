@@ -26,6 +26,7 @@ public class OfferotherController {
 
     /**
      * 赵伟伟
+     * 查询其他报价
      * @param offerId
      * @return
      */

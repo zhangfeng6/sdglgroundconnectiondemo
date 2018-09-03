@@ -31,6 +31,11 @@ public class TourismandlineController {
     private TourismandlineService tourismandlineService;
 
 
+    /**
+     * 查询模板中的线路
+     * @param tourismId
+     * @return
+     */
     @RequestMapping("/selectTourismandlineAll")
     public ReponseResult selectTourismandlineAll(Integer tourismId) {
         try {

@@ -39,6 +39,10 @@ public class TourismtemplateController {
     @Autowired
     private TourismtemplateService tourismtemplateService;
 
+    /**
+     * 查询旅游模板
+     * @return
+     */
     @RequestMapping("/selectTourismtemplate")
     public ReponseResult selectTourismtemplate() {
         try {
@@ -85,7 +89,7 @@ public class TourismtemplateController {
      * @return
      */
     @RequestMapping("/removetourism")
-    @LogNotes(operationType = "删除",content = "模板")
+    @LogNotes(operationType = "模板信息",content = "删除")
     public ReponseResult removetourism(@RequestParam("tid")Integer tid){
         try {
             int result=tourismtemplateService.removetourismtemplate(tid);
@@ -120,6 +124,14 @@ public class TourismtemplateController {
     }
 
 
+    /**
+     * 保存模板
+     * @param temName
+     * @param info
+     * @param id
+     * @return
+     */
+    @LogNotes(operationType="模板信息",content="保存")
     @RequestMapping("/saveorupdate")
     public ReponseResult saveorupdate(@RequestParam("temName")String temName,
                                       @RequestParam("info[]")Integer[] info,
@@ -140,6 +152,11 @@ public class TourismtemplateController {
 
     }
 
+    /**
+     * 根据id获取线路信息
+     * @param tid
+     * @return
+     */
     @RequestMapping("/listtandlById")
     public ReponseResult listtandlById(@RequestParam("tid")Integer tid){
         try {

@@ -11,6 +11,7 @@ import com.dyhc.sdglgroundconnection.parameterentity.DispatchParameter;
 import com.dyhc.sdglgroundconnection.pojo.Cluster;
 import com.dyhc.sdglgroundconnection.service.*;
 import com.dyhc.sdglgroundconnection.utils.DateDifference;
+import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -84,6 +85,12 @@ public class DispatchController {
     }
 
 
+    /**
+     * 派传单
+     * @param request
+     * @param dispatchId
+     * @return
+     */
     @RequestMapping("pai")
     public ReponseResult pai(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -93,6 +100,12 @@ public class DispatchController {
     }
 
 
+    /**
+     * 计划行程单
+     * @param request
+     * @param dispatchId
+     * @return
+     */
     @RequestMapping("jihua")
     public ReponseResult jihua(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -101,6 +114,13 @@ public class DispatchController {
         return msg;
     }
 
+    /**
+     * 导游日志
+     * @param request
+     * @param dispatchId
+     * @param guideId
+     * @return
+     */
     @RequestMapping("rizhi")
     public ReponseResult rizhi(HttpServletRequest request, Integer dispatchId,Integer guideId){
         HttpSession session = request.getSession();
@@ -110,6 +130,12 @@ public class DispatchController {
         return msg;
     }
 
+    /**
+     * 租车合同
+     * @param request
+     * @param dispatchId
+     * @return
+     */
     @RequestMapping("zuche")
     public ReponseResult zuche(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -120,6 +146,12 @@ public class DispatchController {
         return msg;
     }
 
+    /**
+     * 报价单
+     * @param request
+     * @param dispatchId
+     * @return
+     */
     @RequestMapping("bao")
     public ReponseResult bao(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -128,6 +160,12 @@ public class DispatchController {
         return msg;
     }
 
+    /**
+     * 订房通知单
+     * @param request
+     * @param dispatchId
+     * @return
+     */
     @RequestMapping("ding")
     public ReponseResult ding(HttpServletRequest request, Integer dispatchId){
         HttpSession session = request.getSession();
@@ -178,7 +216,10 @@ public class DispatchController {
     }
 
 
-
+    /**
+     * 查询资源数据
+     * @return
+     */
     @RequestMapping("/getresource")
     public ReponseResult getresource(){
         try {
@@ -193,6 +234,12 @@ public class DispatchController {
         }
     }
 
+    /**
+     * 根据类型获取资源
+     * @param type
+     * @param valueId
+     * @return
+     */
     @RequestMapping("/listinfoByvalueId")
     public ReponseResult listinfoByvalueId(@RequestParam("type")String type,@RequestParam("valueId")Integer valueId){
         try {
@@ -236,6 +283,14 @@ public class DispatchController {
         }
     }
 
+    /**
+     * 查询调度
+     * @param pageNo
+     * @param pageSize
+     * @param guideName
+     * @param groundConnectionNumber
+     * @return
+     */
     @RequestMapping("/listDispatchlike")
     public ReponseResult listDispatchlike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("guideName")String guideName, @RequestParam("groundConnectionNumber")String groundConnectionNumber){
         try{
@@ -251,6 +306,16 @@ public class DispatchController {
             return err;
         }
     }
+
+    /**
+     * 修改调度信息
+     * @param did
+     * @param gid
+     * @param travelStartTime
+     * @param travelEndTime
+     * @return
+     */
+    @LogNotes(operationType="调度信息",content="修改")
     @RequestMapping("/updatestateById")
     public ReponseResult updatestateById(@RequestParam("did")Integer did,
                                          @RequestParam("gid")Integer gid,
@@ -359,6 +424,7 @@ public class DispatchController {
      * @return
      */
     @RequestMapping(value = "/saveDispatch")
+    @LogNotes(operationType="调度信息",content="新增")
     public ReponseResult saveDispatch(@RequestBody DispatchParameter dispatchParameter){
         try {
             ReponseResult data=ReponseResult.ok(dispatchService.saveDispatch(dispatchParameter),"");
@@ -397,6 +463,7 @@ public class DispatchController {
      * @param dispatchParameter
      * @return
      */
+    @LogNotes(operationType="调度信息",content="修改")
     @RequestMapping(value = "/updateDispatch",method = RequestMethod.POST)
     public ReponseResult updateDispatch(@RequestBody DispatchParameter dispatchParameter){
         System.out.println("...........................");

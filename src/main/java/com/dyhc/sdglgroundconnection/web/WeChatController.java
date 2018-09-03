@@ -298,6 +298,7 @@ public class WeChatController {
      * @return
      */
     @RequestMapping("/updateGuideByPassword")
+    @LogNotes(operationType="微信小程序密码",content="修改")
     @ResponseBody
     public ReponseResult updateGuideByPassword(Guide guide){
         try {
@@ -372,6 +373,11 @@ public class WeChatController {
     }
 
 
+    /**
+     * 修改导游信息
+     * @param guideId
+     * @return
+     */
     @RequestMapping("/assignmentGuide")
     @ResponseBody
     @LogNotes(operationType="导游表",content="导游修改赋值 ")

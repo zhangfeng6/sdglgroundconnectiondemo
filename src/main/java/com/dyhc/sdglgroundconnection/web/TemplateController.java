@@ -143,7 +143,10 @@ public class TemplateController {
     }
 
 
-
+    /**
+     * 查询旅游模板
+     * @return
+     */
     @RequestMapping("/selectTemplate")
     public ReponseResult selectTemplate() {
         try {
@@ -180,6 +183,11 @@ public class TemplateController {
 
     }
 
+    /**
+     * 删除线路模板
+     * @param tid
+     * @return
+     */
     @RequestMapping("/removetemplate")
     @LogNotes(operationType = "线路模板",content = "删除")
     public ReponseResult removeTemplate(@RequestParam("tid")Integer tid){
@@ -197,8 +205,10 @@ public class TemplateController {
     }
 
 
-
-
+    /**
+     * 查询线路信息
+     * @return
+     */
     @RequestMapping("/listtemplateall")
     public ReponseResult listtemplateall(){
         try {
@@ -213,6 +223,11 @@ public class TemplateController {
         }
     }
 
+    /**
+     * 查询线路信息
+     * @param templateId
+     * @return
+     */
     @RequestMapping("/selectTemplateAll")
     public ReponseResult selectTemplateAll(Integer templateId) {
         try {
