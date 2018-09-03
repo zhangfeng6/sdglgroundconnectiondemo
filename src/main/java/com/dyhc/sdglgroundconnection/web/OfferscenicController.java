@@ -31,6 +31,7 @@ public class OfferscenicController {
 
     /**
      * 赵伟伟
+     * 获取景点报价
      * @param offerId
      * @return
      */

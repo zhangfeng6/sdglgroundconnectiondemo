@@ -27,6 +27,10 @@ public class OfferlineController {
     @Autowired
     private OfferlineService offerlineService;
 
+    /**
+     * 查询线路
+     * @return
+     */
     @RequestMapping("/selectofferline")
     public ReponseResult selectofferline() {
         try {
@@ -63,6 +67,7 @@ public class OfferlineController {
 
     /**
      * 赵伟伟
+     * 查询汽车报价
      * @param offerId
      * @return
      */

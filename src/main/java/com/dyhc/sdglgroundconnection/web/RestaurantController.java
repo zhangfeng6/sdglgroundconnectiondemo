@@ -43,6 +43,7 @@ public class RestaurantController {
 
     /**
      * 赵伟伟
+     * 查询饭店信息
      * @param pageNo
      * @param pageSize
      * @param restaurantName
@@ -69,6 +70,7 @@ public class RestaurantController {
 
     /**
      * 赵伟伟
+     * 查询饭店类型是否重复
      * @return
      */
     @RequestMapping("/selectTypeById")
@@ -93,6 +95,7 @@ public class RestaurantController {
 
     /**
      * 赵伟伟
+     * 删除饭店
      * @param restaurantId
      * @return
      */
@@ -115,13 +118,14 @@ public class RestaurantController {
 
     /**
      * 赵伟伟
+     * 新增饭店
      * @param multipartFile
      * @param savePath
      * @param request
      * @return
      */
     @PostMapping("/insertRestaurant")
-    @LogNotes(operationType="饭店",content="新增")
+    @LogNotes(operationType="饭店",content="保存")
     public ReponseResult insertRestaurant(HttpServletRequest request,@RequestParam("multipartFile") MultipartFile multipartFile, @RequestParam("savePath") String savePath) {
         try {
             String restaurant2 = request.getParameter("restaurant");
@@ -158,7 +162,7 @@ public class RestaurantController {
      * @return
      */
     @PostMapping("/insertRestaurant1")
-    @LogNotes(operationType="饭店",content="新增")
+    @LogNotes(operationType="饭店",content="保存")
     public ReponseResult insertRestaurant1(HttpServletRequest request) {
         try {
             String restaurant2 = request.getParameter("restaurant");
@@ -192,6 +196,7 @@ public class RestaurantController {
 
     /**
      * 赵伟伟
+     * 按编号查询饭店
      * @param restaurantId
      * @return
      */

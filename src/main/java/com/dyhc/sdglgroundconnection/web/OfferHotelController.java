@@ -30,6 +30,7 @@ public class OfferHotelController  {
 
     /**
      * 赵伟伟
+     * 获取酒店报价
      * @param offerId
      * @return
      */
