@@ -12,7 +12,7 @@ public class WebAppConfig implements WebMvcConfigurer {
      * 注册自定义拦截器，添加拦截路径和排除拦截路径
      * @param registry
      */
-  /*  @Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new InterceptorConfig()).addPathPatterns("/**").
       excludePathPatterns("/admins/login.html","/static/**","/Staff/login","/admin/**"
@@ -21,5 +21,5 @@ public class WebAppConfig implements WebMvcConfigurer {
               "/WeChat/getDispatchByguideId","/WeChat/assignmentGuide","/WeChat/getHoterById",
               "/WeChat/getRestaurantById","/WeChat/getShoppingByIdWX","/WeChat/getTemplateById",
               "/WeChat/upload","/WeChat/baozhangType","/WeChat/dictionaries","/WeChat/saveReportaccommodation");
-    }*/
+    }
 }
