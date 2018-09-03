@@ -79,6 +79,7 @@ public class WeChatController {
     @RequestMapping("/saveReportaccommodation")
     @ResponseBody
     public ReponseResult saveAccountType(
+            @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("hotelName")String hotelName,
             @RequestParam("typeId")Integer typeId,
             @RequestParam("housePrice")Double housePrice,
@@ -87,7 +88,6 @@ public class WeChatController {
             @RequestParam("accompanyingPrice")Double accompanyingPrice,
             @RequestParam("subtotal")Double subtotal,
             @RequestParam("payMethods")String payMethods){
-        Integer dispatchId=1;
         //创建总报账表的对象
         Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
         //创建报账住宿
@@ -126,6 +126,7 @@ public class WeChatController {
     @RequestMapping("/dictionaries")
     @ResponseBody
     public ReponseResult dictionaries(
+            @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("valueId")Integer valueId,
             @RequestParam("remarks")String remarks,
             @RequestParam("receipt")Double receipt,
@@ -135,7 +136,7 @@ public class WeChatController {
         //创建导游报账总表信息
         try{
             Reportdetail reportdetail =new Reportdetail();
-            reportdetail.setDispatchId(1);
+            reportdetail.setDispatchId(dispatchId);
             reportdetail.setReportDate(new Date());
             reportdetail.setReceipt(receipt);
             reportdetail.setTotalPayable(totalPayable);
