@@ -54,9 +54,8 @@
             <div  class="layui-input-block" id="roleId" style="width: 400px;">
                 <select type="text" style="width:210px ;height: 40px" name="roleId">
                     <option value="0">--请选择角色类型--</option>
-                    <option value="1">--管理员--</option>
                     <option value="3">--计调--</option>
-                    <option value="4">--总控--</option>
+                    <option value="4">--总控--</option>s
                     <option value="5">--财务--</option>
                 </select>
             </div>
@@ -152,12 +151,10 @@
                 var staff = $("form").serialize();
                 staff = decodeURIComponent(staff, true);//防止乱码
                 var jsondata = DataDeal.formToJson(staff)
-                var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/";//图片路径
                 var fileObj = document.getElementById("file").files[0];//获取文件对象
                 //formData对象，用来序列二进制数据
                 var forData = new FormData();
                 forData.append("headPortraitPath", fileObj);
-                forData.append("savePath", savePath);
                 forData.append("staff", jsondata);
                 $.ajax({
                     url: "/Staff/StaffAdd.html",
@@ -278,7 +275,6 @@
                 var staff = $("form").serialize();
                 staff = decodeURIComponent(staff, true);//防止乱码
                 var jsondata = DataDeal.formToJson(staff)
-                var savePath = "D://Y2\\世达国旅/sdglGroundConnection/src/main/resources/static/images/";//图片路径
                 var fileObj = document.getElementById("file").files[0];//获取文件对象
                 //formData对象，用来序列二进制数据
                 var forData = new FormData();

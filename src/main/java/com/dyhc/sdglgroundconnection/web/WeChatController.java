@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,6 +80,7 @@ public class WeChatController {
     @RequestMapping("/saveReportaccommodation")
     @ResponseBody
     public ReponseResult saveAccountType(
+            @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("hotelName")String hotelName,
             @RequestParam("typeId")Integer typeId,
             @RequestParam("housePrice")Double housePrice,
@@ -87,7 +89,6 @@ public class WeChatController {
             @RequestParam("accompanyingPrice")Double accompanyingPrice,
             @RequestParam("subtotal")Double subtotal,
             @RequestParam("payMethods")String payMethods){
-        Integer dispatchId=1;
         //创建总报账表的对象
         Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
         //创建报账住宿
@@ -126,6 +127,7 @@ public class WeChatController {
     @RequestMapping("/dictionaries")
     @ResponseBody
     public ReponseResult dictionaries(
+            @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("valueId")Integer valueId,
             @RequestParam("remarks")String remarks,
             @RequestParam("receipt")Double receipt,
@@ -135,7 +137,7 @@ public class WeChatController {
         //创建导游报账总表信息
         try{
             Reportdetail reportdetail =new Reportdetail();
-            reportdetail.setDispatchId(1);
+            reportdetail.setDispatchId(dispatchId);
             reportdetail.setReportDate(new Date());
             reportdetail.setReceipt(receipt);
             reportdetail.setTotalPayable(totalPayable);
@@ -169,10 +171,12 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult guideLogin(String username,String password){
         try {
-            System.out.println(password);
-            Guide guide=guideService.login(username,password);
+
+            String mima=MD5(password);
+            System.out.println(mima);
+            Guide guide=guideService.login(username,mima);
             if (guide!=null){
-                if(password.equals(guide.getPassword())){
+                if(mima.equals(guide.getPassword())){
                     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                     HttpSession session=request.getSession();//创建session对象
                     session.setAttribute("staff",guide);
@@ -191,6 +195,38 @@ public class WeChatController {
             e.printStackTrace();
             logger.error("method:login 微信登录失败");
             return ReponseResult.err("登录失败");
+        }
+    }
+
+    /**
+     * MD5加密
+     * @param key
+     * @return
+     */
+    public static String MD5(String key) {
+        char hexDigits[] = {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+        };
+        try {
+            byte[] btInput = key.getBytes();
+            // 获得MD5摘要算法的 MessageDigest 对象
+            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            // 使用指定的字节更新摘要
+            mdInst.update(btInput);
+            // 获得密文
+            byte[] md = mdInst.digest();
+            // 把密文转换成十六进制的字符串形式
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i < j; i++) {
+                byte byte0 = md[i];
+                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+                str[k++] = hexDigits[byte0 & 0xf];
+            }
+            return new String(str);
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -272,9 +308,10 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult pdOldPassword(String password,Integer guideId){
         try {
+            String mima=MD5(password);
             Guide guide=guideService.assignmentGuide(guideId);
             if (guide!=null){
-                if(password.equals(guide.getPassword())){
+                if(mima.equals(guide.getPassword())){
                     logger.info("method:pdOldPassword 旧密码输入正确");
                     return ReponseResult.ok(1,"旧密码输入正确");
                 }else {
@@ -301,6 +338,7 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult updateGuideByPassword(Guide guide){
         try {
+            guide.setPassword(MD5(guide.getPassword()));
             Integer result=guideService.updateGuideByPassword(guide);
             if (result==1){
                 logger.info("method:updateGuideByPassword 修改密码成功");
@@ -473,6 +511,32 @@ public class WeChatController {
             e.printStackTrace();
             logger.error("method:getTemplateById  获取行程内容失败");
             return ReponseResult.err("获取行程内容失败");
+        }
+    }
+
+    /**
+     * 修改导游头像
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateTX")
+    @ResponseBody
+    public ReponseResult updateTX(HttpServletRequest request){
+        try {
+            Integer guideId=Integer.parseInt(request.getParameter("guideId"));
+            String tx=WechatFileUploadUtil.uploadImage(request,".jpg");
+            Integer result=guideService.updateTX(guideId,tx);
+            if (result==1){
+                logger.error("method:updateTX  修改头像成功");
+                return ReponseResult.ok(tx,"修改头像成功");
+            }else {
+                logger.error("method:updateTX  修改头像失败");
+                return ReponseResult.err("修改头像失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("method:updateTX  修改头像失败");
+            return ReponseResult.err("修改头像失败");
         }
     }
 }

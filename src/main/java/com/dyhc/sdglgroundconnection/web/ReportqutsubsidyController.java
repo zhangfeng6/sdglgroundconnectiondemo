@@ -1,5 +1,7 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
+import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Reportqutsubsidy;
 import com.dyhc.sdglgroundconnection.service.ReportqutsubsidyService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -18,7 +20,7 @@ import java.util.Date;
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账出团补助 控制层
  **/
-@RequestMapping("Reportqutsubsidy")
+@RequestMapping("/Reportqutsubsidy")
 @RestController
 public class ReportqutsubsidyController  {
 
@@ -27,7 +29,8 @@ public class ReportqutsubsidyController  {
 
     @Autowired
     private ReportqutsubsidyService reportqutsubsidyService;
-
+    @Autowired
+    private ReportdetailMapper reportdetailMapper;
     /**
      * 导游报账住宿新增
      * @param
@@ -35,8 +38,10 @@ public class ReportqutsubsidyController  {
      */
     @LogNotes(operationType="导游补助明细",content="补助新增")
     @RequestMapping("/saveReportqutsubsidy")
-    public ReponseResult saveReportqutsubsidy(@RequestParam("DailyCost")Double DailyCost,@RequestParam("nums")Integer nums,@RequestParam("guideNum")Integer guideNum){
+    public ReponseResult saveReportqutsubsidy(@RequestParam("dispatchId")Integer dispatchId,@RequestParam("DailyCost")Double DailyCost,@RequestParam("nums")Integer nums,@RequestParam("guideNum")Integer guideNum){
+        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
         Reportqutsubsidy reportqutsubsidy=new Reportqutsubsidy();
+        reportqutsubsidy.setReportDetailId(reportdetail.getReportDetailId());
         reportqutsubsidy.setCreateBy(1);
         reportqutsubsidy.setCreateDate(new Date());
         reportqutsubsidy.setUpDate(new Date());

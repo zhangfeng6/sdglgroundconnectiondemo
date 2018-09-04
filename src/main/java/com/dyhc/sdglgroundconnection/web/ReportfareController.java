@@ -27,7 +27,7 @@ import java.util.List;
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账车费 控制层
  **/
-@RequestMapping("Reportfare")
+@RequestMapping("/Reportfare")
 @RestController
 public class ReportfareController{
 
@@ -49,12 +49,13 @@ public class ReportfareController{
      */
     @LogNotes(operationType="导游车费",content="车费新增")
     @RequestMapping("/savereportaccommodation")
-    public ReponseResult savereportfare(@RequestParam("tolls")Double tolls,@RequestParam("parkingFee")Double parkingFee,@RequestParam("PrepaidFare")Double PrepaidFare) {
-        Integer dispatchId=1;
+    public ReponseResult savereportfare
+    (@RequestParam("dispatchId")Integer dispatchId,@RequestParam("tolls")Double tolls,@RequestParam("parkingFee")Double parkingFee,@RequestParam("PrepaidFare")Double PrepaidFare) {
         //创建总报账表的对象
         Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
         Reportfare reportfare=new Reportfare();
         reportfare.setParkingFee(parkingFee);
+        reportfare.setReportDetailId(reportdetail.getReportDetailId());
         reportfare.setTolls(tolls);
         reportfare.setPrepaidFare(PrepaidFare);
         reportfare.setStatus(0);
