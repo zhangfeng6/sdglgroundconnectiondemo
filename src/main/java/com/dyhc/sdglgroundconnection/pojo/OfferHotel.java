@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
  * 报价酒店表
  **/
 @Table(name = "offerhotel")
-public class OfferHotel {
+public class OfferHotel implements Serializable {
     @Id
     @Column(name = "offerHotelId")
     private int offerHotelId; // 主键编号

@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
  * 字典表
  **/
 @Table(name = "dictionaries")
-public class Dictionaries {
+public class Dictionaries implements Serializable {
     @Id
     @Column(name = "dictionariesId")
     private int dictionariesId; // 字典编号

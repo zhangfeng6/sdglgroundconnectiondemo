@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
  * 接团信息表
  */
 @Table(name = "cluster")
-public class Cluster {
+public class Cluster implements Serializable {
     @Id
     @Column(name = "clusterId")
     private int clusterId; // 接团表

@@ -13,6 +13,7 @@ import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -380,6 +381,7 @@ public class DispatchServiceImpl implements DispatchService {
      * @return
      * @throws Exception
      */
+    @Cacheable(cacheNames = "DISPATCH")
     @Override
     public PageInfo<Dispatch> listDispatch(Integer pageNo, Integer pageSize, String djsth, String dyname, Integer state) throws Exception {
         PageHelper.startPage(pageNo,pageSize);
@@ -393,6 +395,7 @@ public class DispatchServiceImpl implements DispatchService {
      * @throws Exception
      */
     @Override
+    @Cacheable(cacheNames = "RESOURCE")
     public Map<String, Object> getresource() throws Exception {
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("travel",travelMappere.listNoDelTravel());

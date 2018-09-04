@@ -3,6 +3,7 @@ package com.dyhc.sdglgroundconnection.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
  * 调度购物表
  **/
 @Table(name = "disshopp")
-public class Disshopp {
+public class Disshopp implements Serializable {
     @Id
     @Column(name = "disShoppId")
     private int disShoppId; // 调度购物id

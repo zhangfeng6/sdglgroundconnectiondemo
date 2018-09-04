@@ -1,8 +1,10 @@
 package com.dyhc.sdglgroundconnection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.core.serializer.Serializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +14,8 @@ import java.util.Objects;
  *  调度表
  **/
 @Table(name = "dispatch")
-public class Dispatch {
+public class Dispatch implements Serializable {
+
     @Id
     @Column(name = "dispatchId")
     private int dispatchId; // 调度信息编号
