@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>后台登录</title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css"  th:href="@{/admin/layui/css/layui.css}"   />
 		<!--<link rel="stylesheet" type="text/css" href="/admin/css/login.css" />-->
-		<link rel="stylesheet" href="/admin/css/login.css">
+		<link rel="stylesheet" th:href="@{/admin/css/login.css}">
 
 	</head>
 
@@ -36,9 +35,9 @@
 				<p class="copyright">Copyright 2015-2016 by XIAODU</p>
 			</div>
 		</div>
-		<script src="/admin/js/jquery-3.2.1.js"></script>
-		<script src="/js/md5.js"></script>
-		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+		<script  th:src="@{/js/md5.js}"></script>
+		<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
 		<script>
 			layui.use(['form', 'layedit', 'laydate'], function() {
 				var form = layui.form(),
@@ -70,23 +69,23 @@
 			    var password=$("[name='password']").val();
 			    password = hex_md5(password);
                 $.ajax({
-                    url:"/Staff/login",
+                    url:"/sdglGroundConnection/Staff/login",
                     data:{"theUserName":theUserName,"password":password},
                     dataType:"Json",
                     type:"get",
                     success:function(data){
 						alert(data.msg);
 						if (data.data==1){
-							location.href="http://localhost:8888/admins/adminIndex.html";
+							location.href="/sdglGroundConnection/admins/adminIndex.html";
 						}
                         if (data.data==3){
-                            location.href="http://localhost:8888/countAdjust/count-Adjust-Index.html";
+                            location.href="/sdglGroundConnection/countAdjust/count-Adjust-Index.html";
                         }
                         if (data.data==4){
-                            location.href="http://localhost:8888/General/count-Adjust-Index.html";
+                            location.href="/sdglGroundConnection/General/count-Adjust-Index.html";
                         }
                         if (data.data==5){
-                            location.href="http://localhost:8888/finance/finance-Index.html";
+                            location.href="/sdglGroundConnection/finance/finance-Index.html";
                         }
                     }
 				})

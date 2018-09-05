@@ -37,7 +37,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter{
         }
         else{
             PrintWriter printWriter = httpServletResponse.getWriter();
-            httpServletResponse.sendRedirect("/admins/login.html");
+            httpServletResponse.sendRedirect("/sdglGroundConnection/admins/login.html");
             return false;
         }
 

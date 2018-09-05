@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -7,8 +7,8 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>网站后台管理模版</title>
-    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="/admin/css/admin.css"/>
+    <link rel="stylesheet"  th:href="@{/admin/layui/css/layui.css}" />
+    <link rel="stylesheet"  th:href="@{/admin/css/admin.css}" type="text/css" />
 </head>
 <body>
 <div class="main-layout" id='main-layout'>
@@ -20,9 +20,9 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;"><i class="iconfont">&#xe607;</i>用户管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" data-url="article-list.html" data-id='82321' data-text="查看用户"><span
+                    <dd><a  href="javascript:;" data-url="/sdglGroundConnection/admins/article-list.html"  data-id='82321' data-text="查看用户"><span
                             class="l-line"></span>查看用户</a></dd>
-                    <dd><a href="javascript:;" data-url="article-list1.html" data-id='92' data-text="导游"><span
+                    <dd><a  href="javascript:void(0);" data-url="/sdglGroundConnection/admins/article-list1.html"  data-id='92' data-text="导游"><span
                             class="l-line"></span>导游</a></dd>
                 </dl>
             </li>
@@ -31,27 +31,27 @@
                 <dl class="layui-nav-child">
                     <dd><a href="../countAdjust/count-Adjust-Index.html" ><span
                             class="l-line"></span>计调</a></dd>
-                    <dd><a href="../countAdjust/count-Adjust-Index.html"><span
+                    <dd><a href="../General/count-Adjust-Index.html"><span
                             class="l-line"></span>总控</a></dd>
-                    <dd><a href="javascript:;" data-url="danye-list.html" data-id='11' data-text="经理"><span
+                    <dd><a href="javascript:;" data-url="../danye-list.html" data-id='11' data-text="经理"><span
                             class="l-line"></span>经理</a></dd>
 
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:;" data-url="travel_list.html" data-id='232' data-text="旅行社"><i
+                <a href="javascript:;" data-url="/sdglGroundConnection/admins/travel_list.html" data-id='232' data-text="旅行社"><i
                         class="iconfont">&#xe606;</i>旅行社</a>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:;" data-url="company-admin.html" data-id='27' data-text="公司账户类型"><i
+                <a href="javascript:;" data-url="/sdglGroundConnection/admins/company-admin.html" data-text="公司账户类型"><i
                         class="iconfont">&#xe606;</i>公司账户信息</a>
             </li>
             <li class="layui-nav-item">
-            <a href="javascript:;" data-url="log-operate-admin.html" data-id='28' data-text="日志操作"><i
+            <a href="javascript:;" data-url="/sdglGroundConnection/admins/log-operate-admin.html"  data-text="日志操作"><i
                     class="iconfont">&#xe606;</i>日志操作</a>
         </li>
             <li class="layui-nav-item">
-                <a href="javascript:;" data-url="companyone_admin.html" data-id='28' data-text="公司信息"><i
+                <a href="javascript:;" data-url="/sdglGroundConnection/admins/companyone_admin.html" data-id='28' data-text="公司信息"><i
                         class="iconfont">&#xe606;</i>公司信息</a>
             </li>
 
@@ -69,7 +69,7 @@
             <ul class="layui-nav" lay-filter="rightNav">
 
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息">个人信息</a>
+                    <a href="javascript:;" data-url="/sdglGroundConnection/admins/admin-info.html" data-id='5' data-text="个人信息">个人信息</a>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;" onclick="qingkong()">退出</a></li>
             </ul>
@@ -86,7 +86,7 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
                         <!--1-->
-                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto"
+                        <iframe src="welcome.html" width="100%"  name="yemian" height="100%"  scrolling="auto"
                                 class="iframe" framborder="0"></iframe>
                         <!--1end-->
                     </div>
@@ -104,24 +104,28 @@
         link: './welcome.html'
     }
 </script>
-<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-<script src="/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
-<script src="/js/jquery-3.2.1.js"></script>
+<script  th:src="@{/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<script  th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
+<script  th:src="@{/admin/js/main.js}" type="text/javascript" charset="utf-8"></script>
 <script>
     //退出按钮,清空session
     function qingkong() {
         $.ajax({
-            url:"http://localhost:8888/Staff/qingkong",
+            url:"/sdglGroundConnection/Staff/qingkong",
             data:{},
             dataType:"json",
             type:"get",
             success:function (result) {
                 if(result.data==1){
-                    window.parent.location.href="http://localhost:8888/admins/login.html";
+                    window.parent.location.href="/sdglGroundConnection/admins/login.html";
                 }
             }
         });
+    }
+    
+    function iframejump(yurl) {
+        $("#yemian").attr("src",yurl);
     }
 </script>
 

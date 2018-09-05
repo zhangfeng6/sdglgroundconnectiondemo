@@ -1,7 +1,8 @@
 # 端口号配置
 server:
-  port: 8888
-
+  port: 8080
+  servlet:
+    context-path: /sdglGroundConnection
 # 数据源配置
 spring:
   servlet:
@@ -66,13 +67,14 @@ file:
   windowsUploadFolder: D://Y2\世达国旅/sdglGroundConnection/src/main/resources/static/images/  # windows文件上传目录
   linuxUploadFolder: /root/uploadFiles/  # linux文件上传目录
 
+
 #redis配置
-redis:
- host : 127.0.0.1
- port : 6379
- pool:
-  max-idle: 20
-  min-idle: 1
-  max-active: 20
-  max-wait: 60000
-database: 0
+#redis:
+# host : 127.0.0.1
+# port : 6379
+# pool:
+#  max-idle: 20
+#  min-idle: 1
+#  max-active: 20
+#  max-wait: 60000
+#database: 0

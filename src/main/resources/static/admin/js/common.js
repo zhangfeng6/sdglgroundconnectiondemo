@@ -1,5 +1,5 @@
 layui.config({
-	base: '/admin/js/module/'
+	base: '/sdglGroundConnection/admin/js/module/'
 }).extend({
 	dialog: 'dialog',
 });

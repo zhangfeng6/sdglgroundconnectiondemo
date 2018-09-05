@@ -381,7 +381,7 @@ public class DispatchServiceImpl implements DispatchService {
      * @return
      * @throws Exception
      */
-    @Cacheable(cacheNames = "DISPATCH")
+    //@Cacheable(cacheNames = "DISPATCH")
     @Override
     public PageInfo<Dispatch> listDispatch(Integer pageNo, Integer pageSize, String djsth, String dyname, Integer state) throws Exception {
         PageHelper.startPage(pageNo,pageSize);
@@ -395,7 +395,7 @@ public class DispatchServiceImpl implements DispatchService {
      * @throws Exception
      */
     @Override
-    @Cacheable(cacheNames = "RESOURCE")
+    //@Cacheable(cacheNames = "RESOURCE")
     public Map<String, Object> getresource() throws Exception {
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("travel",travelMappere.listNoDelTravel());
@@ -411,6 +411,7 @@ public class DispatchServiceImpl implements DispatchService {
     }
 
     @Override
+    //@Cacheable(cacheNames = "RESOURCEBYVALUEID")
     public List listinfoByvalueId(String type, Integer valueId) throws Exception {
         List list=null;
         if(type.equals("hoteltype")){
