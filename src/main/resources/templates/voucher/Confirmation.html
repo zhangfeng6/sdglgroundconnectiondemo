@@ -1,9 +1,9 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>打印页面</title>
-    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
 <style>
 	table{ width:100%}
 </style>
@@ -13,7 +13,7 @@
 
 	<div style="width:60%; margin:0 auto">
                     <div id="tupian">
-                <img src="/images/logo.jpg" width="640px" height="50px">
+                <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
         </div>
     	<h2 style="text-align:center"><span style="text-decoration:underline" id="zutuanName">STS-RJ-2018-04-15JD</span>确认书(0326件)</h2>
         <table border="1" cellspacing="0" cellpadding="0">
@@ -140,7 +140,7 @@
 
 
     </div>
-    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
     <script>
         $(function(){
             show();
@@ -152,7 +152,7 @@
 
         function show(){
             $.ajax({
-                url:"/Offer/showConfirmation",
+                url:"/sdglGroundConnection/Offer/showConfirmation",
                 data:{},
                 dataType:"json",
                 async: false,

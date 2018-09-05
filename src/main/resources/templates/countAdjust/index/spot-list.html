@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>ajax & LayUI分页插件</title>
-	<link rel="stylesheet" href="/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
 
 
 </head>
@@ -60,9 +60,9 @@
 </div>
 
 </body>
-</html>
-<script src="/layui.js"></script>
-<script src="/js/jquery-1.8.2.min.js"></script>
+
+<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
 <script>
 
 
@@ -80,7 +80,7 @@
         var typeId=$("select[name='typeId']").val();
         var whetherDel=$("select[name='whetherDel']").val();
         $.ajax({
-            url: "http://localhost:8888/Scenicspot/listScenicspots",
+            url: "/sdglGroundConnection/Scenicspot/listScenicspots",
             data: {"typeId":typeId,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"pageNo":curnum,"pageSize":2},
             dataType: "json",
             type: "get",
@@ -211,7 +211,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'spotshopping-add.html?scenicSpotId='+scenicSpotId
+            content:'/sdglGroundConnection/spotshopping-add.html?scenicSpotId='+scenicSpotId
         });/* parent.layer.closeAll();*/
     });
 
@@ -225,7 +225,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'spot-add.html?id='+id
+            content:'/sdglGroundConnection/spot-add.html?id='+id
         });
     });
     $(document).on('click','#insertInfo',function(){
@@ -236,7 +236,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'spot-add.html?id=tianjia'
+            content:'/sdglGroundConnection/spot-add.html?id=tianjia'
         });
     });
 
@@ -248,7 +248,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'spotshopping-update.html?shoppingId='+shoppingId
+            content:'/sdglGroundConnection/spotshopping-update.html?shoppingId='+shoppingId
         });
     });
 
@@ -260,7 +260,7 @@
     function getScenicspotByParentId(parentId) {
         $.ajax({
             type: "post",
-            url: "http://localhost:8888/Scenicspot/getScenicspotByParentId",
+            url: "/sdglGroundConnection/Scenicspot/getScenicspotByParentId",
             data: {"parentId":parentId},
             dataType: "json",
             success:function (result1) {
@@ -278,7 +278,7 @@
         if (tishi==true) {
             $.ajax({
                 type: "post",
-                url: "http://localhost:8888/shopping/deleteShoppingById",
+                url: "/sdglGroundConnection/shopping/deleteShoppingById",
                 data: {"shoppingId":shoppingId},
                 dataType: "json",
                 success:function (result1) {
@@ -300,7 +300,7 @@
         if(tishi==true){
             $.ajax({
                 type: "post",
-                url: "http://localhost:8888/Scenicspot/deleteScenicspotById",
+                url: "/sdglGroundConnection/Scenicspot/deleteScenicspotById",
                 data: {"scenicSpotId":scenicSpotId},
                 dataType: "json",
                 success:function (result1) {
@@ -354,3 +354,4 @@
 
 
 </script>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -7,14 +7,14 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}" />
 	</head>
 	
 	<body>
 		<div id="tupian" style="width: 635px;margin-left: 335px;">
-                <img src="/images/logo.jpg" width="640px" height="50px">
+                <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
        		 </div>
 		<div style="width: 600px;">
 			
@@ -64,7 +64,7 @@
 			</table>
 			<p><button style=" margin-left: 650px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印导游日志</button></p>
 		</div>
-		<script src="/js/jquery-1.8.2.min.js"></script>
+		<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 		<script>
 			$(function () {
 			    kaishi();
@@ -77,7 +77,7 @@
 
             function kaishi(){
                 $.ajax({
-                    url:"/Travel/rizhi",
+                    url:"/sdglGroundConnection/Travel/rizhi",
                     data:{},
                     dataType:"json",
                     async: false,
@@ -96,7 +96,7 @@
              */
 			function  logShow() {
 				$.ajax({
-					url:"/log/log",
+					url:"/sdglGroundConnection/log/log",
 					data:{guideId:guideId,dispatchId:dispatchId,creationDate:creationDate},
 					dataType:"",
 					type:"GET",

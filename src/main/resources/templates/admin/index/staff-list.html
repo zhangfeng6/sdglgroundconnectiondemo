@@ -77,7 +77,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '520px'],
-            content: '/admins/staff-add.html'
+            content: '/sdglGroundConnection/admins/staff-add.html'
         });
     })
     function gettiao(staffId){
@@ -88,7 +88,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/admins/staff-upd.html?staffId='+staffId
+                content: '/sdglGroundConnection/admins/staff-upd.html?staffId='+staffId
             })
         )
     }
@@ -105,7 +105,7 @@
         var haha=$("#staffName").val();
         var str = "";
         $.ajax({
-            url: "/Staff/showstaffLike.html",
+            url: "/sdglGroundConnection/Staff/showstaffLike.html",
             data: {page:curnum,limit:limitcount,staffname:haha},
             dataType: "json",
             type: "get",
@@ -166,7 +166,7 @@
     function getupd(staffId) {
         if (confirm("确定删除吗?")) {
             $.ajax({
-                url:"/Staff/StaffUpd.html",
+                url:"/sdglGroundConnection/Staff/StaffUpd.html",
                 data:{"staffId":staffId},
                 type:"get",
                 dataType:"json",

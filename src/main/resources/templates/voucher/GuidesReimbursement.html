@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<style>
 		*{margin: 0 auto;}
         table,table tr th, table tr td { border:1px solid #0094ff; height: 20px;}
@@ -9,11 +9,11 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
 	</head>
 	<body>
 		<div id="tupian" style="width: 635px;margin-left: 365px;">
-                <img src="/images/logo.jpg" width="640px" height="50px">
+                <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
        		 </div>
 		<table>
 
@@ -244,7 +244,7 @@
 		</table>
 	<p><button style=" margin-left: 500px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印地接导游报账明细</button></p>
 	</body>
-<script src="/js/jquery-1.8.2.min.js"></script>
+	<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
    $(function () {
        kaishi();
@@ -256,7 +256,7 @@ var id;
 
    function kaishi(){
        $.ajax({
-           url:"/Travel/bao",
+           url:"/sdglGroundConnection/Travel/bao",
            data:{},
            dataType:"json",
            async: false,
@@ -271,7 +271,7 @@ var id;
 
     function  ReportDetail() {
         $.ajax({
-            url:"/reportdetail/reportdetail",
+            url:"/sdglGroundConnection/reportdetail/reportdetail",
             data:{dispatchId:id},
             dataType:"json",
             type:"GET",
@@ -404,7 +404,7 @@ var id;
     }
 function dispatchShow() {
     $.ajax({
-        url:"/dispatch/dispatch",
+        url:"/sdglGroundConnection/dispatch/dispatch",
         data:{dispatchId:id},
         dataType:"json",
         type:"GET",
