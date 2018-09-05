@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -7,8 +7,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="/css/baojiadan.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/css/baojiadan.css}" />
 
 	</head>
 
@@ -184,9 +184,9 @@
 			<!--底部div结束-->
 		</div>
 	</table>
-		<script src="/js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="/layui.js"></script>
-		<script type="text/javascript" src="/js/baojiadan.js"></script>
+		<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+		<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+		<script type="text/javascript" th:src="@{/js/baojiadan.js}"></script>
 		<script type="text/javascript">
 				layui.use(['form', 'layedit', 'laydate','element'], function() {
 					var form = layui.form,
@@ -263,7 +263,7 @@
 
 				function selectOffer(){
 				    $.ajax({
-                        url:"/Offer/selectOfferByOfferId",
+                        url:"/sdglGroundConnection/Offer/selectOfferByOfferId",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -281,7 +281,7 @@
 
                 function selectOfferByOfferId(){
                     $.ajax({
-                        url:"/Offercar/selectOfferByOfferId",
+                        url:"/sdglGroundConnection/Offercar/selectOfferByOfferId",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -299,7 +299,7 @@
 
                 function selectOfferlineByOfferId(){
                     $.ajax({
-                        url:"/Offerline/selectOfferlineByOfferId",
+                        url:"/sdglGroundConnection/Offerline/selectOfferlineByOfferId",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -331,7 +331,7 @@
 
                 function selectOfferHotelByOfferId(){
                     $.ajax({
-                        url:"/OfferHotel/selectOfferHotelByOfferId",
+                        url:"/sdglGroundConnection/OfferHotel/selectOfferHotelByOfferId",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -350,7 +350,7 @@
 
                 function selectOfferRestaurantByOfferId(){
                     $.ajax({
-                        url:"/Offerrestaurant/selectOfferRestaurantByOfferId",
+                        url:"/sdglGroundConnection/Offerrestaurant/selectOfferRestaurantByOfferId",
                         data:{"offerId":id},
                         dataType:"json",
                         type:"get",
@@ -367,7 +367,7 @@
 
                 function selectOfferRestaurantByOfferId1(){
                     $.ajax({
-                        url:"/Offerrestaurant/selectOfferRestaurantByOfferId1",
+                        url:"/sdglGroundConnection/Offerrestaurant/selectOfferRestaurantByOfferId1",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -387,7 +387,7 @@
 
                 function selectOfferotherByOfferId(){
                     $.ajax({
-                        url:"/Offerother/selectOfferotherByOfferId",
+                        url:"/sdglGroundConnection/Offerother/selectOfferotherByOfferId",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -405,7 +405,7 @@
 
                 function selectOfferscenicByOfferId(){
                     $.ajax({
-                        url:"/Offerscenic/selectOfferscenicByOfferId",
+                        url:"/sdglGroundConnection/Offerscenic/selectOfferscenicByOfferId",
                         data:{offerId:id},
                         dataType:"json",
                         async: false,
@@ -470,7 +470,7 @@
 
 				function selectTourismtemplate(){
 				    $.ajax({
-                        url:"/Tourismtemplate/selectTourismtemplate",
+                        url:"/sdglGroundConnection/Tourismtemplate/selectTourismtemplate",
                         data:{},
                         dataType:"json",
                         async: false,
@@ -487,7 +487,7 @@
 
             function selectofferline(){
                 $.ajax({
-                    url:"/Template/selectTemplate",
+                    url:"/sdglGroundConnection/Template/selectTemplate",
                     data:{},
                     dataType:"json",
                     async: false,
@@ -504,7 +504,7 @@
 
             function selectHotel(){
                 $.ajax({
-                    url:"/Hotel/selectHotel",
+                    url:"/sdglGroundConnection/Hotel/selectHotel",
                     data:{},
                     dataType:"json",
                     async: false,
@@ -523,7 +523,7 @@
 
             function listScenicspotAll(){
                 $.ajax({
-                    url:"/Scenicspot/listScenicspotAll",
+                    url:"/sdglGroundConnection/Scenicspot/listScenicspotAll",
                     data:{},
                     dataType:"json",
                     async: false,
@@ -541,7 +541,7 @@
 
             function selectMealType(){
                 $.ajax({
-                    url:"/MealType/selectMealType",
+                    url:"/sdglGroundConnection/MealType/selectMealType",
                     data:{},
                     dataType:"json",
                     async: false,
@@ -558,7 +558,7 @@
 
             function selectTravel(){
                 $.ajax({
-                    url:"/Travel/selectTravel",
+                    url:"/sdglGroundConnection/Travel/selectTravel",
                     data:{},
                     dataType:"json",
                     async: false,
@@ -575,7 +575,7 @@
 
                 function listVehicletype(){
                     $.ajax({
-                        url:"/Dictionaries/listVehicletype",
+                        url:"/sdglGroundConnection/Dictionaries/listVehicletype",
                         data:{},
                         dataType:"json",
                         async: false,
@@ -594,7 +594,7 @@
             function selectByDictionariesId(id,index,qq){
                 //var id = $("[name='typeName'] option:selected").val();
                 $.ajax({
-                    url:"/Dictionaries/selectByDictionariesId",
+                    url:"/sdglGroundConnection/Dictionaries/selectByDictionariesId",
                     data:{dictionariesId:id},
                     dataType:"json",
                     type:"get",
@@ -608,7 +608,7 @@
                function selectByDictionariesId1(id,index,qq){
                     //var id = $("[name='typeName'] option:selected").val();
                     $.ajax({
-                        url:"/Dictionaries/selectByDictionariesId",
+                        url:"/sdglGroundConnection/Dictionaries/selectByDictionariesId",
                         data:{dictionariesId:id},
                         dataType:"json",
                         type:"get",
@@ -622,7 +622,7 @@
                 function selectByScenicSpotId(id,index,qq){
                     //var id = $("[name='typeName'] option:selected").val();'
                     $.ajax({
-                        url:"/Scenicspot/selectByScenicSpotId",
+                        url:"/sdglGroundConnection/Scenicspot/selectByScenicSpotId",
                         data:{scenicSpotId:id},
                         dataType:"json",
                         type:"get",
@@ -636,7 +636,7 @@
                 function selectByHotelId(id,index,qq){
                     //var id = $("[name='typeName'] option:selected").val();
                     $.ajax({
-                        url:"/Hotel/selectByHotelId",
+                        url:"/sdglGroundConnection/Hotel/selectByHotelId",
                         data:{hotelId:id},
                         dataType:"json",
                         type:"get",
@@ -665,7 +665,7 @@
 					}
 					var ee = $(ww).html();
                     $.ajax({
-                        url:"/Template/selectTemplateAll",
+                        url:"/sdglGroundConnection/Template/selectTemplateAll",
                         data:{templateId:id},
                         dataType:"json",
                         async: false,
@@ -757,7 +757,7 @@
                     $("#zong1").find("input").val("");
                     $("#zong1").find("select").val("请选择");
                     $.ajax({
-                        url:"/Tourismandline/selectTourismandlineAll",
+                        url:"/sdglGroundConnection/Tourismandline/selectTourismandlineAll",
                         data:{tourismId:id},
                         dataType:"json",
                         async: false,
@@ -858,7 +858,7 @@
 
 
 					$.ajax({
-                        url:"/Offer/insertOffer",
+                        url:"/sdglGroundConnection/Offer/insertOffer",
                         data:{xiaofei:xiaofei,jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer,des:des},
                         dataType:"json",
                         async: false,
@@ -904,14 +904,14 @@
                         jiudianList[i] = $(".jiudian").eq(i).children().val();
 					}
 				    $.ajax({
-                        url:"/Offer/Confirmation",
+                        url:"/sdglGroundConnection/Offer/Confirmation",
                         data:{number:number,travelEndTime:travelEndTime,travelStartTime:travelStartTime,travelId:zuid,jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList},
                         dataType:"json",
                         async: false,
                         traditional: true,
                         type:"get",
                         success:function (data) {
-							location.href="/countAdjust/Confirmation";
+							location.href="/sdglGroundConnection/countAdjust/Confirmation";
 						}
 					})
 				}
@@ -952,14 +952,14 @@
 					}
 					wu = wu/wuCount;
 				    $.ajax({
-                        url:"/Offer/quotation",
+                        url:"/sdglGroundConnection/Offer/quotation",
                         data:{xiaofei:xiaofei,tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
                         dataType:"json",
                         async: false,
                         traditional: true,
                         type:"get",
                         success:function (data) {
-                            location.href="/countAdjust/quotation";
+                            location.href="/sdglGroundConnection/countAdjust/quotation";
                         }
 					})
 				}

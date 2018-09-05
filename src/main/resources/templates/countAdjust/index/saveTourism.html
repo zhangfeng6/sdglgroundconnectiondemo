@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-    <link rel="stylesheet" type="text/css" href="/css/baojiadan.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/baojiadan.css}" />
 </head>
 <body>
 <div>
@@ -40,9 +40,9 @@
         </table>
     </form>
 </div>
-<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/layui.js"></script>
-<script type="text/javascript" src="/js/baojiadan.js"></script>
+<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/baojiadan.js}"></script>
 <script type="text/javascript">
     var xlName="";
     $(function() {
@@ -85,7 +85,7 @@
     //执行修改操作时给文本框赋值
     function updatefuzhi(mid){
         $.ajax({
-            url:"/Tourismtemplate/listtandlById",
+            url:"/sdglGroundConnection/Tourismtemplate/listtandlById",
             data:{tid:mid},
             dataType:"json",
             type:"get",
@@ -110,7 +110,7 @@
      */
     function LodingResouce(){
         $.ajax({
-            url: "/Template/listtemplateall",
+            url: "/sdglGroundConnection/Template/listtemplateall",
             dataType: "json",
             type: "get",
             success:function (result) {
@@ -133,7 +133,7 @@
             return;
         }
         $.ajax({
-            url:"/Tourismtemplate/jumptempName",
+            url:"/sdglGroundConnection/Tourismtemplate/jumptempName",
             data:{temName:name},
             type:"get",
             dataType:"json",
@@ -161,7 +161,7 @@
             info.push(xuan);
         }
         $.ajax({
-            url:"/Tourismtemplate/saveorupdate",
+            url:"/sdglGroundConnection/Tourismtemplate/saveorupdate",
             data:{temName:temname,info:info,id:id},
             dataType:"json",
             type:"get",

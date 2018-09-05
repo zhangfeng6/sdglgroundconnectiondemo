@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}" />
 		<style>
 			#header{
 				margin: 0px auto;
@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<div id="tupian" style="width: 635px;margin-left: 355px;">
-                <img src="/images/logo.jpg" width="640px" height="50px">
+                <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
        		 </div>
 		<div id="tou">
 			<p style=" text-decoration: underline; font-size: 30px;">派&nbsp;&nbsp;&nbsp;&nbsp;团&nbsp;&nbsp;&nbsp;&nbsp;单</p>
@@ -249,7 +249,7 @@
 		</div>
 		<p><button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印派团单</button></p>
 	</body>
-	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 	<script>
 		$(function(){
 		    kaishi();
@@ -266,7 +266,7 @@
 
 		function kaishi(){
 		    $.ajax({
-                url:"/Travel/huoqu",
+                url:"/sdglGroundConnection/Travel/huoqu",
                 data:{},
                 dataType:"json",
                 async: false,
@@ -279,7 +279,7 @@
 
 		function selectGuideByTravelId(){
 			$.ajax({
-                url:"/Travel/selectGuideByTravelId",
+                url:"/sdglGroundConnection/Travel/selectGuideByTravelId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,
@@ -292,7 +292,7 @@
 
         function selectDispatchByTravelId(){
             $.ajax({
-                url:"/Travel/selectDispatchByTravelId",
+                url:"/sdglGroundConnection/Travel/selectDispatchByTravelId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,
@@ -305,7 +305,7 @@
 
         function selectStaffByTraveId(){
             $.ajax({
-                url:"/Travel/selectStaffByTraveId",
+                url:"/sdglGroundConnection/Travel/selectStaffByTraveId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,
@@ -319,7 +319,7 @@
 
         function selectReportfareByTravelId(){
             $.ajax({
-                url:"/Travel/selectReportfareByTravelId",
+                url:"/sdglGroundConnection/Travel/selectReportfareByTravelId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,
@@ -340,7 +340,7 @@
 
         function selectOfferByTravelId(){
             $.ajax({
-                url:"/Travel/selectOfferByTravelId",
+                url:"/sdglGroundConnection/Travel/selectOfferByTravelId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,
@@ -357,7 +357,7 @@
 
         function selectReportrestaurantByTravelId(){
             $.ajax({
-                url:"/Travel/selectReportrestaurantByTravelId",
+                url:"/sdglGroundConnection/Travel/selectReportrestaurantByTravelId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,
@@ -403,7 +403,7 @@
 
         function selectReportticketByTravelId(){
             $.ajax({
-                url:"/Travel/selectReportticketByTravelId",
+                url:"/sdglGroundConnection/Travel/selectReportticketByTravelId",
                 data:{travelId:id},
                 dataType:"json",
                 async: false,

@@ -1,9 +1,9 @@
 ﻿<!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-		<script language="javascript" src="js/LodopFuncs.js"></script>
-		<script language="javascript" src="js/jquery-3.2.1.js"></script>
-		<script language="javascript" src="js/index.js"></script>
+		<script language="javascript" th:src="@{js/LodopFuncs.js}"></script>
+		<script language="javascript" th:src="@{js/jquery-3.2.1.js}"></script>
+		<script language="javascript" th:src="@{js/index.js}"></script>
 <meta charset="utf-8">
 <title>山西世达国旅报价单</title>
 		
@@ -61,7 +61,7 @@ table{
 <body>
 <div id="dy">
 			<div id="tupian">
-				<img src="image/logo.jpg" width="640px" height="50px">
+				<img src="/sdglGroundConnection/image/logo.jpg" width="640px" height="50px">
 		</div>
 			<DIV style="color:#0042A3;text-align:center;font-size: 12px;" id="xiabian">
 				<span>山西省十强旅行社&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -175,7 +175,7 @@ table{
 
 
 
-<script src="/js/jquery-3.3.1.min.js"></script>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
 	$(function(){
 	    show()
@@ -183,7 +183,7 @@ table{
 
 	function show(){
 	    $.ajax({
-            url:"/Offer/showConfirmation",
+            url:"/sdglGroundConnection/Offer/showConfirmation",
             data:{},
             dataType:"json",
             async: false,

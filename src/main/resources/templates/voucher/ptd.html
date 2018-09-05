@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8">
@@ -8,7 +8,7 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}" />
 	<style type="text/css">
 		#tableone tr td {
 			width: 20px;
@@ -32,7 +32,7 @@
 
 <div style="height: 500px; width: 700px; margin: auto;">
 	<div id="tupian" style="width: 635px;">
-		<img src="/images/logo.jpg" width="640px" height="50px">
+		<img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
 	</div>
 	<h2 style="text-align: center; font-size:26px;">导游接团任务工作单(派团单)</h2>
 	<p style="text-indent: 400px; font-size: 20px;">编号:</p>
@@ -131,7 +131,7 @@
 </div>
 
 
-<script src="/js/jquery-1.8.2.min.js"></script>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
     $(function () {
         kaishi();
@@ -145,7 +145,7 @@
 
     function kaishi(){
         $.ajax({
-            url:"/Travel/pai",
+            url:"/sdglGroundConnection/Travel/pai",
             data:{},
             dataType:"json",
             async: false,
@@ -160,7 +160,7 @@
 
     function lisrDispatch() {
         $.ajax({
-            url:"/dispatch/findDispatch.html",
+            url:"/sdglGroundConnection/dispatch/findDispatch.html",
             data:{dispatchId:id},
             type:"get",
             dataType:"json",
@@ -178,7 +178,7 @@
     }
     function listStaff() {
         $.ajax({
-            url:"/Staff/findStaff.html",
+            url:"/sdglGroundConnection/Staff/findStaff.html",
             data:{dispatchId:id},
             type:"get",
             dataType:"json",
@@ -192,7 +192,7 @@
     }
     function listDisguide() {
         $.ajax({
-            url:"/findDisguide.html",
+            url:"/sdglGroundConnection/findDisguide.html",
             data:{dispatchId:id},
             type:"get",
             dataType:"json",
@@ -208,7 +208,7 @@
     }
     function listcluster() {
         $.ajax({
-            url:"/dispatch/findCluster.html",
+            url:"/sdglGroundConnection/dispatch/findCluster.html",
             data:{dispatchId:id},
             type:"get",
             dataType:"json",
