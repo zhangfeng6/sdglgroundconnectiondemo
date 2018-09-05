@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>查看待审核的调度信息</title>
-	<link rel="stylesheet" href="/css/layui.css" media="all">
-	<link rel="stylesheet" type="text/css" href="/admin/layui/css/layui.css" />
-	<link rel="stylesheet" type="text/css" href="/admin/css/admin.css" />
+	<link rel="stylesheet"  th:href="@{/admin/layui/css/layui.css}" type="text/css" />
+	<link rel="stylesheet"  th:href="@{/admin/css/admin.css}" type="text/css" />
 </head>
 <body>
 <div class="page-content-wrap">
@@ -47,9 +46,9 @@
 </div>
 
 
+<script  th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
 
-<script src="/layui.js"></script>
-<script src="/js/jquery-1.8.2.min.js"></script>
 <script>
     function  menu3(dictionariesId) {
         $(document).on(
@@ -59,7 +58,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['1150px' , '520px'],
-                content: '/General/menu3.html'
+                content: '/sdglGroundConnection/General/menu3.html'
             })
         )
     }
@@ -71,7 +70,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['1200px' , '800px'],
-            content: '/countAdjust/Quotation-detail.html?did='+dispatchId
+            content: '/sdglGroundConnection/countAdjust/Quotation-detail.html?did='+dispatchId
         })
         )
     }
@@ -86,7 +85,7 @@
         var haha=$("#two").val()
         var str = "";
         $.ajax({
-            url: "/dispatch/listDispatchlike",
+            url: "/sdglGroundConnection/dispatch/listDispatchlike",
             data:{page:curnum,limit:limitcount,guideName:lala,groundConnectionNumber:haha},
             dataType: "json",
             type: "get",
@@ -135,7 +134,7 @@
         var travelStartTime=$(obj).prev().prev().val();
 		var travelEndTime=$(obj).prev().val();
 		$.ajax({
-			url:"/dispatch/updatestateById",
+			url:"/sdglGroundConnection/dispatch/updatestateById",
 			data:{did:did,gid:gid,travelStartTime:travelStartTime,travelEndTime:travelEndTime},
             dataType:"json",
 			type:"get",

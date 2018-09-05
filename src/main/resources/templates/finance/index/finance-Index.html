@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="renderer" content="webkit">
@@ -8,8 +8,8 @@
 		<title>网站后台管理模版</title>
 <!--		<link rel="stylesheet" type="text/css" href="../../admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="../../admin/css/admin.css"/>-->
-		<link rel="stylesheet" href="/admin/css/admin.css">
-		<link rel="stylesheet" href="/admin/layui/css/layui.css">
+		<link rel="stylesheet"  th:href="@{/admin/layui/css/layui.css}" type="text/css" />
+		<link rel="stylesheet"  th:href="@{/admin/css/admin.css}" type="text/css" />
 	</head>
 	<body>
 		<div class="main-layout" id='main-layout'>
@@ -68,21 +68,21 @@
             //退出按钮,清空session
             function qingkong() {
                 $.ajax({
-                    url:"http://localhost:8888/Staff/qingkong",
+                    url:"/sdglGroundConnection/Staff/qingkong",
                     data:{},
                     dataType:"json",
                     type:"get",
                     success:function (result) {
                         if(result.data==1){
-                            window.parent.location.href="http://localhost:8888/admins/login.html";
+                            window.parent.location.href="/sdglGroundConnection/admins/login.html";
                         }
                     }
                 });
             }
 		</script>
-		<script src="/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script  th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+		<script  th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
+		<script  th:src="@{/admin/js/main.js}" type="text/javascript" charset="utf-8"></script>
 		
 	</body>
 </html>
