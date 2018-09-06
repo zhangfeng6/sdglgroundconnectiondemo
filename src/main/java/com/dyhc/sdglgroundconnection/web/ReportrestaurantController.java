@@ -89,7 +89,7 @@ public class ReportrestaurantController {
      * @return
      */
     @RequestMapping("listReportrestaurantById")
-    public ReponseResult listReportrestaurantById(Integer reportDetailId)throws Exception{
+    public ReponseResult listReportrestaurantById(Integer reportDetailId){
         try {
             ReponseResult data=ReponseResult.ok(reportrestaurantService.listReportrestaurantById(reportDetailId),"获取成功");
             logger.info("mothod:listReportrestaurantById 获取成功");

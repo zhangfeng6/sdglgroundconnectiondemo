@@ -446,7 +446,7 @@ public class StaffController  {
      * @return
      */
     @RequestMapping("/ShowStafftheUserName")
-    public ReponseResult StaffByName(String theUserName)throws Exception{
+    public ReponseResult StaffByName(String theUserName){
         System.out.println("........................................");
         try{
             Integer data=0;
@@ -472,7 +472,7 @@ public class StaffController  {
      */
     @PostMapping("/findStaffThree")
     @LogNotes(operationType="人员信息",content="修改")
-    public ReponseResult findStaffThree(HttpServletRequest request)throws Exception{
+    public ReponseResult findStaffThree(HttpServletRequest request){
         String file="";
         try{
             String staff1=request.getParameter("staff");
@@ -501,7 +501,7 @@ public class StaffController  {
      * @return
      */
     @RequestMapping("qingkong")
-    public ReponseResult qingkong()throws Exception{
+    public ReponseResult qingkong(){
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session=request.getSession();

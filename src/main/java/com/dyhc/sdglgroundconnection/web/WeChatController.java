@@ -238,7 +238,7 @@ public class WeChatController {
      */
     @RequestMapping("/baozhangType")
     @ResponseBody
-    public ReponseResult baozhangType()throws Exception{
+    public ReponseResult baozhangType(){
         try{
             ReponseResult data=ReponseResult.ok(reportdetailService.baozhangType(),"获取类型名称成功");
             logger.info("method:getReportdetailById 获取类型名称成功");
@@ -259,7 +259,7 @@ public class WeChatController {
     @RequestMapping("/upload")
     @ResponseBody
     @LogNotes(operationType="单据",content="添加")
-    public synchronized ReponseResult upload(HttpServletRequest request)throws Exception{
+    public synchronized ReponseResult upload(HttpServletRequest request){
         try {
             Integer dispatchId=Integer.parseInt(request.getParameter("dispatchId"));
             Integer billTypeId=Integer.parseInt(request.getParameter("billTypeId"));
@@ -307,7 +307,7 @@ public class WeChatController {
      */
     @RequestMapping("/pdOldPassword")
     @ResponseBody
-    public ReponseResult pdOldPassword(String password,Integer guideId)throws Exception{
+    public ReponseResult pdOldPassword(String password,Integer guideId){
         try {
             String mima=MD5(password);
             Guide guide=guideService.assignmentGuide(guideId);
@@ -337,7 +337,7 @@ public class WeChatController {
     @RequestMapping("/updateGuideByPassword")
     @LogNotes(operationType="微信小程序密码",content="修改")
     @ResponseBody
-    public ReponseResult updateGuideByPassword(Guide guide)throws Exception{
+    public ReponseResult updateGuideByPassword(Guide guide){
         try {
             guide.setPassword(MD5(guide.getPassword()));
             Integer result=guideService.updateGuideByPassword(guide);
@@ -363,7 +363,7 @@ public class WeChatController {
     @RequestMapping("/insertLog")
     @LogNotes(operationType="日志",content="添加")
     @ResponseBody
-    public ReponseResult insertLog(Log log)throws Exception{
+    public ReponseResult insertLog(Log log){
         try {
             log.setWhetherDel(0);
             log.setCreater(1);
@@ -393,7 +393,7 @@ public class WeChatController {
      */
     @RequestMapping("/getDispatchByguideId")
     @ResponseBody
-    public ReponseResult getDispatchByguideId(Integer guideId)throws Exception{
+    public ReponseResult getDispatchByguideId(Integer guideId){
         try {
             Dispatch dispatch=dispatchService.getDispatchByguideId(guideId);
             Integer date=DateDifference.differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
@@ -419,7 +419,7 @@ public class WeChatController {
     @RequestMapping("/assignmentGuide")
     @ResponseBody
     @LogNotes(operationType="导游表",content="导游修改赋值 ")
-    public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId)throws Exception{
+    public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
         try {
             ReponseResult<Guide> data =ReponseResult.ok(guideService.assignmentGuide(guideId),"导游信息修改赋值成功!");
             logger.info("method:showAccountType 导游信息修改赋值成功");
@@ -438,7 +438,7 @@ public class WeChatController {
      */
     @RequestMapping("/getHoterById")
     @ResponseBody
-    public ReponseResult getHoterById(Integer dispatchId,Integer weight)throws Exception{
+    public ReponseResult getHoterById(Integer dispatchId,Integer weight){
         try {
             Dispatchhotel dispatchhotel=dispatchhotelService.getDispatchHotel(dispatchId,weight);
             Hotel hotel=hotelService.getHotelById(dispatchhotel.getHotelId());
@@ -532,7 +532,7 @@ public class WeChatController {
      */
     @RequestMapping("/getTemplateById")
     @ResponseBody
-    public ReponseResult getTemplateById(Integer dispatchId,Integer weight)throws Exception{
+    public ReponseResult getTemplateById(Integer dispatchId,Integer weight){
         try {
             HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
             Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
@@ -552,7 +552,7 @@ public class WeChatController {
      */
     @RequestMapping("/updateTX")
     @ResponseBody
-    public ReponseResult updateTX(HttpServletRequest request)throws Exception{
+    public ReponseResult updateTX(HttpServletRequest request){
         try {
             Integer guideId=Integer.parseInt(request.getParameter("guideId"));
             String tx=WechatFileUploadUtil.uploadImage(request,".jpg");
