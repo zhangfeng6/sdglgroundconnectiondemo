@@ -176,7 +176,7 @@ public class WeChatController {
             System.out.println(mima);
             Guide guide=guideService.login(username,mima);
             if (guide!=null){
-                if(mima.equals(guide.getPassword())){
+                if(mima.equalsIgnoreCase(guide.getPassword())){
                     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                     HttpSession session=request.getSession();//创建session对象
                     session.setAttribute("staff",guide);
