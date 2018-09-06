@@ -112,7 +112,7 @@ public class TravelController{
      * @return
      */
     @RequestMapping("/showtravellike.html")
-    public ReponseResult TravelLike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("travelName")String travelName){
+    public ReponseResult TravelLike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize, @RequestParam("travelName")String travelName)throws Exception{
         try{
             System.out.println("..."+travelName+"...");
             PageInfo<Travel> pageInfoTravel=travelService.listTravelLike(pageNo,pageSize,travelName);

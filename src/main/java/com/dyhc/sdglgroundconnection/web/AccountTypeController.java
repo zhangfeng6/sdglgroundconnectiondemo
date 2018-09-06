@@ -54,7 +54,7 @@ public class AccountTypeController {
 
     @LogNotes(operationType="账户修改",content="修改账户")
     @RequestMapping("/updateAccountType")
-    public  ReponseResult updateAccounts(AccountType accountType){
+    public  ReponseResult updateAccounts(AccountType accountType)throws Exception{
         try {
             Integer pageInfo=accountTypeService.updateAccountType(accountType);
             ReponseResult<Integer> data =ReponseResult.ok(pageInfo,"修改账户信息");

@@ -107,7 +107,7 @@ public class ReportdetailServiceImpl implements ReportdetailService {
      * @return
      */
     @Override
-    public List<Dictionaries> baozhangType() {
+    public List<Dictionaries> baozhangType()throws Exception {
         return reportdetailMapper.baozhangType();
     }
 
@@ -117,7 +117,7 @@ public class ReportdetailServiceImpl implements ReportdetailService {
      * @return
      */
     @Override
-    public Integer save_Reportfetails(Reportdetail reportdetail) {
+    public Integer save_Reportfetails(Reportdetail reportdetail)throws Exception {
         return reportdetailMapper.insert(reportdetail);
     }
 }

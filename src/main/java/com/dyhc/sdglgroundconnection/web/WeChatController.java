@@ -89,22 +89,23 @@ public class WeChatController {
             @RequestParam("accompanyingPrice")Double accompanyingPrice,
             @RequestParam("subtotal")Double subtotal,
             @RequestParam("payMethods")String payMethods){
-        //创建总报账表的对象
-        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
-        //创建报账住宿
-        Reportaccommodation reportaccommodation =new Reportaccommodation();
-        reportaccommodation.setReportDetailId(reportdetail.getReportDetailId());
-        reportaccommodation.setHotelName(hotelName);
-        reportaccommodation.setTypeId(typeId);
-        reportaccommodation.setHousePrice(housePrice);
-        reportaccommodation.setRoomNum(roomNum);
-        reportaccommodation.setAccompanyingBed(accompanyingBed);
-        reportaccommodation.setAccompanyingPrice(accompanyingPrice);
-        reportaccommodation.setSubtotal(subtotal);
-        reportaccommodation.setPayMethods(payMethods);
-        reportaccommodation.setLiveDate(new Date());
-        reportaccommodation.setStatus(0);
+
         try {
+            //创建总报账表的对象
+            Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
+            //创建报账住宿
+            Reportaccommodation reportaccommodation =new Reportaccommodation();
+            reportaccommodation.setReportDetailId(reportdetail.getReportDetailId());
+            reportaccommodation.setHotelName(hotelName);
+            reportaccommodation.setTypeId(typeId);
+            reportaccommodation.setHousePrice(housePrice);
+            reportaccommodation.setRoomNum(roomNum);
+            reportaccommodation.setAccompanyingBed(accompanyingBed);
+            reportaccommodation.setAccompanyingPrice(accompanyingPrice);
+            reportaccommodation.setSubtotal(subtotal);
+            reportaccommodation.setPayMethods(payMethods);
+            reportaccommodation.setLiveDate(new Date());
+            reportaccommodation.setStatus(0);
             Integer num=reportaccommodationService.saveReportaccommodation(reportaccommodation) ;
             logger.info("method:savereportaccommodation 导游报账住宿新增成功");
             ReponseResult<Integer> data =ReponseResult.ok(num,"保存成功");
@@ -237,7 +238,7 @@ public class WeChatController {
      */
     @RequestMapping("/baozhangType")
     @ResponseBody
-    public ReponseResult baozhangType(){
+    public ReponseResult baozhangType()throws Exception{
         try{
             ReponseResult data=ReponseResult.ok(reportdetailService.baozhangType(),"获取类型名称成功");
             logger.info("method:getReportdetailById 获取类型名称成功");
@@ -258,7 +259,7 @@ public class WeChatController {
     @RequestMapping("/upload")
     @ResponseBody
     @LogNotes(operationType="单据",content="添加")
-    public synchronized ReponseResult upload(HttpServletRequest request){
+    public synchronized ReponseResult upload(HttpServletRequest request)throws Exception{
         try {
             Integer dispatchId=Integer.parseInt(request.getParameter("dispatchId"));
             Integer billTypeId=Integer.parseInt(request.getParameter("billTypeId"));
@@ -306,7 +307,7 @@ public class WeChatController {
      */
     @RequestMapping("/pdOldPassword")
     @ResponseBody
-    public ReponseResult pdOldPassword(String password,Integer guideId){
+    public ReponseResult pdOldPassword(String password,Integer guideId)throws Exception{
         try {
             String mima=MD5(password);
             Guide guide=guideService.assignmentGuide(guideId);
@@ -336,7 +337,7 @@ public class WeChatController {
     @RequestMapping("/updateGuideByPassword")
     @LogNotes(operationType="微信小程序密码",content="修改")
     @ResponseBody
-    public ReponseResult updateGuideByPassword(Guide guide){
+    public ReponseResult updateGuideByPassword(Guide guide)throws Exception{
         try {
             guide.setPassword(MD5(guide.getPassword()));
             Integer result=guideService.updateGuideByPassword(guide);
@@ -362,7 +363,7 @@ public class WeChatController {
     @RequestMapping("/insertLog")
     @LogNotes(operationType="日志",content="添加")
     @ResponseBody
-    public ReponseResult insertLog(Log log){
+    public ReponseResult insertLog(Log log)throws Exception{
         try {
             log.setWhetherDel(0);
             log.setCreater(1);
@@ -392,7 +393,7 @@ public class WeChatController {
      */
     @RequestMapping("/getDispatchByguideId")
     @ResponseBody
-    public ReponseResult getDispatchByguideId(Integer guideId){
+    public ReponseResult getDispatchByguideId(Integer guideId)throws Exception{
         try {
             Dispatch dispatch=dispatchService.getDispatchByguideId(guideId);
             Integer date=DateDifference.differentDays(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
@@ -418,7 +419,7 @@ public class WeChatController {
     @RequestMapping("/assignmentGuide")
     @ResponseBody
     @LogNotes(operationType="导游表",content="导游修改赋值 ")
-    public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
+    public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId)throws Exception{
         try {
             ReponseResult<Guide> data =ReponseResult.ok(guideService.assignmentGuide(guideId),"导游信息修改赋值成功!");
             logger.info("method:showAccountType 导游信息修改赋值成功");
@@ -437,7 +438,7 @@ public class WeChatController {
      */
     @RequestMapping("/getHoterById")
     @ResponseBody
-    public ReponseResult getHoterById(Integer dispatchId,Integer weight){
+    public ReponseResult getHoterById(Integer dispatchId,Integer weight)throws Exception{
         try {
             Dispatchhotel dispatchhotel=dispatchhotelService.getDispatchHotel(dispatchId,weight);
             Hotel hotel=hotelService.getHotelById(dispatchhotel.getHotelId());
@@ -460,12 +461,29 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult getRestaurantById(Integer dispatchId,Integer weight){
         try {
-            Disrestaurant disrestaurant=disrestaurantService.getDisrestaurantById(dispatchId,weight);
+            List<Disrestaurant> disrestaurant=disrestaurantService.getDisrestaurantById(dispatchId,weight);
+            String aa="";
+            if (disrestaurant.size()!=0 && disrestaurant!=null){
+                List<MealType> mealType=new ArrayList<>();
+                for (Disrestaurant d:disrestaurant) {
+                    MealType mealType1=mealTypeService.selectById(d.getTypeId());
+                    mealType.add(mealType1);
+                }
+                List<Restaurant> restaurant=new ArrayList<>();
+                for (MealType m:mealType) {
+                    Restaurant restaurant1=restaurantService.selectRestaurantById(m.getRestaurantId());
+                    restaurant.add(restaurant1);
+                }
 
-            MealType mealType=mealTypeService.selectById(disrestaurant.getTypeId());
-            Restaurant restaurant=restaurantService.selectRestaurantById(mealType.getRestaurantId());
+                for (Restaurant r:restaurant) {
+                    aa+=r.getRestaurantName()+"、";
+                }
+            }else {
+                aa+="无";
+            }
+
             logger.info(" method:getRestaurantById  获取餐厅信息成功！");
-            return ReponseResult.ok(restaurant,"获取餐厅信息成功");
+            return ReponseResult.ok(aa,"获取餐厅信息成功");
         }catch (Exception e){
             e.printStackTrace();
             logger.error(" method:getRestaurantById  获取餐厅信息失败！");
@@ -483,10 +501,23 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult getShoppingByIdWX(Integer dispatchId,Integer weight){
         try {
-            Disshopp disshopp=disshoppService.getDisshoppById(dispatchId,weight);
-            Shopping shopping=shoppingService.getShoppingById(disshopp.getScenicSpotId());
+            List<Disshopp> disshopp=disshoppService.getDisshoppById(dispatchId,weight);
+            String aa="";
+            if (disshopp.size()!=0 && disshopp!=null){
+                List<Shopping> shoppings=new ArrayList<>();
+                for (Disshopp d:disshopp) {
+                    Shopping shopping=shoppingService.getShoppingById(d.getScenicSpotId());
+                    shoppings.add(shopping);
+                }
+                for (Shopping s:shoppings) {
+                    aa+=s.getShoppingSite()+"、";
+                }
+            }else {
+                aa+="无";
+            }
+            System.out.println(aa);
             logger.info("method:getShoppingByIdWX  获取购物信息成功！");
-            return ReponseResult.ok(shopping,"获取购物地点成功");
+            return ReponseResult.ok(aa,"获取购物地点成功");
         }catch (Exception e){
             e.printStackTrace();
             logger.error("method:getShoppingByIdWX  获取购物信息失败！");
@@ -501,7 +532,7 @@ public class WeChatController {
      */
     @RequestMapping("/getTemplateById")
     @ResponseBody
-    public ReponseResult getTemplateById(Integer dispatchId,Integer weight){
+    public ReponseResult getTemplateById(Integer dispatchId,Integer weight)throws Exception{
         try {
             HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
             Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
@@ -521,7 +552,7 @@ public class WeChatController {
      */
     @RequestMapping("/updateTX")
     @ResponseBody
-    public ReponseResult updateTX(HttpServletRequest request){
+    public ReponseResult updateTX(HttpServletRequest request)throws Exception{
         try {
             Integer guideId=Integer.parseInt(request.getParameter("guideId"));
             String tx=WechatFileUploadUtil.uploadImage(request,".jpg");
