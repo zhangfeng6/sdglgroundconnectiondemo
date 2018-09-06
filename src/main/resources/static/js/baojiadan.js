@@ -211,8 +211,8 @@ function insertJingdian(onClickjd) {
                 var index=parseInt(A.length)+1;
 				var a = "<div id='zong"+index+"' name=\"zong\" lay-filter=\"test1\">\n" +
                     "\t\t\t<div style='margin-bottom: 30px;width: 800px'>\n" +
-                    "\t\t\t\t<input type=\"image\" src=\"/sdglGroundConnection/images/up.PNG\" style=\"height: 30px;width: 35px;\" id=\"toggle\" onclick='qiehuan(this)' />\n" +
-                    "\t\t\t\t<input type=\"image\" id=\"sc\" src=\"/sdglGroundConnection/images/del.PNG\" onclick='shanchu(this)' style=\"display:inline-block;float: right;height: 30px;width: 35px;\" />\n" +
+                    "\t\t\t\t<input type=\"image\" src=''/sdglGroundConnection/images/up.PNG\' style=\"height: 30px;width: 35px;\" id=\"toggle\" onclick='qiehuan(this)' />\n" +
+                    "\t\t\t\t<input type=\"image\" id='sc' src='/sdglGroundConnection/images/del.PNG' onclick='shanchu(this)' style=\"display:inline-block;float: right;height: 30px;width: 35px;\" />\n" +
                     "\t\t\t\t<div id=\"content\">\n" +
                     "\t\t\t\t\t<form class=\"layui-form layui-form-pane\" action=\"\">\n" +
                     "\t\t\t\t\t\t<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n" +
