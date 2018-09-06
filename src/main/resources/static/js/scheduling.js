@@ -52,8 +52,8 @@ function addss() {
     var jdhtml=$("select[name=d1scenicspot1]").html();
     var gwdhtml=$("select[name=d1shopping]").html();
     var fanhtml=$("select[name=d1wucan]").html();
-    var a = "<div style='margin-bottom: 25px;width: 1090px' name='xianlu' ><input type='hidden' value='"+index+"'/><input type='image' src='/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
-        "<input type='image' name='hiddendel'  src='/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
+    var a = "<div style='margin-bottom: 25px;width: 1090px' name='xianlu' ><input type='hidden' value='"+index+"'/><input type='image' src='/sdglGroundConnection/images/up.PNG' style='height: 30px;width: 35px;' id='toggle' onclick='qiehuan(this)'/>" +
+        "<input type='image' name='hiddendel'  src='/sdglGroundConnection/images/del.PNG' onclick='shanchu(this)'  style='display:inline-block;height: 30px;width: 35px;margin-left:1065px ;' />" +
         "<div id='content'>" +
         "<form class='layui-form layui-form-pane' action=''>" +
         "<table border='0'  cellspacing='0' cellpadding='0' >" +

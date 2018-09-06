@@ -76,4 +76,11 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @throws Exception
      */
     List<Scenicspot> listNoDelScenicspot()throws Exception;
+
+    /**
+     * 删除父景点的同时删除子景点
+     * @param parentId
+     * @throws Exception
+     */
+    void delScenicspotById(@Param("parentId") Integer parentId)throws Exception;
 }
