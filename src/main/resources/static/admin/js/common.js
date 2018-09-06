@@ -5,22 +5,22 @@ layui.config({
 });
 
 layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element'], function() {
-	var form = layui.form,
-		layer = layui.layer,
-		$ = layui.jquery,
-		dialog = layui.dialog;
+	var form = layui.form;
+	var	layer = layui.layer;
+	var	$ = layui.jquery;
+	var dialog = layui.dialog;
 	//获取当前iframe的name值
 	var iframeObj = $(window.frameElement).attr('name');
 	//全选
-	form.on('checkbox(allChoose)', function(data) {
+	/*form.on('checkbox(allChoose)', function(data) {
 		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
 		child.each(function(index, item) {
 			item.checked = data.elem.checked;
 		});
 		form.render('checkbox');
-	});
+	});*/
 	//渲染表单
-	form.render();	
+	/*form.render();	*/
 	//顶部添加
 	$('.addBtn').click(function() {
 		var url=$(this).attr('data-url');
