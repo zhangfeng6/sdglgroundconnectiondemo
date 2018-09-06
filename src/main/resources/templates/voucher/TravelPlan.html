@@ -217,8 +217,8 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                $("#car").text(data.data.carcontacts.substring(0,6));
-                $("#contacts").text(data.data.carcontacts.substring(7,10));
+                $("#car").text(data.data.carcontacts.split("，")[2]);
+                $("#contacts").text(data.data.carcontacts.split("，")[0]);
                 $("#lala").text(data.data.groundConnectionNumber);
 
 
@@ -232,7 +232,7 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                $("#templateName").text(data.data.templateName);
+                $("#templateName").text(data.data.templateName.split("——")[0]);
             }
         })
     }

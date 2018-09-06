@@ -57,6 +57,6 @@
 
 
     <select id="listTemplate" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
- SELECT SUBSTRING(CONCAT(t.templateName),1,2) AS templateName FROM template t,hoteroomtype h,dispatch s WHERE t.templateId=h.templateId AND h.offerId=s.dispatchId AND s.dispatchId=#{dispatchId} AND weight=1
+ SELECT t.templateName FROM template t,hoteroomtype h,dispatch s WHERE t.templateId=h.templateId AND h.offerId=s.dispatchId AND s.dispatchId=#{dispatchId} AND weight=1
     </select>
 </mapper>
