@@ -240,18 +240,23 @@ public class ScenicspotController {
             Integer result=shoppingService.deleteShoppingsByscenicSpotId(scenicSpotId);
             ReponseResult data=null;
             if (result==1){
-               data=ReponseResult.ok(result,"删除景点成功");
-                logger.info("删除景点成功");
-                Integer result1=scenicspotService.deleteScenicspotById(scenicSpotId);
-                if (result1==1){
-                    data=ReponseResult.ok(result1,"删除景点成功");
+                Integer result2=scenicspotService.delScenicspotById(scenicSpotId);
+                if (result2==1){
+                    data=ReponseResult.ok(result,"删除景点成功");
                     logger.info("删除景点成功");
+                    Integer result1=scenicspotService.deleteScenicspotById(scenicSpotId);
+                    if (result1==1){
+                        data=ReponseResult.ok(result1,"删除景点成功");
+                        logger.info("删除景点成功");
+                    }else {
+                        data=ReponseResult.err("删除景点失败");
+                        logger.info("删除景点失败");
+                    }
                 }else {
                     data=ReponseResult.err("删除景点失败");
                     logger.info("删除景点失败");
                 }
             }
-
             return  data;
 
         }catch (Exception e){

@@ -117,4 +117,14 @@ public class ScenicspotServiceImpl implements ScenicspotService {
     public List<Scenicspot> selectAllScenic() {
         return scenicspotMapper.selectAllScenic();
     }
+
+    @Override
+    public Integer delScenicspotById(Integer parentId) throws Exception {
+        try {
+            scenicspotMapper.delScenicspotById(parentId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+    }
 }
