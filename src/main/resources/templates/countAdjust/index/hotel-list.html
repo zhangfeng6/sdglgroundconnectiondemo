@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<title>网站后台管理模版</title>
-	<link rel="stylesheet" href="/css/layui.css" media="all">
+	<link rel="stylesheet" th:href="@{/css/layui.css}" media="all">
 </head>
 
 <body>
@@ -56,8 +56,8 @@
 		<div id="hbb" style="text-align: center"></div>
 	</div>
 </div>
-<script src="/layui.js"></script>
-<script src="/js/jquery-1.8.2.min.js"></script>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/layui.js}"></script>
 <script>
     var limitcount = 3; // 每页总记录数
     var curnum = 1;  // 当前页码
@@ -69,7 +69,7 @@
                maxmin: true,
                shadeClose: true, //点击遮罩关闭层
                area : ['800px' , '600px'],
-               content: '/countAdjust/hotel-add'
+               content: '/sdglGroundConnection/countAdjust/hotel-add'
            });
        })
       hotelShowAll();
@@ -88,7 +88,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '600px'],
-                content: '/countAdjust/hotel-update?hotelId='+hotelId+""
+                content: '/sdglGroundConnection/countAdjust/hotel-update?hotelId='+hotelId+""
             })
         )
     }
@@ -98,7 +98,7 @@
         var hotelName=$("input[name='hotelName']").val();
         var str = "";
         $.ajax({
-            url:"/Hotel/hotelShowAll",
+            url:"/sdglGroundConnection/Hotel/hotelShowAll",
             data:{pageNo:curnum,pageSize:limitcount,hotelName:hotelName,costpriceOne:costpriceOne,costpriceTwo:costpriceTwo},
             dataType:"json",
             type:"get",
@@ -214,7 +214,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '350px'],
-                content: '/countAdjust/hotel-roomType-add?hotelId='+hotelId
+                content: '/sdglGroundConnection/countAdjust/hotel-roomType-add?hotelId='+hotelId
             })
 		)
     }
@@ -231,7 +231,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '350px'],
-                content: '/countAdjust/hotel-roomType-update?typeId='+typeId+"&hotelId="+hotelId
+                content: '/sdglGroundConnection/countAdjust/hotel-roomType-update?typeId='+typeId+"&hotelId="+hotelId
             })
         )
     }
@@ -241,7 +241,7 @@
 function del(typeId){
   if (confirm("确定要删除么?")){
    $.ajax({
-       url:"/Hotel/removeRoomType",
+       url:"/sdglGroundConnection/Hotel/removeRoomType",
        data:{hotelId:typeId},
        dataType:"json",
        type:"get",
@@ -261,7 +261,7 @@ function del(typeId){
     function delHotel(hotelId){
         if (confirm("确定要删除么?")){
             $.ajax({
-                url:"/Hotel/removeHoter",
+                url:"/sdglGroundConnection/Hotel/removeHoter",
                 data:{hotelId:hotelId},
                 dataType:"json",
                 type:"get",
