@@ -45,17 +45,18 @@ public class ReportingotherexpensesController {
             @RequestParam("GuidedTour")Double GuidedTour,
             @RequestParam("Signing")Double Signing,
             @RequestParam("total")Double total){
-        Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
-        Reportingotherexpenses reportingotherexpenses=new Reportingotherexpenses();
-        reportingotherexpenses.setReportDetailId(reportdetail.getReportDetailId());
-        reportingotherexpenses.setCreateBy(1);
-        reportingotherexpenses.setCreateDate(new Date());
-        reportingotherexpenses.setStatus(0);
-        reportingotherexpenses.setRemarks(Remarks);
-        reportingotherexpenses.setGuidedTour(GuidedTour);
-        reportingotherexpenses.setSigning(Signing);
-        reportingotherexpenses.setTotal(total);
+
         try {
+            Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
+            Reportingotherexpenses reportingotherexpenses=new Reportingotherexpenses();
+            reportingotherexpenses.setReportDetailId(reportdetail.getReportDetailId());
+            reportingotherexpenses.setCreateBy(1);
+            reportingotherexpenses.setCreateDate(new Date());
+            reportingotherexpenses.setStatus(0);
+            reportingotherexpenses.setRemarks(Remarks);
+            reportingotherexpenses.setGuidedTour(GuidedTour);
+            reportingotherexpenses.setSigning(Signing);
+            reportingotherexpenses.setTotal(total);
             Integer num=reportingotherexpensesService.saveReportingotherexpenses(reportingotherexpenses);
             logger.info("method:savereportaccommodation 导游其他新增成功");
             ReponseResult<Integer> data =ReponseResult.ok(num,"保存成功");
