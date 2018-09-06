@@ -131,8 +131,8 @@
 					</table>
 				</div>
 		</div>
-        <script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
-        <script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+        <script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+        <script  th:src="@{/layui.js}"></script>
         <script th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
 		<script>
 			layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
@@ -147,7 +147,6 @@
 						That.removeClass('layui-btn-normal').addClass('layui-btn-warm').html('隐藏').attr('data-status', 2);
 					} else if(status == 2) {
 						That.removeClass('layui-btn-warm').addClass('layui-btn-normal').html('显示').attr('data-status', 1);
-
 					}
 				})
 

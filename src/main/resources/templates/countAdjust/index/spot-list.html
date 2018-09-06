@@ -61,8 +61,8 @@
 
 </body>
 
-<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
-<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/layui.js}"></script>
 <script>
 
 
@@ -211,7 +211,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'/sdglGroundConnection/spotshopping-add.html?scenicSpotId='+scenicSpotId
+            content:'/sdglGroundConnection/countAdjust/spotshopping-add.html?scenicSpotId='+scenicSpotId
         });/* parent.layer.closeAll();*/
     });
 
@@ -225,7 +225,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'/sdglGroundConnection/spot-add.html?id='+id
+            content:'/sdglGroundConnection/countAdjust/spot-add.html?id='+id
         });
     });
     $(document).on('click','#insertInfo',function(){
@@ -236,7 +236,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'/sdglGroundConnection/spot-add.html?id=tianjia'
+            content:'/sdglGroundConnection/countAdjust/spot-add.html?id=tianjia'
         });
     });
 
@@ -248,7 +248,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '700px'],
-            content:'/sdglGroundConnection/spotshopping-update.html?shoppingId='+shoppingId
+            content:'/sdglGroundConnection/countAdjust/spotshopping-update.html?shoppingId='+shoppingId
         });
     });
 

@@ -53,8 +53,8 @@
 	<div id="laypage" style="text-align: center"></div>
 </div>
 </body>
-<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
-<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/layui.js}"></script>
 <script th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
 <script>
 
@@ -240,7 +240,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['1200px' , '800px'],
-                content: '/sdglGroundConnection/countAdjust/Quotation-detail.html?did='+id
+                content: '/sdglGroundConnection/Quotation-detail.html?did='+id
             });
         });
         //列表删除
@@ -267,7 +267,7 @@
         var iHeight=700;
         var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
         var iLeft = (window.screen.availWidth-10-iWidth)/2;
-        window.showModalDialog("/sdglGroundConnection/countAdjust/Restaurant-add.html","newwindow","height=500, width=550, top="+iTop+",left="+iLeft+", toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
+        window.showModalDialog("Restaurant-add.html","newwindow","height=500, width=550, top="+iTop+",left="+iLeft+", toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
     }
 </script>
 </html>

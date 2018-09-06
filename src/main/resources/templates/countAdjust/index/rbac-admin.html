@@ -111,10 +111,10 @@
 								<li class="disabled"><span>«</span></li>
 								<li class="active"><span>1</span></li>
 								<li>
-									<a href="/admin/category/index.html?page=2">2</a>
+									<a href="/sdglGroundConnection/admin/category/index.html?page=2">2</a>
 								</li>
 								<li>
-									<a href="/admin/category/index.html?page=2">»</a>
+									<a href="/sdglGroundConnection/admin/category/index.html?page=2">»</a>
 								</li>
 							</ul>
 						</div>
@@ -123,16 +123,17 @@
 		</div>
 		<script type="text/javascript">
 			var SCOPE = {
-				static: '/static',
-				index: '/admin/category/index.html',
-				edit: 'menu-add.html',
-				updateEdit: '/admin/category/updateedit.html',
-				status: '/admin/category/updatestatus.html',
-				del: '/admin/category/del.html',
-				listOrderAll: '/admin/category/listorderall.html'
+				static: '/sdglGroundConnection/static',
+				index: '/sdglGroundConnection/admin/category/index.html',
+				edit: '/sdglGroundConnection/menu-add.html',
+				updateEdit: '/sdglGroundConnection/admin/category/updateedit.html',
+				status: '/sdglGroundConnection/admin/category/updatestatus.html',
+				del: '/sdglGroundConnection/admin/category/del.html',
+				listOrderAll: '/sdglGroundConnection/admin/category/listorderall.html'
 			}
 		</script>
-		<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
+		<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+		<script  th:src="@{/layui.js}"></script>
 
 		<script>
 			layui.config({

@@ -49,8 +49,8 @@
 </div>
 </body>
 
-<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
-<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/layui.js}"></script>
 <script>
    layui.use(['jquery'], function() {
         var $=layui.jquery;
@@ -105,7 +105,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/sdglGroundConnection/Restaurant-add.html'
+                content: '/sdglGroundConnection/countAdjust/Restaurant-add.html'
             });
         })
 
@@ -117,7 +117,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/sdglGroundConnection/Restaurantroom-add.html?restaurantId='+id
+                content: '/sdglGroundConnection/countAdjust/Restaurantroom-add.html?restaurantId='+id
             });
         })
 
@@ -129,7 +129,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/sdglGroundConnection/Restaurantroom-add.html?codeType='+id
+                content: '/sdglGroundConnection/countAdjust/Restaurantroom-add.html?codeType='+id
             });
         })
 
@@ -141,7 +141,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['800px' , '520px'],
-                content: '/sdglGroundConnection/Restaurant-add.html?restaurantId='+id
+                content: '/sdglGroundConnection/countAdjust/Restaurant-add.html?restaurantId='+id
             });
         })
     })
@@ -181,7 +181,7 @@
                        "\t\t\t\t\t\t\t\t<td class=\"\">"+e.restaurantName+"</td>\n" +
                        "\t\t\t\t\t\t\t\t<td class=\"\">"+e.restaurantAddress+"</td>\n" +
                        "\t\t\t\t\t\t\t\t<td class=\"\">"+e.phone+"</td>\n" +
-                       "\t\t\t\t\t\t\t\t<td class=\"\"><img src='/api/image/"+e.picturePath+"' width='100px' height='50px'> </td>\n" +
+                       "\t\t\t\t\t\t\t\t<td class=\"\"><img src='/sdglGroundConnection/api/image/"+e.picturePath+"' width='100px' height='50px'> </td>\n" +
                        "\t\t\t\t\t\t\t\t<td>\n" +
                        "\t\t\t\t\t\t\t\t\t<div class='layui-inline'><button class='layui-btn layui-btn-small layui-btn-normal add-btn' value='"+e.restaurantId+"' id='insertR' type='button'><i class='layui-icon'>&#xe654;</i></button><button id='update' type='button' value='" + e.restaurantId + "' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon'>&#xe642;</i></button><button class='layui-btn layui-btn-small layui-btn-danger del-btn' data-id='1' data-url='article-detail.html'><i class='layui-icon' onclick='delRestaurantById(" + e.restaurantId + ")'>&#xe640;</i></button></div>\n" +
                        "\t\t\t\t\t\t\t\t</td>\n" +
