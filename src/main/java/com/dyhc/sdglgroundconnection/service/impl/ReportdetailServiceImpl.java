@@ -41,8 +41,7 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     public PageInfo showInfoAll(Integer groupNumber, Integer states,Integer pageNo,Integer pageSize)throws Exception {
         PageHelper.startPage(pageNo, pageSize, true);
         List<Reportdetail> list=reportdetailMapper.showInfoAll(groupNumber,states);
-        PageInfo<Reportdetail> pageInfo = new PageInfo<>(list);
-        return pageInfo;
+        return new PageInfo<>(list);
     }
 
     @Override
