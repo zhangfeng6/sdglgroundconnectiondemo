@@ -40,7 +40,7 @@ public class ReportdetailController {
     public ReponseResult showInfoAll(Integer pageNo,Integer pageSize,Integer groupNumber,Integer states){
         try{
             PageInfo<Reportdetail> pageInfo=reportdetailService.showInfoAll(groupNumber,states,pageNo,pageSize);
-            ReponseResult data=ReponseResult.ok(pageInfo,pageInfo.getTotal(),"获取报账列表成功");
+            ReponseResult data=ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"获取报账列表成功");
             logger.info("method:showInfoAll 获取报账列表成功");
             return data;
         }catch (Exception e){
