@@ -1,5 +1,5 @@
 	<!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
-		<link rel="stylesheet" href="/css/layui.css" media="all">
+		<link rel="stylesheet" th:href="@{/css/layui.css}" media="all">
 	</head>
 
 	<body>
@@ -67,8 +67,8 @@
 			</div>
 
 		</div>
-		<script src="/layui.js"></script>
-		<script src="/js/jquery-1.8.2.min.js"></script>
+		<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+		<script th:src="@{/layui.js}"></script>
 		<script>
 			layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
 				var $ = layui.jquery;
@@ -101,7 +101,7 @@
                 }
 			    var travelName = $("#travelName").val();
 				$.ajax({
-                    url:"/Offer/selectOffer",
+                    url:"/sdglGroundConnection/Offer/selectOffer",
                     data:{page:curnum,limit:limitcount,travelName:travelName},
                     dataType:"json",
                     type:"get",
@@ -178,19 +178,19 @@
 
 
 			function show(id){
-			    location.href="Scheduling-detail.html?offerId="+id;
+			    location.href="/sdglGroundConnection/Scheduling-detail.html?offerId="+id;
 			}
 			function xiangshe(obj,offer) {
 				var url=$(obj).attr('data-url');
 				var id = $(obj).attr('data-id');
 				var offer=offer;
-				window.location.href=url+"?id="+id+"&offer="+offer;
+				window.location.href="/sdglGroundConnection/"+url+"?id="+id+"&offer="+offer;
                 return false;
             }
 
             function que(id){
 				$.ajax({
-                    url:"/Offer/que",
+                    url:"/sdglGroundConnection/Offer/que",
                     data:{offerId:id},
                     dataType:"json",
                     type:"get",

@@ -40,8 +40,8 @@
 </div>
 </body>
 
-<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
-<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+<script  th:src="@{/layui.js}"></script>
 <script th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
 <script>
 
@@ -102,7 +102,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['880px' , '520px'],
-                content: '/sdglGroundConnection/saveTourism.html'
+                content: '/sdglGroundConnection/countAdjust/saveTourism.html'
             });
         });
         //列表添加
@@ -114,7 +114,7 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['880px' , '520px'],
-                content: '/sdglGroundConnection/saveTourism.html?mid='+id
+                content: '/sdglGroundConnection/countAdjust/saveTourism.html?mid='+id
             });
         });
         //列表删除
