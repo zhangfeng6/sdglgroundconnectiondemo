@@ -95,4 +95,11 @@ public interface ScenicspotService {
      * @return
      */
     List<Scenicspot> selectAllScenic();
+
+    /**
+     * 删除父景点的同时删除子景点
+     * @param parentId
+     * @throws Exception
+     */
+    Integer delScenicspotById(@Param("parentId") Integer parentId)throws Exception;
 }
