@@ -191,16 +191,16 @@ public class DictionariesController {
 
     /**
      * 餐厅类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
     @RequestMapping("/DictionariesCanOne")
-    public ReponseResult<Integer> DictionariesCanOne(String valueContent1){
+    public ReponseResult<Integer> DictionariesCanOne(Integer valueId){
         try{
-            System.out.println(valueContent1);
+            System.out.println(valueId);
             Integer result=0;
             Integer data=0;
-            result=dictionariesService.getDictionariesByOne(valueContent1);
+            result=dictionariesService.getDictionariesByOne(valueId);
             if(result>0){
                 data=1;
             }logger.info(" method:DictionariesCanOne  删除餐厅类型成功！");
@@ -214,17 +214,17 @@ public class DictionariesController {
     }
     /**
      * 车辆类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
     @LogNotes(operationType="餐厅类型",content="删除")
     @RequestMapping("/DictionariesByDel.html")
-    public ReponseResult<Integer> getDictionariesByDel(String valueContent1){
+    public ReponseResult<Integer> getDictionariesByDel(Integer valueId){
         try{
-            System.out.println(valueContent1);
+            System.out.println(valueId);
             Integer result=0;
             Integer data=0;
-            result=dictionariesService.getDictionariesByDel(valueContent1);
+            result=dictionariesService.getDictionariesByDel(valueId);
             if(result>0){
                 data=1;
             }logger.info(" method:DictionariesCanOne  删除餐厅类型成功！");
@@ -238,17 +238,17 @@ public class DictionariesController {
     }
     /**
      * 酒店类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
     @LogNotes(operationType="酒店类型",content="删除")
     @RequestMapping("/DictionariesHotelByDel.html")
-    public ReponseResult<Integer> getDictionariesHotelByDel(String valueContent1){
+    public ReponseResult<Integer> getDictionariesHotelByDel(Integer valueId){
         try{
-            System.out.println(valueContent1);
+            System.out.println(valueId);
             Integer result=0;
             Integer data=0;
-            result=dictionariesService.getDictionariesHotelByDel(valueContent1);
+            result=dictionariesService.getDictionariesHotelByDel(valueId);
             if(result>0){
                 data=1;
             }logger.info(" method:DictionariesCanOne  删除餐厅类型成功！");

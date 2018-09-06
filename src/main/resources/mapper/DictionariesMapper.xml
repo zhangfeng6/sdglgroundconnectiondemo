@@ -61,16 +61,33 @@
 
     <!--餐厅类型-->
     <update id="getDictionariesByOne">
-        UPDATE dictionaries SET whetherDel=1 WHERE valueContent1=#{valueContent1}
+        UPDATE dictionaries SET whetherDel=1 WHERE typeCode='DIET' AND valueId=#{valueId}
     </update>
     <!--车队类型-->
     <update id="getDictionariesByDel">
-        UPDATE dictionaries SET whetherDel=1 WHERE valueContent1=#{valueContent1}
+        UPDATE dictionaries SET whetherDel=1 WHERE typeCode='VEHICLE' AND valueId=#{valueId}
     </update>
     <!--酒店类型-->
     <update id="getDictionariesHotelDel">
-        UPDATE dictionaries SET whetherDel=1 WHERE valueContent1=#{valueContent1}
+        UPDATE dictionaries SET whetherDel=1 WHERE typeCode='THEROOM' AND valueId=#{valueId}
     </update>
+
+
+    <!--餐厅类型01-->
+    <update id="getDictionariesByOne1">
+        UPDATE mealtype SET whetherDel=1 WHERE typeCode='DIET' AND valueId=#{valueId}
+    </update>
+    <!--车队类型02-->
+    <update id="getDictionariesByDel1">
+        UPDATE vehicletype SET whetherDel=1 WHERE typeCode='VEHICLE' AND valueId=#{valueId}
+    </update>
+    <!--酒店类型03-->
+    <update id="getDictionariesHotelDel1">
+        UPDATE roomtype SET whetherDel=1 WHERE typeCode='THEROOM' AND valueId=#{valueId}
+    </update>
+
+
+
 
 
 

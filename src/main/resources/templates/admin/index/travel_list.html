@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ajax & LayUI分页插件</title>
-	<link rel="stylesheet" href="/css/layui.css" media="all">
+	<link rel="stylesheet"  th:href="@{/css/layui.css}" media="all">
 	<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}" />
 </head>
@@ -53,7 +53,7 @@
 <script th:src="@{/layui.js}"></script>
 <script>
     layui.use(['jquery'], function() {
-        var $=layui.jquery;.
+        var $=layui.jquery;
         //修改状态
         $('#table-list').on('click', '.table-list-status', function() {
             var That = $(this);

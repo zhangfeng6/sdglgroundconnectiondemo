@@ -93,23 +93,47 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
 
     /**
      * 餐厅类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
-    Integer getDictionariesByOne(String valueContent1)throws Exception;
+    Integer getDictionariesByOne(Integer valueId)throws Exception;
 
     /**
      * 车辆类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
-    Integer getDictionariesByDel(String valueContent1)throws Exception;
+    Integer getDictionariesByDel(Integer valueId)throws Exception;
     /**
      * 酒店类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
-    Integer getDictionariesHotelDel(String valueContent1)throws Exception;
+    Integer getDictionariesHotelDel(Integer valueId)throws Exception;
+
+
+
+
+    /**
+     * 餐厅类型删除    修改1
+     * @param valueId
+     * @return
+     */
+    Integer getDictionariesByOne1(Integer valueId)throws Exception;
+
+    /**
+     * 车辆类型删除    修改1
+     * @param valueId
+     * @return
+     */
+    Integer getDictionariesByDel1(Integer valueId)throws Exception;
+    /**
+     * 酒店类型删除    修改1
+     * @param valueId
+     * @return
+     */
+    Integer getDictionariesHotelDel1(Integer valueId)throws Exception;
+
 
     /**
      * 餐厅修改

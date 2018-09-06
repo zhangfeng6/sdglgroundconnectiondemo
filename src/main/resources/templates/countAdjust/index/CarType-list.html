@@ -101,7 +101,7 @@
                         "<td>" + result.theUserName + "</td>" +
                         "<td>" + result.createDate + "</td>"+
                         "<td><button onclick='TypeUpdate("+result.dictionariesId+")' class='layui-btn layui-btn-mini layui-btn-normal  edit-btn'><i class='layui-icon'>&#xe642;</i></button>\n" +
-                        "<button onclick='getcardel(\""+result.valueContent1+"\")'class='layui-btn layui-btn-mini layui-btn-danger del-btn'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "<button onclick='getcardel("+result.valueId+")'class='layui-btn layui-btn-mini layui-btn-danger del-btn'><i class='layui-icon'>&#xe640;</i></button>" +
                         "</td></tr>";
                     xu++;
                 })
@@ -132,11 +132,11 @@
             }
         })
     }
-    function getcardel(valueContent1) {
+    function getcardel(valueId) {
         if (confirm("确定删除吗?")) {
             $.ajax({
                 url:"/sdglGroundConnection/Dictionaries/DictionariesByDel.html",
-                data:{"valueContent1":valueContent1},
+                data:{"valueId":valueId},
                 type:"get",
                 dataType:"json",
                 success:function (data) {

@@ -75,22 +75,26 @@ public interface DictionariesService {
     PageInfo<Dictionaries> listDictionariesHotel(Integer pageNo, Integer PageSize,String valueContent1) throws Exception;
     /**
      * 餐厅类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
-    Integer getDictionariesByOne(String valueContent1)throws Exception;
+    Integer getDictionariesByOne(Integer valueId)throws Exception;
     /**
      * 车辆类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
-    Integer getDictionariesByDel(String valueContent1)throws Exception;
+    Integer getDictionariesByDel(Integer valueId)throws Exception;
     /**
      * 酒店类型删除    修改
-     * @param valueContent1
+     * @param valueId
      * @return
      */
-    Integer getDictionariesHotelByDel(String valueContent1)throws Exception;
+    Integer getDictionariesHotelByDel(Integer valueId)throws Exception;
+
+
+
+
 
     /**
      * 餐厅添加信息

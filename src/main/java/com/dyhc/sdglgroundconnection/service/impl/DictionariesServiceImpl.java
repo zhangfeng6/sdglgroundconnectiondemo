@@ -8,6 +8,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
  * 字典业务实现
  **/
 @Service
+@Transactional
 public class DictionariesServiceImpl implements DictionariesService {
 
     @Autowired
@@ -100,34 +103,60 @@ public class DictionariesServiceImpl implements DictionariesService {
     /**
      * 删除  修改
      *
-     * @param valueContent1
+     * @param valueId
      * @return
      */
     @Override
-    public Integer getDictionariesByOne(String valueContent1)throws Exception {
-        return dictionariesMapper.getDictionariesByOne(valueContent1);
+    @Transactional
+    public Integer getDictionariesByOne(Integer valueId)throws Exception {
+        try{
+            dictionariesMapper.getDictionariesByOne1(valueId);
+             dictionariesMapper.getDictionariesByOne(valueId);
+            return 1;
+        }catch(Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+
+
     }
 
     /**
      * 餐厅类型删除  修改
      *
-     * @param valueContent1
+     * @param valueId
      * @return
      */
     @Override
-    public Integer getDictionariesByDel(String valueContent1)throws Exception {
-        return dictionariesMapper.getDictionariesByDel(valueContent1);
+    @Transactional
+    public Integer getDictionariesByDel(Integer valueId)throws Exception {
+        try{
+            dictionariesMapper.getDictionariesByDel1(valueId);
+            dictionariesMapper.getDictionariesByDel(valueId);
+            return 1;
+        }catch(Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
     }
 
     /**
      * 酒店类型删除  修改
      *
-     * @param valueContent1
+     * @param valueId
      * @return
      */
     @Override
-    public Integer getDictionariesHotelByDel(String valueContent1)throws Exception {
-        return dictionariesMapper.getDictionariesHotelDel(valueContent1);
+    @Transactional
+    public Integer getDictionariesHotelByDel(Integer valueId)throws Exception {
+        try{
+            dictionariesMapper.getDictionariesHotelDel1(valueId);
+            dictionariesMapper.getDictionariesHotelDel(valueId);
+            return 1;
+        }catch(Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
     }
 
     /**

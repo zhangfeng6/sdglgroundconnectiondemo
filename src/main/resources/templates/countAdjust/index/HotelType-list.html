@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>房间类型</title>
-    <link rel="stylesheet" href="/css/layui.css" media="all">
+    <link rel="stylesheet"  th:href="@{/css/layui.css}" media="all">
     <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/admin.css}" />
 </head>
@@ -102,7 +102,7 @@
                         "<td>" + result.theUserName + "</td>" +
                         "<td>" + result.createDate + "</td>"+
                         "<td><button onclick='TypeUpdate("+result.dictionariesId+")' class='layui-btn layui-btn-mini layui-btn-normal  edit-btn'><i class='layui-icon'>&#xe642;</i></button>\n" +
-                        "<button onclick='getHoteldel(\""+result.valueContent1+"\")'class='layui-btn layui-btn-mini layui-btn-danger del-btn'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "<button onclick='getHoteldel("+result.valueId+")'class='layui-btn layui-btn-mini layui-btn-danger del-btn'><i class='layui-icon'>&#xe640;</i></button>" +
                         "</td></tr>";
                     xu++;
                 })
@@ -133,11 +133,11 @@
             }
         })
     }
-    function getHoteldel(valueContent1) {
+    function getHoteldel(valueId) {
         if (confirm("确定删除吗?")) {
             $.ajax({
                 url:"/sdglGroundConnection/Dictionaries/DictionariesHotelByDel.html",
-                data:{"valueContent1":valueContent1},
+                data:{"valueId":valueId},
                 type:"get",
                 dataType:"json",
                 success:function (data) {
