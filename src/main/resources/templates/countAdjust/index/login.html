@@ -26,7 +26,7 @@
 								<input type="text" name="verity" required lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">
 							</div>
 							<div class="layui-inline">
-								<img class="verifyImg" onclick="this.src=this.src+'?c='+Math.random();" src="/admin/images/login/yzm.jpg" />
+								<img class="verifyImg" onclick="this.src=this.src+'?c='+Math.random();" src="/sdglGroundConnection/admin/images/login/yzm.jpg" />
 							</div>
 						</div>
 						<div class="layui-form-item m-login-btn">
@@ -72,8 +72,8 @@
 			});
 		</script>
 	</body>
-	<script th:src="@{/admin/layui/layui.js}" type="text/javascript" charset="utf-8"></script>
-	<script th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+	<script  th:src="@{/admin/js/jquery-3.2.1.js}"></script>
+	<script  th:src="@{/layui.js}"></script>
 	<script th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
 
 </html>
