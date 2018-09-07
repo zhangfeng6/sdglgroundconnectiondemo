@@ -50,7 +50,7 @@
                     <td >用户名</td>
                     <td >身份证号</td>
                     <td >QQ</td>
-                    <td>头像路径</td>
+                    <td>头像</td>
                     <td >现住址</td>
                     <td>联系电话</td>
                     <td >操作</td>
@@ -128,7 +128,7 @@
                         "<td>" + result.theUserName + "</td>" +
                         "<td>" + result.cardId + "</td>" +
                         "<td>" + result.qqnumber + "</td>" +
-                        "<td>" + result.headPortraitPath + "</td>" +
+                        "<td><img src='/sdglGroundConnection/api/image/"+result.headPortraitPath+"' width='100px' height='50px'></td>" +
                         "<td>" + result.currentAddress + "</td>" +
                         "<td>" + result.phone + "</td>" +
                         "<td><button  onclick='gettiao("+result.staffId+")' class='layui-btn layui-btn-small layui-btn-normal  edit-btn\' data-id='1'><i class='layui-icon'>&#xe642;</i></button>&nbsp;&nbsp;"+

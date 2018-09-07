@@ -137,18 +137,18 @@
 
     <!--餐厅-->
     <select id="DictionariesCanMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
-        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='DIET' AND d.whetherDel!=1
+        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='DIET'
     </select>
 
 
     <!--车辆-->
     <select id="DictionariesCarMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
-        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='VEHICLE' AND d.whetherDel!=1
+        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='VEHICLE'
     </select>
 
     <!--酒店-->
     <select id="DictionariesHotelMax" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
-        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='THEROOM' AND d.whetherDel!=1
+        SELECT  MAX(d.valueId) AS valueId FROM dictionaries  d, staff s WHERE d.createBy=s.staffId AND typeCode='THEROOM'
     </select>
     <!--查询酒店房间类型名称:贾晓亮-->
     <select id="dis_All" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
