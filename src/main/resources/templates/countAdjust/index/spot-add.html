@@ -48,7 +48,7 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图片地址：</label>
 									<div class="layui-input-block">
-										<input type="file" id="imageFile" name="multipartFile" style="float: left"/>
+										<input type="file" id="imageFile" name="multipartFile" style="float: left" onchange="gaibian()"/>
 										<img src="" id="tp" style="width: 100px;height: 50px;float: left">
 										<!--<i class="layui-icon ">&#xe67c;</i>上传图片-->
 									</div>
@@ -146,6 +146,17 @@
                 $("#tp").css("display","block");
             }
         });
+
+		function gaibian() {
+            $("#tp").css("display","block");
+            var oFReader = new FileReader();
+            var file = document.getElementById('imageFile').files[0];
+            oFReader.readAsDataURL(file);
+            oFReader.onloadend = function(oFRevent){
+                var src = oFRevent.target.result;
+                $('#tp').attr('src',src);
+            }
+        }
 		
 
 
