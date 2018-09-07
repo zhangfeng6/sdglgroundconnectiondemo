@@ -88,6 +88,9 @@ public class HotelServiceImpl implements HotelService {
        hotel.setCreateBy(1);
        hotel.setUpdateBy(2);
        Integer number=0;
+       if (hotel.getPicturePath()==""){
+           hotel.setPicturePath(null);
+       }
        try {
            number=hotelMapper.updateByPrimaryKeySelective(hotel);
        } catch (Exception e) {
