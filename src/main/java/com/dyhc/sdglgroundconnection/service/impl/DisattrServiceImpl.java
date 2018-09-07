@@ -5,6 +5,7 @@ import com.dyhc.sdglgroundconnection.pojo.Disattr;
 import com.dyhc.sdglgroundconnection.service.DisattrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -27,11 +28,12 @@ public class DisattrServiceImpl implements DisattrService {
      * @return
      */
     @Override
-    public Disattr disattr(Integer offerId)throws Exception {
-        offerId=1;
-        Disattr Disattr=disattrMapper.disattr(offerId);
-        Disattr.setScenicspot(scenicspotService.ShowScenicSpotId(Disattr.getScenicSpotId()));
-        Disattr.setDispatch(dispatchService.dispatchSelectAll(Disattr.getOfferId()));
-        return Disattr;
+    public List<Disattr> disattr(Integer offerId)throws Exception {
+        List<Disattr> d=disattrMapper.disattr(offerId);
+        for (Disattr s:d) {
+            s.setScenicspot(scenicspotService.ShowScenicSpotId(s.getScenicSpotId()));
+            s.setDispatch(dispatchService.dispatchSelectAll(s.getOfferId()));
+        }
+        return d;
     }
 }

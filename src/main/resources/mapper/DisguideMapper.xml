@@ -10,5 +10,9 @@ SELECT g.guideName,g.certificate,g.telephone,o.num,o.tourist,o.travelStartTime,o
     <select id="getDisguideByDid" resultType="com.dyhc.sdglgroundconnection.pojo.Disguide">
         SELECT `disGuideId`,guideId FROM disguide WHERE `offerId`=#{Did} AND `status`!=1
     </select>
+    <!--查询导游名称-->
 
+    <select id="selectNameAll" resultType="com.dyhc.sdglgroundconnection.pojo.Disguide">
+     SELECT * FROM disguide WHERE `offerId`=#{offerId} AND `status`!=1
+    </select>
 </mapper>
