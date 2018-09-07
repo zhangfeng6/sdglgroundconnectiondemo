@@ -8,22 +8,16 @@
 			#header{
 				margin: 0px auto;
 				border: 2px black solid;
-				width: 60%;
+				width: 100%;
 			}
 			table{
 				width: 100%;
 			}
-			#tou{
-				margin-left: 650px;
-			}
-			#xianmian{
-				margin-left: 310px;
-				font-size: 14px;
-			}
+
 		</style>
 	</head>
-	<div id="form1">
-		<div id="tupian" style="width: 635px;margin-left: 355px;">
+	<div id="form1" style="width: 70%; margin: 0 auto">
+		<div id="tupian" style="width: 100%;">
                 <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
        		 </div>
 		<div id="tou">
@@ -248,8 +242,9 @@
 			<p>3. 请严格按照我公司有关地接导游带团规范进行作业，以进一步确保接待质量。</p>
 		</div>
 	</div>
-		<p><button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印派团单</button></p>
+		<p><button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印派团单</button></p>
 	</body>
+	<script th:src="@{/js/LodopFuncs.js}"></script>
 	<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 	<script>
 		$(function(){

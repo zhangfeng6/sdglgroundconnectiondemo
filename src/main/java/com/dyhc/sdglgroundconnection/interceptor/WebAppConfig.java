@@ -29,7 +29,7 @@ public class WebAppConfig implements WebMvcConfigurer {
                         "/Reportfare/savereportaccommodation","/Reportqutsubsidy/saveReportqutsubsidy",
                         "/Reportrestaurant/saveStaurant","/Reportticket/saveReportticket",
                         "/WeChat/dictionaries","/Reportingotherexpenses/saveReportingotherexpenses",
-                        "/WeChat/listBillType");
+                        "/WeChat/listBillType","/api/image/**");
     }
 
 }

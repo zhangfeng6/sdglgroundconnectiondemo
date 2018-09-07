@@ -7,6 +7,7 @@
 <style id="yangshi">
 	table{ width:100%}
 </style>
+
 </head>
 
 <body>
@@ -80,8 +81,9 @@
             </tr>
          </table>
     </div>
-    <button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印订房通知单</button>
+    <button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印订房通知单</button>
 </body>
+<script th:src="@{/js/LodopFuncs.js}"></script>
 <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
  $(function () {

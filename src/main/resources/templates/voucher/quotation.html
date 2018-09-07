@@ -61,7 +61,7 @@ table{
 <body>
 <div id="dy">
 			<div id="tupian">
-				<img src="/sdglGroundConnection/image/logo.jpg" width="640px" height="50px">
+				<img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
 		</div>
 			<DIV style="color:#0042A3;text-align:center;font-size: 12px;" id="xiabian">
 				<span>山西省十强旅行社&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -165,7 +165,7 @@ table{
 <table>
 	<tr>
 		<td style="width: 25%"></td>
-		<td style="width: 25%"><input type="button" value="打印预览" onclick="printview()"></td>
+		<td style="width: 25%"><input type="button" value="打印预览"  onclick="prn1_preview()"></td>
 		<td style="width: 25%"><input type="button" value="打印维护" onclick="updatePrint()"></td>
 		<td style="width: 25%"></td>
 	</tr>
@@ -173,7 +173,7 @@ table{
 
 
 
-
+<script th:src="@{/js/LodopFuncs.js}"></script>
 <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
 	$(function(){

@@ -30,7 +30,8 @@
 
 <body >
 
-<div style="height: 500px; width: 700px; margin: auto;">
+<div>
+<div style="height: 500px; width: 700px; margin: 0 auto;" id="form1">
 	<div id="tupian" style="width: 635px;">
 		<img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
 	</div>
@@ -78,57 +79,11 @@
 
 	</table>
 	<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
-
-
-
 </div>
-<div style="height: 500px; width: 700px; margin: auto; margin-top: 80px" id="form1">
-	<h2 style="text-align: center; font-size:26px;">导游接团任务工作单(派团单)</h2>
-	<p style="text-indent: 400px; font-size: 20px;">编号:</p>
-	<p style="font-size: 18px;" ><span id="one1"></span>:(导游证件号：<span id="ten1"></span>)</p>
-	<P style="text-indent: 2em;font-size: 20px;">请按照旅行社确定的行程计做好导游工作，保证旅游行程	按计划执行，<br/>并按标准提供服务</P>
-
-	<table style="" id="two" width="670px" height="280px">
-		<tr>
-			<td>接团时间</td>
-			<td colspan="3"><span id="clusterTimex"></span></td>
-
-		</tr>
-		<tr>
-			<td>接团地点</td>
-			<td colspan="3"><span id="clusterAdderssx"></span></td>
-		</tr>
-		<tr>
-			<td>团队抵达/航班<br/>车次号</td>
-			<td colspan="3"><span id="clusterNox"></span></td>
-		</tr>
-		<tr>
-			<td>团队人数</td>
-			<td colspan="3"><span id="fonr"></span></td>
-		</tr>
-		<tr>
-			<td>团队用车车牌号</td>
-			<td><span id="car"></span></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>驾驶员姓名</td>
-			<td><span id="contacts"></span></td>
-			<td>联系电话</td>
-			<td><span id="con"></span></td>
-		</tr>
-		<tr>
-			<td>团队联系人姓名</td>
-			<td><span id="name1"></span></td>
-			<td>联系电话</td>
-			<td><span id="phone1"></span></td>
-		</tr>
-	</table>
-	<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
+	<p><button style=" margin-left: 250px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印导游接团任务工作单</button></p>
 </div>
-<p><button style=" margin-left: 250px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印导游接团任务工作单</button></p>
 
+<script th:src="@{/js/LodopFuncs.js}"></script>
 <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
     $(function () {

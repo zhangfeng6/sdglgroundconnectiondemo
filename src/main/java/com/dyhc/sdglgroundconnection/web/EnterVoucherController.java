@@ -95,6 +95,15 @@ public class EnterVoucherController {
     }
 
     /**
+     * 进入确认书 页面
+     * @return
+     */
+    @RequestMapping("/quotation.html")
+    public String quotation() {
+        return "voucher/quotation";
+    }
+
+    /**
      * 进入导游报账明细单 页面
      * @return
      */
