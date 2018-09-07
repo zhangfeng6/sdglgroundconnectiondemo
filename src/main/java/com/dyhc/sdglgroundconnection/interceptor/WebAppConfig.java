@@ -23,7 +23,13 @@ public class WebAppConfig implements WebMvcConfigurer {
                         "/WeChat/assignmentGuide","/WeChat/getHoterById","" +
                         "/WeChat/getRestaurantById","/WeChat/getShoppingByIdWX"
                         ,"/WeChat/getTemplateById","/WeChat/upload","/WeChat/updateTX",
-                        "/WeChat/saveReportaccommodation","/WeChat/baozhangType","/WeChat/dictionaries","/WeChat/saveReportaccommodation","/RoomType/roomType_All","/Reportaccommodation/jiudianquanbu","/Reportfare/savereportaccommodation","/Reportqutsubsidy/saveReportqutsubsidy","/Reportrestaurant/saveStaurant","/Reportticket/saveReportticket","/WeChat/dictionaries","/Reportingotherexpenses/saveReportingotherexpenses");
+                        "/WeChat/saveReportaccommodation","/WeChat/baozhangType",
+                        "/WeChat/dictionaries","/WeChat/saveReportaccommodation",
+                        "/RoomType/roomType_All","/Reportaccommodation/jiudianquanbu",
+                        "/Reportfare/savereportaccommodation","/Reportqutsubsidy/saveReportqutsubsidy",
+                        "/Reportrestaurant/saveStaurant","/Reportticket/saveReportticket",
+                        "/WeChat/dictionaries","/Reportingotherexpenses/saveReportingotherexpenses",
+                        "/WeChat/listBillType");
     }
 
 }
