@@ -8,7 +8,7 @@
 
 <body>
 
-<div style="width:55%; margin:0 auto">
+<div style="width:55%; margin:0 auto" id="form1">
     <div id="tupian" style="width: 800px;">
                 <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
            </div>
@@ -37,9 +37,11 @@
 <p style="text-height:8px; height:8px; text-indent:1.5em">5、乙方客运驾驶员有权拒绝甲方导游提出的违反安全行车和冒险行车的要求。</p>
 <p style="text-height:8px; height:8px; text-indent:1.5em">6、乙方客运驾驶员不准诱导客人计划外增加景点或煽动购物，不得从事任何违法活动。</p><p style="text-height:8px; height:8px; text-indent:1.5em">7、乙方不得调配非乙方公司车辆接待甲方团队，由此产生的一切责任全部由乙方负责</p>
 <p style="text-height:20px; height:20px; text-indent:1.5em">8、乙方需按双方合同规定的行车路线行车，否则多产生的费用均由甲方承担。在带团过程中，导游交给</p>
-    <p align="right"><button type='button' onclick='xia()'><i type='button'>下一页</i></button></p>
+
   <p align="right">-1-</p>
 </div>
+<p align="right"><button type='button' onclick='xia()'><i type='button'>下一页</i></button></p>
+<p><button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印租车合同</button></p>
 </body>
 <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
@@ -119,5 +121,29 @@
          }
      })
  }
+ var LODOP; //声明为全局变量
+ // 打印预览
+ function prn1_preview() {
+     CreateOneFormPage();
+     LODOP.PREVIEW();
+ };
+ // 直接打印
+ function prn1_print() {
+     CreateOneFormPage();
+     LODOP.PRINT();
+ };
+ // 选择打印机
+ function prn1_printA() {
+     CreateOneFormPage();
+     LODOP.PRINTA();
+ };
+ // 创建打印页面
+ function CreateOneFormPage(){
+     LODOP=getLodop();
+     LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+     LODOP.SET_PRINT_STYLE("FontSize",18);
+     LODOP.SET_PRINT_STYLE("Bold",1);
+     LODOP.ADD_PRINT_HTM(10,20,500,5000,document.getElementById("form1").innerHTML);
+ };
 </script>
 </html>

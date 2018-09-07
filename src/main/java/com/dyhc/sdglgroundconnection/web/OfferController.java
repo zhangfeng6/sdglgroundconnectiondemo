@@ -197,7 +197,7 @@ public class OfferController {
             List<Hotel> hotelList = new ArrayList<>();
             List<Dictionaries> dicList1 = new ArrayList<>();
             List<Dictionaries> dicList2 = new ArrayList<>();
-            List<Template> templatesList = new ArrayList<>();
+            List<String> templatesList = new ArrayList<>();
             for (int i=0;i<jiudianList.length;i++){
                 Integer hotelId = Integer.parseInt(jiudianList[i]);
                 hotelList.add(hotelService.getHotelById(hotelId));
@@ -209,7 +209,18 @@ public class OfferController {
                 dicList2.add(dictionariesService.selectByDictionariesId(Integer.parseInt(wancList[i])));
             }
             for (int i=0;i<xianluList.length;i++){
-                templatesList.add(templateService.selecctNameById(Integer.parseInt(xianluList[i])));
+                boolean is = true;
+                try {
+                    Integer.parseInt(xianluList[i]);
+                    is = false;
+                } catch (NumberFormatException e) {
+                    is = true;
+                }
+                if (is){
+                    templatesList.add(xianluList[i]);
+                }else{
+                    templatesList.add(templateService.selecctNameById(Integer.parseInt(xianluList[i])).getTemplateName());
+                }
             }
             List allList = new ArrayList<>();
             allList.add(tripList);

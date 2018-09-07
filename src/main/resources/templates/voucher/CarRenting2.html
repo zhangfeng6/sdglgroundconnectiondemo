@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<div style="width:55%; margin:0 auto">
+<div style="width:55%; margin:0 auto" id="form1">
 	  <div id="tupian" style="width: 800px;">
                 <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
            </div>
@@ -41,10 +41,12 @@
 
 <p><p style="float:left">签&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字:<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p>  <p style="float:right">签&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字:<strong style="text-decoration:underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p></p>
 <p align="right" style="clear:both">合同订立日期:<strong style="text-decoration:underline">2018</strong>年<strong style="text-decoration:underline">4</strong>月<strong style="text-decoration:underline">11</strong>日</p>
-    <p align="right"><button type='button' onclick='shang()'><i type='button'>上一页</i></button></p>
+
     <p align="right" style="clear:both">-2-</p>
-    <p><button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印租车合同</button></p>
+
 </div>
+<p align="right"><button type='button' onclick='shang()'><i type='button'>上一页</i></button></p>
+<p><button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun">打印租车合同</button></p>
 <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
     $(function () {
@@ -104,6 +106,30 @@
             }
         })
     }
+    var LODOP; //声明为全局变量
+    // 打印预览
+    function prn1_preview() {
+        CreateOneFormPage();
+        LODOP.PREVIEW();
+    };
+    // 直接打印
+    function prn1_print() {
+        CreateOneFormPage();
+        LODOP.PRINT();
+    };
+    // 选择打印机
+    function prn1_printA() {
+        CreateOneFormPage();
+        LODOP.PRINTA();
+    };
+    // 创建打印页面
+    function CreateOneFormPage(){
+        LODOP=getLodop();
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+        LODOP.SET_PRINT_STYLE("FontSize",18);
+        LODOP.SET_PRINT_STYLE("Bold",1);
+        LODOP.ADD_PRINT_HTM(10,20,500,5000,document.getElementById("form1").innerHTML);
+    };
 </script>
 </body>
 </html>
