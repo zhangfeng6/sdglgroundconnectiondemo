@@ -63,4 +63,12 @@ public interface BillTypeService {
      * @throws Exception
      */
     List<BillType> listBillAll()throws Exception;
+
+
+    /**
+     * 获取单据类型列表
+     * @return
+     * @throws Exception
+     */
+    List<BillType> listBillType()throws Exception;
 }

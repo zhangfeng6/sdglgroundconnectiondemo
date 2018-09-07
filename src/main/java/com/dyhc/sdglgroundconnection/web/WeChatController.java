@@ -69,6 +69,8 @@ public class WeChatController {
     private ReportdetailMapper reportdetailMapper;
     @Autowired
     private ReportaccommodationService reportaccommodationService;
+    @Autowired
+    private BillTypeService billTypeService;
 
 
     /**
@@ -568,6 +570,24 @@ public class WeChatController {
             e.printStackTrace();
             logger.error("method:updateTX  修改头像失败");
             return ReponseResult.err("修改头像失败");
+        }
+    }
+
+    /**
+     * 获取单据类型列表
+     * @return
+     */
+    @RequestMapping("listBillType")
+    @ResponseBody
+    public ReponseResult listBillType(){
+        try {
+            List<BillType> list=billTypeService.listBillType();
+            logger.info("mothod:listBillType 获取单据类型列表成功");
+            return ReponseResult.ok(list,"获取单据类型列表成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listBillType 获取单据类型列表失败");
+            return ReponseResult.err("获取单据类型列表失败");
         }
     }
 }

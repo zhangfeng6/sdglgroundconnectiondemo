@@ -34,6 +34,10 @@ public class BillTypeServiceImpl implements BillTypeService {
         PageInfo<BillType>pageInfo=new PageInfo<>(billTypeMapper.ShowAllBillType(pageNo,pageSize,typeName));
         return pageInfo;
     }
+    @Override
+    public List<BillType> listBillType() throws Exception {
+        return billTypeMapper.listBillType();
+    }
 
     /**
      * 删除单据信息

@@ -29,4 +29,11 @@ public interface BillTypeMapper extends CommonMapper<BillType>{
      * @return
      */
  BillType equalBillType(@Param("typeName")String typeName)throws Exception;
+
+    /**
+     * 获取单据类型列表
+     * @return
+     * @throws Exception
+     */
+    List<BillType> listBillType()throws Exception;
 }
