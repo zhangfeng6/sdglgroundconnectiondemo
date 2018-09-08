@@ -73,6 +73,17 @@ public class Dispatch implements Serializable {
     public void setCarcontacts(String carcontacts) {
         this.carcontacts = carcontacts;
     }
+    //调度导游表
+    @Transient
+    private  Disguide disguide;
+
+    public Disguide getDisguide() {
+        return disguide;
+    }
+
+    public void setDisguide(Disguide disguide) {
+        this.disguide = disguide;
+    }
 
     //组团表
     @Transient

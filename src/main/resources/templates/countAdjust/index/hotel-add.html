@@ -38,7 +38,8 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图片地址：</label>
 									<div class="layui-input-block">
-										<input type="file" value="" name="picturePath" id="file">
+										<input type="file" value="" name="picturePath" id="file" onchange="bian()">
+										<img src="" name="img"  width="100px" height="50px"/>
 									</div>
 								</div>
 								<div class="layui-form-item">
@@ -103,6 +104,16 @@
 		
     })
 
+
+    function bian(){
+        var oFReader = new FileReader();
+        var file = document.getElementById('file').files[0];
+        oFReader.readAsDataURL(file);
+        oFReader.onloadend = function(oFRevent){
+            var src = oFRevent.target.result;
+            $("img[name='img']").attr('src',src);
+        }
+    }
 	 function saveHotel(){
          var DataDeal={
              //将从form中通过$('#refer').serialize()获取值转成json

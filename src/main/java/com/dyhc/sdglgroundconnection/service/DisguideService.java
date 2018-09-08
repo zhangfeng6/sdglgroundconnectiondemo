@@ -16,4 +16,10 @@ public interface DisguideService {
      * @return
      */
     Disguide DisguideAll(Integer dispatchId)throws Exception;
+    /**
+     * 查询导游名称
+     * @param
+     * @return
+     */
+    Disguide selectNameAll(Integer offerId);
 }

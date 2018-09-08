@@ -21,7 +21,7 @@
             <label class="layui-form-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
             <div class="layui-input-block" style="width: 400px;">
                 <input type="hidden" name="staffId" id="staffId" th:value="${staffId}"/>
-                <input type="text" name="staffname" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" id="one">
+                <input type="text" name="staffname"  placeholder="请输入姓名" autocomplete="off" class="layui-input" id="one">
             </div>
         </div>
         <div class="layui-form-item">
@@ -34,19 +34,19 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="text" name="theUserName" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" id="three" onblur="validate();">
+                <input type="text" name="theUserName"  placeholder="请输入用户名" autocomplete="off" class="layui-input" id="three" onblur="validate();">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">身份证号：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="text" name="cardId" required lay-verify="required" placeholder="请输入省份证号" autocomplete="off" class="layui-input" id="fonr">
+                <input type="text" name="cardId"  placeholder="请输入省份证号" autocomplete="off" class="layui-input" id="fonr">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="text" name="qqnumber" required lay-verify="required" placeholder="请输入qq" autocomplete="off" class="layui-input" id="five">
+                <input type="text" name="qqnumber"  placeholder="请输入qq" autocomplete="off" class="layui-input" id="five">
             </div>
         </div>
         <div class="layui-form-item">
@@ -70,13 +70,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">现&nbsp;&nbsp;住&nbsp;&nbsp;址：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="text" name="currentAddress" required lay-verify="required" placeholder="请输入现住址" autocomplete="off" class="layui-input" id="six">
+                <input type="text" name="currentAddress"  placeholder="请输入现住址" autocomplete="off" class="layui-input" id="six">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">联系电话：</label>
             <div class="layui-input-block" style="width: 400px;">
-                <input type="text" name="phone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input" id="serve">
+                <input type="text" name="phone"  placeholder="请输入联系电话" autocomplete="off" class="layui-input" id="serve">
             </div>
         </div>
         <div class="layui-form-item">
@@ -198,7 +198,7 @@
                 $("#six").val(e.data.currentAddress);
                 $("#serve").val(e.data.phone);
                 $("select[name=roleId]").val(e.data.roleId);
-                $("#img1").attr("src","/api/image/"+e.data.headPortraitPath);
+                $("#img1").attr("src","/sdglGroundConnection/api/image/"+e.data.headPortraitPath);
             }
         })
     }

@@ -25,21 +25,15 @@
     </form>
     <div class="layui-form" id="table-list">
         <table class="layui-table" lay-even lay-skin="nob">
-            <colgroup>
-                <col width="50">
-                <col class="hidden-xs" width="50">
-                <col class="hidden-xs" width="100">
-                <col>
-                <col width="80">
-                <col width="150">
-            </colgroup>
             <thead>
             <tr>
-                <th style="width: 60px;">序号</th>
-                <th style="width: 45px;">房间类型</th>
-                <th style="width: 45px;">创建人</th>
-                <th style="width: 45px;">创建时间</th>
-                <th style="width: 80px; font-size: small;">操作</th>
+                <td>序号</td>
+                <td>房间类型</td>
+                <td>创建人</td>
+                <td>创建时间</td>
+                <td>成本价</td>
+                <td>报价</td>
+                <td>操作</td>
             </tr>
             </thead>
             <tbody id="two">
@@ -62,7 +56,7 @@
             title: '房间类型',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
-            area : ['800px' , '220px'],
+            area : ['800px' , '300px'],
             content: '/sdglGroundConnection/countAdjust/HotelType-upd.html'
         });
     })
@@ -74,7 +68,7 @@
                 title: '房间类型',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
-                area : ['800px' , '220px'],
+                area : ['800px' , '300px'],
                 content: '/sdglGroundConnection/countAdjust/HotelType-upd.html?dictionariesId='+dictionariesId
             })
         )
@@ -101,6 +95,8 @@
                         "<td>" + result.valueContent1 + "</td>" +
                         "<td>" + result.theUserName + "</td>" +
                         "<td>" + result.createDate + "</td>"+
+                        "<td>" + result.valueContent2 + "</td>" +
+                        "<td>" + result.valueContent3 + "</td>"+
                         "<td><button onclick='TypeUpdate("+result.dictionariesId+")' class='layui-btn layui-btn-mini layui-btn-normal  edit-btn'><i class='layui-icon'>&#xe642;</i></button>\n" +
                         "<button onclick='getHoteldel("+result.valueId+")'class='layui-btn layui-btn-mini layui-btn-danger del-btn'><i class='layui-icon'>&#xe640;</i></button>" +
                         "</td></tr>";

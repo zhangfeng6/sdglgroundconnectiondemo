@@ -39,14 +39,15 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">图片地址：</label>
                     <div class="layui-input-block">
-                        <input type="file" value="" name="picturePath" id="file">
+                        <input type="file" value="" name="picturePath" id="file" onchange="bian()">
+                        <img src="" name="img"  width="100px" height="50px"/>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">是否提供早餐：</label>
+                    <label class="layui-form-label">提供早餐：</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="breakfast" title="是" checked="checked" value="0" />
-                        <input type="radio" name="breakfast" title="否" value="1"/>
+                        是<input type="radio" name="breakfast" title="是" checked="checked" value="0" />
+                        否 <input type="radio" name="breakfast" title="否" value="1"/>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -112,13 +113,13 @@
                $("input[name='hotelName']").val(data.data.hotelName);
                $("input[name='starHotel']").val(data.data.starHotel);
                $("input[name='hotelAddress']").val(data.data.hotelAddress);
-               $("input[name='picturePath']").val(data.data.picturePath);
-               $("[name='breakfast']").val(data.data.breakfast);
-               $("[name='contacts']").val(data.data.contacts);
-               $("[name='offer']").val(data.data.offer);
-               $("[name='hotelDescribe']").val(data.data.hotelDescribe);
-               $("[name='phone']").val(data.data.phone);
-               $("[name='costprice']").val(data.data.costprice);
+               $("img[name='img']").attr("src","/sdglGroundConnection/api/image/"+data.data.picturePath);
+               $("input[name='breakfast']").val(data.data.breakfast);
+               $("input[name='contacts']").val(data.data.contacts);
+               $("input[name='offer']").val(data.data.offer);
+               $("input[name='hotelDescribe']").val(data.data.hotelDescribe);
+               $("input[name='phone']").val(data.data.phone);
+               $("input[name='costprice']").val(data.data.costprice);
             },
             error:function () {
                 alert("酒店房间修改赋值失败！");
@@ -126,7 +127,15 @@
         })
     }
 
-    
+    function bian(){
+        var oFReader = new FileReader();
+        var file = document.getElementById('file').files[0];
+        oFReader.readAsDataURL(file);
+        oFReader.onloadend = function(oFRevent){
+            var src = oFRevent.target.result;
+            $("img[name='img']").attr('src',src);
+        }
+    }
     function updateHotel(){
         var DataDeal={
             //将从form中通过$('#refer').serialize()获取值转成json

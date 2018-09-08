@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 调度景点业务接口
@@ -15,5 +17,5 @@ public interface DisattrService {
      * @param offerId
      * @return
      */
-    Disattr disattr(@Param("offerId") Integer offerId)throws Exception;
+    List<Disattr> disattr(@Param("offerId") Integer offerId)throws Exception;
 }

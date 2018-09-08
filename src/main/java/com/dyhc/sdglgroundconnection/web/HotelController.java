@@ -230,7 +230,7 @@ public class HotelController {
      */
     @RequestMapping("/updatHotel")
     @LogNotes(operationType="酒店",content="修改")
-    public ReponseResult updateHotel(HttpServletRequest request,@RequestParam("picturePath") MultipartFile picturePath) {
+    public ReponseResult updateHotel(HttpServletRequest request,@RequestParam(value = "picturePath",required =false) MultipartFile picturePath) {
         try {
             String form =request.getParameter("form");
             //创建对象

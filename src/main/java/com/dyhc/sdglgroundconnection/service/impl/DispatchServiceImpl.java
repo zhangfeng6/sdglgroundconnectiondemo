@@ -125,7 +125,9 @@ public class DispatchServiceImpl implements DispatchService {
     //调度餐厅表
     @Autowired
     private DisrestaurantMapper disrestaurantMapper;
-
+    //调度导游表
+    @Autowired
+    private  DisguideServiceImpl disguideService;
     /**
      * 根据调度id获取调度的相关数据
      * @param dispatchId
@@ -450,11 +452,13 @@ public class DispatchServiceImpl implements DispatchService {
             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
             /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
             dispatch.setDispatchhotel(dispatchhotels);
+            dispatch.setDisguide(disguideService.selectNameAll(dispatchId));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return dispatch;
     }
+
 
     @Override
     public Dispatch getDispatchByguideId(Integer guideId)throws Exception {
