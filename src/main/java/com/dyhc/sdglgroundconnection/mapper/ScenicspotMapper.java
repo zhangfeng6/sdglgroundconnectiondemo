@@ -83,4 +83,12 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @throws Exception
      */
     void delScenicspotById(@Param("parentId") Integer parentId)throws Exception;
+
+    /**
+     * 获取父景点名称
+     * @param parentId
+     * @return
+     * @throws Exception
+     */
+    Scenicspot getParentName(Integer parentId)throws Exception;
 }

@@ -48,11 +48,11 @@
                 <td>组团社(单位):</td>
                 <td><input type="text" disabled name="travelName" style="width:120px; text-align:center"></td>
                 <td style="padding-left:30px">人数:</td>
-                <td><input type="text" disabled value="10" style="width:60px; text-align:center" name="num"></td>
+                <td><input type="text" disabled  style="width:60px; text-align:center" name="num"></td>
                 <td style="padding-left:20px">天数:</td>
                 <td><input type="text" disabled name="cha" style="width:60px; text-align:center"></td>
                 <td style="padding-left:20px">客源地:</td>
-                <td><input type="text" disabled value="北京" style="width:60px; text-align:center" name="tourist"></td>
+                <td><input type="text" disabled  style="width:60px; text-align:center" name="tourist"></td>
                 <td style="padding-left:20px">单据类型<select style="margin-left:10px" name="typeName">
                     <option>请选择</option>
                 </select></td>
@@ -330,7 +330,7 @@
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area: ['700px', '500px'],
-            content: '/sdglGroundConnection/viewPictures.html?dispatchId='+dispatchId+"&billTypeId="+billTypeId
+            content: '/sdglGroundConnection/finance/viewPictures.html?dispatchId='+dispatchId+"&billTypeId="+billTypeId
         });
     }
 
@@ -351,12 +351,14 @@
             dataType: "json",
             type: "post",
             success:function (result) {
-                $("input[name='groupNumber']").val(result.data[0].groupNumber);
+                $("input[name='groupNumber']").val(result.data[0].groundConnectionNumber);
                 $("input[name='travelStartTime']").val(result.data[0].travelStartTime);
                 $("input[name='travelEndTime']").val(result.data[0].travelEndTime);
                 $("input[name='sendLine']").val(result.data[0].sendLine);
                 $("input[name='cha']").val(result.data[1]+1);
                 $("input[name='dispatchId']").val(result.data[0].dispatchId);
+                $("input[name='num']").val(result.data[0].num);
+                $("input[name='tourist']").val(result.data[0].tourist);
                 getTravelName(result.data[0].groupNumber);
                 getGuideById(result.data[0].guideId);
                 getReportdetailById(reportDetailId);
@@ -646,7 +648,7 @@
     function  listReportingotherexpensesById() {
         var reportDetailId=$("input[name='reportDetailId']").val();
         $.ajax({
-            url: "/sdglGroundConnectionReportingotherexpenses/listReportingotherexpensesById",
+            url: "/sdglGroundConnection/Reportingotherexpenses/listReportingotherexpensesById",
             data: {"reportDetailId":reportDetailId},
             dataType: "json",
             type: "post",

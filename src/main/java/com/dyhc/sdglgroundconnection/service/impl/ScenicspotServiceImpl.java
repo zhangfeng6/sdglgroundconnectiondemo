@@ -127,4 +127,10 @@ public class ScenicspotServiceImpl implements ScenicspotService {
             return 0;
         }
     }
+
+    @Override
+    public String getParentName(Integer parentId) throws Exception {
+        Scenicspot scenicspot=scenicspotMapper.getParentName(parentId);
+        return scenicspot.getScenicSpotName();
+    }
 }

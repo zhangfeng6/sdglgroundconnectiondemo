@@ -67,8 +67,7 @@ public class ScenicspotController {
     @RequestMapping("/getScenicspotByParentId")
     public ReponseResult getScenicspotByParentId(Integer parentId){
         try {
-            PageInfo<Scenicspot> scenicspotPageInfo = scenicspotService.getScenicspotByParentId(parentId);
-            ReponseResult<List> data = ReponseResult.ok(scenicspotPageInfo.getList(), scenicspotPageInfo.getTotal(), "分页获取景点成功！");
+            ReponseResult<String> data = ReponseResult.ok(scenicspotService.getParentName(parentId), "分页获取景点成功！");
             logger.info(" method:showHotel  分页获取景点成功！");
             return data;
         } catch (Exception e) {
