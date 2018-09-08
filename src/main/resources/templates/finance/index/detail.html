@@ -646,7 +646,7 @@
     function  listReportingotherexpensesById() {
         var reportDetailId=$("input[name='reportDetailId']").val();
         $.ajax({
-            url: "/sdglGroundConnectionReportingotherexpenses/listReportingotherexpensesById",
+            url: "/sdglGroundConnection/Reportingotherexpenses/listReportingotherexpensesById",
             data: {"reportDetailId":reportDetailId},
             dataType: "json",
             type: "post",
