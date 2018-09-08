@@ -315,7 +315,7 @@ public class WeChatController {
             String mima=MD5(password);
             Guide guide=guideService.assignmentGuide(guideId);
             if (guide!=null){
-                if(mima.equals(guide.getPassword())){
+                if(mima.equalsIgnoreCase(guide.getPassword())){
                     logger.info("method:pdOldPassword 旧密码输入正确");
                     return ReponseResult.ok(1,"旧密码输入正确");
                 }else {
@@ -344,6 +344,7 @@ public class WeChatController {
         try {
             guide.setPassword(MD5(guide.getPassword()));
             Integer result=guideService.updateGuideByPassword(guide);
+
             if (result==1){
                 logger.info("method:updateGuideByPassword 修改密码成功");
                 return ReponseResult.ok(result,"修改成功");
