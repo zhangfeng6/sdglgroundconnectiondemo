@@ -85,4 +85,6 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      */
     List<Hotel>   listNoDelHotel()throws Exception;
 
+    List<Hotel> selectAllHotel()throws Exception;
+
 }

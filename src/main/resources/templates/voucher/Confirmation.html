@@ -22,7 +22,7 @@
                 <td>收件单位及收件人</td>
                 <td id="shouren"></td>
                 <td>发件单位及发件人</td>
-                <td>山西世达国旅 崔俊娜</td>
+                <td>山西世达国旅 <span id="fajian"></span></td>
             </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="0">
@@ -126,7 +126,7 @@
                 <td style="width:50%" valign="top">地接社盖章：</td>
             </tr>
         </table>
-        <p style="text-align:right">2018年3月26日</p>
+        <p style="text-align:right" id="di"></p>
 
 
 
@@ -159,7 +159,9 @@
                 async: false,
                 type:"get",
                 success:function (data) {
-                    $("#shouren").text(data.data[11].personName+data.data[11].personPost);
+                    $("#fajian").text(data.data[16]);
+                    $("#di").text(data.data[15]);
+                    $("#shouren").text(data.data[11].travelName+" "+data.data[11].personName+" "+data.data[11].personPost);
                     $("#zutuanName").text(data.data[11].travelName);
                     $("#jinji1").text(data.data[11].phone);
                     $("#keyuan").text(data.data[11].travelName.substring(0,data.data[11].travelName.length-3));

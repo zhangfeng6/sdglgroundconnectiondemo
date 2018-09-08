@@ -326,7 +326,7 @@ public class HotelController {
     @RequestMapping("/selectHotel")
     public ReponseResult selectHotel() {
         try {
-            List<Hotel> list = hotelService.selectHotel();
+            List<Hotel> list = hotelService.selectAllHotel();
             ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
             logger.info(" method:selectHotel  查询旅游线路成功！");
             return data;

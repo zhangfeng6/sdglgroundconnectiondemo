@@ -100,7 +100,7 @@ table{
 			<td>包含</td>
 			<td colspan="5" id="t1">
 				1、行程中所列酒店双人标准间<br/>
-				2、正餐&nbsp;&nbsp;&nbsp;餐，餐标<span id="wu" style="text-decoration: underline"></span><br/>
+				2、正餐<span id="ji"></span>餐，餐标<span id="wu" style="text-decoration: underline"></span><br/>
 				3、<span id="zuo" style="text-decoration: underline"></span>座空调旅游巴士<br/>
 				4、行程中所列景区景点门票及小交通<br/>
 				5、全程中文导游服务
@@ -189,8 +189,9 @@ table{
             type:"get",
             success:function (data) {
                 var content = "";
+                $("#ji").text(data.data[10]);
                 $("#fawang").text(data.data[6].travelName);
-                $("#shijian").text(data.data[1]+"——"+data.data[2]);
+                $("#shijian").text(data.data[1].substring(5)+"—"+data.data[2].substring(5));
                 $("#number").text(data.data[0]);
                 $("#keyuan").text(data.data[6].travelName.substring(0,data.data[6].travelName.length-3));
                 for (var i=0;i<data.data[8].length;i++){
@@ -198,7 +199,7 @@ table{
 				}
                 $("#xingcheng").text(content);
                 $("#jiage").text(data.data[3]);
-                $("#wu").text(data.data[4]);
+                $("#wu").text(parseInt(data.data[4]));
                 var valueContent1=0;
 				if (data.data[5].valueContent1=="大巴车"){
                     valueContent1=50;

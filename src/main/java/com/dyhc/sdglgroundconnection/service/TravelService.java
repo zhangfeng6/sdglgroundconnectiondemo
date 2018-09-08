@@ -116,7 +116,7 @@ public interface TravelService {
      * @param travelId
      * @return
      */
-    Offer selectOfferByTravelId(@Param("travelId") Integer travelId)throws Exception;
+    Dispatch selectOfferByTravelId(@Param("travelId") Integer travelId)throws Exception;
 
     /**
      * 根据组团社号获取组团社名称

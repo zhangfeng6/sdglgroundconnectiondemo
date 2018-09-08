@@ -129,6 +129,7 @@ public class OfferController {
             String remarks = request.getParameter("remarks");
             String[] tripList = request.getParameterValues("tripList");
             String xiaofei = request.getParameter("xiaofei");
+            String ji = request.getParameter("ji");
 
 
 
@@ -145,6 +146,7 @@ public class OfferController {
             allList.add(remarks);
             allList.add(tripList);
             allList.add(xiaofei);
+            allList.add(ji);
             session.setAttribute("allList",allList);
             ReponseResult<Object> data = ReponseResult.err("查询成功！");
             return data;
@@ -511,7 +513,11 @@ public class OfferController {
     public ReponseResult showConfirmation(HttpServletRequest request) {
         try {
             HttpSession session = request.getSession();
+            Staff staff = (Staff) session.getAttribute("staff");
             List allList = (List)session.getAttribute("allList");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            allList.add(df.format(new Date()));
+            allList.add(staff.getStaffname());
             ReponseResult<Object> data = ReponseResult.ok(allList, "获取确认书成功！");
             logger.info(" method:selectOffer  获取确认书成功！");
             return data;
