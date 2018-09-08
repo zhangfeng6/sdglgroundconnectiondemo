@@ -139,7 +139,10 @@
              return;
 		 }else if (phone=='' || phone==null||phone==undefined){
              return;
-		 }else if (costprice=='' || costprice==null||costprice==undefined){
+		 }else if(phone.length>11 || phone.length<11){
+             alert("请输入正确位数的手机号码");
+             return;
+		 } else if (costprice=='' || costprice==null||costprice==undefined){
              return;
 		 }else if (offer=='' || offer==null||offer==undefined){
              return;
@@ -169,8 +172,6 @@
 		})
 	   }
      }
-
-
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
 				var form = layui.form(),
 					layer = layui.layer,
