@@ -347,6 +347,13 @@ public class OfferController {
             offer.setRemarks(remarks);
             offer.setReception(jiedai);
             offer.setNotcontain(xiaofei);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            SimpleDateFormat format7 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date3 = format7.parse(df.format(new Date()));
+            SimpleDateFormat format8 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String sdate3=format8.format(date3);
+            Timestamp fTimestamp3=Timestamp.valueOf(sdate3);
+            offer.setCreationDate(fTimestamp3);
             offerService.insertOffer(offer);
 
 

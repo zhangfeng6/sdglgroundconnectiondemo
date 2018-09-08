@@ -455,10 +455,10 @@ public class StaffController  {
             if(staff!=null){
                 data=1;
             }
-            logger.info(" method:StaffByName  判断车辆类型是否存在成功！");
-            return ReponseResult.ok(data,"判断车辆类型是否存在成功！");
+            logger.info(" method:StaffByName  判断用户名是否存在！");
+            return ReponseResult.ok(data,"判断用户名是否存在！");
         }catch (Exception e){
-            logger.error(" method:StaffByName  判断车辆类型是否存在失败，系统出现异常！");
+            logger.error(" method:StaffByName  判断用户名是否存在失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;

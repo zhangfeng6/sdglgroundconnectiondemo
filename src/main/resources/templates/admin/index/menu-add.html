@@ -59,21 +59,18 @@
                 var accountName=$("input[name='accountName']").val().trim();
                 var leixing=$("#leixing").find("option:selected").val();
                 if (bank=="" || bank==null ||bank==undefined){
-                    alert("不能为空1");
                     return;
                 } else if (accountNum=="" || accountNum==null||accountNum==undefined){
-                    alert("不能为空2");
                     return;
                 } else if (""==accountName || null==accountName||accountName==undefined){
-                    alert("不能为空3");
                     return;
                 } else if (leixing=="" || leixing==null || leixing==undefined){
-                    alert("不能为空4");
                     return;
                 }else{
                 var accountType =$("form[class='layui-form']").serialize();
                 $.ajax({
                     url: "/sdglGroundConnection/AccountType/saveAccountType",
+                    async:false,
                     data: accountType,
                     dataType: "json",
                     type: "get",
@@ -93,7 +90,31 @@
                 })
             }
         }
+       //判断用户名是否重复
+        function panduan(){
+            var accountName=$("input[name='accountName']").val().trim();
+ 			$.ajax({
+				url:"/sdglGroundConnection/Staff/ShowStafftheUserName",
+				async:false,
+				data:{theUserName:accountName},
+				dataType:"json",
+				type:"get",
+				success:function (data) {
+						if (data.data==1){
+							alert("已存在该用户名！");
+							return;
+						}
+                },error:function () {
+						alert("判断错误");
+                }
+			})
+		}
+
          $(function () {
+             $("input[name='accountName']").blur(function () {
+				 //判断是否重复
+
+             })
              $.ajax({
                  url: "/sdglGroundConnection/Staff/showAllstaff",
                  data: {},
