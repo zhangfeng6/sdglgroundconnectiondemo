@@ -87,4 +87,8 @@
     <update id="delScenicspotById">
         UPDATE `scenicspot` SET whetherDel=0 WHERE parentId=#{parentId}
     </update>
+    <select id="getParentName" resultType="com.dyhc.sdglgroundconnection.pojo.Scenicspot">
+        SELECT * FROM `scenicspot` WHERE scenicSpotId=#{parentId}
+    </select>
+
 </mapper>

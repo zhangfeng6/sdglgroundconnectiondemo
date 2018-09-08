@@ -268,6 +268,7 @@ public class WeChatController {
             String path= WechatFileUploadUtil.uploadImage(request,".jpg");
             Bill bill=billService.selectBillByDispatchIdAndBillTypeId(dispatchId,billTypeId);
             if (bill==null){
+                bill=new Bill();
                 bill.setDispatchId(dispatchId);
                 bill.setBillTypeId(billTypeId);
                 bill.setPicturePath(path);

@@ -322,6 +322,7 @@
          */
         function getScenicspotById() {
 			var scenicSpotId=$("input[name='scenicSpotId']").val();
+			alert(scenicSpotId);
 			if (scenicSpotId!=0) {
                 $.ajax({
                     type: "post",

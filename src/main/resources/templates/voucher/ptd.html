@@ -45,54 +45,55 @@
 			<td>接团时间</td>
 			<td colspan="3"><span id="clusterTime"></span></td>
 
-		</tr>
-		<tr>
-			<td>接团地点</td>
-			<td colspan="3"><span id="clusterAdderss"></span></td>
-		</tr>
-		<tr>
-			<td>团队抵达/航班<br/>车次号</td>
-			<td colspan="3"><span id="clusterNo"></span></td>
-		</tr>
-		<tr>
-			<td>团队人数</td>
-			<td colspan="3"><span id="first"></span></td>
-		</tr>
-		<tr>
-			<td>团队用车车牌号</td>
-			<td><span id="car1"></span></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>驾驶员姓名</td>
-			<td><span id="contacts1"></span></td>
-			<td>联系电话</td>
-			<td><span id="con1"></span></td>
-		</tr>
-		<tr>
-			<td>团队联系人姓名</td>
-			<td><span id="name"></span></td>
-			<td>联系电话</td>
-			<td><span id="phone"></span></td>
-		</tr>
+			</tr>
+			<tr>
+				<td>接团地点</td>
+				<td colspan="3"><span id="clusterAdderss"></span></td>
+			</tr>
+			<tr>
+				<td>团队抵达/航班<br/>车次号</td>
+				<td colspan="3"><span id="clusterNo"></span></td>
+			</tr>
+			<tr>
+				<td>团队人数</td>
+				<td colspan="3"><span id="first"></span></td>
+			</tr>
+			<tr>
+				<td>团队用车车牌号</td>
+				<td><span id="car1"></span></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>驾驶员姓名</td>
+				<td><span id="contacts1"></span></td>
+				<td>联系电话</td>
+				<td><span id="con1"></span></td>
+			</tr>
+			<tr>
+				<td>团队联系人姓名</td>
+				<td><span id="name"></span></td>
+				<td>联系电话</td>
+				<td><span id="phone"></span></td>
+			</tr>
 
-	</table>
-	<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
+		</table>
+		<p style="font-size: 16px;">团队行程详见《团队运行接待计划表》  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span >山西世达国际旅行社(盖章)</span></p>
 </div>
-	<p><button style=" margin-left: 500px;margin-top:140px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()" >打印导游接团任务工作单</button></p>
-</div>
+    <p><button style=" margin-left: 250px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印导游接团任务工作单</button></p>
+	</div>
 
-<script th:src="@{/js/LodopFuncs.js}"></script>
-<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
-<script>
-    $(function () {
-        kaishi();
-        lisrDispatch()
-        listStaff()
-        listDisguide()
-        listcluster()
-    })
+
+	<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+	<script th:src="@{/js/LodopFuncs.js}"></script>
+	<script>
+        $(function () {
+            kaishi();
+            lisrDispatch()
+            listStaff()
+            listDisguide()
+            listcluster()
+        })
 
 	var id;
 
@@ -203,5 +204,4 @@
     };
 </script>
 </body>
-
 </html>
