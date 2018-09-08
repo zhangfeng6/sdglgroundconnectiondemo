@@ -34,7 +34,17 @@ public class Disguide implements Serializable {
     private String value1;
     private String value2;
     private String value;
+    //导游表
+    @Transient
+    private  Guide guide;
 
+    public Guide getGuide() {
+        return guide;
+    }
+
+    public void setGuide(Guide guide) {
+        this.guide = guide;
+    }
     @Transient
     private String guideName;
     @Transient

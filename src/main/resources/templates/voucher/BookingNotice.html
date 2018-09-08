@@ -1,151 +1,160 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<title>山西世达国旅订房通知单</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
-<style id="yangshi">
-	table{ width:100%}
-</style>
+    <meta charset="utf-8">
+    <title>山西世达国旅订房通知单</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}" />
+    <style id="yangshi">
+        table{ width:100%}
+    </style>
+
 
 </head>
 
 <body>
 
-	<div style="width:60%; margin:0 auto" id="form1">
-		<div id="tupian">
-				<img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
-		</div>
-    	<h2 style="text-align:center">山西世达国旅订房通知单</h2>
-    	<table>
-        	<tr>
-            	<td style="width:10%">部门：</td>
+<div style="width:60%; margin:0 auto">
+    <form id="form1">
+        <div id="tupian">
+            <img src="/images/logo.jpg" width="640px" height="50px">
+        </div>
+        <h2 style="text-align:center">山西世达国旅订房通知单</h2>
+        <table>
+            <tr>
+                <td style="width:10%">部门：</td>
                 <td style="width:30%">计调部</td>
                 <td style="width:10%">导游：</td>
-                <td style="width:30%">自己写</td>
+                <td style="width:30%" id="daoyouming"></td>
                 <td style="width:20%">2018年3月20日</td>
             </tr>
-         </table>
-         <table border="1" cellspacing="0" cellpadding="0">
-         	<tr>
-            	<td style="width:15%; text-align:center">团&nbsp;&nbsp;&nbsp;名</td>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:15%; text-align:center">团&nbsp;&nbsp;&nbsp;名</td>
                 <td style="width:35%" id="travelName">STS-RJ-20180415JD</td>
                 <td style="width:15%; text-align:center" >客源地</td>
                 <td style="width:35%" id="tourist">台湾</td>
             </tr>
-         </table>
-         <table border="1" cellspacing="0" cellpadding="0">
-         	<tr>
-            	<td style="width:15%; text-align:center">人&nbsp;&nbsp;&nbsp;数</td>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:15%; text-align:center">人&nbsp;&nbsp;&nbsp;数</td>
                 <td style="width:10%" id="num">19人</td>
                 <td style="width:20%">全陪/领队</td>
                 <td style="width:20%">1人</td>
                 <td style="width:15%; text-align:center">地陪司机</td>
                 <td style="width:20%">2人</td>
             </tr>
-         </table>
-         <table border="1" cellspacing="0" cellpadding="0">
-             <thead><tr>
-                 <td style="width:25%">用房时间</td>
-                 <td style="width:25%; text-align:center">宾馆名称</td>
-                 <td style="width:50%; text-align:center">团队用房</td>
-             </tr></thead>
-             <tbody id="tbody"></tbody>
-         </table>
-         <table border="1" cellspacing="0" cellpadding="0">
-         	<tr>
-            	<td style="width:25%; text-align:center">备 注</td>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0">
+            <thead><tr>
+                <td style="width:25%">用房时间</td>
+                <td style="width:25%; text-align:center">宾馆名称</td>
+                <td style="width:50%; text-align:center">团队用房</td>
+            </tr></thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:25%; text-align:center">备 注</td>
                 <td style="width:75%">
-                	1、请安排无烟房或做无烟处理<br/>
+                    1、请安排无烟房或做无烟处理<br/>
                     2、请安排高层、相同或相近楼层、相近房间<br/>
                     3、收到请<strong style="font-size:24px">签字并盖章</strong>回传确认<br/>
                 </td>
             </tr>
-         </table>
-         <table border="1" cellspacing="0" cellpadding="0">
-         	<tr>
-            	<td style="width:25%">确认酒店名称</td>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:25%">确认酒店名称</td>
                 <td style="width:35%"></td>
                 <td style="width:22%; text-align:center">酒店确认人</td>
                 <td style="width:18%"></td>
             </tr>
-         </table>
-         <table>
-         	<tr>
-            	<td style="width:8%">团控:</td>
+        </table>
+        <table>
+            <tr>
+                <td style="width:8%">团控:</td>
                 <td style="width:30%">崔俊娜 18603416895</td>
                 <td style="width:8%">TEL：</td>
                 <td style="width:26%">0351-7896890</td>
                 <td style="width:8%">FAX：</td>
                 <td style="width:20%">0351-7925068</td>
             </tr>
-         </table>
-    </div>
-    <button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印订房通知单</button>
+        </table>
+    </form>
+    <button style=" margin-left: 300px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_print()">打印订房通知单</button>
+</div>
+
 </body>
-<script th:src="@{/js/LodopFuncs.js}"></script>
 <script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script  th:src="@{/js/LodopFuncs.js}"></script>
 <script>
- $(function () {
-     show();
- });
+    $(function () {
+        show();
+    });
 
 
 
 
- /**
-  *显示计调订房通知单
-  */
- function show() {
-     $.ajax({
-         url:"/dispatch/dispatchSelectAll",
-         data:{},
-         dataType:"json",
-         type:"GET",
-         success:function (LoL){
-             var concat="";
-             $("#travelName").html(LoL.data.travel.travelName);
-             $("#tourist").html(LoL.data.tourist);
-             $("#num").html(LoL.data.num);
-             $.each(LoL.data.dispatchhotel,function (i,resilt) {
-                 concat+="<tr>" +
-                     "<td>"+resilt.creationDate+"</td>" +
-                     "<td>"+resilt.hotel.hotelName+"</td>" +
-                     "<td>"+resilt.roomNum+"标+2司陪</td>" +
-                     "</tr>";
-             })
-             $("#tbody").html(concat);
-         },
-         error:function () {
-             alert("显示错误");
-         }
-     })
- }
+    /**
+     *显示计调订房通知单
+     */
+    function show() {
+        $.ajax({
+            url:"/sdglGroundConnection/dispatch/dispatchSelectAll",
+            data:{},
+            dataType:"json",
+            type:"GET",
+            success:function (LoL){
+                var concat="";
+                $("#travelName").html(LoL.data.travel.travelName);
+                $("#tourist").html(LoL.data.tourist);
+                $("#num").html(LoL.data.num);
+                $.each(LoL.data.dispatchhotel,function (i,resilt) {
+                    concat+="<tr>" +
+                        "<td>"+resilt.creationDate+"</td>" +
+                        "<td>"+resilt.hotel.hotelName+"</td>" +
+                        "<td>"+resilt.roomNum+"标+2司陪</td>" +
+                        "</tr>";
+                })
+                $("#daoyouming").html(LoL.data.disguide.guide.guideName);
+                $("#tbody").html(concat);
+            },
+            error:function () {
+                alert("显示错误");
+            }
+        })
+    }
 
- var LODOP; //声明为全局变量
- // 打印预览
- function prn1_preview() {
-     CreateOneFormPage();
-     LODOP.PREVIEW();
- };
- // 直接打印
- function prn1_print() {
-     CreateOneFormPage();
-     LODOP.PRINT();
- };
- // 选择打印机
- function prn1_printA() {
-     CreateOneFormPage();
-     LODOP.PRINTA();
- };
- // 创建打印页面
- function CreateOneFormPage(){
-     LODOP=getLodop();
-     LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
-     LODOP.SET_PRINT_STYLE("FontSize",18);
-     LODOP.SET_PRINT_STYLE("Bold",1);
-     var strBodyStyle = "<style>" + document.getElementById("yangshi").innerHTML + "</style>";
-     LODOP.ADD_PRINT_HTM(10,20,500,5000,strBodyStyle+document.getElementById("form1").innerHTML);
- };
+
+
+    var LODOP; //声明为全局变量
+    // 打印预览
+    function prn1_preview() {
+        CreateOneFormPage();
+        LODOP.PREVIEW();
+    };
+    // 直接打印
+    function prn1_print() {
+        CreateOneFormPage();
+        LODOP.PRINT();
+    };
+    // 选择打印机
+    function prn1_printA() {
+        CreateOneFormPage();
+        LODOP.PRINTA();
+    };
+    // 创建打印页面
+    function CreateOneFormPage(){
+        LODOP=getLodop();
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+        LODOP.SET_PRINT_STYLE("FontSize",18);
+        LODOP.SET_PRINT_STYLE("Bold",1);
+        var strBodyStyle = "<style>" + document.getElementById("yangshi").innerHTML + "</style>";
+        LODOP.ADD_PRINT_HTM(10,20,500,5000,strBodyStyle+document.getElementById("form1").innerHTML);
+    };
+
+
 </script>
 </html>

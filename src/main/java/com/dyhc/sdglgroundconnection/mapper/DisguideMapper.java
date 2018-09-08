@@ -26,4 +26,11 @@ public interface DisguideMapper extends CommonMapper<Disguide>{
      * @throws Exception
      */
     Disguide getDisguideByDid(@Param("Did")Integer Did)throws Exception;
+
+    /**
+     * 查询导游名称
+     * @param offerId
+     * @return
+     */
+    Disguide selectNameAll(@Param("offerId")Integer offerId);
 }
