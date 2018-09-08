@@ -23,6 +23,7 @@
         <if test="whetherDel!=null">
             and whetherDel = #{whetherDel}
         </if>
+        order by createDate desc
     </select>
 
     <update id="delRestaurantById">
@@ -30,11 +31,11 @@
     </update>
 
     <update id="updateRestaurantById">
-        update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone},picturePath=#{picturePath} where restaurantId=#{restaurantId}
+        update restaurant set updateDate=#{updateDate},updateBy=#{updateBy},restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone},picturePath=#{picturePath} where restaurantId=#{restaurantId}
     </update>
 
     <update id="updateRestaurantById1">
-        update restaurant set restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone} where restaurantId=#{restaurantId}
+        update restaurant set updateDate=#{updateDate},updateBy=#{updateBy},restaurantName=#{restaurantName},restaurantAddress=#{restaurantAddress},phone=#{phone} where restaurantId=#{restaurantId}
     </update>
 
     <!--根据valueid获取饭店信息-->
