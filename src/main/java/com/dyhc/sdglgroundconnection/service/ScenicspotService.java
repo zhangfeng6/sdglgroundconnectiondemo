@@ -102,4 +102,12 @@ public interface ScenicspotService {
      * @throws Exception
      */
     Integer delScenicspotById(Integer parentId)throws Exception;
+
+    /**
+     * 获取父景点名称
+     * @param parentId
+     * @return
+     * @throws Exception
+     */
+    String getParentName(Integer parentId)throws Exception;
 }

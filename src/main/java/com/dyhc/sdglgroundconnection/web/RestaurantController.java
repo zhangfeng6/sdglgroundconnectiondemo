@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.MealType;
 import com.dyhc.sdglgroundconnection.pojo.Restaurant;
+import com.dyhc.sdglgroundconnection.pojo.Staff;
 import com.dyhc.sdglgroundconnection.service.DisrestaurantService;
 import com.dyhc.sdglgroundconnection.service.MealTypeService;
 import com.dyhc.sdglgroundconnection.service.RestaurantService;
@@ -13,12 +14,17 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -133,9 +139,29 @@ public class RestaurantController {
             String uploadResult = ClientFileUploadUtil.uploadImage(multipartFile, ".jpg");
             restaurant.setPicturePath(uploadResult);
             if (restaurant.getRestaurantId()!=0){
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                SimpleDateFormat format7 = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date date3 = format7.parse(df.format(new Date()));
+                SimpleDateFormat format8 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String sdate3=format8.format(date3);
+                Timestamp fTimestamp3=Timestamp.valueOf(sdate3);
+                restaurant.setUpdateDate(fTimestamp3);
+                HttpSession session = request.getSession();
+                Staff staff=(Staff) session.getAttribute("staff");
+                restaurant.setUpdateBy(staff.getStaffId());
                 i = restaurantService.updateRestaurantById(restaurant);
             }else{
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                SimpleDateFormat format7 = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date date3 = format7.parse(df.format(new Date()));
+                SimpleDateFormat format8 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String sdate3=format8.format(date3);
+                Timestamp fTimestamp3=Timestamp.valueOf(sdate3);
+                restaurant.setCreateDate(fTimestamp3);
                 restaurant.setWhetherDel(0);
+                HttpSession session = request.getSession();
+                Staff staff=(Staff) session.getAttribute("staff");
+                restaurant.setCreateBy(staff.getStaffId());
                 i = restaurantService.insertRestaurant(restaurant);
             }
             ReponseResult<Object> data = ReponseResult.ok("保存成功！");
