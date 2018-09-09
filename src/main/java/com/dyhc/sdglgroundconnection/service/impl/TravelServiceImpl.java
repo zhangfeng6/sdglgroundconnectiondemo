@@ -128,7 +128,7 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public Offer selectOfferByTravelId(Integer travelId)throws Exception {
+    public Dispatch selectOfferByTravelId(Integer travelId)throws Exception {
         return travelMapper.selectOfferByTravelId(travelId);
     }
     @Override

@@ -315,7 +315,7 @@ public class WeChatController {
             String mima=MD5(password);
             Guide guide=guideService.assignmentGuide(guideId);
             if (guide!=null){
-                if(mima.equals(guide.getPassword())){
+                if(mima.equalsIgnoreCase(guide.getPassword())){
                     logger.info("method:pdOldPassword 旧密码输入正确");
                     return ReponseResult.ok(1,"旧密码输入正确");
                 }else {
@@ -344,6 +344,7 @@ public class WeChatController {
         try {
             guide.setPassword(MD5(guide.getPassword()));
             Integer result=guideService.updateGuideByPassword(guide);
+
             if (result==1){
                 logger.info("method:updateGuideByPassword 修改密码成功");
                 return ReponseResult.ok(result,"修改成功");
@@ -414,23 +415,19 @@ public class WeChatController {
     }
 
 
-    /**
-     * 修改导游信息
-     * @param guideId
-     * @return
-     */
-    @RequestMapping("/assignmentGuide")
+    @LogNotes(operationType="导游表",content="导游修改")
+    @RequestMapping("/guideUpdate")
     @ResponseBody
-    @LogNotes(operationType="导游表",content="导游修改赋值 ")
-    public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
+    public  ReponseResult updateGuide(Guide guide){
         try {
-            ReponseResult<Guide> data =ReponseResult.ok(guideService.assignmentGuide(guideId),"导游信息修改赋值成功!");
-            logger.info("method:showAccountType 导游信息修改赋值成功");
+            ReponseResult<Integer> data =ReponseResult.ok(guideService.updateGuide(guide),"导游信息修改成功!");
+            logger.info("method:showAccountType 导游信息修改成功");
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 导游信息修改赋值失败");
+            logger.info("method:showAccountType 导游信息修改失败");
             e.printStackTrace();
-            return  ReponseResult.err("系统出现异常请联系管理员");
+            ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
+            return  error;
         }
     }
 
@@ -539,6 +536,7 @@ public class WeChatController {
         try {
             HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
             Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
+            template.setTemplateContent(hoteroomType.getXingcheng());
             logger.error("method:getTemplateById  获取行程内容成功");
             return ReponseResult.ok(template,"获取行程内容成功");
         }catch (Exception e){

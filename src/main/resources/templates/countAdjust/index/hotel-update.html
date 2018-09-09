@@ -45,10 +45,8 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">提供早餐：</label>
-                    <div class="layui-input-block">
-                        是<input type="radio" name="breakfast" title="是" checked="checked" value="0" />
-                        否 <input type="radio" name="breakfast" title="否" value="1"/>
-                    </div>
+                        是<input type="radio" name="breakfast"   value="0" />
+                        否 <input type="radio" name="breakfast"  value="1"/>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">联系人：</label>
@@ -114,7 +112,7 @@
                $("input[name='starHotel']").val(data.data.starHotel);
                $("input[name='hotelAddress']").val(data.data.hotelAddress);
                $("img[name='img']").attr("src","/sdglGroundConnection/api/image/"+data.data.picturePath);
-               $("input[name='breakfast']").val(data.data.breakfast);
+               $("input[name='breakfast'][value='"+data.data.breakfast+"']").attr("checked","checked");
                $("input[name='contacts']").val(data.data.contacts);
                $("input[name='offer']").val(data.data.offer);
                $("input[name='hotelDescribe']").val(data.data.hotelDescribe);

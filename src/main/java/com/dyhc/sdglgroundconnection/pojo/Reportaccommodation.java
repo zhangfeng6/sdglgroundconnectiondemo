@@ -44,7 +44,6 @@ public class Reportaccommodation {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "`updateDate`")
-
     private Date updateDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

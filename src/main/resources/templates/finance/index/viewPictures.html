@@ -54,7 +54,7 @@
                 if(ReponseResult.data!=null&&ReponseResult.data!=undefined&&ReponseResult.data!=""){
                     var attr=ReponseResult.data.picturePath.split(",");
                     var content="";
-                    var savePath = "/api/image/";
+                    var savePath = "/sdglGroundConnection/api/image/";
                     $.each(attr,function (i,e) {
                         content+="<div class=''><img src='"+(savePath+e)+"' style='width: 500px;height:330px;'></div>";
                     });
