@@ -33,7 +33,8 @@ public class DiscarController {
      * @return
      */
     @RequestMapping("/DiscarController")
-    public ReponseResult CompanyList(HttpServletRequest request, Integer disCarId){
+    public ReponseResult CompanyList(HttpServletRequest request){
+        Integer disCarId;
         HttpSession session = request.getSession();
         disCarId=Integer.parseInt(session.getAttribute("disCarId").toString());
         try{

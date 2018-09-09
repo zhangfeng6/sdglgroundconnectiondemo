@@ -146,6 +146,11 @@ public class HotelServiceImpl implements HotelService {
         return hotelMapper.selectTypeById(valueId,hotelId);
     }
 
+    @Override
+    public List<Hotel> selectAllHotel() throws Exception {
+        return hotelMapper.selectAllHotel();
+    }
+
 
     /**
      * 删除酒店信息
@@ -222,10 +227,6 @@ public class HotelServiceImpl implements HotelService {
         return hotelMapper.selectByPrimaryKey(id);
     }
 
-    @Override
-    public List<Hotel> selectHotel() throws Exception {
-        return hotelMapper.selectAll();
-    }
 
     @Override
     public Hotel selectByHotelId(Integer hotelId)throws Exception {

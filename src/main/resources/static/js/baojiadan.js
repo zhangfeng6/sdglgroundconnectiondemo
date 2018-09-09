@@ -129,7 +129,7 @@ function shanchu(aa){
 
 
 function insertJingdian(onClickjd) {
-    var a = $(onClickjd);
+    var c = $(onClickjd);
     var A=$("[name=scenic]");
     /*if(A.length==5){
         alert("最多可选择五个景点！");

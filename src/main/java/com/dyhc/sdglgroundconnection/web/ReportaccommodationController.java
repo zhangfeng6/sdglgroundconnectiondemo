@@ -93,7 +93,7 @@ public class ReportaccommodationController {
     public ReponseResult Reportaccommodation(){
         System.out.println("进来酒店查询了！");
         try {
-            List<Hotel> num=hotelService.selectHotel();
+            List<Hotel> num=hotelService.selectAllHotel();
             logger.info("method:savereportaccommodation 酒店查询成功");
             ReponseResult<Object> data =ReponseResult.ok(num,"酒店查询成功");
             return  data;

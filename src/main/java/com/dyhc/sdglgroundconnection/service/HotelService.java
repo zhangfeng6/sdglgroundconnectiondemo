@@ -34,13 +34,6 @@ public interface HotelService {
     Hotel getHotelById(Integer id) throws Exception;
 
 
-    /**
-     * 赵伟伟
-     * 查询酒店
-     * @return
-     * @throws Exception
-     */
-    List<Hotel> selectHotel() throws Exception;
 
 
     /**
@@ -134,5 +127,7 @@ public interface HotelService {
      * @return
      */
     int selectTypeById(Integer valueId,Integer hotelId)throws Exception;
+
+    List<Hotel> selectAllHotel()throws Exception;
 
 }

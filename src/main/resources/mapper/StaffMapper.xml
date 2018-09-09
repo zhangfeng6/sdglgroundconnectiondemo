@@ -58,4 +58,8 @@
     <select id="StaffByName" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
         SELECT * FROM staff WHERE theUserName=#{theUserName}
     </select>
+    <!--贾晓亮-->
+    <select id="nameStaff" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+         SELECT * FROM `staff` WHERE roleId=#{roleId}
+    </select>
 </mapper>
