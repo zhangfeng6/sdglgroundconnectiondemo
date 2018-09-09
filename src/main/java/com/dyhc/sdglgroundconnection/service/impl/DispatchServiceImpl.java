@@ -128,6 +128,9 @@ public class DispatchServiceImpl implements DispatchService {
     //调度导游表
     @Autowired
     private  DisguideServiceImpl disguideService;
+    //人员表（）贾晓亮
+    @Autowired
+    private  StaffMapper staffMapper;
     /**
      * 根据调度id获取调度的相关数据
      * @param dispatchId
@@ -450,9 +453,9 @@ public class DispatchServiceImpl implements DispatchService {
             }
             dispatch.setTravel(travel);
             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
-            /* dispatchhotelMapper.dispatchhotelSelectAll(dispatchId);*/
             dispatch.setDispatchhotel(dispatchhotels);
             dispatch.setDisguide(disguideService.selectNameAll(dispatchId));
+            dispatch.setStaff(staffMapper.nameStaff(dispatchId));
         } catch (Exception e) {
             e.printStackTrace();
         }

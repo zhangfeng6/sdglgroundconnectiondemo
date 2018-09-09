@@ -31,26 +31,37 @@ public class Dispatch implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone ="GMT+8")
     @Column(name = "travelEndTime")
     private Date travelEndTime; // 旅行结束时间
+    @Column(name = "num")
     private Integer num; // 人数
+    @Column(name = "tourist")
     private String tourist; // 客源地
+    @Column(name = "trip")
     private String trip; // 行程
+    @Column(name = "offer")
     private Double offer; // 报价(按人数算)
     @Column(name = "aVariance")
     private Double aVariance; // 单间房差
+    @Column(name = "fare")
     private Double fare; // 车费
     @Column(name = "wineFee")
     private Double wineFee; // 酒水费
     @Column(name = "notcontain")
     private String notcontain ; // 不含
+    @Column(name = "remarks")
     private String remarks; // 备注
+    @Column(name = "supervision")
     private String supervision; // 团体监督
+    @Column(name = "reception")
     private String reception; // 接待标准
+    @Column(name = "total")
     private Double total; // 总计
+    @Column(name = "loan")
     private Double loan; // 导游借款
     @Column(name = "`state`")
     private Integer state; // 状态（1、未开始2、进行中3、已结束）
     @Column(name = "whetherDel")
     private Integer whetherDel; // 是否删除（1代表已删除，0代表未删除）
+    @Column(name = "creater")
     private Integer creater; // 创建人 （外键，与人员表关联）
     @Column(name = "`modifier`")
     private Integer modifier; // 修改人（外键，与人员表关联）
@@ -65,7 +76,16 @@ public class Dispatch implements Serializable {
     private String value3;
     @Column(name = "carcontacts")
     private  String carcontacts;
+    //角色表
+    @Transient
+    private  Staff staff;
+    public Staff getStaff() {
+        return staff;
+    }
 
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
     public String getCarcontacts() {
         return carcontacts;
     }

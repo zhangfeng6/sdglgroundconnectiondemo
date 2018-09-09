@@ -222,8 +222,6 @@ public class HotelController {
         }
     }
 
-
-
     /**
      * 酒店修改:贾晓亮
      * @return
@@ -251,8 +249,6 @@ public class HotelController {
             return err;
         }
     }
-
-
     /**
      * 酒店删除
      * @return

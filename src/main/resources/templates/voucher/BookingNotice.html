@@ -16,7 +16,7 @@
 <div style="width:60%; margin:0 auto">
     <form id="form1">
         <div id="tupian">
-            <img src="/images/logo.jpg" width="640px" height="50px">
+            <img th:src="@{/sdglGroundConnection/images/logo.jpg}" width="640px" height="50px">
         </div>
         <h2 style="text-align:center">山西世达国旅订房通知单</h2>
         <table>
@@ -25,7 +25,7 @@
                 <td style="width:30%">计调部</td>
                 <td style="width:10%">导游：</td>
                 <td style="width:30%" id="daoyouming"></td>
-                <td style="width:20%">2018年3月20日</td>
+                <td style="width:20%" id="show">2018年3月20日</td>
             </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="0">
@@ -74,12 +74,10 @@
         </table>
         <table>
             <tr>
-                <td style="width:8%">团控:</td>
-                <td style="width:30%">崔俊娜 18603416895</td>
-                <td style="width:8%">TEL：</td>
-                <td style="width:26%">0351-7896890</td>
-                <td style="width:8%">FAX：</td>
-                <td style="width:20%">0351-7925068</td>
+                <td style="width: 50px">团控：</td>
+                <td style="width:30%"><span id="io"></span>&nbsp;&nbsp;<span  id="ioi"></span></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </form>
@@ -91,16 +89,21 @@
 <script  th:src="@{/js/LodopFuncs.js}"></script>
 <script>
     $(function () {
-        show();
+        showrr();
+        var show = document.getElementById("show");
+        setInterval(function() {
+            var time = new Date();   // 程序计时的月从0开始取值后+1
+            var m = time.getMonth() + 1;
+            var t = time.getFullYear() + "-" + m + "-"
+                + time.getDate() + " " + time.getHours() + ":"
+                + time.getMinutes() + ":" + time.getSeconds();
+            show.innerHTML = t;
+        }, 1000);
     });
-
-
-
-
     /**
      *显示计调订房通知单
      */
-    function show() {
+    function showrr() {
         $.ajax({
             url:"/sdglGroundConnection/dispatch/dispatchSelectAll",
             data:{},
@@ -108,12 +111,15 @@
             type:"GET",
             success:function (LoL){
                 var concat="";
-                $("#travelName").html(LoL.data.travel.travelName);
+                $("#travelName").html(LoL.data.groundConnectionNumber);
                 $("#tourist").html(LoL.data.tourist);
                 $("#num").html(LoL.data.num);
+                $("#io").html(LoL.data.staff.theUserName);
+                $("#ioi").html(LoL.data.staff.phone);
+                LoL.data. staff
                 $.each(LoL.data.dispatchhotel,function (i,resilt) {
                     concat+="<tr>" +
-                        "<td>"+resilt.creationDate+"</td>" +
+                        "<td>"+resilt.date+"</td>" +
                         "<td>"+resilt.hotel.hotelName+"</td>" +
                         "<td>"+resilt.roomNum+"标+2司陪</td>" +
                         "</tr>";

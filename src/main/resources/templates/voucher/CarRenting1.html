@@ -50,12 +50,9 @@
         bengonsi2();//显示调度车辆信息
         bengonsi3();//显示景点
     })
-
     function xia(){
         location.href="/sdglGroundConnection/voucher/CarRenting2.html";
     }
-
-
     function bengonsi() {
         $.ajax({
             url:"/sdglGroundConnection/CompanyController/CompanyList",
@@ -72,7 +69,6 @@
             }
         })
     }
-
     function bengonsi3() {
         $.ajax({
             url:"/sdglGroundConnection/disattr/DisattrController",
@@ -148,6 +144,5 @@
         LODOP.SET_PRINT_STYLE("Bold",1);
         LODOP.ADD_PRINT_HTM(10,20,500,5000,document.getElementById("form1").innerHTML);
     };
-
 </script>
 </html>
