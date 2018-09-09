@@ -22,6 +22,7 @@ public class Reportdetail {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "`reportDate`")
     private Date reportDate; // 报账日期
+    @Column(name = "`receipt`")
     private Double receipt; // 外收团款
     @Column(name = "totalPayable")
     private Double totalPayable; // 导游现付合计
@@ -41,8 +42,8 @@ public class Reportdetail {
     private Integer createBy; // 创建人 （外键，与人员表关联）
     @Column(name = "updateBy")
     private Integer updateBy; // 修改人（外键，与人员表关联）
-    @Column(name = "`upDate`")
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "`upDate`")
     private Date upDate; // 修改日期
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "`createDate`")

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
  * 导游报账明细 控制层
@@ -75,9 +78,10 @@ public class ReportdetailController {
      * @return
      */
     @RequestMapping("/reportdetail")
-    public ReponseResult reportdetail(Integer dispatchId){
+    public ReponseResult reportdetail(HttpServletRequest request, Integer dispatchId){
+        HttpSession session = request.getSession();
+        session.setAttribute("dispatchId",dispatchId);
         try{
-            System.out.println("进来了");
             ReponseResult data=ReponseResult.ok(reportdetailService.reportdetail(dispatchId),"获取获取导游报账明细信息成功");
             logger.info("method:reportdetail 获取获取导游报账明细信息成功");
             return data;
