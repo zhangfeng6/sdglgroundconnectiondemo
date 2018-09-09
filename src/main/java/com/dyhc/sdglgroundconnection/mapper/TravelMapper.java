@@ -84,7 +84,7 @@ public interface TravelMapper extends CommonMapper<Travel> {
      * @param travelId
      * @return
      */
-    Offer selectOfferByTravelId(@Param("travelId") Integer travelId)throws Exception;
+    Dispatch selectOfferByTravelId(@Param("travelId") Integer travelId)throws Exception;
 
     /**
      * 查询组团表信息

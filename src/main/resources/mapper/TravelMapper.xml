@@ -50,8 +50,8 @@
         AND t.travelId = #{travelId}
     </select>
 
-    <select id="selectOfferByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">
-         SELECT * FROM offer o,travel t WHERE o.travelId=t.travelId AND t.travelId=#{travelId}
+    <select id="selectOfferByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+         SELECT * FROM dispatch WHERE groupNumber=#{travelId}
     </select>
 
     <select id="selectReportrestaurantByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">

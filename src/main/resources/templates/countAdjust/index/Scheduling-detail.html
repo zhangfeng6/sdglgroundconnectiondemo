@@ -656,12 +656,12 @@
                         $(qq).parent().parent().parent().parent().parent().find("[name=scenic]").eq(1).remove();
                     }
                     /*var id = $("[name='typeName'] option:selected").val();*/
-					var qq = $(qq).parent();
+					var q = $(qq).parent();
 					var ww;
-					if (qq.length==1){
-                        ww = qq[0].firstChild;
+					if (q.length==1){
+                        ww = q[0].firstChild;
 					}else{
-                        ww = qq[1].firstChild;
+                        ww = q[1].firstChild;
 					}
 					var ee = $(ww).html();
                     $.ajax({
@@ -672,10 +672,30 @@
                         type:"get",
                         success:function (data) {
                             var a = $(ww).parent().parent().parent().parent().next().next().next().children().children();
+                            $(ww).parent().parent().parent().parent().next().next().children().eq(3).children().val(data.data.thcostPrice);
+                            $(ww).parent().parent().parent().parent().next().next().children().eq(5).children().val(data.data.thoffer);
+                            $(ww).parent().parent().parent().parent().next().next().children().eq(1).children().children().each(function(){
+                                if($(this).text() ==data.data.hotelName){
+                                    $(this).prop("selected",true);
+                                }
+                            })
                             for (var i=1;i<data.data.scenicspotsList.length;i++) {
-                                insertJingdian(a);
+                                var A=$("[name=scenic]");
+                                var index=parseInt(A.length)+1;
+                                var content = $("#jingdian").html();
+                                $(a).parent().parent().parent().find("[name=wucai]").before("<tr id=\"scenic1\" name=\"scenic\" class=\"scenic\">\n" +
+                                    "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">景点</label></td>\n" +
+                                    "\t\t\t\t\t\t\t\t<td class=\"jingdian\">\n" +
+                                    "\t\t\t\t\t\t\t\t\t<select id=\"jingdian\" name=\"scenicSpotName\" lay-verify=\"required\" lay-filter=\"jingdian\">"+content+"</select>\n" +
+                                    "\t\t\t\t\t\t\t\t</td>\n" +
+                                    "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">成本价:</label></td>\n" +
+                                    "\t\t\t\t\t\t\t\t<td><input name=\"jdcostPrice\" type=\"text\" class=\"layui-input\"></td>\n" +
+                                    "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价:</label></td>\n" +
+                                    "\t\t\t\t\t\t\t\t<td><input name=\"jdoffer\" type=\"text\" class=\"layui-input\"></td>\n" +
+                                    "\t\t\t\t\t\t\t</tr>");
                             }
                             for (var j=1;j<=data.data.scenicspotsList.length;j++) {
+                                var b = $(ww).parent().parent().parent().parent().parent().children().eq(j+3).html();
                                 $(ww).parent().parent().parent().parent().parent().children().eq(j+3).children().eq(3).children().val(data.data.scenicspotsList[j-1].costprice);
                                 $(ww).parent().parent().parent().parent().parent().children().eq(j+3).children().eq(5).children().val(data.data.scenicspotsList[j-1].offer);
                                 $(ww).parent().parent().parent().parent().parent().children().eq(j+3).children().eq(1).children().children().each(function(){
@@ -684,38 +704,6 @@
                                     }
                                 })
                             }
-                            //$(qq).parent().parent().parent().parent().next().next().children().eq(1).children().children().append("<option>"+data.data.hotelName+"</option>");
-                            $(ww).parent().parent().parent().parent().next().next().children().eq(3).children().val(data.data.thcostPrice);
-                            $(ww).parent().parent().parent().parent().next().next().children().eq(5).children().val(data.data.thoffer);
-                            $(ww).parent().parent().parent().parent().next().next().children().eq(1).children().children().each(function(){
-                                if($(this).text() ==data.data.hotelName){
-                                    $(this).prop("selected",true);
-                                }
-                            })
-
-
-
-
-
-                            /*for (var i=1;i<=data.data.scenicspotsList.length;i++) {
-                                var sd = $("#zong1").children().children().html();
-                                var d = $(qq).parent().html();
-                                $(b).children().eq(3).children().val(data.data.scenicspotsList[i-1].costprice);
-                                $(b).children().eq(5).children().val(data.data.scenicspotsList[i-1].offer);
-                                $(b).children().eq(1).children().children().each(function(){
-                                    if($(this).text() ==data.data.scenicspotsList[i-1].scenicSpotName){
-                                        $(this).prop("selected",true);
-                                    }
-                                })
-							}*/
-                            /*$(ww).parent().parent().parent().parent().next().next().next().next().children().eq(3).children().val(data.data.scenicspotsList[0].costprice);
-                            $(ww).parent().parent().parent().parent().next().next().next().next().children().eq(5).children().val(data.data.scenicspotsList[0].offer);
-                            $(ww).parent().parent().parent().parent().next().next().next().next().children().eq(1).children().children().each(function(){
-                                if($(this).text() ==data.data.scenicspotsList[0].scenicSpotName){
-                                    $(this).prop("selected",true);
-                                }
-                            })*/
-
                             layui.form.render('select');
                         }
                     })
@@ -937,7 +925,7 @@
                     jiage += Number($("#qoffer").val());
                     jiage += Number($("#coffer").val());
                     var wuCount = 0;
-
+					var ji = $(".wubj").length+$(".wanbj").length;
                     for (var i=0;i<xianluCount;i++){
                         var index = "#zong"+(i+1);
                         var jingdianCount = $(index).find("[name=scenic]").length;
@@ -948,13 +936,14 @@
                         tripList[i] = $("[name=trip]").eq(i).val();
                         jiage += Number($(".wubj").eq(i).children().val());
                         wu += Number($(".wubj").eq(i).children().val());
+                        wu += Number($(".wanbj").eq(i).children().val());
                         jiage += Number($(".wanbj").eq(i).children().val());
                         jiage += Number($("[name=joffer]").eq(i).val());
 					}
 					wu = wu/wuCount;
 				    $.ajax({
                         url:"/sdglGroundConnection/Offer/quotation",
-                        data:{xiaofei:xiaofei,tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
+                        data:{ji:ji,xiaofei:xiaofei,tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
                         dataType:"json",
                         async: false,
                         traditional: true,

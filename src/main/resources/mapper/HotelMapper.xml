@@ -43,4 +43,8 @@
     <select id="listNoDelHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
         SELECT * FROM `hotel` WHERE `whetherDel`!=1
     </select>
+
+    <select id="selectAllHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
+        select * from hotel where `whetherDel`!=1
+    </select>
 </mapper>
