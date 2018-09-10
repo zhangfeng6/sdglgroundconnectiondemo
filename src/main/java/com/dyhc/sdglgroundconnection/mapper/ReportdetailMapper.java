@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
+import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -63,4 +64,7 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     Reportdetail All_dispatchId(@Param("dispatchId")Integer dispatchId)throws Exception;
+
+
+    Dispatch selectDispatchById(@Param("groupNumber") Integer groupNumber)throws Exception;
 }
