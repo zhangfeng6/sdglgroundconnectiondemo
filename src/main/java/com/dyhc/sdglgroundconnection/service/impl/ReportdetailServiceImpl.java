@@ -1,10 +1,7 @@
 package com.dyhc.sdglgroundconnection.service.impl;
 
 import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
-import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
-import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
-import com.dyhc.sdglgroundconnection.pojo.Reportrestaurant;
-import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -118,5 +115,10 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     @Override
     public Integer save_Reportfetails(Reportdetail reportdetail)throws Exception {
         return reportdetailMapper.insert(reportdetail);
+    }
+
+    @Override
+    public Dispatch selectDispatchById(Integer groupNumber) throws Exception {
+        return reportdetailMapper.selectDispatchById(groupNumber);
     }
 }

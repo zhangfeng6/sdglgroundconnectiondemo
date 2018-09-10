@@ -116,8 +116,8 @@
                     if (e.parentId==0){
                         content+="<td class=''>无</td>";
                     }else {
-                        content+="<td class='parentName'>"+getScenicspotByParentId(e.parentId)+"</td>";
-
+                        var aa=getScenicspotByParentId(e.parentId);
+                        content+="<td class='parentName'>"+aa+"</td>";
                     }
                     content+="<td class=''>"+e.scenicSpotAddress+"</td>" +
                         "<td class=''>";
@@ -265,7 +265,7 @@
             dataType: "json",
             async : false,
             success:function (result1) {
-                aa+=result1.data[0].scenicSpotName;
+                aa+=result1.data;
             }
         })
 		return aa;

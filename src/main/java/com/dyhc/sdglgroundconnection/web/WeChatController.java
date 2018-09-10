@@ -334,6 +334,26 @@ public class WeChatController {
     }
 
     /**
+     * 修改导游信息
+     * @param guideId
+     * @return
+     */
+    @RequestMapping("/assignmentGuide")
+    @ResponseBody
+    @LogNotes(operationType="导游表",content="导游修改赋值 ")
+    public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
+        try {
+            ReponseResult<Guide> data =ReponseResult.ok(guideService.assignmentGuide(guideId),"导游信息修改赋值成功!");
+            logger.info("method:showAccountType 导游信息修改赋值成功");
+            return  data;
+        } catch (Exception e) {
+            logger.info("method:showAccountType 导游信息修改赋值失败");
+            e.printStackTrace();
+            return  ReponseResult.err("系统出现异常请联系管理员");
+        }
+    }
+
+    /**
      * 微信小程序之修改密码
      * @return
      */

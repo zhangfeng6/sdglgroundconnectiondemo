@@ -1,6 +1,7 @@
 package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
+import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
@@ -73,4 +74,7 @@ public interface ReportdetailService {
      * @return
      */
     Integer save_Reportfetails(Reportdetail  reportdetail)throws Exception;
+
+
+    Dispatch selectDispatchById(Integer groupNumber)throws Exception;
 }
