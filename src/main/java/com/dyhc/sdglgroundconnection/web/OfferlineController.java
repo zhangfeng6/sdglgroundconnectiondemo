@@ -36,10 +36,8 @@ public class OfferlineController {
         try {
             List<Offerline> list = offerlineService.selectOfferline();
             ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
-            logger.info(" method:selectofferline  查询旅游线路成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectofferline  查询旅游线路失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
             return err;
@@ -76,10 +74,8 @@ public class OfferlineController {
         try {
             List<Offerline> offerline = offerlineService.selectOfferlineByOfferId(offerId);
             ReponseResult<Object> data = ReponseResult.ok(offerline,"获取汽车报价成功！");
-            logger.info(" method:selectOfferByOfferId  获取汽车报价成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectOfferByOfferId  汽车报价数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

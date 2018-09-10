@@ -84,11 +84,9 @@ public class DispatchController {
         try {
             PageInfo<Dispatch> pageInfo=dispatchService.listDispatch(pageNo, pageSize, djsth, dyname, state);
             ReponseResult<List> data=ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"分页获取调度信息成功！");
-            logger.info("method:listDispatch 分页获取调度信息成功！");
             return data;
         } catch (Exception e) {
             e.printStackTrace();
-            logger.debug("method:listDispatch 系统出现异常！");
             ReponseResult<Object> err=ReponseResult.err("系统出现异常");
             return err;
         }
@@ -202,11 +200,9 @@ public class DispatchController {
         try {
             dispatchId=Integer.parseInt(session.getAttribute("dispatchId").toString());
             ReponseResult<Dispatch> data =ReponseResult.ok(dispatchService.dispatchSelectAll(dispatchId),"查询计调订房通知单成功");
-            logger.info("method:getresource 查询计调订房通知单成功！");
             return data;
         } catch (Exception e) {
             e.printStackTrace();
-            logger.info("method:getresource 查询计调订房通知单失败！");
             ReponseResult<Object> err=ReponseResult.err("系统异常！");
             return err;
         }
@@ -222,11 +218,9 @@ public class DispatchController {
         try {
             Dispatch dispatch =dispatchService.dispatch(dispatchId);
             ReponseResult<Dispatch> data =ReponseResult.ok(dispatch,"查询计调成功");
-            logger.info("method:dispatch 查询计调成功！");
             return data;
         } catch (Exception e) {
             e.printStackTrace();
-            logger.info("method:dispatch 查询计调失败！");
             ReponseResult<Object> err=ReponseResult.err("系统异常！");
             return err;
         }

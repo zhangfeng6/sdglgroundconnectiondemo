@@ -67,10 +67,8 @@ public class OfferController {
         try {
             PageInfo<Offer> pageInfo = offerService.selectOffer(pageNo,pageSize,travelName);
             ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取报价单成功！");
-            logger.info(" method:selectOffer  分页获取报价单成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectOffer  获取报价单数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -93,10 +91,8 @@ public class OfferController {
             HttpSession session = request.getSession();
             List allList = (List)session.getAttribute("allList");
             ReponseResult<Object> data = ReponseResult.ok(allList, "获取报价单成功！");
-            logger.info(" method:selectOffer  获取报价单成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectOffer  获取报价单数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
