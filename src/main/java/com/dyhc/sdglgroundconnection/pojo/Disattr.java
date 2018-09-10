@@ -21,7 +21,9 @@ public class Disattr implements Serializable {
     private Integer scenicSpotId; // 景点编号（外键，与景点表关联）
     @Column(name = "offerId")
     private Integer offerId; // 调度信息编号（外键，与报价信息表关联）
+    @Column(name = "date")
     private Date date; // 日期
+    @Column(name = "buynum")
     private Integer buynum; // 购买人数
     @Column(name = "costPrice")
     private Double costPrice; // 成本价

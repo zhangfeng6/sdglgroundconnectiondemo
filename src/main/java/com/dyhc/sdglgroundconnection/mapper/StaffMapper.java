@@ -113,4 +113,10 @@ public interface StaffMapper extends CommonMapper<Staff>{
      */
     Staff StaffByName(String theUserName) throws Exception;
 
+    /**
+     * 贾晓亮（查询姓名，电话）
+     * @param roleId
+     * @return
+     */
+    Staff nameStaff(@Param("roleId")Integer roleId)throws Exception;
 }

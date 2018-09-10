@@ -37,7 +37,7 @@
     </select>
 
     <select id="listStaff" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
-        SELECT theUserName,phone FROM staff s,dispatch d WHERE s.staffId=d.creater AND d.dispatchId=#{dispatchId}
+         SELECT s.staffname,s.phone FROM staff s,dispatch d,role r WHERE s.roleId=r.roleId AND s.staffId=d.creater AND d.dispatchId=#{dispatchId}
     </select>
 
 
@@ -57,5 +57,9 @@
     </update>
     <select id="StaffByName" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
         SELECT * FROM staff WHERE theUserName=#{theUserName}
+    </select>
+    <!--贾晓亮-->
+    <select id="nameStaff" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+         SELECT * FROM `staff` WHERE roleId=#{roleId}
     </select>
 </mapper>

@@ -41,11 +41,9 @@ public class AccountTypeController {
         try {
             PageInfo<AccountType> pageInfo=accountTypeService.listAccountType(pageNo,pageSize,bank);
             ReponseResult<List> data =ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"账户类型分页成功!");
-            logger.info("method:showAccountType 账户类型分页成功");
             System.out.println(data);
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 账户类型分页失败");
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;

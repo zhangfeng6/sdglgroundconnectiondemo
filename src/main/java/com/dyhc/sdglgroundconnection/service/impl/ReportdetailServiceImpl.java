@@ -55,7 +55,7 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     public Reportdetail reportdetail(Integer dispatchId) {
         Reportdetail a = null;
         try {
-            a = reportdetailMapper.reportdetail(dispatchId);
+               a = reportdetailMapper.reportdetail(dispatchId);
             a.setReportaccommodationShow(reportaccommodationService.listReportaccommodationByreportDetailId(a.getReportDetailId()));
             a.setReportrestaurant(reportrestaurantService.listReportrestaurantById(a.getReportDetailId()));
             a.setReportticket(reportticketService.listReportticketById(a.getReportDetailId()));
