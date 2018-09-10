@@ -1,5 +1,6 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -132,6 +133,32 @@ public class ReportdetailController {
             return ReponseResult.err("报账驳回审核失败");
         }
     }
+
+
+
+
+    /**
+     * 查询调度Id
+     * @param
+     * @return
+     */
+    @RequestMapping("selectDispatchById")
+    public ReponseResult selectDispatchById(HttpServletRequest request, Integer groupNumber){
+        try {
+            Dispatch dispatch=reportdetailService.selectDispatchById(groupNumber);
+            ReponseResult data=ReponseResult.ok("查询成功");
+            HttpSession session = request.getSession();
+            session.setAttribute("dispatchId",dispatch.getDispatchId());
+            logger.info("mothod:selectDispatchById 查询成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:selectDispatchById 查询失败");
+            return ReponseResult.err("查询失败");
+        }
+    }
+
+
 
 
     /**

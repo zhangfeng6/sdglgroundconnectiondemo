@@ -33,6 +33,7 @@
                 <input class="layui-btn layui-btn-normal" id="search" type="button" lay-submit="search" value="搜索"/>
             </div>
         </form>
+        <button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='dao()'><i class='layui-icon' type='button'>导游报账明细</i></button>
         <div class="layui-form" id="table-list">
             <table class="layui-table" lay-skin="nob">
 
@@ -71,6 +72,29 @@
         }
     );
     search();
+
+    var groupId;
+    function xuan(groupNumber,qq){
+        groupId=groupNumber;
+        $(qq).parents().children().css("background","");
+        $(qq).css("background","#F2F2F2");
+    }
+
+
+    function dao(){
+        $.ajax({
+            url:"/sdglGroundConnection/reportdetail/selectDispatchById",
+            data:{groupNumber:groupId},
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                location.href="/sdglGroundConnection/voucher/GuidesReimbursement.html";
+            },
+        })
+    }
+
+
+
 
     //通过审核
     function tgShenHe(reportDetailId) {
@@ -150,7 +174,7 @@
                     if(e.status==4){
                         status="已通过";
                     }
-                    context += "<tr>\n" +
+                    context += "<tr onclick='xuan("+e.groupNumber+",this)'>\n" +
                         "<td class=\"hidden-xs\">" + (i+1) + "</td>\n" +
                         "<td class=\"hidden-xs\">" + e.groundConnectionNumber + "</td>\n" +
                         "<td class=\"hidden-xs\">" + e.guideName + "</td>\n" +

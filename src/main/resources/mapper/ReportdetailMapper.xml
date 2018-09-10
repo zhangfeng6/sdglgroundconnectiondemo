@@ -38,4 +38,8 @@
     <select id="All_dispatchId" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
      select * from  `reportdetail` where  dispatchId=#{dispatchId}
     </select>
+
+    <select id="selectDispatchById" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+          select * from dispatch where groupNumber=#{groupNumber}
+    </select>
 </mapper>
