@@ -243,10 +243,18 @@
 						<td><label class="layui-form-label">小费：</label></td>
 						<td><input type="text" name="xiaofei"  class="layui-input"></td>
 						<td colspan="2">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td><label class="layui-form-label">导游借款：</label></td>
+								<td><input type="text" name="loan"  class="layui-input"></td>
+							</tr>
+						</table>
+					</td>
+						<td colspan="2">
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td><label class="layui-form-label">导游借款：</label></td>
-									<td><input type="text" name="loan"  class="layui-input"></td>
+									<td><label class="layui-form-label">客源地：</label></td>
+									<td><input type="text" name="tourist"  class="layui-input"></td>
 								</tr>
 							</table>
 						</td>
@@ -689,6 +697,7 @@
                 dispatch.travelEndTime=$("input[name=travelEndTime]").val();
                 dispatch.sendLine=$("input[name=sendLine]").val();
                 dispatch.dispatchId=$("input[name=Did]").val();
+                dispatch.tourist=$("input[name=tourist]").val();
                 var tourist="";
                 for (var i=0;i<index;i++){
                     var L=0;
@@ -844,6 +853,7 @@
                 dispatch.travelEndTime=$("input[name=travelEndTime]").val();
                 dispatch.sendLine=$("input[name=sendLine]").val();
                 dispatch.offer=$("#offer").val();
+                dispatch.tourist=$("input[name=tourist]").val();
                 var tourist="";
                 for (var i=0;i<index;i++){
                     var L=0;
@@ -957,7 +967,7 @@
                     contentType: "application/json",
                     success:function (result) {
                         if(result.data==1){
-                            location.href="/sdglGroundConnection/Quotation.html";
+                            location.href="/sdglGroundConnection/countAdjust/Quotation.html";
                             alert("保存成功！");
                         }else{
                             alert("系统异常："+result.data);
@@ -1002,7 +1012,7 @@
                         $("input[name=cheduinum]").val(result.data["discar"].number);
                         $("input[name=cheduicb]").val(result.data["discar"].costPrice);
                         $("select[name=carrental]").attr("disCarId",result.data["discar"].disCarId);
-
+						$("input[name=tourist]").val(result.data["dispatch"].tourist);
                         $(result.data["hoteroomType"]).each(function (i,e) {
                             if(i>0){
                                 addss();

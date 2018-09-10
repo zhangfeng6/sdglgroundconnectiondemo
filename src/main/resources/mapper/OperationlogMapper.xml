@@ -17,7 +17,8 @@
         <if test="theUserName != null and theUserName != ''">
             AND s.`theUserName` LIKE CONCAT('%',#{theUserName},'%')
         </if>
-        AND o.`status` !=1
+        AND o.`status` !=1  ORDER BY o.createDate DESC
+
     </select>
 
     <resultMap id="getloganduser" type="com.dyhc.sdglgroundconnection.pojo.Operationlog">

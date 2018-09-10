@@ -26,7 +26,7 @@
             <tr  name="template">
                 <td><label class="layui-form-label">线路</label></td>
                 <td>
-                    <select  name="temline1" lay-verify="required">
+                    <select  name="temline1" lay-verify="required" style="height: 35px;width:233px;" lay-ignore>
 
                     </select>
                 </td>
@@ -192,7 +192,7 @@
         $("#caozuo").prev().after("<tr  name='template'>\n" +
             "<td><label class='layui-form-label'>线路</label></td>\n" +
             "<td>\n" +
-            "<select  name='temline"+index+"' lay-verify='required' >"+content+"</select>\n" +
+            "<select  name='temline"+index+"' lay-verify='required' style='height: 35px;width:233px;' lay-ignore>"+content+"</select>\n" +
             "</td>\n" +
             "<td><span style='font-weight: bold;padding-left: 15px;margin-right: 15px;' name='howmanydays"+index+"'>Day"+index+"</span></td>\n" +
             "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>"+
