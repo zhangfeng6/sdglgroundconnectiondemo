@@ -37,7 +37,6 @@ public class BillTypeController {
      * @param
      * @return
      */
-    @LogNotes(operationType="单据表",content="模糊分页查询")
     @RequestMapping("/showAllBillType")
     public ReponseResult showAccountType(@RequestParam("pageNo")Integer pageNo, @RequestParam("pageSize")Integer pageSize, @RequestParam("typeName")String typeName){
         try {
@@ -84,7 +83,6 @@ public class BillTypeController {
         }
     }
 
-    @LogNotes(operationType="单据表",content="单据判断查询")
     @RequestMapping("/equalBillType")
     public  ReponseResult equalBillType(@RequestParam("typeName")String  typeName){
         System.out.println(typeName);
