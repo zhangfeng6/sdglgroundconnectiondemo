@@ -19,6 +19,15 @@ public interface OfferotherService {
      */
     int insertOfferother(Offerother offerother)throws Exception;
 
+
+    /**
+     * 赵伟伟
+     * 新增其他报价
+     * @param offerother
+     * @return
+     */
+    int updateOfferother(Offerother offerother)throws Exception;
+
     /**
      * 赵伟伟
      * 按报价单编号查询

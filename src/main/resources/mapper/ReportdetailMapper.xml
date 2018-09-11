@@ -42,4 +42,18 @@
     <select id="selectDispatchById" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
           select * from dispatch where groupNumber=#{groupNumber}
     </select>
+
+
+    <!--查看门票-->
+    <select id="getReportticket" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
+        SELECT * FROM ReportDetail r,dispatch d,reportticket s WHERE r.dispatchId=d.dispatchId AND r.reportDetailId=s.reportDetailId AND r.dispatchId=#{dispatchId}
+    </select>
+    <!--查看住宿-->
+    <select id="getHotel" resultType="com.dyhc.sdglgroundconnection.pojo.Reportaccommodation">
+        SELECT * FROM ReportDetail r,dispatch d,reportaccommodation s WHERE r.dispatchId=d.dispatchId AND r.reportDetailId=s.reportDetailId AND r.dispatchId=#{dispatchId}
+    </select>
+    <!--查看其它-->
+    <select id="getReportingotherexpenses" resultType="com.dyhc.sdglgroundconnection.pojo.Reportingotherexpenses">
+        SELECT * FROM ReportDetail r,dispatch d,reportingotherexpenses s WHERE r.dispatchId=d.dispatchId AND r.reportDetailId=s.reportDetailId AND r.dispatchId=#{dispatchId}
+    </select>
 </mapper>

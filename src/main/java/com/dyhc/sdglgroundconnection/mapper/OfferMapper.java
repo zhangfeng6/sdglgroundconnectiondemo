@@ -30,6 +30,14 @@ public interface OfferMapper extends CommonMapper<Offer>{
      */
     int insertOffer(Offer offer) throws Exception;
 
+    /**
+     * 赵伟伟
+     * 修改报价单信息
+     * @param offer
+     * @return
+     */
+    int updateOffer(Offer offer) throws Exception;
+
 
     /**
      * 赵伟伟

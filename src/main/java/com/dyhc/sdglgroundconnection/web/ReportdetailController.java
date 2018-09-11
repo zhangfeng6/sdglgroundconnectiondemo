@@ -1,7 +1,9 @@
 package com.dyhc.sdglgroundconnection.web;
 
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
+import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
+import com.dyhc.sdglgroundconnection.pojo.Reportingotherexpenses;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
@@ -178,6 +180,63 @@ public class ReportdetailController {
             e.printStackTrace();
             logger.error("mothod:jsShenHe 报账结算失败");
             return ReponseResult.err("报账结算失败");
+        }
+    }
+    /**
+     * 查看门票
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/wx_getReportticket")
+    public ReponseResult<Object> getReportticket(Integer dispatchId){
+        try{
+            Integer data=0;
+            Reportdetail reportticket=reportdetailService.getReportticket(dispatchId);
+            ReponseResult<Object> date=ReponseResult.ok(reportticket,"操作成功");
+            logger.info("method:getReportticket 查看门票成功");
+            return date;
+        }catch (Exception e){
+            logger.error("method:getReportticket 查看门票失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+    /**
+     * 查看住宿
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/wx_getHotel")
+    public ReponseResult<Object> getHotel(Integer dispatchId){
+        try{
+            Integer data=0;
+            Reportaccommodation reportticket=reportdetailService.getHotel(dispatchId);
+            ReponseResult<Object> date=ReponseResult.ok(reportticket,"操作成功");
+            logger.info("method:getHotel 查看住宿成功");
+            return date;
+        }catch (Exception e){
+            logger.error("method:getHotel 查看住宿失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
+        }
+    }
+    /**
+     * 查看其它
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("/wx_getReportingotherexpenses")
+    public ReponseResult<Object> getReportingotherexpenses(Integer dispatchId){
+        try{
+            Integer data=0;
+            Reportingotherexpenses reportticket=reportdetailService.getReportingotherexpenses(dispatchId);
+            ReponseResult<Object> date=ReponseResult.ok(reportticket,"操作成功");
+            logger.info("method:getReportingotherexpenses 查看其它成功");
+            return date;
+        }catch (Exception e){
+            logger.error("method:getReportingotherexpenses 查看其它失败");
+            e.printStackTrace();
+            return ReponseResult.err("获取失败");
         }
     }
 }

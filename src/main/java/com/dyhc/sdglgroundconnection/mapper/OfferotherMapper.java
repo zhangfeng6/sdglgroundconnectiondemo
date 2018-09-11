@@ -23,6 +23,14 @@ public interface OfferotherMapper extends CommonMapper<Offerother>{
 
     /**
      * 赵伟伟
+     * 修改其他报价
+     * @param offerother
+     * @return
+     */
+    int updateOfferother(Offerother offerother)throws Exception;
+
+    /**
+     * 赵伟伟
      * 按报价单编号查询
      * @param offerId
      * @return

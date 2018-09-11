@@ -45,10 +45,8 @@ public class HotelController {
         try {
             PageInfo<Hotel> pageInfo = hotelService.hotelShowAll(pageNo,pageSize,hotelName);
             ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取酒店成功！");
-            logger.info(" method:showHotel  分页获取酒店成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:showHotel  获取酒店数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -95,10 +93,8 @@ public class HotelController {
             Integer  num =hotelService.updateRoomType(roomType);
             ReponseResult<Integer> data = ReponseResult.ok(num,"酒店房间修改成功");
             System.out.println(data);
-            logger.info(" method:showHotel  酒店房间修改成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:showHotel  酒店房间修改失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -283,10 +279,8 @@ public class HotelController {
         try {
             PageInfo<Hotel> pageInfo = hotelService.listHotels(pageNo,pageSize);
             ReponseResult<List> data = ReponseResult.ok(pageInfo.getList(), pageInfo.getTotal(), "分页获取酒店成功！");
-            logger.info(" method:showHotel  分页获取酒店成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:showHotel  获取酒店数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -304,10 +298,8 @@ public class HotelController {
     public ReponseResult getHotelById(@RequestParam("id") Integer id) {
         try {
             ReponseResult<Hotel> data = ReponseResult.ok(hotelService.getHotelById(id),"获取指定的酒店信息");
-            logger.info(" method:showHotel  获取酒店信息成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:showHotel  获取酒店数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -324,10 +316,8 @@ public class HotelController {
         try {
             List<Hotel> list = hotelService.selectAllHotel();
             ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
-            logger.info(" method:selectHotel  查询旅游线路成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectHotel  查询旅游线路失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
             return err;
@@ -368,10 +358,8 @@ public class HotelController {
         try {
             count = hotelService.selectTypeById(valueId,hotelId);
             ReponseResult<Object> data = ReponseResult.ok(count, "查询成功！");
-            logger.info(" method:showHotel  查询成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:showRestaurant  查询失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

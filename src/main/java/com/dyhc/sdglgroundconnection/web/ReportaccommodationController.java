@@ -88,7 +88,6 @@ public class ReportaccommodationController {
      *  查询全部酒店
      * @return
      */
-    @LogNotes(operationType="酒店查询成功",content="酒店查询成功")
     @RequestMapping("/jiudianquanbu")
     public ReponseResult Reportaccommodation(){
         System.out.println("进来酒店查询了！");

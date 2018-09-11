@@ -34,6 +34,11 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
+    public int updateOffer(Offer offer) throws Exception {
+        return offerMapper.updateOffer(offer);
+    }
+
+    @Override
     public Offer selectOfferByOfferId(int offerId)throws Exception {
         return offerMapper.selectOfferByOfferId(offerId);
     }

@@ -39,11 +39,9 @@ public class DiscarController {
         disCarId=Integer.parseInt(session.getAttribute("disCarId").toString());
         try{
             Discar discar=discarService.discar(disCarId);
-            logger.info(" method:CompanyList  调度车辆查询成功！");
             ReponseResult<Discar> data= ReponseResult.ok(discar,"调度车辆查询成功！");
             return data;
         }catch (Exception e){
-            logger.error(" method:CompanyList  调度车辆查询失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

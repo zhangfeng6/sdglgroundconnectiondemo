@@ -44,11 +44,9 @@ public class CarrentalController  {
         try{
             PageInfo<Carrental> pageInfo=carrentalService.listCarRentals(carRentalName,pageNo,pageSize);
             ReponseResult<List> data=ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"查询汽车公司及旗下的车辆类型成功");
-            logger.info(" method:listCarRentals  查询汽车公司及旗下的车辆类型成功！");
             return data;
         }catch (Exception e){
             e.printStackTrace();
-            logger.error(" method:listCarRentals  查询汽车公司及旗下的车辆类型失败！");
             return ReponseResult.err("查询汽车公司及旗下的车辆类型失败");
         }
     }
@@ -166,10 +164,8 @@ public class CarrentalController  {
     public ReponseResult getCarrentalByName(String carRentalName){
         try {
             ReponseResult data=ReponseResult.ok(carrentalService.getCarrentalByName(carRentalName),"获取相同名称的公司成功");
-            logger.info("获取相同名称的公司成功");
             return data;
         }catch (Exception e){
-            logger.info("获取相同名称的公司失败");
             e.printStackTrace();
             return ReponseResult.err("获取相同名称的公司失败");
         }

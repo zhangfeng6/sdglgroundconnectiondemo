@@ -23,6 +23,15 @@ public interface OfferHotelMapper extends CommonMapper<OfferHotel>{
      */
     int insertOfferHotel(OfferHotel offerHotel)throws Exception;
 
+
+    /**
+     * 赵伟伟
+     * 删除酒店报价
+     * @param offerId
+     * @return
+     */
+    int delOfferHotel(@Param("offerId") Integer offerId);
+
     /**
      * 赵伟伟s
      * 按报价编号查询

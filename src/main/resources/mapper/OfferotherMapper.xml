@@ -8,6 +8,10 @@
         values(#{offerId},#{costPrice},#{offer},#{remarks},0,1)
     </insert>
 
+    <update id="updateOfferother">
+        update offerother set offerId=#{offerId},costPrice=#{costPrice},offer=#{offer},remarks=#{remarks},whetherDel=0 where offerId=#{offerId}
+    </update>
+
     <select id="selectOfferotherByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerother">
         select * from offerother where whetherDel!=1 and offerId=#{offerId}
     </select>

@@ -23,6 +23,14 @@ public interface OfferscenicService {
 
     /**
      * 赵伟伟
+     * 删除景点报价
+     * @param offerId
+     * @return
+     */
+    int delOfferscenic(@Param("offerId") Integer offerId);
+
+    /**
+     * 赵伟伟
      * 按报价编号查询
      * @return
      */

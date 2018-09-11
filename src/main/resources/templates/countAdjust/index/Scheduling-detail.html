@@ -34,6 +34,7 @@
 				<tr>
 					<td><label class="layui-form-label">选择模板</label></td>
 					<td id="xzmuban"><select name="tourismtemplateName" lay-filter="muban"></select></td>
+					<td><input  id="offerId" type="hidden" value="0"></td>
 				</tr>
 			</table>
 		</form>
@@ -242,8 +243,10 @@
                     listVehicletype()
                     var thisURL = document.URL;
                     var  getval =thisURL.split('?')[1];
+                    var lei;
                     if (getval!=undefined){
                         id= getval.split("=")[1];
+                        lei = getval.split("=")[0];
                         selectOfferByOfferId();
                         selectOffer();
                         selectOfferlineByOfferId();
@@ -252,11 +255,14 @@
                         selectOfferRestaurantByOfferId1();
                         selectOfferotherByOfferId();
                         selectOfferscenicByOfferId();
-						$("select").attr("disabled","disabled");
-                        $("input").attr("disabled","disabled");
-                        $("textarea").attr("disabled","disabled");
-                        $(".hi").hide();
-                        $("#add").hide();
+                        $("#offerId").val(id);
+                        if (lei=="offerId"){
+                            $("select").attr("disabled","disabled");
+                            $("input").attr("disabled","disabled");
+                            $("textarea").attr("disabled","disabled");
+                            $(".hi").hide();
+                            $("#add").hide();
+						}
                     }
 				})
 
@@ -842,19 +848,21 @@
                     var ccostPrice = $("#ccostPrice").val();
                     var coffer = $("#coffer").val();
                     var jiedai = $("#jiedai").val();
+                    var offerId=$("#offerId").val();
 
 
 
 					$.ajax({
                         url:"/sdglGroundConnection/Offer/insertOffer",
-                        data:{xiaofei:xiaofei,jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer,des:des},
+                        data:{offerId:offerId,xiaofei:xiaofei,jiedai:jiedai,tripList:tripList,xdateList:xdateList,xianluList:xianluList,wucList:wucList,wucbList:wucbList,wubjList:wubjList,wancList:wancList,wancbList:wancbList,wanbjList:wanbjList,jiudianList:jiudianList,jcostPrice:jcostPrice,joffer:joffer,jingdianList:jingdianList,jdcostPriceList:jdcostPriceList,jdofferList:jdofferList,travelId:travelId,number:number,remarks:remarks,travelStartTime:travelStartTime,travelEndTime:travelEndTime,qcostPrice:qcostPrice,qoffer:qoffer,ctypeId:ctypeId,ccostPrice:ccostPrice,coffer:coffer,des:des},
                         dataType:"json",
                         async: false,
                         traditional: true,
                         type:"get",
                         success:function (data) {
                             alert(data.msg);
-                            location.reload();
+                            var index=parent.layer.getFrameIndex(window.name);
+                            parent.location.reload(index);
 						}
 					})
 				}
