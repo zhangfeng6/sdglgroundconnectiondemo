@@ -43,11 +43,9 @@ public class BillTypeController {
         try {
             PageInfo<BillType> pageInfo=billTypeService.ShowAllBillType(pageNo,pageSize,typeName);
             ReponseResult<List> data =ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"单据类型分页成功!");
-            logger.info("method:showAccountType 单据类型分页成功");
             System.out.println(data);
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 单据类型分页失败");
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;
@@ -98,11 +96,9 @@ public class BillTypeController {
                 billType.setTypeName("no");
             }
             ReponseResult<BillType> data =ReponseResult.ok(billType,"单据类型名称判断查询成功!");
-            logger.info("method:showAccountType 单据类型名称判断查询成功");
             System.out.println(data);
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 单据类型名称判断查询失败");
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;
@@ -135,11 +131,9 @@ public class BillTypeController {
     public  ReponseResult equalBillType(@RequestParam("billTypeId") Integer billTypeId){
         try {
             BillType billType =billTypeService.fuzhiBillType(billTypeId);
-            logger.info("method:showAccountType 单据修改赋值信息成功");
             ReponseResult<BillType> data =ReponseResult.ok(billType,"单据修改赋值信息成功");
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 单据修改赋值信息失败");
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;

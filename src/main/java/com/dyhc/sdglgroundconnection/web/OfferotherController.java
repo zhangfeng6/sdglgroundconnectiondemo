@@ -35,10 +35,8 @@ public class OfferotherController {
         try {
             Offerother offerother = offerotherService.selectOfferotherByOfferId(offerId);
             ReponseResult<Offerother> data = ReponseResult.ok(offerother,"获取其他报价成功！");
-            logger.info(" method:selectOfferotherByOfferId  获取其他报价成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectOfferotherByOfferId  获取其他报价数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

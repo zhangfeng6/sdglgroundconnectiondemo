@@ -37,10 +37,8 @@ public class BillController  {
     public ReponseResult listBillAll(){
         try {
             ReponseResult data=ReponseResult.ok(billTypeService.listBillAll(),"获取单据类型成功");
-            logger.info("method:listBillAll 获取单据类型成功");
             return data;
         }catch (Exception e){
-            logger.error("method:listBillAll 获取单据类型失败");
             e.printStackTrace();
             return ReponseResult.err("获取单据类型失败");
         }
@@ -58,11 +56,9 @@ public class BillController  {
         try {
             Bill bill=billService.selectBillByDispatchIdAndBillTypeId(dispatchId,billTypeId);
             ReponseResult data=ReponseResult.ok(bill,"获取失败");
-            logger.info("method:selectBillByDispatchIdAndBillTypeId 获取成功");
             return data;
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("method:selectBillByDispatchIdAndBillTypeId 获取失败");
             return ReponseResult.err("获取失败");
         }
     }

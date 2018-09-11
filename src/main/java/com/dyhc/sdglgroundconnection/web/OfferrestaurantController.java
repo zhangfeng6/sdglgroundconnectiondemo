@@ -48,7 +48,6 @@ public class OfferrestaurantController {
                 }
             }
             ReponseResult<Object> data = ReponseResult.ok(wu,"获取餐厅报价成功！");
-            logger.info(" method:selectOfferHotelByOfferId  获取餐厅报价成功！");
             return data;
         } catch (Exception e) {
             logger.error(" method:selectOfferHotelByOfferId  酒店餐厅数据失败，系统出现异常！");

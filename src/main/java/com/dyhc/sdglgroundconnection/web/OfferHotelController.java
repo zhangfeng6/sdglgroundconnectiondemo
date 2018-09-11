@@ -39,10 +39,8 @@ public class OfferHotelController  {
         try {
             List<OfferHotel> offerhotel = offerHotelService.selectOfferHotelByOfferId(offerId);
             ReponseResult<Object> data = ReponseResult.ok(offerhotel,"获取酒店报价成功！");
-            logger.info(" method:selectOfferHotelByOfferId  获取酒店报价成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectOfferHotelByOfferId  酒店报价数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

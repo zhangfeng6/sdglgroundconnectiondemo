@@ -34,11 +34,9 @@ public class CompanyController  {
     public ReponseResult CompanyList(){
         try{
             Company company=companyService.getCompany();
-            logger.info(" method:CompanyList  查看公司信息成功！");
             ReponseResult<Company> data= ReponseResult.ok(company,"查看取组团社成功！");
             return data;
         }catch (Exception e){
-            logger.error(" method:CompanyList  查看公司信息数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
