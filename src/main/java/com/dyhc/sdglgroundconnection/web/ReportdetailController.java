@@ -1,10 +1,12 @@
 package com.dyhc.sdglgroundconnection.web;
 
+import com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper;
 import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Reportingotherexpenses;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
+import com.dyhc.sdglgroundconnection.service.ReportticketService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +35,8 @@ public class ReportdetailController {
 
     @Autowired
     private ReportdetailService reportdetailService;
-
+    @Autowired
+    private ReportdetailMapper reportdetailMapper;
 
     /**
      * 获取所有的导游报账明细
@@ -188,9 +192,10 @@ public class ReportdetailController {
      * @return
      */
     @RequestMapping("/wx_getReportticket")
-    public ReponseResult<Object> getReportticket(Integer dispatchId){
+    public ReponseResult<Object> getReportticket(@RequestParam("dispatchId")Integer dispatchId){
+        System.out.println(dispatchId);
         try{
-            Integer data=0;
+            Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             Reportdetail reportticket=reportdetailService.getReportticket(dispatchId);
             ReponseResult<Object> date=ReponseResult.ok(reportticket,"操作成功");
             logger.info("method:getReportticket 查看门票成功");

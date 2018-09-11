@@ -29,13 +29,12 @@ public class AccountTypeController {
     private AccountTypeService accountTypeService;
 
     /**
-     * 账户模糊分页
+     *
      * @param pageNo
-     * @param pageSize
+     * @param pageSize 账户模糊分页
      * @param bank
      * @return
      */
-    @LogNotes(operationType="账户分类",content="模糊分页查询")
     @RequestMapping("/showAllAccountType")
     public ReponseResult showAccountType(@RequestParam("pageNo")Integer pageNo,@RequestParam("pageSize")Integer pageSize,@RequestParam("bank")String bank){
         try {
