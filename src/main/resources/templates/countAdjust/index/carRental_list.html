@@ -148,7 +148,7 @@
                             if (!first) {
                                 //obj包含了当前分页的所有参数，比如：
                                 curnum = obj.curr; // 当前页码
-                                limitcount = 2; // 每页记录数
+                                limitcount = obj.limit; // 每页记录数
                                 // 查询新数据
                                 listCarRentals();
                             }

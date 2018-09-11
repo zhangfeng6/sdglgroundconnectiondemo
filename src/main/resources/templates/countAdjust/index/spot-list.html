@@ -82,7 +82,7 @@
         var whetherDel=$("select[name='whetherDel']").val();
         $.ajax({
             url: "/sdglGroundConnection/Scenicspot/listScenicspots",
-            data: {"typeId":typeId,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"pageNo":curnum,"pageSize":2},
+            data: {"typeId":typeId,"scenicSpotName":scenicSpotName,"scenicSpotAddress":scenicSpotAddress,"pageNo":curnum,"pageSize":limitcount},
             dataType: "json",
             type: "get",
             async: false,
