@@ -36,7 +36,6 @@ public class GuideController{
     private GuideService guideService;
 
 
-    @LogNotes(operationType="导游表",content="导游模糊查询")
     @RequestMapping("/guideShowAll")
     public ReponseResult showGuide(@RequestParam("pageNo")Integer pageNo, @RequestParam("pageSize")Integer pageSize, @RequestParam("guideName")String guideName){
         try {
@@ -64,7 +63,6 @@ public class GuideController{
         }
     }
 
-    @LogNotes(operationType="导游表",content="导游判断是否有重复的证件号")
     @RequestMapping("/pdcertificate")
     public  ReponseResult pdcertificate(@RequestParam("certificate")String certificate){
         try {
