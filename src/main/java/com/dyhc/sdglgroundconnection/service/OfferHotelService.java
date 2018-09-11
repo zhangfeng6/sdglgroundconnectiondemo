@@ -20,6 +20,13 @@ public interface OfferHotelService {
      * @return
      */
     int insertOfferHotel(OfferHotel offerHotel)throws Exception;
+    /**
+     * 赵伟伟
+     * 删除酒店报价
+     * @param offerId
+     * @return
+     */
+    int delOfferHotel(@Param("offerId") Integer offerId);
 
     /**
      * 赵伟伟s

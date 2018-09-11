@@ -29,6 +29,11 @@ public class OfferlineServiceImpl implements OfferlineService {
         return offerlineMapper.selectAll();
     }
 
+    @Override
+    public int delOfferline(Integer offerId) {
+        return offerlineMapper.delOfferline(offerId);
+    }
+
     /**
      * 赵伟伟
      * 查询线路

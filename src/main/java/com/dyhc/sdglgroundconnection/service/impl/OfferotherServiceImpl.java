@@ -22,6 +22,11 @@ public class OfferotherServiceImpl implements OfferotherService {
     }
 
     @Override
+    public int updateOfferother(Offerother offerother) throws Exception {
+        return offerotherMapper.updateOfferother(offerother);
+    }
+
+    @Override
     public Offerother selectOfferotherByOfferId(int offerId) throws Exception{
         return offerotherMapper.selectOfferotherByOfferId(offerId);
     }

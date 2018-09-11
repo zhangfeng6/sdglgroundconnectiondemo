@@ -155,10 +155,8 @@ public class DictionariesController {
             System.out.println(pageNo);
             PageInfo<Dictionaries> pageInfoTravel=dictionariesService.listDictionariesCar(pageNo,pageSize,valueContent1);
             ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取餐厅类型成功！");
-            logger.info(" method:DictionariesCan  分页获取餐厅类型成功！");
             return data;
         }catch (Exception e){
-            logger.error(" method:DictionariesCan  获取餐厅类型数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -178,10 +176,8 @@ public class DictionariesController {
             System.out.println(pageNo);
             PageInfo<Dictionaries> pageInfoTravel=dictionariesService.listDictionariesHotel(pageNo,pageSize,valueContent1);
             ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取餐厅类型成功！");
-            logger.info(" method:DictionariesCan  分页获取餐厅类型成功！");
             return data;
         }catch (Exception e){
-            logger.error(" method:DictionariesCan  获取餐厅类型数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -446,10 +442,8 @@ public class DictionariesController {
             if(dictionaries!=null){
                 data=1;
             }
-            logger.info(" method:DictionariesByNameType  判断酒店类型是否存在成功！");
             return ReponseResult.ok(data,"判断酒店类型是否存在成功！");
         }catch (Exception e){
-            logger.error(" method:DictionariesByNameType  判断酒店类型是否存在失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -469,7 +463,6 @@ public class DictionariesController {
             if(dictionaries!=null){
                 data=1;
             }
-            logger.info(" method:DictionariesByNameTypecan  判断餐厅类型是否存在成功！");
             return ReponseResult.ok(data,"判断餐厅类型是否存在成功！");
         }catch (Exception e){
             logger.error(" method:DictionariesByNameTypecan  判断餐厅类型是否存在失败，系统出现异常！");
@@ -493,10 +486,8 @@ public class DictionariesController {
             if(dictionaries!=null){
                 data=1;
             }
-            logger.info(" method:DictionariesByNameTypecan  判断车辆类型是否存在成功！");
             return ReponseResult.ok(data,"判断车辆类型是否存在成功！");
         }catch (Exception e){
-            logger.error(" method:DictionariesByNameTypecan  判断车辆类型是否存在失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;

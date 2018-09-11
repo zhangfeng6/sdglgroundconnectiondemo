@@ -24,6 +24,12 @@ public class OfferHotelServiceImpl implements OfferHotelService {
     }
 
     @Override
+    public int delOfferHotel(Integer offerId) {
+        return offerHotelMapper.delOfferHotel(offerId);
+    }
+
+
+    @Override
     public List<OfferHotel> selectOfferHotelByOfferId(int offerId)throws Exception {
         return offerHotelMapper.selectOfferHotelByOfferId(offerId);
     }

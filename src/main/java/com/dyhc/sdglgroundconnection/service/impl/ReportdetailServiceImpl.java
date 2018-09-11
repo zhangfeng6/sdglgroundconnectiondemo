@@ -121,4 +121,33 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     public Dispatch selectDispatchById(Integer groupNumber) throws Exception {
         return reportdetailMapper.selectDispatchById(groupNumber);
     }
+
+    /**
+     * 查看门票
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Reportdetail getReportticket(Integer dispatchId) throws Exception{
+        return reportdetailMapper.getReportticket(dispatchId);
+    }
+    /**
+     * 查看住宿
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Reportaccommodation getHotel(Integer dispatchId) throws Exception{
+        return reportdetailMapper.getHotel(dispatchId);
+    }
+
+    /**
+     * 查看其它
+     * @param dispatchId
+     * @return
+     */
+    @Override
+    public Reportingotherexpenses getReportingotherexpenses(Integer dispatchId)throws Exception {
+        return reportdetailMapper.getReportingotherexpenses(dispatchId);
+    }
 }

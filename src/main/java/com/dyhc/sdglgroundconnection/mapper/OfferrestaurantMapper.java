@@ -25,6 +25,14 @@ public interface OfferrestaurantMapper extends CommonMapper<Offerrestaurant>{
 
     /**
      * 赵伟伟
+     * 删除餐厅报价
+     * @param offerId
+     * @return
+     */
+    int delOfferrestaurant(@Param("offerId") Integer offerId);
+
+    /**
+     * 赵伟伟
      * 根据报价编号查询
      * @param offerId
      * @return

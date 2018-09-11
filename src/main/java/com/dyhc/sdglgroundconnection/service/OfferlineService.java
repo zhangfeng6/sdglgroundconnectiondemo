@@ -20,6 +20,15 @@ public interface OfferlineService {
      */
     List<Offerline> selectOfferline()throws Exception;
 
+
+    /**
+     * 赵伟伟
+     * 删除报价线路
+     * @param offerId
+     * @return
+     */
+    int delOfferline(@Param("offerId") Integer offerId);
+
     /**
      * 赵伟伟
      * 查询线路

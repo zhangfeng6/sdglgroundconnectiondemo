@@ -42,10 +42,8 @@ public class GuideController{
         try {
             PageInfo<Guide> pageInfo=guideService.listGuide(pageNo,pageSize,guideName);
             ReponseResult<List> data =ReponseResult.ok(pageInfo.getList(),pageInfo.getTotal(),"导游信息分页成功!");
-            logger.info("method:showAccountType 导游信息成功");
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 导游信息分页失败");
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;
@@ -71,10 +69,8 @@ public class GuideController{
     public  ReponseResult pdcertificate(@RequestParam("certificate")String certificate){
         try {
             ReponseResult<Guide> data =ReponseResult.ok(guideService.pdcertificate(certificate),"导游判断是否有重复的证件号成功!");
-            logger.info("method:showAccountType 导游判断是否有重复的证件号成功");
             return  data;
         } catch (Exception e) {
-            logger.info("method:showAccountType 导游判断是否有重复的证件号失败");
             e.printStackTrace();
             ReponseResult<Object> error =ReponseResult.err("系统出现异常请联系管理员");
             return  error;

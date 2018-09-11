@@ -37,10 +37,8 @@ public class OffercarController {
         try {
             Offercar offercar = offercarService.selectOffercarByOfferId(offerId);
             ReponseResult<Object> data = ReponseResult.ok(offercar,"获取汽车报价成功！");
-            logger.info(" method:selectOfferByOfferId  获取汽车报价成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectOfferByOfferId  汽车报价数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;

@@ -8,6 +8,10 @@
       values(#{scenicSpotId},#{offerId},#{costPrice},#{offer},0,1,#{howmanydays})
     </insert>
 
+    <delete id="delOfferscenic">
+        delete from offerscenic where offerId=#{offerId}
+    </delete>
+
     <select id="selectOfferscenicByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerscenic">
         select * from offerscenic where whetherDel!=1 and offerId=#{offerId}
     </select>

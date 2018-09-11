@@ -24,6 +24,14 @@ public interface OffercarMapper extends CommonMapper<Offercar>{
     int insertOffercar(Offercar offercar)throws Exception;
 
     /**
+     * 赵伟伟
+     * 修改汽车报价
+     * @param offercar
+     * @return
+     */
+    int updateOffercar(Offercar offercar)throws Exception;
+
+    /**
      * 按报价编号查询
      * @return
      */

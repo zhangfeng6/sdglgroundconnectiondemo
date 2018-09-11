@@ -39,10 +39,8 @@ public class MealTypeController  {
     public ReponseResult selectMealTypeByRestaurantId(Integer restaurantId) {
         try {
             ReponseResult<List> data = ReponseResult.ok(mealTypeService.selectMealTypeByRestaurantId(restaurantId), "获取饭店类型成功！");
-            logger.info(" method:selectMealTypeByRestaurantId  获取饭店类型成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectMealTypeByRestaurantId  饭店类型数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -59,10 +57,8 @@ public class MealTypeController  {
     public ReponseResult selectById(Integer typeId) {
         try {
             ReponseResult<MealType> data = ReponseResult.ok(mealTypeService.selectById(typeId), "获取饭店类型成功！");
-            logger.info(" method:selectById  获取饭店类型成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectById  饭店类型数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -133,10 +129,8 @@ public class MealTypeController  {
     public ReponseResult selectDic() {
         try {
             ReponseResult<List> data = ReponseResult.ok(mealTypeService.selectDic(), "获取饭店类型成功！");
-            logger.info(" method:selectDic  获取饭店类型成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectDic  饭店类型数据失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
             return err;
@@ -153,10 +147,8 @@ public class MealTypeController  {
         try {
             List<Dictionaries> list = mealTypeService.selectMealType();
             ReponseResult<Object> data = ReponseResult.ok(list,"查询成功！");
-            logger.info(" method:selectMealType  查询餐馆类型成功！");
             return data;
         } catch (Exception e) {
-            logger.error(" method:selectMealType  查询餐馆类型失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Object> err = ReponseResult.err("查询失败！");
             return err;

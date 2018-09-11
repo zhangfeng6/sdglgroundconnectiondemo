@@ -66,11 +66,9 @@ public class GuideScheduleController {
             }
             Integer result=guideScheduleService.insertGuideSchedule(list);
             ReponseResult data=ReponseResult.ok(result,"添加成功");
-            logger.info("mothod:insertGuideSchedule");
             return data;
         }catch (Exception e){
             e.printStackTrace();
-            logger.error("mothod:insertGuideSchedule 添加失败");
             return ReponseResult.err("添加失败");
         }
     }

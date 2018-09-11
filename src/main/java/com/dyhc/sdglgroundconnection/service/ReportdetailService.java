@@ -1,8 +1,6 @@
 package com.dyhc.sdglgroundconnection.service;
 
-import com.dyhc.sdglgroundconnection.pojo.Dictionaries;
-import com.dyhc.sdglgroundconnection.pojo.Dispatch;
-import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
+import com.dyhc.sdglgroundconnection.pojo.*;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -77,4 +75,25 @@ public interface ReportdetailService {
 
 
     Dispatch selectDispatchById(Integer groupNumber)throws Exception;
+
+    /**
+     * 查看门票
+     * @param dispatchId
+     * @return
+     */
+    Reportdetail getReportticket(Integer dispatchId)throws Exception;
+
+    /**
+     * 查看住宿
+     * @param dispatchId
+     * @return
+     */
+    Reportaccommodation getHotel(Integer dispatchId)throws Exception;
+
+    /**
+     * 查看其它
+     * @param dispatchId
+     * @return
+     */
+    Reportingotherexpenses getReportingotherexpenses(Integer dispatchId)throws Exception;
 }

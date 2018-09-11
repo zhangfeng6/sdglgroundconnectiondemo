@@ -27,4 +27,9 @@ public class OfferrestaurantServiceImpl implements OfferrestaurantService {
     public List<Offerrestaurant> selectOfferRestaurantByOfferId(int offerId)throws Exception {
         return offerrestaurantMapper.selectOfferRestaurantByOfferId(offerId);
     }
+
+    @Override
+    public int delOfferrestaurant(Integer offerId) {
+        return offerrestaurantMapper.delOfferrestaurant(offerId);
+    }
 }

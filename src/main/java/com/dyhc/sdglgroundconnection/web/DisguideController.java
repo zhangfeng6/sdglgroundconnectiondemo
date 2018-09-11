@@ -32,10 +32,8 @@ public class DisguideController {
     public ReponseResult findDisguide(Integer dispatchId){
         try{
             Disguide disguide=disguideService.DisguideAll(dispatchId);
-            logger.info(" method:showTravelupdlala  查看行程计划成功！");
             return ReponseResult.ok(disguide,"查看行程计划成功！");
         }catch (Exception e) {
-            logger.error(" method:showTravelupdlala  查看行程计划失败，系统出现异常！");
             e.printStackTrace();
             ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
             return err;

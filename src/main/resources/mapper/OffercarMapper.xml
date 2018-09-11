@@ -8,6 +8,10 @@
         values(#{typeId},#{offerId},#{costPrice},#{offer},1,0,1)
     </insert>
 
+    <update id="updateOffercar">
+        update offercar set typeId=#{typeId},offerId=#{offerId},costPrice=#{costPrice},offer=#{offer},`number`=#{number},creater=#{creater} where offerId=#{offerId}
+    </update>
+
     <select id="selectOffercarByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offercar">
         SELECT * FROM offercar o,dictionaries d WHERE o.typeId=d.`dictionariesId` and d.`typeCode`='VEHICLE' AND o.whetherDel!=1 AND o.offerId=#{offerId}
     </select>

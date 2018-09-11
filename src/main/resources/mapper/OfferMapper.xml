@@ -25,6 +25,10 @@
         values(#{travelId},#{travelStartTime},#{travelEndTime},#{number},#{tourist},#{trip},#{offer},#{remarks},#{reception},2,1,#{costPrice},#{notcontain},#{creationDate})
     </insert>
 
+    <update id="updateOffer">
+        update offer set travelId=#{travelId},travelStartTime=#{travelStartTime},travelEndTime=#{travelEndTime},`number`=#{number},tourist=#{tourist},trip=#{trip},offer=#{offer},remarks=#{remarks},reception=#{reception},whetherDel=2,creater=1,costPrice=#{costPrice},notcontain=#{notcontain},creationDate=#{creationDate} where offerId=#{offerId}
+    </update>
+
     <select id="selectOfferByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offer">
           select * from offer where whetherDel!=1 and offerId=#{offerId}
     </select>

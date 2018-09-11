@@ -24,6 +24,15 @@ public interface OfferlineMapper extends CommonMapper<Offerline>{
      */
     Offerline selectByofferLineRecordId(@Param("offerLineRecordId") Integer offerLineRecordId)throws Exception;
 
+
+    /**
+     * 赵伟伟
+     * 删除报价线路
+     * @param offerId
+     * @return
+     */
+    int delOfferline(@Param("offerId") Integer offerId);
+
     /**
      * 新增报价线路信息
      * @param offerline

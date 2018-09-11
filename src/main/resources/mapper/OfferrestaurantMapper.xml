@@ -8,6 +8,10 @@
         values(#{offerId},'DIET',#{dictionariesId},#{costPrice},#{offer},#{date},#{havemealsdate},0,1,#{howmanydays})
     </insert>
 
+    <delete id="delOfferrestaurant">
+        delete from offerrestaurant where offerId=#{offerId}
+    </delete>
+
     <select id="selectOfferRestaurantByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.Offerrestaurant">
         select * from offerrestaurant where whetherDel!=1 and offerId=#{offerId}
     </select>

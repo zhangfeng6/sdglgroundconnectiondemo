@@ -28,4 +28,13 @@ public interface OfferrestaurantService {
      * @return
      */
     List<Offerrestaurant> selectOfferRestaurantByOfferId(int offerId)throws Exception;
+
+
+    /**
+     * 赵伟伟
+     * 删除餐厅报价
+     * @param offerId
+     * @return
+     */
+    int delOfferrestaurant(@Param("offerId") Integer offerId);
 }

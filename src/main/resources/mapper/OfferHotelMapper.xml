@@ -8,6 +8,10 @@
         values(#{hotelId},#{offerId},#{costPrice},#{offer},0,1,#{howmanydays})
     </insert>
 
+    <delete id="delOfferHotel">
+        delete from offerhotel where offerId=#{offerId}
+    </delete>
+
     <select id="selectOfferHotelByOfferId" resultType="com.dyhc.sdglgroundconnection.pojo.OfferHotel">
         select * from offerhotel where  whetherDel!=1 and offerId=#{offerId}
     </select>
