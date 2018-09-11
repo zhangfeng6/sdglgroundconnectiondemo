@@ -23,6 +23,11 @@ public class OffercarServiceImpl implements OffercarService {
     }
 
     @Override
+    public int updateOffercar(Offercar offercar) throws Exception {
+        return offercarMapper.updateOffercar(offercar);
+    }
+
+    @Override
     public Offercar selectOffercarByOfferId(int offerId)throws Exception {
         return offercarMapper.selectOffercarByOfferId(offerId);
     }

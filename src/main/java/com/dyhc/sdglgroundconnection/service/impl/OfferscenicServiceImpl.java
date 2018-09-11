@@ -24,6 +24,11 @@ public class OfferscenicServiceImpl implements OfferscenicService {
     }
 
     @Override
+    public int delOfferscenic(Integer offerId) {
+        return offerscenicMapper.delOfferscenic(offerId);
+    }
+
+    @Override
     public List<Offerscenic> selectOfferscenicByOfferId(int offerId)throws Exception {
         return offerscenicMapper.selectOfferscenicByOfferId(offerId);
     }
