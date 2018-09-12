@@ -1,276 +1,470 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<style id="yangshi">
-		*{margin: 0 auto;}
-        table,table tr th, table tr td { border:1px solid #0094ff; height: 20px;}
-        table { min-height: 20px; line-height: 20px; text-align: center; border-collapse: collapse;width: 70%}
-        .cc{text-align: left;}  
-    </style>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
-	</head>
-	<body>
-	<div id="form1">
-		<div id="tupian" style="width: 635px;margin-left: 365px;">
-                <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
-       		 </div>
-		<table>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
+</head>
+<body>
+<div style="width: 1116px;border: 2px #0094FF solid;margin: 0px auto;">
+    <table border="1" cellspacing="0" cellpadding="0" width="1116px" style="text-align: center;border: 1px #0094FF solid" >
+        <thead>
+        <tr><td colspan="8" style="text-align: center;"><h1>地接导游报账明细表</h1></td></tr>
+        <tr><td width="200px">团号</td><td id="groundConnectionNumber"></td>
+            <td width="200px">抵离时间</td><td id="time"></td>
+            <td width="200px">线路</td><td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>组团社（单位）</td>
+            <td id="groupNumber"></td>
+            <td>人数</td>
+            <td id="num"></td>
+            <td>天数</td>
+            <td id="day"></td>
+            <td width="200px">客源地</td>
+            <td id="tourist"></td>
+        </tr>
+        </thead>
+        <!--
+            作者：贾晓亮
+            时间：2018-09-12
+            描述：明细表---住宿，餐厅，门票
+        -->
+        <tbody>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>住宿</td>
+                <td><table border="1" cellspacing="0" cellpadding="0" width="1100px" style="text-align: center;border: 1px #0094FF solid" >
+                    <thead>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
 
-			<tr>
-				<td colspan="17" style="text-align: center;">地接导游报账明细表</td>
-			</tr>
-			<tr>
-				<td colspan="2">团号</td>
-				<td colspan="4" id="groundConnectionNumber"></td>
-				<td colspan="2">抵离时间</td>
-				<td colspan="4" id="time"></td>
-				<td>线路</td>
-				<td colspan="4"></td>
-			</tr>
-			<tr>
-				<td colspan="3">组团社（单位）</td>
-				<td colspan="3" id="groupNumber"></td>
-				<td>人数</td>
-				<td colspan="4" id="num"></td>
-				<td>天数</td>
-				<td colspan="2" id="day"></td>
-				<td colspan="1">客源地</td>
-				<td colspan="2" id="tourist"></td>
-			</tr>
-			<tr>
-				<td rowspan="2">住<br>宿</td>
-				<td colspan="20" >
-				<table border="0"  cellspacing="0" cellpadding="0" style="width: 1100px">
-					<thead>
-					<td>日期</td>
-					<td colspan="2">酒店名称</td>
-					<td colspan="2">房价</td>
-					<td>间数</td>
-					<td colspan="2">陪同床位</td>
-					<td colspan="2">陪同床价</td>
-					<td colspan="2">天数</td>
-					<td colspan="2">小计</td>
-					<td colspan="2">支付方式</td></thead>
-					<tbody id="zhusu"></tbody>
-				</table>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">住宿合计</td>
-				<td colspan="3" id="zshj"></td>
-				<td colspan="2">其中导游付</td>
-				<td colspan="4" id="xianfu"></td>
-				<td colspan="2">签单合计</td>
-				<td colspan="3" id="qiandan"></td>
-			</tr>
-			<tr id="reportrestaurant">
-					<td rowspan="4">餐厅</td>
-					<td>午餐日期</td>
-					<td>餐厅名称</td>
-					<td>餐标</td>
-					<td>人数</td>
-					<td>次数</td>
-					<td>其它</td>
-					<td>小计</td>
-					<td>支付方式</td>
-					<td>晚餐日期</td>
-					<td>餐厅名称</td>
-					<td>餐标</td>
-					<td>人数</td>
-					<td>次数</td>
-					<td>其它</td>
-					<td>小计</td>
-					<td>支付方式</td>
-				</tr>
-				<tr>
-					<td colspan="2">用餐合计</td>
-					<td colspan="3" id="wucan"></td>
-					<td colspan="2">其中导游付</td>
-					<td colspan="4" id="xianfu2"></td>
-					<td colspan="2">签单合计</td>
-					<td colspan="3" id="qiandan2"></td>
-				</tr>
-				<tr id="menpiao">
-					<td rowspan="9">门票</td>
-					<td colspan="2">景点门票</td>
-					<td colspan="2">单价</td>
-					<td>人数</td>
-					<td colspan="2">小计</td>
-					<td colspan="2">支付方式</td>
-					<td colspan="2">景点门票</td>
-					<td>单价</td>
-					<td>人数</td>
-					<td>小计</td>
-					<td colspan="3">支付方式</td>
-				</tr>
+                    </thead>
+                    <tbody id="one">
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
+                    </tbody>
 
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="2">门票合计</td>
-					<td colspan="3" id="xj3"></td>
-					<td colspan="2">其中导游付</td>
-					<td colspan="4" id="xianfu3"></td>
-					<td colspan="2">签单合计</td>
-					<td colspan="3" id="qiandan3"></td>
-				</tr>
-				<tr>
-					<td rowspan="2">车费</td>
-					<td>过路费</td>
-					<td>停车费</td>
-					<td>预付车费</td>
-					<td colspan="2">合计</td>
-					<td rowspan="2">出团补助</td>
-					<td colspan="3">元/天</td>
-					<td colspan="2">天数</td>
-					<td colspan="2">导游数</td>
-					<td colspan="2">合计</td>
-					<td>支付方式</td>
-				</tr>
-				<tr>
-					<td id="guolufei"></td>
-					<td id="tingchefei"></td>
-					<td id="yufuchefei"></td>
-					<td colspan="2" id="chefeiheji"></td>
-					<td colspan="3" id="yuan"></td>
-					<td colspan="2" id="tianshu"></td>
-					<td colspan="2" id="daoyoushu"></td>
-					<td colspan="2" id="buzhuheji"></td>
-					<td colspan="2"></td>
-				</tr>
-				<tr>
-					<td rowspan="4" colspan="2">其他支出</td>
-					<td colspan="15">请列出项目及计算过程：</td>
-				</tr>
-				<tr>
-					<td colspan="15" id="bbk1"></td>
-				</tr>
-				<tr>
-					<td colspan="15"></td>
-				</tr>
-				<tr>
-					<td>导游付</td>
-					<td colspan="3" id="bbk2"></td>
-					<td>签单</td>
-					<td colspan="5" id="bbk3"></td>
-					<td>合计</td>
-					<td colspan="4" id="bbk4"></td>
-				</tr>
-				<tr>
-					<td class="cc" colspan="17">交回其它单据及内容（包括购物签单）：</td>
-				</tr>
-				<tr>
-					<td colspan="17"></td>
-				</tr>
-				<tr>
-					<td class="cc" colspan="17">现收团款明细：</td>
-				</tr>
-				<tr>
-					<td colspan="17"></td>
-				</tr>
-				<tr>
-					<td colspan="2">原借贷</td>
-					<td colspan="3"></td>
-					<td>外售团款</td>
-					<td colspan="3"></td>
-					<td colspan="2">导游现付合计</td>
-					<td colspan="2"></td>
-					<td colspan="2">报/退款</td>
-					<td colspan="2"></td>
-				</tr>
-				<tr>
-					<td>备注</td>
-					<td class="cc" colspan="16">导游以全票制报销，票据必须与所列明细相符，按派团单上的标准报销，发票要与所列的酒店，餐厅，景点的名称相符，不得以其他发票代替。按以上所列分类粘贴（火车，飞机票无原件可以用复印件代替）</td>
-				</tr>
-				<tr>
-					<td colspan="2">报账日期</td>
-					<td colspan="3"></td>
-					<td>导游签字</td>
-					<td colspan="5"></td>
-					<td colspan="2">审核人批示</td>
-					<td colspan="4"></td>
-				</tr>
-		</table>
-	</div>
-	<p><button style=" margin-left: 500px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印地接导游报账明细</button></p>
-	</body>
-	<script th:src="@{/js/LodopFuncs.js}"></script>
-	<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+                    <tfoot>
+                    <tr>
+                        <td>住宿合计</td>
+                        <td colspan="2" id="zshj"></td>
+                        <td>其中导游付</td>
+                        <td colspan="2" id="xianfu"></td>
+                        <td>签单合计</td>
+                        <td colspan="2" id="qiandan"></td>
+                    </tr>
+                    </tfoot>
+                </table></td>
+            </tr>
+            <!--
+                作者：贾晓亮
+                时间：2018-09-12
+                描述：餐厅
+            -->
+            <tr>
+                <td>餐厅</td>
+                <td><table border="1" cellspacing="0" cellpadding="0" width="1100px" style="text-align: center;border: 1px #0094FF solid" >
+                    <thead>
+                    <tr>
+                        <td>午餐日期</td>
+                        <td>餐厅名称</td>
+                        <td>餐标</td>
+                        <td>人数</td>
+                        <td>次数</td>
+                        <td>其他</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+
+                        <td>晚餐日期</td>
+                        <td>餐厅名称</td>
+                        <td>餐标</td>
+                        <td>人数</td>
+                        <td>次数</td>
+                        <td>其他</td>
+                        <td>小计</td>
+                        <td>支付方式</td>
+                    </tr>
+
+                    </thead>
+                    <tbody id="two">
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                    </tr>
+                    <tr>
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+
+                        <td>日期</td>
+                        <td>酒店</td>
+                        <td>房价</td>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td>小计</td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot>
+                    <tr>
+                        <td>用餐合计</td>
+                        <td colspan="5" id="wucan"></td>
+                        <td>其中导游付</td>
+                        <td colspan="5" id="xianfu2"></td>
+                        <td>签单合计</td>
+                        <td colspan="5" id="qiandan2"></td>
+                    </tr>
+                    </tfoot>
+                </table></td>
+            </tr>
+            <!--
+                作者：贾晓亮
+                时间：2018-09-12
+                描述：门票
+            -->
+            <tr>
+                <td>门票</td>
+                <td><table border="1" cellspacing="0" cellpadding="0" width="1100px" style="text-align: center;border: 1px #0094FF solid" >
+                    <thead>
+                    <tr>
+                        <td>景点门票</td>
+                        <td>单价</td>
+                        <td>人数</td>
+                        <td>小计</td>
+                        <td colspan="2">支付方式</td>
+                    </tr>
+
+                    </thead>
+                    <tbody id="three">
+                    <tr>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td colspan="2">小计</td>
+                    </tr>
+                    <tr>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td colspan="2">小计</td>
+                    </tr>
+                    <tr>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td colspan="2">小计</td>
+                    </tr>
+                    <tr>
+                        <td>间数</td>
+                        <td>陪同床位</td>
+                        <td>陪同床价</td>
+                        <td>天数</td>
+                        <td colspan="2">小计</td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot>
+                    <tr>
+                        <td>门票合计</td>
+                        <td width="80px" id="xj3"></td>
+                        <td width="120px">其中导游付</td>
+                        <td id="xianfu3"></td>
+                        <td>签单合计</td>
+                        <td width="120px" id="qiandan3"></td>
+                    </tr>
+                    </tfoot>
+                </table></td>
+            </tr>
+        </table>
+        </tbody>
+        <tfoot>
+        <!--
+                作者：贾晓亮
+                时间：2018-09-12
+                描述：车费
+            -->
+        <table border="0" cellspacing="0" cellpadding="0" width="1116px" style="text-align: center;border: 1px #0094FF solid">
+            <tr>
+                <td>车费</td>
+                <td>
+                    <table border="1" cellspacing="0" cellpadding="0" width="530px" style="text-align: center;border: 1px #0094FF solid">
+                        <thead><tr><td>过路费</td><td>停车费</td><td>预付车费</td><td>合计</td></tr></thead>
+                        <tbody>
+                        <tr>
+                            <td id="guolufei">11</td>
+                            <td id="tingchefei">111</td>
+                            <td id="yufuchefei">11</td>
+                            <td id="chefeiheji">11</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>出团补助</td>
+                <td>
+                    <table border="1" cellspacing="0" cellpadding="0" width="530px" style="text-align: center;border: 1px #0094FF solid">
+                        <tr><td>元/天</td><td>天数</td><td>导游数</td><td>合计</td><td>支付方式</td></tr>
+                        <tbody><tr>
+                            <td id="yuan">11</td>
+                            <td id="tianshu">111</td>
+                            <td id="daoyoushu">11</td>
+                            <td id="buzhuheji">11</td>
+                            <td>导游付</td>
+                        </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <!--结束-->
+            <tr>
+                <!--
+                    作者：贾晓亮
+                    时间：2018-09-12
+                    描述：其他支出
+                -->
+                <table border="0" cellspacing="0" cellpadding="0" width="1116px" style="border: 1px #0094FF solid">
+                    <tr>
+                        <td>
+                            <table border="1" cellspacing="0" cellpadding="0" height="113px" width="80px" style="border: 1px #0094FF solid">
+                                <tr><td>其他支出</td></tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table border="1" cellspacing="0" cellpadding="0" style="border: 1px #0094FF solid">
+                                <tr height="45px"><td>请列明项目及其计算过程：<span id="bbk1"></span></td></tr>
+                                <tr height="20px"><td></td></tr>
+                                <tr height="20px"><td></td></tr>
+                                <tr height="20px"><td>
+                                    <table border="1" cellspacing="0" cellpadding="0" width="1035px" style="text-align: center;border: 1px #0094FF solid">
+                                        <tr><td width="120px">导游付</td><td id="bbk2"></td>
+                                            <td width="120px">签单</td><td id="bbk3"></td>
+                                            <td width="120px">合计</td><td id="bbk4"></td>
+                                        </tr>
+                                    </table>
+                                </td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+            <!--
+                作者：贾晓亮
+                时间：2018-09-12
+                描述：最先面的开始了
+            -->
+            <tr>
+                <table border="1" cellspacing="0" cellpadding="0" width="1116px" height="170px" style="font-size: 14px;border: 1px #0094FF solid">
+                    <tr><td>交回的其他单据和内容（包括购物签单）：</td></tr>
+                    <tr><td></td></tr>
+                    <tr><td>现收团款明细：</td></tr>
+                    <tr><td></td></tr>
+                    <tr height="25px"><td>
+                        <table border="1" cellspacing="0" cellpadding="0" width="1116px" style="text-align: center;border: 1px #0094FF solid" height="25px">
+                            <tr>
+                                <td width="120px">原借款</td>
+                                <td></td>
+                                <td width="120px">外售团款</td>
+                                <td></td>
+                                <td width="120px">导游现付合计</td>
+                                <td></td>
+                                <td width="120px">报/退款</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td></tr>
+                    <tr height="42px"><td>
+                        <table border="1" cellspacing="0" cellpadding="0" width="1116px" style="border: 1px #0094FF solid">
+                            <tr>
+                                <td>备注</td>
+                                <td>导游以全票制报销，票据必须与所列明细相符，按派团单上的标准报销，发票要与所列的酒店，餐厅，景点的名称相符，不得以其他发票代替。按以上所列分类粘贴（火车，飞机票无原件可以用复印件代替）</td>
+                            </tr>
+                        </table>
+                    </td></tr>
+                    <tr height="21px"><td>
+                        <table border="1" cellspacing="0" cellpadding="0" width="1116px" style="border: 1px #0094FF solid">
+                            <tr>
+                                <td width="120px">报账日期 </td>
+                                <td></td>
+                                <td width="120px">导游签字</td>
+                                <td></td>
+                                <td width="120px">审核人批示</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td></tr>
+                </table>
+            </tr>
+        </table>
+        </tfoot>
+    </table>
+</div>
+<p><button style=" margin-left: 500px" class='layui-btn layui-btn-normal layui-btn-radius' type="button" id="baocun" onclick="prn1_preview()">打印地接导游报账明细</button></p>
+</body>
+<script th:src="@{/js/LodopFuncs.js}"></script>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
 <script>
-   $(function () {
-       kaishi();
-       dispatchShow();
-       ReportDetail();//报账总表
-   })
+    $(function () {
+        kaishi();
+        dispatchShow();
+        ReportDetail();//报账总表
+    })
+    var id;
 
-var id;
-
-   function kaishi(){
-       $.ajax({
-           url:"/sdglGroundConnection/Travel/bao",
-           data:{},
-           dataType:"json",
-           async: false,
-           type:"get",
-           success:function (data) {
-               id=data.data;
-           }
-       })
-   }
-
-
+    function kaishi(){
+        $.ajax({
+            url:"/sdglGroundConnection/Travel/bao",
+            data:{},
+            dataType:"json",
+            async: false,
+            type:"get",
+            success:function (data) {
+                id=data.data;
+            }
+        })
+    }
 
     function  ReportDetail() {
         $.ajax({
@@ -279,57 +473,59 @@ var id;
             dataType:"json",
             type:"GET",
             success:function (e) {
-             var one="";
-             var two="";
-             var three="";
-             var xj=0;
-             var xj2=0;
-             var xj3=0;
-             var xianfu=0;
-             var qiandan=0;
-             var xianfu2=0;
-             var qiandan2=0;
-             var xianfu3=0;
-             var qiandan3=0;
-             $("#guolufei").html(e.data.reportfare.tolls);
-             $("#tingchefei").html(e.data.reportfare.parkingFee);
-             $("#yufuchefei").html(e.data.reportfare.prepaidFare);
-             var hj4=Number($("#guolufei").text())+Number($("#tingchefei").text())+Number($("#yufuchefei").text());
-             //开始出团补助
+                var one="";
+                var two="";
+                var three="";
+                var xj=0;
+                var xj2=0;
+                var xj3=0;
+                var xianfu=0;
+                var qiandan=0;
+                var xianfu2=0;
+                var qiandan2=0;
+                var xianfu3=0;
+                var qiandan3=0;
+                $("#guolufei").html(e.data.reportfare.tolls);
+                $("#tingchefei").html(e.data.reportfare.parkingFee);
+                $("#yufuchefei").html(e.data.reportfare.prepaidFare);
+                var hj4=Number($("#guolufei").text())+Number($("#tingchefei").text())+Number($("#yufuchefei").text());
+                //开始出团补助
                 $("#yuan").html(e.data.reportqutsubsidy.dailyCost);
                 $("#tianshu").html(e.data.reportqutsubsidy.nums);
                 $("#daoyoushu").html(e.data.reportqutsubsidy.guideNum);
                 var buzhuzhichu=Number($("#yuan").text())*Number( $("#tianshu").text());
-				$("#buzhuheji").html(buzhuzhichu);
-				$("#chefeiheji").html(hj4);
-               //其他支出
-				$("#bbk1").html(e.data.reportingotherexpenses.remarks);
+                $("#buzhuheji").html(buzhuzhichu);
+                $("#chefeiheji").html(hj4);
+                //其他支出
+                $("#bbk1").html(e.data.reportingotherexpenses.remarks);
                 $("#bbk2").html(e.data.reportingotherexpenses.guidedTour);
                 $("#bbk3").html(e.data.reportingotherexpenses.signing);
                 $("#bbk4").html(e.data.reportingotherexpenses.total);
-             for (var i=0;i<e.data.reportaccommodationShow.length;i++){
-				 one+="<tr><td>"+e.data.reportaccommodationShow[i].liveDate+"</td>" +
-                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].hotelName+"</td>" +
-                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].housePrice+"</td>" +
-                     "<td>"+e.data.reportaccommodationShow[i].roomNum+"</td>" +
-                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].accompanyingBed+"</td>" +
-                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].accompanyingPrice+"</td>" +
-                     "<td colspan='2'>1</td>" +
-                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].subtotal+"</td>" +
-                     "<td colspan='2'>"+e.data.reportaccommodationShow[i].payMethods+"</td></tr>";
-				 xj+=e.data.reportaccommodationShow[i].subtotal;
-				 if (e.data.reportaccommodationShow[i].payMethods=="签单"){
-                     qiandan+=e.data.reportaccommodationShow[i].subtotal;
-				 } else if(e.data.reportaccommodationShow[i].payMethods=="现付"){
-                     xianfu+=e.data.reportaccommodationShow[i].subtotal;
-				 }
-			 }
-             $("#zshj").html(xj);
-             $("#xianfu").html(xianfu);
-             $("#qiandan").html(qiandan);
-			 for (var i=0;i<e.data.reportrestaurant.length;i++){
-			     var wubao=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
-                 var wubao2=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
+                for (var i=0;i<e.data.reportaccommodationShow.length;i++){
+                    one+=" <tr>" +
+                        "<td>"+e.data.reportaccommodationShow[i].liveDate+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].hotelName+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].housePrice+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].roomNum+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].accompanyingBed+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].accompanyingPrice+"</td>" +
+                        "<td>"+1+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].subtotal+"</td>" +
+                        "<td>"+e.data.reportaccommodationShow[i].payMethods+"</td>" +
+                        "</tr>";
+                    xj+=e.data.reportaccommodationShow[i].subtotal;
+                    if (e.data.reportaccommodationShow[i].payMethods=="签单"){
+                        qiandan+=e.data.reportaccommodationShow[i].subtotal;
+                    } else if(e.data.reportaccommodationShow[i].payMethods=="现付"){
+                        xianfu+=e.data.reportaccommodationShow[i].subtotal;
+                    }
+                }
+                $("#zshj").html(xj);
+                $("#xianfu").html(xianfu);
+                $("#qiandan").html(qiandan);
+                for (var i=0;i<e.data.reportrestaurant.length;i++){
+                    var wubao=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
+                    var wubao2=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
                     two+="<tr>\n" +
                         "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].lunchDate+"</td>\n" +
                         "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].luncheonName+"</td>\n" +
@@ -349,26 +545,26 @@ var id;
                         "\t\t\t\t\t<td>"+e.data.reportrestaurant[i].dinnerPayMethods+"</td>\n" +
                         "\t\t\t\t</tr>";
                     xj2+=Number(wubao)+Number(wubao2);
-                 if (e.data.reportrestaurant[i].lunchPayMethods=="签单"){
-                     var wubaoa=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
-                     qiandan2+=wubaoa;
-                 } else if(e.data.reportrestaurant[i].lunchPayMethods=="付现"){
-                     var wubaoa=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
-                     xianfu2+=wubaoa;
-                 }
-                 if (e.data.reportrestaurant[i].dinnerPayMethods=="签单"){
-                     var wubaog=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
-                     qiandan2+=wubaog;
-                 } else if(e.data.reportrestaurant[i].dinnerPayMethods=="付现"){
-                     var wubaog=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
-                     xianfu2+=wubaog;
-                 }
+                    if (e.data.reportrestaurant[i].lunchPayMethods=="签单"){
+                        var wubaoa=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
+                        qiandan2+=wubaoa;
+                    } else if(e.data.reportrestaurant[i].lunchPayMethods=="付现"){
+                        var wubaoa=Number(e.data.reportrestaurant[i].lunchMeal)*Number(e.data.reportrestaurant[i].lunchEatNum);
+                        xianfu2+=wubaoa;
+                    }
+                    if (e.data.reportrestaurant[i].dinnerPayMethods=="签单"){
+                        var wubaog=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
+                        qiandan2+=wubaog;
+                    } else if(e.data.reportrestaurant[i].dinnerPayMethods=="付现"){
+                        var wubaog=Number(e.data.reportrestaurant[i].dinnerMeal)*Number(e.data.reportrestaurant[i].dinnerEatNum);
+                        xianfu2+=wubaog;
+                    }
 
 
                 }
                 $("#wucan").html(xj2);
                 $("#xianfu2").html(xianfu2);
-				$("#qiandan2").html(qiandan2);
+                $("#qiandan2").html(qiandan2);
                 for (var i=0;i<e.data.reportticket.length;i++){
                     var bbk=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
                     three+="<tr>\n" +
@@ -384,7 +580,7 @@ var id;
                         "\t\t\t\t\t<td></td>\n" +
                         "\t\t\t\t\t<td></td>\n" +
                         "\t\t\t\t</tr>";
-                         xj3+=bbk;
+                    xj3+=bbk;
                     if (e.data.reportticket[i].payMethods=="签单"){
                         var bbk2=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
                         qiandan3+=bbk2;
@@ -393,70 +589,82 @@ var id;
                         xianfu3+=bbk3;
                     }
                 }
-              $("#xj3").html(xj3);
-              $("#xianfu3").html(xianfu3);
-              $("#qiandan3").html(qiandan3);
-             $("#zhusu").html(one);
-			 $("#reportrestaurant").after(two);
-			 $("#menpiao").after(three);
+                $("#xj3").html(xj3);
+                $("#xianfu3").html(xianfu3);
+                $("#qiandan3").html(qiandan3);
+                $("#zhusu").html(one);
+                $("#reportrestaurant").after(two);
+                $("#menpiao").after(three);
             },
             error:function () {
                 alert("错误，请联系管理员！");
             }
         })
     }
-function dispatchShow() {
-    $.ajax({
-        url:"/sdglGroundConnection/dispatch/dispatch",
-        data:{dispatchId:id},
-        dataType:"json",
-        type:"GET",
-        success:function (e) {
-			$("#groundConnectionNumber").html(e.data.groundConnectionNumber);
-			$("#time").html(e.data.travelStartTime+"　到　"+e.data.travelEndTime);
-			$("#groupNumber").html(e.data.groupNumber);
-			$("#num").html(e.data.num);
-            var time=daysBetween(e.data.travelStartTime,e.data.travelEndTime);
-			$("#day").html(time);
-			$("#tourist").html(e.data.tourist);
-        },
-        error:function () {
-            alert("错误，请联系管理员！");
-        }
-    })
-}
-   function daysBetween(sDate1,sDate2){
-  //Date.parse() 解析一个日期时间字符串，并返回1970/1/1 午夜距离该日期时间的毫秒数
-       var time1 = Date.parse(new Date(sDate1));
-       var time2 = Date.parse(new Date(sDate2));
-       var nDays = Math.abs(parseInt((time2 - time1)/1000/3600/24));
-       return nDays;
-   };
 
-   var LODOP; //声明为全局变量
-   // 打印预览
-   function prn1_preview() {
-       CreateOneFormPage();
-       LODOP.PREVIEW();
-   };
-   // 直接打印
-   function prn1_print() {
-       CreateOneFormPage();
-       LODOP.PRINT();
-   };
-   // 选择打印机
-   function prn1_printA() {
-       CreateOneFormPage();
-       LODOP.PRINTA();
-   };
-   // 创建打印页面
-   function CreateOneFormPage(){
-       LODOP=getLodop();
-       LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
-       LODOP.SET_PRINT_STYLE("FontSize",18);
-       LODOP.SET_PRINT_STYLE("Bold",1);
-       var strBodyStyle = "<style>" + document.getElementById("yangshi").innerHTML + "</style>";
-       LODOP.ADD_PRINT_HTM(10,20,500,5000,strBodyStyle+document.getElementById("form1").innerHTML);
-   };
+
+
+
+    function dispatchShow() {
+        $.ajax({
+            url:"/sdglGroundConnection/dispatch/dispatch",
+            data:{dispatchId:id},
+            dataType:"json",
+            type:"GET",
+            success:function (e) {
+                $("#groundConnectionNumber").html(e.data.groundConnectionNumber);
+                $("#time").html(e.data.travelStartTime+"　到　"+e.data.travelEndTime);
+                $("#groupNumber").html(e.data.groupNumber);
+                $("#num").html(e.data.num);
+                var time=daysBetween(e.data.travelStartTime,e.data.travelEndTime);
+                $("#day").html(time);
+                $("#tourist").html(e.data.tourist);
+            },
+            error:function () {
+                alert("错误，请联系管理员！");
+            }
+        })
+    }
+
+
+
+
+
+
+
+
+    function daysBetween(sDate1,sDate2){
+        //Date.parse() 解析一个日期时间字符串，并返回1970/1/1 午夜距离该日期时间的毫秒数
+        var time1 = Date.parse(new Date(sDate1));
+        var time2 = Date.parse(new Date(sDate2));
+        var nDays = Math.abs(parseInt((time2 - time1)/1000/3600/24));
+        return nDays;
+    };
+
+    var LODOP; //声明为全局变量
+    // 打印预览
+    function prn1_preview() {
+        CreateOneFormPage();
+        LODOP.PREVIEW();
+    };
+    // 直接打印
+    function prn1_print() {
+        CreateOneFormPage();
+        LODOP.PRINT();
+    };
+    // 选择打印机
+    function prn1_printA() {
+        CreateOneFormPage();
+        LODOP.PRINTA();
+    };
+    // 创建打印页面
+    function CreateOneFormPage(){
+        LODOP=getLodop();
+        LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+        LODOP.SET_PRINT_STYLE("FontSize",18);
+        LODOP.SET_PRINT_STYLE("Bold",1);
+        var strBodyStyle = "<style>" + document.getElementById("yangshi").innerHTML + "</style>";
+        LODOP.ADD_PRINT_HTM(10,20,500,5000,strBodyStyle+document.getElementById("form1").innerHTML);
+    };
 </script>
 </html>

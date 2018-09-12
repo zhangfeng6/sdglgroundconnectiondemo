@@ -114,22 +114,22 @@
     }
 
 
-    //驳回审核
-    function bhShenHe(reportDetailId) {
-        $.ajax({
-            url: "/sdglGroundConnection/reportdetail/bhShenHe",
-            data: {"reportDetailId": reportDetailId},
-            dataType: "json",
-            type: "post",
-            success:function (result) {
-                if (result.data==1){
-                    alert("驳回成功");
-                    search();
-                }
-
-            }
-        });
-    }
+    // //驳回审核
+    // function bhShenHe(reportDetailId) {
+    //     $.ajax({
+    //         url: "/sdglGroundConnection/reportdetail/bhShenHe",
+    //         data: {"reportDetailId": reportDetailId},
+    //         dataType: "json",
+    //         type: "post",
+    //         success:function (result) {
+    //             if (result.data==1){
+    //                 alert("驳回成功");
+    //                 search();
+    //             }
+    //
+    //         }
+    //     });
+    // }
 
     //结算审核
     function jsShenHe(reportDetailId) {
@@ -186,8 +186,8 @@
                         "<li class=\"layui-nav-item\">\n" +
                         "<a href=\"detail.html?reportDetailId="+e.reportDetailId+"\"' style='color:blue'>详细信息</a>\n";
                         if (e.status==1) {
-                            context+="<a href='javascript:void(0)' onclick='tgShenHe("+e.reportDetailId+")' style='color:blue'>通过审核</a>\n"+
-                                "<a href='javascript:void(0)' onclick='bhShenHe("+e.reportDetailId+")' style='color:blue'>驳回审核</a>\n";
+                            context+="<a href='javascript:void(0)' onclick='tgShenHe("+e.reportDetailId+")' style='color:blue'>通过审核</a>\n";
+                                // "<a href='javascript:void(0)' onclick='bhShenHe("+e.reportDetailId+")' style='color:blue'>驳回审核</a>\n";
                         }
                         if (e.status==4) {
                             context+="<a href='javascript:void(0)' onclick='jsShenHe("+e.reportDetailId+")' style='color:blue'>结算报账</a>\n";
