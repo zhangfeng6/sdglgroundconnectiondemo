@@ -201,6 +201,7 @@ public class TravelController{
      * @param travelId
      * @return
      */
+    @LogNotes(operationType="组团社信息",content="修改")
     @RequestMapping("/findTravelupdlala.html")
     public ReponseResult findTravelupdlala(Integer travelId){
         try{

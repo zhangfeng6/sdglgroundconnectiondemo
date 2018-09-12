@@ -127,6 +127,7 @@ public class WeChatController {
      * 新增导游报账总信息（贾晓亮）
      * @return
      */
+    @LogNotes(operationType="导游报账总信息",content="新增")
     @RequestMapping("/dictionaries")
     @ResponseBody
     public ReponseResult dictionaries(
@@ -568,6 +569,7 @@ public class WeChatController {
      * @param request
      * @return
      */
+    @LogNotes(operationType="导游",content="修改")
     @RequestMapping("/updateTX")
     @ResponseBody
     public ReponseResult updateTX(HttpServletRequest request){
