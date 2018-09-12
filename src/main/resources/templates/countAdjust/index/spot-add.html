@@ -35,7 +35,6 @@
 									<label class="layui-form-label">等级：</label>
 									<div class="layui-inline">
 										<select name="typeId" lay-filter="status">
-											<option>wu</option>
 										</select>
 									</div>
 								</div>
@@ -322,7 +321,6 @@
          */
         function getScenicspotById() {
 			var scenicSpotId=$("input[name='scenicSpotId']").val();
-			alert(scenicSpotId);
 			if (scenicSpotId!=0) {
                 $.ajax({
                     type: "post",

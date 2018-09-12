@@ -181,9 +181,6 @@ public class WeChatController {
             Guide guide=guideService.login(username,mima);
             if (guide!=null){
                 if(mima.equalsIgnoreCase(guide.getPassword())){
-                    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                    HttpSession session=request.getSession();//创建session对象
-                    session.setAttribute("staff",guide);
                     logger.info("method:login 微信登录成功");
                     return ReponseResult.ok(guide,"登录成功");
                 }else {
