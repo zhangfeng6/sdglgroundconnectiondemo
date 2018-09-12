@@ -65,7 +65,7 @@
 			</div>
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="updateA()">立即提交</button>
+					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="panduan()">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
@@ -91,10 +91,33 @@
                $("input[name='telephone']").val(data.data.telephone);
                $("input[name='age']").val(data.data.age);
                $("#leixing").find("option:eq('"+(data.data.sex)+"')").attr("selected",true);
-
            },
            error: function () {
                alert("错误！");
+           }
+       })
+   }
+   /**
+    * 判断导游是否有重复证件号
+    */
+   function panduan() {
+       var certificate=$("input[name='certificate']").val().trim();
+       $.ajax({
+           url:"/sdglGroundConnection/Guide/pdcertificate",
+           async:false,
+           data:{certificate:certificate},
+           dataType:"json",
+           type:"POST",
+           success:function (e) {
+               if (e.data!=null){
+                   alert("该证件号已重复，请重新填写！");
+                   return;
+               } else{
+                   updateA();
+               }
+           },
+           error:function () {
+               alert("系统出错");
            }
        })
    }
@@ -123,6 +146,7 @@
                   var guide=$("#jxlshuai").serialize();
                   $.ajax({
                       url: "/sdglGroundConnection/Guide/guideUpdate",
+                      async:false,
                       data: guide,
                       dataType: "json",
                       type: "get",
