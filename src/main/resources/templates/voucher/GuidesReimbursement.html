@@ -568,11 +568,11 @@
                 for (var i=0;i<e.data.reportticket.length;i++){
                     var bbk=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
                     three+="<tr>\n" +
-                        "\t\t\t\t\t<td colspan='2'>"+e.data.reportticket[i].attrName+"</td>\n" +
-                        "\t\t\t\t\t<td colspan='2'>"+e.data.reportticket[i].price+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportticket[i].attrName+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportticket[i].price+"</td>\n" +
                         "\t\t\t\t\t<td>"+e.data.reportticket[i].nums+"</td>\n" +
                         "\t\t\t\t\t<td colspan='2'>"+bbk+"</td>\n" +
-                        "\t\t\t\t\t<td colspan='2'>"+e.data.reportticket[i].payMethods+"</td>\n" +
+                        "\t\t\t\t\t<td>"+e.data.reportticket[i].payMethods+"</td>\n" +
                         "\t\t\t\t\t<td colspan='2'></td>\n" +
                         "\t\t\t\t</tr>";
                     xj3+=bbk;
