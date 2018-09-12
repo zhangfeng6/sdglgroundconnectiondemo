@@ -329,7 +329,12 @@ public class DispatchServiceImpl implements DispatchService {
                 s.setCreateBy(1);
                 s.setCreateDate(new Date());
             }
-            disshoppMapper.insertList(disshoppList);
+            if(disshoppList.size()>0){
+                if(disattrList.get(1)!=null){
+                    disshoppMapper.insertList(disshoppList);
+                }
+            }
+
             for (Disrestaurant r:disrestaurantList) {
                 r.setOfferId(infoId.getDispatchId());
                 r.setStatus(0);
@@ -455,7 +460,7 @@ public class DispatchServiceImpl implements DispatchService {
             List<Dispatchhotel> dispatchhotels =dispatchhotelService.dispatchhotelSelectAll(dispatchId);
             dispatch.setDispatchhotel(dispatchhotels);
             dispatch.setDisguide(disguideService.selectNameAll(dispatchId));
-            dispatch.setStaff(staffMapper.nameStaff(dispatchId));
+            dispatch.setStaff(staffMapper.nameStaff(dispatch.getCreater()));
         } catch (Exception e) {
             e.printStackTrace();
         }

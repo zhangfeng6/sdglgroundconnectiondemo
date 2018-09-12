@@ -466,7 +466,9 @@ public class EnterCountAdjustPageController {
     @RequestMapping("/Quotation-detail.html")
     public String  QuotationDetail(@RequestParam(value = "id",required = false)Integer id,
                                    @RequestParam(value = "did",required = false)Integer did,
-                                   @RequestParam(value = "offer",required = false)String offer, Model model) {
+                                   @RequestParam(value = "offer",required = false)String offer,
+                                   @RequestParam(value = "zhidu",required = false)Integer zhidu,
+                                   Model model) {
         if(id!=null&&id!=0){
             model.addAttribute("id",id);
         }
@@ -475,6 +477,9 @@ public class EnterCountAdjustPageController {
         }
         if(offer!=null&&!offer.equals("")){
             model.addAttribute("offer",offer);
+        }
+        if(zhidu!=null&&zhidu!=0){
+            model.addAttribute("zhidu",zhidu);
         }
         return "countAdjust/index/Quotation-detail";
     }

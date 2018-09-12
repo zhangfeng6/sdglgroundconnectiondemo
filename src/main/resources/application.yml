@@ -1,6 +1,6 @@
 # 端口号配置
 server:
-  port: 80
+  port: 8080
   servlet:
     context-path: /sdglGroundConnection
 # 数据源配置
@@ -13,7 +13,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/toaccessthe?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: Dyhc123..
+    password: 123456
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     # 下面为连接池的补充设置，应用到上面所有数据源中
@@ -65,7 +65,7 @@ pagehelper:
 file:
   staticAccessPath: /api/image/**  # 静态资源对外暴露的访问路径
   windowsUploadFolder: D://Y2\世达国旅/sdglGroundConnection/src/main/resources/static/images/  # windows文件上传目录
-  linuxUploadFolder: /root/sdglGroundConnection/uploadFiles/  # linux文件上传目录
+  linuxUploadFolder: /root/uploadFiles/  # linux文件上传目录
 
 
 #redis配置

@@ -15,6 +15,7 @@
 	<input type="hidden" name="offerId" th:value="${id}"/>
 	<input type="hidden" name="Did" th:value="${did}"/>
 	<input type="hidden" id="offer" name="offer" th:value="${offer}"/>
+	<input type="hidden" name="zhidu" th:value="${zhidu}"/>
 	<div id="divhead">
 	<form class="layui-form layui-form-pane" action="">
 			<table border="0" cellspacing="0" cellpadding="0">
@@ -180,7 +181,8 @@
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><label class="layui-form-label">接团时间：</label></td>
-									<td colspan="3"><input type="text" name="clusterTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+									<td colspan="3">
+										<input type="datetime-local" name="clusterTime" placeholder="yyyy-MM-dd hh:mm:ss"  lay-ignore style="width: 190px;height: 32px;" ></td>
 								</tr>
 							</table>
 						</td>
@@ -243,14 +245,6 @@
 						<td><label class="layui-form-label">小费：</label></td>
 						<td><input type="text" name="xiaofei"  class="layui-input"></td>
 						<td colspan="2">
-						<table border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td><label class="layui-form-label">导游借款：</label></td>
-								<td><input type="text" name="loan"  class="layui-input"></td>
-							</tr>
-						</table>
-					</td>
-						<td colspan="2">
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td><label class="layui-form-label">客源地：</label></td>
@@ -262,12 +256,12 @@
 					<tr>
 						<td><label class="layui-form-label">车队</label></td>
 						<td>
-							<select name="vehicle" onchange="typechange(this,'cartype')" style="height: 35px;width:233px;" lay-ignore>
+							<select name="vehicle"  onchange="typechange(this,'cartype')" style="height: 35px;width:233px;" lay-ignore>
 								<option value="0">--请选择--</option>
 							</select>
 						</td>
 						<td>
-							<select name="carrental" onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
+							<select name="carrental"  onchange="emptynum(this)" style="height: 35px;width:180px;" lay-ignore>
 								<option value="0">--请选择车队类型--</option>
 							</select>
 						</td>
@@ -280,6 +274,12 @@
 						<td><label class="layui-form-label">车联系人：</label></td>
 						<td><input type="text" name="cheduilxr" class="layui-input"></td>
 						<td colspan="3">(如：张师傅，13333333333，晋H:88888)</td>
+					</tr>
+					<tr>
+						<td><label class="layui-form-label">导游借款：</label></td>
+						<td><input type="text" name="loan"  class="layui-input"></td>
+						<td><input type="button" value="合计预算" style="height: 35px;" onclick="countprice()"></td>
+						<td colspan="4"><span id="showheji"></span></td>
 					</tr>
 					<tr>
 						<td><label class="layui-form-label">备注：</label></td>
@@ -334,6 +334,13 @@
                 if(Did!=null&&Did!=0){
 					getdispatchById(Did);
 
+				}
+				var zhidu=$("input[name=zhidu]").val();
+				if(zhidu!=null&&zhidu!=0){
+                    $("select").attr("disabled","disabled");
+                    $("input").attr("disabled","disabled");
+                    $("textarea").attr("disabled","disabled");
+                    $("#baocun").hide();
 				}
 
             });
@@ -720,7 +727,15 @@
                 dispatch.carcontacts=$("input[name=cheduilxr]").val();
                 disguide.guideId=$("select[name=guide]").val();
                 disguide.disGuideId=$("select[name=guide]").attr("disGuideId");
-                cluster.clusterTime=$("input[name=clusterTime]").val();
+                var fmt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                var now=new Date();
+                x =$("input[name=clusterTime]").val();
+                now.setFullYear(parseInt(x.substring(0, 4)));
+                now.setMonth(parseInt(x.substring(5, 7)) - 1);
+                now.setDate(parseInt(x.substring(8, 10)));
+                now.setHours(parseInt(x.substring(11, 13)));
+                now.setMinutes(parseInt(x.substring(14, 16)));
+                cluster.clusterTime=fmt.format(now);
                 cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
                 cluster.clusterNo=$("input[name=clusterNo]").val();
                 cluster.clusterId=$("input[name=clusterTime]").attr("clusterId");
@@ -875,7 +890,15 @@
                 dispatch.guideId=$("select[name=guide]").val();
                 dispatch.carcontacts=$("input[name=cheduilxr]").val();
                 disguide.guideId=$("select[name=guide]").val();
-                cluster.clusterTime=$("input[name=clusterTime]").val();
+                var fmt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                var now=new Date();
+                x =$("input[name=clusterTime]").val();
+                now.setFullYear(parseInt(x.substring(0, 4)));
+                now.setMonth(parseInt(x.substring(5, 7)) - 1);
+                now.setDate(parseInt(x.substring(8, 10)));
+                now.setHours(parseInt(x.substring(11, 13)));
+                now.setMinutes(parseInt(x.substring(14, 16)));
+                cluster.clusterTime=fmt.format(now);
                 cluster.clusterAdderss=$("input[name=clusterAdderss]").val();
                 cluster.clusterNo=$("input[name=clusterNo]").val();
                 discar.typeId=$("select[name=carrental]").val();
@@ -985,6 +1008,7 @@
 					data:{dispatchId:Did},
 					type:"get",
 					dataType:"json",
+					async:false,
 					success:function (result) {
 						$("select[name=travel]").val(result.data["dispatch"].groupNumber);
 						$("input[name=num]").val(result.data["dispatch"].num);
@@ -992,9 +1016,11 @@
                         $("input[name=travelEndTime]").val(result.data["dispatch"].travelEndTime);
                         $("select[name=guide]").val(result.data["disguide"].guideId);
                         $("select[name=guide]").attr("disGuideId",result.data["disguide"].disGuideId);
-                        $("input[name=clusterTime]").val(result.data["cluster"].clusterTime);
+                        var jdate=result.data["cluster"].clusterTime.substring(0,10)+"T"+result.data["cluster"].clusterTime.substring(11);
+                        $("input[name=clusterTime]").val(jdate);
                         $("input[name=clusterTime]").attr("clusterId",result.data["cluster"].clusterId);
                         $("input[name=clusterAdderss]").val(result.data["cluster"].clusterAdderss);
+
                         $("input[name=clusterNo]").val(result.data["cluster"].clusterNo);
                         $("input[name=jiushui]").val(result.data["dispatch"].wineFee);
                         $("input[name=sendLine]").val(result.data["dispatch"].sendLine);
@@ -1124,6 +1150,104 @@
                     }
 				});
 			}
+			//时间格式化
+            function SimpleDateFormat(pattern){
+                var fmt = new Object();
+                fmt.pattern = pattern;
+
+                fmt.parse = function(source){
+                    try{
+                        return new Date(source);
+                    }catch(e){
+                        console.log("字符串 "+source+" 转时间格式失败！");
+                        return null;
+                    }
+                };
+
+                fmt.format = function(date){
+                    if(typeof(date) == "undefined" || date == null || date==""){
+                        return "";
+                    }
+
+                    try{
+                        date = new Date(date);
+                    }catch(e){
+                        console.log("时间 "+date+" 格式化失败！");
+                        return "";
+                    }
+
+                    var strTime = this.pattern;//时间表达式的正则
+
+                    var o = {
+                        "M+": date.getMonth() + 1, //月份
+                        "d+": date.getDate(), //日
+                        "H+": date.getHours(), //小时
+                        "m+": date.getMinutes(), //分
+                        "s+": date.getSeconds(), //秒
+                        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+                        "S": date.getMilliseconds() //毫秒
+                    };
+
+                    if (/(y+)/.test(strTime)){
+                        strTime = strTime
+                            .replace(RegExp.$1, (date.getFullYear() + "")
+                                .substr(4 - RegExp.$1.length));
+                    }
+                    for (var k in o){
+                        if (new RegExp("(" + k + ")").test(strTime)){
+                            strTime = strTime.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                        }
+                    }
+
+                    return strTime;
+                };
+                return fmt;
+            }
+			//计算总金额
+			function countprice() {
+                var price=0;
+                var renshu=$("input[name=num]").val();
+				$("div[name=xianlu]").each(function (i,e) {
+					var index=$(e).children("input").val();
+					price+=parseInt($("input[name=d1jiucb]").val());
+                    price+=parseInt($("input[name=d1spchengben]").val());
+                    price+=parseInt($("input[name=d1wucancb]").val())*parseInt(renshu);
+                    price+=parseInt($("input[name=d1wancancb]").val())*parseInt(renshu);
+                    $("tr[name=d"+index+"jingdian]").each(function (q,w) {
+						price+=parseInt($(w).children("td").next().next().next().children("input").val())*parseInt(renshu);
+                    });
+                });
+				price+=parseInt($("input[name=jiushui]").val());
+                price+=parseInt($("input[name=baoting]").val());
+                price+=parseInt($("input[name=xiaofei]").val());
+                price+=parseInt($("input[name=cheduicb]").val());
+
+                //计算签单的总价格
+                var qiandan=0;
+                $("div[name=xianlu]").each(function (i,e) {
+                    var index=$(e).children("input").val();
+                   	if($("input[name=d"+index+"hotelpayment]:checked").val()=="签单"){
+                        qiandan+=parseInt($("input[name=d"+index+"jiucb]").val());
+                        qiandan+=parseInt($("input[name=d"+index+"spchengben]").val());
+					}
+                    if($("input[name=d"+index+"wucanpayment]:checked").val()=="签单"){
+                        qiandan+=parseInt($("input[name=d"+index+"wucancb]").val())*parseInt(renshu);
+                    }
+                    if($("input[name=d"+index+"wancanpayment]:checked").val()=="签单"){
+                        qiandan+=parseInt($("input[name=d"+index+"wancancb]").val())*parseInt(renshu);
+                    }
+
+                    $("tr[name=d"+index+"jingdian]").each(function (q,w) {
+                        var ge=$(w).children("td").next().children("select").attr("name").substring(12,13);
+						if($("input[name=d"+index+"jingdpayment"+ge+"]:checked").val()=="签单"){
+                            qiandan+=parseInt($(w).children("td").next().next().next().children("input").val())*parseInt(renshu);
+						}
+                    });
+                });
+				var xianfu=parseInt(price)-parseInt(qiandan);
+                var content="总金额："+price+"(RMB),其中现付："+xianfu+"(RMB),签单："+qiandan+"(RMB)";
+				$("#showheji").text(content);
+            }
 		</script>
 </body>
 </html>

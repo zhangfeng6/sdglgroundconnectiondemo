@@ -113,7 +113,11 @@
                         "<td>"+result.travelEndTime+"</td>" +
                         "<td>"+result.offer+"</td>" +
                         "<td>"+state+"</td>" +
-                        "<td><button  type='button'value='" + result.dispatchId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button></td></tr>";
+                        "<td><button  type='button'value='" + result.dispatchId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
+					if(result.state==2){
+					    str+="<button  type='button'value='" + result.dispatchId + "' name='bian' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>行程变更</i></button>";
+					}
+					str+="</td></tr>";
                     xu++;
                 })
                 $('tbody').html(str);
@@ -151,8 +155,6 @@
             },
         })
     }
-
-
     function zuche(){
         $.ajax({
             url:"/sdglGroundConnection/dispatch/zuche",
@@ -164,9 +166,6 @@
             },
         })
     }
-
-
-
     function rizhi(){
         $.ajax({
             url:"/sdglGroundConnection/dispatch/rizhi",
@@ -178,7 +177,6 @@
             },
         })
     }
-
     function bao(){
         $.ajax({
             url:"/sdglGroundConnection/dispatch/bao",
@@ -190,8 +188,6 @@
             },
         })
     }
-
-
     function pai(){
         $.ajax({
             url:"/sdglGroundConnection/dispatch/pai",
@@ -203,8 +199,6 @@
             },
         })
     }
-
-
     function jihua(){
         $.ajax({
             url:"/sdglGroundConnection/dispatch/jihua",
@@ -216,11 +210,10 @@
             },
         })
     }
-
     function Delegation(){
         $.ajax({
             url:"/sdglGroundConnection/Travel/Delegation",
-            data:{travelId:groupNumber},
+            data:{travelId:dispatchId},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -228,8 +221,6 @@
             }
         })
     }
-
-
     $(function(){
         loadData(0);
         //列表添加
@@ -241,27 +232,20 @@
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['1200px' , '800px'],
-                content: '/sdglGroundConnection/countAdjust/Quotation-detail.html?did='+id
+                content: '/sdglGroundConnection/countAdjust/Quotation-detail.html?did='+id+'&zhidu=1'
             });
         });
-        //列表删除
-        /*    $('#table-list').on('click', '.del-btn', function() {
-                var id = $(this).attr('data-id');
-                if(confirm("确认要删除吗？")){
-                    $.ajax({
-                        url:"/Template/removetemplate",
-                        data:{tid:id},
-                        dataType:"json",
-                        type:"get",
-                        success:function (result) {
-                            loadData(0);
-                        },
-                        error:function (err) {
-                            alert(err);
-                        }
-                    });
-                }
-            })*/
+        $(document).on('click', 'button[name=bian]', function() {
+            var id=$(this).val();
+            layer.open({
+                type: 2,
+                title: '上传行程变更单据',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['600px' , '600px'],
+                content: '/sdglGroundConnection/countAdjust/article-list.html'
+            });
+        });
     });
     function like(){
         var iWidth=650; //弹出窗口的宽度;
