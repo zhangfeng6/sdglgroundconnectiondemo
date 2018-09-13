@@ -568,13 +568,13 @@
                 for (var i=0;i<e.data.reportticket.length;i++){
                     var bbk=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
                     three+="<tr>\n" +
-                        "\t\t\t\t\t<td>"+e.data.reportticket[i].attrName+"</td>\n" +
-                        "\t\t\t\t\t<td>"+e.data.reportticket[i].price+"</td>\n" +
-                        "\t\t\t\t\t<td>"+e.data.reportticket[i].nums+"</td>\n" +
-                        "\t\t\t\t\t<td colspan='2'>"+bbk+"</td>\n" +
-                        "\t\t\t\t\t<td>"+e.data.reportticket[i].payMethods+"</td>\n" +
-                        "\t\t\t\t\t<td colspan='2'></td>\n" +
-                        "\t\t\t\t</tr>";
+                        "<td>"+e.data.reportticket[i].attrName+"</td>\n" +
+                        "<td>"+e.data.reportticket[i].price+"</td>\n" +
+                        "<td>"+e.data.reportticket[i].nums+"</td>\n" +
+                        "<td colspan='2'>"+bbk+"</td>\n" +
+                        "<td>"+e.data.reportticket[i].payMethods+"</td>\n" +
+                        "<td colspan='2'></td>\n" +
+                        " </tr>";
                     xj3+=bbk;
                     if (e.data.reportticket[i].payMethods=="签单"){
                         var bbk2=Number(e.data.reportticket[i].price)*Number(e.data.reportticket[i].nums);
