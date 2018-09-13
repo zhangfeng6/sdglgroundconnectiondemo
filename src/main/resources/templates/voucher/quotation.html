@@ -136,17 +136,15 @@ table{
 	<td colspan="6" id="t1">部门</td>
 </tr>
 <tr>
-<td class="team">团体监督</td>
-<td colspan="5">
-				<span></span>
+<td class="team">团体监督<span></span></td>
+<td colspan="5" id="jian">
+
 </td>
 </tr>
 <tr>
 <td>联系人</td>
-<td colspan="5" id="t1">
-				崔俊娜 18603416895  <br/>     
-				Tel：886-351-7896890 <br/>
-				QQ：2355703931  <br/>
+<td colspan="5" id="lian">
+
 </td>
 </tr>
 <tr>
@@ -213,6 +211,10 @@ table{
                 $("#zuo").text(valueContent1);
 				$(".bei").text(data.data[7]);
 				$("#xiaofei").text(data.data[9]);
+				$("#jian").html(data.data[6].personName+"  "+data.data[6].personPost+"  "+data.data[6].phone);
+				$("#lian").html(data.data[12].staffname+"<br/>\n" +
+                    "\t\t\t\tTel："+data.data[12].phone+"<br/>\n" +
+                    "\t\t\t\tQQ："+data.data[12].qqnumber+"  <br/>")
 			}
 		})
 	}

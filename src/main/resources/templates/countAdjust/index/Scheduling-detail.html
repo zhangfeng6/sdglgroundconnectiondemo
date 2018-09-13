@@ -948,10 +948,11 @@
                         jiage += Number($(".wanbj").eq(i).children().val());
                         jiage += Number($("[name=joffer]").eq(i).val());
 					}
+					var oId = $("#offerId").val();
 					wu = wu/wuCount;
 				    $.ajax({
                         url:"/sdglGroundConnection/Offer/quotation",
-                        data:{ji:ji,xiaofei:xiaofei,tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
+                        data:{offerId:oId,ji:ji,xiaofei:xiaofei,tripList:tripList,remarks:remarks,zuid:zuid,number:number,travelStartTime:travelStartTime,travelEndTime:travelEndTime,jiage:jiage,wu:wu,ctypeId:ctypeId},
                         dataType:"json",
                         async: false,
                         traditional: true,
