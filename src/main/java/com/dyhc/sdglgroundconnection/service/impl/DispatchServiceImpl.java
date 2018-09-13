@@ -131,6 +131,9 @@ public class DispatchServiceImpl implements DispatchService {
     //人员表（）贾晓亮
     @Autowired
     private  StaffMapper staffMapper;
+    //单据表
+    @Autowired
+    private  BillMapper billMapper;
     /**
      * 根据调度id获取调度的相关数据
      * @param dispatchId
@@ -224,12 +227,12 @@ public class DispatchServiceImpl implements DispatchService {
                 r.setUpdateBy(userId);
                 disrestaurantMapper.updateByPrimaryKeySelective(r);
             }
+            billMapper.removeBillBydispatchId(dispatch.getDispatchId());
             return 1;
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             e.printStackTrace();
             return 0;
-
         }
     }
 
@@ -238,6 +241,11 @@ public class DispatchServiceImpl implements DispatchService {
         Dispatch dispatch=dispatchMapper.dispatch(dispatchId);
         List<Date> list1=getBetweenDates(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
         return list1;
+    }
+
+    @Override
+    public int updateDispatchState(Integer dispatchId) throws Exception {
+        return dispatchMapper.updateDispatchstate2(dispatchId);
     }
 
     /**
@@ -403,6 +411,16 @@ public class DispatchServiceImpl implements DispatchService {
     public PageInfo<Dispatch> listDispatch(Integer pageNo, Integer pageSize, String djsth, String dyname, Integer state) throws Exception {
         PageHelper.startPage(pageNo,pageSize);
         PageInfo<Dispatch> pageInfo=new PageInfo<Dispatch>(dispatchMapper.listdispatch(djsth, dyname, state));
+        for (Dispatch d:pageInfo.getList()) {
+            boolean flag=true;
+            for (int i=0;i<3;i++){
+                if(billMapper.getBillBtTypeId((i+1),d.getDispatchId())==null){
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag){ d.setIsupdate("yes"); }else{ d.setIsupdate("no"); }
+        }
         return pageInfo;
     }
 

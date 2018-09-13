@@ -154,7 +154,10 @@ public class EnterCountAdjustPageController {
      * @return
      */
     @RequestMapping("/article-list.html")
-    public String  articlelist() {
+    public String  articlelist(@RequestParam(value = "dispatchId",required = false)Integer dispatchId,Model model) {
+        if(dispatchId!=null&&dispatchId!=0){
+            model.addAttribute("dispatchId",dispatchId);
+        }
         return "countAdjust/index/article-list";
     }
     /**

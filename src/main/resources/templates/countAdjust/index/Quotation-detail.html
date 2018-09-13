@@ -1039,6 +1039,9 @@
                         $("input[name=cheduicb]").val(result.data["discar"].costPrice);
                         $("select[name=carrental]").attr("disCarId",result.data["discar"].disCarId);
 						$("input[name=tourist]").val(result.data["dispatch"].tourist);
+						if(result.data["dispatch"].state==4){
+                            $("select[name=guide]").attr("disabled","disabled");
+						}
                         $(result.data["hoteroomType"]).each(function (i,e) {
                             if(i>0){
                                 addss();

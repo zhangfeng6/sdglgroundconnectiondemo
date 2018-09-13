@@ -544,4 +544,22 @@ public class DispatchController {
         }
 
     }
+
+    /**
+     * 修改调度信息的状态列
+     * @return
+     */
+    @RequestMapping("/updateDispatchState")
+    public ReponseResult updateDispatchState(@RequestParam("dispatchId")Integer dispatchId){
+        try {
+            ReponseResult data=ReponseResult.ok(dispatchService.updateDispatchState(dispatchId),"修改调度信息！");
+            logger.info("method:updateDispatchState 修改调度表状态列信息！");
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("method:updateDispatchState 系统出现错误！");
+            ReponseResult<Object> err=ReponseResult.err("系统出现错误!");
+            return err;
+        }
+    }
 }

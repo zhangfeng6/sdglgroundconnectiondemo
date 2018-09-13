@@ -9,6 +9,7 @@
 
 </head>
 <body>
+
 	<div class="layui-form-item">
 		<!--		<div class="layui-inline tool-btn">
                     <button class='layui-btn layui-btn-small layui-btn-normal add-btn' id='insert' type='button'><i class='layui-icon'>&#xe654;</i></button>
@@ -99,11 +100,13 @@
                 $(e.data).each(function (i, result) {
                     var state="";
                     if(result.state==1){
-                        state="审核中";
+                        state="调度中";
                     }else if(result.state==2){
                         state="进行中";
                     }else if(result.state==3){
                         state="已结束";
+                    }else if(result.state==4){
+                        state="已审核";
                     }
                     str+="<tr onclick='xuan("+result.guideId+","+result.dispatchId+","+result.groupNumber+",this)'><td>"+xu+"</td>" +
                         "<td>"+result.groundConnectionNumber+"</td>" +
@@ -112,11 +115,24 @@
                         "<td>"+result.travelStartTime+"</td>" +
                         "<td>"+result.travelEndTime+"</td>" +
                         "<td>"+result.offer+"</td>" +
-                        "<td>"+state+"</td>" +
-                        "<td><button  type='button'value='" + result.dispatchId + "' name='update' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
-					if(result.state==2){
-					    str+="<button  type='button'value='" + result.dispatchId + "' name='bian' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>行程变更</i></button>";
+                        "<td>"+state+"</td><td>";
+
+                    if(result.state==2){
+					    if(result.isupdate=="yes"){
+                            str+="<button  type='button'value='" + result.dispatchId + "'  zhidu='0' name='update' zhidu='0' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
+						}else{
+                            str+="<button  type='button'value='" + result.dispatchId + "'  zhidu='1' name='update' zhidu='0' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
+                            str+="<button  type='button'value='" + result.dispatchId + "'  name='bian' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>行程变更</i></button>";
+						}
+					}else if(result.state==3){
+                        str+="<button  type='button'value='" + result.dispatchId + "'  zhidu='1' name='update' zhidu='0' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
+					}else if(result.state==4){
+                        str+="<button  type='button'value='" + result.dispatchId + "'  zhidu='0' name='update' zhidu='0' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
+                        str+="<button  type='button'value='" + result.dispatchId + "' onclick='updateDispatchState("+result.dispatchId+")'  class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>开团</i></button>";
+                    }else{
+                        str+="<button  type='button'value='" + result.dispatchId + "'  zhidu='0' name='update' zhidu='0' class='layui-btn layui-btn-small layui-btn-normal go-btn'><i class='layui-icon' type='button'>&#xe642;</i></button>&nbsp;&nbsp;&nbsp;";
 					}
+
 					str+="</td></tr>";
                     xu++;
                 })
@@ -132,7 +148,25 @@
         layer = layui.layer;
         form.render('select');
     });
-
+	function updateDispatchState(dispatchId) {
+		$.ajax({
+			url:"/sdglGroundConnection/dispatch/updateDispatchState",
+			data:{dispatchId:dispatchId},
+			dataType:"json",
+			type:"get",
+			success:function (result) {
+				if(result.data==1){
+				    alert("开团成功！");
+				    loadData(1);
+				}else{
+				    alert("网路异常！");
+				}
+            },
+			error:function (err) {
+				alert(err);
+            }
+		});
+    }
     var dispatchId;
     var guideId;
     var groupNumber;
@@ -226,26 +260,33 @@
         //列表添加
         $(document).on('click', 'button[name=update]', function() {
             var id=$(this).val();
+            var zhidu=$(this).attr("zhidu");
             layer.open({
                 type: 2,
                 title: '查看调度详情',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['1200px' , '800px'],
-                content: '/sdglGroundConnection/countAdjust/Quotation-detail.html?did='+id+'&zhidu=1'
+                content: '/sdglGroundConnection/countAdjust/Quotation-detail.html?did='+id+'&zhidu='+zhidu
             });
         });
         $(document).on('click', 'button[name=bian]', function() {
             var id=$(this).val();
+
             layer.open({
                 type: 2,
                 title: '上传行程变更单据',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['600px' , '600px'],
-                content: '/sdglGroundConnection/countAdjust/article-list.html'
+                content: '/sdglGroundConnection/countAdjust/article-list.html?dispatchId='+id
             });
         });
+
+        var id=$("input[name=love]").val();
+        if(id!=null&&id!=0){
+			alert("添加成功！");
+		}
     });
     function like(){
         var iWidth=650; //弹出窗口的宽度;

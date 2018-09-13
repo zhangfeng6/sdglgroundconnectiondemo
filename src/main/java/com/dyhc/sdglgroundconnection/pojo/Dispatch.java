@@ -76,6 +76,20 @@ public class Dispatch implements Serializable {
     private String value3;
     @Column(name = "carcontacts")
     private  String carcontacts;
+
+
+    //判断修改是否可用
+    @Transient
+    private  String isupdate;
+
+    public String getIsupdate() {
+        return isupdate;
+    }
+
+    public void setIsupdate(String isupdate) {
+        this.isupdate = isupdate;
+    }
+
     //角色表
     @Transient
     private  Staff staff;
