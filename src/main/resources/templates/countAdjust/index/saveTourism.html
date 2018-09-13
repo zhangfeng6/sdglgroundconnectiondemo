@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/baojiadan.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/baojiadan.css}" />
 </head>
 <body>
 <div>
@@ -26,7 +26,7 @@
             <tr  name="template">
                 <td><label class="layui-form-label">线路</label></td>
                 <td>
-                    <select  name="temline1" lay-verify="required">
+                    <select  name="temline1" lay-verify="required" style="height: 35px;width:233px;" lay-ignore>
 
                     </select>
                 </td>
@@ -91,6 +91,7 @@
             type:"get",
             success:function (result) {
                 $("input[name=templateName]").val(result.data['info'].tourismtemplateName);
+                xlName=result.data['info'].tourismtemplateName;
                 $(result.data["list"]).each(function (i,e) {
                     if(i>0){
                         insertJingdian();
@@ -192,7 +193,7 @@
         $("#caozuo").prev().after("<tr  name='template'>\n" +
             "<td><label class='layui-form-label'>线路</label></td>\n" +
             "<td>\n" +
-            "<select  name='temline"+index+"' lay-verify='required' >"+content+"</select>\n" +
+            "<select  name='temline"+index+"' lay-verify='required' style='height: 35px;width:233px;' lay-ignore>"+content+"</select>\n" +
             "</td>\n" +
             "<td><span style='font-weight: bold;padding-left: 15px;margin-right: 15px;' name='howmanydays"+index+"'>Day"+index+"</span></td>\n" +
             "<td style='bottom: 0px;'><label class='layui-form-label' onclick='san(this)'>×</label></td>"+

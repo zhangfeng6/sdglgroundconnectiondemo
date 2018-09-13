@@ -3,9 +3,12 @@ package com.dyhc.sdglgroundconnection.service.impl;
 import com.dyhc.sdglgroundconnection.mapper.BillMapper;
 import com.dyhc.sdglgroundconnection.pojo.Bill;
 import com.dyhc.sdglgroundconnection.service.BillService;
+import com.dyhc.sdglgroundconnection.utils.ClientFileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +44,29 @@ public class BillServiceImpl implements BillService {
         }catch (Exception e){
             return 0;
         }
+    }
+
+    @Override
+    public int savebillBianGeng(List<MultipartFile> list, Integer did) throws Exception {
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                Bill bill = new Bill();
+                bill.setUpdateBy(1);
+                bill.setDispatchId(did);
+                bill.setBillTypeId(i + 1);
+                bill.setWhetherDel(0);
+                bill.setCreateBy(1);
+                bill.setCreateDate(new Date());
+                String uploadResult = ClientFileUploadUtil.uploadImage(list.get(i), ".jpg");
+                bill.setPicturePath(uploadResult);
+                billMapper.insert(bill);
+            }
+            return 1;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+
     }
 
 }

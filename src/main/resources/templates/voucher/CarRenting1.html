@@ -9,8 +9,8 @@
 <body>
 
 <div style="width:55%; margin:0 auto" id="form1">
-    <div id="tupian" style="width: 800px;">
-        <img src="/images/logo.jpg" width="640px" height="50px">
+    <div id="tupian" style="width: 635px;">
+        <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
     </div>
     <h3>单次租车合同附件</h3>
     <h3 align="center">旅游团队运输合同(共2页)</h3>
@@ -85,12 +85,12 @@
                     }
                 }
                 $("#c").html(concat);
-                $("#koko").text(time);
+                $("#koko").text(time+1);
                 $("#num").text(num);
                 var arr =e.data[0].dispatch.carcontacts.split('，');
                 $("#one").text(arr[0]);
-                $("#two").text(arr[2]);
-                $("#three").text(arr[1]);
+                $("#two").text(arr[1]);
+                $("#three").text(arr[2]);
             },
             error:function () {
                 alert("错误，请联系管理员！");

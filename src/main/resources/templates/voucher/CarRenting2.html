@@ -90,9 +90,10 @@
                 var num=e.data[0].dispatch.num;
                 var time=daysBetween(e.data[0].dispatch.travelStartTime,e.data[0].dispatch.travelEndTime);
                 var offer=$("#offer").text();
-                $("#num").html(time);
-                $("#num2").html(time);
-                $("#num3").html(time);
+                var bbk7=time+1;
+                $("#num").html(bbk7);
+                $("#num2").html(bbk7);
+                $("#num3").html(bbk7);
                 var num =$("#num").text();
                 concat=Number(offer)*Number(num);
                 $("#gong").html(concat);
@@ -121,7 +122,7 @@
             dataType:"json",
             type:"GET",
             success:function (e) {
-                $("#offer").html(e.data.vehicleType.offer);
+                $("#offer").html(e.data.costPrice);
             },
             error:function () {
                 alert("错误，请联系管理员！");

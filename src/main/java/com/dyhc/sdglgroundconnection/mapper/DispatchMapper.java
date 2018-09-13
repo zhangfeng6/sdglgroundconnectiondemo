@@ -62,4 +62,10 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @throws Exception
      */
     Dispatch getsavedispatchId()throws Exception;
+    /**
+     * 根据主键id修改调度表信息
+     * @param dispatchId
+     * @return
+     */
+    int updateDispatchstate2(@Param("dispatchId")Integer dispatchId)throws Exception;
 }

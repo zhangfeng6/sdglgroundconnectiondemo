@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.ReportdetailMapper">
     <select id="showInfoAll" resultType="com.dyhc.sdglgroundconnection.pojo.Reportdetail">
-        SELECT r.*,d.groupNumber,g.guideName FROM `reportdetail` r,`dispatch` d,guide g
+        SELECT r.*,d.groupNumber,d.groundConnectionNumber,g.guideName FROM `reportdetail` r,`dispatch` d,guide g
         <where>
             <if test="groupNumber!=null and groupNumber!=''">
                 d.groupNumber like  concat('%',#{groupNumber},'%')

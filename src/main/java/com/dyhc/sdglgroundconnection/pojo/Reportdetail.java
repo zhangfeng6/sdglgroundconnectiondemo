@@ -49,7 +49,18 @@ public class Reportdetail {
     @Column(name = "`createDate`")
     private Date createDate; // 创建时间
     @Transient
-    private String groupNumber;     //地接社团号
+    private String groupNumber;     //组团社团号
+
+    public String getGroundConnectionNumber() {
+        return groundConnectionNumber;
+    }
+
+    public void setGroundConnectionNumber(String groundConnectionNumber) {
+        this.groundConnectionNumber = groundConnectionNumber;
+    }
+
+    @Transient
+    private String groundConnectionNumber;     //地接社团号
     @Transient
     private String guideName;       //导游姓名
     @Transient

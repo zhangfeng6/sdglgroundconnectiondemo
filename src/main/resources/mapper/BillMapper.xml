@@ -15,4 +15,11 @@
         update bill set picturePath=#{picturePath} where billId=#{billId}
     </update>
 
+    <select id="getBillBtTypeId" resultType="com.dyhc.sdglgroundconnection.pojo.Bill">
+        SELECT * FROM bill WHERE `dispatchId` = #{dispatchId} and `billTypeId` = #{typeId} and `updateBy`=1
+    </select>
+
+    <delete id="removeBillBydispatchId">
+        DELETE FROM bill WHERE dispatchId=#{dispatchId}
+    </delete>
 </mapper>

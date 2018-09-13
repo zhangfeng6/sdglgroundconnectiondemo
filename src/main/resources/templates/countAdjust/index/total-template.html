@@ -46,7 +46,7 @@
 <script th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
 <script>
 
-    var limitcount = 2; // 每页总记录数
+    var limitcount = 5; // 每页总记录数
     var curnum = 1;  // 当前页码
 
     function loadData(refresh) {
@@ -70,7 +70,7 @@
                         elem: 'laypage'
                         , count: e.count
                         , curr: curnum
-                        , limit: 2
+                        , limit: 5
                         , layout: ['prev', 'page', 'next', 'skip', 'count']
                         , jump: function (obj, first) {
                             if (!first) {

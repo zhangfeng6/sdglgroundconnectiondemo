@@ -94,7 +94,7 @@ table{
 		</tr>
 		<tr>
 			<td>报价</td>
-			<td colspan="5" id="t1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+1T/L：RMB<span id="jiage" style="text-decoration: underline">&nbsp;&nbsp;&nbsp;</span>元/人（免&nbsp;1&nbsp;持证领队）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单间房差：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span>元</td>
+			<td colspan="5" id="t1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="lll"></span>+1T/L：RMB<span id="jiage" style="text-decoration: underline">&nbsp;&nbsp;&nbsp;</span>元/人（免&nbsp;1&nbsp;持证领队）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单间房差：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span>元</td>
 		</tr>
 		<tr>
 			<td>包含</td>
@@ -191,6 +191,7 @@ table{
                 $("#fawang").text(data.data[6].travelName);
                 $("#shijian").text(data.data[1].substring(5)+"—"+data.data[2].substring(5));
                 $("#number").text(data.data[0]);
+                $("#lll").text(data.data[0]);
                 $("#keyuan").text(data.data[6].travelName.substring(0,data.data[6].travelName.length-3));
                 for (var i=0;i<data.data[8].length;i++){
                     content+=data.data[8][i];
