@@ -133,4 +133,12 @@ public interface DispatchService {
 
 
     List<Date> list(Integer dispatchId)throws Exception;
+
+    /**
+     * 修改指定调度信息的状态
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    int updateDispatchState(Integer dispatchId)throws Exception;
 }

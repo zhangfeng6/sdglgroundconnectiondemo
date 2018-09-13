@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/admin/layui/css/layui.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/baojiadan.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/baojiadan.css}" />
 </head>
 <body>
 <div id="content">
@@ -21,7 +21,7 @@
             <tr>
                 <td><label class="layui-form-label">酒店</label></td>
                 <td>
-                    <select name="hotelId" lay-verify="required" lay-filter="hotel" >
+                    <select name="hotelId" lay-verify="required" lay-filter="hotel"  style="height: 35px;width:233px;" lay-ignore onchange=" getHotelByid(this,0)">
 
                     </select>
                 </td>
@@ -48,7 +48,7 @@
             <tr  name="scenic">
                 <td><label class="layui-form-label">景点</label></td>
                 <td>
-                    <select  name="scenicSpotId1" lay-verify="required" lay-filter="jingd1" >
+                    <select  name="scenicSpotId1" lay-verify="required" lay-filter="jingd1" onchange="getScenicByid(this,1)" style="height: 35px;width:233px;" lay-ignore >
 
                     </select>
                 </td>
@@ -58,7 +58,7 @@
                 <td><input type="text" class="layui-input" name="offer1" ></td>
 
             </tr>
-            <tr>
+            <tr id="lll">
                 <td><label class="layui-form-label">行程</label></td>
                 <td colspan="5"><textarea placeholder="请输入内容" class="layui-textarea" name="templateContent"></textarea></td>
             </tr>
@@ -87,32 +87,13 @@
         });
     });
 
+
     layui.use(['form', 'layedit', 'laydate','element'], function() {
          var form = layui.form;
          layer = layui.layer;
          layedit = layui.layedit;
          element=layui.element;
          laydate = layui.laydate;
-        form.on('select(hotel)',function (data) {
-                getHotelByid(data.value);
-        });
-
-        form.on('select(jingd1)',function(data){
-            getScenicByid(data.value,1);
-        });
-        form.on('select(jingd2)',function(data){
-            getScenicByid(data.value,2);
-        });
-        form.on('select(jingd3)',function(data){
-            getScenicByid(data.value,3);
-        });
-        form.on('select(jingd4)',function(data){
-            getScenicByid(data.value,4);
-        });
-        form.on('select(jingd5)',function(data){
-            getScenicByid(data.value,5);
-        });
-
         //日期
         laydate.render({
             elem: '#date'
@@ -139,7 +120,7 @@
             success:function (result) {
                 xlName=result.data["parameter"].templateName;
                 $("select[name=hotelId]").val(result.data["parameter"].hotelId);
-                getHotelByid(result.data["parameter"].hotelId);
+                getHotelByid(0,result.data["parameter"].hotelId);
                 $("input[name=templateName]").val(result.data["parameter"].templateName);
                 $("input[name=costprice]").val(result.data["parameter"].costprice);
                 $("input[name=offer]").val(result.data["parameter"].offer);
@@ -168,6 +149,7 @@
             url: "/sdglGroundConnection/Template/getResource",
             dataType: "json",
             type: "get",
+            async: false,
             success:function (result) {
                 var jiudian="<option value='0'>--请选择--</option>";
                 var jingdian="<option value='0'>--请选择--</option>";
@@ -216,10 +198,10 @@
         }
         var index=parseInt(A.length)+1;
         var content=$("select[name=scenicSpotId1]").html();
-        $("#newjd").parent().parent().next().after("<tr name='scenic'>"+
+        $("#lll").before("<tr name='scenic'>"+
             "<td><label class='layui-form-label'>景点</label></td>"+
             "<td>"+
-            "<select name='scenicSpotId"+index+"' lay-verify='required' lay-filter='jingd"+index+"'>"+content+"</select>"+
+            "<select name='scenicSpotId"+index+"' lay-verify='required' lay-filter='jingd"+index+"' style='height: 35px;width:233px;' lay-ignore onchange='getScenicByid(this,"+index+")'>"+content+"</select>"+
             "</td>"+
             "<td><label class='layui-form-label'>成本价:</label></td>"+
             "<td><input type='text' class='layui-input' name='costprice"+index+"'></td>"+
@@ -267,7 +249,8 @@
     /**
      * 根据景点id获取该
      * */
-    function  getScenicByid(id,index) {
+    function  getScenicByid(obj,index) {
+        var id=$(obj).val();
         if(id==0){
             $("input[name=costprice"+index+"]").val("");
             $("input[name=offer"+index+"]").val("");
@@ -293,7 +276,12 @@
      * 根据Id查找指定的酒店信息
      * @param id
      */
-    function getHotelByid(id) {
+    function getHotelByid(obj,jid) {
+        if(jid==null||jid==0||jid==undefined){
+            var id=$(obj).val();
+        }else{
+           var id=jid;
+        }
         if(id==0){
             $("#tupian").html("");
             $("#jieshao").html("");
@@ -318,7 +306,7 @@
                         xingji+="<input type='image'src='/sdglGroundConnection/images/face/xingwu.png'style='width: 20px;height: 20px;margin: 3px;'/>";
                     }
                 }
-                var content="<input type='image' style='width: 150px;height: 120px;margin: 8px;'  src='/sdglGroundConnection/"+result.data.picturePath+"'/>\n" +
+                var content="<input type='image' style='width: 150px;height: 120px;margin: 8px;'  src='/sdglGroundConnection/api/image/"+result.data.picturePath+"'/>\n" +
                     "<div style='margin-left: 8px;'>"+xingji+"</div>";
                 $("#tupian").html(content);
                 $("#jieshao").html(jieshao);

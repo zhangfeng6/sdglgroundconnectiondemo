@@ -167,12 +167,9 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                $("#clusterTime").text(data.data.clusterTime.substring(0,10));
+                $("#clusterTime").text(data.data.clusterTime);
                 $("#clusterAdderss").text(data.data.clusterAdderss);
                 $("#clusterNo").text(data.data.clusterNo);
-                $("#clusterTimex").text(data.data.clusterTime.substring(0,10));
-                $("#clusterAdderssx").text(data.data.clusterAdderss);
-                $("#clusterNox").text(data.data.clusterNo);
             }
         })
     }

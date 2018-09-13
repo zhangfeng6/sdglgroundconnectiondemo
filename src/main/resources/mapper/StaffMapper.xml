@@ -60,6 +60,6 @@
     </select>
     <!--贾晓亮-->
     <select id="nameStaff" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
-         SELECT * FROM `staff` WHERE roleId=#{roleId}
+         SELECT * FROM `staff` WHERE staffId=#{staffId}
     </select>
 </mapper>

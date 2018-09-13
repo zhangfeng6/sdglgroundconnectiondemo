@@ -81,19 +81,24 @@ public class TourismtemplateServiceImpl  implements TourismtemplateService {
         try {
             Tourismtemplate tem=new Tourismtemplate();
             tem.setTourismtemplateName(temName);
+            Tourismtemplate tid=null;
             if(id==0||id==null){
                 tem.setStatus(0);
                 tem.setCreateBy(1);
                 tem.setCreateDate(new Date());
                 tourismtemplateMapper.insert(tem);
+                tid=tourismtemplateMapper.gettemplateByName(temName);
             }else{
+                tem.setTourismId(id);
                 tem.setUpdateBy(1);
                 tem.setUpdateDate(new Date());
                 tourismtemplateMapper.updateByPrimaryKeySelective(tem);
                 tourismandlineMapper.removeTourismandline(id);
+                tid=new Tourismtemplate();
+                tid.setTourismId(id);
             }
 
-            Tourismtemplate tid=tourismtemplateMapper.gettemplateByName(temName);
+
             List<Tourismandline> list=new ArrayList<Tourismandline>();
             for (int i=0; i<info.length;i++) {
                 Tourismandline tandl=new Tourismandline();
