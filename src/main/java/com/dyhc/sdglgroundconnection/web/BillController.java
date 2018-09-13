@@ -42,7 +42,7 @@ public class BillController  {
     @RequestMapping("listBillAll")
     public ReponseResult listBillAll(){
         try {
-            ReponseResult data=ReponseResult.ok(billTypeService.listBillAll(),"获取单据类型成功");
+            ReponseResult data=ReponseResult.ok(billTypeService.listBillType(),"获取单据类型成功");
             return data;
         }catch (Exception e){
             e.printStackTrace();
