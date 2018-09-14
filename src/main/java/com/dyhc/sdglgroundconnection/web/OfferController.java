@@ -54,6 +54,8 @@ public class OfferController {
     private HotelService hotelService;
     @Autowired
     private DictionariesService dictionariesService;
+    @Autowired
+    private StaffService staffService;
 
 
     /**
@@ -126,9 +128,11 @@ public class OfferController {
             String[] tripList = request.getParameterValues("tripList");
             String xiaofei = request.getParameter("xiaofei");
             String ji = request.getParameter("ji");
+            String offerId = request.getParameter("offerId");
 
 
-
+            Offer offer = offerService.selectOfferByOfferId(Integer.parseInt(offerId));
+            Staff staff = staffService.pdPassword(offer.getCreater());
             Dictionaries dictionaries = offercarService.selectOffercarById(Integer.parseInt(ctypeId));
             Travel travel = travelService.selectTravelById(Integer.parseInt(zuid));
             List allList = new ArrayList<>();
@@ -143,6 +147,8 @@ public class OfferController {
             allList.add(tripList);
             allList.add(xiaofei);
             allList.add(ji);
+            allList.add(offer);
+            allList.add(staff);
             session.setAttribute("allList",allList);
             ReponseResult<Object> data = ReponseResult.err("查询成功！");
             return data;
