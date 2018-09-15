@@ -198,6 +198,9 @@
                     //日期
                     laydate.render({
                         elem: '#date'
+                        ,done: function (value, date, endDate) {
+                            fanzhuanDate()
+                        }
                     });
                     laydate.render({
                         elem: '#date1'
