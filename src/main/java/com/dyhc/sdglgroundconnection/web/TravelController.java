@@ -393,6 +393,14 @@ public class TravelController{
         return ReponseResult.ok(travelId,"获取成功");
     }
 
+    @RequestMapping("jiesuan")
+    public ReponseResult jiesuan(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer reportDetailId=Integer.parseInt(session.getAttribute("reportDetailId").toString());
+        return ReponseResult.ok(reportDetailId,"获取成功");
+    }
+
+
 
     /**
      * 派传单

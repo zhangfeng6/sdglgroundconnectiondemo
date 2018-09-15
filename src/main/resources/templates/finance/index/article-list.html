@@ -33,7 +33,7 @@
                 <input class="layui-btn layui-btn-normal" id="search" type="button" lay-submit="search" value="搜索"/>
             </div>
         </form>
-        <button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='dao()'><i class='layui-icon' type='button'>导游报账明细</i></button>
+        <button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='dao()'><i class='layui-icon' type='button'>导游报账明细</i></button><button type='button' class='layui-btn layui-btn-small layui-btn-cyan go-btn' onclick='jie()'><i class='layui-icon' type='button'>结算单</i></button>
         <div class="layui-form" id="table-list">
             <table class="layui-table" lay-skin="nob">
 
@@ -74,8 +74,10 @@
     search();
 
     var groupId;
-    function xuan(groupNumber,qq){
+    var reportDetailId;
+    function xuan(reportDetailid,groupNumber,qq){
         groupId=groupNumber;
+        reportDetailId=reportDetailid;
         $(qq).parents().children().css("background","");
         $(qq).css("background","#F2F2F2");
     }
@@ -93,6 +95,17 @@
         })
     }
 
+    function jie(){
+        $.ajax({
+            url:"/sdglGroundConnection/reportdetail/selectReportdetail",
+            data:{reportDetailId:reportDetailId},
+            dataType:"json",
+            type:"get",
+            success:function (result) {
+                location.href="/sdglGroundConnection/voucher/newFile.html";
+            },
+        })
+    }
 
 
 
@@ -174,7 +187,7 @@
                     if(e.status==4){
                         status="已通过";
                     }
-                    context += "<tr onclick='xuan("+e.groupNumber+",this)'>\n" +
+                    context += "<tr onclick='xuan("+e.reportDetailId+","+e.groupNumber+",this)'>\n" +
                         "<td class=\"hidden-xs\">" + (i+1) + "</td>\n" +
                         "<td class=\"hidden-xs\">" + e.groundConnectionNumber + "</td>\n" +
                         "<td class=\"hidden-xs\">" + e.guideName + "</td>\n" +

@@ -43,5 +43,8 @@ public interface AccountTypeMapper extends CommonMapper<AccountType>{
      */
     Integer updateAccountType(AccountType accountType)throws Exception;
 
+    List<AccountType> selectStatusOne()throws Exception;
+
+    List<AccountType> selectStatusTwo()throws Exception;
 
 }

@@ -321,7 +321,7 @@
                 async: false,
                 type:"get",
                 success:function (data) {
-                    var guoting = data.data.number*data.data.quotePrice;
+                    var guoting = data.data.number*data.data.costPrice;
                     var zong = guoting+data.data.fare;
                     $("#chefei").text("车费"+guoting+"+过停"+data.data.fare+"="+zong+"元");
                     $("#jie").text(data.data.loan);

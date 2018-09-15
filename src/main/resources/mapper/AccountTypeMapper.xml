@@ -21,4 +21,12 @@
         UPDATE accounttype set bank=#{bank},accountNum=#{accountNum},accountName=#{accountName},status=#{status},
         createBy=#{createBy},updateBy=#{updateBy},`upDate`=#{upDate} WHERE accountTypeId=#{accountTypeId}
     </update>
+
+    <select id="selectStatusOne" resultType="com.dyhc.sdglgroundconnection.pojo.AccountType">
+        select * from accountType where status=1
+    </select>
+
+    <select id="selectStatusTwo" resultType="com.dyhc.sdglgroundconnection.pojo.AccountType">
+        select * from accountType where status=2
+    </select>
 </mapper>

@@ -56,4 +56,12 @@
     <select id="getReportingotherexpenses" resultType="com.dyhc.sdglgroundconnection.pojo.Reportingotherexpenses">
         SELECT * FROM ReportDetail r,dispatch d,reportingotherexpenses s WHERE r.dispatchId=d.dispatchId AND r.reportDetailId=s.reportDetailId AND r.dispatchId=#{dispatchId}
     </select>
+
+    <select id="showJieSuan" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">
+        SELECT t.* FROM `reportdetail` r,dispatch d,travel t WHERE r.`reportDetailId`=#{reportDetailId} AND r.dispatchId = d.dispatchId AND t.`travelId` = d.`groupNumber`
+    </select>
+
+    <select id="showJieSuan1" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+        select d.* from `reportdetail` r,dispatch d where r.`reportDetailId`=#{reportDetailId} and r.dispatchId = d.dispatchId
+    </select>
 </mapper>
