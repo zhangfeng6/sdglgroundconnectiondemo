@@ -12,7 +12,7 @@
         <tr><td colspan="8" style="text-align: center;"><h1>地接导游报账明细表</h1></td></tr>
         <tr><td width="200px">团号</td><td id="groundConnectionNumber"></td>
             <td width="200px">抵离时间</td><td id="time"></td>
-            <td width="200px">线路</td><td colspan="3"></td>
+            <td width="200px">线路</td><td colspan="3" id="xianlu"></td>
         </tr>
         <tr>
             <td>组团社（单位）</td>
@@ -405,13 +405,13 @@
                         <table border="1" cellspacing="0" cellpadding="0" width="1116px" style="text-align: center;border: 1px #0094FF solid" height="25px">
                             <tr>
                                 <td width="120px">原借款</td>
-                                <td></td>
-                                <td width="120px">外售团款</td>
-                                <td></td>
+                                <td id="loan"></td>
+                                <td width="120p">外售团款</td>
+                                <td id="receipt"></td>
                                 <td width="120px">导游现付合计</td>
-                                <td></td>
+                                <td id="totalPayable"></td>
                                 <td width="120px">报/退款</td>
-                                <td></td>
+                                <td id="balanceAmount"></td>
                             </tr>
                         </table>
                     </td></tr>
@@ -491,6 +491,9 @@
                 var hj4=Number($("#guolufei").text())+Number($("#tingchefei").text())+Number($("#yufuchefei").text());
                 //开始出团补助
                 $("#yuan").html(e.data.reportqutsubsidy.dailyCost);
+                $("#receipt").html(e.data.receipt);
+                $("#totalPayable").html(e.data.totalPayable);
+                $("#balanceAmount").html(e.data.balanceAmount);
                 $("#tianshu").html(e.data.reportqutsubsidy.nums);
                 $("#daoyoushu").html(e.data.reportqutsubsidy.guideNum);
                 var buzhuzhichu=Number($("#yuan").text())*Number( $("#tianshu").text());
@@ -614,6 +617,8 @@
                 var time=daysBetween(e.data.travelStartTime,e.data.travelEndTime);
                 $("#day").html(time);
                 $("#tourist").html(e.data.tourist);
+                $("#xianlu").html(e.data.tourist);
+                $("#loan").html(e.data.loan);
             },
             error:function () {
                 alert("错误，请联系管理员！");

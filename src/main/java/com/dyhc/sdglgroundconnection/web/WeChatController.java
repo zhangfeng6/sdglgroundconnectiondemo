@@ -553,10 +553,22 @@ public class WeChatController {
     public ReponseResult getTemplateById(Integer dispatchId,Integer weight){
         try {
             HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,weight);
-            Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
-            template.setTemplateContent(hoteroomType.getXingcheng());
+            List<String> list=new ArrayList<>();
+            String xlName="";
+            System.out.println(hoteroomType.getTemplateId());
+            if(hoteroomType.getTemplateId()==null || hoteroomType.getTemplateId()==0){
+                String[]  templateName=hoteroomType.getTemName().split("——");
+                list.add(templateName[1]);
+                list.add(hoteroomType.getXingcheng());
+            }else {
+                Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
+                template.setTemplateContent(hoteroomType.getXingcheng());
+                String[]  templateName=template.getTemplateName().split("——");
+                list.add(templateName[1]);
+                list.add(hoteroomType.getXingcheng());
+            }
             logger.error("method:getTemplateById  获取行程内容成功");
-            return ReponseResult.ok(template,"获取行程内容成功");
+            return ReponseResult.ok(list,"获取行程内容成功");
         }catch (Exception e){
             e.printStackTrace();
             logger.error("method:getTemplateById  获取行程内容失败");
