@@ -41,7 +41,7 @@
 		<div id="zong1" name="zong" lay-filter="test1">
 			<div style='margin-bottom: 30px;width: 800px'>
 				<input type="image" src="/sdglGroundConnection/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)' />
-				<input type="image" id="sc" src="/sdglGroundConnection/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right;height: 30px;width: 35px;" />
+				<input type="hidden" id="sc" src="/sdglGroundConnection/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right;height: 30px;width: 35px;" />
 				<div id="content">
 					<form class="layui-form layui-form-pane" action="">
 						<table border="0" cellspacing="0" cellpadding="0">
@@ -783,12 +783,12 @@
 				}
 
 				function tianshu(){
-				    var tian=$("[name=zong]").length();
+				    var tian=$("[name=zong]").length;
                     var startDate=$("#date").val();
                     startDate = new Date(startDate);
-                    startDate = +startDate + tian*1000 * 60 * 60 * 24;
+                    startDate = +startDate + (tian-1)*1000 * 60 * 60 * 24;
                     startDate = new Date(startDate);
-                    var nextStartDate = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+                    var nextStartDate = startDate.getFullYear() + "-0" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
                     $("#date1").val(nextStartDate);
 				}
 
@@ -998,7 +998,7 @@
                             --js;
                             var jsb=-js;
                             for (var i=0;i<jsb;i++){
-                                shanchu($("#add").prev().children("div:last-child").find("[id=sc]"));
+                                shanchu1($("#add").prev().children("div:last-child").find("[id=sc]"));
                             }
                         }
                     }

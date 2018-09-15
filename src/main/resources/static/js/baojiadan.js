@@ -100,6 +100,11 @@ function shanchu(aa){
     a.remove();
     datedel();
 }
+function shanchu1(aa){
+    var a=$(aa).parent().parent();
+    //$(aa).parent().next().remove();
+    a.remove();
+}
 
 /*function insertJingdian(onClickjd) {
         $(onClickjd).parent().parent().next().after("<tr id='scenic'>"+
