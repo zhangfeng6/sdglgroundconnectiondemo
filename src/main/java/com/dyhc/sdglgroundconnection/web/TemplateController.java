@@ -2,17 +2,12 @@ package com.dyhc.sdglgroundconnection.web;
 
 import com.alibaba.fastjson.JSON;
 import com.dyhc.sdglgroundconnection.parameterentity.TemplateParameter;
-import com.dyhc.sdglgroundconnection.pojo.Hotel;
-import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
-import com.dyhc.sdglgroundconnection.pojo.Scenicspot;
-import com.dyhc.sdglgroundconnection.pojo.Template;
-import com.dyhc.sdglgroundconnection.service.HotelService;
-import com.dyhc.sdglgroundconnection.service.HoteroomTypeService;
-import com.dyhc.sdglgroundconnection.service.ScenicspotService;
-import com.dyhc.sdglgroundconnection.service.TemplateService;
+import com.dyhc.sdglgroundconnection.pojo.*;
+import com.dyhc.sdglgroundconnection.service.*;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
 import com.dyhc.sdglgroundconnection.utils.ReponseResult;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -47,6 +40,8 @@ public class TemplateController {
 
     @Autowired
     private HoteroomTypeService hoteroomTypeService;
+    @Autowired
+    private DispatchService dispatchService;
 
 
     /**
@@ -256,9 +251,28 @@ public class TemplateController {
     @RequestMapping("/findTemplate.html")
     public ReponseResult findTemplate(Integer dispatchId){
         try{
-            Template template=templateService.listTemplate(dispatchId);
+            List<String> lists=new ArrayList<>();
+            Dispatch dispatch=dispatchService.dispatch(dispatchId);
+            List<Date> list=dispatchService.list(dispatchId);
+            for (int i=1;i<=list.size();i++){
+                //所在地
+                HoteroomType hoteroomType=null;
+                hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,i);
+                if(hoteroomType.getTemplateId() ==null || hoteroomType.getTemplateId()==0 ){
+                    String lala=hoteroomType.getTemName();
+                    lists.add(lala);
+                }else{
+                    Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
+                    lists.add(template.getTemplateName());
+                }
+            }
+            String qidian=lists.get(0);
+            String zongdian=lists.get(lists.size()-1);
+            List<String> list1=new ArrayList<>();
+            list1.add(qidian);
+            list1.add(zongdian);
             logger.info(" method:findStaff  查看路线成功！");
-            return ReponseResult.ok(template,"查看路线成功！");
+            return ReponseResult.ok(list1,"查看路线成功！");
         }catch (Exception e) {
             logger.error(" method:findStaff  查看路线失败，系统出现异常！");
             e.printStackTrace();

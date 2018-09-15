@@ -37,4 +37,12 @@ public interface HoteroomTypeMapper extends CommonMapper<HoteroomType>{
      * @throws Exception
      */
     List<HoteroomType> listHoteroomTypeByDid(@Param("Did")Integer Did)throws Exception;
+
+    /**
+     * 查看线路
+     * @param dispatchId
+     * @param weight
+     * @return
+     */
+    HoteroomType getHoteroomTypeByTemName(@Param("dispatchId") Integer dispatchId,@Param("weight") Integer weight)throws Exception;
 }

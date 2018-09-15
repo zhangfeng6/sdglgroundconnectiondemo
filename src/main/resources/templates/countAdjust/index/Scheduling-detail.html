@@ -27,9 +27,9 @@
 				</tr>
 				<tr>
 					<td><label class="layui-form-label">开始时间</label></td>
-					<td> <input type="text" name="travelStartTime" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+					<td> <input type="text" name="travelStartTime" id="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
 					<td><label class="layui-form-label">结束时间</label></td>
-					<td> <input type="text" name="travelEndTime" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
+					<td> <input type="text" name="travelEndTime" id="date1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input"></td>
 				</tr>
 				<tr>
 					<td><label class="layui-form-label">选择模板</label></td>
@@ -41,7 +41,7 @@
 		<div id="zong1" name="zong" lay-filter="test1">
 			<div style='margin-bottom: 30px;width: 800px'>
 				<input type="image" src="/sdglGroundConnection/images/up.PNG" style="height: 30px;width: 35px;" id="toggle" onclick='qiehuan(this)' />
-				<input type="image" id="sc" src="/sdglGroundConnection/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right;height: 30px;width: 35px;" />
+				<input type="hidden" id="sc" src="/sdglGroundConnection/images/del.PNG" onclick='shanchu(this)' style="display:inline-block;float: right;height: 30px;width: 35px;" />
 				<div id="content">
 					<form class="layui-form layui-form-pane" action="">
 						<table border="0" cellspacing="0" cellpadding="0">
@@ -198,9 +198,15 @@
                     //日期
                     laydate.render({
                         elem: '#date'
+                        ,done: function (value, date, endDate) {
+                            fanzhuanDate()
+                        }
                     });
                     laydate.render({
                         elem: '#date1'
+                        ,done: function (value, date, endDate) {
+                            fanzhuanDate()
+                        }
                     });
                     laydate.render({
                         elem: '#date2'
@@ -231,6 +237,7 @@
                     form.on('select(chedui)',function(data){
                         selectByDictionariesId1(data.value,1,this);
                     });
+
 				});
                 var id=0;
 				$(function(){
@@ -775,8 +782,18 @@
                             }
                         }
                     })
+                    tianshu();
 				}
 
+				function tianshu(){
+				    var tian=$("[name=zong]").length;
+                    var startDate=$("#date").val();
+                    startDate = new Date(startDate);
+                    startDate = +startDate + (tian-1)*1000 * 60 * 60 * 24;
+                    startDate = new Date(startDate);
+                    var nextStartDate = startDate.getFullYear() + "-0" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+                    $("#date1").val(nextStartDate);
+				}
 
 
 				function baocunmuban(){
@@ -963,6 +980,59 @@
                         }
 					})
 				}
+
+
+                function fanzhuanDate(){
+                    var begin=$("#date").val();
+                    var end=$("#date1").val();
+                    var cha=0;
+                    if(begin!="" && end!=""){
+                        cha=getDaysByDateString(begin,end)+1;
+                    }
+                    var xls=$("[name=zong]").length;
+                    var js=parseInt(cha)-parseInt(xls)
+                    if(begin!=""&&end!=""){
+                        if(js>0){
+                            for(var i=1;i<js;i++){
+                                addss3();
+                            }
+                        }
+                        if(js<=0){
+                            --js;
+                            var jsb=-js;
+                            for (var i=0;i<jsb;i++){
+                                shanchu1($("#add").prev().children("div:last-child").find("[id=sc]"));
+                            }
+                        }
+                    }
+                }
+                //获取两个日期之间的天数
+                function  getDaysByDateString(dateString1,dateString2){
+                    var  startDate=Date.parse(dateString1.replace('/-/g','/'));
+                    var  endDate=Date.parse(dateString2.replace('/-/g','/'));
+                    var diffDate=(endDate-startDate)+1*24*60*60*1000;
+                    var days=diffDate/(1*24*60*60*1000);
+                    //alert(diffDate/(1*24*60*60*1000));
+                    return  days;
+                }
+                //日期加一天
+                function dateAdd() {
+                    var startDate=$("#date1").val();
+                    startDate = new Date(startDate);
+                    startDate = +startDate + 1000 * 60 * 60 * 24;
+                    startDate = new Date(startDate);
+                    var nextStartDate = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+                    $("#date1").val(nextStartDate);
+                }
+                //日期减一天
+                function datedel() {
+                    var startDate=$("#date1").val();
+                    startDate = new Date(startDate);
+                    startDate = +startDate - 1000 * 60 * 60 * 24;
+                    startDate = new Date(startDate);
+                    var nextStartDate = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+                    $("#date1").val(nextStartDate);
+                }
 
 		</script>
 	</body>
