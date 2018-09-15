@@ -39,6 +39,11 @@ public class BillTypeServiceImpl implements BillTypeService {
         return billTypeMapper.listBillType();
     }
 
+    @Override
+    public BillType getBillTypeById(Integer billTypeId) throws Exception {
+        return billTypeMapper.getBillTypeById(billTypeId);
+    }
+
     /**
      * 删除单据信息
      * @return

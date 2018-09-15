@@ -620,4 +620,51 @@ public class WeChatController {
             return ReponseResult.err("获取单据类型列表失败");
         }
     }
+
+    /**
+     * 获取上传单据中已存在的单据类型列表
+     * @return
+     */
+    @RequestMapping("listBillByDispatchId")
+    @ResponseBody
+    public ReponseResult listBillByDispatchId(Integer dispatchId){
+        try {
+            List<Bill> list=billService.listBillByDispatchId(dispatchId);
+            List<BillType> list1=new ArrayList<>();
+            for (Bill bill:list) {
+                BillType billType=billTypeService.getBillTypeById(bill.getBillTypeId());
+                list1.add(billType);
+            }
+            logger.info("mothod:listBillByDispatchId 获取单据类型列表成功");
+            return ReponseResult.ok(list1,"获取单据类型列表成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listBillByDispatchId 获取单据类型列表失败");
+            return ReponseResult.err("获取单据类型列表失败");
+        }
+    }
+
+    /**
+     * 根据单据类型查看图片
+     * @return
+     */
+    @RequestMapping("listBillById")
+    @ResponseBody
+    public ReponseResult listBillById(Integer dispatchId,Integer billTypeId){
+        try {
+            Bill bill=billService.listBillById(dispatchId,billTypeId);
+            String[] picturePath=bill.getPicturePath().split(",");
+            List<String> list=new ArrayList<>();
+            for (String p:picturePath) {
+                list.add(p);
+            }
+            logger.info("mothod:listBillType 获取单据类型列表成功");
+            return ReponseResult.ok(list,"获取单据类型列表成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listBillType 获取单据类型列表失败");
+            return ReponseResult.err("获取单据类型列表失败");
+        }
+    }
+
 }

@@ -28,7 +28,7 @@
     </update>
 
     <update id="jsShenHe">
-        UPDATE `reportdetail` SET `status`=2 WHERE reportDetailId=#{reportDetailId}
+        UPDATE `reportdetail` SET `status`=3 WHERE reportDetailId=#{reportDetailId}
     </update>
     <!--查询报账类型名称-->
     <select id="baozhangType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">

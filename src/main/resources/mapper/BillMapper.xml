@@ -22,4 +22,11 @@
     <delete id="removeBillBydispatchId">
         DELETE FROM bill WHERE dispatchId=#{dispatchId}
     </delete>
+
+    <select id="listBillByDispatchId" resultType="com.dyhc.sdglgroundconnection.pojo.Bill">
+        SELECT * FROM bill WHERE dispatchId=#{dispatchId} AND whetherDel=0
+    </select>
+    <select id="listBillById" resultType="com.dyhc.sdglgroundconnection.pojo.Bill">
+        SELECT * FROM bill WHERE dispatchId=#{dispatchId} and billTypeId=#{billTypeId}
+    </select>
 </mapper>

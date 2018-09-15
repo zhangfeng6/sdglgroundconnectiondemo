@@ -42,4 +42,18 @@ public interface BillService {
      */
     int savebillBianGeng(List<MultipartFile> list,Integer did)throws Exception;
 
+    /**
+     * 获取上传单据中已存在的单据类型列表
+     * @return
+     */
+    List<Bill> listBillByDispatchId(Integer dispatchId)throws Exception;
+
+    /**
+     * 根据调度id和类型id查看图片
+     * @param dispatchId
+     * @param billTypeId
+     * @return
+     */
+    Bill listBillById(Integer dispatchId,Integer billTypeId)throws Exception;
+
 }
