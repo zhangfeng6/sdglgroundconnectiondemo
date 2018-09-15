@@ -199,8 +199,7 @@ function insertJingdian(onClickjd) {
 
 
 	function  san(dang){
-	    var a = $(dang).parent().parent().html();
-      $(dang).parent().parent().parent().remove();
+      $(dang).parent().parent().remove();
 	}
 
 			function addss1() {
