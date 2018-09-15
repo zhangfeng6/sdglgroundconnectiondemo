@@ -95,9 +95,10 @@ function muban1(obj){
 
 
 function shanchu(aa){
-    var a=$(aa).parent();
-    $(aa).parent().next().remove();
+    var a=$(aa).parent().parent();
+    //$(aa).parent().next().remove();
     a.remove();
+    datedel();
 }
 
 /*function insertJingdian(onClickjd) {
@@ -198,7 +199,8 @@ function insertJingdian(onClickjd) {
 
 
 	function  san(dang){
-      $(dang).parent().parent().remove();
+	    var a = $(dang).parent().parent().html();
+      $(dang).parent().parent().parent().remove();
 	}
 
 			function addss1() {
@@ -309,6 +311,7 @@ function insertJingdian(onClickjd) {
 				/*var f = "<button class='layui-btn layui-btn-normal layui-btn-radius' onclick='addss()' id='add'>十</button>";
 				$("#zong").append(f);*/
 				layui.form.render('select');
+                dateAdd();
 			}
 
 function gouwudiyes(obj){
@@ -416,6 +419,94 @@ function addss2() {
         "\t\t\t<!---中结束-->\n" +
         "\t\t</div>";
     $("#add").before(a);
+}
+
+
+function addss3() {
+    var A=$("[name=zong]");
+    var xianlu = $("#xianlu").html();
+    var jiudian = $("#jiudian").html();
+    var jingdian = $("#jingdian").html();
+    var wucan = $("#wucan").html();
+    var wancan = $("#wancan").html();
+    var index=parseInt(A.length)+1;
+    var a = "<div id='zong"+index+"' name=\"zong\" lay-filter=\"test1\">\n" +
+        "\t\t\t<div style='margin-bottom: 30px;width: 800px'>\n" +
+        "\t\t\t\t<input type=\"image\" src=\"/sdglGroundConnection/images/up.PNG\" style=\"height: 30px;width: 35px;\" id=\"toggle\" onclick='qiehuan(this)' />\n" +
+        "\t\t\t\t<input type=\"image\" id='sc' src='/sdglGroundConnection/images/del.PNG' onclick='shanchu(this)' style=\"display:inline-block;float: right;height: 30px;width: 35px;\" />\n" +
+        "\t\t\t\t<div id=\"content\">\n" +
+        "\t\t\t\t\t<form class=\"layui-form layui-form-pane\" action=\"\">\n" +
+        "\t\t\t\t\t\t<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n" +
+        "\t\t\t\t\t\t\t<tr>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">线路</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class='xzxianlu'>\n" +
+        "\t\t\t\t\t\t\t\t\t<select name=\"lineArriveName\" lay-verify=\"required\" lay-search lay-filter=\"xianlu\">"+xianlu+"</select>\n" +
+        "\t\t\t\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\t\t\t<td colspan=\"2\">&nbsp;<button type=\"button\" class='layui-btn layui-btn-normal layui-btn-radius' style='height: 30px;width: 100px;' onclick=\"xianlu1(this)\">自行填写</button></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t\t<tr>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">日期</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td>\n" +
+        "\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"date\" id=\"date2\" lay-verify=\"date\" placeholder=\"yyyy-MM-dd\" autocomplete=\"off\" class=\"layui-input\">\n" +
+        "\t\t\t\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\n" +
+        "\t\t\t\t\t\t\t<tr>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">酒店</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"jiudian\">\n" +
+        "\t\t\t\t\t\t\t\t\t<select class=\"hotelName\" name=\"hotelName\" lay-verify=\"required\" lay-filter=\"jiudian\">"+jiudian+"</select>\n" +
+        "\t\t\t\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">成本价</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><input name=\"jcostPrice\" type=\"text\" class=\"layui-input\"></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><input name=\"joffer\" type=\"text\" class=\"layui-input\"></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t\t<!--点击新增景点-->\n" +
+        "\t\t\t\t\t\t\t<tr id=\"onClickjd\">\n" +
+        "\t\t\t\t\t\t\t\t<td colspan=\"2\" class='tian'><button id=\"tian\" class=\"layui-btn\" type=\"button\" style=\"font-size: 12px\" onclick=\"insertJingdian(this)\">添加景点+</button></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t\t<!--点击新增结束-->\n" +
+        "\t\t\t\t\t\t\t<tr id=\"scenic1\" name=\"scenic\" class=\"scenic\" >\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">景点</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"jingdian\">\n" +
+        "\t\t\t\t\t\t\t\t\t<select name=\"scenicSpotName\" lay-verify=\"required\" lay-filter=\"jingdian\">"+jingdian+"</select>\n" +
+        "\t\t\t\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">成本价:</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><input name=\"jdcostPrice\" type=\"text\" class=\"layui-input\"></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价:</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><input name=\"jdoffer\" type=\"text\" class=\"layui-input\"></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t\t<tr name=\"wucai\">\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">午餐</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"wuc\">\n" +
+        "\t\t\t\t\t\t\t\t\t<select name=\"typeName\" lay-verify=\"required\" lay-filter=\"wucan\">"+wucan+"</select>\n" +
+        "\t\t\t\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label  class=\"layui-form-label\">成本价</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"wucb\"><input type=\"text\" class=\"layui-input\" name=\"cb\"></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"wubj\"><input type=\"text\" class=\"layui-input\" name=\"bj\"></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t\t<tr>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">晚餐</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class='wanc'>\n" +
+        "\t\t\t\t\t\t\t\t\t<select name=\"typeName\" lay-verify=\"required\" lay-filter=\"wancan\">"+wancan+"</select>\n" +
+        "\t\t\t\t\t\t\t\t</td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">成本价</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"wancb\"><input type=\"text\" class=\"layui-input\" name=\"cb\"></td>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">报价</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td class=\"wanbj\"><input type=\"text\" class=\"layui-input\" name=\"bj\"></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t\t<tr>\n" +
+        "\t\t\t\t\t\t\t\t<td><label class=\"layui-form-label\">行程</label></td>\n" +
+        "\t\t\t\t\t\t\t\t<td colspan=\"5\"> <textarea  name=\"trip\" placeholder=\"请输入内容\" class=\"layui-textarea\"></textarea></td>\n" +
+        "\t\t\t\t\t\t\t</tr>\n" +
+        "\t\t\t\t\t\t</table>\n" +
+        "\t\t\t\t\t</form>\n" +
+        "\t\t\t\t</div>\n" +
+        "\t\t\t</div>\n" +
+        "\t\t\t<!---中结束-->\n" +
+        "\t\t</div>";
+    $("#add").before(a);
     /*selectTourismtemplate();
     selectofferline();
     selectHotel();
@@ -438,5 +529,5 @@ function addss2() {
     b.remove();*/
     /*var f = "<button class='layui-btn layui-btn-normal layui-btn-radius' onclick='addss()' id='add'>十</button>";
     $("#zong").append(f);*/
-    //layui.form.render('select');
+    layui.form.render('select');
 }
