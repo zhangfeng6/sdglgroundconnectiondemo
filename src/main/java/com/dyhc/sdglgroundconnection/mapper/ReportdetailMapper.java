@@ -86,4 +86,19 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     Reportingotherexpenses getReportingotherexpenses(Integer dispatchId)throws Exception;
+
+
+    /**
+     * 查看结算
+     * @param
+     * @return
+     */
+    Travel showJieSuan(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 查看结算
+     * @param
+     * @return
+     */
+    Dispatch showJieSuan1(@Param("reportDetailId") Integer reportDetailId)throws Exception;
 }

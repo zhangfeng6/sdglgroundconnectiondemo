@@ -59,14 +59,14 @@
 <script th:src="@{/layui.js}"></script>
 
 <script>
-    var limitcount = 3; // 每页总记录数
+    var limitcount = 5; // 每页总记录数
     var curnum = 1;  // 当前页码
     $(function () {
         loadData(1);
         $(document).on("click","#save",function () {
             layer.open({
-                type: 2,0.
-                title: '账户'
+                type: 2,
+                title: '账户',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['700px' , '330px'],
@@ -146,7 +146,7 @@
                         elem: 'laypage'
                         , count: e.count
                         , curr: curnum
-                        , limit: 3
+                        , limit: 5
                         , layout: ['prev', 'page', 'next','skip', 'count']
                         , jump: function (obj, first) {
                             if (!first) {

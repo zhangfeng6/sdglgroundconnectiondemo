@@ -164,6 +164,25 @@ public class ReportdetailController {
         }
     }
 
+    /**
+     * 查询调度Id
+     * @param
+     * @return
+     */
+    @RequestMapping("selectReportdetail")
+    public ReponseResult selectReportdetail(HttpServletRequest request, Integer reportDetailId){
+        try {
+            HttpSession session = request.getSession();
+            session.setAttribute("reportDetailId",reportDetailId);
+            logger.info("mothod:selectDispatchById 查询成功");
+            ReponseResult data=ReponseResult.ok("查询成功");
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:selectDispatchById 查询失败");
+            return ReponseResult.err("查询失败");
+        }
+    }
 
 
 

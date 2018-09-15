@@ -21,7 +21,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">证件号：</label>
 				<div class="layui-input-block">
-					<input type="text" name="certificate" required lay-verify="required" placeholder="请输入用证件号" autocomplete="off" class="layui-input">
+					<input type="text" name="certificate" required lay-verify="required" placeholder="请输入用证件号" autocomplete="off" class="layui-input" disabled="disabled">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -56,8 +56,8 @@
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">性别：</label>
-				<div class="layui-input-block">
-					<select name="sex" lay-verify="" id="leixing">
+				<div class="layui-input-block" lay-filter="selFilter">
+					<select name="sex"  id="leixing">
 						<option value="0">女</option>
 						<option value="1">男</option>
 					</select>
@@ -65,7 +65,7 @@
 			</div>
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="panduan()">立即提交</button>
+					<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="updateA()">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
@@ -91,6 +91,25 @@
                $("input[name='telephone']").val(data.data.telephone);
                $("input[name='age']").val(data.data.age);
                $("#leixing").find("option:eq('"+(data.data.sex)+"')").attr("selected",true);
+               //Demo
+               layui.use(['form', 'layedit', 'laydate', 'element'], function () {
+                   var form = layui.form,
+                       layer = layui.layer,
+                       layedit = layui.layedit,
+                       element = layui.element,
+                       laydate = layui.laydate;
+                   laydate.render({
+                       elem: '#vvv'
+                   });
+                   element.render();
+                   form.render('select', 'test1');
+                   form.render('select','selFilter');
+                   form.render();
+                   //监听提交
+                   form.on('submit(formDemo)', function(data) {
+                       return false;
+                   });
+               });
            },
            error: function () {
                alert("错误！");
@@ -109,7 +128,8 @@
            dataType:"json",
            type:"POST",
            success:function (e) {
-               if (e.data!=null){
+              var certificate=$("input[name='certificate']").val().trim();
+              if (e.data!=null && e.data.certificate!=certificate ){
                    alert("该证件号已重复，请重新填写！");
                    return;
                } else{
@@ -120,6 +140,7 @@
                alert("系统出错");
            }
        })
+
    }
             //修改账户信息
             function updateA() {
@@ -200,7 +221,8 @@
                    });
                 element.render();
                 form.render('select', 'test1');
-				form.render();
+                form.render('select','selFilter');
+                form.render();
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
 					return false;

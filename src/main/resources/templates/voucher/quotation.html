@@ -151,7 +151,7 @@ table{
 <td colspan="6">
 				    以上专此呈上，如有不详之处敬请垂询，感谢支持，预祝合作愉快！<br/><br/>
    
-                                              发件人：<span></span>
+                                              发件人：<span id="fa"></span>
 
 </td>
 </tr>
@@ -216,6 +216,7 @@ table{
 				$("#lian").html(data.data[12].staffname+"<br/>\n" +
                     "\t\t\t\tTel："+data.data[12].phone+"<br/>\n" +
                     "\t\t\t\tQQ："+data.data[12].qqnumber+"  <br/>")
+				$("#fa").text(data.data[14]);
 			}
 		})
 	}

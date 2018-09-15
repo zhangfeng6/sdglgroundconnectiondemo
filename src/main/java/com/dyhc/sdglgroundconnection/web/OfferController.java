@@ -56,6 +56,12 @@ public class OfferController {
     private DictionariesService dictionariesService;
     @Autowired
     private StaffService staffService;
+    @Autowired
+    private ReportdetailService reportdetailService;
+    @Autowired
+    private DispatchhotelService dispatchhotelService;
+    @Autowired
+    private AccountTypeService accountTypeService;
 
 
     /**
@@ -731,6 +737,46 @@ public class OfferController {
             return err;
         }
     }
+
+
+    /**
+     * 赵伟伟
+     * 查询结算单
+     * @param
+     * @return
+     */
+    @RequestMapping("/showJieSuan")
+    public ReponseResult showJieSuan(HttpServletRequest request,Integer reportDetailId) {
+        try {
+            HttpSession session = request.getSession();
+            List<Object> allList = new ArrayList<>();
+            Travel travel = reportdetailService.showJieSuan(reportDetailId);
+            Dispatch dispatch = reportdetailService.showJieSuan1(reportDetailId);
+            List<Dispatchhotel> dispatchhotel = dispatchhotelService.dispatchhotelSelectAll(dispatch.getDispatchId());
+            int fang = 0;
+            for (int i=0;i<dispatchhotel.size();i++){
+                fang+=dispatchhotel.get(i).getRoomNum();
+            }
+            List<AccountType> accountTypeOne = accountTypeService.selectStatusOne();
+            List<AccountType> accountTypeTwo = accountTypeService.selectStatusTwo();
+            Staff staff = (Staff) session.getAttribute("staff");
+            allList.add(travel);
+            allList.add(dispatch);
+            allList.add(fang);
+            allList.add(accountTypeOne);
+            allList.add(accountTypeTwo);
+            allList.add(staff);
+            ReponseResult<Object> data = ReponseResult.ok(allList, "获取确认书成功！");
+            logger.info(" method:selectOffer  获取确认书成功！");
+            return data;
+        } catch (Exception e) {
+            logger.error(" method:selectOffer  获取确认书数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
 
     /**
      * 赵伟伟

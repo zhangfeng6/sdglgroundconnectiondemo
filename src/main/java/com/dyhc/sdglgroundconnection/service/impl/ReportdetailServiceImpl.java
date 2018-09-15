@@ -150,4 +150,14 @@ public class ReportdetailServiceImpl implements ReportdetailService {
     public Reportingotherexpenses getReportingotherexpenses(Integer dispatchId)throws Exception {
         return reportdetailMapper.getReportingotherexpenses(dispatchId);
     }
+
+    @Override
+    public Travel showJieSuan(Integer reportDetailId) throws Exception {
+        return reportdetailMapper.showJieSuan(reportDetailId);
+    }
+
+    @Override
+    public Dispatch showJieSuan1(Integer reportDetailId) throws Exception {
+        return reportdetailMapper.showJieSuan1(reportDetailId);
+    }
 }
