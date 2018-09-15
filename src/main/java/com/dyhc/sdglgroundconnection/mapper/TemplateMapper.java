@@ -74,4 +74,11 @@ public interface TemplateMapper  extends CommonMapper<Template>{
      * @return
      */
     Template listTemplate(Integer templateId)throws Exception;
+
+    /**
+     * 查看路线
+     * @param templateId
+     * @return
+     */
+    Template listTemplateTemName(Integer templateId)throws Exception;
 }

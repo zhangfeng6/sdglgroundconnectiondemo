@@ -106,4 +106,11 @@ public interface TemplateService {
      */
     Template listTemplate(Integer dispatchId)throws Exception;
 
+    /**
+     * 查看路线
+     * @param  dispatchId
+     * @return
+     */
+    Template listTemplateTemName(Integer dispatchId)throws Exception;
+
 }

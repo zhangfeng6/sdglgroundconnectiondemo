@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.service;
 
 import com.dyhc.sdglgroundconnection.pojo.HoteroomType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,4 +26,13 @@ public interface HoteroomTypeService {
      * @return
      */
     List<HoteroomType> listOfferlineAll(Integer dispatchId)throws Exception;
+
+    /**
+     * 查看线路
+     * @param dispatchId
+     * @param weight
+     * @return
+     */
+    HoteroomType getHoteroomTypeByTemName(Integer dispatchId,Integer weight)throws Exception;
+
 }

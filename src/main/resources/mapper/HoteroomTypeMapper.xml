@@ -14,4 +14,11 @@
     <select id="listHoteroomTypeByDid" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
         SELECT `hoteroomtId`,`templateId`,`xingcheng`,`weight`,`date`,`temName`  FROM `hoteroomtype` WHERE `offerId`=#{Did}
     </select>
+    
+    <select id="getHoteroomTypeByTemName" resultType="com.dyhc.sdglgroundconnection.pojo.HoteroomType">
+        SELECT temName FROM `hoteroomtype` WHERE offerId=#{offerId} AND weight={weight} and `status`=0
+    </select>
+
+
+    
 </mapper>

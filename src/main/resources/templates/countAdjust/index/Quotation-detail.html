@@ -671,7 +671,10 @@
                             $("select[name=d"+(i+1)+"wancan]").val(result.data["wan"][i].valueId);
                             $("select[name=d"+(i+1)+"wancan]").change();
                         });
-
+                        $($("input[name=hiddendel]")).each(function (i,e) {
+                            $(e).css("display","none");
+                        });
+                        $("#add").css("display","none");
                     },
 					error:function (err) {
 						alert(err);
@@ -1040,7 +1043,7 @@
                         $("select[name=carrental]").attr("disCarId",result.data["discar"].disCarId);
 						$("input[name=tourist]").val(result.data["dispatch"].tourist);
 						if(result.data["dispatch"].state==4){
-                            $("select[name=guide]").attr("disabled","disabled");
+						    $("select[name=guide]").attr("disabled","disabled");
 						}
                         $(result.data["hoteroomType"]).each(function (i,e) {
                             if(i>0){

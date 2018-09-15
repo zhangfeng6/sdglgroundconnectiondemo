@@ -59,4 +59,8 @@
     <select id="listTemplate" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
  SELECT t.templateName FROM template t,hoteroomtype h,dispatch s WHERE t.templateId=h.templateId AND h.offerId=s.dispatchId AND s.dispatchId=#{dispatchId} AND weight=1
     </select>
+
+    <select id="listTemplateTemName" resultType="com.dyhc.sdglgroundconnection.pojo.Template">
+         SELECT h.temName FROM template t,hoteroomtype h,dispatch s WHERE  h.offerId=s.dispatchId AND s.dispatchId=#{dispatchId} AND weight=1
+    </select>
 </mapper>

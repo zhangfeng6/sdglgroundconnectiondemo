@@ -423,12 +423,19 @@ public class DispatchController {
                 bb.add(cc);
 
                 //所在地
-                HoteroomType hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,i);
-                Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
-                bb.add(template.getTemplateName());
-                //行程内容
-                bb.add(template.getTemplateContent());
-
+                HoteroomType hoteroomType=null;
+                hoteroomType=hoteroomTypeService.getHoteroomTypeById(dispatchId,i);
+                if(hoteroomType.getTemplateId() ==null || hoteroomType.getTemplateId()==0 ){
+                    String lala=hoteroomType.getTemName();
+                    String haha=hoteroomType.getXingcheng();
+                    bb.add(lala);
+                    bb.add(haha);
+                }else{
+                    Template template=templateService.selecctNameById(hoteroomType.getTemplateId());
+                    bb.add(template.getTemplateName());
+                    //行程内容
+                    bb.add(template.getTemplateContent());
+                }
                 //行程日期
                 String a=sdf.format(list.get(i-1));
                 bb.add(a);

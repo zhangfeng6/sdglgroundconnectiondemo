@@ -338,7 +338,7 @@ public class DispatchServiceImpl implements DispatchService {
                 s.setCreateDate(new Date());
             }
             if(disshoppList.size()>0){
-                if(disattrList.get(1)!=null){
+                if(disattrList.get(0)!=null){
                     disshoppMapper.insertList(disshoppList);
                 }
             }

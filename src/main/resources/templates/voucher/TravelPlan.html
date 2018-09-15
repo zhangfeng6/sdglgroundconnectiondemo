@@ -95,7 +95,7 @@
             <td width="21%">起点</td>
             <td width="22%"><span id="templateName"></span></td>
             <td width="21%">终点</td>
-            <td width="22%"></td>
+            <td width="22%"><span id="zongdian"></span> </td>
         </tr>
         <tr>
             <td width="21%">总里程</td>
@@ -233,7 +233,9 @@
             type:"get",
             dataType:"json",
             success:function (data) {
-                $("#templateName").text(data.data.templateName.split("——")[0]);
+                /*$("#templateName").text(data.data.templateName.split("——")[0]);*/
+                $("#templateName").text(data.data[0].split("——")[0]);
+                $("#zongdian").text(data.data[1].split("——")[1]);
             }
         })
     }

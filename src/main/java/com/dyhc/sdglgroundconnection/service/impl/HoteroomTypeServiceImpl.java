@@ -30,4 +30,17 @@ public class HoteroomTypeServiceImpl implements HoteroomTypeService {
     public List<HoteroomType> listOfferlineAll(Integer dispatchId) throws Exception{
         return hoteroomTypeMapper.listOfferlineAll(dispatchId);
     }
+
+    /**
+     * 查看路线信息2
+     * @param dispatchId
+     * @param weight
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public HoteroomType getHoteroomTypeByTemName(Integer dispatchId, Integer weight) throws Exception {
+        return hoteroomTypeMapper.getHoteroomTypeByTemName(dispatchId,weight);
+    }
+
 }

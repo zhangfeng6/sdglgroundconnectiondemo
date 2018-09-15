@@ -296,4 +296,15 @@ public class TemplateServiceImpl implements TemplateService {
         return templateMapper.listTemplate(dispatchId);
     }
 
+    /**
+     * 查看路线
+     * @param  dispatchId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Template listTemplateTemName(Integer dispatchId) throws Exception {
+        return templateMapper.listTemplateTemName(dispatchId);
+    }
+
 }
