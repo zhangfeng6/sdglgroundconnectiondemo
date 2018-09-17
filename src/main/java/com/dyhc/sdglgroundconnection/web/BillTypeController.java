@@ -124,7 +124,6 @@ public class BillTypeController {
      * @param
      * @return
      */
-    @LogNotes(operationType="单据修改赋值",content="单据修改赋值信息")
     @RequestMapping("/updateBillTypeFuzhi")
     public  ReponseResult equalBillType(@RequestParam("billTypeId") Integer billTypeId){
         try {

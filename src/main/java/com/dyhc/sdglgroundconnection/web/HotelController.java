@@ -133,7 +133,7 @@ public class HotelController {
      * 酒店房间修改赋值
      * @return
      */
-    @LogNotes(operationType="酒店房间",content="修改赋值")
+
     @RequestMapping("/fuzhiRoomType")
     public ReponseResult fuzhiRoomType(Integer typeId) {
         try {
@@ -155,7 +155,7 @@ public class HotelController {
      * 酒店修改赋值
      * @return
      */
-    @LogNotes(operationType="酒店",content="修改赋值")
+
     @RequestMapping("/fuzhiHotel")
     public ReponseResult fuzhiHotel(@RequestParam("typeId") Integer hotelId) {
         try {

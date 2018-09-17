@@ -338,7 +338,7 @@ public class WeChatController {
      */
     @RequestMapping("/assignmentGuide")
     @ResponseBody
-    @LogNotes(operationType="导游表",content="导游修改赋值 ")
+
     public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
         try {
             ReponseResult<Guide> data =ReponseResult.ok(guideService.assignmentGuide(guideId),"导游信息修改赋值成功!");

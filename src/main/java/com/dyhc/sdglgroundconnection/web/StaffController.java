@@ -41,7 +41,6 @@ public class StaffController  {
      * 查询人员全部信息
      * @return
      */
-    @LogNotes(operationType="用户信息",content="查询账户")
     @RequestMapping("/showAllstaff")
     public ReponseResult showAllstaff(){
         try {

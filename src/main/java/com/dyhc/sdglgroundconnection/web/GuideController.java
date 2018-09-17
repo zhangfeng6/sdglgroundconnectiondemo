@@ -112,7 +112,7 @@ public class GuideController{
     }
 
 
-    @LogNotes(operationType="导游表",content="导游修改赋值 ")
+
     @RequestMapping("/assignmentGuide")
     public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
         try {

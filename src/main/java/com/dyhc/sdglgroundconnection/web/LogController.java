@@ -36,7 +36,6 @@ public class LogController  {
      * @return
      */
     @RequestMapping("/log")
-    @LogNotes(operationType="日志",content="显示")
     public  ReponseResult logShowAll(Integer guideId,Integer dispatchId,String creationDate){
         try {
              Log log=logService.ShowAllLog(guideId,dispatchId,creationDate);
