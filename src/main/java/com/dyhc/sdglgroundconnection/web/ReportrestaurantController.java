@@ -59,19 +59,19 @@ public class ReportrestaurantController {
                 //创建总报账表的对象
                 Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
                 Reportrestaurant reportrestaurant =new Reportrestaurant();
-                reportrestaurant.setLunchDate(new Date());
+                reportrestaurant.setLunchDate(date);
                 reportrestaurant.setDinnerName(dinnerName);
                 reportrestaurant.setLuncheonName(LuncheonName);
                 reportrestaurant.setLunchMeal(lunchMeal);
                 reportrestaurant.setLunchEatNum(lunchEatNum);
                 reportrestaurant.setLunchother(lunchother);
                 reportrestaurant.setLunchPayMethods(lunchPayMethods);
-                reportrestaurant.setDinnerDate(new Date());
+                reportrestaurant.setDinnerDate(date);
                 reportrestaurant.setDinnerMeal(dinnerMeal);
                 reportrestaurant.setDinnerPayMethods(dinnerPayMethods);
                 reportrestaurant.setDinnerEatNum(dinnerEatNum);
                 reportrestaurant.setDinnerother(dinnerother);
-                reportrestaurant.setCreateDate(date);
+                reportrestaurant.setCreateDate(new Date());
                 reportrestaurant.setStatus(0);
                 reportrestaurant.setReportDetailId(reportdetail.getReportDetailId());
             Integer num=reportrestaurantService.saveReportrestaurant(reportrestaurant);
