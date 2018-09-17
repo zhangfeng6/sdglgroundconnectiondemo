@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -38,14 +39,17 @@ public class ReportqutsubsidyController  {
      */
     @LogNotes(operationType="导游补助明细",content="补助新增")
     @RequestMapping("/saveReportqutsubsidy")
-    public ReponseResult saveReportqutsubsidy(@RequestParam("dispatchId")Integer dispatchId,@RequestParam("DailyCost")Double DailyCost,@RequestParam("nums")Integer nums,@RequestParam("guideNum")Integer guideNum){
+    public ReponseResult saveReportqutsubsidy( @RequestParam("createDate")String createDate,
+            @RequestParam("dispatchId")Integer dispatchId,@RequestParam("DailyCost")Double DailyCost,@RequestParam("nums")Integer nums,@RequestParam("guideNum")Integer guideNum){
 
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(createDate);
             Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             Reportqutsubsidy reportqutsubsidy=new Reportqutsubsidy();
             reportqutsubsidy.setReportDetailId(reportdetail.getReportDetailId());
             reportqutsubsidy.setCreateBy(1);
-            reportqutsubsidy.setCreateDate(new Date());
+            reportqutsubsidy.setCreateDate(date);
             reportqutsubsidy.setUpDate(new Date());
             reportqutsubsidy.setUpdateBy(2);
             reportqutsubsidy.setStatus(0);

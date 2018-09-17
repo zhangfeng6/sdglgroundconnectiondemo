@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -37,6 +39,7 @@ public class ReportrestaurantController {
     @LogNotes(operationType="导游餐厅明细",content="餐厅新增")
     @RequestMapping("/saveStaurant")
     public ReponseResult savereportrestaurant(
+            @RequestParam("createDate")String createDate,
            @RequestParam("dispatchId")Integer dispatchId,
            @RequestParam("LuncheonName") String LuncheonName,
            @RequestParam("lunchMeal")Double lunchMeal,
@@ -51,17 +54,19 @@ public class ReportrestaurantController {
           ){
 
             try {
+                SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = sf.parse(createDate);
                 //创建总报账表的对象
                 Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
                 Reportrestaurant reportrestaurant =new Reportrestaurant();
-                reportrestaurant.setLunchDate(new Date());
+                reportrestaurant.setLunchDate(date);
                 reportrestaurant.setDinnerName(dinnerName);
                 reportrestaurant.setLuncheonName(LuncheonName);
                 reportrestaurant.setLunchMeal(lunchMeal);
                 reportrestaurant.setLunchEatNum(lunchEatNum);
                 reportrestaurant.setLunchother(lunchother);
                 reportrestaurant.setLunchPayMethods(lunchPayMethods);
-                reportrestaurant.setDinnerDate(new Date());
+                reportrestaurant.setDinnerDate(date);
                 reportrestaurant.setDinnerMeal(dinnerMeal);
                 reportrestaurant.setDinnerPayMethods(dinnerPayMethods);
                 reportrestaurant.setDinnerEatNum(dinnerEatNum);
