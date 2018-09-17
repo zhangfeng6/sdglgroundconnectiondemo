@@ -187,7 +187,7 @@ public class ReportdetailController {
 
 
     /**
-     * 驳回导游报账的审核
+     * 结算导游报账的审核
      * @param reportDetailId
      * @return
      */

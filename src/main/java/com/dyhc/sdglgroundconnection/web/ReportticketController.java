@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -38,16 +39,19 @@ public class ReportticketController {
     @LogNotes(operationType="导游门票明细",content="门票新增")
     @RequestMapping("/saveReportticket")
     public ReponseResult saveReportqutsubsidy(
+            @RequestParam("createDate")String createDate,
             @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("attrName") String attrName,@RequestParam("price") Double price,
             @RequestParam("nums")Integer nums, @RequestParam("payMethods")String payMethods){
 
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(createDate);
             Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             Reportticket reportticket =new Reportticket();
             reportticket.setReportDetailId(reportdetail.getReportDetailId());
             reportticket.setCreateBy(1);
-            reportticket.setCreateDate(new Date());
+            reportticket.setCreateDate(date);
             reportticket.setStatus(0);
             reportticket.setAttrName(attrName);
             reportticket.setPrice(price);

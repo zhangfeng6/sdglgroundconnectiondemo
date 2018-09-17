@@ -36,4 +36,11 @@ public interface BillTypeMapper extends CommonMapper<BillType>{
      * @throws Exception
      */
     List<BillType> listBillType()throws Exception;
+
+    /**
+     * 根据单据类型id获取单据名称
+     * @param billTypeId
+     * @return
+     */
+    BillType getBillTypeById(@Param("billTypeId")Integer billTypeId) throws Exception;
 }

@@ -91,7 +91,7 @@ public class AccountTypeController {
      * @param accountTypeId
      * @return
      */
-@LogNotes(operationType="账目修改赋值",content="查询账目修改信息")
+
 @RequestMapping("/updateShowAllAccountType")
 public  ReponseResult updateShowAll(@RequestParam("accountTypeId") Integer accountTypeId){
     try {

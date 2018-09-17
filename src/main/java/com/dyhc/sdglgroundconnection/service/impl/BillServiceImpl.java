@@ -69,4 +69,14 @@ public class BillServiceImpl implements BillService {
 
     }
 
+    @Override
+    public List<Bill> listBillByDispatchId(Integer dispatchId) throws Exception {
+        return billMapper.listBillByDispatchId(dispatchId);
+    }
+
+    @Override
+    public Bill listBillById(Integer dispatchId, Integer billTypeId) throws Exception {
+        return billMapper.listBillById(dispatchId,billTypeId);
+    }
+
 }

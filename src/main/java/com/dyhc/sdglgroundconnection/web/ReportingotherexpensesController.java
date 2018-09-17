@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -40,6 +41,7 @@ public class ReportingotherexpensesController {
     @LogNotes(operationType="导游其他明细",content="其他新增")
     @RequestMapping("/saveReportingotherexpenses")
     public ReponseResult saveReportingotherexpenses(
+            @RequestParam("createDate")String createDate,
             @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("Remarks")String Remarks,
             @RequestParam("GuidedTour")Double GuidedTour,
@@ -47,11 +49,13 @@ public class ReportingotherexpensesController {
             @RequestParam("total")Double total){
 
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(createDate);
             Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             Reportingotherexpenses reportingotherexpenses=new Reportingotherexpenses();
             reportingotherexpenses.setReportDetailId(reportdetail.getReportDetailId());
             reportingotherexpenses.setCreateBy(1);
-            reportingotherexpenses.setCreateDate(new Date());
+            reportingotherexpenses.setCreateDate(date);
             reportingotherexpenses.setStatus(0);
             reportingotherexpenses.setRemarks(Remarks);
             reportingotherexpenses.setGuidedTour(GuidedTour);

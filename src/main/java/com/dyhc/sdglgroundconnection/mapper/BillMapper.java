@@ -1,10 +1,13 @@
 package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Bill;
+import com.dyhc.sdglgroundconnection.pojo.BillType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * this class by created wuyongfei on 2018/6/5 13:50
@@ -50,4 +53,20 @@ public interface BillMapper extends CommonMapper<Bill>{
      * @throws Exception
      */
     int  removeBillBydispatchId(@Param("dispatchId")Integer dispatchId)throws Exception;
+
+    /**
+     * 获取上传单据中已存在的单据类型列表
+     * @return
+     */
+    List<Bill> listBillByDispatchId(@Param("dispatchId")Integer dispatchId)throws Exception;
+
+    /**
+     * 根据调度id和类型id查看图片
+     * @param dispatchId
+     * @param billTypeId
+     * @return
+     */
+    Bill listBillById(@Param("dispatchId") Integer dispatchId,@Param("billTypeId")Integer billTypeId)throws Exception;
+
+
 }

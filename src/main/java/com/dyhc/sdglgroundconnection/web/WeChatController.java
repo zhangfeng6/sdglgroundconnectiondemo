@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,6 +83,7 @@ public class WeChatController {
     @RequestMapping("/saveReportaccommodation")
     @ResponseBody
     public ReponseResult saveAccountType(
+            @RequestParam("setLiveDate")String setLiveDate,
             @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("hotelName")String hotelName,
             @RequestParam("typeId")Integer typeId,
@@ -93,6 +95,8 @@ public class WeChatController {
             @RequestParam("payMethods")String payMethods){
 
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(setLiveDate);
             //创建总报账表的对象
             Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             //创建报账住宿
@@ -106,7 +110,7 @@ public class WeChatController {
             reportaccommodation.setAccompanyingPrice(accompanyingPrice);
             reportaccommodation.setSubtotal(subtotal);
             reportaccommodation.setPayMethods(payMethods);
-            reportaccommodation.setLiveDate(new Date());
+            reportaccommodation.setLiveDate(date);
             reportaccommodation.setStatus(0);
             Integer num=reportaccommodationService.saveReportaccommodation(reportaccommodation) ;
             logger.info("method:savereportaccommodation 导游报账住宿新增成功");
@@ -131,6 +135,7 @@ public class WeChatController {
     @RequestMapping("/dictionaries")
     @ResponseBody
     public ReponseResult dictionaries(
+            @RequestParam("reportDate")String reportDate,
             @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("valueId")Integer valueId,
             @RequestParam("remarks")String remarks,
@@ -140,9 +145,11 @@ public class WeChatController {
     ){
         //创建导游报账总表信息
         try{
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(reportDate);
             Reportdetail reportdetail =new Reportdetail();
             reportdetail.setDispatchId(dispatchId);
-            reportdetail.setReportDate(new Date());
+            reportdetail.setReportDate(date);
             reportdetail.setReceipt(receipt);
             reportdetail.setTotalPayable(totalPayable);
             reportdetail.setTypeCode("BILL");
@@ -338,7 +345,7 @@ public class WeChatController {
      */
     @RequestMapping("/assignmentGuide")
     @ResponseBody
-    @LogNotes(operationType="导游表",content="导游修改赋值 ")
+
     public  ReponseResult assignmentGuide(@RequestParam("guideId") Integer guideId){
         try {
             ReponseResult<Guide> data =ReponseResult.ok(guideService.assignmentGuide(guideId),"导游信息修改赋值成功!");
@@ -620,4 +627,51 @@ public class WeChatController {
             return ReponseResult.err("获取单据类型列表失败");
         }
     }
+
+    /**
+     * 获取上传单据中已存在的单据类型列表
+     * @return
+     */
+    @RequestMapping("listBillByDispatchId")
+    @ResponseBody
+    public ReponseResult listBillByDispatchId(Integer dispatchId){
+        try {
+            List<Bill> list=billService.listBillByDispatchId(dispatchId);
+            List<BillType> list1=new ArrayList<>();
+            for (Bill bill:list) {
+                BillType billType=billTypeService.getBillTypeById(bill.getBillTypeId());
+                list1.add(billType);
+            }
+            logger.info("mothod:listBillByDispatchId 获取单据类型列表成功");
+            return ReponseResult.ok(list1,"获取单据类型列表成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listBillByDispatchId 获取单据类型列表失败");
+            return ReponseResult.err("获取单据类型列表失败");
+        }
+    }
+
+    /**
+     * 根据单据类型查看图片
+     * @return
+     */
+    @RequestMapping("listBillById")
+    @ResponseBody
+    public ReponseResult listBillById(Integer dispatchId,Integer billTypeId){
+        try {
+            Bill bill=billService.listBillById(dispatchId,billTypeId);
+            String[] picturePath=bill.getPicturePath().split(",");
+            List<String> list=new ArrayList<>();
+            for (String p:picturePath) {
+                list.add(p);
+            }
+            logger.info("mothod:listBillType 获取单据类型列表成功");
+            return ReponseResult.ok(list,"获取单据类型列表成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listBillType 获取单据类型列表失败");
+            return ReponseResult.err("获取单据类型列表失败");
+        }
+    }
+
 }

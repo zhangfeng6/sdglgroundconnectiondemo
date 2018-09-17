@@ -50,9 +50,12 @@ public class ReportfareController{
     @LogNotes(operationType="导游车费",content="车费新增")
     @RequestMapping("/savereportaccommodation")
     public ReponseResult savereportfare
-    (@RequestParam("dispatchId")Integer dispatchId,@RequestParam("tolls")Double tolls,@RequestParam("parkingFee")Double parkingFee,@RequestParam("PrepaidFare")Double PrepaidFare){
+    ( @RequestParam("createDate")String createDate,
+            @RequestParam("dispatchId")Integer dispatchId,@RequestParam("tolls")Double tolls,@RequestParam("parkingFee")Double parkingFee,@RequestParam("PrepaidFare")Double PrepaidFare){
 
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(createDate);
             //创建总报账表的对象
             Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             Reportfare reportfare=new Reportfare();
@@ -62,7 +65,7 @@ public class ReportfareController{
             reportfare.setPrepaidFare(PrepaidFare);
             reportfare.setStatus(0);
             reportfare.setCreateBy(1);
-            reportfare.setCreateDate(new Date());
+            reportfare.setCreateDate(date);
             reportfare.setUpDate(new Date());
             reportfare.setUpdateBy(2);
             reportfare.setValue2("");
