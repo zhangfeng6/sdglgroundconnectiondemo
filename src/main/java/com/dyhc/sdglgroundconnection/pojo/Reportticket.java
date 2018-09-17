@@ -35,6 +35,11 @@ public class Reportticket {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "`createDate`")
     private Date createDate; //  创建时间
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "reportDate")
+    private Date reportDate; //  报账时间
+
     public Integer getReportDetailId() {
         return reportDetailId;
     }
@@ -45,7 +50,6 @@ public class Reportticket {
 
     @Column(name = "reportDetailId")
     private Integer reportDetailId; //导游报账明细id
-    private String value2;
     private String value3;
 
     @Id
@@ -148,16 +152,14 @@ public class Reportticket {
         this.createDate = createDate;
     }
 
-
-
     @Basic
-    @Column(name = "value2")
-    public String getValue2() {
-        return value2;
+    @Column(name = "getReportDate")
+    public Date getReportDate() {
+        return reportDate;
     }
 
-    public void setValue2(String value2) {
-        this.value2 = value2;
+    public void setReportDate(Date reportDate) {
+        this.reportDate = reportDate;
     }
 
     @Basic
@@ -186,13 +188,13 @@ public class Reportticket {
                 Objects.equals(upDate, that.upDate) &&
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(reportDetailId, that.reportDetailId) &&
-                Objects.equals(value2, that.value2) &&
+                Objects.equals(reportDate, that.reportDate) &&
                 Objects.equals(value3, that.value3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(reportTicketId, attrName, price, nums, payMethods, status, createBy, updateBy, upDate, createDate, reportDetailId, value2, value3);
+        return Objects.hash(reportTicketId, attrName, price, nums, payMethods, status, createBy, updateBy, upDate, createDate, reportDetailId, reportDate, value3);
     }
 }

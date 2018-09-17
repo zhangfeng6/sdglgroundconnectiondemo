@@ -38,4 +38,9 @@ public class ReportticketServiceImpl implements ReportticketService {
     public List<Reportticket> listReportticketById(Integer reportDetailId) throws Exception {
         return reportticketMapper.listReportticketById(reportDetailId);
     }
+
+    @Override
+    public List<Reportticket> getMenPiaoById(Integer reportDetailId, String liveDate) throws Exception {
+        return reportticketMapper.getMenPiaoById(reportDetailId,liveDate);
+    }
 }

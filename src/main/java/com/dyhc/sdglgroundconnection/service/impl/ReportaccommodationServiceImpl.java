@@ -53,4 +53,9 @@ public class ReportaccommodationServiceImpl implements ReportaccommodationServic
     public Integer save_Reportaccommodation(Reportaccommodation reportaccommodation)throws Exception {
         return reportaccommodationMapper.insert(reportaccommodation);
     }
+
+    @Override
+    public Reportaccommodation getZhuSuById(Integer reportDetailId, String liveDate) throws Exception {
+        return reportaccommodationMapper.getZhuSuById(reportDetailId,liveDate);
+    }
 }

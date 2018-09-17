@@ -141,4 +141,12 @@ public interface DispatchService {
      * @throws Exception
      */
     int updateDispatchState(Integer dispatchId)throws Exception;
+
+    /**
+     * 获取本次旅行的天数
+     * @param date1
+     * @param date2
+     * @return
+     */
+    List<Date> listDate(Date date1,Date date2)throws Exception;
 }

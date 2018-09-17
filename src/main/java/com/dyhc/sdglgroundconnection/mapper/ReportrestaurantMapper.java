@@ -21,4 +21,13 @@ public interface ReportrestaurantMapper extends CommonMapper<Reportrestaurant>{
      * @throws Exception
      */
     List<Reportrestaurant> listReportrestaurantById(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 获取餐厅报账
+     * @param reportDetailId
+     * @param liveDate
+     * @return
+     * @throws Exception
+     */
+    Reportrestaurant getCanGuanById(@Param("reportDetailId") Integer reportDetailId,@Param("liveDate")String liveDate)throws Exception;
 }

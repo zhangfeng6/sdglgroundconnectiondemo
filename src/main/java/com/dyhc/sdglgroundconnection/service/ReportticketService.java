@@ -24,4 +24,11 @@ public interface ReportticketService {
      * @return
      */
     List<Reportticket> listReportticketById(Integer reportDetailId)throws Exception;
+
+    /**
+     * 获取导游门票报账明细信息
+     * @param reportDetailId
+     * @return
+     */
+    List<Reportticket> getMenPiaoById(Integer reportDetailId,String liveDate)throws Exception;
 }

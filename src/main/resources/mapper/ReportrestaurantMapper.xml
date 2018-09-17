@@ -5,4 +5,8 @@
     <select id="listReportrestaurantById" resultType="com.dyhc.sdglgroundconnection.pojo.Reportrestaurant">
         SELECT * FROM `reportrestaurant` WHERE reportDetailId=#{reportDetailId} AND `status`=0
     </select>
+
+    <select id="getCanGuanById" resultType="com.dyhc.sdglgroundconnection.pojo.Reportrestaurant">
+        SELECT * FROM `reportrestaurant` WHERE reportDetailId=#{reportDetailId} AND lunchDate=#{liveDate}
+    </select>
 </mapper>

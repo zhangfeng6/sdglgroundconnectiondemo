@@ -248,6 +248,11 @@ public class DispatchServiceImpl implements DispatchService {
         return dispatchMapper.updateDispatchstate2(dispatchId);
     }
 
+
+    public List<Date> listDate(Date date1, Date date2)throws Exception {
+        return getBetweenDates(date1,date2);
+    }
+
     /**
      * 根据参数类的数据进行新增调度及调度相关信息
      * @param dispatchParameter

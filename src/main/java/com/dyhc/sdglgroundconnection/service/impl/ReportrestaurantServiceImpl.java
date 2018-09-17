@@ -38,4 +38,9 @@ public class ReportrestaurantServiceImpl implements ReportrestaurantService {
     public List<Reportrestaurant> listReportrestaurantById(Integer reportDetailId) throws Exception {
         return reportrestaurantMapper.listReportrestaurantById(reportDetailId);
     }
+
+    @Override
+    public Reportrestaurant getCanGuanById(Integer reportDetailId, String liveDate) throws Exception {
+        return reportrestaurantMapper.getCanGuanById(reportDetailId,liveDate);
+    }
 }

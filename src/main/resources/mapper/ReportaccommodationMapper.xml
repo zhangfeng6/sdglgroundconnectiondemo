@@ -9,4 +9,8 @@
     <select id="reportaccommodation" resultType="com.dyhc.sdglgroundconnection.pojo.Reportaccommodation">
           select  * from reportaccommodation
     </select>
+
+    <select id="getZhuSuById" resultType="com.dyhc.sdglgroundconnection.pojo.Reportaccommodation">
+        SELECT * FROM `reportaccommodation` WHERE reportDetailId=#{reportDetailId} AND liveDate=#{liveDate}
+    </select>
 </mapper>

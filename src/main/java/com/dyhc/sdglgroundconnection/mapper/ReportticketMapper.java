@@ -2,6 +2,7 @@ package com.dyhc.sdglgroundconnection.mapper;
 
 import com.dyhc.sdglgroundconnection.pojo.Reportticket;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,4 +21,11 @@ public interface ReportticketMapper extends CommonMapper<Reportticket> {
      * @return
      */
     List<Reportticket> listReportticketById(Integer reportDetailId)throws Exception;
+
+    /**
+     * 获取导游门票报账明细信息
+     * @param reportDetailId
+     * @return
+     */
+    List<Reportticket> getMenPiaoById(@Param("reportDetailId") Integer reportDetailId, @Param("liveDate") String liveDate)throws Exception;
 }

@@ -26,4 +26,13 @@ public interface ReportrestaurantService {
      * @throws Exception
      */
     List<Reportrestaurant> listReportrestaurantById(Integer reportDetailId)throws Exception;
+
+    /**
+     * 获取餐厅报账
+     * @param reportDetailId
+     * @param liveDate
+     * @return
+     * @throws Exception
+     */
+    Reportrestaurant getCanGuanById(Integer reportDetailId,String liveDate)throws Exception;
 }

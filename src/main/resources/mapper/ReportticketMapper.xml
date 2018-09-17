@@ -5,4 +5,7 @@
     <select id="listReportticketById" resultType="com.dyhc.sdglgroundconnection.pojo.Reportticket">
         SELECT * FROM `reportticket` WHERE reportDetailId=#{reportDetailId} AND `status`=0
     </select>
+    <select id="getMenPiaoById" resultType="com.dyhc.sdglgroundconnection.pojo.Reportticket">
+        SELECT * FROM `reportticket` WHERE reportDetailId=#{reportDetailId} AND reportDate=#{liveDate}
+    </select>
 </mapper>

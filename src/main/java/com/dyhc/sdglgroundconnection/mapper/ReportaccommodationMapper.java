@@ -29,6 +29,13 @@ public interface ReportaccommodationMapper extends CommonMapper<Reportaccommodat
      */
     List<Reportaccommodation>  reportaccommodation()throws Exception;
 
-
+    /**
+     * 获取住宿报账
+     * @param reportDetailId
+     * @param liveDate
+     * @return
+     * @throws Exception
+     */
+    Reportaccommodation getZhuSuById(@Param("reportDetailId") Integer reportDetailId,@Param("liveDate")String liveDate)throws Exception;
 
 }

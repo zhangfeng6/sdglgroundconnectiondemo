@@ -34,4 +34,14 @@ public interface ReportaccommodationService {
      * @return
      */
     Integer   save_Reportaccommodation(Reportaccommodation reportaccommodation)throws Exception;
+
+
+    /**
+     * 获取住宿报账
+     * @param reportDetailId
+     * @param liveDate
+     * @return
+     * @throws Exception
+     */
+    Reportaccommodation getZhuSuById(Integer reportDetailId,String liveDate)throws Exception;
 }

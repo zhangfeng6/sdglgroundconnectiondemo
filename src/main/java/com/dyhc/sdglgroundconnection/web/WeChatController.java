@@ -23,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +38,16 @@ public class WeChatController {
     // 日志对象
     private Logger logger = LoggerFactory.getLogger(GuideController.class);
 
+    @Autowired
+    private ReportticketService reportticketService;
+    @Autowired
+    private ReportrestaurantService reportrestaurantService;
+    @Autowired
+    private ReportqutsubsidyService reportqutsubsidyService;
+    @Autowired
+    private ReportingotherexpensesService reportingotherexpensesService;
+    @Autowired
+    private ReportfareService reportfareService;
     @Autowired
     private GuideService guideService;
     @Autowired
@@ -666,5 +679,171 @@ public class WeChatController {
             return ReponseResult.err("获取单据类型列表失败");
         }
     }
+
+
+    /**
+     * 获取本次旅行的天数
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("listDate")
+    @ResponseBody
+    public ReponseResult listDate(Integer dispatchId){
+        try {
+            Dispatch dispatch=dispatchService.dispatch(dispatchId);
+            List<Date> list=dispatchService.listDate(dispatch.getTravelStartTime(),dispatch.getTravelEndTime());
+            List<String> list1=new ArrayList<>();
+            for (Date date:list) {
+                String a=(new SimpleDateFormat("yyyy-MM-dd")).format(date);
+                list1.add(a);
+            }
+            logger.info("mothod:listDate 获取本次旅行的天数成功");
+            return ReponseResult.ok(list1,"获取本次旅行的天数成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:listDate 获取本次旅行的天数失败");
+            return ReponseResult.err("获取本次旅行的天数失败");
+        }
+    }
+
+
+    /**
+     * 根据调度id获取总报账id
+     * @param dispatchId
+     * @return
+     */
+    @RequestMapping("getReportdetailByDispatchId")
+    @ResponseBody
+    public ReponseResult getReportdetailByDispatchId(Integer dispatchId){
+        try {
+            Reportdetail reportdetail=reportdetailService.reportdetail(dispatchId);
+            Integer a=reportdetail.getReportDetailId();
+            logger.info("mothod:getReportdetailByDispatchId 获取总报账id成功");
+            return ReponseResult.ok(a,"获取总报账id成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getReportdetailByDispatchId 获取总报账id失败");
+            return ReponseResult.err("获取总报账id失败");
+        }
+    }
+
+
+    /**
+     * 获取车费报账
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getReportfareById")
+    @ResponseBody
+    public ReponseResult getReportfareById(Integer reportDetailId){
+        try {
+            Reportfare reportfare=reportfareService.listReportfareById(reportDetailId);
+            logger.info("mothod:getReportfareById 获取车费报账成功");
+            return ReponseResult.ok(reportfare,"获取车费报账成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getReportfareById 获取车费报账失败");
+            return ReponseResult.err("获取总报账id失败");
+        }
+    }
+
+
+    /**
+     * 获取车费报账
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getReportOtherById")
+    @ResponseBody
+    public ReponseResult getReportOtherById(Integer reportDetailId){
+        try {
+            Reportingotherexpenses reportingotherexpenses=reportingotherexpensesService.listReportingotherexpensesById(reportDetailId);
+            logger.info("mothod:getReportOtherById 获取其他支出报账成功");
+            return ReponseResult.ok(reportingotherexpenses,"获取其他支出成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getReportOtherById 获取其他支出失败");
+            return ReponseResult.err("获取其他支出失败");
+        }
+    }
+
+    /**
+     * 获取出团补助报账
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getReportqutsubsidyById")
+    @ResponseBody
+    public ReponseResult getReportqutsubsidyById(Integer reportDetailId){
+        try {
+            Reportqutsubsidy reportqutsubsidy=reportqutsubsidyService.getReportqutsubsidyById(reportDetailId);
+            logger.info("mothod:getReportqutsubsidyById 获取出团补助报账成功");
+            return ReponseResult.ok(reportqutsubsidy,"获取出团补助成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getReportqutsubsidyById 获取出团补助失败");
+            return ReponseResult.err("获取出团补助失败");
+        }
+    }
+
+    /**
+     * 获取住宿报账
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getZhuSuById")
+    @ResponseBody
+    public ReponseResult getZhuSuById(Integer reportDetailId,String liveDate){
+        try {
+            Reportaccommodation reportaccommodation=reportaccommodationService.getZhuSuById(reportDetailId,liveDate);
+            logger.info("mothod:getZhuSuById 获取住宿报账成功");
+            return ReponseResult.ok(reportaccommodation,"获取住宿成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getZhuSuById 获取住宿失败");
+            return ReponseResult.err("获取住宿失败");
+        }
+    }
+
+
+    /**
+     * 获取餐馆报账
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getCanGuanById")
+    @ResponseBody
+    public ReponseResult getCanGuanById(Integer reportDetailId,String liveDate){
+        try {
+            Reportrestaurant reportrestaurant=reportrestaurantService.getCanGuanById(reportDetailId,liveDate);
+            logger.info("mothod:getCanGuanById 获取餐馆报账成功");
+            return ReponseResult.ok(reportrestaurant,"获取餐馆报账成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getCanGuanById 获取餐馆报账失败");
+            return ReponseResult.err("获取餐馆报账失败");
+        }
+    }
+
+    /**
+     * 获取门票报账
+     * @param reportDetailId
+     * @return
+     */
+    @RequestMapping("getMenPiaoById")
+    @ResponseBody
+    public ReponseResult getMenPiaoById(Integer reportDetailId,String liveDate){
+        try {
+           List<Reportticket> list=reportticketService.getMenPiaoById(reportDetailId,liveDate);
+            logger.info("mothod:getMenPiaoById 获取餐馆报账成功");
+            return ReponseResult.ok(list,"获取餐馆报账成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getMenPiaoById 获取餐馆报账失败");
+            return ReponseResult.err("获取餐馆报账失败");
+        }
+    }
+
+
 
 }
