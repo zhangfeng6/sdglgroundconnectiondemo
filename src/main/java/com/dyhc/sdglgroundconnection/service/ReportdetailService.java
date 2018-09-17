@@ -96,4 +96,19 @@ public interface ReportdetailService {
      * @return
      */
     Reportingotherexpenses getReportingotherexpenses(Integer dispatchId)throws Exception;
+
+
+    /**
+     * 查看结算
+     * @param
+     * @return
+     */
+    Travel showJieSuan(Integer reportDetailId)throws Exception;
+
+    /**
+     * 查看结算
+     * @param
+     * @return
+     */
+    Dispatch showJieSuan1(Integer reportDetailId)throws Exception;
 }

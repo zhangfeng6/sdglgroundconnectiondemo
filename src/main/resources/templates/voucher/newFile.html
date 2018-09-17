@@ -33,22 +33,22 @@
 		<div id="tupian" style="width: 800px;margin-left: 537px; margin:auto;">
                 <img src="/sdglGroundConnection/images/logo.jpg" width="640px" height="50px">
        		 </div>
-		<div style="text-align: center;">
+		<div style="text-align: center; margin:auto;width: 800px;">
 
-			<h2>STS-RJ-20180415JD团结算账单</h2>
+			<h2><span class="di"></span>团结算账单</h2>
 			<div style="border: 1px solid black;width:800px">
 			<table  id="tabletwo" width="800px" height="50px" cellpadding="0" cellspacing="0">
 				<tr style="">
 					<td >收件单位及收件人</td>
-					<td width="200px"></td>
+					<td width="200px" id="shou"></td>
 					<td>发件单位及收件人</td>
-					<td width="200px"></td>
+					<td width="200px" id="fa"></td>
 				</tr>
 				<tr>
 					<td>紧急联络</td>
-					<td></td>
+					<td id="shouj"></td>
 					<td>紧急联络</td>
-					<td></td>
+					<td id="faj"></td>
 				</tr>
 			</table>
 			<table  id="tableone1" width="800px" height="50px" cellpadding="0" cellspacing="0">
@@ -58,13 +58,13 @@
 			</table>
 			<table id="tableone" width="800px" height="600px" cellpadding="0" cellspacing="0">
 				<tr>
-					<td colspan="2" style="text-align: left; width: 160px; ">客源地：</td>
-					<td colspan="2" style="text-align: left; " >旅行人数：</td>
+					<td colspan="2" style="text-align: left; width: 160px; ">客源地：<span id="keyuan"></span></td>
+					<td colspan="2" style="text-align: left; " >旅行人数：<span id="num"></span></td>
 
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: left;">接团社团号：<br/>组团社团号</td>
-					<td colspan="2" style="text-align: left;">用房：</td>
+					<td colspan="2" style="text-align: left;">接团社团号：<span class="di"></span><br/>组团社团号：<span id="zu"></span></td>
+					<td colspan="2" style="text-align: left;">用房：<span id="fang"></span>间</td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: left;">费用内容<br>ITEMS</td>
@@ -72,34 +72,34 @@
 					<td style="text-align: left;">金额<br>AMOUNT</td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: left;">综费:<br>成人:</td>
+					<td colspan="2" style="text-align: left;">综费:<br><span id="zong"></span></td>
 					<td style="text-align: left;">人民币</td>
-					<td style="text-align: left;"></td>
+					<td style="text-align: left;" id="zf"></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: left;">其他增加费用：</td>
 					<td style="text-align: left;">人民币</td>
-					<td style="text-align: left;"></td>
+					<td style="text-align: left;">0元</td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: left;">其他核减费用：</td>
 					<td style="text-align: left;">人民币</td>
-					<td style="text-align: left;"></td>
+					<td style="text-align: left;">0元</td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: left;">费用共计</td>
 					<td style="text-align: left;">人民币</td>
-					<td style="text-align: left;"></td>
+					<td style="text-align: left;"><span id="zongji"></span><br/><span id="da"></span></td>
 				</tr>
 				<tr>
-					<td colspan="4" style="text-align: left;">以上费用不含司机小费，请现付导游司机，谢谢。</td>
+					<td colspan="4" style="text-align: left;">以上费用不含司机小费(NT<span id="xiao"></span>元/人。天)，请现付导游司机，谢谢。</td>
 				</tr>
 				<tr>
 					<td colspan="4" style="text-align: left;">备注</td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: left;">账户名：<br/>账号:<br>开户行</td>
-					<td colspan="2" style="text-align: left;">户名：<br/>卡号:<br>开户行</td>
+					<td colspan="2" style="text-align: left;" id="one"></td>
+					<td colspan="2" style="text-align: left;" id="two"></td>
 				</tr>
 			</table>
 		</div>
@@ -112,5 +112,57 @@
 		</table>
 		
 	</body>
+	<script th:src="@{/js/LodopFuncs.js}"></script>
+	<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+	<script>
 
+		var reportDetailId;
+        $(function(){
+            kaishi();
+        })
+
+        function kaishi(){
+            $.ajax({
+                url:"/sdglGroundConnection/Travel/jiesuan",
+                data:{},
+                dataType:"json",
+                async: false,
+                type:"get",
+                success:function (data) {
+                    reportDetailId=data.data;
+                    show();
+                }
+            })
+        }
+			function show(){
+				$.ajax({
+                    url:"/sdglGroundConnection/Offer/showJieSuan",
+                    data:{reportDetailId:reportDetailId},
+                    dataType:"json",
+                    async: false,
+                    type:"get",
+                    success:function (data) {
+						$(".di").text(data.data[1].groundConnectionNumber);
+						$("#shou").text(data.data[0].personName+" "+data.data[0].personPost);
+                        $("#fa").text("山西世达国旅  "+data.data[5].staffname);
+                        $("#shouj").text(data.data[0].phone);
+                        $("#faj").text(data.data[5].phone);
+
+                        $("#keyuan").text(data.data[1].tourist);
+                        $("#num").text(data.data[1].num);
+                        $("#zu").text(data.data[0].travelName);
+                        $("#fang").text(data.data[2]);
+                        $("#xiao").text(data.data[1].notcontain);
+
+                        var zong;
+                        zong=data.data[1].offer*data.data[1].num+data.data[1].wineFee+data.data[1].fare;
+                        $("#zong").text(data.data[1].offer+"元/人*"+data.data[1].num+"人+酒水"+data.data[1].wineFee+"+车费"+data.data[1].fare+"="+zong+"元");
+                        $("#zf").text(zong+"元");
+                        $("#zongji").text(zong+"元");
+                        $("#one").html("账户名："+data.data[3][0].accountName+"<br/>账号:"+data.data[3][0].accountNum+"<br>开户行"+data.data[3][0].bank);
+                        $("#two").html("户名："+data.data[4][0].accountName+"<br/>卡号:"+data.data[4][0].accountNum+"<br>开户行"+data.data[4][0].bank);
+					}
+				})
+			}
+	</script>
 </html>

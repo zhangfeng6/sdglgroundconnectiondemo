@@ -106,4 +106,14 @@ public class AccountTypeServiceImpl implements AccountTypeService {
         }
         return accountType;
     }
+
+    @Override
+    public List<AccountType> selectStatusOne() throws Exception {
+        return accountTypeMapper.selectStatusOne();
+    }
+
+    @Override
+    public List<AccountType> selectStatusTwo() throws Exception {
+        return accountTypeMapper.selectStatusTwo();
+    }
 }

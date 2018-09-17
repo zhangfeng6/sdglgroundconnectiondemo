@@ -17,6 +17,10 @@
     <select id="listBillType" resultType="com.dyhc.sdglgroundconnection.pojo.BillType">
         SELECT * FROM billtype WHERE whetherDel=0
     </select>
+    <select id="getBillTypeById" resultType="com.dyhc.sdglgroundconnection.pojo.BillType">
+        SELECT * FROM billtype WHERE billTypeId=#{billTypeId}
+    </select>
+
     <!--查询单据类型信息的resultMap-->
     <resultMap id="billType" type="com.dyhc.sdglgroundconnection.pojo.BillType">
         <id column="billTypeId" property="billTypeId"/>
