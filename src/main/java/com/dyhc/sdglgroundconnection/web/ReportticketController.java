@@ -51,7 +51,8 @@ public class ReportticketController {
             Reportticket reportticket =new Reportticket();
             reportticket.setReportDetailId(reportdetail.getReportDetailId());
             reportticket.setCreateBy(1);
-            reportticket.setCreateDate(date);
+            reportticket.setCreateDate(new Date());
+            reportticket.setReportDate(date);
             reportticket.setStatus(0);
             reportticket.setAttrName(attrName);
             reportticket.setPrice(price);

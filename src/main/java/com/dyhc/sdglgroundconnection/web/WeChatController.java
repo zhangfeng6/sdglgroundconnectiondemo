@@ -12,25 +12,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 @Controller
 @RequestMapping("/WeChat")
@@ -96,6 +88,7 @@ public class WeChatController {
     @RequestMapping("/saveReportaccommodation")
     @ResponseBody
     public ReponseResult saveAccountType(
+            @RequestParam("createDate")String createDate,
             @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("hotelName")String hotelName,
             @RequestParam("typeId")Integer typeId,
@@ -105,8 +98,9 @@ public class WeChatController {
             @RequestParam("accompanyingPrice")Double accompanyingPrice,
             @RequestParam("subtotal")Double subtotal,
             @RequestParam("payMethods")String payMethods){
-
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(createDate);
             //创建总报账表的对象
             Reportdetail reportdetail =reportdetailMapper.All_dispatchId(dispatchId);
             //创建报账住宿
@@ -120,7 +114,8 @@ public class WeChatController {
             reportaccommodation.setAccompanyingPrice(accompanyingPrice);
             reportaccommodation.setSubtotal(subtotal);
             reportaccommodation.setPayMethods(payMethods);
-            reportaccommodation.setLiveDate(new Date());
+            reportaccommodation.setLiveDate(date);
+            reportaccommodation.setCreateDate(new Date());
             reportaccommodation.setStatus(0);
             Integer num=reportaccommodationService.saveReportaccommodation(reportaccommodation) ;
             logger.info("method:savereportaccommodation 导游报账住宿新增成功");
@@ -145,6 +140,7 @@ public class WeChatController {
     @RequestMapping("/dictionaries")
     @ResponseBody
     public ReponseResult dictionaries(
+            @RequestParam("reportDate")String reportDate,
             @RequestParam("dispatchId")Integer dispatchId,
             @RequestParam("valueId")Integer valueId,
             @RequestParam("remarks")String remarks,
@@ -154,8 +150,11 @@ public class WeChatController {
     ){
         //创建导游报账总表信息
         try{
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(reportDate);
             Reportdetail reportdetail =new Reportdetail();
             reportdetail.setDispatchId(dispatchId);
+            reportdetail.setReportDate(date);
             reportdetail.setReportDate(new Date());
             reportdetail.setReceipt(receipt);
             reportdetail.setTotalPayable(totalPayable);
