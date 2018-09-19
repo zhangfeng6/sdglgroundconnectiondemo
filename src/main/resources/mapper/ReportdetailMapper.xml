@@ -39,7 +39,7 @@
      select * from  `reportdetail` where  dispatchId=#{dispatchId}
     </select>
 
-    <select id="selectDispatchById" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+   <select id="selectDispatchById" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
           select * from dispatch where groupNumber=#{groupNumber}
     </select>
 

@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * 模板表和线路表关联派生表
  */
-@Table(name = "Tourismandline")
+@Table(name = "tourismandline")
 public class Tourismandline {
     @Id
     @Column(name = "tourismandlineId")
