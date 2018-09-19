@@ -37,27 +37,31 @@
 <script th:src="@{/layui.js}"></script>
 
 <script>
-
+    var value="";
     //修改判断是否有重复账户类型
     function  panduan() {
         var typeName =$("input[name='typeName']").val();
-        $.ajax({
-            url: "/sdglGroundConnection/billType/equalBillType",
-            data: {typeName:typeName},
-            dataType: "json",
-            type: "get",
-            async : false,
-            success: function (data) {
-                if (typeName==data.data.typeName){
-                    alert("名称相同，请重新输入！");
-                }else{
-                    updateA();
+        if(value==typeName){
+            updateA();
+        }else{
+            $.ajax({
+                url: "/sdglGroundConnection/billType/equalBillType",
+                data: {typeName:typeName},
+                dataType: "json",
+                type: "get",
+                async : false,
+                success: function (data) {
+                    if (typeName==data.data.typeName){
+                        alert("名称相同，请重新输入！");
+                    }else{
+                        updateA();
+                    }
+                },
+                error: function () {
+                    alert("错误！");
                 }
-            },
-            error: function () {
-                alert("错误！");
-            }
-        });
+            });
+        }
     }
     //修改赋值
     function updataShow(guideId){
@@ -69,6 +73,7 @@
             type: "get",
             success: function (data) {
                 $("input[name='typeName']").val(data.data.typeName);
+                value=data.data.typeName;
             },
             error: function () {
                 alert("错误！");
@@ -126,6 +131,12 @@
             return false;
         });
     });
+
+
+
+
+
+
 </script>
 </body>
 </html>
