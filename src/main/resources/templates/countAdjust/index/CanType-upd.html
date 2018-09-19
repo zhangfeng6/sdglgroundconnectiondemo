@@ -87,7 +87,7 @@
         if(value==la && la!=''){
             $.ajax({
                 url:"/sdglGroundConnection/Dictionaries/DictionariesCanthree",
-                data:lala,
+            data:lala,
                 type:"get",
                 dateType:"json",
                 success:function (data) {
@@ -106,8 +106,14 @@
                         alert("类型已存在")
                     }else{
                         var haha=$("#one").val()
+                        var haha1=$("#two").val()
+                        var haha2=$("#three").val()
                         if(haha.value =="" || haha.length==0){
                             alert("餐厅类型不能为空")
+                        }else if(haha1.value =="" || haha1.length==0){
+                            alert("成本价不能为空")
+                        }else if(haha2.value =="" || haha2.length==0){
+                            alert("报价不能为空")
                         }else{
                             $.ajax({
                                 url:"/sdglGroundConnection/Dictionaries/DictionariesCanthree",

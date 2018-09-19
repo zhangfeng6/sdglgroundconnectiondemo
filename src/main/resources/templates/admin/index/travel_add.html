@@ -76,6 +76,9 @@
         }else if(personPost.value =="" || personPost.length ==0){
             alert("职位不能为空");
             return;
+        }else if(phone.value =="" || phone.length ==0){
+            alert("电话不能为空");
+            return;
         }else if(phone.substring(0,1)){
             if (!isMobile.exec(phone) && phone.length != 11) {
                 alert("电话格式不正确");
