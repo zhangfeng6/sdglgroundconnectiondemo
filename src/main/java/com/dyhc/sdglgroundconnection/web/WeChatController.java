@@ -188,9 +188,7 @@ public class WeChatController {
     @ResponseBody
     public ReponseResult guideLogin(String username,String password){
         try {
-
             String mima=MD5(password);
-            System.out.println(mima);
             Guide guide=guideService.login(username,mima);
             if (guide!=null){
                 if(mima.equalsIgnoreCase(guide.getPassword())){

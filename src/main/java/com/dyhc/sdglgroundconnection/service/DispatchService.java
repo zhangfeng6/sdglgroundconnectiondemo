@@ -149,4 +149,12 @@ public interface DispatchService {
      * @return
      */
     List<Date> listDate(Date date1,Date date2)throws Exception;
+
+    /**
+     * 结束本次调度
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    Integer updateState(Integer dispatchId)throws Exception;
 }

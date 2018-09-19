@@ -101,4 +101,12 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     Dispatch showJieSuan1(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 根据id获取导游报账明细信息：陈庆武
+     * @param reportDetailId
+     * @return
+     * @throws Exception
+     */
+    Reportdetail getReportdetailById(@Param("reportDetailId") Integer reportDetailId)throws Exception;
 }

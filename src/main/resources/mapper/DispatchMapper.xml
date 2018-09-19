@@ -17,7 +17,7 @@
         </if>
     </select>
     
-    <select id="getDispatchByguideId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+    <select id="" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         SELECT * FROM dispatch WHERE guideId=#{guideId} AND state=2
     </select>
 
@@ -60,5 +60,9 @@
 
     <update id="updateDispatchstate2">
         UPDATE `dispatch` SET `state`=2 WHERE `dispatchId`=#{dispatchId}
+    </update>
+
+    <update id="updateState">
+        UPDATE `dispatch` SET `state`=3 WHERE `dispatchId`=#{dispatchId}
     </update>
 </mapper>

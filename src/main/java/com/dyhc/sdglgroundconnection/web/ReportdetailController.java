@@ -5,6 +5,7 @@ import com.dyhc.sdglgroundconnection.pojo.Dispatch;
 import com.dyhc.sdglgroundconnection.pojo.Reportaccommodation;
 import com.dyhc.sdglgroundconnection.pojo.Reportdetail;
 import com.dyhc.sdglgroundconnection.pojo.Reportingotherexpenses;
+import com.dyhc.sdglgroundconnection.service.DispatchService;
 import com.dyhc.sdglgroundconnection.service.ReportdetailService;
 import com.dyhc.sdglgroundconnection.service.ReportticketService;
 import com.dyhc.sdglgroundconnection.utils.LogNotes;
@@ -37,6 +38,8 @@ public class ReportdetailController {
     private ReportdetailService reportdetailService;
     @Autowired
     private ReportdetailMapper reportdetailMapper;
+    @Autowired
+    private DispatchService dispatchService;
 
     /**
      * 获取所有的导游报账明细
@@ -196,8 +199,20 @@ public class ReportdetailController {
     public ReponseResult jsShenHe(Integer reportDetailId){
         try {
             Integer result=reportdetailService.jsShenHe(reportDetailId);
-            ReponseResult data=ReponseResult.ok(result,"报账结算成功");
-            logger.info("mothod:jsShenHe 报账结算成功");
+            ReponseResult data=null;
+            if (result==1){
+                Integer result1=dispatchService.updateState(reportdetailService.getReportdetailById(reportDetailId).getDispatchId());
+                if (result1==1){
+                    data=ReponseResult.ok(result,"报账结算成功");
+                    logger.info("mothod:jsShenHe 报账结算成功");
+                }else {
+                    data=ReponseResult.err("报账结算失败");
+                    logger.error("mothod:jsShenHe 报账结算失败");
+                }
+            }else {
+                data=ReponseResult.err("报账结算失败");
+                logger.error("mothod:jsShenHe 报账结算失败");
+            }
             return data;
         }catch (Exception e){
             e.printStackTrace();
