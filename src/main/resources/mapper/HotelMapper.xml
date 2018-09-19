@@ -9,7 +9,7 @@
     </select>
     <!--查询酒店信息-->
     <select id="HotelShowAll" resultType="com.dyhc.sdglgroundconnection.pojo.Hotel">
-      select  * from  Hotel where 1=1
+      select  * from  hotel where 1=1
       <if test="hotelName!=null and hotelName!=''">
         and hotelName like  concat('%',#{hotelName},'%')
       </if>
@@ -17,7 +17,7 @@
     </select>
      <!--删除酒店信息:贾晓亮-->
     <update id="removeHoter">
-     update  Hotel set whetherDel =1 where  hotelId =#{hotelId}
+     update  hotel set whetherDel =1 where  hotelId =#{hotelId}
     </update>
     <!--房间修改赋值-->
     <select id="fuzhiRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
