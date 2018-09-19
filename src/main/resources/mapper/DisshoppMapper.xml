@@ -7,7 +7,7 @@
     </select>
 
     <select id="listDisshoppAll" resultType="java.lang.String">
-SELECT s.scenicSpotAddress FROM DisShopp d,scenicSpot s,dispatch w WHERE d.scenicSpotId=s.scenicSpotId AND d.offerId=w.dispatchId AND w.dispatchId=#{dispatchId}
+SELECT s.scenicSpotAddress FROM disShopp d,scenicSpot s,dispatch w WHERE d.scenicSpotId=s.scenicSpotId AND d.offerId=w.dispatchId AND w.dispatchId=#{dispatchId}
     </select>
 
     <!--根据调度id获取调度购物地数据 张枫-->

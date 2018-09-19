@@ -6,7 +6,7 @@
         SELECT * FROM `disrestaurant` WHERE offerId=#{dispatchId} AND weight=#{weight} and `status`=0
     </select>
     <select id="listDisrestaurantAll" resultType="java.lang.String">
-SELECT r.restaurantName FROM DisRestaurant d,restaurant r,dispatch s WHERE d.disRestaurantId=r.restaurantId AND d.offerId=s.dispatchId AND s.dispatchId =#{dispatchId}
+SELECT r.restaurantName FROM disRestaurant d,restaurant r,dispatch s WHERE d.disRestaurantId=r.restaurantId AND d.offerId=s.dispatchId AND s.dispatchId =#{dispatchId}
     </select>
 
     <!--根据调度id获取调度餐厅表数据 张枫-->

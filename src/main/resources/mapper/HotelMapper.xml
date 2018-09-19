@@ -17,7 +17,7 @@
     </select>
      <!--删除酒店信息:贾晓亮-->
     <update id="removeHoter">
-     update  Hotel set whetherDel =1 where  hotelId =#{hotelId}
+     update  hotel set whetherDel =1 where  hotelId =#{hotelId}
     </update>
     <!--房间修改赋值-->
     <select id="fuzhiRoomType" resultType="com.dyhc.sdglgroundconnection.pojo.RoomType">
