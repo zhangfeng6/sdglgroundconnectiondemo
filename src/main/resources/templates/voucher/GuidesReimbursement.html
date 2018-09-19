@@ -600,7 +600,20 @@
         })
     }
 
-
+    /**
+     * 获取组团社名称
+     */
+    function getTravelName(groupNumber) {
+        $.ajax({
+            url: "/sdglGroundConnection/Travel/getTravelName",
+            data: {"groupNumber": groupNumber},
+            dataType: "json",
+            type: "post",
+            success:function (result) {
+                $("#groupNumber").html(result.data.travelName);
+            }
+        });
+    }
 
 
     function dispatchShow() {
@@ -612,13 +625,13 @@
             success:function (e) {
                 $("#groundConnectionNumber").html(e.data.groundConnectionNumber);
                 $("#time").html(e.data.travelStartTime+"　到　"+e.data.travelEndTime);
-                $("#groupNumber").html(e.data.groupNumber);
                 $("#num").html(e.data.num);
                 var time=daysBetween(e.data.travelStartTime,e.data.travelEndTime);
                 $("#day").html(time);
                 $("#tourist").html(e.data.tourist);
                 $("#xianlu").html(e.data.tourist);
                 $("#loan").html(e.data.loan);
+                getTravelName(e.data.groupNumber);
             },
             error:function () {
                 alert("错误，请联系管理员！");
