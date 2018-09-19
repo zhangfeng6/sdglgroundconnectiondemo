@@ -40,14 +40,14 @@ public interface TravelMapper extends CommonMapper<Travel> {
      * @param travelId
      * @return
      */
-    Integer getUpdTrave(Integer travelId)throws Exception;
+    Integer getUpdTrave(@Param("travelId")Integer travelId)throws Exception;
 
     /**
      * 修改条件查
      * @param travelId
      * @return
      */
-    Travel getupdBytravelId(Integer travelId)throws Exception;
+    Travel getupdBytravelId(@Param("travelId")Integer travelId)throws Exception;
 
     /**
      * 修改

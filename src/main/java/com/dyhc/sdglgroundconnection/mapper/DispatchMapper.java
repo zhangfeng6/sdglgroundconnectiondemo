@@ -30,13 +30,13 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @param guideId 导游id
      * @return
      */
-    Dispatch getDispatchByguideId(Integer guideId) throws Exception;
+    Dispatch getDispatchByguideId(@Param("guideId")Integer guideId) throws Exception;
     /**
      *查询计调的全部信息：贾晓亮
      * @param dispatchId
      * @return
      */
-    Dispatch dispatchSelectAll(Integer dispatchId)throws Exception;
+    Dispatch dispatchSelectAll(@Param("dispatchId")Integer dispatchId)throws Exception;
     /*
      * 分页查看调度信息                 刘跃云
      * @param guideName

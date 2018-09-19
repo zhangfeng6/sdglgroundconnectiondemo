@@ -253,6 +253,17 @@ public class DispatchServiceImpl implements DispatchService {
         return getBetweenDates(date1,date2);
     }
 
+    @Override
+    public Integer updateState(Integer dispatchId) throws Exception {
+        try {
+            dispatchMapper.updateState(dispatchId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+
+    }
+
     /**
      * 根据参数类的数据进行新增调度及调度相关信息
      * @param dispatchParameter

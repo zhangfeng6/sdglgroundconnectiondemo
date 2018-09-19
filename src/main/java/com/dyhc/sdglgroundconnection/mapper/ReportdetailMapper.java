@@ -71,21 +71,21 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @param dispatchId
      * @return
      */
-    Reportdetail getReportticket(Integer dispatchId) throws Exception;
+    Reportdetail getReportticket(@Param("dispatchId")Integer dispatchId) throws Exception;
 
     /**
      * 查看住宿
      * @param dispatchId
      * @return
      */
-    Reportaccommodation getHotel(Integer dispatchId)throws Exception;
+    Reportaccommodation getHotel(@Param("dispatchId")Integer dispatchId)throws Exception;
 
     /**
      * 查看其它
      * @param dispatchId
      * @return
      */
-    Reportingotherexpenses getReportingotherexpenses(Integer dispatchId)throws Exception;
+    Reportingotherexpenses getReportingotherexpenses(@Param("dispatchId")Integer dispatchId)throws Exception;
 
 
     /**
@@ -101,4 +101,12 @@ public interface ReportdetailMapper extends CommonMapper<Reportdetail>{
      * @return
      */
     Dispatch showJieSuan1(@Param("reportDetailId") Integer reportDetailId)throws Exception;
+
+    /**
+     * 根据id获取导游报账明细信息：陈庆武
+     * @param reportDetailId
+     * @return
+     * @throws Exception
+     */
+    Reportdetail getReportdetailById(@Param("reportDetailId") Integer reportDetailId)throws Exception;
 }
