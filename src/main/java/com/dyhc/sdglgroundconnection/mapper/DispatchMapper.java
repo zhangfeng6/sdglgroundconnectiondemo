@@ -68,4 +68,12 @@ public interface DispatchMapper extends CommonMapper<Dispatch>{
      * @return
      */
     int updateDispatchstate2(@Param("dispatchId")Integer dispatchId)throws Exception;
+
+    /**
+     * 结束本次调度
+     * @param dispatchId
+     * @return
+     * @throws Exception
+     */
+    Integer updateState(@Param("dispatchId") Integer dispatchId)throws Exception;
 }
