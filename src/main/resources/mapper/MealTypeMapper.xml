@@ -4,10 +4,10 @@
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.MealTypeMapper">
 
     <select id="selectMealTypeByRestaurantId" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
-        SELECT * FROM mealType m,dictionaries d WHERE m.`typeCode` = d.`typeCode` AND m.whetherDel=0 AND m.`valueId` = d.`valueId` AND m.`restaurantId`=#{restaurantId}
+        SELECT * FROM mealtype m,dictionaries d WHERE m.`typeCode` = d.`typeCode` AND m.whetherDel=0 AND m.`valueId` = d.`valueId` AND m.`restaurantId`=#{restaurantId}
     </select>
     <update id="updateMealType">
-        update mealType set valueId=#{valueId},costprice=#{costprice},offer=#{offer} where typeId=#{typeId}
+        update mealtype set valueId=#{valueId},costprice=#{costprice},offer=#{offer} where typeId=#{typeId}
     </update>
 
     <select id="selectDic" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
@@ -15,15 +15,15 @@
     </select>
 
     <update id="delMealTypeById">
-        update mealType set whetherDel=1 where typeId=#{typeId}
+        update mealtype set whetherDel=1 where typeId=#{typeId}
     </update>
 
     <insert id="insertMealType">
-        insert into mealType(typeCode,valueId,restaurantId,costprice,offer,whetherDel) values("DIET",#{valueId},#{restaurantId},#{costprice},#{offer},0)
+        insert into mealtype(typeCode,valueId,restaurantId,costprice,offer,whetherDel) values("DIET",#{valueId},#{restaurantId},#{costprice},#{offer},0)
     </insert>
 
     <select id="selectById" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">
-        select typeId,restaurantId,typeCode,valueId,costprice,offer,whetherDel,createBy,updateBy,updateDate,createDate,value1,value2,value3 from mealType where typeId = #{typeId}
+        select typeId,restaurantId,typeCode,valueId,costprice,offer,whetherDel,createBy,updateBy,updateDate,createDate,value1,value2,value3 from mealtype where typeId = #{typeId}
     </select>
 
     <select id="selectMealType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">

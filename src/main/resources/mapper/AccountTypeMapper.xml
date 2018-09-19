@@ -23,10 +23,10 @@
     </update>
 
     <select id="selectStatusOne" resultType="com.dyhc.sdglgroundconnection.pojo.AccountType">
-        select * from accountType where status=1
+        select * from accounttype where status=1
     </select>
 
     <select id="selectStatusTwo" resultType="com.dyhc.sdglgroundconnection.pojo.AccountType">
-        select * from accountType where status=2
+        select * from accounttype where status=2
     </select>
 </mapper>

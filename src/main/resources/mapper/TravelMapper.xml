@@ -32,7 +32,7 @@
     </select>
 
     <select id="selectGuideByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Guide">
-        SELECT g.* FROM guide g,Dispatch d,disGuide dg,travel t
+        SELECT g.* FROM guide g,dispatch d,disguide dg,travel t
         WHERE dg.guideId = g.guideId
         AND dg.offerId = d.dispatchId
         AND d.groupNumber = t.travelId
@@ -55,12 +55,12 @@
     </select>
 
     <select id="selectReportrestaurantByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
-        SELECT rr.*,d.num,re.restaurantName FROM dispatch d,disrestaurant rr,mealType m,restaurant re WHERE d.dispatchId = rr.offerId AND d.dispatchId=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='2'
+        SELECT rr.*,d.num,re.restaurantName FROM dispatch d,disrestaurant rr,mealtype m,restaurant re WHERE d.dispatchId = rr.offerId AND d.dispatchId=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='2'
 
     </select>
 
     <select id="selectReportrestaurantByTravelId1" resultType="com.dyhc.sdglgroundconnection.pojo.Disrestaurant">
-        SELECT rr.*,d.num,re.restaurantName FROM dispatch d,disrestaurant rr,mealType m,restaurant re WHERE d.dispatchId = rr.offerId AND d.dispatchId=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='3'
+        SELECT rr.*,d.num,re.restaurantName FROM dispatch d,disrestaurant rr,mealtype m,restaurant re WHERE d.dispatchId = rr.offerId AND d.dispatchId=#{travelId} AND m.typeId=rr.typeId AND re.restaurantId = m.restaurantId and rr.dinDate='3'
 
     </select>
 
@@ -69,11 +69,11 @@
     </select>
 
     <select id="selectReportticketByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Disattr">
-         SELECT rr.*,ss.scenicSpotName FROM dispatch d,DisAttr rr,scenicSpot ss WHERE d.dispatchId = rr.offerId AND d.dispatchId=#{travelId} AND ss.scenicSpotId = rr.scenicSpotId
+         SELECT rr.*,ss.scenicSpotName FROM dispatch d,disattr rr,scenicspot ss WHERE d.dispatchId = rr.offerId AND d.dispatchId=#{travelId} AND ss.scenicSpotId = rr.scenicSpotId
     </select>
 
     <select id="selectReportfareByTravelId" resultType="com.dyhc.sdglgroundconnection.pojo.Discar">
-         SELECT rr.*,d.loan,d.wineFee,d.fare FROM dispatch d,`disCar` rr WHERE d.dispatchId = rr.offerId AND d.dispatchId = #{travelId}
+         SELECT rr.*,d.loan,d.wineFee,d.fare FROM dispatch d,`discar` rr WHERE d.dispatchId = rr.offerId AND d.dispatchId = #{travelId}
     </select>
 
     <select id="listNoDelTravel" resultType="com.dyhc.sdglgroundconnection.pojo.Travel">

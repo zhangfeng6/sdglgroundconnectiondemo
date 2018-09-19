@@ -27,7 +27,7 @@
     </select>
 
     <select id="getDispatchLike" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
-        SELECT d.*,s.theUserName AS 'jiDiaoName',g.guideName FROM Dispatch d ,staff s ,guide g WHERE d.creater=s.staffId AND d.guideId=g.guideId AND d.`state`=1
+        SELECT d.*,s.theUserName AS 'jiDiaoName',g.guideName FROM dispatch d ,staff s ,guide g WHERE d.creater=s.staffId AND d.guideId=g.guideId AND d.`state`=1
         <if test="guideName !=null and guideName !=''">
             and g.guideName like concat('%',#{guideName},'%')
         </if>

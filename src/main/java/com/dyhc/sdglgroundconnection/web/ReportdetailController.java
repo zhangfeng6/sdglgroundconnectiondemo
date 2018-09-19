@@ -151,7 +151,7 @@ public class ReportdetailController {
      * @param
      * @return
      */
-    @RequestMapping("selectDispatchById")
+    @RequestMapping("/selectDispatchById")
     public ReponseResult selectDispatchById(HttpServletRequest request, Integer groupNumber){
         try {
             Dispatch dispatch=reportdetailService.selectDispatchById(groupNumber);
