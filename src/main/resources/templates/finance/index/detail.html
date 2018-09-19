@@ -522,10 +522,10 @@
                     //计算用餐合计
                     ychj+=wcxj+wchj;
                     //计算导游付
-                    if (e.lunchPayMethods=="付现") {      //午餐
+                    if (e.lunchPayMethods=="现付") {      //午餐
                         ctdyf+=wcxj;
                     }
-                    if (e.dinnerPayMethods=="付现") {     //晚餐
+                    if (e.dinnerPayMethods=="现付") {     //晚餐
                         ctdyf+=wchj;
                     }
                     //计算签单合计
@@ -585,7 +585,7 @@
                         mpdyf+=e.nums*e.price;
                     }
                     //计算导游付
-                    if (e.payMethods=="付现"){
+                    if (e.payMethods=="现付"){
                         mpdyf+=e.nums*e.price;
                     }
 

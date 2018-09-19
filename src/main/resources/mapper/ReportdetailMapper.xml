@@ -24,11 +24,11 @@
     </update>
 
     <update id="bhShenHe">
-        UPDATE `reportdetail` SET `status`=3 WHERE reportDetailId=#{reportDetailId}
+        UPDATE `reportdetail` SET `status`=4 WHERE reportDetailId=#{reportDetailId}
     </update>
 
     <update id="jsShenHe">
-        UPDATE `reportdetail` SET `status`=3 WHERE reportDetailId=#{reportDetailId}
+        UPDATE `reportdetail` SET `status`=2 WHERE reportDetailId=#{reportDetailId}
     </update>
     <!--查询报账类型名称-->
     <select id="baozhangType" resultType="com.dyhc.sdglgroundconnection.pojo.Dictionaries">
@@ -63,5 +63,9 @@
 
     <select id="showJieSuan1" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         select d.* from `reportdetail` r,dispatch d where r.`reportDetailId`=#{reportDetailId} and r.dispatchId = d.dispatchId
+    </select>
+
+    <select id="getReportdetailById" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+        SELECT * FROM reportdetail WHERE reportDetailId =#{reportDetailId}
     </select>
 </mapper>
