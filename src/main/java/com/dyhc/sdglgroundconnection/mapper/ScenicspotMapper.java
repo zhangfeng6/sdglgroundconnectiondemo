@@ -90,5 +90,5 @@ public interface ScenicspotMapper extends CommonMapper<Scenicspot>{
      * @return
      * @throws Exception
      */
-    Scenicspot getParentName(Integer parentId)throws Exception;
+    Scenicspot getParentName(@Param("parentId")Integer parentId)throws Exception;
 }

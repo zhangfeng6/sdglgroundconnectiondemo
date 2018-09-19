@@ -43,14 +43,14 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @return
      * @throws Exception
      */
-    Integer removeHoter(Integer hotelId)throws  Exception;
+    Integer removeHoter(@Param("hotelId")Integer hotelId)throws  Exception;
 
     /**
      * 房间修改赋值
      * @param typeId
      * @return
      */
-    RoomType fuzhiRoomType(Integer  typeId)throws Exception;
+    RoomType fuzhiRoomType(@Param("typeId")Integer  typeId)throws Exception;
 
     /**
      * 修改酒店进行赋值操作：贾晓亮
@@ -58,7 +58,7 @@ public interface HotelMapper extends CommonMapper<Hotel>{
      * @return
      * @throws Exception
      */
-    Hotel fuzhiHotel(Integer hotelId)throws Exception;
+    Hotel fuzhiHotel(@Param("hotelId")Integer hotelId)throws Exception;
 
     /**
      * 根据房间类型id获取酒店信息   张枫

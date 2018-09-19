@@ -56,7 +56,7 @@ public interface StaffMapper extends CommonMapper<Staff>{
      * @param staffId
      * @return
      */
-    Staff getStaffUpdTwoById(Integer staffId)throws Exception;
+    Staff getStaffUpdTwoById(@Param("staffId")Integer staffId)throws Exception;
 
     /**
      * 判断用户是否存在
@@ -69,7 +69,7 @@ public interface StaffMapper extends CommonMapper<Staff>{
      * @param dispatchId
      * @return
      */
-    Staff listStaff(Integer  dispatchId)throws Exception;
+    Staff listStaff(@Param("dispatchId")Integer  dispatchId)throws Exception;
 
     /**
      * 修改个人信息并修改图片
@@ -111,7 +111,7 @@ public interface StaffMapper extends CommonMapper<Staff>{
      * @return
      * @throws Exception
      */
-    Staff StaffByName(String theUserName) throws Exception;
+    Staff StaffByName(@Param("theUserName")String theUserName) throws Exception;
 
     /**
      * 贾晓亮（查询姓名，电话）

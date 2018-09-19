@@ -23,7 +23,7 @@ public interface DiscarMapper extends CommonMapper<Discar>{
      * @param dispatchId
      * @return
      */
-    Discar listDiscar(Integer dispatchId)throws Exception;
+    Discar listDiscar(@Param("dispatchId")Integer dispatchId)throws Exception;
 
     Discar selectDiscarByOfferId(@Param("offerId") Integer offerId)throws Exception;
 

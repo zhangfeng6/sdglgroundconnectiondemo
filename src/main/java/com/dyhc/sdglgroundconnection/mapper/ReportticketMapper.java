@@ -20,7 +20,7 @@ public interface ReportticketMapper extends CommonMapper<Reportticket> {
      * @param reportDetailId
      * @return
      */
-    List<Reportticket> listReportticketById(Integer reportDetailId)throws Exception;
+    List<Reportticket> listReportticketById(@Param("reportDetailId")Integer reportDetailId)throws Exception;
 
     /**
      * 获取导游门票报账明细信息
