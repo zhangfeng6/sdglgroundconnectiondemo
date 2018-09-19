@@ -154,10 +154,9 @@ public class ReportdetailController {
     @RequestMapping("/selectDispatchById")
     public ReponseResult selectDispatchById(HttpServletRequest request, Integer groupNumber){
         try {
-            Dispatch dispatch=reportdetailService.selectDispatchById(groupNumber);
             ReponseResult data=ReponseResult.ok("查询成功");
             HttpSession session = request.getSession();
-            session.setAttribute("dispatchId",dispatch.getDispatchId());
+            session.setAttribute("dispatchId",groupNumber);
             logger.info("mothod:selectDispatchById 查询成功");
             return data;
         }catch (Exception e){
