@@ -29,7 +29,7 @@
     </update>
     
     <select id="listVehicleTypeByValueId" resultType="com.dyhc.sdglgroundconnection.pojo.VehicleType">
-        select * from vehicleType
+        select * from vehicletype
         where carRentalId=#{carRentalId} and valueId=#{valueId} and whetherDel=0
     </select>
 

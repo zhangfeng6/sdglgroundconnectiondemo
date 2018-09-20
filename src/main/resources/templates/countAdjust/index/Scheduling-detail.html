@@ -821,9 +821,9 @@
                         var jdcostPrice = new Array();
                         var jdoffer = new Array();
 						for (var j=0;j<jingdianCount;j++){
-                            jingdian[j] = $(".jingdian").eq(j).children().val();
-                            jdcostPrice[j] = $("[name=jdcostPrice]").val();
-                            jdoffer[j] = $("[name=jdoffer]").val();
+                            jingdian[j] = $(index).find(".jingdian").eq(j).children().val();
+                            jdcostPrice[j] = $(index).find("[name=jdcostPrice]").val();
+                            jdoffer[j] = $(index).find("[name=jdoffer]").val();
 						}
                         jingdianList[i] = jingdian;
                         jdcostPriceList[i] = jdcostPrice;
