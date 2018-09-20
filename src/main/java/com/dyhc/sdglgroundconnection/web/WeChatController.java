@@ -31,6 +31,9 @@ public class WeChatController {
     // 日志对象
     private Logger logger = LoggerFactory.getLogger(GuideController.class);
 
+
+    @Autowired
+    private RoomTypeService roomTypeService;
     @Autowired
     private ReportticketService reportticketService;
     @Autowired
@@ -843,5 +846,24 @@ public class WeChatController {
     }
 
 
+    /**
+     * 获取房间类型名称
+     * @param typeId
+     * @return
+     */
+    @RequestMapping("getFJTypeName")
+    @ResponseBody
+    public ReponseResult getFJTypeName(Integer typeId){
+        try {
+            RoomType roomType=roomTypeService.getRoomTypeById(typeId);
+            Dictionaries dictionaries=dictionariesService.getDictionariesByFJId(roomType.getValueId());
+            logger.info("mothod:getFJTypeName 获取房间类型名称成功");
+            return ReponseResult.ok(dictionaries.getValueContent1(),"获取房间类型名称成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("mothod:getFJTypeName 获取房间类型名称失败");
+            return ReponseResult.err("获取房间类型名称失败");
+        }
+    }
 
 }

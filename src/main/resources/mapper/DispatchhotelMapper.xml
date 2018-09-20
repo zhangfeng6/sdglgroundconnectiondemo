@@ -18,4 +18,8 @@ SELECT h.hotelName FROM dispatchHotel d,hotel h,dispatch s WHERE d.hotelId=h.hot
     <select id="listDispatchhotelByDid" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
         SELECT `dispatchHotelId`,`hotelId`,`costPrice`,`payment`,`roomNum`,`valueId`,`weight`,`sproomNum`,`hotelTypeId` FROM `dispatchhotel` WHERE `offerId`=#{Did}
     </select>
+
+    <select id="getDispatchhotelById" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatchhotel">
+        SELECT * FROM `dispatchhotel` WHERE hotelTypeId=#{dispatchHotelId}
+    </select>
 </mapper>

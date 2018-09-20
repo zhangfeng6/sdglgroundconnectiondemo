@@ -188,4 +188,13 @@ public interface DictionariesService {
      * @return
      */
     Dictionaries DictionariesHotelMax()throws Exception;
+
+
+    /**
+     * 根据房间类型id获取类型名称
+     * @param valueId
+     * @return
+     * @throws Exception
+     */
+    Dictionaries getDictionariesByFJId(Integer valueId)throws Exception;
 }

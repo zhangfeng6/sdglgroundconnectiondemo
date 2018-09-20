@@ -36,4 +36,13 @@ public interface DispatchhotelService {
      */
     List<String> listDispatchhotelAll(Integer dispatchId)throws Exception;
 
+
+    /**
+     * 根据id调度酒店
+     * @param dispatchHotelId
+     * @return
+     * @throws Exception
+     */
+    Dispatchhotel getDispatchhotelById(Integer dispatchHotelId)throws Exception;
+
 }

@@ -54,4 +54,9 @@ public class DispatchhotelServiceImpl implements DispatchhotelService {
     public List<String> listDispatchhotelAll(Integer dispatchId)throws Exception {
         return dispatchhotelMapper.listDispatchhotelAll(dispatchId);
     }
+
+    @Override
+    public Dispatchhotel getDispatchhotelById(Integer dispatchHotelId) throws Exception {
+        return dispatchhotelMapper.getDispatchhotelById(dispatchHotelId);
+    }
 }

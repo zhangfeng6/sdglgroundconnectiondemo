@@ -317,4 +317,9 @@ public class DictionariesServiceImpl implements DictionariesService {
         return dictionariesMapper.DictionariesHotelMax();
     }
 
+    @Override
+    public Dictionaries getDictionariesByFJId(Integer valueId) throws Exception {
+        return dictionariesMapper.dis_All(valueId);
+    }
+
 }
