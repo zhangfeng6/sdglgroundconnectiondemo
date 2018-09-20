@@ -37,7 +37,7 @@ public class Dictionaries implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "updateDate")
     private Date updateDate; // 修改日期
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     @Column(name = "createDate")
     private Date createDate; // 创建时间
     private String value1;

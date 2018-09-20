@@ -27,7 +27,7 @@ public class BillType {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updateDate; // 修改日期
     @Column(name = "createDate")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createDate; // 创建日期
     private String value1;
     private String value2;
