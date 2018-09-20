@@ -17,7 +17,7 @@
         </if>
     </select>
     
-    <select id="" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
+    <select id="getDispatchByguideId" resultType="com.dyhc.sdglgroundconnection.pojo.Dispatch">
         SELECT * FROM dispatch WHERE guideId=#{guideId} AND state=2
     </select>
 
