@@ -44,7 +44,7 @@ SELECT r.*,m.`costprice` AS 'gettypeprice' FROM `restaurant` r,`mealtype` m WHER
     </select>
 
     <select id="selectTypeById" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM restaurant WHERE restaurantId IN (SELECT restaurantId FROM mealType WHERE typeCode='DIET' AND valueId=#{valueId} AND restaurantId=#{restaurantId} AND whetherDel!=1)
+        SELECT COUNT(*) FROM restaurant WHERE restaurantId IN (SELECT restaurantId FROM mealtype WHERE typeCode='DIET' AND valueId=#{valueId} AND restaurantId=#{restaurantId} AND whetherDel!=1)
     </select>
 
     <select id="selectMealTypeByTypeId" resultType="com.dyhc.sdglgroundconnection.pojo.MealType">

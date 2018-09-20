@@ -67,6 +67,7 @@
                     type: "post",
                     url: "/sdglGroundConnection/Dictionaries/listDictionaries1",
                     data:{},
+                    async: false,
                     dataType: "json",
                     success:function (result1) {
                         var content="<option value='0'>请选择一个车辆类型</option>";
@@ -196,7 +197,7 @@
 			}
 			//Demo
 			layui.use(['form'], function() {
-				var form = layui.form();
+				var form = layui.form;
 				form.render();
 				//监听提交
 				form.on('submit(formDemo)', function(data) {

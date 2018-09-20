@@ -27,7 +27,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
             <div class="layui-input-block">
-                男&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="0" >
+                男&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="0" checked>
                 女&nbsp;&nbsp;&nbsp;<input type="radio" name="sex"  value="1" >
             </div>
         </div>
@@ -121,22 +121,36 @@
         var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
         var IdCard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
         var reg=/^\d{5,10}$/;
+        var im = document.getElementById("img1").getAttribute('src');
+        var guan=$("#guanliyuan").val();
         if(staffname.value =="" || staffname.length ==0){
             alert("姓名不能为空")
         }else if(theUserName.value =="" || theUserName.length ==0){
             alert("用户名不能为空")
             return;
+        }else if(cardId.value =="" || cardId.length ==0){
+            alert("身份证不能为空")
+            return;
         }else if(!IdCard.exec(cardId) && cardId.length !=18){
             alert("身份证格式不正确")
+            return;
+        }else if(qqnumber.value =="" || qqnumber.length ==0){
+            alert("QQ号码不能为空")
             return;
         }else if(qqnumber.length<=5 || qqnumber.length>=11){
             alert("QQ号码格式不正确")
             return;
-        }else if(document.getElementById("file").value == null || document.getElementById("file").value == ""){
+        }else if(guan==0){
+            alert("请选择角色")
+            return;
+        }else if(im == null || im == ""){
             alert("请选择上传文件");
             return;
         }else if(currentAddress.value =="" || currentAddress.length ==0){
             alert("现住址不能为空")
+            return;
+        }else if(phone.value =="" || phone.length ==0){
+            alert("电话号码不能为空")
             return;
         }else if(phone.substring(0,1)){
             if(!isMobile.exec(phone) && phone.length != 11){
@@ -254,19 +268,36 @@
         var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
         var IdCard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
         var reg=/^\d{5,10}$/;
+        var im = document.getElementById("img1").getAttribute('src');
+        var guan=$("#guanliyuan").val();
         if(staffname.value =="" || staffname.length ==0){
             alert("姓名不能为空")
         }else if(theUserName.value =="" || theUserName.length ==0){
             alert("用户名不能为空")
             return;
+        }else if(cardId.value =="" || cardId.length ==0){
+            alert("身份证不能为空")
+            return;
         }else if(!IdCard.exec(cardId) && cardId.length !=18){
             alert("身份证格式不正确")
+            return;
+        }else if(qqnumber.value =="" || qqnumber.length ==0){
+            alert("QQ号码不能为空")
             return;
         }else if(qqnumber.length<=5 || qqnumber.length>=11){
             alert("QQ号码格式不正确")
             return;
+        }else if(guan==0){
+            alert("请选择角色")
+            return;
+        }else if(im == null || im == ""){
+            alert("请选择上传文件");
+            return;
         }else if(currentAddress.value =="" || currentAddress.length ==0){
             alert("现住址不能为空")
+            return;
+        }else if(phone.value =="" || phone.length ==0){
+            alert("电话号码不能为空")
             return;
         }else if(phone.substring(0,1)){
             if(!isMobile.exec(phone) && phone.length != 11){

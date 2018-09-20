@@ -52,7 +52,7 @@
 	<script th:src="@{/admin/js/common.js}" type="text/javascript" charset="utf-8"></script>
 	<script>
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
-				var form = layui.form(),
+				var form = layui.form,
 					layer = layui.layer,
 					$ = layui.jquery,
 					laypage = layui.laypage,
@@ -144,7 +144,7 @@
 					async: false,
                     type: "post",
                     success: function (data) {
-                        var content = "";
+                        var content = "<option value='0'>请选择</option>";
                         $.each(data.data,function(i,e){
                             content+="<option value='"+e.valueId+"'>"+e.valueContent1+"</option>";
 						})
