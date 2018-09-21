@@ -453,8 +453,14 @@
 
                         }
 					}
-                    zongji+=zong;
-					$("#jdfx").text(zong);
+					var zong1=0;
+					for(var y=0;y<data.data.length;y++){
+						if (data.data[y].payMethods=="付现"){
+							zong1+=data.data[y].costPrice*data.data[y].buynum;
+						}
+					}
+                    zongji+=zong1;
+					$("#jdfx").text(zong1);
 					$("#ta").html(content);
                 }
             })
