@@ -222,4 +222,6 @@ public interface DictionariesMapper extends CommonMapper<Dictionaries>{
      */
     Dictionaries  dis_All(@Param("valueId")Integer valueId)throws Exception;
 
+
+
 }

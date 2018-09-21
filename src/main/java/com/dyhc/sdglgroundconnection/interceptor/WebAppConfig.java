@@ -34,6 +34,7 @@ public class WebAppConfig implements WebMvcConfigurer {
                         "/WeChat/listBillByDispatchId","/WeChat/listBillById","/WeChat/listDate",
                         "/WeChat/getReportdetailByDispatchId","/WeChat/getReportfareById",
                         "/WeChat/getReportOtherById","/WeChat/getReportqutsubsidyById",
-                        "/WeChat/getZhuSuById","/WeChat/getCanGuanById","/WeChat/getMenPiaoById");
+                        "/WeChat/getZhuSuById","/WeChat/getCanGuanById","/WeChat/getMenPiaoById",
+                        "/WeChat/getFJTypeName","WeChat/getFJTypeName");
     }
 }

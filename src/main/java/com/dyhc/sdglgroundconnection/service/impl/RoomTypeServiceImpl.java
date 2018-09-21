@@ -47,4 +47,9 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         }
         return ko;
     }
+
+    @Override
+    public RoomType getRoomTypeById(Integer typeId) throws Exception {
+        return roomTypeMapper.selectByPrimaryKey(typeId);
+    }
 }

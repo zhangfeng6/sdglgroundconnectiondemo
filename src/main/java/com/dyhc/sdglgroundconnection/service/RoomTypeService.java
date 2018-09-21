@@ -27,4 +27,12 @@ public interface RoomTypeService {
      * @return
      */
     List<RoomType> roomType_All(@Param("hotelId")Integer hotelId)throws Exception;
+
+    /**
+     * 根据id获取房名类型对象
+     * @param typeId
+     * @return
+     * @throws Exception
+     */
+    RoomType getRoomTypeById(Integer typeId)throws Exception;
 }
